@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ZZZ Measurements">
+  <defs>
+    <clipPath id="tile"><rect width="64" height="64" rx="14"/></clipPath>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#D8FA00"/>
+  <g clip-path="url(#tile)">
+    <path d="M45 0h19v19z" fill="#FF5E41"/>
+  </g>
+  <path d="M14 14H50V25L27 39H50V50H14V39L37 25H14Z" fill="#0B0B0C"/>
+</svg>

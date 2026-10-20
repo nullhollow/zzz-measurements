@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nullhollow.github.io/zzz-measurements/sitemap.xml
