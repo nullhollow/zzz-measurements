@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZZZ Female Measurements</title>
-<meta name="description" content="Measurements for all 48 female Zenless Zone Zero agents: height, bust, under-bust, waist, hips and thigh circumference in cm and inches, with waist-to-hip proportions, silhouette reads and UK, US and EU bra sizes.">
+<title>__TITLE__</title>
+<meta name="description" content="__DESC__">
 <meta name="keywords" content="Zenless Zone Zero, ZZZ, female measurements, character measurements, height, bust, waist, hips, thigh circumference, bra size, UK US EU sizing, hourglass, proportions, modelmetrics.net">
 <meta name="author" content="modelmetrics.net">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#0B0B0C">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
 <link rel="canonical" href="__SITE_URL__">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="ZZZ Female Measurements">
 <meta property="og:title" content="ZZZ Female Measurements">
-<meta property="og:description" content="Measurements for all 48 female Zenless Zone Zero agents: height, bust, under-bust, waist, hips and thigh circumference in cm and inches, with waist-to-hip proportions, silhouette reads and UK, US and EU bra sizes.">
+<meta property="og:description" content="__DESC__">
 <meta property="og:url" content="__SITE_URL__">
 <meta property="og:image" content="__SITE_URL__og.png?v=__OGV__">
 <meta property="og:image:type" content="image/png">
@@ -24,11 +24,14 @@
 <meta property="og:image:alt" content="ZZZ Female Measurements: Zenless Zone Zero character renders over a hazard-tape strip">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ZZZ Female Measurements">
-<meta name="twitter:description" content="Measurements for all 48 female Zenless Zone Zero agents: height, bust, under-bust, waist, hips and thigh circumference in cm and inches, with waist-to-hip proportions, silhouette reads and UK, US and EU bra sizes.">
+<meta name="twitter:description" content="__DESC__">
 <meta name="twitter:image" content="__SITE_URL__og.png?v=__OGV__">
 <meta name="twitter:image:alt" content="ZZZ Female Measurements: Zenless Zone Zero character renders over a hazard-tape strip">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-512.png">
+<link rel="preload" href="fonts/Anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Inter-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">/*__JSONLD__*/</script>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -39,7 +42,7 @@
     --acid:#D8FA00; --acid-deep:#C6E800; --hazard:#FFDE00; --signal:#FF5E41;
     --holo:#29D4FF; --blue:#4E6FFF; --brass:#DB9A45; --tan:#D3BC8E;
     --ink:#0B0B0C; --coal:#121214; --panel:#17171C; --panel2:#101014;
-    --line:#ffffff1f; --line2:#ffffff33; --dim:#9A9AA3; --dimmer:#6B6B74;
+    --line:#ffffff1f; --line2:#ffffff33; --dim:#9A9AA3; --dimmer:#8A8A94;
     --concrete:#EFEFEF;
     /* metric coding */
     --bust:#FF5E41; --waist:#29D4FF; --hips:#D8FA00; --thighs:#FFDE00;
@@ -48,12 +51,20 @@
     --radius:18px;
   }
   *{box-sizing:border-box}
+  [hidden]{display:none !important}
   html{scroll-behavior:smooth}
+  html[data-theme="light"]{
+    --ink:#F3F3EC; --coal:#E9E9E1; --panel:#FFFFFF; --panel2:#F7F7F1;
+    --line:#0b0b0c1f; --line2:#0b0b0c33; --dim:#4C4C55; --dimmer:#5D5D66;
+    --concrete:#0B0B0C; --acid:#5C6E00; --acid-deep:#4F5F00;
+    color-scheme:light;
+  }
   body{
     margin:0; background:var(--ink); color:#fff;
     font:13.5px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
+  html[data-theme="light"] body{color:#0B0B0C}
   ::selection{background:var(--acid); color:#0b0b0c}
   ::-webkit-scrollbar{width:11px;height:11px}
   ::-webkit-scrollbar-track{background:#0c0c0e}
@@ -61,9 +72,15 @@
   ::-webkit-scrollbar-thumb:hover{background:var(--acid)}
   a{color:var(--acid)}
   :focus-visible{outline:2px solid var(--acid); outline-offset:2px}
-
-  /* ---------- small helpers ---------- */
-  .lab{font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--dim)}
+  .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .skip{position:fixed;left:12px;top:-80px;z-index:200;background:var(--acid);color:#0b0b0c;
+    padding:10px 16px;border-radius:999px;font-weight:800;text-decoration:none;transition:top .15s}
+  .skip:focus{top:12px}
+  .toast{position:fixed;left:50%;bottom:84px;z-index:300;transform:translate(-50%,12px);opacity:0;
+    pointer-events:none;background:#050507;color:#fff;border:1px solid var(--line2);border-radius:999px;
+    padding:10px 18px;font-size:12px;letter-spacing:.04em;transition:.18s}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  html[data-theme="light"] .toast{background:#0b0b0c}
 
   /* ---------- hero ---------- */
   .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line);
@@ -83,7 +100,7 @@
   .hero h2{margin:0 0 8px; font-family:var(--disp); font-weight:400; text-transform:uppercase;
     font-size:clamp(17px,2vw,25px); line-height:1.06; letter-spacing:.015em}
   .hero p{margin:0; max-width:660px; color:#c6c6cd; font-size:13px}
-  .hero .meta{margin-top:12px; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim)}
+  .hero .meta{margin-top:12px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim)}
   .hero .meta b{color:var(--acid)}
   .tape{height:12px; background:repeating-linear-gradient(45deg,var(--hazard) 0 12px,#111 12px 24px)}
   .film{display:flex; gap:8px; align-items:center; padding:7px 10px; background:#0b0b0d; border-bottom:1px solid var(--line)}
@@ -96,7 +113,7 @@
     border-radius:16px; background:linear-gradient(180deg,#18181d,#101014)}
   .hl:after{content:""; position:absolute; right:-34px; bottom:-34px; width:86px; height:86px;
     background:var(--acid); opacity:.14; clip-path:polygon(100% 0,100% 100%,0 100%)}
-  .hl .k{font-size:8.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--dim)}
+  .hl .k{font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--dim)}
   .hl .v{font-family:var(--disp); font-size:20px; text-transform:uppercase; line-height:1.05; margin-top:5px}
   .hl .n{font-family:var(--num); font-weight:700; font-size:13px; color:var(--acid); margin-top:3px}
   .hl .bar{height:6px; margin-top:9px; background:#ffffff14}
@@ -125,13 +142,14 @@
     padding:10px 22px; background:rgba(10,10,12,.93); backdrop-filter:blur(10px);
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
     background-image:repeating-linear-gradient(45deg,#ffffff08 0 2px,transparent 2px 9px)}
+  html[data-theme="light"] .controls{background:rgba(243,243,236,.94)}
   .search{position:relative; flex:1 1 220px; min-width:170px; display:flex; align-items:center; gap:9px;
     background:#08080a; border:1px solid var(--line2); border-radius:999px; padding:9px 15px; color:var(--dim)}
   .search input{flex:1; background:none; border:0; outline:0; color:#fff; font:inherit; min-width:60px}
   .search input::placeholder{color:var(--dimmer)}
   .search:focus-within{border-color:var(--acid); color:var(--acid)}
   .fgroup{display:flex; align-items:center; gap:6px}
-  .fgroup label{font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--dimmer)}
+  .fgroup label{font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--dimmer)}
   select,.btn{
     background:#0f0f12; color:#fff; border:1px solid var(--line2); border-radius:999px;
     padding:9px 15px; font:inherit; font-size:11px; font-weight:500; letter-spacing:.13em;
@@ -142,9 +160,12 @@
   .viewtoggle button{background:#0f0f12; border:0; color:#fff; padding:9px 15px; font:inherit;
     font-size:11px; letter-spacing:.13em; text-transform:uppercase; cursor:pointer; transition:.12s}
   .viewtoggle button:hover{color:var(--acid)}
-  .viewtoggle button.active{background:var(--acid); color:#0b0b0c; font-weight:800}
+  .viewtoggle button[aria-pressed="true"]{background:var(--acid); color:#0b0b0c; font-weight:800}
   .count{margin-left:auto; color:var(--dim); font-size:11px; letter-spacing:.1em; white-space:nowrap}
   .count b{color:var(--acid); font-family:var(--num); font-weight:700; font-size:13px}
+  .cmpbtn .n{display:inline-block; min-width:16px; margin-left:7px; padding:1px 5px; border-radius:999px;
+    background:var(--acid); color:#0b0b0c; font-family:var(--num); font-weight:800; font-size:9px}
+  .cmpbtn[aria-pressed="true"]{border-color:var(--acid); color:var(--acid)}
 
   /* ---------- filter dropdown ---------- */
   .fdrop{position:relative}
@@ -157,15 +178,18 @@
     border-radius:16px; background:linear-gradient(180deg,#18181d,#0f0f12);
     box-shadow:0 20px 44px #000000a6}
   .fdrop.open .fpanel{display:block}
-  .fhead{display:flex; justify-content:space-between; align-items:center; font-size:9px;
+  .fhead{display:flex; justify-content:space-between; align-items:center; font-size:9.5px;
     letter-spacing:.22em; text-transform:uppercase; color:var(--acid)}
-  .fhead .lnk{background:none; border:0; padding:0; color:var(--dimmer); font:inherit; font-size:9px;
+  .fhead .lnk{background:none; border:0; padding:0; color:var(--dimmer); font:inherit; font-size:9.5px;
     letter-spacing:.12em; text-transform:uppercase; cursor:pointer}
   .fhead .lnk:hover{color:var(--acid)}
+  .fnote{font-size:10px; color:var(--dimmer); margin-top:6px; line-height:1.45}
   .frow{margin-top:12px}
   .frl{display:flex; justify-content:space-between; align-items:baseline; font-size:9.5px;
     letter-spacing:.16em; text-transform:uppercase; color:var(--dim)}
   .frl .frv{font-family:var(--num); font-weight:600; font-size:11px; letter-spacing:.03em; color:var(--acid)}
+  .rreset{background:none;border:0;color:var(--dimmer);cursor:pointer;font-size:12px;padding:0 2px;margin-left:5px}
+  .rreset:hover{color:var(--acid)}
   .dual{position:relative; height:20px; margin-top:3px}
   .dual .dtr{position:absolute; left:0; right:0; top:8px; height:4px; background:#ffffff1f}
   .dual .dtr i{position:absolute; top:0; bottom:0; background:var(--acid)}
@@ -176,21 +200,24 @@
   .dual input[type=range]::-moz-range-thumb{pointer-events:auto; width:9px; height:14px; border-radius:0;
     background:var(--acid); border:1px solid #000; cursor:ew-resize}
   .dual input[type=range]::-moz-range-track{background:transparent}
-  .fgrid{margin-top:6px}
   .fchips{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px}
-  .fchips .fl{flex:0 0 100%; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--dimmer); margin-top:6px}
+  .fchips .fl{flex:0 0 100%; font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--dimmer); margin-top:6px}
   .chipbtn{background:#0f0f12; border:1px solid var(--line2); border-radius:999px; color:#e8e8ee;
     padding:5px 11px; font:inherit; font-size:10px; letter-spacing:.12em; text-transform:uppercase;
     cursor:pointer; transition:.12s}
   .chipbtn:hover{border-color:var(--acid); color:var(--acid)}
-  .chipbtn.on{background:var(--acid); border-color:var(--acid); color:#0b0b0c; font-weight:800}
+  .chipbtn[aria-pressed="true"]{background:var(--acid); border-color:var(--acid); color:#0b0b0c; font-weight:800}
+  .fapply{display:none; width:100%; margin-top:14px}
+  .fpanel .fapply{display:block}
 
   /* ---------- cards ---------- */
   .wrap{max-width:1400px; margin:0 auto; padding:18px 22px 60px}
   .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(238px,1fr)); gap:14px}
-  .card{position:relative; overflow:hidden; cursor:pointer; border:1px solid var(--line); border-radius:var(--radius);
+  .card{position:relative; overflow:hidden; border:1px solid var(--line); border-radius:var(--radius);
     background:linear-gradient(180deg,#18181d,#101014); transition:.15s; display:flex; flex-direction:column}
+  .card-main{display:block; color:inherit; text-decoration:none; height:100%; display:flex; flex-direction:column}
   .card:hover{border-color:var(--acid); transform:translateY(-4px); box-shadow:0 16px 34px #000000a6}
+  .card:focus-within{outline:2px solid var(--acid); outline-offset:2px}
   .card:hover:after{content:""; position:absolute; right:-30px; bottom:-30px; width:120px; height:120px;
     background:var(--acid); opacity:.15; clip-path:polygon(100% 0,100% 100%,0 100%); pointer-events:none}
   .card .imgbox{position:relative; aspect-ratio:260/497; overflow:hidden; background:#0c0c10;
@@ -204,15 +231,20 @@
     font-family:var(--disp); font-size:12px; line-height:1; letter-spacing:.05em; text-transform:uppercase;
     padding:4px 11px 3px; transform:rotate(-2deg); box-shadow:0 0 0 2px #fff,3px 3px 0 #000}
   .stick.dark{background:#0b0b0c; color:var(--acid); box-shadow:0 0 0 2px var(--acid),3px 3px 0 #000}
-  .card .pbars{display:none}
+  .cmp{position:absolute; left:9px; top:9px; z-index:4; width:28px; height:28px; padding:0;
+    border-radius:999px; border:1px solid var(--line2); background:#0b0b0c; color:#fff;
+    font:700 15px/1 var(--num); cursor:pointer; opacity:.55; transition:.12s}
+  .card:hover .cmp,.cmp:focus-visible,.cmp[aria-pressed="true"]{opacity:1}
+  .cmp:hover{border-color:var(--acid); color:var(--acid)}
+  .cmp[aria-pressed="true"]{background:var(--acid); color:#0b0b0c; border-color:var(--acid); transform:rotate(45deg)}
   /* roster percentiles, moved out of the artwork into the card body */
   .pct{display:grid; gap:4px; padding:8px 9px; background:#08080a; border:1px solid var(--line); border-radius:10px}
   .prow{display:flex; align-items:center; gap:7px}
-  .prow span{flex:0 0 34px; font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  .prow span{flex:0 0 38px; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
   .prow .pbar{flex:1; height:4px; background:#ffffff14; overflow:hidden}
   .prow .pbar i{display:block; height:100%}
   .prow b{flex:0 0 20px; text-align:right; font-family:var(--num); font-weight:600; font-size:10.5px; color:#c9c9d2}
-  .pct.wide .prow span{flex-basis:44px; font-size:9px}
+  .pct.wide .prow span{flex-basis:44px; font-size:9.5px}
   .pct.wide .prow b{flex-basis:26px; font-size:12px}
   .card .body{padding:12px 13px 14px; display:flex; flex-direction:column; gap:9px; flex:1}
   .card .name{font-family:var(--disp); font-size:20px; line-height:1.04; text-transform:uppercase}
@@ -221,10 +253,10 @@
   .card .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:6px}
   .card .stat{background:#08080a; border:1px solid var(--line); border-radius:10px; padding:6px 8px}
   .card .stat .v{font-family:var(--num); font-weight:700; font-size:15px; line-height:1.15}
-  .card .stat .k{font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); margin-top:2px}
+  .card .stat .k{font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); margin-top:2px}
   .chips{display:flex; flex-wrap:wrap; gap:5px}
   .chip{display:inline-block; border:1px solid var(--line2); border-radius:999px; padding:4px 10px;
-    font-size:9px; letter-spacing:.13em; text-transform:uppercase; color:#e8e8ee; white-space:nowrap}
+    font-size:9.5px; letter-spacing:.13em; text-transform:uppercase; color:#e8e8ee; white-space:nowrap}
   .chip.height{border-color:var(--tan); color:var(--tan)}
   .chip.bust{border-color:var(--bust); color:var(--bust)}
   .chip.waist{border-color:var(--waist); color:var(--waist)}
@@ -239,19 +271,27 @@
   .tablewrap{border:1px solid var(--line); border-radius:14px; overflow:auto; max-height:78vh; background:#101014}
   table{width:100%; border-collapse:collapse}
   thead th{position:sticky; top:0; z-index:2; background:var(--acid); color:#0b0b0c; text-align:left;
-    padding:10px 12px; font-family:var(--num); font-weight:700; font-size:10px; letter-spacing:.12em;
-    text-transform:uppercase; white-space:nowrap; cursor:pointer; user-select:none; border-right:1px solid #00000012}
-  thead th:hover{background:#fff}
-  thead th.sorted{background:var(--acid-deep)}
+    padding:0; font-family:var(--num); font-weight:700; font-size:10px; letter-spacing:.12em;
+    text-transform:uppercase; white-space:nowrap; border-right:1px solid #00000012}
+  thead th button{width:100%; background:none; border:0; color:inherit; font:inherit; text-align:left;
+    padding:10px 12px; cursor:pointer; letter-spacing:inherit; text-transform:inherit}
+  thead th:hover button{background:#fff}
+  thead th[aria-sort]{background:var(--acid-deep)}
   thead th .arr{opacity:.55; margin-left:6px; font-size:9px}
   tbody td{padding:9px 12px; border-top:1px solid var(--line); font-size:12px; vertical-align:middle}
   tbody tr:hover td{background:#ffffff08}
   td.num{font-family:var(--num); font-weight:600}
   td .mini{color:var(--dimmer); font-size:9.5px; font-family:var(--num); font-weight:500}
+  tbody tr:focus-within td{background:#ffffff10}
   .thumb{width:34px; height:64px; object-fit:cover; object-position:center top;
     border:1px solid var(--line2); border-radius:6px; display:block; background:#0c0c10}
+  .tname{color:#fff; text-decoration:none; font-weight:700}
+  .tname:hover{color:var(--acid)}
   .badge{display:inline-block; margin-left:6px; border:1px solid var(--line2); border-radius:999px;
-    padding:1px 7px; font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); white-space:nowrap}
+    padding:1px 7px; font-size:8.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); white-space:nowrap}
+  .badge.conf-charted{border-color:#ffffff2e}
+  .badge.conf-estimated{border-color:var(--hazard); color:var(--hazard)}
+  .badge.conf-partial{border-color:var(--signal); color:var(--signal)}
   .warn{color:var(--hazard)}
   .nsTable{max-width:1400px; margin:0 auto; padding:22px}
   .nsTable h2{font-family:var(--disp); font-size:20px; margin:0 0 10px}
@@ -261,7 +301,24 @@
   .nsTable th{font-family:var(--num); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim)}
   .empty{padding:40px 0; text-align:center; color:var(--dimmer); letter-spacing:.16em; text-transform:uppercase; font-size:11px}
 
+  /* ---------- plot ---------- */
+  .plotbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px}
+  .plotbar label{font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim)}
+  .plotwrap{border:1px solid var(--line); border-radius:14px; background:#0e0e11; padding:10px}
+  .plot{display:block; width:100%; height:auto; touch-action:manipulation}
+  .plot .gridline{stroke:#ffffff14; stroke-width:1}
+  .plot .axis{stroke:#ffffff33; stroke-width:1}
+  .plot .tick{fill:#9A9AA3; font:10px var(--num)}
+  .plot .alab{fill:#9A9AA3; font:10px var(--num); letter-spacing:.12em; text-transform:uppercase}
+  .plot .pt{cursor:pointer; outline:none}
+  .plot .pt circle{stroke:#0b0b0c; stroke-width:1.5; transition:.12s}
+  .plot .pt:hover circle,.plot .pt:focus-visible circle{stroke:#fff; stroke-width:2.5; r:7}
+  .plot .pt text{fill:#e8e8ee; font:10px var(--num); opacity:0; pointer-events:none}
+  .plot .pt:hover text,.plot .pt:focus-visible text{opacity:1}
+  .plot legend{font:10px var(--num)}
+
   /* ---------- modal ---------- */
+  body.modal-open{overflow:hidden}
   .overlay{position:fixed; inset:0; z-index:100; display:none; place-items:center; padding:22px;
     background:#040406cc; backdrop-filter:blur(3px)}
   .overlay.open{display:grid}
@@ -269,7 +326,7 @@
     border:1px solid var(--line2); border-radius:22px;
     background:linear-gradient(180deg,#17171c,#0d0d10); animation:pop .15s ease-out}
   @keyframes pop{from{transform:translateY(10px); opacity:.3} to{transform:none; opacity:1}}
-  .modal .x{position:absolute; right:12px; top:12px; z-index:3; width:32px; height:32px; cursor:pointer;
+  .modal .x{position:absolute; right:12px; top:12px; z-index:3; width:36px; height:36px; cursor:pointer;
     background:#0b0b0c; color:#fff; border:1px solid var(--line2); border-radius:999px; font-size:14px; line-height:1}
   .modal .x:hover{background:var(--acid); color:#0b0b0c; border-color:var(--acid)}
   .mhead{padding:16px 22px 12px; border-bottom:1px solid var(--line); display:flex; align-items:baseline;
@@ -280,7 +337,8 @@
   .mbody{display:grid; grid-template-columns:min(470px,38vw) 1fr}
   .mimg{border-right:1px solid var(--line); background:#0b0b0f; padding:12px}
   .mimg img{display:block; width:100%; height:auto; max-height:86vh; object-fit:contain;
-    border-radius:12px; background:#0b0b0f}
+    border-radius:12px; background:#0b0b0f; cursor:zoom-in}
+  .mimg img.zoom{max-height:none; cursor:zoom-out}
   .mimg .scale{font-size:10px; color:var(--dimmer); padding:9px 2px 0; line-height:1.5}
   .mimg .scale a{color:var(--dim)}
   .mtools{display:flex; flex-wrap:wrap; margin-bottom:9px}
@@ -288,27 +346,26 @@
   .seg button{background:#0f0f12; border:0; color:#fff; padding:7px 13px; font:inherit; font-size:10px;
     letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:.12s}
   .seg button:hover{color:var(--acid)}
-  .seg button.on{background:var(--acid); color:#0b0b0c; font-weight:800}
+  .seg button[aria-pressed="true"]{background:var(--acid); color:#0b0b0c; font-weight:800}
   .seg button[disabled]{opacity:.32; cursor:not-allowed}
   .seg button[disabled]:hover{color:#fff}
   .moutfits{margin:0 0 9px; padding-top:2px}
   .olabel{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--mut); margin-bottom:7px}
+    color:var(--dim); margin-bottom:7px}
   .ochips{display:flex; flex-wrap:wrap; gap:6px}
   .ochip{display:inline-flex; align-items:center; gap:5px; background:#0f0f12; border:1px solid var(--line2);
     border-radius:999px; color:#fff; padding:5px 11px; font:inherit; font-size:10px; cursor:pointer; transition:.12s}
   .ochip:hover{color:var(--acid); border-color:var(--acid)}
-  .ochip.on{background:var(--acid); border-color:var(--acid); color:#0b0b0c; font-weight:800}
+  .ochip[aria-pressed="true"]{background:var(--acid); border-color:var(--acid); color:#0b0b0c; font-weight:800}
   .ochip .mdot{width:5px; height:5px; border-radius:50%; background:var(--signal)}
-  .ochip.on .mdot{background:#0b0b0c}
-  .onote{margin-top:8px; font-size:10.5px; line-height:1.5; color:var(--mut)}
-  .mtools .moutfits .olabel{margin-top:2px}
+  .ochip[aria-pressed="true"] .mdot{background:#0b0b0c}
+  .onote{margin-top:8px; font-size:10.5px; line-height:1.5; color:var(--dim)}
   .mdata{padding:14px 18px 20px}
   .sect{margin-bottom:15px}
   .sect h3{margin:0 0 8px; font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--acid)}
   .kgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:6px}
   .kv{background:#08080a; border:1px solid var(--line); border-radius:10px; padding:7px 9px}
-  .kv .k{font-size:8.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--dimmer)}
+  .kv .k{font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--dimmer)}
   .kv .v{font-family:var(--num); font-weight:600; font-size:14px; margin-top:2px}
   .kv .v small{color:var(--dim); font-size:10px; font-weight:500}
   /* infographic figure read */
@@ -316,7 +373,7 @@
   .infog{display:flex; flex-direction:column; gap:4px}
   .irow{display:grid; grid-template-columns:74px 96px 1fr 88px 84px; gap:8px; align-items:center;
     padding:6px 9px; background:#08080a; border:1px solid var(--line); border-left:2px solid var(--line2)}
-  .irow .ik{font-size:8.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--dimmer)}
+  .irow .ik{font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--dimmer)}
   .irow .iv{font-family:var(--num); font-weight:700; font-size:12.5px}
   .irow .isub{font-family:var(--num); font-size:10.5px; color:var(--dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
   .irow .ibar{height:5px; background:#ffffff14}
@@ -333,17 +390,51 @@
     padding-left:9px; margin-top:9px}
   .mnote b{color:var(--acid)}
   .mtags{display:flex; flex-wrap:wrap; gap:5px; margin-top:11px}
+  .mfoot{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:12px}
+  .mfoot .btn{text-decoration:none; display:inline-block}
+  .mfoot .btn.primary{background:var(--acid); color:#0b0b0c; border-color:var(--acid); font-weight:800}
+  .simrow{display:flex; flex-wrap:wrap; gap:6px}
+  .sim{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line2); border-radius:999px;
+    background:#0f0f12; color:#fff; padding:4px 10px 4px 4px; font:inherit; font-size:10.5px; cursor:pointer}
+  .sim img{width:22px; height:34px; object-fit:cover; object-position:center top; border-radius:6px}
+  .sim:hover{border-color:var(--acid); color:var(--acid)}
+  .confrow{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:10px; font-size:10.5px; color:var(--dim)}
+
+  /* ---------- compare ---------- */
+  .comparebar{position:fixed; left:0; right:0; bottom:0; z-index:80; display:flex; flex-wrap:wrap;
+    align-items:center; gap:8px; padding:10px 16px; border-top:1px solid var(--line2);
+    background:rgba(10,10,12,.96); backdrop-filter:blur(10px)}
+  .comparebar .cchips{display:flex; flex-wrap:wrap; gap:6px; flex:1 1 auto}
+  .cchip{display:inline-flex; align-items:center; gap:6px; background:#0f0f12; border:1px solid var(--line2);
+    border-radius:999px; padding:5px 5px 5px 11px; font-size:10.5px; color:#fff}
+  .cchip button{background:none;border:0;color:var(--dimmer);cursor:pointer;font-size:13px;line-height:1;padding:0 4px}
+  .cchip button:hover{color:var(--signal)}
+  .comparebar .btn.primary{background:var(--acid); color:#0b0b0c; border-color:var(--acid); font-weight:800}
+  .cmptable{width:100%; border-collapse:collapse; font-size:12px}
+  .cmptable th,.cmptable td{padding:9px 11px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top}
+  .cmptable thead th{background:transparent; color:#fff; font-family:var(--disp); font-weight:400;
+    font-size:16px; text-transform:uppercase; position:static}
+  .cmptable tbody th{font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); font-weight:600}
+  .cmptable td{font-family:var(--num); font-weight:600}
+  .cmptable .cmdesc{font-family:Inter,sans-serif;font-weight:400;color:#b7b7c0;font-size:11.5px;max-width:260px}
+  .cmpwrap{padding:0 18px 18px; overflow:auto}
 
   /* ---------- footer ---------- */
   footer{max-width:1400px; margin:0 auto; padding:0 22px 70px}
   footer .fbox{border-top:1px solid var(--line); padding:18px 0 0; color:var(--dimmer); font-size:11px; line-height:1.7}
   footer b{color:var(--dim)}
+  footer a{color:var(--dim)}
+  footer a:hover{color:var(--acid)}
   footer .mark{display:flex; align-items:center; gap:10px; margin-bottom:14px}
   footer .mark span{font-family:var(--disp); font-size:15px; color:var(--acid); letter-spacing:.04em}
   footer .mark i{flex:1; height:1px; background:var(--line)}
+  .flinks{display:flex; flex-wrap:wrap; gap:14px; margin:0 0 14px}
+  .fopts{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px; padding-top:14px;
+    border-top:1px solid var(--line)}
+  .fopts label{font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--dimmer)}
+  .fopts select{padding:7px 12px; font-size:10px}
 
   /* ---------- podium ---------- */
-  .pgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:14px}
   .pod{position:relative; min-width:0; overflow:hidden; border:1px solid var(--line); border-radius:var(--radius); padding:12px 12px 0;
     background:linear-gradient(180deg,#18181d,#101014)}
   .phead{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px}
@@ -351,16 +442,16 @@
   .phead span{font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim)}
   /* equal flex tracks: a wide portrait overlaps its neighbours instead of stretching the row */
   .stage{position:relative; display:flex; align-items:flex-end; gap:6px}
-  .slot{position:relative; flex:var(--g,1) 1 auto; min-width:calc(var(--g,1) * var(--h,186px)); display:flex; flex-direction:column; justify-content:flex-end; align-items:stretch; cursor:pointer}
+  .slot{position:relative; flex:var(--g,1) 1 auto; min-width:calc(var(--g,1) * var(--h,186px)); display:flex; flex-direction:column; justify-content:flex-end; align-items:stretch; cursor:pointer; color:inherit; text-decoration:none}
   .slot.p1{z-index:3} .slot.p2{z-index:2} .slot.p3{z-index:1}
   .slot .pimg{position:relative; display:flex; justify-content:flex-start; align-items:flex-end; height:186px}
   .slot[data-dxn] .pimg{justify-content:flex-end}
   .slot .pimg img{margin-inline-start:calc(var(--k,0) * var(--h,186px))}
   .slot[data-dxn] .pimg img{margin-inline-start:0; margin-inline-end:calc(var(--k,0) * var(--h,186px))}
   .slot .pimg, .slot .pimg img{pointer-events:none}          /* wide art (e.g. Remielle) must not cover its neighbours' click targets */
-  .slot:hover{z-index:9}
+  .slot:hover,.slot:focus-visible{z-index:9}
   .slot .pimg img{flex:0 0 auto; height:186px; width:auto; max-width:none; display:block; transition:filter .15s}
-  .slot:hover .pimg img{filter:drop-shadow(0 0 14px rgba(216,250,0,.45))}
+  .slot:hover .pimg img,.slot:focus-visible .pimg img{filter:drop-shadow(0 0 14px rgba(216,250,0,.45))}
   .slot .step{display:flex; align-items:center; justify-content:center; background:#1b1b21;
     border-top:1px solid var(--line2); font-family:var(--disp); font-size:15px; color:var(--acid)}
   .slot.p1 .step{height:38px; background:linear-gradient(180deg,var(--acid),var(--acid-deep)); color:#0b0b0c; border-top-color:#fff}
@@ -374,6 +465,41 @@
   .slot .plate u{display:block; margin-top:3px; font-size:9px; letter-spacing:.13em; text-transform:uppercase;
     color:var(--dimmer); text-decoration:none}
   .slot.blank .step{background:#141418; border-top-color:var(--line)}
+
+  /* ---------- light theme overrides ---------- */
+  html[data-theme="light"] .hero{background:linear-gradient(180deg,#ffffff,#ededE6)}
+  html[data-theme="light"] .hero .dots{background-image:radial-gradient(#0b0b0c12 1px,transparent 1.4px)}
+  html[data-theme="light"] .sticker{background:#fff;border-color:#0b0b0c26}
+  html[data-theme="light"] .sticker b{color:#0b0b0c;-webkit-text-stroke:2px #0b0b0c;text-shadow:5px 5px 0 #fff}
+  html[data-theme="light"] .hero p{color:#3d3d45}
+  html[data-theme="light"] .film{background:#0b0b0c}
+  html[data-theme="light"] .hl,html[data-theme="light"] .card,html[data-theme="light"] .pod{
+    background:linear-gradient(180deg,#ffffff,#f4f4ed)}
+  html[data-theme="light"] .card .imgbox,html[data-theme="light"] .thumb{background:#e8e8e0}
+  html[data-theme="light"] .card .desc{color:#3d3d45}
+  html[data-theme="light"] .pct,html[data-theme="light"] .card .stat,html[data-theme="light"] .kv,
+  html[data-theme="light"] .irow,html[data-theme="light"] .mdesc{background:#f7f7f1}
+  html[data-theme="light"] .mdesc,html[data-theme="light"] .vline,html[data-theme="light"] .irow .isub{color:#333}
+  html[data-theme="light"] .search,html[data-theme="light"] select,html[data-theme="light"] .btn,
+  html[data-theme="light"] .viewtoggle button,html[data-theme="light"] .chipbtn,
+  html[data-theme="light"] .seg button,html[data-theme="light"] .ochip,html[data-theme="light"] .sim,
+  html[data-theme="light"] .cchip{background:#fff;color:#0b0b0c}
+  html[data-theme="light"] .search input{color:#0b0b0c}
+  html[data-theme="light"] .modal{background:linear-gradient(180deg,#ffffff,#f4f4ed)}
+  html[data-theme="light"] .mimg,html[data-theme="light"] .mimg img{background:#e8e8e0}
+  html[data-theme="light"] .tname{color:#0b0b0c}
+  html[data-theme="light"] .cmptable thead th,html[data-theme="light"] .cmptable td{color:#0b0b0c}
+  html[data-theme="light"] .cmptable .cmdesc{color:#3d3d45}
+  html[data-theme="light"] .cmp{background:#fff;color:#0b0b0c}
+  html[data-theme="light"] .fpanel{background:linear-gradient(180deg,#ffffff,#f4f4ed)}
+  html[data-theme="light"] .comparebar{background:rgba(243,243,236,.97)}
+  html[data-theme="light"] .plotwrap{background:#fff}
+  html[data-theme="light"] .plot .tick,html[data-theme="light"] .plot .alab{fill:#4C4C55}
+  html[data-theme="light"] .plot .gridline{stroke:#0b0b0c14}
+  html[data-theme="light"] .plot .pt text{fill:#0b0b0c}
+  html[data-theme="light"] .slot .step{background:#e4e4dc;color:#5C6E00}
+  html[data-theme="light"] .slot.p1 .step{background:linear-gradient(180deg,#5C6E00,#4F5F00);color:#fff}
+
   /* ---------- responsive ---------- */
   @media (max-width:1100px){
     .mbody{grid-template-columns:min(360px,42vw) 1fr}
@@ -406,154 +532,307 @@
     .card .stats{grid-template-columns:repeat(2,1fr)}
     .card .name{font-size:17px}
     .slot .pimg,.slot .pimg img{height:150px}
-    .pgrid{grid-template-columns:1fr}
     .hero-inner{padding:20px 16px 24px}
     .hero-side{display:none}
     .count{flex-basis:100%; margin-left:0; text-align:right}
     select,.btn,.viewtoggle button{padding:8px 12px}
     .mhead h2{font-size:22px}
+    .fpanel{position:fixed; left:8px; right:8px; bottom:8px; top:auto; width:auto; max-height:72vh;
+      overflow:auto; border-radius:18px}
+    .comparebar{padding:8px 10px}
+    .comparebar .cchip{font-size:10px}
+    .toast{bottom:104px}
+  }
+  @media (max-width:480px){
+    .col-low{display:none}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*:before,*:after{animation-duration:.001ms !important; animation-iteration-count:1 !important;
+      transition-duration:.001ms !important}
+    .card:hover{transform:none}
+  }
+  @media (prefers-contrast: more){
+    :root{--dim:#C9C9D2; --dimmer:#B9B9C2; --line:#ffffff47; --line2:#ffffff5c}
+    .card .desc{color:#e6e6ec}
+    .chip{color:#fff}
+  }
+  @media (forced-colors: active){
+    .card,.pod,.panel,.modal,.btn,.chip{border:1px solid CanvasText}
+    .viewtoggle button[aria-pressed="true"],.chipbtn[aria-pressed="true"]{border:2px solid Highlight}
+  }
+  @media print{
+    .hero:before,.hero .dots,.hero-side,.film,.tape,.controls,.podstrip,.highlights,.comparebar,
+    .fpanel,.toast,.skip,.cmp,.modal .x{display:none !important}
+    body{background:#fff;color:#000}
+    .wrap{max-width:none;padding:0}
+    .card{break-inside:avoid;border:1px solid #bbb;background:#fff;color:#000}
+    .card .desc,.card .name small{color:#333}
+    .tablewrap{max-height:none;overflow:visible;border:1px solid #bbb}
+    thead th{background:#eee !important;color:#000 !important}
+    tbody td{color:#000}
+    a{color:#000;text-decoration:underline}
   }
 </style>
 </head>
 <body>
+
+<a class="skip" href="#main" data-i18n="skip">Skip to the roster</a>
 
 <header class="hero">
   <div class="dots"></div>
   <span class="hero-side">ZENLESS ZONE ZERO · MEASUREMENTS</span>
   <div class="hero-inner">
     <h1 style="margin:0"><span class="sticker"><b>ZZZ <span>MEASUREMENTS</span></b></span></h1>
-    <h2><span id="agentCount">/*__COUNT__*/</span> female agents · measurements, proportions &amp; silhouette reads</h2>
-    <div class="meta">Source: <b>modelmetrics.net</b></div>
+    <h2><span id="agentCount">/*__COUNT__*/</span> <span data-i18n="heroSuffix">female agents · measurements, proportions &amp; silhouette reads</span></h2>
+    <div class="meta"><span data-i18n="source">Source</span>: <b>modelmetrics.net</b> · <span data-i18n="updated">Data updated</span> <time datetime="__DATA_UPDATED__">__DATA_UPDATED__</time></div>
   </div>
   <div class="tape"></div>
 </header>
-<div class="film"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="film" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
-<section class="podstrip" id="podstrip"></section>
+<main id="main">
+  <section class="highlights" id="highlights" aria-label="Roster highlights"></section>
+  <section class="podstrip" id="podstrip" aria-label="Roster leaders"></section>
 
-<div class="controls">
-  <div class="search">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-    <input id="q" type="search" placeholder="Search character…" autocomplete="off">
-  </div>
-  <div class="fdrop" id="fDrop">
-    <button class="btn fbtn" id="fBtn">Filters<span class="fbadge" id="fBadge"></span><span class="car">▾</span></button>
-    <div class="fpanel" id="fPanel">
-      <div class="fhead"><span>Numeric ranges</span><button class="lnk" id="fClearRanges">reset</button></div>
-      <div id="fRanges"></div>
-      <div class="fhead" style="margin-top:14px"><span>Classes</span></div>
-      <div class="fchips">
-        <span class="fl">Bust tier</span>
-        <button class="chipbtn on" data-g="cup" data-v="all">All</button>
-        <button class="chipbtn" data-g="cup" data-v="A-B">A–B</button>
-        <button class="chipbtn" data-g="cup" data-v="C-D">C–D</button>
-        <button class="chipbtn" data-g="cup" data-v="DD-E">DD–E</button>
-        <button class="chipbtn" data-g="cup" data-v="F-G">F–G</button>
-        <button class="chipbtn" data-g="cup" data-v="GG+">GG+</button>
-        <span class="fl">Shape</span>
-        <button class="chipbtn on" data-g="shape" data-v="all">All</button>
-        <button class="chipbtn" data-g="shape" data-v="Hourglass">Hourglass</button>
-        <button class="chipbtn" data-g="shape" data-v="Balanced">Balanced</button>
-        <button class="chipbtn" data-g="shape" data-v="Straight">Straight</button>
-        <span class="fl">Build</span>
-        <button class="chipbtn on" data-g="balance" data-v="all">All</button>
-        <button class="chipbtn" data-g="balance" data-v="Top-heavy">Top-heavy</button>
-        <button class="chipbtn" data-g="balance" data-v="Bottom-heavy">Bottom-heavy</button>
-        <button class="chipbtn" data-g="balance" data-v="Balanced">Balanced</button>
-        <span class="fl" title="Tercile of raw thigh circumference in cm: Slim = bottom third, Thick = top third, plus a few hand-pinned entries.">Thigh class</span>
-        <button class="chipbtn on" data-g="thighs" data-v="all">All</button>
-        <button class="chipbtn" data-g="thighs" data-v="Slim">Slim</button>
-        <button class="chipbtn" data-g="thighs" data-v="Average">Average</button>
-        <button class="chipbtn" data-g="thighs" data-v="Thick">Thick</button>
+  <div class="controls" role="region" aria-label="Roster controls">
+    <div class="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="Search character, outfit or alias…" autocomplete="off" aria-label="Search roster">
+    </div>
+    <div class="fdrop" id="fDrop">
+      <button class="btn fbtn" id="fBtn" aria-expanded="false" aria-controls="fPanel" data-i18n="filters">Filters<span class="fbadge" id="fBadge"></span><span class="car" aria-hidden="true">▾</span></button>
+      <div class="fpanel" id="fPanel" role="group" aria-label="Filters">
+        <div class="fhead"><span data-i18n="ranges">Numeric ranges</span><button class="lnk" id="fClearRanges" data-i18n="resetRanges">reset</button></div>
+        <div id="fRanges"></div>
+        <div class="fnote" data-i18n="statureNote">Stature uses head height where the charted figure counts ears or headgear; charted height stays visible in the table.</div>
+        <div class="fhead" style="margin-top:14px"><span data-i18n="classes">Classes</span></div>
+        <div class="fchips" id="fChips">
+          <span class="fl" data-i18n="bustTier">Bust tier</span>
+          <button class="chipbtn" data-g="cup" data-v="all" aria-pressed="true" data-i18n="all">All</button>
+          <button class="chipbtn" data-g="cup" data-v="A-B" aria-pressed="false">A–B</button>
+          <button class="chipbtn" data-g="cup" data-v="C-D" aria-pressed="false">C–D</button>
+          <button class="chipbtn" data-g="cup" data-v="DD-E" aria-pressed="false">DD–E</button>
+          <button class="chipbtn" data-g="cup" data-v="F-G" aria-pressed="false">F–G</button>
+          <button class="chipbtn" data-g="cup" data-v="GG+" aria-pressed="false">GG+</button>
+          <span class="fl" data-i18n="heightClass">Stature</span>
+          <button class="chipbtn" data-g="height" data-v="all" aria-pressed="true" data-i18n="all">All</button>
+          <button class="chipbtn" data-g="height" data-v="Petite" aria-pressed="false" data-i18n="petite">Petite</button>
+          <button class="chipbtn" data-g="height" data-v="Mid" aria-pressed="false" data-i18n="mid">Mid</button>
+          <button class="chipbtn" data-g="height" data-v="Tall" aria-pressed="false" data-i18n="tall">Tall</button>
+          <span class="fl" data-i18n="shape">Shape</span>
+          <button class="chipbtn" data-g="shape" data-v="all" aria-pressed="true" data-i18n="all">All</button>
+          <button class="chipbtn" data-g="shape" data-v="Hourglass" aria-pressed="false" data-i18n="hourglass">Hourglass</button>
+          <button class="chipbtn" data-g="shape" data-v="Balanced" aria-pressed="false" data-i18n="balanced">Balanced</button>
+          <button class="chipbtn" data-g="shape" data-v="Straight" aria-pressed="false" data-i18n="straight">Straight</button>
+          <span class="fl" data-i18n="build">Build</span>
+          <button class="chipbtn" data-g="balance" data-v="all" aria-pressed="true" data-i18n="all">All</button>
+          <button class="chipbtn" data-g="balance" data-v="Top-heavy" aria-pressed="false" data-i18n="topHeavy">Top-heavy</button>
+          <button class="chipbtn" data-g="balance" data-v="Bottom-heavy" aria-pressed="false" data-i18n="bottomHeavy">Bottom-heavy</button>
+          <button class="chipbtn" data-g="balance" data-v="Balanced" aria-pressed="false" data-i18n="balanced">Balanced</button>
+          <span class="fl" title="Tercile of raw thigh circumference in cm, plus a few hand-pinned entries." data-i18n="thighClass">Thigh class</span>
+          <button class="chipbtn" data-g="thighs" data-v="all" aria-pressed="true" data-i18n="all">All</button>
+          <button class="chipbtn" data-g="thighs" data-v="Slim" aria-pressed="false" data-i18n="slim">Slim</button>
+          <button class="chipbtn" data-g="thighs" data-v="Average" aria-pressed="false" data-i18n="average">Average</button>
+          <button class="chipbtn" data-g="thighs" data-v="Thick" aria-pressed="false" data-i18n="thick">Thick</button>
+        </div>
+        <button class="btn fapply" id="fApply" data-i18n="apply">Apply &amp; close</button>
       </div>
     </div>
+    <div class="fgroup" id="sortGroup"><label for="fSort" data-i18n="sort">Sort</label>
+      <select id="fSort" aria-label="Sort roster"></select>
+    </div>
+    <div class="viewtoggle" id="unitToggle" role="group" aria-label="Measurement units">
+      <button id="uCm" aria-pressed="true">CM</button><button id="uIn" aria-pressed="false">IN</button>
+    </div>
+    <div class="viewtoggle" id="artToggle" role="group" aria-label="Portrait source">
+      <button id="aSheet" aria-pressed="false" data-i18n="sheet">SHEET</button><button id="aOff" aria-pressed="true" data-i18n="official">OFFICIAL</button>
+    </div>
+    <div class="viewtoggle" role="group" aria-label="View">
+      <button id="vCards" aria-pressed="true" data-i18n="cards">CARDS</button>
+      <button id="vTable" aria-pressed="false" data-i18n="table">TABLE</button>
+      <button id="vPlot" aria-pressed="false" data-i18n="plot">PLOT</button>
+    </div>
+    <button class="btn cmpbtn" id="compareBtn" aria-pressed="false"><span data-i18n="compare">COMPARE</span><span class="n" id="cmpCount">0</span></button>
+    <button class="btn" id="shareBtn" data-i18n="share">SHARE</button>
+    <button class="btn" id="reset" data-i18n="reset">RESET</button>
+    <div class="count" id="count" aria-live="polite" aria-atomic="true"></div>
   </div>
-  <div class="fgroup" id="sortGroup"><label>Sort</label>
-    <select id="fSort">
-      <option value="bust-desc" selected>Bust diff · high→low</option>
-      <option value="bust-asc">Bust diff · low→high</option>
-      <option value="height-desc">Height · tall→short</option>
-      <option value="height-asc">Height · short→tall</option>
-      <option value="waist-asc">Waist · thin→thick</option>
-      <option value="hip-desc">Hips · wide→narrow</option>
-      <option value="thigh-desc">Thigh cm · thick→slim</option>
-      <option value="thigh-asc">Thigh cm · slim→thick</option>
-      <option value="whr-asc">Hourglass first</option>
-      <option value="name">Name A→Z</option>
-    </select>
+
+  <div class="wrap">
+    <noscript><style>#grid{display:none}.controls{display:none}</style></noscript>
+    <div id="cardsView"><div class="grid" id="grid">/*__CARDS__*/</div></div>
+    <section id="plotView" hidden aria-label="Scatter plot">
+      <div class="plotbar">
+        <label for="plotY" data-i18n="plotY">Y axis</label>
+        <select id="plotY"></select>
+        <span class="count" id="plotCount" aria-live="polite"></span>
+      </div>
+      <div class="plotwrap"><svg class="plot" id="plot" viewBox="0 0 920 520" role="img"></svg></div>
+    </section>
+    <div id="tableView" hidden><div class="tablewrap"><table id="tbl">
+      <caption class="sr">Measurements for every agent; use the header buttons to sort.</caption>
+      <thead></thead><tbody></tbody>
+    </table></div></div>
+    <p class="empty" id="empty" hidden data-i18n="noMatch">No characters match these filters.</p>
+    <noscript>/*__NOSCRIPT__*/</noscript>
   </div>
-  <div class="viewtoggle" id="unitToggle" title="Measurement units">
-    <button id="uCm" class="active">CM</button><button id="uIn">IN</button>
-  </div>
-  <div class="viewtoggle" id="artToggle" title="Portrait source for cards, table and detail view">
-    <button id="aSheet">SHEET</button><button id="aOff" class="active">OFFICIAL</button>
-  </div>
-  <div class="viewtoggle">
-    <button id="vCards" class="active">CARDS</button>
-    <button id="vTable">TABLE</button>
-  </div>
-  <button class="btn" id="reset">RESET</button>
-  <div class="count" id="count"></div>
+</main>
+
+<div class="comparebar" id="compareBar" hidden aria-label="Comparison tray">
+  <div class="cchips" id="cmpChips"></div>
+  <button class="btn primary" id="cmpOpen" data-i18n="compareNow">Compare</button>
+  <button class="btn" id="cmpClear" data-i18n="clear">Clear</button>
 </div>
 
-<div class="wrap">
-  <div id="cardsView"><div class="grid" id="grid"></div></div>
-  <div id="tableView" style="display:none"><div class="tablewrap"><table id="tbl">
-    <thead></thead><tbody></tbody>
-  </table></div></div>
-  <div class="empty" id="empty" style="display:none">No characters match these filters.</div>
-  <noscript>/*__NOSCRIPT__*/</noscript>
-</div>
-
-<div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
+<div class="overlay" id="overlay" aria-hidden="true"><div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"></div></div>
 
 <footer>
   <div class="fbox">
     <div class="mark"><span>ZZZ MEASUREMENTS</span><i></i><span style="color:var(--dim)">MODELMETRICS.NET</span></div>
-    <b>Source:</b> modelmetrics.net · <i>Zenless Zone Zero · Female Character Measurements</i>.<br>
-  Sheet caveats: heights come from official listings where available and usually include ears, footwear and accessories; all other measurements come from curves wrapped around the official 3D models, and some parts were removed for visibility, so treat every number as an estimate.<br>
-  <b>Classes:</b> every class is a roster tercile of the raw measurement in cm. Waist (Cinched / Average / Fuller), hips (Compact / Average-width / Wide) and thighs (Slim / Average / Thick) use their own circumference; Build compares raw bust and hip percentiles; bust tier comes from bust minus under-bust. Thirteen agents (Rina, Yidhari, Caesar, Velina, Yanagi, Pulchra, Astra Yao, Sigrid, Jane Doe, Trigger, Cissia, Burnice, Orphie) are hand-pinned to Thick by curator read, so their detail view is marked “hand-pinned”. Shape (Hourglass / Balanced / Straight) is the one ratio-based class, using waist ÷ hip.<br>
-  <b>Percentile bars:</b> the bust / waist / hips bars on each card (and all four in the detail view) are roster percentiles of the <b>raw cm measurement</b>. 0 = smallest in the roster, 100 = largest. Build (Top-heavy / Bottom-heavy / Balanced) is simply the bust percentile minus the hip percentile.<br>
-  Auto-comments are generated from the measurements themselves; treat them as fun figure-chart commentary, not in-game canon.<br>
-  <b>Bust diff:</b> recomputed as bust minus under-bust so it keeps one decimal (the sheet's own diff column is whole-number rounded). Bust sorting and the bust podium use it.<br>
-  <b>Images:</b> scale renders from modelmetrics.net; official art from the ZZZ Fandom wiki, © HoYoverse.
+    <div class="flinks">
+      <a href="methodology.html" data-i18n="methodology">Methodology &amp; FAQ</a>
+      <a href="data/measurements.json" download data-i18n="downloadJson">Download JSON</a>
+      <a href="data/measurements.csv" download data-i18n="downloadCsv">Download CSV</a>
+      <a href="__REPO__/blob/main/CHANGELOG.md" rel="noopener">Changelog</a>
+      <a href="__REPO__" rel="noopener">Source repository</a>
+    </div>
+    <b>Source:</b> modelmetrics.net · <i>Zenless Zone Zero · Female Character Measurements</i>. Schema v__SCHEMA_VERSION__ · data updated <time datetime="__DATA_UPDATED__">__DATA_UPDATED__</time>.<br>
+    <b>Height:</b> charted height may include ears, footwear and accessories. Stature comparisons use head height where the chart notes an appendage (Miyabi). Both values are shown in the table and the detail view.<br>
+    <b>Basis:</b> every card, filter and ranking uses the <b>standard model</b>. A measured outfit is kept as its own record, shown in the detail view with its deltas; art-only outfits never touch a number.<br>
+    <b>Classes:</b> waist (Cinched / Average / Fuller), hips (Compact / Average-width / Wide) and thighs (Slim / Average / Thick) are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles; bust tier comes from bust minus under-bust. Thirteen agents (Rina, Yidhari, Caesar, Velina, Yanagi, Pulchra, Astra Yao, Sigrid, Jane Doe, Trigger, Cissia, Burnice, Orphie) are hand-pinned to Thick by curator read, so their detail view is marked “hand-pinned”. Shape (Hourglass / Balanced / Straight) uses waist ÷ hip.<br>
+    <b>Percentile bars:</b> roster percentiles of the raw cm measurement; stature percentiles use head height. 0 = smallest, 100 = largest. Build is the bust percentile minus the hip percentile.<br>
+    <b>Confidence:</b> <span class="badge conf-charted">charted</span> no caveat, <span class="badge conf-estimated">estimated</span> a value is approximated, <span class="badge conf-partial">partial</span> a value is missing. See the <a href="methodology.html">methodology</a>.<br>
+    <b>Bust diff:</b> recomputed as bust minus under-bust so it keeps one decimal (the sheet's own diff column is whole-number rounded).<br>
+    <b>Images:</b> scale renders from modelmetrics.net; official art from the ZZZ Fandom wiki, © HoYoverse. Auto-comments are generated from the measurements; treat them as figure-chart commentary, not in-game canon.
+    <div class="fopts">
+      <label for="lang">Language</label>
+      <select id="lang"><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option></select>
+      <label for="theme">Theme</label>
+      <select id="theme"><option value="dark">Dark</option><option value="light">Light</option></select>
+      <span class="fnote" style="margin:0" data-i18n="langNote">Roster commentary stays in English; controls and labels are translated.</span>
+    </div>
   </div>
 </footer>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
+'use strict';
 const DATA = /*__DATA__*/[];
+const CARD_TMPL = /*__CARD_TMPL__*/"";
+const META = {updated:"__DATA_UPDATED__", schema:"__SCHEMA_VERSION__", repo:"__REPO__"};
+
+/* ---------------- i18n ---------------- */
+const I18N = {
+  en: {
+    skip:'Skip to the roster', heroSuffix:'female agents · measurements, proportions & silhouette reads',
+    source:'Source', updated:'Data updated', filters:'Filters', ranges:'Numeric ranges', resetRanges:'reset',
+    statureNote:'Stature uses head height where the charted figure counts ears or headgear; charted height stays visible in the table.',
+    classes:'Classes', bustTier:'Bust tier', heightClass:'Stature', shape:'Shape', build:'Build', thighClass:'Thigh class',
+    all:'All', petite:'Petite', mid:'Mid', tall:'Tall', hourglass:'Hourglass', balanced:'Balanced', straight:'Straight',
+    topHeavy:'Top-heavy', bottomHeavy:'Bottom-heavy', slim:'Slim', average:'Average', thick:'Thick',
+    apply:'Apply & close', sort:'Sort', sheet:'SHEET', official:'OFFICIAL', cards:'CARDS', table:'TABLE', plot:'PLOT',
+    compare:'COMPARE', share:'SHARE', reset:'RESET', noMatch:'No characters match these filters.',
+    compareNow:'Compare', clear:'Clear', methodology:'Methodology & FAQ', downloadJson:'Download JSON', downloadCsv:'Download CSV',
+    langNote:'Roster commentary stays in English; controls and labels are translated.',
+    plotY:'Y axis', searchPh:'Search character, outfit or alias…',
+    entries:'entries', picked:'selected for comparison', addCompare:'Add to comparison',
+    measurements:'Measurements', bra:'Bra sizing', proportions:'Proportions', percentiles:'Roster percentiles',
+    figureRead:'Figure read', outfits:'Outfits', standard:'Standard', fullProfile:'Full profile', report:'Report an error',
+    addToCompare:'Add to comparison', removeFromCompare:'Remove from comparison', similar:'Similar figures',
+    confidence:'Confidence', sourceArt:'Portrait source', close:'Close', zoomHint:'Click the portrait to zoom.',
+    bust:'Bust', underbust:'Under-bust', waist:'Waist', hip:'Hip', thigh:'Thigh', bustDiff:'Bust diff',
+    frame:'frame', silhouette:'silhouette', balance:'balance', thighNote:'Thigh class',
+    height:'Height', stature:'Stature', charted:'charted', headHeight:'head height',
+    compareTitle:'Compare agents', pickTwo:'Pick at least two agents to compare.', clearAll:'Clear all',
+    copyLink:'Link copied', shareFail:'Could not share this link.',
+    sortBustDesc:'Bust diff · high→low', sortBustAsc:'Bust diff · low→high', sortHeightDesc:'Stature · tall→short',
+    sortHeightAsc:'Stature · short→tall', sortWaistAsc:'Waist · thin→thick', sortHipDesc:'Hips · wide→narrow',
+    sortThighDesc:'Thigh cm · thick→slim', sortThighAsc:'Thigh cm · slim→thick', sortWhrAsc:'Hourglass first',
+    sortName:'Name A→Z', sortStatureLabel:'Stature', cm:'cm', inch:'in', uk:'UK',
+    tally:'tallest', bustiest:'largest bust diff', hourglassTop:'sharpest hourglass', outfitsN:'outfit renders',
+    pctLong:'Roster percentile of the raw centimetre measurement. 0 = smallest in the cast, 100 = largest.'
+  },
+  ja: {
+    skip:'名簿へスキップ', heroSuffix:'人の女性エージェント · 寸法・比率・シルエット',
+    source:'出典', updated:'データ更新', filters:'絞り込み', ranges:'数値範囲', resetRanges:'リセット',
+    statureNote:'耳や頭部装備を含む身長は、頭頂高で比較します。公式身長は表に残ります。',
+    classes:'分類', bustTier:'バスト区分', heightClass:'身長', shape:'シルエット', build:'体型', thighClass:'太もも区分',
+    all:'すべて', petite:'小柄', mid:'中背', tall:'高身長', hourglass:'砂時計型', balanced:'バランス型', straight:'直線型',
+    topHeavy:'上半身型', bottomHeavy:'下半身型', slim:'細め', average:'普通', thick:'太め',
+    apply:'適用して閉じる', sort:'並び順', sheet:'一覧', official:'公式', cards:'カード', table:'表', plot:'散布図',
+    compare:'比較', share:'共有', reset:'初期化', noMatch:'条件に合うキャラクターがいません。',
+    compareNow:'比較する', clear:'クリア', methodology:'算出方法とFAQ', downloadJson:'JSONを保存', downloadCsv:'CSVを保存',
+    langNote:'解説文は英語のままです。操作ラベルを翻訳しています。',
+    plotY:'縦軸', searchPh:'名前・衣装・別名で検索…',
+    entries:'件', picked:'件を比較に追加', addCompare:'比較に追加',
+    measurements:'寸法', bra:'ブラサイズ', proportions:'比率', percentiles:' roster パーセンタイル',
+    figureRead:'体型の読み', outfits:'衣装', standard:'標準', fullProfile:'詳細ページ', report:'誤りを報告',
+    addToCompare:'比較に追加', removeFromCompare:'比較から外す', similar:'似た体型',
+    confidence:'信頼度', sourceArt:'画像出典', close:'閉じる', zoomHint:'画像をクリックで拡大。',
+    bust:'バスト', underbust:'アンダー', waist:'ウエスト', hip:'ヒップ', thigh:'太もも', bustDiff:'バスト差',
+    frame:'身長', silhouette:'シルエット', balance:'バランス', thighNote:'太もも区分',
+    height:'身長', stature:'頭頂高', charted:'公式', headHeight:'頭頂高',
+    compareTitle:'エージェント比較', pickTwo:'2人以上を選んでください。', clearAll:'すべて解除',
+    copyLink:'リンクをコピーしました', shareFail:'共有できませんでした。',
+    sortBustDesc:'バスト差 · 高い順', sortBustAsc:'バスト差 · 低い順', sortHeightDesc:'身長 · 高い順',
+    sortHeightAsc:'身長 · 低い順', sortWaistAsc:'ウエスト · 細い順', sortHipDesc:'ヒップ · 広い順',
+    sortThighDesc:'太もも · 太い順', sortThighAsc:'太もも · 細い順', sortWhrAsc:'砂時計型順',
+    sortName:'名前 A→Z', sortStatureLabel:'身長', cm:'cm', inch:'in', uk:'UK',
+    tally:'最高身長', bustiest:'最大バスト差', hourglassTop:'最も砂時計型', outfitsN:'衣装画像',
+    pctLong:'roster内の生cm値パーセンタイル。0=最小、100=最大。'
+  },
+  zh: {
+    skip:'跳到名单', heroSuffix:'位女性代理人 · 三围、比例与轮廓',
+    source:'来源', updated:'数据更新', filters:'筛选', ranges:'数值范围', resetRanges:'重置',
+    statureNote:'若官方身高包含耳朵或头饰，则按头顶高度比较；官方身高仍保留在表格中。',
+    classes:'分类', bustTier:'胸围等级', heightClass:'身高', shape:'轮廓', build:'体型', thighClass:'大腿分类',
+    all:'全部', petite:'娇小', mid:'中等', tall:'高挑', hourglass:'沙漏型', balanced:'均衡型', straight:'直筒型',
+    topHeavy:'上重', bottomHeavy:'下重', slim:'纤细', average:'适中', thick:'丰满',
+    apply:'应用并关闭', sort:'排序', sheet:'拼图', official:'官方', cards:'卡片', table:'表格', plot:'散点图',
+    compare:'对比', share:'分享', reset:'重置', noMatch:'没有符合筛选条件的角色。',
+    compareNow:'对比', clear:'清空', methodology:'方法与常见问题', downloadJson:'下载 JSON', downloadCsv:'下载 CSV',
+    langNote:'角色评论仍为英文；控件与标签已翻译。',
+    plotY:'纵轴', searchPh:'搜索角色、服装或别名…',
+    entries:'条', picked:'项已加入对比', addCompare:'加入对比',
+    measurements:'测量', bra:'内衣尺码', proportions:'比例', percentiles:'名单百分位',
+    figureRead:'体型解读', outfits:'服装', standard:'标准', fullProfile:'完整页面', report:'报告错误',
+    addToCompare:'加入对比', removeFromCompare:'移出对比', similar:'相似体型',
+    confidence:'可信度', sourceArt:'立绘来源', close:'关闭', zoomHint:'点击立绘可放大。',
+    bust:'胸围', underbust:'下胸围', waist:'腰围', hip:'臀围', thigh:'大腿', bustDiff:'胸围差',
+    frame:'身高', silhouette:'轮廓', balance:'体型', thighNote:'大腿分类',
+    height:'身高', stature:'头顶高', charted:'官方', headHeight:'头顶高',
+    compareTitle:'角色对比', pickTwo:'请至少选择两位角色。', clearAll:'全部清除',
+    copyLink:'链接已复制', shareFail:'无法分享此链接。',
+    sortBustDesc:'胸围差 · 高到低', sortBustAsc:'胸围差 · 低到高', sortHeightDesc:'身高 · 高到低',
+    sortHeightAsc:'身高 · 低到高', sortWaistAsc:'腰围 · 细到粗', sortHipDesc:'臀围 · 宽到窄',
+    sortThighDesc:'大腿 · 粗到细', sortThighAsc:'大腿 · 细到粗', sortWhrAsc:'沙漏型优先',
+    sortName:'姓名 A→Z', sortStatureLabel:'身高', cm:'cm', inch:'in', uk:'UK',
+    tally:'最高身高', bustiest:'最大胸围差', hourglassTop:'最沙漏', outfitsN:'服装立绘',
+    pctLong:'名单内原始厘米值的百分位。0=最小，100=最大。'
+  }
+};
 
 /* ---------------- helpers ---------------- */
 const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = (v, d=1) => (v==null ? "—" : (+v).toFixed(d).replace(/\.0$/,""));
-const imgSrc = d => `images/${d.img}.webp`;
-const officialSrc = r => `character_images/${r.official}.webp`;
-const thumbSrc = d => state.art==="official" ? officialSrc(d) : imgSrc(d);
+const norm = s => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const t = k => (I18N[state.lang] && I18N[state.lang][k]) || I18N.en[k] || k;
 const pct = p => p==null?0:Math.round(p*100);
 const isCm = () => state.unit==='cm';
-const U = (d,k) => isCm()? d[k+'_cm'] : d[k+'_in'];              // value of a measurement in the active unit
+const U = (d,k) => isCm()? d[k+'_cm'] : d[k+'_in'];
 const USUF = () => isCm()? ' cm' : ' in';
 const descFor = d => isCm()? (d.desc_cm||d.desc_in) : (d.desc_in||d.desc_cm);
+const bySlug = new Map(DATA.map(d=>[d.slug,d]));
+const byName = new Map(DATA.map(d=>[d.name,d]));
+const fmtPct = v => v==null ? '—' : v.toFixed(3);
 
-/* ---------------- state + card sorts ---------------- */
-const state = {q:"", cup:"all", shape:"all", balance:"all", thighs:"all", sort:"bust-desc",
-               view:"cards", unit:"cm", art:"official", rng:{}};
-const SORTS = {
-  "name":       (a,b)=>a.display.localeCompare(b.display),
-  "height-desc":(a,b)=>b.cm-a.cm,
-  "height-asc": (a,b)=>a.cm-b.cm,
-  "bust-desc":  (a,b)=>(b.diff_cm??-99)-(a.diff_cm??-99),
-  "bust-asc":   (a,b)=>(a.diff_cm??99)-(b.diff_cm??99),
-  "waist-asc":  (a,b)=>(a.waist_cm??99)-(b.waist_cm??99),
-  "hip-desc":   (a,b)=>(b.hip_cm??-99)-(a.hip_cm??-99),
-  "thigh-desc": (a,b)=>(b.thigh_cm??-99)-(a.thigh_cm??-99),
-  "thigh-asc":  (a,b)=>(a.thigh_cm??99)-(b.thigh_cm??99),
-  "whr-asc":    (a,b)=>(a.whr??9)-(b.whr??9),
-};
-
-/* ---------------- numeric range filters ---------------- */
+/* ---------------- state ---------------- */
 const RANGES = [
-  {k:'cm',       label:'Height'},
+  {k:'stature_cm', label:'Stature'},
   {k:'bust_cm',  label:'Bust'},
   {k:'waist_cm', label:'Waist'},
   {k:'hip_cm',   label:'Hips'},
@@ -564,6 +843,86 @@ for(const m of RANGES){
   const vals = DATA.map(d=>d[m.k]).filter(v=>v!=null);
   BOUNDS[m.k] = [Math.floor(Math.min(...vals)), Math.ceil(Math.max(...vals))];
 }
+const state = {q:"", cup:"all", shape:"all", balance:"all", thighs:"all", height:"all",
+               sort:"bust-desc", view:"cards", unit:"cm", art:"official", lang:"en",
+               rng:{}, compare:[], plotY:"whr"};
+const SORTS = {
+  "name":        (a,b)=>a.display.localeCompare(b.display),
+  "height-desc": (a,b)=>b.stature_cm-a.stature_cm,
+  "height-asc":  (a,b)=>a.stature_cm-b.stature_cm,
+  "bust-desc":   (a,b)=>(b.diff_cm??-99)-(a.diff_cm??-99),
+  "bust-asc":    (a,b)=>(a.diff_cm??99)-(b.diff_cm??99),
+  "waist-asc":   (a,b)=>(a.waist_cm??99)-(b.waist_cm??99),
+  "hip-desc":    (a,b)=>(b.hip_cm??-99)-(a.hip_cm??-99),
+  "thigh-desc":  (a,b)=>(b.thigh_cm??-99)-(a.thigh_cm??-99),
+  "thigh-asc":   (a,b)=>(a.thigh_cm??99)-(b.thigh_cm??99),
+  "whr-asc":     (a,b)=>(a.whr??9)-(b.whr??9),
+};
+const SORT_KEYS = ["bust-desc","bust-asc","height-desc","height-asc","waist-asc","hip-desc",
+                   "thigh-desc","thigh-asc","whr-asc","name"];
+const SORT_LABEL_KEY = {
+  "bust-desc":"sortBustDesc","bust-asc":"sortBustAsc","height-desc":"sortHeightDesc","height-asc":"sortHeightAsc",
+  "waist-asc":"sortWaistAsc","hip-desc":"sortHipDesc","thigh-desc":"sortThighDesc","thigh-asc":"sortThighAsc",
+  "whr-asc":"sortWhrAsc","name":"sortName"
+};
+const PLOT_METRICS = [
+  {k:'whr', label:'Waist ÷ hip', dec:3},
+  {k:'whtr', label:'Waist ÷ stature', dec:3},
+  {k:'thh', label:'Thigh ÷ hip', dec:3},
+  {k:'bhr', label:'Bust ÷ stature', dec:3},
+  {k:'diff_cm', label:'Bust diff (cm)', dec:1},
+];
+
+/* ---------------- URL state ---------------- */
+function readHash(){
+  const p = new URLSearchParams(location.hash.replace(/^#/, ''));
+  const out = {};
+  const take = (key, target) => { if(p.has(key)){ const v=p.get(key); if(v) out[target]=v; } };
+  take('q','q'); take('sort','sort'); take('view','view'); take('unit','unit');
+  take('art','art'); take('cup','cup'); take('shape','shape'); take('bal','balance');
+  take('thigh','thighs'); take('h','height'); take('y','plotY');
+  if(p.has('r')){
+    const rng = {};
+    for(const part of p.get('r').split(';')){
+      const [k,a,b] = part.split(':');
+      if(BOUNDS[k] && isFinite(a) && isFinite(b)){
+        const lo = Math.max(BOUNDS[k][0], +a), hi = Math.min(BOUNDS[k][1], +b);
+        if(lo > BOUNDS[k][0] || hi < BOUNDS[k][1]) rng[k] = [lo, hi];
+      }
+    }
+    out.rng = rng;
+  }
+  if(p.has('c')) out.compare = p.get('c').split(',').map(s=>bySlug.get(s)).filter(Boolean).map(d=>d.slug);
+  if(p.has('p')) out.p = p.get('p');
+  return out;
+}
+function writeHash(replace=true){
+  const p = new URLSearchParams();
+  if(state.q) p.set('q', state.q);
+  if(state.sort!=="bust-desc") p.set('sort', state.sort);
+  if(state.view!=="cards") p.set('view', state.view);
+  if(state.unit!=="cm") p.set('unit', state.unit);
+  if(state.art!=="official") p.set('art', state.art);
+  if(state.lang!=="en") p.set('lang', state.lang);
+  if(state.cup!=="all") p.set('cup', state.cup);
+  if(state.shape!=="all") p.set('shape', state.shape);
+  if(state.balance!=="all") p.set('bal', state.balance);
+  if(state.thighs!=="all") p.set('thigh', state.thighs);
+  if(state.height!=="all") p.set('h', state.height);
+  if(state.plotY!=="whr") p.set('y', state.plotY);
+  const r = Object.entries(state.rng).map(([k,[a,b]])=>`${k}:${a}:${b}`).join(';');
+  if(r) p.set('r', r);
+  if(state.compare.length) p.set('c', state.compare.join(','));
+  if(mctx.slug) p.set('p', mctx.slug);
+  const hash = p.toString();
+  const url = location.pathname + location.search + (hash ? '#'+hash : '');
+  try{
+    const method = replace ? 'replaceState' : 'pushState';
+    history[method]({...state}, '', url);
+  }catch(e){}
+}
+
+/* ---------------- numeric range filters ---------------- */
 const toDisp = cm => isCm()? cm : cm/2.54;
 const toCmOf = dv => isCm()? dv : dv*2.54;
 const snapTo = (v,s) => Math.round(v/s)*s;
@@ -584,7 +943,7 @@ function inRange(d,k){
 function activeFilterCount(){
   let n = 0;
   for(const m of RANGES) if(!rangeFull(m.k)) n++;
-  for(const k of ["cup","shape","balance","thighs"]) if(state[k]!=="all") n++;
+  for(const k of ["cup","shape","balance","thighs","height"]) if(state[k]!=="all") n++;
   return n;
 }
 function updateFilterBadge(){
@@ -600,15 +959,15 @@ function renderFilterPanel(){
     const v0 = Math.min(Math.max(snapTo(toDisp(r[0]),step), b0), b1);
     const v1 = Math.min(Math.max(snapTo(toDisp(r[1]),step), b0), b1);
     return `<div class="frow" data-k="${k}">
-      <div class="frl"><span>${m.label}</span><span class="frv"></span></div>
+      <div class="frl"><span>${esc(k==='stature_cm'?t('stature'):m.label)}<button class="rreset" data-reset="${k}" title="Reset ${esc(m.label)}" aria-label="Reset ${esc(m.label)}">↺</button></span><span class="frv"></span></div>
       <div class="dual">
         <div class="dtr"><i></i></div>
-        <input type="range" class="dlo" min="${b0}" max="${b1}" step="${step}" value="${v0}" aria-label="${m.label} minimum">
-        <input type="range" class="dhi" min="${b0}" max="${b1}" step="${step}" value="${v1}" aria-label="${m.label} maximum">
+        <input type="range" class="dlo" min="${b0}" max="${b1}" step="${step}" value="${v0}" aria-label="${esc(m.label)} minimum">
+        <input type="range" class="dhi" min="${b0}" max="${b1}" step="${step}" value="${v1}" aria-label="${esc(m.label)} maximum">
       </div>
     </div>`;
   }).join("");
-  $("#fRanges").querySelectorAll(".frow").forEach(row=>{
+  $$("#fRanges .frow").forEach(row=>{
     const k = row.dataset.k;
     const lo = row.querySelector(".dlo"), hi = row.querySelector(".dhi");
     const paint = ()=>{
@@ -623,75 +982,93 @@ function renderFilterPanel(){
       const loC = (+lo.value) <= b0+1e-9 ? BOUNDS[k][0] : toCmOf(+lo.value);
       const hiC = (+hi.value) >= b1-1e-9 ? BOUNDS[k][1] : toCmOf(+hi.value);
       state.rng[k] = [loC, hiC];
-      paint(); updateFilterBadge(); render();
+      paint(); updateFilterBadge(); scheduleRender();
     };
     lo.addEventListener("input", ()=>{ if(+lo.value > +hi.value) hi.value = lo.value; apply(); });
     hi.addEventListener("input", ()=>{ if(+hi.value < +lo.value) lo.value = hi.value; apply(); });
     paint();
   });
+  $$("#fRanges .rreset").forEach(b=>b.addEventListener("click", e=>{
+    e.preventDefault(); e.stopPropagation();
+    delete state.rng[b.dataset.reset];
+    renderFilterPanel(); updateFilterBadge(); scheduleRender(true);
+  }));
 }
 
-function filtered(ignoreQuery){
-  const q = ignoreQuery ? "" : state.q.trim().toLowerCase();
+/* ---------------- filtering + sorting ---------------- */
+function filtered(){
+  const q = norm(state.q.trim());
   return DATA.filter(d=>{
-    if(q && !d.display.toLowerCase().includes(q)) return false;
+    if(q && !(norm(d.display).includes(q) || d.aliases.some(a=>norm(a).includes(q)))) return false;
     for(const m of RANGES) if(!inRange(d, m.k)) return false;
     if(state.cup!=="all" && d.cup_group!==state.cup) return false;
     if(state.shape!=="all" && d.shape!==state.shape) return false;
     if(state.balance!=="all" && d.tags.balance!==state.balance) return false;
     if(state.thighs!=="all" && d.tags.thighs!==state.thighs) return false;
+    if(state.height!=="all" && d.height_group!==state.height) return false;
     return true;
   });
 }
 
-/* ---------------- cards ---------------- */
-function cardHTML(d){
-  return `
-  <div class="card" data-name="${d.name}">
-    <div class="imgbox">
-      <img loading="lazy" decoding="async" src="${thumbSrc(d)}" alt="${d.display}"${d.dx!=null && state.art==="official" ? ` style="--dx:${d.dx}%"` : ""}>
-      ${d.variant_of?`<span class="stick">${d.outfit||"variant"}</span>`:''}
-    </div>
-    <div class="body">
-      <div class="name">${d.display}<small>${isCm()? `${fmt(d.cm,0)} cm · ${d.ftin}` : `${d.ftin} · ${fmt(d.cm,0)} cm`}</small></div>
-      <div class="pct" title="Roster percentile of the raw centimetre measurement. 0 = smallest in the cast, 100 = largest.">
-        <div class="prow"><span>bust</span><div class="pbar"><i style="width:${pct(d.p_bust_cm)}%;background:var(--bust)"></i></div><b>${pct(d.p_bust_cm)}</b></div>
-        <div class="prow"><span>waist</span><div class="pbar"><i style="width:${pct(d.p_waist_cm)}%;background:var(--waist)"></i></div><b>${pct(d.p_waist_cm)}</b></div>
-        <div class="prow"><span>hips</span><div class="pbar"><i style="width:${pct(d.p_hip_cm)}%;background:var(--hips)"></i></div><b>${pct(d.p_hip_cm)}</b></div>
-      </div>
-      <div class="stats">
-        <div class="stat"><div class="v">${fmt(U(d,'bust'))}</div><div class="k">bust ${isCm()?'cm':'in'}</div></div>
-        <div class="stat"><div class="v">${fmt(U(d,'waist'))}</div><div class="k">waist ${isCm()?'cm':'in'}</div></div>
-        <div class="stat"><div class="v">${fmt(U(d,'hip'))}</div><div class="k">hip ${isCm()?'cm':'in'}</div></div>
-        <div class="stat"><div class="v">${d.uk}</div><div class="k">uk</div></div>
-      </div>
-      <div class="chips">
-        <span class="chip height">${d.tags.height}</span>
-        <span class="chip bust">UK ${d.uk}</span>
-        <span class="chip waist">waist ${d.tags.waist}</span>
-        <span class="chip hips">hips ${d.tags.hips}</span>
-        ${d.thigh_in!=null?`<span class="chip thighs">thighs ${d.tags.thighs}</span>`:''}
-        <span class="chip shape">${d.tags.shape}</span>
-        <span class="chip">${d.tags.balance}</span>
-      </div>
-      <div class="desc">${descFor(d)}</div>
-      ${d.notes?`<div class="note">${d.notes}</div>`:''}
-    </div>
-  </div>`;
+/* ---------------- cards (shared template) ---------------- */
+const officialSrc = r => `character_images/${r.official}.webp`;
+const thumbSrc = d => state.art==="official" ? `character_images/thumbs/${d.official}.webp` : `images/${d.img}.webp`;
+function heightLine(d){
+  if(d.stature_basis==='head'){
+    return `${fmt(d.cm,0)} cm ${t('charted')} · ${fmt(d.stature_cm,0)} cm ${t('headHeight')}`;
+  }
+  return isCm()? `${fmt(d.cm,0)} cm · ${d.ftin}` : `${d.ftin} · ${fmt(d.cm,0)} cm`;
 }
-
+function chipsHTML(d){
+  const chips = [
+    `<span class="chip height">${esc(d.tags.height)}</span>`,
+    `<span class="chip bust">${t('uk')} ${esc(d.uk)}</span>`,
+    `<span class="chip waist">${esc(t('waist'))} ${esc(d.tags.waist)}</span>`,
+    `<span class="chip hips">${esc(t('hip'))} ${esc(d.tags.hips)}</span>`,
+  ];
+  if(d.thigh_cm!=null) chips.push(`<span class="chip thighs">${esc(t('thigh'))} ${esc(d.tags.thighs)}</span>`);
+  chips.push(`<span class="chip shape">${esc(d.tags.shape)}</span>`);
+  chips.push(`<span class="chip">${esc(d.tags.balance)}</span>`);
+  return chips.join('');
+}
+function cardValues(d){
+  const u = isCm()? 'cm' : 'in';
+  const dx = (d.dx!=null && state.art==="official") ? ` style="--dx:${d.dx}%"` : '';
+  const note = d.notes ? `<div class="note">${esc(d.notes)}</div>` : '';
+  const stick = d.variant_of ? `<span class="stick">${esc(d.outfit||"variant")}</span>` : '';
+  const cmpOn = state.compare.includes(d.slug);
+  return {
+    name: esc(d.name),
+    cmpAria: esc(`${cmpOn?t('removeFromCompare'):t('addCompare')}: ${d.display}`),
+    href: `characters/${d.slug}.html`,
+    thumb: thumbSrc(d), dx, stick,
+    display: esc(d.display),
+    heightLine: esc(heightLine(d)),
+    pctTitle: esc(t('pctLong')),
+    bustWord: t('bust'), waistWord: t('waist'), hipWord: t('hip'),
+    pBust: pct(d.p_bust_cm), pWaist: pct(d.p_waist_cm), pHip: pct(d.p_hip_cm),
+    bust: fmt(d['bust_'+u]), waist: fmt(d['waist_'+u]), hip: fmt(d['hip_'+u]),
+    bustLabel: `${t('bust')} ${u}`, waistLabel: `${t('waist')} ${u}`, hipLabel: `${t('hip')} ${u}`,
+    uk: esc(d.uk),
+    chips: chipsHTML(d),
+    desc: esc(descFor(d)),
+    note
+  };
+}
+function cardHTML(d){
+  const v = cardValues(d);
+  return CARD_TMPL.replace(/\{\{(\w+)\}\}/g, (_,k)=> v[k] ?? '');
+}
 function renderCards(list){
   $("#grid").innerHTML = list.map(cardHTML).join("");
-  $("#grid").querySelectorAll(".card").forEach(el=>{
-    el.addEventListener("click", ()=> openModal(DATA.find(d=>d.name===el.dataset.name)));
-  });
+  syncCardCompare();
 }
 
 /* ---------------- table ---------------- */
 function columns(){
   const u = state.unit, suf = u==='cm' ? ' cm' : ' in', osuf = u==='cm' ? ' in' : ' cm';
   const unitCol = (key, title, dec=1) => ({
-    k:key, t:`${title} (${u})`, s:d=>d[key+'_in'], num:true,
+    k:key, t:`${title} (${u})`, s:d=>d[key+'_in'], num:true, cls:'',
     fmtv:(v,d)=>{
       const p = U(d,key); if(p==null) return "—";
       const o = isCm()? d[key+'_in'] : d[key+'_cm'];
@@ -699,40 +1076,47 @@ function columns(){
     }
   });
   return [
-    {k:"name",   t:"Character",   s:d=>d.display,              num:false},
-    {k:"cm",     t:"Height (cm)", s:d=>d.cm,                   num:true},
-    {k:"ft",     t:"Height (ft/in)", s:d=>d.ftin,              num:false, fmtv:(v,d)=>d.ftin??"—"},
+    {k:"name",   t:t('sortName').replace(' A→Z',''), s:d=>d.display, num:false},
+    {k:"cm",     t:`${t('height')} (cm)`, s:d=>d.cm, num:true, cls:'',
+      fmtv:(v,d)=>`${fmt(d.cm,0)}${d.stature_basis==='head'?`<div class="mini">${fmt(d.stature_cm,0)} ${t('headHeight')}</div>`:''}`},
+    {k:"stature",t:`${t('stature')} (cm)`, s:d=>d.stature_cm, num:true, cls:'',
+      fmtv:(v,d)=>fmt(d.stature_cm,0)},
+    {k:"ft",     t:"ft/in", s:d=>d.ftin, num:false, cls:'col-low', fmtv:(v,d)=>d.ftin??"—"},
     unitCol("bust","Bust"),
-    unitCol("band","Band"),
+    unitCol("band","Band","col-low"),
     unitCol("waist","Waist"),
     unitCol("hip","Hip"),
-    unitCol("thigh","Thigh"),
-    unitCol("diff","Bust diff",1),
-    {k:"uk",     t:"UK",          s:d=>d.uk,                   num:false},
-    {k:"us",     t:"US",          s:d=>d.us,                   num:false},
-    {k:"eu",     t:"EU",          s:d=>d.eu,                   num:false},
-    {k:"whr",    t:"Waist/Hip",   s:d=>d.whr,                  num:true,  fmtv:v=>v?.toFixed(3)??"—"},
-    {k:"whtr",   t:"Waist/H",     s:d=>d.whtr,                 num:true,  fmtv:v=>v?.toFixed(3)??"—"},
-    {k:"thr",    t:"Thigh/H",     s:d=>d.thr,                  num:true,  fmtv:v=>v?.toFixed(3)??"—"},
-    {k:"thh",    t:"Thigh/Hip",   s:d=>d.thh,                  num:true,  fmtv:v=>v?.toFixed(3)??"—"},
-    {k:"shape",  t:"Shape",       s:d=>d.shape,                num:false},
-    {k:"bal",    t:"Build",       s:d=>d.tags.balance,         num:false},
-    {k:"note",   t:"Notes",       s:d=>d.notes?1:0,            num:true,  fmtv:(v,d)=>d.notes?`<span class="warn" title="${d.notes.replace(/"/g,'&quot;')}">⚠</span>`:""},
+    unitCol("thigh","Thigh","col-low"),
+    unitCol("diff","Bust diff"),
+    {k:"uk",     t:"UK", s:d=>d.uk, num:false, cls:''},
+    {k:"us",     t:"US", s:d=>d.us, num:false, cls:'col-low'},
+    {k:"eu",     t:"EU", s:d=>d.eu, num:false, cls:'col-low'},
+    {k:"whr",    t:"Waist/Hip", s:d=>d.whr, num:true, cls:'', fmtv:v=>fmtPct(v)},
+    {k:"whtr",   t:"Waist/H", s:d=>d.whtr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
+    {k:"thr",    t:"Thigh/H", s:d=>d.thr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
+    {k:"thh",    t:"Thigh/Hip", s:d=>d.thh, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
+    {k:"shape",  t:t('shape'), s:d=>d.shape, num:false, cls:'col-low'},
+    {k:"bal",    t:t('build'), s:d=>d.tags.balance, num:false, cls:'col-low'},
+    {k:"conf",   t:t('confidence'), s:d=>d.confidence, num:false, cls:'col-low',
+      fmtv:(v,d)=>`<span class="badge conf-${esc(d.confidence)}">${esc(d.confidence)}</span>`},
+    {k:"note",   t:"Notes", s:d=>d.notes?1:0, num:true, cls:'col-low',
+      fmtv:(v,d)=>d.notes?`<span class="warn" title="${esc(d.notes)}">⚠</span>`:""},
   ];
 }
-let tblSort = {k:"bust", dir:1};
+let tblSort = {k:"diff", dir:-1};
 
 function renderTable(list){
   const COLS = columns();
   const thead = $("#tbl thead"), tbody = $("#tbl tbody");
   thead.innerHTML = "<tr>" + COLS.map(c=>{
     const sorted = tblSort.k===c.k;
-    return `<th data-k="${c.k}" class="${sorted?'sorted':''}">${c.t}<span class="arr">${sorted?(tblSort.dir>0?'▲':'▼'):'↕'}</span></th>`;
+    const aria = sorted ? (tblSort.dir>0?'ascending':'descending') : 'none';
+    return `<th scope="col" data-k="${c.k}" class="${esc(c.cls||'')}" aria-sort="${aria}"><button type="button">${esc(c.t)}<span class="arr" aria-hidden="true">${sorted?(tblSort.dir>0?'▲':'▼'):'↕'}</span></button></th>`;
   }).join("") + "</tr>";
-  thead.querySelectorAll("th").forEach(th=>th.addEventListener("click", ()=>{
-    const k = th.dataset.k;
+  thead.querySelectorAll("th button").forEach(btn=>btn.addEventListener("click", ()=>{
+    const k = btn.closest("th").dataset.k;
     if(tblSort.k===k) tblSort.dir *= -1; else tblSort = {k, dir:1};
-    render();
+    renderTable(filtered());
   }));
   const col = COLS.find(c=>c.k===tblSort.k);
   const rows = [...list].sort((a,b)=>{
@@ -747,30 +1131,134 @@ function renderTable(list){
       if(c.k==="name"){
         return `<td><div style="display:flex;align-items:center;gap:8px">
           <img class="thumb" loading="lazy" decoding="async" src="${thumbSrc(d)}" alt="">
-          <span><b>${d.display}</b>${d.variant_of?'<span class="badge">variant</span>':''}<div class="mini">${d.height_group} · UK ${d.uk} · ${d.shape}</div></span></div></td>`;
+          <span><a class="tname" href="characters/${d.slug}.html">${esc(d.display)}</a>${d.variant_of?'<span class="badge">variant</span>':''}<div class="mini">${esc(d.height_group)} · UK ${esc(d.uk)} · ${esc(d.shape)}</div></span></div></td>`;
       }
       const raw = c.s(d);
-      const val = c.fmtv ? c.fmtv(raw, d) : (raw==null?"—":(c.num?fmt(raw, c.k==="diff"?0:1):raw));
+      const val = c.fmtv ? c.fmtv(raw, d) : (raw==null?"—":(c.num?fmt(raw, c.k==="diff"?0:1):esc(raw)));
       return `<td class="${c.num?'num':''}">${val}</td>`;
     }).join("");
-    return `<tr data-name="${d.name}">${tds}</tr>`;
+    return `<tr data-name="${esc(d.name)}">${tds}</tr>`;
   }).join("");
-  tbody.querySelectorAll("tr").forEach(tr=>{
-    tr.addEventListener("click", ()=> openModal(DATA.find(d=>d.name===tr.dataset.name)));
+}
+
+/* ---------------- plot ---------------- */
+function plotMetric(){ return PLOT_METRICS.find(m=>m.k===state.plotY) || PLOT_METRICS[0]; }
+function renderPlot(list){
+  const svg = $("#plot"), W=920, H=520, P={l:58,r:22,t:18,b:52};
+  const m = plotMetric();
+  const pts = list.filter(d=>d[m.k]!=null && d.stature_cm!=null);
+  $("#plotCount").innerHTML = `<b>${pts.length}</b> / ${DATA.length} ${esc(t('entries'))}`;
+  if(!pts.length){ svg.innerHTML = `<text x="${W/2}" y="${H/2}" text-anchor="middle" class="tick">${esc(t('noMatch'))}</text>`; return; }
+  const xs = pts.map(d=>d.stature_cm), ys = pts.map(d=>d[m.k]);
+  const pad=(lo,hi)=>lo===hi?[lo-1,hi+1]:[lo-(hi-lo)*.06, hi+(hi-lo)*.06];
+  const [x0,x1]=pad(Math.min(...xs),Math.max(...xs));
+  const [y0,y1]=pad(Math.min(...ys),Math.max(...ys));
+  const sx=v=>P.l+(v-x0)/(x1-x0)*(W-P.l-P.r);
+  const sy=v=>H-P.b-(v-y0)/(y1-y0)*(H-P.t-P.b);
+  const ticks=(a,b,n=5)=>Array.from({length:n},(_,i)=>a+(b-a)*i/(n-1));
+  const shapeColor={Hourglass:'var(--hips)',Balanced:'var(--blue)',Straight:'var(--bust)'};
+  let g='';
+  for(const v of ticks(y0,y1)) g+=`<line class="gridline" x1="${P.l}" x2="${W-P.r}" y1="${sy(v).toFixed(1)}" y2="${sy(v).toFixed(1)}"/><text class="tick" x="${P.l-8}" y="${(sy(v)+3).toFixed(1)}" text-anchor="end">${v.toFixed(m.dec===1?1:2)}</text>`;
+  for(const v of ticks(x0,x1,6)) g+=`<line class="gridline" x1="${sx(v).toFixed(1)}" x2="${sx(v).toFixed(1)}" y1="${P.t}" y2="${H-P.b}"/><text class="tick" x="${sx(v).toFixed(1)}" y="${H-P.b+18}" text-anchor="middle">${Math.round(v)}</text>`;
+  g+=`<line class="axis" x1="${P.l}" x2="${W-P.r}" y1="${H-P.b}" y2="${H-P.b}"/><line class="axis" x1="${P.l}" x2="${P.l}" y1="${P.t}" y2="${H-P.b}"/>`;
+  g+=`<text class="alab" x="${(P.l+W-P.r)/2}" y="${H-14}" text-anchor="middle">${esc(t('stature'))} (cm)</text>`;
+  g+=`<text class="alab" transform="translate(14 ${(P.t+H-P.b)/2}) rotate(-90)" text-anchor="middle">${esc(m.label)}</text>`;
+  for(const d of pts){
+    const cx=sx(d.stature_cm), cy=sy(d[m.k]);
+    g+=`<g class="pt" data-slug="${esc(d.slug)}" tabindex="0" role="button" aria-label="${esc(d.display)}: ${esc(fmt(d[m.k], m.dec))}">
+      <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5" fill="${shapeColor[d.shape]||'var(--acid)'}"/>
+      <title>${esc(d.display)} — ${esc(fmt(d.stature_cm,0))} cm · ${esc(m.label)} ${esc(fmt(d[m.k], m.dec))}</title>
+      <text x="${(cx+8).toFixed(1)}" y="${(cy-8).toFixed(1)}">${esc(d.display)}</text></g>`;
+  }
+  svg.setAttribute('aria-label', `${t('stature')} × ${m.label} scatter plot, ${pts.length} agents`);
+  svg.innerHTML = g;
+}
+
+/* ---------------- podium + highlights ---------------- */
+const PODIUM_CATS = [
+  {t:'tally', s:'byStature', pick:d=>d.stature_cm, asc:false,
+    f:d=> isCm()? `${fmt(d.stature_cm,0)} cm` : d.ftin_stature,
+    x:d=> d.stature_basis==='head' ? `${fmt(d.cm,0)} cm ${t('charted')}` : (isCm()? d.ftin : `${fmt(d.cm,0)} cm`)},
+  {t:'bustiest', s:'byBustDiff', pick:d=>d.diff_cm, asc:false,
+    f:d=> fmt(U(d,'diff'))+USUF(), x:d=>`UK ${d.uk}`},
+  {t:'thickest', s:'byThigh', pick:d=>d.thigh_cm, asc:false,
+    f:d=> fmt(U(d,'thigh'))+USUF(), x:()=>''},
+  {t:'hourglassTop', s:'byWhr', pick:d=>d.whr, asc:true,
+    f:d=>`WHR ${d.whr.toFixed(3)}`, x:()=>''},
+];
+function renderPodium(){
+  const picks = PODIUM_CATS.map(cat=>{
+    const pool = DATA.filter(d=>cat.pick(d)!=null);
+    return [...pool].sort((a,b)=> cat.asc ? cat.pick(a)-cat.pick(b) : cat.pick(b)-cat.pick(a)).slice(0,3);
   });
+  const sig = picks.map(p=>p.map(d=>d.name).join(",")).join("|") + "|" + state.unit + state.lang;
+  if(sig === renderPodium._sig) return;
+  renderPodium._sig = sig;
+  $("#podstrip").innerHTML = PODIUM_CATS.map((cat,i)=>{
+    const top = picks[i];
+    const slots = [top[1], top[0], top[2]];
+    const rank  = [2,1,3];
+    const wgt = d => Math.max((d && d.ar ? d.ar : 0.55) * (1 + Math.abs(d && d.dx || 0) / 100), 0.42);
+    const nudge = d => ((d && d.ar ? d.ar : 0.55) * Math.abs(d && d.dx || 0) / 100).toFixed(4);
+    const asp = slots.reduce((a,d)=> a + wgt(d), 0);
+    return `<div class="pod" style="--asp:${asp.toFixed(3)}">
+      <div class="phead"><b>${esc(t(cat.t))}</b><span>${esc(cat.x(top[0])||'')}</span></div>
+      <div class="stage">
+        ${slots.map((d,i)=> !d ? `<div class="slot blank p${rank[i]}" style="--g:0.42"><div class="pimg"></div><div class="step">${rank[i]}</div><div class="plate"></div></div>`
+        : `<a class="slot p${rank[i]}" href="characters/${d.slug}.html" data-slug="${esc(d.slug)}" title="${esc(d.display)} — ${esc(cat.f(d))}"${d.dx<0?' data-dxn="1"':''} style="--g:${wgt(d).toFixed(3)};--k:${nudge(d)}">
+            <div class="pimg"><img fetchpriority="${rank[i]===1?'high':'low'}" decoding="async" src="character_images/thumbs/${d.official}.webp" alt="" width="300" height="420"></div>
+            <div class="step">${rank[i]}</div>
+            <div class="plate"><b>${esc(d.display)}</b><i>${esc(cat.f(d))}</i>${cat.x(d)?`<u>${esc(cat.x(d))}</u>`:""}</div>
+          </a>`).join("")}
+      </div>
+    </div>`;
+  }).join("");
+}
+function renderHighlights(){
+  const byStature=[...DATA].sort((a,b)=>b.stature_cm-a.stature_cm);
+  const tallest=byStature.filter(d=>d.stature_cm===byStature[0].stature_cm);
+  const bust=[...DATA].sort((a,b)=>(b.diff_cm??-99)-(a.diff_cm??-99));
+  const hour=[...DATA].sort((a,b)=>(a.whr??9)-(b.whr??9));
+  const outfits=DATA.reduce((n,d)=>n+1+(d.skin?1:0)+d.outfits.length,0);
+  const items=[
+    {k:t('tally'),v:tallest.map(d=>d.display).join(' · '),n:`${fmt(tallest[0].stature_cm,0)} cm · ${tallest[0].ftin_stature}`,bar:100},
+    {k:t('bustiest'),v:bust[0].display,n:`${fmt(bust[0].diff_cm,1)} cm diff · UK ${bust[0].uk}`,bar:pct(bust[0].p_bust_cm)},
+    {k:t('hourglassTop'),v:hour[0].display,n:`WHR ${hour[0].whr.toFixed(3)}`,bar:100-100*hour[0].p_whr},
+    {k:t('outfitsN'),v:`${outfits}`,n:`${DATA.length} agents`,bar:Math.round(outfits/ (DATA.length*1.6) *100)},
+  ];
+  $("#highlights").innerHTML=items.map(x=>`<div class="hl"><div class="k">${esc(x.k)}</div><div class="v">${esc(x.v)}</div><div class="n">${esc(x.n)}</div><div class="bar"><i style="width:${Math.max(4,Math.min(100,x.bar))}%;background:var(--acid)"></i></div></div>`).join('');
 }
 
 /* ---------------- modal ---------------- */
-let mctx = {name:null, src:"sheet", skin:false, card:true, more:null};
-function openModal(d, opts){
+let mctx = {slug:null, src:"official", skin:false, more:null};
+let lastFocus = null;
+function rankword(p){ return p==null? "unranked" : p>=0.85? `top ${Math.max(1,Math.round((1-p)*100))}%` : p<=0.15? `bottom ${Math.max(1,Math.round(p*100))}%` : "mid-pack"; }
+function similarTo(d){
+  const keys=[['bust_cm',.25],['waist_cm',.2],['hip_cm',.2],['thigh_cm',.15],['stature_cm',.2]];
+  const ranges={};
+  for(const [k] of keys){ const v=DATA.map(x=>x[k]).filter(x=>x!=null); ranges[k]=Math.max(...v)-Math.min(...v)||1; }
+  return DATA.filter(x=>x.slug!==d.slug).map(x=>{
+    let s=0, n=0;
+    for(const [k,w] of keys){ if(d[k]==null||x[k]==null) continue; s+=w*Math.abs(d[k]-x[k])/ranges[k]; n+=w; }
+    return {d:x, score:n? s/n : 9};
+  }).sort((a,b)=>a.score-b.score).slice(0,3);
+}
+function issueURL(d){
+  const title = `[data] ${d.display}`;
+  const body = `Character: ${d.display}\nField: \nCurrent value: \nSource: \n\nWhat looks wrong?\n`;
+  return `${META.repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+}
+function openModal(slug, opts){
+  const d = bySlug.get(slug);
   if(!d) return;
-  mctx = Object.assign({name:d.name, src:state.art, skin:false, card:true, more:null}, opts||{});
+  const first = !mctx.slug;
+  mctx = Object.assign({slug, src:state.art, skin:false, more:null}, first?{}:mctx, opts||{});
   const hasSkin = !!d.skin;
   const outfits = d.outfits || [];
   const moreOn = (mctx.more!=null && outfits[mctx.more]) ? outfits[mctx.more] : null;
   const skinOn = hasSkin && !!mctx.skin && !moreOn;
-  const cardOn = hasSkin && d.merged && !!mctx.card && !skinOn && !moreOn;
-  const r = skinOn ? d.skin : (d.merged && d.std && !cardOn ? d.std : d);
+  const r = skinOn ? d.skin : d;
+  const official = mctx.src === "official" || !!moreOn;
   const kv = (k,v) => `<div class="kv"><div class="k">${k}</div><div class="v">${v}</div></div>`;
   const meas = (label, key, dec=1)=>{
     const p = isCm()? r[key+'_cm'] : r[key+'_in'];
@@ -780,314 +1268,519 @@ function openModal(d, opts){
     const sub = o==null? '' : `<small>${fmt(o,dec)} ${isCm()?'in':'cm'}</small>`;
     return kv(label, `${main} ${sub}`);
   };
-  const rankword = p => p==null? "unranked" : p>=0.85? `top ${Math.max(1,Math.round((1-p)*100))}%`
-                        : p<=0.15? `bottom ${Math.max(1,Math.round(p*100))}%` : "mid-pack";
   const readRow = (label,value,sub,bar,chip,col) => `
     <div class="irow">
       <span class="ik">${label}</span>
       <span class="iv">${value}</span>
       <span class="isub">${sub}</span>
-      <span class="ibar"><i style="width:${bar}%;background:${col}"></i></span>
+      <span class="ibar"><i style="width:${Math.max(0,Math.min(100,bar))}%;background:${col}"></i></span>
       <span class="ichip">${chip}</span>
     </div>`;
   const outfitRow = rec => {
     if(!rec.variant_of) return "";
-    let base = DATA.find(x=>x.name===rec.variant_of);
-    if(base && base.std) base = base.std;                 // merged entries compare against the standard model
+    const base = byName.get(rec.variant_of);
     if(!base) return "";
-    const d = (a,b)=> (a??0)-(b??0);
     const cell = (k,inKey,cmKey) => {
-      const dv = isCm()? d(rec[cmKey], base[cmKey]) : d(rec[inKey], base[inKey]);
+      const dv = isCm()? (rec[cmKey]??0)-(base[cmKey]??0) : (rec[inKey]??0)-(base[inKey]??0);
       if(Math.abs(dv) < (isCm()?0.6:0.25)) return "";
       return `<span class="odelta">${k} ${dv>0?"▲":"▼"} ${dv>0?"+":""}${fmt(dv,1)}${USUF()}</span>`;
     };
-    const parts = [cell("bust","bust_in","bust_cm"), cell("waist","waist_in","waist_cm"), cell("hip","hip_in","hip_cm")].filter(Boolean).join("");
-    return parts? `<div class="irow outfit"><span class="ik">outfit</span><span class="isub wide">${rec.outfit||"variant"}</span>${parts}</div>` : "";
+    const parts = [cell('bust','bust_in','bust_cm'), cell('waist','waist_in','waist_cm'), cell('hip','hip_in','hip_cm')].filter(Boolean).join("");
+    return parts? `<div class="irow outfit"><span class="ik">outfit</span><span class="isub wide">${esc(rec.outfit||"variant")}</span>${parts}</div>` : "";
   };
-  const official = mctx.src === "official" || !!moreOn;         // skins exist as official art only
   const cap = moreOn
-    ? `<b>${moreOn.label} outfit portrait</b> · ZZZ Fandom wiki (© HoYoverse, fair use). <b>Art only:</b> this outfit is not measured, so no number, filter or ranking on this page uses it.`
+    ? `<b>${esc(moreOn.label)} outfit portrait</b> · ZZZ Fandom wiki (© HoYoverse, fair use). <b>Art only:</b> this outfit is not measured, so no number, filter or ranking on this page uses it.`
     : official
-    ? `<b>${r.outfit?r.outfit+" outfit portrait":"Official character portrait"}</b> · ZZZ Fandom wiki (© HoYoverse, fair use), via <a href="https://zenless-zone-zero.fandom.com/" target="_blank" rel="noopener">zenless-zone-zero.fandom.com</a>.`
-    : `Render from modelmetrics.net. Scale: 1 square = 10 cm × 10 cm; characters are drawn to relative scale.${skinOn?" There is no separate render for this outfit, so this image shows her standard model.":""}`;
+    ? `<b>${esc(r.outfit?r.outfit+' outfit portrait':'Official character portrait')}</b> · ZZZ Fandom wiki (© HoYoverse, fair use), via <a href="https://zenless-zone-zero.fandom.com/" target="_blank" rel="noopener">zenless-zone-zero.fandom.com</a>. ${esc(t('zoomHint'))}`
+    : `Render from modelmetrics.net. Scale: 1 square = 10 cm × 10 cm; characters are drawn to relative scale.${skinOn?" There is no separate render for this outfit, so this image shows her standard model.":""} ${esc(t('zoomHint'))}`;
   const outfitNote = (hasSkin || outfits.length) ? `<div class="onote" style="margin:0 9px 10px">${moreOn
-            ? `Art only. “${moreOn.label}” has no measured data, so it never affects a figure, a filter or a ranking on this page.`
-            : cardOn
-            ? `Merged values: the larger of Standard and “${d.skin.outfit}” per measurement. These are the numbers on the card, in the table and behind the filters, sorting and podium rankings.`
+            ? `Art only. “${esc(moreOn.label)}” has no measured data, so it never affects a figure, a filter or a ranking on this page.`
             : skinOn
-            ? `“${d.skin.outfit||"This outfit"}” has its own measured data. Cards, filters and sorting use the larger of the two values per measurement.`
-            : `Standard model. ${outfits.length?`${outfits.length} extra outfit${outfits.length>1?'s':''} available as art only: they carry no measured data.`:"No alternate outfit renders."}`}</div>` : "";
-  const segBtn = (attr, val, on, label, dis) => `<button data-${attr}="${val}" class="${on?'on':''}"${dis?' disabled':''}>${label}</button>`;
-  const chips = [ ...(d.merged? [{label:"Card values", sel:cardOn, attrs:'data-card="1"', type:"merged values used by the cards, table, filters and sorting"},
-                                 {label:"Standard", sel:!cardOn && !skinOn && !moreOn, attrs:'data-card="0"'}]
-                             : [{label:"Standard", sel:!skinOn && !moreOn, attrs:'data-card="0"'}]),
-                  ...(hasSkin? [{label:d.skin.outfit||"Skin", sel:skinOn, attrs:'data-s="1"', dot:true, type:"measured"}]:[]),
-                  ...outfits.map((o,i)=>({label:o.label, sel:moreOn===o, attrs:`data-more="${i}"`, type:o.type})),
-                ];
+            ? `“${esc(d.skin.outfit||'This outfit')}” has its own measured data. Cards, table, filters and rankings stay on the <b>standard model</b>; this view is the outfit record.`
+            : `Standard model — the canonical figure for every card, filter and ranking.${hasSkin?` “${esc(d.skin.outfit)}” is kept as a separate measured outfit.`:''}${outfits.length?` ${outfits.length} extra outfit${outfits.length>1?'s':''} available as art only.`:''}`}</div>` : "";
+  const segBtn = (attr, val, on, label, dis) => `<button type="button" data-${attr}="${val}" aria-pressed="${on?'true':'false'}"${dis?' disabled':''}>${label}</button>`;
+  const chips = [
+    {label:t('standard'), sel:!skinOn && !moreOn, attrs:'data-card="0"', type:t('standard')},
+    ...(hasSkin? [{label:d.skin.outfit||"Skin", sel:skinOn, attrs:'data-s="1"', dot:true, type:"measured"}]:[]),
+    ...outfits.map((o,i)=>({label:o.label, sel:moreOn===o, attrs:`data-more="${i}"`, type:o.type})),
+  ];
   const outfitStrip = (hasSkin || outfits.length) ? `
         <div class="moutfits" style="flex-basis:100%">
-          <div class="olabel">Outfits</div>
-          <div class="ochips">${chips.map(c=>`<button class="ochip${c.sel?' on':''}" ${c.attrs} title="${c.type==='measured'?c.label+': has its own measured data':c.type||'art only'}">${c.label}${c.dot?'<i class="mdot"></i>':''}</button>`).join("")}</div>
+          <div class="olabel">${esc(t('outfits'))}</div>
+          <div class="ochips">${chips.map(c=>`<button type="button" class="ochip${c.sel?' on':''}" ${c.attrs} aria-pressed="${c.sel?'true':'false'}" title="${esc(c.type)}">${esc(c.label)}${c.dot?'<i class="mdot" aria-hidden="true"></i>':''}</button>`).join("")}</div>
         </div>` : "";
+  const cmpOn = state.compare.includes(d.slug);
+  const conf = {charted:t('charted'), estimated:'estimated', partial:'partial'}[r.confidence] || r.confidence;
+  const srcLink = r.source_page ? `<a href="https://zenless-zone-zero.fandom.com/wiki/${encodeURIComponent(r.source_page.replace(/ /g,'_'))}" target="_blank" rel="noopener">${esc(r.source_page)}</a>` : '—';
   $("#modal").innerHTML = `
-    <button class="x" id="closeModal">✕</button>
+    <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
     <div class="mhead">
-      <h2>${d.display}</h2>
-      <div class="sub2">${r.outfit?`Outfit: ${r.outfit} · `:(r.variant_of?`Variant of ${r.variant_of} · `:"")}${isCm()? `${fmt(r.cm,0)} cm (${r.ftin})` : `${r.ftin} (${fmt(r.cm,0)} cm)`} · UK ${r.uk} / US ${r.us} / EU ${r.eu}</div>
+      <h2 id="mTitle">${esc(d.display)}</h2>
+      <div class="sub2">${r.outfit?`${esc(t('outfits'))}: ${esc(r.outfit)} · `:(r.variant_of?`Variant of ${esc(r.variant_of)} · `:"")}${isCm()? `${fmt(r.cm,0)} cm (${r.ftin})` : `${r.ftin} (${fmt(r.cm,0)} cm)`}${r.stature_basis==='head'?` · ${fmt(r.stature_cm,0)} cm ${esc(t('headHeight'))}`:''} · UK ${esc(r.uk)} / US ${esc(r.us)} / EU ${esc(r.eu)}</div>
+      <div class="confrow"><span class="badge conf-${esc(r.confidence)}">${esc(t('confidence'))}: ${esc(conf)}</span><span>${esc(r.confidence_note||'')}</span></div>
     </div>
     <div class="mbody">
       <div class="mimg">
         <div class="mtools">
-          <div class="seg">${segBtn('v','sheet',!official && !moreOn,'Render',!!moreOn)}${segBtn('v','official',official,'Official art')}</div>
+          <div class="seg" role="group" aria-label="Portrait">${segBtn('v','sheet',!official && !moreOn,t('sheet'),!!moreOn)}${segBtn('v','official',official,t('official'))}</div>
         </div>
         ${outfitStrip}
-        <img decoding="async" src="${moreOn? `character_images/${moreOn.file}` : official?officialSrc(r):imgSrc(d)}" alt="${moreOn?moreOn.label:r.display} portrait">
+        <img id="mimg" decoding="async" src="${moreOn? `character_images/${moreOn.file}` : official?officialSrc(r):imgSrc(d)}" alt="${esc(moreOn?moreOn.label:r.display)} portrait">
         <div class="scale">${cap}</div>
         ${outfitNote}
-        ${d.merged?`<div class="mnote" style="margin:0 9px 10px">This entry merges the standard model and the “${d.skin.outfit}” outfit. Cards, filters and sorting use the <b>larger</b> of the two values per measurement; the toggle above shows each outfit's own numbers and art.</div>`:''}
+        ${d.merged?`<div class="mnote" style="margin:0 9px 10px">This entry has a measured outfit (${esc(d.skin.outfit)}). <b>Standard model is canonical</b> for cards, filters and rankings; the toggle shows the outfit's own numbers and art.</div>`:''}
       </div>
       <div class="mdata">
-        <div class="sect"><h3>Measurements</h3><div class="kgrid">
-          ${meas("Bust","bust")}
-          ${meas("Under-bust","band")}
-          ${meas("Waist","waist")}
-          ${meas("Hip","hip")}
-          ${meas("Thigh","thigh")}
-          ${meas("Bust diff","diff",1)}
+        <div class="sect"><h3>${esc(t('measurements'))}</h3><div class="kgrid">
+          ${meas(t('bust'),"bust")}
+          ${meas(t('underbust'),"band")}
+          ${meas(t('waist'),"waist")}
+          ${meas(t('hip'),"hip")}
+          ${meas(t('thigh'),"thigh")}
+          ${meas(t('bustDiff'),"diff",1)}
         </div></div>
-        <div class="sect"><h3>Bra sizing</h3><div class="kgrid">
-          ${kv("UK", r.uk)} ${kv("US", r.us)} ${kv("EU", r.eu)} ${kv("Bust diff", r.diff_cm!=null? (isCm()? fmt(r.diff_cm,1)+" cm" : fmt(r.diff_in,1)+" in") : "—")}
+        <div class="sect"><h3>${esc(t('bra'))}</h3><div class="kgrid">
+          ${kv("UK", esc(r.uk))} ${kv("US", esc(r.us))} ${kv("EU", esc(r.eu))} ${kv(t('bustDiff'), r.diff_cm!=null? (isCm()? fmt(r.diff_cm,1)+" cm" : fmt(r.diff_in,1)+" in") : "—")}
         </div></div>
-        <div class="sect"><h3>Proportions</h3><div class="kgrid">
+        <div class="sect"><h3>${esc(t('proportions'))}</h3><div class="kgrid">
           ${kv("Waist / hip", r.whr?.toFixed(3)??"—")}
-          ${kv("Waist / height", r.whtr?.toFixed(3)??"—")}
+          ${kv("Waist / stature", r.whtr?.toFixed(3)??"—")}
           ${kv("Waist / thigh", r.wtr?.toFixed(3)??"—")}
-          ${kv("Thigh / height", r.thr?.toFixed(3)??"—")}
+          ${kv("Thigh / stature", r.thr?.toFixed(3)??"—")}
           ${kv("Thigh / hip", r.thh?.toFixed(3)??"—")}
-          ${kv("Bust / height", r.bhr?.toFixed(3)??"—")}
-          ${kv("Hip / height", r.hhr?.toFixed(3)??"—")}
+          ${kv("Bust / stature", r.bhr?.toFixed(3)??"—")}
+          ${kv("Hip / stature", r.hhr?.toFixed(3)??"—")}
         </div>
-        ${r.thigh_cm!=null?`<div class="mnote">Thigh class <b>${r.tags.thighs}</b> · ${pct(r.p_thigh_cm)}th percentile by raw thigh circumference${r.thigh_pin?' · <b>hand-pinned</b>':''}. Terciles of the roster, measured in cm.</div>`:''}
+        ${r.thigh_cm!=null?`<div class="mnote">${esc(t('thighNote'))} <b>${esc(r.tags.thighs)}</b> · ${pct(r.p_thigh_cm)}th percentile by raw thigh circumference${r.thigh_pin?' · <b>hand-pinned</b>':''}. Terciles of the roster, measured in cm.</div>`:''}
         </div>
-        <div class="sect"><h3>Roster percentiles</h3>
+        <div class="sect"><h3>${esc(t('percentiles'))}</h3>
           <div class="pct wide">
             <div class="prow"><span>bust</span><div class="pbar"><i style="width:${pct(r.p_bust_cm)}%;background:var(--bust)"></i></div><b>${pct(r.p_bust_cm)}</b></div>
             <div class="prow"><span>waist</span><div class="pbar"><i style="width:${pct(r.p_waist_cm)}%;background:var(--waist)"></i></div><b>${pct(r.p_waist_cm)}</b></div>
             <div class="prow"><span>hips</span><div class="pbar"><i style="width:${pct(r.p_hip_cm)}%;background:var(--hips)"></i></div><b>${pct(r.p_hip_cm)}</b></div>
             <div class="prow"><span>thigh</span><div class="pbar"><i style="width:${pct(r.p_thigh_cm)}%;background:var(--thighs)"></i></div><b>${r.p_thigh_cm!=null?pct(r.p_thigh_cm):"—"}</b></div>
+            <div class="prow"><span>stature</span><div class="pbar"><i style="width:${pct(r.p_stature_cm)}%;background:var(--tan)"></i></div><b>${pct(r.p_stature_cm)}</b></div>
           </div>
-          <div class="mnote">Rank among the ${DATA.length} entries by <b>raw circumference</b>. 0 = smallest measurement in the cast, 100 = largest, 50 = exactly average.</div>
+          <div class="mnote">${esc(t('pctLong'))}</div>
         </div>
-        <div class="sect"><h3>Figure read</h3>
-          <div class="vline">${r.read||""}</div>
+        <div class="sect"><h3>${esc(t('figureRead'))}</h3>
+          <div class="vline">${esc(r.read||"")}</div>
           <div class="infog">
-            ${readRow("frame", isCm()? `${fmt(r.cm,0)} cm` : r.ftin,
-                      (isCm()? r.ftin : `${fmt(r.cm,0)} cm`) + (r.cm_eff? ` · ${fmt(r.cm_eff,0)} cm excl. ears` : ``),
-                      pct(r.p_cm), r.tags.height, "var(--tan)")}
-            ${readRow("bust", fmt(U(r,'bust'))+USUF(), `UK ${r.uk}`, pct(r.p_bust_cm), rankword(r.p_bust_cm), "var(--bust)")}
-            ${readRow("waist", fmt(U(r,'waist'))+USUF(), `WHtR ${r.whtr.toFixed(3)}`, pct(r.p_waist_cm), rankword(r.p_waist_cm), "var(--waist)")}
-            ${readRow("hips", fmt(U(r,'hip'))+USUF(), `hip/height ${r.hhr.toFixed(3)}`, pct(r.p_hip_cm), rankword(r.p_hip_cm), "var(--hips)")}
-            ${r.thigh_cm!=null?readRow("thighs", fmt(U(r,'thigh'))+USUF(), `thigh/height ${r.thr.toFixed(3)} · thigh/hip ${r.thh.toFixed(3)}`,
+            ${readRow(t('frame'), isCm()? `${fmt(r.cm,0)} cm` : r.ftin,
+                      (isCm()? r.ftin : `${fmt(r.cm,0)} cm`) + (r.stature_basis==='head'? ` · ${fmt(r.stature_cm,0)} cm ${t('headHeight')}` : ``),
+                      pct(r.p_stature_cm), r.tags.height, "var(--tan)")}
+            ${readRow(t('bust'), fmt(U(r,'bust'))+USUF(), `UK ${esc(r.uk)}`, pct(r.p_bust_cm), rankword(r.p_bust_cm), "var(--bust)")}
+            ${readRow(t('waist'), fmt(U(r,'waist'))+USUF(), `WHtR ${r.whtr.toFixed(3)}`, pct(r.p_waist_cm), rankword(r.p_waist_cm), "var(--waist)")}
+            ${readRow(t('hip'), fmt(U(r,'hip'))+USUF(), `hip/stature ${r.hhr.toFixed(3)}`, pct(r.p_hip_cm), rankword(r.p_hip_cm), "var(--hips)")}
+            ${r.thigh_cm!=null?readRow(t('thigh'), fmt(U(r,'thigh'))+USUF(), `thigh/stature ${r.thr.toFixed(3)} · thigh/hip ${r.thh.toFixed(3)}`,
                       pct(r.p_thigh_cm), r.tags.thighs, "var(--thighs)"):""}
-            ${readRow("silhouette", r.tags.shape, `waist/hip ${r.whr.toFixed(3)}`, Math.round(100*(1-r.p_whr)),
+            ${readRow(t('silhouette'), r.tags.shape, `waist/hip ${r.whr.toFixed(3)}`, Math.round(100*(1-r.p_whr)),
                       `${Math.round(100*(1-r.p_whr))}% hourglass`, "var(--blue)")}
             <div class="irow">
-              <span class="ik">balance</span>
-              <span class="iv">${r.tags.balance}</span>
+              <span class="ik">${esc(t('balance'))}</span>
+              <span class="iv">${esc(r.tags.balance)}</span>
               <span class="isub">bust ${pct(r.p_bust_cm)} vs hips ${pct(r.p_hip_cm)}</span>
               <span class="isym">${(r.p_bhr-r.p_hhr) >= 0 ? "▲" : "▼"} ${Math.abs(Math.round((r.p_bhr-r.p_hhr)*100))} pts</span>
               <span class="ichip dim">${r.balance==='top'?"top-heavy":r.balance==='bottom'?"bottom-heavy":"even"}</span>
             </div>
             ${outfitRow(r)}
           </div>
-          ${r.notes?`<div class="mnote">Chart note: ${r.notes}</div>`:""}
+          ${r.notes?`<div class="mnote">Chart note: ${esc(r.notes)}</div>`:""}
+        </div>
+        <div class="sect"><h3>${esc(t('similar'))}</h3>
+          <div class="simrow">${similarTo(d).map(s=>`<button type="button" class="sim" data-sim="${esc(s.d.slug)}"><img src="character_images/thumbs/${s.d.official}.webp" alt="" width="22" height="34">${esc(s.d.display)}</button>`).join('')}</div>
+        </div>
+        <div class="mfoot">
+          <a class="btn primary" href="characters/${d.slug}.html">${esc(t('fullProfile'))}</a>
+          <button class="btn" id="mCompare" aria-pressed="${cmpOn?'true':'false'}">${esc(cmpOn?t('removeFromCompare'):t('addToCompare'))}</button>
+          <a class="btn" href="${issueURL(d)}" target="_blank" rel="noopener">${esc(t('report'))}</a>
+          <span class="fnote" style="margin:0">${esc(t('sourceArt'))}: ${srcLink}</span>
         </div>
       </div>
     </div>`;
+  if(first){ lastFocus = document.activeElement; }
   $("#overlay").classList.add("open");
+  $("#overlay").setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
+  const main = $("#main"); if(main && 'inert' in main) main.inert = true;
+  $("#closeModal").focus();
   $("#closeModal").addEventListener("click", closeModal);
-  $("#modal").querySelectorAll(".mtools .seg button, .ochips button").forEach(b=>{
+  $$("#modal .seg button, #modal .ochip").forEach(b=>{
     b.addEventListener("click", ()=>{
       if(b.disabled) return;
       const patch = {};
       if(b.dataset.v) patch.src = b.dataset.v;
-      if(b.dataset.card){ patch.card = b.dataset.card === "1"; patch.skin = false; patch.more = null; }
-      if(b.dataset.s){ patch.skin = b.dataset.s === "1"; patch.card = false; patch.more = null; }
-      if(b.dataset.more){ patch.more = Number(b.dataset.more); patch.skin = false; patch.card = false; }
-      openModal(DATA.find(x=>x.name===mctx.name), Object.assign({}, mctx, patch));
+      if(b.dataset.card!=null){ patch.skin = false; patch.more = null; }
+      if(b.dataset.s){ patch.skin = true; patch.more = null; }
+      if(b.dataset.more){ patch.more = Number(b.dataset.more); patch.skin = false; }
+      openModal(slug, patch);
     });
   });
+  $("#mCompare").addEventListener("click", ()=>{ toggleCompare(d.slug); openModal(slug); });
+  $$("#modal [data-sim]").forEach(b=>b.addEventListener("click", ()=>openModal(b.dataset.sim)));
+  const img = $("#mimg");
+  img.addEventListener("click", ()=>img.classList.toggle("zoom"));
+  writeHash(true);
 }
-function closeModal(){ $("#overlay").classList.remove("open"); }
+function closeModal(){
+  $("#overlay").classList.remove("open");
+  $("#overlay").setAttribute("aria-hidden","true");
+  document.body.classList.remove("modal-open");
+  const main = $("#main"); if(main && 'inert' in main) main.inert = false;
+  mctx = {slug:null, src:state.art, skin:false, more:null};
+  if(lastFocus && lastFocus.focus) lastFocus.focus();
+  writeHash(true);
+}
 $("#overlay").addEventListener("click", e=>{ if(e.target.id==="overlay") closeModal(); });
-document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeModal(); });
 
-/* ---------------- podium ---------------- */
-/* rankings use the RAW numeric measurements (cm) — not the normalised scores */
-const PODIUM_CATS = [
-  {t:"Tallest",         s:"by height",            pick:d=>d.cm,       asc:false,
-    f:d=> isCm()? `${fmt(d.cm,0)} cm` : d.ftin,
-    x:d=> isCm()? d.ftin : `${fmt(d.cm,0)} cm`},
-  {t:"Largest bust",    s:"by bust − under-bust", pick:d=>d.diff_cm,  asc:false,
-    f:d=> fmt(U(d,'diff'))+USUF(), x:d=>`UK ${d.uk}`},
-  {t:"Fullest thighs",  s:"by thigh circumference",pick:d=>d.thigh_cm, asc:false,
-    f:d=> fmt(U(d,'thigh'))+USUF(), x:()=>""},
-  {t:"Purest hourglass",s:"lowest waist ÷ hip",   pick:d=>d.whr,     asc:true,
-    f:d=>`WHR ${d.whr.toFixed(3)}`, x:()=>""},
-];
-function renderPodium(list){
-  const picks = PODIUM_CATS.map(cat=>{
-    const pool = list.filter(d=>cat.pick(d)!=null);
-    return [...pool].sort((a,b)=> cat.asc ? cat.pick(a)-cat.pick(b) : cat.pick(b)-cat.pick(a)).slice(0,3);
-  });
-  // the only thing that may rebuild the strip is a unit switch (the plates print cm or ft/in)
-  const sig = picks.map(p=>p.map(d=>d.name).join(",")).join("|") + "|" + state.unit;
-  if(sig === renderPodium._sig) return;
-  renderPodium._sig = sig;
-  $("#podstrip").innerHTML = PODIUM_CATS.map((cat,i)=>{
-    const top = picks[i];
-    const slots = [top[1], top[0], top[2]];          // 2nd · 1st · 3rd
-    const rank  = [2,1,3];
-    // Slot weights: art width per unit of height, including the visual-centre shift
-    // (a dx% nudge moves the art by dx% of its own width, so its slot needs that much
-    // extra room). Aspects below 0.42 are floored because there the plate text, not the
-    // art, sets the slot width. The sum drives the art height, the weights drive the
-    // flex-grow, so every image plus its nudge fits inside its own slot exactly.
-    const wgt = d => Math.max((d && d.ar ? d.ar : 0.55) * (1 + Math.abs(d && d.dx || 0) / 100), 0.42);
-    const nudge = d => ((d && d.ar ? d.ar : 0.55) * Math.abs(d && d.dx || 0) / 100).toFixed(4);
-    const asp = slots.reduce((a,d)=> a + wgt(d), 0);
-    return `<div class="pod" style="--asp:${asp.toFixed(3)}">
-      <div class="phead"><b>${cat.t}</b><span>${cat.s}</span></div>
-      <div class="stage">
-        ${slots.map((d,i)=> !d ? `<div class="slot blank p${rank[i]}" style="--g:0.42"><div class="pimg"></div><div class="step">${rank[i]}</div><div class="plate"></div></div>`
-        : `<div class="slot p${rank[i]}" data-name="${d.name}" title="${d.display} — ${cat.f(d)}"${d.dx<0?' data-dxn="1"':''} style="--g:${wgt(d).toFixed(3)};--k:${nudge(d)}">
-            <div class="pimg"><img fetchpriority="high" decoding="async" src="${officialSrc(d)}" alt="${d.display}"></div>
-            <div class="step">${rank[i]}</div>
-            <div class="plate"><b>${d.display}</b><i>${cat.f(d)}</i>${cat.x(d)?`<u>${cat.x(d)}</u>`:""}</div>
-          </div>`).join("")}
-      </div>
-    </div>`;
+/* ---------------- compare ---------------- */
+function toggleCompare(slug){
+  const i = state.compare.indexOf(slug);
+  if(i>=0) state.compare.splice(i,1);
+  else if(state.compare.length>=4) toast("Up to 4 agents can be compared.");
+  else state.compare.push(slug);
+  renderCompare();
+  syncCardCompare();
+  writeHash(true);
+}
+function renderCompare(){
+  const bar = $("#compareBar"), chips = $("#cmpChips");
+  bar.hidden = state.compare.length===0;
+  $("#compareBtn").setAttribute("aria-pressed", state.compare.length? "true":"false");
+  $("#cmpCount").textContent = state.compare.length;
+  chips.innerHTML = state.compare.map(slug=>{
+    const d = bySlug.get(slug); if(!d) return "";
+    return `<span class="cchip">${esc(d.display)}<button type="button" data-uncmp="${esc(slug)}" aria-label="Remove ${esc(d.display)}">×</button></span>`;
   }).join("");
-  $("#podstrip").querySelectorAll(".slot[data-name]").forEach(el=>{
-    el.addEventListener("click", ()=> openModal(DATA.find(d=>d.name===el.dataset.name)));
+}
+function syncCardCompare(){
+  $$("#grid .card").forEach(card=>{
+    const d = byName.get(card.dataset.name); if(!d) return;
+    const b = card.querySelector("[data-cmp]");
+    if(!b) return;
+    const on = state.compare.includes(d.slug);
+    b.setAttribute("aria-pressed", on? "true":"false");
+    b.setAttribute("aria-label", `${on?t('removeFromCompare'):t('addCompare')}: ${d.display}`);
   });
+}
+function openCompare(){
+  const list = state.compare.map(s=>bySlug.get(s)).filter(Boolean);
+  if(list.length<2){ toast(t('pickTwo')); return; }
+  const rows = [
+    [t('stature'), d=>`${fmt(d.stature_cm,0)} cm${d.stature_basis==='head'?` (${fmt(d.cm,0)} ${t('charted')})`:''}`],
+    [t('height'), d=>`${fmt(d.cm,0)} cm / ${d.ftin}`],
+    [t('bust'), d=>`${fmt(d.bust_cm)} cm / ${fmt(d.bust_in)} in`],
+    [t('underbust'), d=>`${fmt(d.band_cm)} cm / ${fmt(d.band_in)} in`],
+    [t('waist'), d=>`${fmt(d.waist_cm)} cm / ${fmt(d.waist_in)} in`],
+    [t('hip'), d=>`${fmt(d.hip_cm)} cm / ${fmt(d.hip_in)} in`],
+    [t('thigh'), d=>d.thigh_cm!=null?`${fmt(d.thigh_cm)} cm / ${fmt(d.thigh_in)} in`:'—'],
+    [t('bustDiff'), d=>`${fmt(d.diff_cm)} cm`],
+    ['UK / US / EU', d=>`${d.uk} / ${d.us} / ${d.eu}`],
+    ['Waist / hip', d=>fmtPct(d.whr)],
+    ['Waist / stature', d=>fmtPct(d.whtr)],
+    [t('shape'), d=>d.tags.shape],
+    [t('build'), d=>d.tags.balance],
+    [t('thighNote'), d=>d.tags.thighs],
+    [t('confidence'), d=>d.confidence],
+  ];
+  $("#modal").innerHTML = `
+    <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
+    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><div class="sub2">${list.length} ${esc(t('picked'))}</div></div>
+    <div class="cmpwrap"><table class="cmptable">
+      <thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(d.display)}</th>`).join('')}</tr></thead>
+      <tbody>${rows.map(([label,fn])=>`<tr><th scope="row">${esc(label)}</th>${list.map(d=>`<td>${esc(fn(d))}</td>`).join('')}</tr>`).join('')}
+      <tr><th scope="row">${esc(t('figureRead'))}</th>${list.map(d=>`<td class="cmdesc">${esc(d.read||'')}</td>`).join('')}</tr>
+      </tbody></table></div>`;
+  $("#overlay").classList.add("open");
+  $("#overlay").setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
+  const main=$("#main"); if(main && 'inert' in main) main.inert=true;
+  $("#closeModal").focus();
+  $("#closeModal").addEventListener("click", closeModal);
+  lastFocus = lastFocus || document.activeElement;
+}
+
+/* ---------------- toast + share ---------------- */
+let toastTimer;
+function toast(msg){
+  const el = $("#toast"); el.textContent = msg; el.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>el.classList.remove("show"), 2600);
+}
+async function share(){
+  const url = location.href;
+  const data = {title:"ZZZ Female Measurements", text:"Zenless Zone Zero measurements, proportions and silhouette reads", url};
+  try{
+    if(navigator.share){ await navigator.share(data); return; }
+    await navigator.clipboard.writeText(url);
+    toast(t('copyLink'));
+  }catch(e){
+    if(e && e.name==='AbortError') return;
+    try{ await navigator.clipboard.writeText(url); toast(t('copyLink')); }
+    catch(_){ toast(t('shareFail')); }
+  }
 }
 
 /* ---------------- render loop ---------------- */
-function render(){
+let frame = 0;
+function scheduleRender(){
+  if(frame) return;
+  frame = requestAnimationFrame(()=>{ frame = 0; render(); });
+}
+function render(skipHash){
   const list = filtered();
-  renderPodium(DATA);                // podium is fully independent of search, filters, sorting and the layout
-  $("#count").innerHTML = `<b>${list.length}</b> / ${DATA.length} entries`;
-  $("#empty").style.display = list.length? "none":"block";
+  renderPodium();
+  renderHighlights();
+  $("#count").innerHTML = `<b>${list.length}</b> / ${DATA.length} ${esc(t('entries'))}`;
+  $("#empty").hidden = list.length>0;
   const v = state.view;
-  $("#cardsView").style.display  = v==="cards"  ? "" : "none";
-  $("#tableView").style.display  = v==="table"  ? "" : "none";
-  $("#sortGroup").style.display  = v==="cards"  ? "" : "none";
+  $("#cardsView").hidden = v!=="cards";
+  $("#plotView").hidden = v!=="plot";
+  $("#tableView").hidden = v!=="table";
+  $("#sortGroup").hidden = v!=="cards";
   if(v==="table") renderTable(list);
-  else            renderCards([...list].sort(SORTS[state.sort]));
+  else if(v==="plot") renderPlot(list);
+  else renderCards([...list].sort(SORTS[state.sort]));
+  $("#vCards").setAttribute("aria-pressed", v==="cards"?"true":"false");
+  $("#vTable").setAttribute("aria-pressed", v==="table"?"true":"false");
+  $("#vPlot").setAttribute("aria-pressed", v==="plot"?"true":"false");
+  renderCompare();
+  updateFilterBadge();
+  if(!skipHash) writeHash(true);
 }
 
-/* ---------------- wiring ---------------- */
-$("#q").addEventListener("input", e=>{ state.q=e.target.value; render(); });
-/* class chip filters */
+/* ---------------- controls ---------------- */
+$("#q").addEventListener("input", debounce(e=>{ state.q = e.target.value; scheduleRender(); }, 120));
 $("#fPanel").addEventListener("click", e=>{
   const b = e.target.closest(".chipbtn");
   if(!b) return;
   const g = b.dataset.g;
   state[g] = b.dataset.v;
-  $("#fPanel").querySelectorAll(`.chipbtn[data-g="${g}"]`).forEach(x=>x.classList.toggle("on", x===b));
-  updateFilterBadge(); render();
+  $$(`#fPanel .chipbtn[data-g="${g}"]`).forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
+  updateFilterBadge(); scheduleRender();
 });
-$("#fSort").addEventListener("change", e=>{ state.sort=e.target.value; render(); });
-[["#vCards","cards"],["#vTable","table"]].forEach(([id,v])=>{
-  $(id).addEventListener("click", ()=>{
-    state.view = v;
-    ["#vCards","#vTable"].forEach(x=>$(x).classList.toggle("active", x===id));
-    render();
-  });
+$("#fSort").addEventListener("change", e=>{ state.sort = e.target.value; render(); });
+[["#vCards","cards"],["#vTable","table"],["#vPlot","plot"]].forEach(([id,v])=>{
+  $(id).addEventListener("click", ()=>{ state.view = v; render(); });
 });
+$("#plotY").addEventListener("change", e=>{ state.plotY = e.target.value; renderPlot(filtered()); writeHash(true); });
+$("#compareBtn").addEventListener("click", ()=>{
+  if(!state.compare.length){ toast(t('pickTwo')); return; }
+  if(state.compare.length<2){ toast(t('pickTwo')); return; }
+  openCompare();
+});
+$("#cmpOpen").addEventListener("click", openCompare);
+$("#cmpClear").addEventListener("click", ()=>{ state.compare=[]; renderCompare(); syncCardCompare(); writeHash(true); });
+$("#cmpChips").addEventListener("click", e=>{
+  const b = e.target.closest("[data-uncmp]");
+  if(b){ toggleCompare(b.dataset.uncmp); }
+});
+$("#shareBtn").addEventListener("click", share);
 
-/* filter dropdown */
+/* filter dropdown + mobile sheet */
 function placeFilterPanel(){
   const panel = $("#fPanel");
+  if(window.innerWidth<=640){ panel.style.transform="none"; return; }
   panel.style.transform = "none";
   const r = panel.getBoundingClientRect();
   if(!r.width) return;
   const over = r.right - (window.innerWidth - 10);
   if(over > 0) panel.style.transform = `translateX(${-over}px)`;
 }
+function setFilters(open){
+  $("#fDrop").classList.toggle("open", open);
+  $("#fBtn").setAttribute("aria-expanded", open?"true":"false");
+  if(open) placeFilterPanel();
+}
 $("#fBtn").addEventListener("click", e=>{
   e.stopPropagation();
-  $("#fDrop").classList.toggle("open");
-  if($("#fDrop").classList.contains("open")) placeFilterPanel();
+  setFilters(!$("#fDrop").classList.contains("open"));
 });
-window.addEventListener("resize", ()=>{ if($("#fDrop").classList.contains("open")) placeFilterPanel(); });
 $("#fPanel").addEventListener("click", e=>e.stopPropagation());
-document.addEventListener("click", ()=>{ $("#fDrop").classList.remove("open"); });
+$("#fApply").addEventListener("click", ()=>{ setFilters(false); $("#fBtn").focus(); });
 $("#fClearRanges").addEventListener("click", e=>{
-  e.stopPropagation(); state.rng = {}; renderFilterPanel(); updateFilterBadge(); render();
+  e.stopPropagation(); state.rng = {}; renderFilterPanel(); updateFilterBadge(); scheduleRender();
 });
+document.addEventListener("click", ()=>setFilters(false));
+window.addEventListener("resize", ()=>{ if($("#fDrop").classList.contains("open")) placeFilterPanel(); });
 
-/* units */
+/* units + artwork */
 function setUnit(u){
   state.unit = u;
-  $("#uCm").classList.toggle("active", u==="cm");
-  $("#uIn").classList.toggle("active", u==="in");
+  $("#uCm").setAttribute("aria-pressed", u==="cm"?"true":"false");
+  $("#uIn").setAttribute("aria-pressed", u==="in"?"true":"false");
   try{ localStorage.setItem("zzz-unit", u); }catch(e){}
-  renderFilterPanel();
-  render();
-  if($("#overlay").classList.contains("open") && mctx.name){
-    const d = DATA.find(x=>x.name===mctx.name);
-    if(d) openModal(d, mctx);
-  }
+  renderFilterPanel(); render();
+  if($("#overlay").classList.contains("open") && mctx.slug) openModal(mctx.slug, mctx);
 }
 $("#uCm").addEventListener("click", ()=>setUnit("cm"));
 $("#uIn").addEventListener("click", ()=>setUnit("in"));
-try{
-  const saved = localStorage.getItem("zzz-unit");
-  if(saved==="cm" || saved==="in"){
-    state.unit = saved;
-    $("#uCm").classList.toggle("active", saved==="cm");
-    $("#uIn").classList.toggle("active", saved==="in");
-  }
-}catch(e){}
 
-/* portrait source (sheet crop vs official art) */
 function setArt(a){
   state.art = a;
-  $("#aSheet").classList.toggle("active", a==="sheet");
-  $("#aOff").classList.toggle("active", a==="official");
+  $("#aSheet").setAttribute("aria-pressed", a==="sheet"?"true":"false");
+  $("#aOff").setAttribute("aria-pressed", a==="official"?"true":"false");
   try{ localStorage.setItem("zzz-art2", a); }catch(e){}
   render();
-  if($("#overlay").classList.contains("open") && mctx.name){
-    const d = DATA.find(x=>x.name===mctx.name);
-    if(d) openModal(d, Object.assign({}, mctx, {src:a}));
-  }
+  if($("#overlay").classList.contains("open") && mctx.slug) openModal(mctx.slug, Object.assign({}, mctx, {src:a}));
 }
 $("#aSheet").addEventListener("click", ()=>setArt("sheet"));
 $("#aOff").addEventListener("click", ()=>setArt("official"));
-try{
-  const savedArt = localStorage.getItem("zzz-art2");
-  if(savedArt==="sheet" || savedArt==="official"){
-    state.art = savedArt;
-    $("#aSheet").classList.toggle("active", savedArt==="sheet");
-    $("#aOff").classList.toggle("active", savedArt==="official");
-  }
-}catch(e){}
-$("#reset").addEventListener("click", ()=>{
-  Object.assign(state,{q:"",cup:"all",shape:"all",balance:"all",thighs:"all",sort:"bust-desc",view:"cards",rng:{}});
-  $("#q").value="";
-  $("#fPanel").querySelectorAll(".chipbtn").forEach(b=>b.classList.toggle("on", b.dataset.v==="all"));
-  $("#fSort").value="bust-desc";
-  $("#vCards").classList.add("active"); $("#vTable").classList.remove("active");
-  renderFilterPanel(); updateFilterBadge();
+
+/* language + theme */
+function fillSort(){
+  $("#fSort").innerHTML = SORT_KEYS.map(k=>`<option value="${k}">${esc(t(SORT_LABEL_KEY[k]))}</option>`).join("");
+  $("#fSort").value = state.sort;
+}
+function fillPlot(){
+  $("#plotY").innerHTML = PLOT_METRICS.map(m=>`<option value="${m.k}">${esc(m.label)}</option>`).join("");
+  $("#plotY").value = state.plotY;
+}
+function applyLang(lang){
+  state.lang = I18N[lang]? lang : 'en';
+  document.documentElement.lang = state.lang;
+  $$('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(I18N[state.lang][k]){ el.innerHTML = t(k); } });
+  $("#q").placeholder = t('searchPh');
+  $("#fSort").setAttribute('aria-label', t('sort'));
+  fillSort(); fillPlot();
+  try{ localStorage.setItem("zzz-lang", state.lang); }catch(e){}
+  renderPodium._sig = null;
   render();
+}
+$("#lang").addEventListener("change", e=>applyLang(e.target.value));
+function applyTheme(theme){
+  const t2 = theme==="light"?"light":"dark";
+  if(t2==="light") document.documentElement.dataset.theme="light";
+  else delete document.documentElement.dataset.theme;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.content = t2==="light" ? "#F3F3EC" : "#0B0B0C";
+  $("#theme").value = t2;
+  try{ localStorage.setItem("zzz-theme", t2); }catch(e){}
+}
+$("#theme").addEventListener("change", e=>applyTheme(e.target.value));
+
+/* reset */
+$("#reset").addEventListener("click", ()=>{
+  Object.assign(state,{q:"",cup:"all",shape:"all",balance:"all",thighs:"all",height:"all",
+    sort:"bust-desc",view:"cards",rng:{},compare:[]});
+  $("#q").value="";
+  $$("#fPanel .chipbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v==="all"?"true":"false"));
+  $("#fSort").value="bust-desc";
+  renderFilterPanel(); renderCompare(); render();
 });
 
-renderFilterPanel();
-updateFilterBadge();
-$("#agentCount").textContent = DATA.length;
-render();
+/* keyboard + routing */
+document.addEventListener("keydown", e=>{
+  if(e.key==="Escape"){
+    if($("#overlay").classList.contains("open")) closeModal();
+    else if($("#fDrop").classList.contains("open")) setFilters(false);
+    return;
+  }
+  if(e.key!=="Tab" || !$("#overlay").classList.contains("open")) return;
+  const f = $$('#modal button, #modal a[href], #modal input, #modal select, #modal [tabindex]:not([tabindex="-1"])')
+    .filter(el=>!el.disabled && el.offsetParent!==null);
+  if(!f.length) return;
+  const first = f[0], last = f[f.length-1];
+  if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+});
+document.addEventListener("click", ()=>setFilters(false));
+window.addEventListener("popstate", applyHashState);
+window.addEventListener("hashchange", applyHashState);
+
+/* delegated card / podium / table / plot clicks */
+$("#grid").addEventListener("click", e=>{
+  const cmp = e.target.closest("[data-cmp]");
+  if(cmp){
+    e.preventDefault(); e.stopPropagation();
+    toggleCompare(byName.get(cmp.closest(".card").dataset.name).slug);
+    return;
+  }
+  const a = e.target.closest(".card-main");
+  if(!a) return;
+  if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;   // modifier: open the static profile
+  e.preventDefault();
+  const d = byName.get(a.closest(".card").dataset.name);
+  if(d) openModal(d.slug);
+});
+$("#podstrip").addEventListener("click", e=>{
+  const a = e.target.closest(".slot[data-slug]");
+  if(!a) return;
+  if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
+  e.preventDefault(); openModal(a.dataset.slug);
+});
+$("#page-not-used");
+$("#tbl tbody").addEventListener("click", e=>{
+  const a = e.target.closest("a.tname");
+  if(a && !(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)){ e.preventDefault(); openModal(a.getAttribute("href").split('/').pop().replace('.html','')); return; }
+  const tr = e.target.closest("tr[data-name]");
+  if(!tr) return;
+  const d = byName.get(tr.dataset.name);
+  if(d) openModal(d.slug);
+});
+$("#plot").addEventListener("click", e=>{
+  const g = e.target.closest(".pt");
+  if(g) openModal(g.dataset.slug);
+});
+$("#plot").addEventListener("keydown", e=>{
+  if(e.key!=="Enter" && e.key!==" ") return;
+  const g = e.target.closest(".pt");
+  if(g){ e.preventDefault(); openModal(g.dataset.slug); }
+});
+
+/* ---------------- boot ---------------- */
+function debounce(fn, ms){ let id; return (...a)=>{ clearTimeout(id); id=setTimeout(()=>fn(...a), ms); }; }
+function applyHashState(){
+  const h = readHash();
+  state.q = h.q ?? "";
+  state.cup = h.cup ?? "all";
+  state.shape = h.shape ?? "all";
+  state.balance = h.balance ?? "all";
+  state.thighs = h.thighs ?? "all";
+  state.height = h.height ?? "all";
+  state.sort = SORTS[h.sort] ? h.sort : "bust-desc";
+  state.view = ["cards","table","plot"].includes(h.view) ? h.view : "cards";
+  state.unit = (h.unit==="in")? "in":"cm";
+  state.art = (h.art==="sheet")? "sheet":"official";
+  state.rng = h.rng || {};
+  state.compare = Array.isArray(h.compare)? h.compare.slice(0,4):[];
+  state.plotY = PLOT_METRICS.some(m=>m.k===h.plotY)? h.plotY : "whr";
+  if(h.lang && I18N[h.lang]) state.lang = h.lang;
+  $("#q").value = state.q;
+  $$("#fPanel .chipbtn").forEach(b=> b.setAttribute("aria-pressed", b.dataset.v===state[b.dataset.g]?"true":"false"));
+  $("#uCm").setAttribute("aria-pressed", state.unit==="cm"?"true":"false");
+  $("#uIn").setAttribute("aria-pressed", state.unit==="in"?"true":"false");
+  $("#aSheet").setAttribute("aria-pressed", state.art==="sheet"?"true":"false");
+  $("#aOff").setAttribute("aria-pressed", state.art==="official"?"true":"false");
+  $("#lang").value = state.lang;
+  renderFilterPanel(); fillSort(); fillPlot();
+  render(true);
+  if(h.p && bySlug.has(h.p)) openModal(h.p, {src:state.art});
+  else if($("#overlay").classList.contains("open")) closeModal();
+}
+
+(function boot(){
+  try{
+    const u=localStorage.getItem("zzz-unit"); if(u==="cm"||u==="in") state.unit=u;
+    const a=localStorage.getItem("zzz-art2"); if(a==="sheet"||a==="official") state.art=a;
+    const l=localStorage.getItem("zzz-lang"); if(l && I18N[l]) state.lang=l;
+    const th=localStorage.getItem("zzz-theme"); if(th==="light") document.documentElement.dataset.theme="light";
+  }catch(e){}
+  Object.assign(state, readHash());
+  $("#uCm").setAttribute("aria-pressed", state.unit==="cm"?"true":"false");
+  $("#uIn").setAttribute("aria-pressed", state.unit==="in"?"true":"false");
+  $("#aSheet").setAttribute("aria-pressed", state.art==="sheet"?"true":"false");
+  $("#aOff").setAttribute("aria-pressed", state.art==="official"?"true":"false");
+  $("#lang").value = state.lang;
+  $("#theme").value = document.documentElement.dataset.theme==="light" ? "light":"dark";
+  $("#agentCount").textContent = DATA.length;
+  fillPlot(); renderFilterPanel(); fillSort();
+  applyLang(state.lang);
+  const h = readHash();
+  if(h.p && bySlug.has(h.p)) openModal(h.p);
+  if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  }
+})();
 </script>
 </body>
 </html>

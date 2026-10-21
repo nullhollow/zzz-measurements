@@ -1,0 +1,37 @@
+{
+ "schema_version": 2,
+ "data_updated": "2026-10-21",
+ "title": "ZZZ Female Measurements",
+ "source": "modelmetrics.net",
+ "rights": "Measurements compiled from modelmetrics.net. Character artwork is © HoYoverse and shown as fair use via the ZZZ Fandom wiki.",
+ "repo": "https://github.com/nullhollow/zzz-measurements",
+ "wiki": "https://zenless-zone-zero.fandom.com",
+ "measurement_fields": [
+  "height_cm",
+  "bust_cm",
+  "underbust_cm",
+  "waist_cm",
+  "hip_cm",
+  "thigh_cm"
+ ],
+ "fields": {
+  "name": "Source roster key from measurements.csv",
+  "display": "Display name",
+  "slug": "URL slug used by the per-character pages",
+  "aliases": "Extra search terms (wiki page, outfit names)",
+  "cm": "Height as charted, in cm (may include ears, footwear or accessories)",
+  "stature_cm": "Head height used for stature comparisons; equals cm unless the chart counts an appendage",
+  "stature_basis": "charted or head",
+  "bust_cm": "Bust circumference, cm",
+  "band_cm": "Under-bust circumference, cm",
+  "waist_cm": "Waist circumference, cm",
+  "hip_cm": "Hip circumference, cm",
+  "thigh_cm": "Thigh circumference, cm",
+  "diff_cm": "Bust minus under-bust, cm (recomputed for 1 dp precision)",
+  "uk": "UK bra size as supplied by the source",
+  "confidence": "charted, estimated or partial (see methodology)",
+  "basis": "standard; outfit variants are exposed separately under skin",
+  "skin": "Measured outfit variant with its own numbers",
+  "outfits": "Art-only outfit renders (no measured data)"
+ }
+}

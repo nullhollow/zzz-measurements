@@ -4,13 +4,13 @@ ROOT = Path(__file__).resolve().parent.parent
 
 data = json.load(open(ROOT/'tools/data.json'))
 by_key = {d['name']: d for d in data}
-# stature baseline for the profile text, using effective height where the chart counts an appendage
-ROSTER_AVG = sum(d['cm_eff'] or d['cm'] for d in data) / len(data)
+# stature baseline for the profile text, using head height where the chart counts an appendage
+ROSTER_AVG = sum(d['stature_cm'] for d in data) / len(data)
 # rank by stature (1 = tallest) so the "tallest" claim matches the actual chart position;
 # tied statures share the better rank, hence the "among the tallest" wording for the top group
-_HEIGHTS = [d['cm_eff'] or d['cm'] for d in data]
+_HEIGHTS = [d['stature_cm'] for d in data]
 H_TOTAL = len(data)
-H_RANK = {d['name']: 1 + sum(1 for x in _HEIGHTS if x > (d['cm_eff'] or d['cm'])) for d in data}
+H_RANK = {d['name']: 1 + sum(1 for x in _HEIGHTS if x > d['stature_cm']) for d in data}
 
 
 def ordinal(n):
@@ -36,7 +36,7 @@ CUP_PHRASE = {
 WAIST_PHRASE = {
   'low': "one of the trimmer midsections in the set",
   'avg': "a middling midsection by this set's standards",
-  'high': "a fuller midsection relative to height",
+  'high': "a fuller midsection than most of the roster",
 }
 HIP_WORD   = {'low':"compact",'avg':"average-width",'high':"wide"}
 THIGH_WORD = {'low':"slim",'avg':"average",'high':"thick"}
@@ -46,14 +46,6 @@ def rankword(p):
     if p >= 0.85: return f"top {max(1, round((1-p)*100))}% of the roster"
     if p <= 0.15: return f"bottom {max(1, round(p*100))}% of the roster"
     return "mid-pack for the roster"
-
-def thigh_word(z):
-    if z is None: return "average"
-    if z >= 0.75: return "full"
-    if z >= 0.25: return "slightly full"
-    if z <= -0.75: return "slim"
-    if z <= -0.25: return "slightly slim"
-    return "average"
 
 def describe(d, unit, compare=None):
     cmu = (unit == 'cm')
@@ -65,15 +57,15 @@ def describe(d, unit, compare=None):
         s = f"{raw:.{dec}f}".rstrip('0').rstrip('.')
         return f"{s} {word}"
 
-    n = d['display']; cmv = d['cm']; ft = d.get('ftin') or d['ft']
+    n = d['display']; cmv = d['cm']; ft = d.get('ftin')
     hg = d['height_group']
-    if d.get('cm_eff'):
-        gap = d['cm_eff'] - ROSTER_AVG
+    if d['stature_basis'] == 'head':
+        gap = d['stature_cm'] - ROSTER_AVG
         where = 'just under' if gap < -2 else ('above' if gap > 2 else 'right around')
         frame = (f"{n} is charted at {cmv:g} cm ({ft}), but that figure counts her ears: at head height "
-                 f"she stands about {d['cm_eff']:g} cm ({d['ftin_eff']}), {where} the roster average.")
+                 f"she stands about {d['stature_cm']:g} cm ({d['ftin_stature']}), {where} the roster average.")
     elif hg == 'Tall':
-        r = H_RANK.get(d['name'], H_TOTAL)
+        r = H_RANK.get(d.get('variant_of') or d['name'], H_TOTAL)
         if r <= 3:
             frame = f"{n} is among the tallest figures on the chart at {cmv:g} cm ({ft})."
         elif r <= 8:
@@ -120,7 +112,7 @@ def describe(d, unit, compare=None):
             parts.append(f"Versus her standard model this outfit reads {dB:+.1f} {u} bust, "
                          f"{dW:+.1f} {u} waist, {dH:+.1f} {u} hips.")
     notes = d['notes']
-    if d.get('cm_eff') and notes.lower().startswith('height includes ears'):
+    if d['stature_basis'] == 'head' and notes.lower().startswith('height includes ears'):
         notes = ''          # already spelled out in the first sentence
     if notes:
         parts.append(f"Chart note: {notes}.")
@@ -169,18 +161,17 @@ for d in data:
     d.pop('desc', None)
     d['tags'] = build_tags(d)
     d['read'] = read_line(d)
-    # merged outfit entries keep two sub-records (standard model + skin), each
-    # with its own text/tags for the detail-view toggle
-    for key, cmp_ in (('std', None), ('skin', d.get('std'))):
-        s = d.get(key)
-        if not s: continue
-        s['desc_cm'] = describe(s, 'cm', compare=cmp_)
-        s['desc_in'] = describe(s, 'in', compare=cmp_)
+    # an outfit variant keeps its own text and tags; it is always compared
+    # against the standard model that owns it
+    s = d.get('skin')
+    if s:
+        s['desc_cm'] = describe(s, 'cm', compare=d)
+        s['desc_in'] = describe(s, 'in', compare=d)
         s.pop('desc', None)
         s['tags'] = build_tags(s)
         s['read'] = read_line(s)
 
-json.dump(data, open(ROOT/'tools/data.json','w'), indent=1)
+json.dump(data, open(ROOT/'tools/data.json','w'), indent=1, ensure_ascii=False)
 print('descriptions written (cm + in)\n')
 for d in data[:2] + [by_key['Rina'], by_key['Jane Doe']['skin']]:
     print('*', d['display'], '· CM:')

@@ -1,0 +1,26 @@
+<article class="card" data-name="{{name}}">
+  <button class="cmp" type="button" data-cmp="1" aria-pressed="false" aria-label="{{cmpAria}}">+</button>
+  <a class="card-main" href="{{href}}">
+    <div class="imgbox">
+      <img loading="lazy" decoding="async" src="{{thumb}}" alt=""{{dx}}>
+      {{stick}}
+    </div>
+    <div class="body">
+      <div class="name">{{display}}<small>{{heightLine}}</small></div>
+      <div class="pct" title="{{pctTitle}}">
+        <div class="prow"><span>{{bustWord}}</span><div class="pbar"><i style="width:{{pBust}}%;background:var(--bust)"></i></div><b>{{pBust}}</b></div>
+        <div class="prow"><span>{{waistWord}}</span><div class="pbar"><i style="width:{{pWaist}}%;background:var(--waist)"></i></div><b>{{pWaist}}</b></div>
+        <div class="prow"><span>{{hipWord}}</span><div class="pbar"><i style="width:{{pHip}}%;background:var(--hips)"></i></div><b>{{pHip}}</b></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="v">{{bust}}</div><div class="k">{{bustLabel}}</div></div>
+        <div class="stat"><div class="v">{{waist}}</div><div class="k">{{waistLabel}}</div></div>
+        <div class="stat"><div class="v">{{hip}}</div><div class="k">{{hipLabel}}</div></div>
+        <div class="stat"><div class="v">{{uk}}</div><div class="k">uk</div></div>
+      </div>
+      <div class="chips">{{chips}}</div>
+      <div class="desc">{{desc}}</div>
+      {{note}}
+    </div>
+  </a>
+</article>
