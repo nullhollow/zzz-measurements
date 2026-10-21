@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """Build the responsive artwork set used by cards, the table and the podium.
 
-For every portrait in character_images/ this writes four files under thumbs/:
+For every portrait in character_images/ this writes five files under thumbs/:
 
-    <slug>.webp            640 px longest side, WebP q78
-    320/<slug>.webp        320 px longest side, WebP q76
-    avif/<slug>.avif       640 px longest side, AVIF q60
-    avif/320/<slug>.avif   320 px longest side, AVIF q60
+    <slug>.webp                 640 px longest side, WebP q78
+    320/<slug>.webp             320 px longest side, WebP q76
+    avif/<slug>.avif            640 px longest side, AVIF q60
+    avif/320/<slug>.avif        320 px longest side, AVIF q60
+    avif/1024/<slug>.avif       full 1024 px longest side, AVIF q60
 
-AVIF is used first (roughly 35% smaller); WebP is the fallback. Full 1024 px
-renders stay in character_images/ for the detail view.
+AVIF is used first (roughly 35% smaller); WebP is the fallback. The 1024 set is
+what 2x desktop cards and character-page heroes pick, so they stay sharp instead
+of upscaling a 640 px thumb. The original 1024 px WebP stays in character_images/
+as the largest WebP fallback and for the detail view.
 
 Usage: python3 tools/make_thumbs.py [--force]
 """
@@ -25,6 +28,7 @@ WEBP640 = OUT
 WEBP320 = OUT / '320'
 AVIF640 = OUT / 'avif'
 AVIF320 = AVIF640 / '320'
+AVIF1024 = AVIF640 / '1024'
 FORCE = '--force' in sys.argv
 AVIF = features.check('avif')
 
@@ -57,14 +61,15 @@ def make(src, targets):
         (WEBP320 / src.name, 320, 'WEBP', 76),
     ]
     if AVIF:
-        targets += [(AVIF640 / avif, 640, 'AVIF', 60), (AVIF320 / avif, 320, 'AVIF', 60)]
+        targets += [(AVIF640 / avif, 640, 'AVIF', 60), (AVIF320 / avif, 320, 'AVIF', 60),
+                    (AVIF1024 / avif, 1024, 'AVIF', 60)]
     for path, longest, fmt, q in targets:
         encode(resize(im, longest), path, fmt, q)
     return True
 
 
 def main():
-    for d in (WEBP320, AVIF640, AVIF320):
+    for d in (WEBP320, AVIF640, AVIF320, AVIF1024):
         d.mkdir(parents=True, exist_ok=True)
     files = sorted(p for p in SRC.glob('*.webp') if p.is_file())
     if not files:
@@ -74,7 +79,7 @@ def main():
         avif = src.stem + '.avif'
         targets = [WEBP640 / src.name, WEBP320 / src.name]
         if AVIF:
-            targets += [AVIF640 / avif, AVIF320 / avif]
+            targets += [AVIF640 / avif, AVIF320 / avif, AVIF1024 / avif]
         if make(src, targets):
             made += 1
         else:

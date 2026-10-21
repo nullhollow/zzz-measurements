@@ -43,6 +43,20 @@ def thumb(d, size=None):
     return base
 
 
+def card_sizes(d):
+    """CSS width of the art before the imgbox crops it.
+
+    Desktop art is height-driven (height:100%, width:auto), so a wide character
+    can render much wider than the 260 px card. Telling the browser the real
+    width makes it pick the full 1024 variant on 2x screens instead of upscaling
+    the 640 thumb. Phones use a 132x377 box with object-fit:cover.
+    """
+    ar = d.get('ar') or 0.6
+    mobile = max(132, round(ar * 377))
+    desktop = max(1, round(ar * 497))
+    return f'(max-width:560px) {mobile}px, {desktop}px'
+
+
 def media(d, sizes, art='official', lazy=True, priority=None):
     """AVIF + WebP <picture> for official art; a plain crop for sheet mode."""
     if art == 'sheet':
@@ -52,12 +66,18 @@ def media(d, sizes, art='official', lazy=True, priority=None):
     slug = d['official']
     base = 'character_images/thumbs'
     dx = f' style="--dx:{d["dx"]}%"' if d.get('dx') is not None else ''
+    w320, w640 = d.get('w320', 320), d.get('w640', 640)
+    w1024, wfull = d.get('w1024', 1024), d.get('wfull', 1024)
+    avif = (f'{base}/avif/320/{slug}.avif {w320}w, '
+            f'{base}/avif/{slug}.avif {w640}w, '
+            f'{base}/avif/1024/{slug}.avif {w1024}w')
+    webp = (f'{base}/320/{slug}.webp {w320}w, '
+            f'{base}/{slug}.webp {w640}w, '
+            f'character_images/{slug}.webp {wfull}w')
     return (f'<picture>'
-            f'<source type="image/avif" srcset="{base}/avif/320/{slug}.avif 320w, '
-            f'{base}/avif/{slug}.avif 640w" sizes="{sizes}">'
+            f'<source type="image/avif" srcset="{avif}" sizes="{sizes}">'
             f'<img{load}{prio} decoding="async" src="{base}/{slug}.webp" '
-            f'srcset="{base}/320/{slug}.webp 320w, {base}/{slug}.webp 640w" '
-            f'sizes="{sizes}" alt=""{dx}>'
+            f'srcset="{webp}" sizes="{sizes}" alt=""{dx}>'
             f'</picture>')
 
 
@@ -91,7 +111,7 @@ def values(d, unit='cm', lang='en'):
         'name': esc(d['name']),
         'cmpAria': esc(f"Add {d['display']} to comparison"),
         'href': f"characters/{d['slug']}.html",
-        'media': media(d, '(max-width:560px) 132px, (max-width:900px) 200px, 240px'),
+        'media': media(d, card_sizes(d)),
         'stick': stick,
         'display': esc(d['display']),
         'heightLine': esc(height_line(d, unit)),

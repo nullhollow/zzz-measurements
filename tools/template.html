@@ -1127,8 +1127,19 @@ function mediaFor(d, sizes, opts={}){
   if(state.art==="sheet") return `<img${load}${prio} decoding="async" src="images/${d.img}.webp" alt="">`;
   const s = d.official;
   const dx = d.dx!=null ? ` style="--dx:${d.dx}%"` : '';
-  return `<picture><source type="image/avif" srcset="${THUMB}/avif/320/${s}.avif 320w, ${THUMB}/avif/${s}.avif 640w" sizes="${sizes}">`+
-    `<img${load}${prio} decoding="async" src="${THUMB}/${s}.webp" srcset="${THUMB}/320/${s}.webp 320w, ${THUMB}/${s}.webp 640w" sizes="${sizes}" alt=""${dx}></picture>`;
+  const w320=d.w320||320, w640=d.w640||640, w1024=d.w1024||1024, wfull=d.wfull||w1024;
+  const avif = `${THUMB}/avif/320/${s}.avif ${w320}w, ${THUMB}/avif/${s}.avif ${w640}w, ${THUMB}/avif/1024/${s}.avif ${w1024}w`;
+  const webp = `${THUMB}/320/${s}.webp ${w320}w, ${THUMB}/${s}.webp ${w640}w, character_images/${s}.webp ${wfull}w`;
+  return `<picture><source type="image/avif" srcset="${avif}" sizes="${sizes}">`+
+    `<img${load}${prio} decoding="async" src="${THUMB}/${s}.webp" srcset="${webp}" sizes="${sizes}" alt=""${dx}></picture>`;
+}
+function cardSizes(d){
+  const ar=d.ar||0.6;
+  return `(max-width:560px) ${Math.max(132,Math.round(ar*377))}px, ${Math.max(1,Math.round(ar*497))}px`;
+}
+function podiumSizes(d){
+  const ar=d.ar||0.6;
+  return `(max-width:640px) ${Math.max(100,Math.round(ar*150))}px, ${Math.max(150,Math.round(ar*300))}px`;
 }
 function heightLine(d){
   if(d.stature_basis==='head'){
@@ -1158,7 +1169,7 @@ function cardValues(d){
     name: esc(d.name),
     cmpAria: esc(`${cmpOn?t('removeFromCompare'):t('addCompare')}: ${d.display}`),
     href: `characters/${d.slug}.html`,
-    media: mediaFor(d, '(max-width:560px) 132px, (max-width:900px) 200px, 240px'),
+    media: mediaFor(d, cardSizes(d)),
     stick,
     display: esc(d.display),
     heightLine: esc(heightLine(d)),
@@ -1327,7 +1338,7 @@ function renderPodium(){
       <div class="stage">
         ${slots.map((d,i)=> !d ? `<div class="slot blank p${rank[i]}" style="--g:0.42"><div class="pimg"></div><div class="step">${rank[i]}</div><div class="plate"></div></div>`
         : `<a class="slot p${rank[i]}" href="characters/${d.slug}.html" data-slug="${esc(d.slug)}" title="${esc(d.display)} — ${esc(cat.f(d))}"${d.dx<0?' data-dxn="1"':''} style="--g:${wgt(d).toFixed(3)};--k:${nudge(d)}">
-            <div class="pimg">${mediaFor(d, '(max-width:640px) 30vw, 220px', {lazy:false, priority:rank[i]===1?'high':'low'})}</div>
+            <div class="pimg">${mediaFor(d, podiumSizes(d), {lazy:false, priority:rank[i]===1?'high':'low'})}</div>
             <div class="step">${rank[i]}</div>
             <div class="plate"><b>${esc(d.display)}</b><i>${esc(cat.f(d))}</i>${cat.x(d)?`<u>${esc(cat.x(d))}</u>`:""}</div>
           </a>`).join("")}

@@ -20,8 +20,19 @@ import html
 import json
 from pathlib import Path
 from urllib.parse import quote
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
+_WIDTH = {}
+
+
+def intrinsic_width(rel):
+    if rel not in _WIDTH:
+        with Image.open(ROOT / rel) as im:
+            _WIDTH[rel] = im.size[0]
+    return _WIDTH[rel]
+
+
 DATA = json.loads((ROOT / 'tools/data.json').read_text())
 META = json.loads((ROOT / 'tools/meta.json').read_text())
 SITE = 'https://nullhollow.github.io/zzz-measurements/'
@@ -197,13 +208,21 @@ def pct_bars(r):
 
 def hero_picture(d):
     s = d['official']
-    sizes = '(max-width:760px) 320px, 340px'
+    sizes = '(max-width:760px) 360px, 340px'
     height = round(440 / d['ar']) if d.get('ar') else 700
+    w320 = intrinsic_width(f'character_images/thumbs/320/{s}.webp')
+    w640 = intrinsic_width(f'character_images/thumbs/{s}.webp')
+    w1024 = intrinsic_width(f'character_images/thumbs/avif/1024/{s}.avif')
+    wfull = intrinsic_width(f'character_images/{s}.webp')
+    avif = (f'../character_images/thumbs/avif/320/{s}.avif {w320}w, '
+            f'../character_images/thumbs/avif/{s}.avif {w640}w, '
+            f'../character_images/thumbs/avif/1024/{s}.avif {w1024}w')
+    webp = (f'../character_images/thumbs/320/{s}.webp {w320}w, '
+            f'../character_images/thumbs/{s}.webp {w640}w, '
+            f'../character_images/{s}.webp {wfull}w')
     return (f'<picture>'
-            f'<source type="image/avif" srcset="../character_images/thumbs/avif/320/{s}.avif 320w, '
-            f'../character_images/thumbs/avif/{s}.avif 640w" sizes="{sizes}">'
-            f'<img src="../character_images/thumbs/320/{s}.webp" '
-            f'srcset="../character_images/thumbs/320/{s}.webp 320w, ../character_images/thumbs/{s}.webp 640w" '
+            f'<source type="image/avif" srcset="{avif}" sizes="{sizes}">'
+            f'<img src="../character_images/thumbs/{s}.webp" srcset="{webp}" '
             f'sizes="{sizes}" width="440" height="{height}" alt="{esc(d["display"])} official portrait">'
             f'</picture>')
 

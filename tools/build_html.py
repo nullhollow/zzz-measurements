@@ -5,6 +5,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'tools'))
@@ -16,7 +17,7 @@ N = len(DATA)
 MISSING = []
 
 # ---- asset checks ----------------------------------------------------------
-THUMBS = ('', '320/', 'avif/', 'avif/320/')
+THUMBS = ('', '320/', 'avif/', 'avif/320/', 'avif/1024/')
 for d in DATA:
     checks = {
         'sheet crop': ROOT / f"images/{d['img']}.webp",
@@ -37,6 +38,21 @@ for d in DATA:
 if MISSING:
     raise SystemExit('missing artwork (run tools/make_thumbs.py):\n  ' + '\n  '.join(MISSING))
 print(f'artwork: all {N} entries and their responsive variants present')
+
+# ---- exact intrinsic widths for srcset ------------------------------------
+_WIDTH = {}
+def intrinsic_width(rel):
+    if rel not in _WIDTH:
+        with Image.open(ROOT / rel) as im:
+            _WIDTH[rel] = im.size[0]
+    return _WIDTH[rel]
+
+for d in DATA:
+    o = d['official']
+    d['w320'] = intrinsic_width(f'character_images/thumbs/320/{o}.webp')
+    d['w640'] = intrinsic_width(f'character_images/thumbs/{o}.webp')
+    d['w1024'] = intrinsic_width(f'character_images/thumbs/avif/1024/{o}.avif')
+    d['wfull'] = intrinsic_width(f'character_images/{o}.webp')
 
 DESC = (f"Measurements for all {N} female Zenless Zone Zero agents: height, bust, under-bust, waist, "
         "hips and thigh circumference in cm and inches, with waist-to-hip proportions, silhouette "

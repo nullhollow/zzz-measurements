@@ -55,6 +55,9 @@
 - Responsive `<picture>` set: AVIF 320/640 with WebP 320/640 fallbacks and `sizes`.
   Measured first-screen artwork drops from ~556 KB to ~120 KB on a 390 px phone.
 - Character pages load the 320/640 hero set instead of the 1024 px render.
+- Cards gained a full 1024 px AVIF candidate and exact per-image `srcset` widths;
+  2x desktop and phone cards now pick the full render instead of upscaling the
+  640 thumb (1x desktop stays on the lighter 640 set).
 - The embedded client dataset drops provenance-only fields; static cards are reused
   on first paint instead of being rebuilt.
 - Phones get one horizontal card per row (art left, data right), a swipeable podium

@@ -47,11 +47,12 @@ python3 tools/make_og.py          # social card (needs Chrome)
 
 ## Payload
 
-Cards, the table and the podium use a `<picture>` set: AVIF 320/640 with WebP
-fallbacks and `sizes`, so a phone downloads ~120 KB of artwork for the first screen
-instead of ~0.5 MB. Full 1024 px renders are only fetched when a detail view opens.
-The HTML is ~61 KB gzipped locally (GitHub Pages serves it compressed), and the
-page keeps its 48 static cards.
+Cards, the table and the podium use a `<picture>` set: AVIF 320/640/full-1024
+with WebP fallbacks and per-card `sizes`. 1x desktop cards get the 640 set at
+roughly 1:1; 2x desktop and phone cards pick the full 1024 render instead of
+upscaling the 640 thumb. A 2x phone loads ~430 KB of artwork for the first screen
+(podium plus visible cards), and the rest lazy-loads. The HTML is ~61 KB gzipped
+locally (GitHub Pages serves it compressed), and the page keeps its 48 static cards.
 
 ## Data model
 
