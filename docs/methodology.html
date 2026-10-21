@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methodology, classes and FAQ — ZZZ Female Measurements</title>
+<meta name="description" content="How the Zenless Zone Zero measurements were taken, why stature and charted height differ, what the silhouette classes and percentiles mean, and the confidence flags.">
+<link rel="canonical" href="https://nullhollow.github.io/zzz-measurements/methodology.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ZZZ Female Measurements">
+<meta property="og:title" content="Methodology, classes and FAQ — ZZZ Female Measurements">
+<meta property="og:description" content="How the Zenless Zone Zero measurements were taken, why stature and charted height differ, what the silhouette classes and percentiles mean, and the confidence flags.">
+<meta property="og:url" content="https://nullhollow.github.io/zzz-measurements/methodology.html">
+<meta property="og:image" content="https://nullhollow.github.io/zzz-measurements/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Methodology, classes and FAQ — ZZZ Female Measurements">
+<meta name="twitter:description" content="How the Zenless Zone Zero measurements were taken, why stature and charted height differ, what the silhouette classes and percentiles mean, and the confidence flags.">
+<meta name="twitter:image" content="https://nullhollow.github.io/zzz-measurements/og.png">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{--acid:#D8FA00;--hazard:#FFDE00;--signal:#FF5E41;--ink:#0B0B0C;--panel:#17171C;
+  --line:#ffffff22;--dim:#A6A6AE;--dim2:#8A8A94;--bust:#FF5E41;--waist:#29D4FF;--hips:#D8FA00;
+  --thighs:#FFDE00;--tan:#D3BC8E;--disp:'Anton','Arial Narrow',Impact,sans-serif;
+  --num:'Chakra Petch',ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:#fff;font:14px/1.6 Inter,system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--acid)}
+:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
+.top{max-width:1100px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;
+  align-items:center;gap:12px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase}
+.top a{text-decoration:none;color:var(--dim)}
+.top a:hover{color:var(--acid)}
+.top b{font-family:var(--num);color:var(--acid)}
+main{max-width:1100px;margin:0 auto;padding:22px 20px 60px}
+.hero{display:grid;grid-template-columns:min(340px,38vw) 1fr;gap:26px;align-items:center;
+  border-bottom:1px solid var(--line);padding-bottom:24px}
+.hero img{width:100%;height:auto;border-radius:16px;border:1px solid var(--line);background:#101014}
+.eyebrow{margin:0 0 6px;font-family:var(--num);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+h1{margin:0 0 10px;font-family:var(--disp);font-weight:400;font-size:clamp(36px,6vw,64px);line-height:.96;
+  text-transform:uppercase}
+.lead{margin:0 0 14px;color:#cfd0d6;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:9.5px;
+  letter-spacing:.13em;text-transform:uppercase;color:#e8e8ee}
+.chip.bust{border-color:var(--bust);color:var(--bust)}.chip.waist{border-color:var(--waist);color:var(--waist)}
+.chip.hips{border-color:var(--hips);color:var(--hips)}.chip.thighs{border-color:var(--thighs);color:var(--thighs)}
+.chip.height{border-color:var(--tan);color:var(--tan)}
+.meta{font-family:var(--num);font-size:12px;color:var(--dim);letter-spacing:.03em}
+h2{margin:30px 0 10px;font-family:var(--disp);font-weight:400;font-size:22px;text-transform:uppercase}
+h3{margin:18px 0 6px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--acid)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+thead th{font-family:var(--num);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+tbody th{font-weight:500;color:var(--dim)}
+td{font-family:var(--num);font-weight:600}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:14px}
+.card p{margin:0;color:#cfd0d6;font-size:12.5px}
+.bars{display:grid;gap:7px}
+.prow{display:grid;grid-template-columns:64px 1fr 36px;gap:8px;align-items:center;font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.pbar{height:6px;background:#ffffff1a;border-radius:99px;overflow:hidden}
+.pbar i{display:block;height:100%}
+.prow b{font-family:var(--num);text-align:right;color:#e8e8ee;font-size:11px}
+.note{border-left:2px solid var(--hazard);padding-left:10px;color:var(--dim);font-size:12px;margin-top:12px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.gallery figure{margin:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#101014}
+.gallery img{width:100%;height:auto;display:block;background:#0c0c10}
+.gallery figcaption{padding:8px 10px;font-size:10.5px;color:var(--dim)}
+.gallery b{display:block;color:#fff;font-size:12px}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:34px;border-top:1px solid var(--line);padding-top:16px}
+.nav a{text-decoration:none;font-family:var(--num);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.nav span{color:var(--dim)}
+footer{max-width:1100px;margin:0 auto;padding:0 20px 60px;color:var(--dim2);font-size:11px;line-height:1.7}
+footer a{color:var(--dim)}
+footer .rule{border-top:1px solid var(--line);padding-top:14px}
+.btn{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:8px 14px;
+  font-family:var(--num);font-size:10px;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;color:#fff}
+.btn:hover{border-color:var(--acid);color:var(--acid)}
+.btn.primary{background:var(--acid);border-color:var(--acid);color:#0b0b0c;font-weight:800}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.faq dt{font-weight:700;margin-top:14px;color:#fff}
+.faq dd{margin:4px 0 0;color:#cfd0d6}
+.small{font-size:11px;color:var(--dim2)}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.hero img{max-width:320px}
+  .grid2{grid-template-columns:1fr}}
+@media print{body{background:#fff;color:#000}.top,footer,.nav,.btns{display:none}
+  .hero img{max-height:300px;width:auto}.card{background:#fff}.lead,.card p{color:#333}
+  a{color:#000}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"FAQPage","@id":"https://nullhollow.github.io/zzz-measurements/methodology.html#faq","mainEntity":[{"@type":"Question","name":"Where do the numbers come from?","acceptedAnswer":{"@type":"Answer","text":"Heights come from official listings where available. The remaining circumferences come from curves measured around the official 3D models, so treat every value as an estimate rather than an in-game stat."}},{"@type":"Question","name":"Why does Miyabi show 170 cm and 155 cm?","acceptedAnswer":{"@type":"Answer","text":"Her charted 170 cm includes her ears. Stature comparisons use the ~155 cm head height, while the charted number stays visible in the table, the card and the exports."}},{"@type":"Question","name":"Why is the card value the standard model?","acceptedAnswer":{"@type":"Answer","text":"The standard model is the canonical figure. A measured outfit is stored as its own record with its own numbers and deltas, so no card or ranking mixes two outfits into one body."}},{"@type":"Question","name":"What do the silhouette classes mean?","acceptedAnswer":{"@type":"Answer","text":"Shape (Hourglass / Balanced / Straight) is the waist ÷ hip percentile. Build compares the raw bust and hip percentiles. Waist, hip and thigh classes are roster terciles of their raw circumference."}},{"@type":"Question","name":"What does hand-pinned mean?","acceptedAnswer":{"@type":"Answer","text":"A few agents read as visibly thicker or slimmer than a single circumference suggests. Thirteen are marked thick by curator read and labelled hand-pinned in their detail view."}},{"@type":"Question","name":"How is the bust tier calculated?","acceptedAnswer":{"@type":"Answer","text":"Bust minus under-bust, recomputed to one decimal rather than using the sheet's rounded diff column. The letter is the source's UK sizing, not a fit recommendation."}},{"@type":"Question","name":"What do the confidence badges mean?","acceptedAnswer":{"@type":"Answer","text":"Charted means no caveat is flagged. Estimated means the source marks at least one value as approximated. Partial means a value is missing or unreadable."}},{"@type":"Question","name":"Can I reuse the data?","acceptedAnswer":{"@type":"Answer","text":"The measurements are compiled from modelmetrics.net and the character art is © HoYoverse, shown via the ZZZ Fandom wiki as fair use. Link back to the source and respect those rights."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ZZZ Measurements","item":"https://nullhollow.github.io/zzz-measurements/"},{"@type":"ListItem","position":2,"name":"Methodology","item":"https://nullhollow.github.io/zzz-measurements/methodology.html"}]}]}</script>
+</head>
+<body>
+<header class="top"><a href="">← ZZZ Measurements</a><span>Zenless Zone Zero · <b>48</b> agents</span></header>
+
+<main>
+  <p class="eyebrow">Reference</p>
+  <h1>Methodology &amp; FAQ</h1>
+  <p class="lead">A short, honest account of what the chart measures, what it estimates, and how every class and percentile is calculated.</p>
+
+  <div class="grid2">
+    <section class="card">
+      <h3>Height</h3>
+      <p>Charted height comes from official listings and may include ears, footwear or accessories. Stature comparisons use head height where the chart notes an appendage. Both values appear in the table and in the exports; <code>stature_cm</code> is the comparison value.</p>
+    </section>
+    <section class="card">
+      <h3>Circumferences</h3>
+      <p>Bust, under-bust, waist, hip and thigh come from curves wrapped around the official 3D models. Clothing, armour and removed geometry make some readings approximate; the source notes are preserved verbatim.</p>
+    </section>
+    <section class="card">
+      <h3>Standard model vs outfit</h3>
+      <p>The standard model is canonical. A measured outfit is a separate record with its own numbers and deltas; art-only outfits are never measured and never affect a figure, filter or ranking.</p>
+    </section>
+    <section class="card">
+      <h3>Bra sizing</h3>
+      <p>The bust tier uses bust minus under-bust, recomputed to one decimal. UK / US / EU letters are reproduced from the source for comparison, not as a fit recommendation.</p>
+    </section>
+    <section class="card">
+      <h3>Classes</h3>
+      <p>Waist, hip and thigh classes are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles. Shape is waist ÷ hip. Thirteen agents are hand-pinned to Thick by curator read and labelled as such.</p>
+    </section>
+    <section class="card">
+      <h3>Percentiles</h3>
+      <p>Bars show the roster percentile of the raw centimetre measurement, with stature using head height. 0 is the smallest value in the set, 50 the midpoint and 100 the largest.</p>
+    </section>
+    <section class="card">
+      <h3>Confidence</h3>
+      <p><b>Charted</b>: no caveat flagged. <b>Estimated</b>: the source marks a value as approximated. <b>Partial</b>: a value is missing or unreadable. The flag is derived from the source note, never invented.</p>
+    </section>
+    <section class="card">
+      <h3>Corrections</h3>
+      <p>Every character page has a pre-filled “Report an error” link. Corrections are recorded in the changelog, and the dataset carries a schema version and an update date.</p>
+    </section>
+  </div>
+
+  <h2>Data &amp; exports</h2>
+  <p class="lead">The same numbers power the interactive chart and the static pages. Downloads are versioned by schema v2 and dated 2026-10-21.</p>
+  <div class="btns">
+    <a class="btn primary" href="data/measurements.json" download>JSON dataset</a>
+    <a class="btn" href="data/measurements.csv" download>CSV export</a>
+    <a class="btn" href="data/schema.json" download>JSON Schema</a>
+  </div>
+  <p class="small">Rights: Measurements compiled from modelmetrics.net. Character artwork is © HoYoverse and shown as fair use via the ZZZ Fandom wiki.</p>
+
+  <h2>FAQ</h2>
+  <dl class="faq"><dt>Where do the numbers come from?</dt><dd>Heights come from official listings where available. The remaining circumferences come from curves measured around the official 3D models, so treat every value as an estimate rather than an in-game stat.</dd><dt>Why does Miyabi show 170 cm and 155 cm?</dt><dd>Her charted 170 cm includes her ears. Stature comparisons use the ~155 cm head height, while the charted number stays visible in the table, the card and the exports.</dd><dt>Why is the card value the standard model?</dt><dd>The standard model is the canonical figure. A measured outfit is stored as its own record with its own numbers and deltas, so no card or ranking mixes two outfits into one body.</dd><dt>What do the silhouette classes mean?</dt><dd>Shape (Hourglass / Balanced / Straight) is the waist ÷ hip percentile. Build compares the raw bust and hip percentiles. Waist, hip and thigh classes are roster terciles of their raw circumference.</dd><dt>What does hand-pinned mean?</dt><dd>A few agents read as visibly thicker or slimmer than a single circumference suggests. Thirteen are marked thick by curator read and labelled hand-pinned in their detail view.</dd><dt>How is the bust tier calculated?</dt><dd>Bust minus under-bust, recomputed to one decimal rather than using the sheet&#x27;s rounded diff column. The letter is the source&#x27;s UK sizing, not a fit recommendation.</dd><dt>What do the confidence badges mean?</dt><dd>Charted means no caveat is flagged. Estimated means the source marks at least one value as approximated. Partial means a value is missing or unreadable.</dd><dt>Can I reuse the data?</dt><dd>The measurements are compiled from modelmetrics.net and the character art is © HoYoverse, shown via the ZZZ Fandom wiki as fair use. Link back to the source and respect those rights.</dd></dl>
+
+  <div class="btns"><a class="btn primary" href="./">Back to the chart</a></div>
+</main>
+<footer><div class="rule">
+<b>Source:</b> modelmetrics.net · <i>Zenless Zone Zero · Female Character Measurements</i>. Data updated <time datetime="2026-10-21">2026-10-21</time>.<br>
+Official art via the ZZZ Fandom wiki, © HoYoverse (fair use). Auto-generated commentary is not in-game canon.<br>
+<a href="methodology.html">Methodology &amp; FAQ</a> · <a href="data/measurements.json" download>Dataset (JSON)</a> ·
+<a href="data/measurements.csv" download>CSV</a> · <a href="https://github.com/nullhollow/zzz-measurements" rel="noopener">Source</a>
+</div></footer>
+</body>
+</html>

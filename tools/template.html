@@ -208,10 +208,10 @@
   .chipbtn:hover{border-color:var(--acid); color:var(--acid)}
   .chipbtn[aria-pressed="true"]{background:var(--acid); border-color:var(--acid); color:#0b0b0c; font-weight:800}
   .fapply{display:none; width:100%; margin-top:14px}
-  .fpanel .fapply{display:block}
 
   /* ---------- cards ---------- */
   .wrap{max-width:1400px; margin:0 auto; padding:18px 22px 60px}
+  #cardsView,#plotView,#tableView{scroll-margin-top:170px}
   .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(238px,1fr)); gap:14px}
   .card{position:relative; overflow:hidden; border:1px solid var(--line); border-radius:var(--radius);
     background:linear-gradient(180deg,#18181d,#101014); transition:.15s; display:flex; flex-direction:column}
@@ -304,6 +304,10 @@
   /* ---------- plot ---------- */
   .plotbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px}
   .plotbar label{font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim)}
+  .plegend{display:inline-flex;align-items:center;gap:6px;font-size:9.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--dim)}
+  .plegend .lg{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .plegend .lg.hg{background:var(--hips)} .plegend .lg.ba{background:var(--blue)} .plegend .lg.st{background:var(--bust)}
   .plotwrap{border:1px solid var(--line); border-radius:14px; background:#0e0e11; padding:10px}
   .plot{display:block; width:100%; height:auto; touch-action:manipulation}
   .plot .gridline{stroke:#ffffff14; stroke-width:1}
@@ -367,7 +371,7 @@
   .kv{background:#08080a; border:1px solid var(--line); border-radius:10px; padding:7px 9px}
   .kv .k{font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--dimmer)}
   .kv .v{font-family:var(--num); font-weight:600; font-size:14px; margin-top:2px}
-  .kv .v small{color:var(--dim); font-size:10px; font-weight:500}
+  .kv .v small{display:block; color:var(--dim); font-size:10px; font-weight:500; margin-top:1px}
   /* infographic figure read */
   .vline{font-size:12px; color:#cfd0d6; margin-bottom:9px}
   .infog{display:flex; flex-direction:column; gap:4px}
@@ -415,7 +419,7 @@
   .cmptable thead th{background:transparent; color:#fff; font-family:var(--disp); font-weight:400;
     font-size:16px; text-transform:uppercase; position:static}
   .cmptable tbody th{font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); font-weight:600}
-  .cmptable td{font-family:var(--num); font-weight:600}
+  .cmptable td{font-family:var(--num); font-weight:600; white-space:pre-line}
   .cmptable .cmdesc{font-family:Inter,sans-serif;font-weight:400;color:#b7b7c0;font-size:11.5px;max-width:260px}
   .cmpwrap{padding:0 18px 18px; overflow:auto}
 
@@ -468,6 +472,9 @@
 
   /* ---------- light theme overrides ---------- */
   html[data-theme="light"] .hero{background:linear-gradient(180deg,#ffffff,#ededE6)}
+  html[data-theme="light"] .hero:before{background:#D8FA00}
+  html[data-theme="light"] .hero .meta{color:#0b0b0c}
+  html[data-theme="light"] .hero .meta b{color:#0b0b0c}
   html[data-theme="light"] .hero .dots{background-image:radial-gradient(#0b0b0c12 1px,transparent 1.4px)}
   html[data-theme="light"] .sticker{background:#fff;border-color:#0b0b0c26}
   html[data-theme="light"] .sticker b{color:#0b0b0c;-webkit-text-stroke:2px #0b0b0c;text-shadow:5px 5px 0 #fff}
@@ -499,6 +506,19 @@
   html[data-theme="light"] .plot .pt text{fill:#0b0b0c}
   html[data-theme="light"] .slot .step{background:#e4e4dc;color:#5C6E00}
   html[data-theme="light"] .slot.p1 .step{background:linear-gradient(180deg,#5C6E00,#4F5F00);color:#fff}
+  html[data-theme="light"] .chip,html[data-theme="light"] .irow .ichip,html[data-theme="light"] .prow b,
+  html[data-theme="light"] .slot .plate u{color:#0b0b0c}
+  html[data-theme="light"] .chip.height{color:#7a6320}
+  html[data-theme="light"] .chip.bust{color:#b3361f}
+  html[data-theme="light"] .chip.waist{color:#0b6f8c}
+  html[data-theme="light"] .chip.hips{color:#5C6E00}
+  html[data-theme="light"] .chip.thighs{color:#8a6b00}
+  html[data-theme="light"] .chip.shape{color:#3049c9}
+  html[data-theme="light"] .viewtoggle button[aria-pressed="true"],
+  html[data-theme="light"] .chipbtn[aria-pressed="true"],
+  html[data-theme="light"] .seg button[aria-pressed="true"],
+  html[data-theme="light"] .ochip[aria-pressed="true"],
+  html[data-theme="light"] .cmp[aria-pressed="true"]{background:#0B0B0C;color:var(--acid);border-color:#0B0B0C}
 
   /* ---------- responsive ---------- */
   @media (max-width:1100px){
@@ -507,8 +527,19 @@
   @media (max-width:900px){
     .mbody{grid-template-columns:1fr}
     .mimg{border-right:0; border-bottom:1px solid var(--line)}
+    .mimg img{max-height:44vh;width:auto;max-width:100%;margin:0 auto}
     .hero:before{width:74%; opacity:.92}
     .hero p{max-width:none}
+    /* figure-read rows become two lines instead of forcing a wide min-content */
+    .irow{grid-template-columns:62px minmax(0,1fr) 66px;gap:6px;padding:8px 9px}
+    .irow .ik{grid-column:1;grid-row:1}
+    .irow .iv{grid-column:2;grid-row:1}
+    .irow .ichip{grid-column:3;grid-row:1}
+    .irow .isub{grid-column:1/3;grid-row:2;white-space:normal;overflow:visible}
+    .irow .isym{grid-column:3;grid-row:2;text-align:right}
+    .irow .ibar{display:none}
+    .irow.outfit{grid-template-columns:62px 1fr}
+    .irow.outfit .isub.wide{grid-column:2;grid-row:1}
   }
   @media (max-width:1150px){
     /* acid becomes a decorative bottom band so it never sits behind body text */
@@ -521,7 +552,14 @@
     .hero-side{display:none}
   }
   @media (max-width:640px){
-    .controls{padding:9px 12px; gap:7px}
+    .controls{padding:8px 10px; gap:6px; backdrop-filter:none}
+    .search{flex:1 1 100%}
+    #artToggle{display:none}
+    .highlights{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .hl{padding:9px 10px 10px}
+    .hl .k{font-size:8px}
+    .hl .v{font-size:15px}
+    .hl .n{font-size:11px}
     .wrap{padding:14px 12px 48px}
     .podstrip{padding:0 12px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:10px}
     .podstrip .pod{padding:10px 10px 0}
@@ -534,14 +572,23 @@
     .slot .pimg,.slot .pimg img{height:150px}
     .hero-inner{padding:20px 16px 24px}
     .hero-side{display:none}
-    .count{flex-basis:100%; margin-left:0; text-align:right}
+    .count{flex-basis:auto; margin-left:auto}
     select,.btn,.viewtoggle button{padding:8px 12px}
     .mhead h2{font-size:22px}
     .fpanel{position:fixed; left:8px; right:8px; bottom:8px; top:auto; width:auto; max-height:72vh;
       overflow:auto; border-radius:18px}
+    .fpanel .fapply{display:block}
     .comparebar{padding:8px 10px}
     .comparebar .cchip{font-size:10px}
     .toast{bottom:104px}
+    .cmptable{table-layout:fixed}
+    .cmptable th:first-child,.cmptable td:first-child{width:30%}
+    .cmptable th,.cmptable td{padding:7px 5px;font-size:10px;overflow-wrap:anywhere}
+    .cmptable thead th{font-size:12px}
+    .cmpwrap{padding:0 8px 14px}
+    .plot .tick,.plot .alab{font-size:20px}
+    .plot .pt text{font-size:20px}
+    .plegend{display:none}
   }
   @media (max-width:480px){
     .col-low{display:none}
@@ -591,7 +638,7 @@
 </header>
 <div class="film" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
-<main id="main">
+<main id="main" tabindex="-1">
   <section class="highlights" id="highlights" aria-label="Roster highlights"></section>
   <section class="podstrip" id="podstrip" aria-label="Roster leaders"></section>
 
@@ -601,7 +648,7 @@
       <input id="q" type="search" placeholder="Search character, outfit or alias…" autocomplete="off" aria-label="Search roster">
     </div>
     <div class="fdrop" id="fDrop">
-      <button class="btn fbtn" id="fBtn" aria-expanded="false" aria-controls="fPanel" data-i18n="filters">Filters<span class="fbadge" id="fBadge"></span><span class="car" aria-hidden="true">▾</span></button>
+      <button class="btn fbtn" id="fBtn" aria-expanded="false" aria-controls="fPanel"><span data-i18n="filters">Filters</span><span class="fbadge" id="fBadge"></span><span class="car" aria-hidden="true">▾</span></button>
       <div class="fpanel" id="fPanel" role="group" aria-label="Filters">
         <div class="fhead"><span data-i18n="ranges">Numeric ranges</span><button class="lnk" id="fClearRanges" data-i18n="resetRanges">reset</button></div>
         <div id="fRanges"></div>
@@ -666,9 +713,10 @@
       <div class="plotbar">
         <label for="plotY" data-i18n="plotY">Y axis</label>
         <select id="plotY"></select>
+        <span class="plegend" aria-hidden="true"><i class="lg hg"></i>Hourglass <i class="lg ba"></i>Balanced <i class="lg st"></i>Straight</span>
         <span class="count" id="plotCount" aria-live="polite"></span>
       </div>
-      <div class="plotwrap"><svg class="plot" id="plot" viewBox="0 0 920 520" role="img"></svg></div>
+      <div class="plotwrap"><svg class="plot" id="plot" viewBox="0 0 920 520" role="group" aria-label="Scatter plot"></svg></div>
     </section>
     <div id="tableView" hidden><div class="tablewrap"><table id="tbl">
       <caption class="sr">Measurements for every agent; use the header buttons to sort.</caption>
@@ -751,7 +799,7 @@ const I18N = {
     sortHeightAsc:'Stature · short→tall', sortWaistAsc:'Waist · thin→thick', sortHipDesc:'Hips · wide→narrow',
     sortThighDesc:'Thigh cm · thick→slim', sortThighAsc:'Thigh cm · slim→thick', sortWhrAsc:'Hourglass first',
     sortName:'Name A→Z', sortStatureLabel:'Stature', cm:'cm', inch:'in', uk:'UK',
-    tally:'tallest', bustiest:'largest bust diff', hourglassTop:'sharpest hourglass', outfitsN:'outfit renders',
+    tally:'tallest', bustiest:'largest bust diff', hourglassTop:'sharpest hourglass', thickest:'fullest thighs', outfitsN:'outfit renders',
     pctLong:'Roster percentile of the raw centimetre measurement. 0 = smallest in the cast, 100 = largest.'
   },
   ja: {
@@ -767,7 +815,7 @@ const I18N = {
     langNote:'解説文は英語のままです。操作ラベルを翻訳しています。',
     plotY:'縦軸', searchPh:'名前・衣装・別名で検索…',
     entries:'件', picked:'件を比較に追加', addCompare:'比較に追加',
-    measurements:'寸法', bra:'ブラサイズ', proportions:'比率', percentiles:' roster パーセンタイル',
+    measurements:'寸法', bra:'ブラサイズ', proportions:'比率', percentiles:'名单内パーセンタイル',
     figureRead:'体型の読み', outfits:'衣装', standard:'標準', fullProfile:'詳細ページ', report:'誤りを報告',
     addToCompare:'比較に追加', removeFromCompare:'比較から外す', similar:'似た体型',
     confidence:'信頼度', sourceArt:'画像出典', close:'閉じる', zoomHint:'画像をクリックで拡大。',
@@ -780,7 +828,7 @@ const I18N = {
     sortHeightAsc:'身長 · 低い順', sortWaistAsc:'ウエスト · 細い順', sortHipDesc:'ヒップ · 広い順',
     sortThighDesc:'太もも · 太い順', sortThighAsc:'太もも · 細い順', sortWhrAsc:'砂時計型順',
     sortName:'名前 A→Z', sortStatureLabel:'身長', cm:'cm', inch:'in', uk:'UK',
-    tally:'最高身長', bustiest:'最大バスト差', hourglassTop:'最も砂時計型', outfitsN:'衣装画像',
+    tally:'最高身長', bustiest:'最大バスト差', hourglassTop:'最も砂時計型', thickest:'太もも最太', outfitsN:'衣装画像',
     pctLong:'roster内の生cm値パーセンタイル。0=最小、100=最大。'
   },
   zh: {
@@ -809,7 +857,7 @@ const I18N = {
     sortHeightAsc:'身高 · 低到高', sortWaistAsc:'腰围 · 细到粗', sortHipDesc:'臀围 · 宽到窄',
     sortThighDesc:'大腿 · 粗到细', sortThighAsc:'大腿 · 细到粗', sortWhrAsc:'沙漏型优先',
     sortName:'姓名 A→Z', sortStatureLabel:'身高', cm:'cm', inch:'in', uk:'UK',
-    tally:'最高身高', bustiest:'最大胸围差', hourglassTop:'最沙漏', outfitsN:'服装立绘',
+    tally:'最高身高', bustiest:'最大胸围差', hourglassTop:'最沙漏', thickest:'大腿最粗', outfitsN:'服装立绘',
     pctLong:'名单内原始厘米值的百分位。0=最小，100=最大。'
   }
 };
@@ -893,6 +941,8 @@ function readHash(){
     out.rng = rng;
   }
   if(p.has('c')) out.compare = p.get('c').split(',').map(s=>bySlug.get(s)).filter(Boolean).map(d=>d.slug);
+  if(p.has('lang')) out.lang = p.get('lang');
+  if(p.has('th')) out.theme = p.get('th');
   if(p.has('p')) out.p = p.get('p');
   return out;
 }
@@ -904,6 +954,7 @@ function writeHash(replace=true){
   if(state.unit!=="cm") p.set('unit', state.unit);
   if(state.art!=="official") p.set('art', state.art);
   if(state.lang!=="en") p.set('lang', state.lang);
+  if(document.documentElement.dataset.theme==="light") p.set('th','light');
   if(state.cup!=="all") p.set('cup', state.cup);
   if(state.shape!=="all") p.set('shape', state.shape);
   if(state.balance!=="all") p.set('bal', state.balance);
@@ -1067,8 +1118,8 @@ function renderCards(list){
 /* ---------------- table ---------------- */
 function columns(){
   const u = state.unit, suf = u==='cm' ? ' cm' : ' in', osuf = u==='cm' ? ' in' : ' cm';
-  const unitCol = (key, title, dec=1) => ({
-    k:key, t:`${title} (${u})`, s:d=>d[key+'_in'], num:true, cls:'',
+  const unitCol = (key, title, dec=1, cls='') => ({
+    k:key, t:`${title} (${u})`, s:d=>d[key+'_in'], num:true, cls,
     fmtv:(v,d)=>{
       const p = U(d,key); if(p==null) return "—";
       const o = isCm()? d[key+'_in'] : d[key+'_cm'];
@@ -1083,10 +1134,10 @@ function columns(){
       fmtv:(v,d)=>fmt(d.stature_cm,0)},
     {k:"ft",     t:"ft/in", s:d=>d.ftin, num:false, cls:'col-low', fmtv:(v,d)=>d.ftin??"—"},
     unitCol("bust","Bust"),
-    unitCol("band","Band","col-low"),
+    unitCol("band","Band",1,'col-low'),
     unitCol("waist","Waist"),
     unitCol("hip","Hip"),
-    unitCol("thigh","Thigh","col-low"),
+    unitCol("thigh","Thigh",1,'col-low'),
     unitCol("diff","Bust diff"),
     {k:"uk",     t:"UK", s:d=>d.uk, num:false, cls:''},
     {k:"us",     t:"US", s:d=>d.us, num:false, cls:'col-low'},
@@ -1131,7 +1182,7 @@ function renderTable(list){
       if(c.k==="name"){
         return `<td><div style="display:flex;align-items:center;gap:8px">
           <img class="thumb" loading="lazy" decoding="async" src="${thumbSrc(d)}" alt="">
-          <span><a class="tname" href="characters/${d.slug}.html">${esc(d.display)}</a>${d.variant_of?'<span class="badge">variant</span>':''}<div class="mini">${esc(d.height_group)} · UK ${esc(d.uk)} · ${esc(d.shape)}</div></span></div></td>`;
+          <span><a class="tname" data-slug="${esc(d.slug)}" href="characters/${d.slug}.html">${esc(d.display)}</a>${d.variant_of?'<span class="badge">variant</span>':''}<div class="mini">${esc(d.height_group)} · UK ${esc(d.uk)} · ${esc(d.shape)}</div></span></div></td>`;
       }
       const raw = c.s(d);
       const val = c.fmtv ? c.fmtv(raw, d) : (raw==null?"—":(c.num?fmt(raw, c.k==="diff"?0:1):esc(raw)));
@@ -1206,7 +1257,7 @@ function renderPodium(){
       <div class="stage">
         ${slots.map((d,i)=> !d ? `<div class="slot blank p${rank[i]}" style="--g:0.42"><div class="pimg"></div><div class="step">${rank[i]}</div><div class="plate"></div></div>`
         : `<a class="slot p${rank[i]}" href="characters/${d.slug}.html" data-slug="${esc(d.slug)}" title="${esc(d.display)} — ${esc(cat.f(d))}"${d.dx<0?' data-dxn="1"':''} style="--g:${wgt(d).toFixed(3)};--k:${nudge(d)}">
-            <div class="pimg"><img fetchpriority="${rank[i]===1?'high':'low'}" decoding="async" src="character_images/thumbs/${d.official}.webp" alt="" width="300" height="420"></div>
+            <div class="pimg"><img fetchpriority="${rank[i]===1?'high':'low'}" decoding="async" src="character_images/thumbs/${d.official}.webp" alt=""></div>
             <div class="step">${rank[i]}</div>
             <div class="plate"><b>${esc(d.display)}</b><i>${esc(cat.f(d))}</i>${cat.x(d)?`<u>${esc(cat.x(d))}</u>`:""}</div>
           </a>`).join("")}
@@ -1219,12 +1270,13 @@ function renderHighlights(){
   const tallest=byStature.filter(d=>d.stature_cm===byStature[0].stature_cm);
   const bust=[...DATA].sort((a,b)=>(b.diff_cm??-99)-(a.diff_cm??-99));
   const hour=[...DATA].sort((a,b)=>(a.whr??9)-(b.whr??9));
-  const outfits=DATA.reduce((n,d)=>n+1+(d.skin?1:0)+d.outfits.length,0);
+  const outfits=DATA.reduce((n,d)=>n+d.outfits.length,0);
+  const outfitChars=DATA.filter(d=>d.outfits.length).length;
   const items=[
     {k:t('tally'),v:tallest.map(d=>d.display).join(' · '),n:`${fmt(tallest[0].stature_cm,0)} cm · ${tallest[0].ftin_stature}`,bar:100},
     {k:t('bustiest'),v:bust[0].display,n:`${fmt(bust[0].diff_cm,1)} cm diff · UK ${bust[0].uk}`,bar:pct(bust[0].p_bust_cm)},
     {k:t('hourglassTop'),v:hour[0].display,n:`WHR ${hour[0].whr.toFixed(3)}`,bar:100-100*hour[0].p_whr},
-    {k:t('outfitsN'),v:`${outfits}`,n:`${DATA.length} agents`,bar:Math.round(outfits/ (DATA.length*1.6) *100)},
+    {k:t('outfitsN'),v:`${outfits}`,n:`${outfitChars} ${t('entries')}`,bar:Math.round(outfits/(DATA.length*.6)*100)},
   ];
   $("#highlights").innerHTML=items.map(x=>`<div class="hl"><div class="k">${esc(x.k)}</div><div class="v">${esc(x.v)}</div><div class="n">${esc(x.n)}</div><div class="bar"><i style="width:${Math.max(4,Math.min(100,x.bar))}%;background:var(--acid)"></i></div></div>`).join('');
 }
@@ -1251,8 +1303,10 @@ function issueURL(d){
 function openModal(slug, opts){
   const d = bySlug.get(slug);
   if(!d) return;
-  const first = !mctx.slug;
-  mctx = Object.assign({slug, src:state.art, skin:false, more:null}, first?{}:mctx, opts||{});
+  const wasOpen = $("#overlay").classList.contains("open");
+  if(!wasOpen) lastFocus = document.activeElement;
+  const same = mctx.slug === slug;
+  mctx = Object.assign({slug, src:state.art, skin:false, more:null}, same?mctx:{}, opts||{});
   const hasSkin = !!d.skin;
   const outfits = d.outfits || [];
   const moreOn = (mctx.more!=null && outfits[mctx.more]) ? outfits[mctx.more] : null;
@@ -1398,7 +1452,7 @@ function openModal(slug, opts){
         </div>
       </div>
     </div>`;
-  if(first){ lastFocus = document.activeElement; }
+  if(!wasOpen) lastFocus = document.activeElement;
   $("#overlay").classList.add("open");
   $("#overlay").setAttribute("aria-hidden","false");
   document.body.classList.add("modal-open");
@@ -1467,13 +1521,13 @@ function openCompare(){
   const list = state.compare.map(s=>bySlug.get(s)).filter(Boolean);
   if(list.length<2){ toast(t('pickTwo')); return; }
   const rows = [
-    [t('stature'), d=>`${fmt(d.stature_cm,0)} cm${d.stature_basis==='head'?` (${fmt(d.cm,0)} ${t('charted')})`:''}`],
-    [t('height'), d=>`${fmt(d.cm,0)} cm / ${d.ftin}`],
-    [t('bust'), d=>`${fmt(d.bust_cm)} cm / ${fmt(d.bust_in)} in`],
-    [t('underbust'), d=>`${fmt(d.band_cm)} cm / ${fmt(d.band_in)} in`],
-    [t('waist'), d=>`${fmt(d.waist_cm)} cm / ${fmt(d.waist_in)} in`],
-    [t('hip'), d=>`${fmt(d.hip_cm)} cm / ${fmt(d.hip_in)} in`],
-    [t('thigh'), d=>d.thigh_cm!=null?`${fmt(d.thigh_cm)} cm / ${fmt(d.thigh_in)} in`:'—'],
+    [t('stature'), d=>`${fmt(d.stature_cm,0)} cm${d.stature_basis==='head'?`\n(${fmt(d.cm,0)} ${t('charted')})`:''}`],
+    [t('height'), d=>`${fmt(d.cm,0)} cm\n${d.ftin}`],
+    [t('bust'), d=>`${fmt(d.bust_cm)} cm\n${fmt(d.bust_in)} in`],
+    [t('underbust'), d=>`${fmt(d.band_cm)} cm\n${fmt(d.band_in)} in`],
+    [t('waist'), d=>`${fmt(d.waist_cm)} cm\n${fmt(d.waist_in)} in`],
+    [t('hip'), d=>`${fmt(d.hip_cm)} cm\n${fmt(d.hip_in)} in`],
+    [t('thigh'), d=>d.thigh_cm!=null?`${fmt(d.thigh_cm)} cm\n${fmt(d.thigh_in)} in`:'—'],
     [t('bustDiff'), d=>`${fmt(d.diff_cm)} cm`],
     ['UK / US / EU', d=>`${d.uk} / ${d.us} / ${d.eu}`],
     ['Waist / hip', d=>fmtPct(d.whr)],
@@ -1491,13 +1545,14 @@ function openCompare(){
       <tbody>${rows.map(([label,fn])=>`<tr><th scope="row">${esc(label)}</th>${list.map(d=>`<td>${esc(fn(d))}</td>`).join('')}</tr>`).join('')}
       <tr><th scope="row">${esc(t('figureRead'))}</th>${list.map(d=>`<td class="cmdesc">${esc(d.read||'')}</td>`).join('')}</tr>
       </tbody></table></div>`;
+  const wasOpen = $("#overlay").classList.contains("open");
+  if(!wasOpen) lastFocus = document.activeElement;
   $("#overlay").classList.add("open");
   $("#overlay").setAttribute("aria-hidden","false");
   document.body.classList.add("modal-open");
   const main=$("#main"); if(main && 'inert' in main) main.inert=true;
   $("#closeModal").focus();
   $("#closeModal").addEventListener("click", closeModal);
-  lastFocus = lastFocus || document.activeElement;
 }
 
 /* ---------------- toast + share ---------------- */
@@ -1635,7 +1690,7 @@ function fillPlot(){
   $("#plotY").innerHTML = PLOT_METRICS.map(m=>`<option value="${m.k}">${esc(m.label)}</option>`).join("");
   $("#plotY").value = state.plotY;
 }
-function applyLang(lang){
+function applyLang(lang, doRender=true){
   state.lang = I18N[lang]? lang : 'en';
   document.documentElement.lang = state.lang;
   $$('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(I18N[state.lang][k]){ el.innerHTML = t(k); } });
@@ -1643,8 +1698,11 @@ function applyLang(lang){
   $("#fSort").setAttribute('aria-label', t('sort'));
   fillSort(); fillPlot();
   try{ localStorage.setItem("zzz-lang", state.lang); }catch(e){}
-  renderPodium._sig = null;
-  render();
+  if(doRender){
+    renderPodium._sig = null;
+    render();
+    if($("#overlay").classList.contains("open") && mctx.slug) openModal(mctx.slug);
+  }
 }
 $("#lang").addEventListener("change", e=>applyLang(e.target.value));
 function applyTheme(theme){
@@ -1683,7 +1741,6 @@ document.addEventListener("keydown", e=>{
   if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
   else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
 });
-document.addEventListener("click", ()=>setFilters(false));
 window.addEventListener("popstate", applyHashState);
 window.addEventListener("hashchange", applyHashState);
 
@@ -1708,10 +1765,9 @@ $("#podstrip").addEventListener("click", e=>{
   if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
   e.preventDefault(); openModal(a.dataset.slug);
 });
-$("#page-not-used");
 $("#tbl tbody").addEventListener("click", e=>{
   const a = e.target.closest("a.tname");
-  if(a && !(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)){ e.preventDefault(); openModal(a.getAttribute("href").split('/').pop().replace('.html','')); return; }
+  if(a && !(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)){ e.preventDefault(); openModal(a.dataset.slug); return; }
   const tr = e.target.closest("tr[data-name]");
   if(!tr) return;
   const d = byName.get(tr.dataset.name);
@@ -1729,6 +1785,18 @@ $("#plot").addEventListener("keydown", e=>{
 
 /* ---------------- boot ---------------- */
 function debounce(fn, ms){ let id; return (...a)=>{ clearTimeout(id); id=setTimeout(()=>fn(...a), ms); }; }
+function syncControls(){
+  $("#q").value = state.q;
+  $$("#fPanel .chipbtn").forEach(b=> b.setAttribute("aria-pressed", b.dataset.v===state[b.dataset.g]?"true":"false"));
+  $("#uCm").setAttribute("aria-pressed", state.unit==="cm"?"true":"false");
+  $("#uIn").setAttribute("aria-pressed", state.unit==="in"?"true":"false");
+  $("#aSheet").setAttribute("aria-pressed", state.art==="sheet"?"true":"false");
+  $("#aOff").setAttribute("aria-pressed", state.art==="official"?"true":"false");
+  $("#lang").value = state.lang;
+  $("#theme").value = document.documentElement.dataset.theme==="light" ? "light" : "dark";
+  $("#fSort").value = state.sort;
+  $("#plotY").value = state.plotY;
+}
 function applyHashState(){
   const h = readHash();
   state.q = h.q ?? "";
@@ -1739,20 +1807,16 @@ function applyHashState(){
   state.height = h.height ?? "all";
   state.sort = SORTS[h.sort] ? h.sort : "bust-desc";
   state.view = ["cards","table","plot"].includes(h.view) ? h.view : "cards";
-  state.unit = (h.unit==="in")? "in":"cm";
-  state.art = (h.art==="sheet")? "sheet":"official";
+  state.unit = h.unit ? (h.unit==="in"?"in":"cm") : state.unit;
+  state.art = h.art ? (h.art==="sheet"?"sheet":"official") : state.art;
+  state.lang = (h.lang && I18N[h.lang]) ? h.lang : state.lang;
   state.rng = h.rng || {};
-  state.compare = Array.isArray(h.compare)? h.compare.slice(0,4):[];
-  state.plotY = PLOT_METRICS.some(m=>m.k===h.plotY)? h.plotY : "whr";
-  if(h.lang && I18N[h.lang]) state.lang = h.lang;
-  $("#q").value = state.q;
-  $$("#fPanel .chipbtn").forEach(b=> b.setAttribute("aria-pressed", b.dataset.v===state[b.dataset.g]?"true":"false"));
-  $("#uCm").setAttribute("aria-pressed", state.unit==="cm"?"true":"false");
-  $("#uIn").setAttribute("aria-pressed", state.unit==="in"?"true":"false");
-  $("#aSheet").setAttribute("aria-pressed", state.art==="sheet"?"true":"false");
-  $("#aOff").setAttribute("aria-pressed", state.art==="official"?"true":"false");
-  $("#lang").value = state.lang;
-  renderFilterPanel(); fillSort(); fillPlot();
+  state.compare = Array.isArray(h.compare) ? h.compare.slice(0,4) : [];
+  state.plotY = PLOT_METRICS.some(m=>m.k===h.plotY) ? h.plotY : state.plotY;
+  if(h.theme) applyTheme(h.theme);
+  applyLang(state.lang, false);
+  syncControls();
+  renderFilterPanel();
   render(true);
   if(h.p && bySlug.has(h.p)) openModal(h.p, {src:state.art});
   else if($("#overlay").classList.contains("open")) closeModal();
@@ -1765,18 +1829,10 @@ function applyHashState(){
     const l=localStorage.getItem("zzz-lang"); if(l && I18N[l]) state.lang=l;
     const th=localStorage.getItem("zzz-theme"); if(th==="light") document.documentElement.dataset.theme="light";
   }catch(e){}
-  Object.assign(state, readHash());
-  $("#uCm").setAttribute("aria-pressed", state.unit==="cm"?"true":"false");
-  $("#uIn").setAttribute("aria-pressed", state.unit==="in"?"true":"false");
-  $("#aSheet").setAttribute("aria-pressed", state.art==="sheet"?"true":"false");
-  $("#aOff").setAttribute("aria-pressed", state.art==="official"?"true":"false");
-  $("#lang").value = state.lang;
-  $("#theme").value = document.documentElement.dataset.theme==="light" ? "light":"dark";
   $("#agentCount").textContent = DATA.length;
-  fillPlot(); renderFilterPanel(); fillSort();
-  applyLang(state.lang);
-  const h = readHash();
-  if(h.p && bySlug.has(h.p)) openModal(h.p);
+  applyLang(state.lang, false);
+  syncControls();
+  applyHashState();
   if('serviceWorker' in navigator && location.protocol.startsWith('http')){
     navigator.serviceWorker.register('sw.js').catch(()=>{});
   }

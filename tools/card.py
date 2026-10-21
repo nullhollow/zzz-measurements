@@ -69,7 +69,7 @@ def values(d, unit='cm', lang='en'):
     dx = ''
     if d.get('dx') is not None:
         dx = f' style="--dx:{d["dx"]}%"'
-    suffix = '' if unit == 'cm' else '_in'
+    suffix = '_cm' if unit == 'cm' else '_in'
     val = lambda k: fmt(d[k + suffix])  # noqa: E731
     return {
         'name': esc(d['name']),

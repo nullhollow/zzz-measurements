@@ -284,7 +284,7 @@ def bake(params_file=None):
         out[slug] = r
     json.dump(out, open(ROOT / 'tools/visual-centers.json', 'w'), indent=1)
     for rec in data:
-        for r in [rec] + [rec[k] for k in ('std', 'skin') if k in rec]:
+        for r in [rec] + ([rec['skin']] if rec.get('skin') else []):
             r['dx'] = out[r['official']]['dx_final']
     json.dump(data, open(ROOT / 'tools/data.json', 'w'), indent=1)
     print(f"baked {len(out)} offsets with method={P['method']} -> tools/visual-centers.json, tools/data.json")
@@ -295,7 +295,7 @@ def bake(params_file=None):
 
 def main():
     data = json.load(open(ROOT / 'tools/data.json'))
-    subs = [s for d in data for s in (d.get('std'), d.get('skin')) if s]
+    subs = [d['skin'] for d in data if d.get('skin')]
     seen, masks, ref = set(), {}, {}
     for rec in data + subs:
         slug = rec['official']

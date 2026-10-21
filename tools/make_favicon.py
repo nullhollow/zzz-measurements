@@ -50,6 +50,20 @@ def render(size, ss=8):
     return tile.resize((size, size), Image.LANCZOS)
 
 
+def render_maskable(size=512, ss=4):
+    """Maskable icon: full-bleed acid field, Z kept inside the 80% safe circle."""
+    S = size * ss
+    tile = Image.new('RGBA', (S, S), ACID)
+    d = ImageDraw.Draw(tile)
+    k = S / U
+    # scale the Z about the tile centre so it survives a circular crop
+    cx = cy = U / 2
+    s = 0.58
+    pts = [((x - cx) * s + cx, (y - cy) * s + cy) for x, y in Z]
+    d.polygon([(x * k, y * k) for x, y in pts], fill=INK)
+    return tile.resize((size, size), Image.LANCZOS)
+
+
 def main():
     open(os.path.join(ROOT, 'favicon.svg'), 'w').write(SVG)
     base = render(256)
@@ -57,7 +71,8 @@ def main():
               sizes=[(16, 16), (32, 32), (48, 48), (64, 64)])
     render(512).save(os.path.join(ROOT, 'icon-512.png'))          # manifest / apple-touch icon
     render(192).save(os.path.join(ROOT, 'icon-192.png'))
-    print('wrote favicon.svg, favicon.ico, icon-192.png, icon-512.png',
+    render_maskable(512).save(os.path.join(ROOT, 'icon-maskable-512.png'))
+    print('wrote favicon.svg, favicon.ico, icon-192.png, icon-512.png, icon-maskable-512.png',
           f"({os.path.getsize(os.path.join(ROOT, 'favicon.svg'))} B / "
           f"{os.path.getsize(os.path.join(ROOT, 'favicon.ico'))} B / "
           f"{os.path.getsize(os.path.join(ROOT, 'icon-512.png'))} B)")

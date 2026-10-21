@@ -1,58 +1,60 @@
 # Deploying ZZZ Female Measurements
 
-The whole site is packed into **`docs/`** — a self-contained folder with the page, the WebP
-artwork, the bundled fonts, icons, the social card and the crawler files. Nothing else in this
-repository is needed to host it.
+Everything the site needs lives in **`docs/`** — the interactive page, 48 static
+character pages, the methodology/FAQ page, the dataset exports, WebP artwork, bundled
+fonts, icons, the service worker and the crawler files. Nothing else in the
+repository is served.
 
 ```
 docs/
-  index.html              the site (203 kB, includes all 48 entries inline)
-  og.png                 1200×630 social share card
-  favicon.svg .ico       tab icon (SVG + multi-size ICO)
-  icon-192.png 512.png   manifest / home-screen icons
-  manifest.webmanifest   PWA metadata
-  robots.txt  sitemap.xml  .nojekyll    crawler + Pages files
-  404.html               styled not-found page
-  fonts/                 16 woff2 + fonts.css (Anton, Chakra Petch, Inter)
-  images/                48 sheet crops (WebP)
-  character_images/      52 official renders + 24 outfit renders (WebP)
+  index.html               interactive chart (48 cards pre-rendered)
+  methodology.html         method, classes, confidence, FAQ
+  characters/*.html        48 crawlable profiles
+  data/                    measurements.json · measurements.csv · schema.json
+  offline.html             service-worker fallback
+  sw.js                    versioned cache
+  manifest.webmanifest     PWA metadata (incl. maskable icon)
+  404.html                 absolute-base not-found page
+  robots.txt sitemap.xml .nojekyll
+  og.png favicon.* icon-*.png
+  fonts/                   16 woff2 + fonts.css (local, no CDN)
+  images/                  48 sheet crops
+  character_images/        52 portraits + 24 outfit renders + thumbs/
 ```
 
-Total ≈ **7.6 MB**, 153 files. No CDN calls: every font and image is local.
+≈ **260 files / 10.7 MB**.
 
-## 1. Set your URL (once)
+## 1. Set the URL
 
-`canonical`, `og:url`, `og:image`, `robots.txt` and `sitemap.xml` need the final address.
-Re-pack with your real Pages URL:
+`canonical`, Open Graph, the sitemap and the service worker all use the deployed
+address. Re-pack with the real one (the default is the current Pages URL):
 
 ```bash
-python3 tools/pack_site.py            # uses https://nullhollow.github.io/zzz-measurements/ by default
+python3 tools/pack_site.py --site-url https://<account>.github.io/<repo>/
 ```
-
-Different repo name? `python3 tools/pack_site.py --site-url https://nullhollow.github.io/<repo>/` and re-commit `docs/`.
 
 ## 2. Publish on GitHub Pages
 
-**Auth on this machine:** there is no SSH key, so `git@github.com:...` remotes are refused. The
-`gh` CLI is installed and authenticated (currently as **`yangandi114`**, token scopes include
-`repo`), and `gh auth setup-git` has wired that token into git for HTTPS. Keep the remote on
-HTTPS:
+**Auth on this machine:** there is no SSH key, so `git@github.com:...` remotes are
+refused. The `gh` CLI is installed and authenticated (currently as **`yangandi114`**,
+token scopes include `repo`), and `gh auth setup-git` has wired that token into git
+for HTTPS. Keep the remote on HTTPS:
 
 ```bash
 git remote set-url origin https://github.com/<account>/zzz-measurements.git
 ```
 
-Create the repo and push in one step (uses the account `gh` is logged into):
+Create the repo and push in one step:
 
 ```bash
 gh repo create zzz-measurements --public --source=. --push
 ```
 
-If the site should live under a **different account** than the one `gh` is logged into
-(for example `nullhollow`), either switch accounts first:
+If the site should live under a **different account** than the one `gh` is logged
+into (for example `nullhollow`), either switch accounts first:
 
 ```bash
-gh auth login                    # choose the account that owns the site
+gh auth login
 gh repo create zzz-measurements --public --source=. --push
 ```
 
@@ -65,46 +67,79 @@ git push -u origin main
 ```
 
 Then on GitHub: **Settings → Pages → Build and deployment → Deploy from a branch →
-`main` / `docs`**. The site appears at `https://nullhollow.github.io/zzz-measurements/` (or the
-account you used) within a minute.
+`main` / `docs`**. The site appears within a minute.
 
-## 3. Re-packing after a data or design change
-
-```bash
-python3 tools/pack_site.py            # uses https://nullhollow.github.io/zzz-measurements/ by default
-```
-
-That runs the full pipeline (`build_data.py` → `describe.py` → `build_html.py`), refreshes
-`index.html`, and re-copies every asset into `docs/`. Add `--no-rebuild` to pack the existing
-`index.html` as-is.
-
-Rebuild the icons or the social card after a palette change:
+## 3. Rebuild and validate
 
 ```bash
-python3 tools/make_favicon.py     # favicon.svg, favicon.ico, icon-192/512.png
-python3 tools/make_og.py          # og.png from tools/og.html
+python3 tools/pack_site.py            # full pipeline + docs/
+python3 tools/validate.py             # data, assets, links, JSON-LD, crawler files
 ```
+
+`pack_site.py` runs, in order:
+
+1. `build_data.py` — `measurements.csv` → `tools/data.json`
+2. `describe.py` — generated profile text (cm + in)
+3. `build_html.py` — `index.html` with static cards and JSON-LD
+4. `build_pages.py` — character pages, methodology, exports, offline page
+5. copies assets, writes `sw.js` / sitemap / manifest / 404, checks every local link
+
+Useful flags: `--no-rebuild` packs the current `index.html`; `--out DIR` writes
+somewhere else.
+
+Asset-only steps (outputs are committed):
+
+```bash
+python3 tools/make_thumbs.py      # 640 px thumbs used by cards/podium/tables
+python3 tools/make_favicon.py     # SVG, ICO, PWA + maskable icons
+python3 tools/make_og.py          # 1200×630 social card (needs Chrome)
+```
+
+## 4. CI
+
+`.github/workflows/ci.yml` runs on every push/PR:
+
+* installs `requirements.txt`
+* builds and packs the site
+* runs `tools/validate.py`
+* fails if the rebuild differs from the committed `docs/`, `index.html` or
+  `tools/data.json` (reproducibility check)
+* uploads `docs/` as an artifact
+
+So: build locally, commit `docs/`, push. If CI reports a diff, run the same
+`pack_site.py --site-url ...` command and commit the result.
 
 ## What ships and what does not
 
 | shipped | left out (dev only) |
 |---|---|
-| `index.html`, all WebP artwork, fonts, icons, OG card | `tools/` (build scripts, data.json, template), `measurements.csv` |
-| `robots.txt`, `sitemap.xml`, `manifest.webmanifest`, `404.html`, `.nojekyll` | `zzz3.2b.webp` (4.3 MB source contact sheet), `bug/` screenshots |
-| | `visual-center-demo.html` + `visual-masks.js` (the alignment lab), `ui-proposal.html` (style tile) |
+| `index.html`, character pages, methodology, data exports, service worker | `tools/` (pipeline, data.json, templates) |
+| all WebP artwork + thumbs, fonts, icons, OG card | `measurements.csv` (source sheet) |
+| `robots.txt`, `sitemap.xml`, `manifest.webmanifest`, `404.html`, `offline.html`, `.nojekyll` | `zzz3.2b.webp` (4.3 MB source contact sheet), `bug/` |
+| | `visual-center-demo.html` + `visual-masks.js` (alignment lab), `ui-proposal.html` |
 
-To publish the alignment lab alongside the site as well, copy it in and re-pack:
+`pack_site.py` deletes everything else in `docs/` on purpose, but preserves
+search-console verification files (`google*.html`, `BingSiteAuth.xml`, `yandex_*.html`).
 
-```bash
-cp visual-center-demo.html visual-masks.js docs/
-```
+## SEO & sharing
 
-## SEO in the page
+* per-character `<title>`, description, canonical and Open Graph tags
+* JSON-LD: `WebSite`, `WebPage`, `Dataset` (with `dateModified`, `distribution`,
+  `measurementTechnique`, rights), `ItemList`, `ProfilePage` + `Person`,
+  `BreadcrumbList`, `FAQPage`
+* 48 static pages in the sitemap, plus the chart and methodology page
+* a `<noscript>` table and 48 pre-rendered cards, so crawlers and no-JS visitors get
+  every measurement
+* local fonts, 640 px thumbs for first paint, full 1024 px art only in the detail
+  view, one `fetchpriority="high"` podium image, lazy loading below the fold
+* shareable URL state (filters, sort, view, unit, comparison, open character)
 
-* `<title>ZZZ Female Measurements</title>`, meta description, keywords, author, robots
-* canonical URL, Open Graph (`og:image` 1200×630) and Twitter `summary_large_image`
-* JSON-LD: `WebSite` + `Dataset` (48 characters, variableMeasured list) + `ItemList` of the roster
-* an `<h2>` naming "48 female agents" and a `<noscript>` fallback that renders the whole roster
-  as a plain table, so crawlers and no-JS visitors still get every measurement
-* local fonts, WebP artwork capped at 1024 px, lazy loading for the grid, `fetchpriority="high"`
-  on the podium renders
+## Troubleshooting
+
+| symptom | cause / fix |
+|---|---|
+| `missing artwork` from `build_html.py` | run `python3 tools/make_thumbs.py`; check `character_images/` |
+| `broken local reference` | a page links to a file the pack does not copy; fix the source, not `docs/` |
+| CI reproducibility diff | `docs/` was not rebuilt after a data/template change |
+| 404 assets break on nested URLs | `404.html` must keep its `<base href="...">` |
+| pages show old copy | GitHub Pages caches for ~10 min; hard-refresh or check the Actions run |

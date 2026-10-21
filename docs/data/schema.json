@@ -1,0 +1,256 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://nullhollow.github.io/zzz-measurements/data/schema.json",
+ "title": "ZZZ Female Measurements dataset",
+ "description": "Measurements, proportions and classification for the female Zenless Zone Zero roster.",
+ "type": "object",
+ "required": [
+  "meta",
+  "characters"
+ ],
+ "properties": {
+  "meta": {
+   "type": "object",
+   "required": [
+    "schema_version",
+    "data_updated",
+    "count"
+   ],
+   "properties": {
+    "schema_version": {
+     "type": "integer"
+    },
+    "data_updated": {
+     "type": "string",
+     "format": "date"
+    },
+    "count": {
+     "type": "integer",
+     "minimum": 1
+    },
+    "source": {
+     "type": "string"
+    },
+    "rights": {
+     "type": "string"
+    },
+    "fields": {
+     "type": "object"
+    }
+   }
+  },
+  "characters": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "required": [
+     "slug",
+     "display",
+     "height_cm",
+     "stature_cm",
+     "bust_cm",
+     "waist_cm",
+     "hip_cm",
+     "confidence"
+    ],
+    "properties": {
+     "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+     },
+     "name": {
+      "type": "string"
+     },
+     "display": {
+      "type": "string"
+     },
+     "aliases": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "height_cm": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "stature_cm": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "stature_basis": {
+      "enum": [
+       "charted",
+       "head"
+      ]
+     },
+     "bust_cm": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "underbust_cm": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "waist_cm": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "hip_cm": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "thigh_cm": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "bust_in": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "underbust_in": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "waist_in": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "hip_in": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "thigh_in": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "bust_diff_cm": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "bust_diff_in": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "uk": {
+      "type": "string"
+     },
+     "us": {
+      "type": "string"
+     },
+     "eu": {
+      "type": "string"
+     },
+     "ratios": {
+      "type": "object",
+      "additionalProperties": {
+       "type": [
+        "number",
+        "null"
+       ]
+      }
+     },
+     "percentiles": {
+      "type": "object",
+      "additionalProperties": {
+       "type": [
+        "number",
+        "null"
+       ]
+      }
+     },
+     "classes": {
+      "type": "object",
+      "properties": {
+       "height": {
+        "enum": [
+         "Petite",
+         "Mid",
+         "Tall"
+        ]
+       },
+       "shape": {
+        "enum": [
+         "Hourglass",
+         "Balanced",
+         "Straight"
+        ]
+       },
+       "build": {
+        "enum": [
+         "top",
+         "bottom",
+         "even"
+        ]
+       },
+       "thigh_hand_pinned": {
+        "type": "boolean"
+       }
+      }
+     },
+     "confidence": {
+      "enum": [
+       "charted",
+       "estimated",
+       "partial"
+      ]
+     },
+     "confidence_note": {
+      "type": "string"
+     },
+     "notes": {
+      "type": "string"
+     },
+     "source_page": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "profile": {
+      "type": "string",
+      "format": "uri"
+     },
+     "measured_outfit": {
+      "type": [
+       "object",
+       "null"
+      ]
+     },
+     "art_only_outfits": {
+      "type": "array"
+     }
+    }
+   }
+  }
+ }
+}

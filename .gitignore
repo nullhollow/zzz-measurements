@@ -9,3 +9,8 @@ __pycache__/
 # temporary renders used while tuning
 /tmp/
 /*.log
+
+# local tooling
+.venv/
+node_modules/
+.pytest_cache/

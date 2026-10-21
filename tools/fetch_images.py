@@ -3,19 +3,19 @@
 Source: https://zenless-zone-zero.fandom.com (images are fair-use, (c) HoYoverse).
 One PNG per measurements.csv entry (52), named after the character (slug of display name).
 """
-import json, sys, os
+import json, sys, os, time, urllib.parse, urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from optimize_images import convert as _c
 def convert_to_webp(p):
     try: return _c(p)[0]
-    except Exception as e: print('  webp conversion failed:', e); return None, time, urllib.parse, urllib.request
+    except Exception as e: print('  webp conversion failed:', e); return None
 from io import BytesIO
 from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'character_images'
-OUT.mkdir(exist_ok=True)
+OUT.mkdir(parents=True, exist_ok=True)
 
 WIKI = 'https://zenless-zone-zero.fandom.com'
 UA = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) zzz-fan-dashboard/1.0 (local archive)'}

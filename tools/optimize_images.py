@@ -74,8 +74,12 @@ def main():
         for f in os.listdir(d) if os.path.isdir(d) else []:
             if f.lower().endswith('.webp'):
                 out += os.path.getsize(os.path.join(d, f))
-    print(f'converted {done}, skipped {skipped} | webp total {out/1048576:.1f} MB '
-          f'({100*(1-out/before):.1f}% smaller than the PNGs)')
+    if before:
+        print(f'converted {done}, skipped {skipped} | webp total {out/1048576:.1f} MB '
+              f'({100*(1-out/before):.1f}% smaller than the PNGs)')
+    else:
+        print(f'converted {done}, skipped {skipped} | webp total {out/1048576:.1f} MB '
+              f'(no source PNGs on disk, nothing to compare)')
     if PRUNE:
         removed = kept = 0
         for p in pngs:
