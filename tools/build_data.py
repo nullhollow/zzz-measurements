@@ -79,8 +79,12 @@ for row in rows:
         diff_in=num(row[13]), diff_cm=num(row[14]),   # diff_in kept below: exact conversion from cm
         uk=row[15], us=row[16], eu=row[17],
         notes=row[22].strip() if len(row) > 22 else '',
+        # stature that excludes an appendage (Miyabi's ears) when the chart value counts it;
+        # drives the profile text and the height class, never the measurement columns
+        cm_eff=num(row[23]) if len(row) > 23 and row[23].strip() else None,
     )
     d['ftin'] = ftin(d['cm'])
+    d['ftin_eff'] = ftin(d['cm_eff'])
     # the sheet's own diff columns are whole-number rounded (Velina 26 cm vs 25.5 real);
     # recompute from bust - under-bust so the value keeps its 1 dp precision
     d['diff_in_csv'], d['diff_cm_csv'] = d['diff_in'], d['diff_cm']
@@ -178,7 +182,7 @@ def level(p, lo=0.33, hi=0.66):
 
 def add_groups(d):
     d['cup_group'] = cup_group(d['diff_in'])
-    d['height_group'] = height_group(d['cm'])
+    d['height_group'] = height_group(d['cm_eff'] or d['cm'])
     d['bust_level'] = level(d['p_bust_cm'])       # raw bust cm terciles
     d['waist_level'] = level(d['p_waist_cm'])     # raw waist cm terciles
     d['hip_level'] = level(d['p_hip_cm'])         # raw hip cm terciles

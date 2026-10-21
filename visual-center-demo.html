@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visual-centre lab · tune every parameter</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{--acid:#D8FA00;--acid-deep:#C6E800;--signal:#FF5E41;--holo:#29D4FF;--brass:#DB9A45;
+        --ink:#0B0B0C;--panel:#17171C;--line:#ffffff1f;--line2:#ffffff33;--dim:#9A9AA3;--dimmer:#6B6B74;
+        --disp:'Anton','Arial Narrow',sans-serif;--num:'Chakra Petch',ui-monospace,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:#fff;font:12.5px/1.5 Inter,-apple-system,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1560px;margin:0 auto;padding:18px 20px 70px}
+  h1{font-family:var(--disp);font-weight:400;font-size:28px;text-transform:uppercase;margin:0 0 4px}
+  h1 span{color:var(--acid)}
+  .lede{color:#c6c6cd;max-width:1000px}
+  .lede code{font-family:var(--num);color:var(--acid);background:#ffffff0f;padding:1px 5px}
+  .panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#18181d,#101014);
+         padding:12px 14px;margin:14px 0}
+  .row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+  .lab{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dimmer)}
+  .seg{display:inline-flex;border:1px solid var(--line2);border-radius:999px;overflow:hidden;flex-wrap:wrap}
+  .seg button{background:#0f0f12;border:0;color:#fff;padding:6px 12px;font:inherit;font-size:10px;
+    letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border-right:1px solid var(--line)}
+  .seg button:last-child{border-right:0}
+  .seg button.on{background:var(--acid);color:#0b0b0c;font-weight:800}
+  .btn{background:#0f0f12;border:1px solid var(--line2);border-radius:999px;color:#fff;padding:6px 13px;
+    font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+  .btn:hover{border-color:var(--acid);color:var(--acid)}
+  .status{margin-left:auto;font-size:11px;color:var(--dim)}
+  .status b{color:var(--acid)}
+  .groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px;margin-top:12px}
+  .group{border:1px solid var(--line);border-radius:12px;background:#111115;padding:10px 12px}
+  .group h3{margin:0 0 8px;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--acid)}
+  .p{display:flex;align-items:center;gap:8px;margin:5px 0}
+  .p label{flex:0 0 132px;font-size:10px;color:var(--dim);letter-spacing:.04em}
+  .p input[type=range]{flex:1;accent-color:var(--acid);min-width:60px}
+  .p b{flex:0 0 46px;text-align:right;font-family:var(--num);font-size:10.5px;color:var(--acid)}
+  .p select{flex:1;background:#0f0f12;border:1px solid var(--line2);border-radius:8px;color:#fff;
+    padding:3px 6px;font:inherit;font-size:10.5px}
+  .p input[type=checkbox]{accent-color:var(--acid);width:15px;height:15px}
+  .legend{display:flex;gap:13px;flex-wrap:wrap;font-size:10px;color:var(--dim);margin-top:8px}
+  .legend i{display:inline-block;width:15px;height:2px;vertical-align:middle;margin-right:5px}
+  textarea{width:100%;height:120px;background:#08080a;color:#b9f;border:1px solid var(--line);border-radius:10px;
+    font-family:var(--num);font-size:10.5px;padding:8px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:13px;margin-top:14px}
+  .cmp{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#18181d,#101014);padding:10px 11px 11px}
+  .cmp.sel{border-color:var(--acid)}
+  .cmp h4{margin:0 0 8px;font-family:var(--disp);font-weight:400;font-size:16px;text-transform:uppercase;
+    display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .cmp h4 em{font-family:var(--num);font-style:normal;font-size:10.5px;color:var(--acid)}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .tile{position:relative;height:280px;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    background:#0c0c10;background-image:radial-gradient(#ffffff10 1px,transparent 1.4px);background-size:7px 7px;cursor:pointer}
+  .holder{position:absolute;top:0;left:50%;height:100%;transform:translateX(calc(-50% + var(--dx,0%)))}
+  .holder img{display:block;width:100%;height:100%}
+  .ln{position:absolute;top:0;bottom:0;width:1px;pointer-events:none}
+  .ln.canvas{background:#ff5e4199;border-left:1px dashed #ff5e41}
+  .ln.bbox{background:#DB9A4599}
+  .ln.torso{background:var(--acid);width:2px;box-shadow:0 0 8px rgba(216,250,0,.55)}
+  .ln.sym{background:#29D4FF99}
+  .ln.den{background:#FF6FD899;width:1px}
+  .ln.manual{background:#fff;width:1px;opacity:.6}
+  .band{position:absolute;left:0;right:0;background:rgba(255,94,65,.10);
+    border-top:1px dashed rgba(255,94,65,.55);border-bottom:1px dashed rgba(255,94,65,.55);pointer-events:none}
+  .cap{display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--dimmer);padding:5px 2px 0}
+  .cap b{color:var(--acid);font-family:var(--num);letter-spacing:0}
+  table{width:100%;border-collapse:collapse;font-size:11px}
+  th,td{text-align:left;padding:4px 7px;border-top:1px solid var(--line)}
+  th{color:var(--dimmer);font-weight:500;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+  td.n{font-family:var(--num);font-weight:600}
+  td.pos{color:var(--signal)} td.neg{color:var(--holo)}
+  .scroll{max-height:430px;overflow:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Visual-centre <span>lab</span></h1>
+  <p class="lede">Every parameter of the alignment pipeline, live. The page runs on <b>packed alpha masks</b>
+    (<code>visual-masks.js</code>) so it recomputes instantly and works straight from <code>file://</code> — no canvas,
+    no server. Pick a preset or dial the parameters, then hit <b>copy settings</b> and tell me the JSON you want.
+    Final shift is applied as <code>translateX(calc(-50% + dx%))</code>, a share of each image's own width.</p>
+
+  <div class="panel">
+    <div class="row">
+      <span class="lab">presets</span>
+      <span class="seg" id="presets"></span>
+      <button class="btn" id="reset">reset</button>
+      <button class="btn" id="copy">copy settings</button>
+      <span class="lab" style="margin-left:8px">grid</span>
+      <span class="seg" id="filt">
+        <button data-f="0" class="on">all</button><button data-f="2">|dx|≥2%</button><button data-f="5">|dx|≥5%</button><button data-f="-1">resort ⟳</button>
+      </span>
+      <span class="status" id="status"></span>
+    </div>
+    <div class="groups" id="params"></div>
+    <div class="legend">
+      <span><i style="background:#ff5e41"></i>canvas centre</span>
+      <span><i style="background:#DB9A45"></i>alpha-bbox centre</span>
+      <span><i style="background:#D8FA00"></i>torso axis</span>
+      <span><i style="background:#29D4FF"></i>symmetry axis</span>
+      <span><i style="background:#FF6FD8"></i>density peak (blurred)</span>
+      <span><i style="background:rgba(255,94,65,.5)"></i>rows used (band)</span>
+      <span>click a tile to select that character → nudge it in <b>Final</b></span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="row" style="margin-bottom:6px">
+      <span class="lab">settings — paste this back to me</span>
+      <button class="btn" id="apply">apply pasted</button>
+    </div>
+    <textarea id="settings" spellcheck="false"></textarea>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="panel">
+    <div class="lab" style="margin-bottom:6px">results — dx as % of image width (positive = shift right)</div>
+    <div class="scroll"><table id="tbl">
+      <thead><tr><th>character</th><th>mask</th><th>bbox</th><th>torso</th><th>sym</th><th>rows</th>
+        <th>dx bbox</th><th>dx torso</th><th>dx sym</th><th>final dx</th><th>manual</th></tr></thead>
+      <tbody></tbody></table></div>
+  </div>
+</div>
+
+<script src="visual-masks.js"></script>
+<script src="visual-centers.js"></script>
+<script>
+/* ==================================================================
+   alignment pipeline — mirrors tools/visual_center.py
+   ================================================================== */
+const DEFAULTS = {
+  alphaSil:24, alphaCore:160, bboxMode:"silhouette", bboxTrim:0, sparseCols:0,
+  bandTop:22, bandBottom:55, window:76, minRun:2, maxRun:100, gapFrac:1.2, pick:"widest",
+  rowWeight:"uniform", rowCenter:38, rowSigma:12, agg:"median", trim:8,
+  symRadius:8, symProfile:"mass", symVert:"weights", symWidth:50, symStep:0.5, symSubpixel:true,
+  denSigma:12, denSource:"alpha", denRows:"all", denMode:"column", denPow:6, denBlend:0,
+  method:"torso", blend:0, bias:0, biasScale:1, clamp:40,
+  manualNudge:0
+};
+const SPEC = [
+  ["Mask & bounds", [
+    ["alphaSil","silhouette α",0,200,4],
+    ["alphaCore","solid-body α",0,255,4],
+    ["bboxMode","bbox source",null,null,null,["silhouette","core"]],
+    ["bboxTrim","bbox trim each side %",0,25,0.5],
+    ["sparseCols","drop sparse columns %",0,30,0.5]
+  ]],
+  ["Torso band & rows", [
+    ["bandTop","band top % of figure",0,60,1],
+    ["bandBottom","band bottom %",20,95,1],
+    ["window","central window %",40,100,2],
+    ["minRun","min run width %",0,12,0.5],
+    ["maxRun","max run width %",20,100,5],
+    ["gapFrac","merge gaps ≤ %",0,5,0.1],
+    ["pick","row run pick",null,null,null,["widest","nearest"]]
+  ]],
+  ["Weighting & symmetry", [
+    ["rowWeight","row weighting",null,null,null,["uniform","width","mass","gaussian"]],
+    ["rowCenter","gaussian peak % of figure",5,90,1],
+    ["rowSigma","gaussian σ % of figure",2,45,1],
+    ["agg","aggregate rows",null,null,null,["median","mean"]],
+    ["trim","drop rows > % off axis",0,25,0.5],
+    ["symRadius","symmetry search ± %",0,25,0.5],
+    ["symProfile","symmetry profile",null,null,null,["mass","uniform"]],
+    ["symVert","symmetry vertical weighting",null,null,null,["weights","uniform"]],
+    ["symWidth","symmetry window ± %",5,100,5],
+    ["symStep","symmetry step px",0.25,2,0.25],
+    ["symSubpixel","sub-pixel refine",null,null,null,"bool"]
+  ]],
+  ["Gaussian density (densest part)", [
+    ["denSigma","blur σ (mask px)",1,40,1],
+    ["denSource","blur source",null,null,null,["alpha","core"]],
+    ["denRows","vertical extent",null,null,null,["all","band","gaussian"]],
+    ["denMode","centre readout",null,null,null,["column","point","weighted","centroid"]],
+    ["denPow","weighted exponent",1,20,1],
+    ["denBlend","mix into result %",0,100,5]
+  ]],
+  ["Final", [
+    ["method","method",null,null,null,["geometric","bbox","torso","sym","density","blend"]],
+    ["blend","torso → symmetry blend %",0,100,5],
+    ["bias","global dx bias %",-12,12,0.25],
+    ["biasScale","dx scale factor",0.4,1.6,0.05],
+    ["clamp","max |dx| %",5,60,1],
+    ["manualNudge","nudge selected image %",-25,25,0.5]
+  ]]
+];
+const PRESETS = {
+  "geometric":   {method:"geometric"},
+  "alpha bbox":  {method:"bbox"},
+  "torso axis":  {method:"torso", rowWeight:"uniform", trim:8, pick:"widest", bandTop:22, bandBottom:55, window:76},
+  "torso + symmetry": {method:"sym", rowWeight:"uniform", trim:8, symRadius:8},
+  "blend 50":    {method:"blend", blend:50},
+  "waist-weighted": {method:"torso", rowWeight:"gaussian", rowCenter:38, rowSigma:12, trim:8},
+  "hips-weighted":  {method:"torso", rowWeight:"gaussian", rowCenter:48, rowSigma:10, trim:8},
+  "chest-weighted": {method:"torso", rowWeight:"gaussian", rowCenter:28, rowSigma:10, trim:8},
+  "density blur":  {method:"density", denSigma:12, denSource:"alpha", denRows:"all", denMode:"column"},
+  "density σ24":   {method:"density", denSigma:24, denRows:"all", denMode:"column"},
+  "density band":  {method:"density", denSigma:12, denRows:"band", denMode:"column"}
+};
+
+const MASK = window.MASKS, N = Object.keys(MASK);
+let PARAMS = {...DEFAULTS}, MANUAL = {}, SELECTED = null, RES = {}, FILT = 0;
+const DEC = {};
+const $ = s => document.querySelector(s);
+
+function decode(slug){
+  if(DEC[slug]) return DEC[slug];
+  const m = MASK[slug], bin = atob(m.data), n = m.w*m.h, px = new Uint8Array(n);
+  for(let i=0,j=0;i<bin.length && j<n;i++){
+    const v = bin.charCodeAt(i);
+    px[j++] = (v>>4)*17;
+    if(j<n) px[j++] = (v&15)*17;
+  }
+  return DEC[slug] = {w:m.w, h:m.h, px};
+}
+function runsWithGap(row, gap){
+  const out=[]; let start=-1, prev=-2;
+  for(let x=0;x<row.length;x++){
+    if(!row[x]) continue;
+    if(start<0){ start=prev=x; continue; }
+    if(x-prev<=gap){ prev=x; continue; }
+    out.push([start,prev]); start=prev=x;
+  }
+  if(start>=0) out.push([start,prev]);
+  return out;
+}
+/* --- O(n) box filter; three passes per axis approximate a Gaussian of sigma --- */
+function box1d(src, dst, W, H, r, horiz){
+  const n = 2*r+1, inv = 1/n;
+  if(horiz){
+    for(let y=0;y<H;y++){
+      const o=y*W; let sum=0;
+      for(let i=-r;i<=r;i++) sum += src[o + Math.min(W-1, Math.max(0, i))];
+      for(let x=0;x<W;x++){
+        dst[o+x] = sum*inv;
+        sum += src[o + Math.min(W-1, x+r+1)] - src[o + Math.max(0, x-r)];
+      }
+    }
+  }else{
+    for(let x=0;x<W;x++){
+      let sum=0;
+      for(let i=-r;i<=r;i++) sum += src[Math.min(H-1, Math.max(0, i))*W + x];
+      for(let y=0;y<H;y++){
+        dst[y*W+x] = sum*inv;
+        sum += src[Math.min(H-1, y+r+1)*W + x] - src[Math.max(0, y-r)*W + x];
+      }
+    }
+  }
+}
+function blurMask(px, W, H, sigma, useCore, alphaCore){
+  let a = new Float32Array(W*H);
+  for(let i=0;i<W*H;i++) a[i] = useCore ? (px[i] > alphaCore ? 1 : 0) : px[i]/255;
+  const b = new Float32Array(W*H), r = Math.max(1, Math.round(sigma - 0.5));
+  for(let k=0;k<3;k++){ box1d(a,b,W,H,r,true); box1d(b,a,W,H,r,false); }
+  return a;
+}
+function densityAxis(px, W, H, P, rows, roww){
+  const B = blurMask(px, W, H, Math.max(0.5, P.denSigma), P.denSource==="core", P.alphaCore);
+  const y0 = rows ? rows[0] : 0, y1 = rows ? rows[1] : H-1;
+  const prof = new Float64Array(W);
+  for(let y=y0;y<=y1;y++){
+    const w = roww ? roww[y-y0] : 1, o=y*W;
+    for(let x=0;x<W;x++) prof[x] += B[o+x]*w;
+  }
+  let tot=0; for(const v of prof) tot+=v;
+  if(tot<=0) return W/2;
+  if(P.denMode==="centroid" || P.denMode==="weighted"){
+    const p = P.denMode==="centroid" ? 1 : Math.max(0.2, P.denPow);
+    let num=0, den=0;
+    for(let x=0;x<W;x++){ const w=Math.pow(prof[x],p); num+=x*w; den+=w; }
+    return den ? num/den : W/2;
+  }
+  let base = W/2;
+  if(P.denMode==="point"){
+    let best=-1, bx=0;
+    for(let y=y0;y<=y1;y++){ const o=y*W;
+      for(let x=0;x<W;x++) if(B[o+x]>best){ best=B[o+x]; bx=x; } }
+    base = bx;
+  }else{
+    let best=-1; for(let x=0;x<W;x++) if(prof[x]>best){ best=prof[x]; base=x; }
+  }
+  const i = Math.round(base);
+  if(i>0 && i<W-1){
+    const a=prof[i-1], b2=prof[i], c=prof[i+1], den=a-2*b2+c;
+    if(den) base = i + 0.5*(a-c)/den;
+  }
+  return base;
+}
+
+function analyse(slug, P){
+  const {w:W, h:H, px} = decode(slug);
+  const sil = P.alphaSil, core = P.alphaCore;
+  let x0=W,x1=-1,y0=H,y1=-1;
+  const coreRow = y => px.subarray(y*W, y*W+W);
+  for(let y=0;y<H;y++){ const r=coreRow(y);
+    for(let x=0;x<W;x++) if(r[x]>sil){ if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; } }
+  if(x1<0) return null;
+  const figH = y1-y0+1;
+
+  // bbox centre
+  let bx0=x0, bx1=x1;
+  if(P.sparseCols>0){
+    const col=new Float64Array(W); let mx=0;
+    for(let y=y0;y<=y1;y++){ const r=coreRow(y);
+      for(let x=0;x<W;x++) if(r[x]> (P.bboxMode==="core"?core:sil)){ col[x]++; if(col[x]>mx)mx=col[x]; } }
+    let first=-1,last=-1;
+    for(let x=0;x<W;x++) if(col[x]>=P.sparseCols/100*mx){ if(first<0)first=x; last=x; }
+    if(first>=0){ bx0=first; bx1=last; }
+  }
+  const t = P.bboxTrim/100*(bx1-bx0);
+  const bboxCx = (bx0+t + bx1-t)/2;
+
+  // band + per-row runs
+  const gap = Math.max(1, Math.round(P.gapFrac/100*W));
+  const half = (1-P.window/100)/2;
+  const lo = x0+half*(x1-x0), hi = x1-half*(x1-x0);
+  const by0 = Math.round(y0+P.bandTop/100*figH), by1 = Math.round(y0+P.bandBottom/100*figH);
+  const yc = y0 + P.rowCenter/100*figH, sg = Math.max(1e-6, P.rowSigma/100*figH);
+  const centres=[], weights=[], rowW=[];
+  const bin = new Uint8Array(W);                     // thresholded row buffer
+  let prev=null;
+  for(let y=by0;y<=by1;y++){
+    const row = coreRow(y);
+    for(let x=0;x<W;x++) bin[x] = row[x] > core ? 1 : 0;
+    let best=null;
+    for(const r of runsWithGap(bin, gap)){
+      const width = r[1]-r[0];
+      if(r[0]<lo || r[1]>hi) continue;
+      if(width < P.minRun/100*W) continue;
+      if(width > P.maxRun/100*W) continue;
+      if(P.pick==="nearest" && prev!=null){ if(!best || Math.abs((r[0]+r[1])/2-prev) < Math.abs((best[0]+best[1])/2-prev)) best=r; }
+      else if(!best || width > best[1]-best[0]) best=r;
+    }
+    let w = 1;
+    if(best){
+      const c=(best[0]+best[1])/2; centres.push(c); prev=c;
+      if(P.rowWeight==="width") w = best[1]-best[0];
+      else if(P.rowWeight==="mass"){ let m=0; for(let x=best[0];x<=best[1];x++) if(row[x]>core) m++; w=m; }
+      else if(P.rowWeight==="gaussian") w = Math.exp(-(((y-yc)/sg)**2));
+      weights.push(w);
+    } else if(P.rowWeight==="gaussian") w = Math.exp(-(((y-yc)/sg)**2));
+    rowW.push(w);
+  }
+  const aggregate = (cs, ws) => {
+    if(!cs.length) return bboxCx;
+    if(P.agg==="mean"){ let a=0,b=0; for(let i=0;i<cs.length;i++){ a+=cs[i]*ws[i]; b+=ws[i]; } return b? a/b : bboxCx; }
+    const idx=[...cs.keys()].sort((i,j)=>cs[i]-cs[j]);
+    let total=0; for(const w of ws) total+=w;
+    let acc=0; for(const i of idx){ acc+=ws[i]; if(acc>=total/2) return cs[i]; }
+    return cs[idx[idx.length-1]];
+  };
+  let torsoCx = aggregate(centres, weights);
+  if(P.trim>0 && centres.length>=5){
+    const kc=[], kw=[];
+    centres.forEach((c,i)=>{ if(Math.abs(c-torsoCx)<=P.trim/100*W){ kc.push(c); kw.push(weights[i]); } });
+    if(kc.length>=5) torsoCx = aggregate(kc,kw);
+  }
+
+  // symmetry
+  const prof = new Float64Array(W);
+  for(let y=by0, i=0;y<=by1;y++, i++){
+    const r = coreRow(y);
+    let w = 1;
+    if(P.symVert==="weights") w = rowW[i] ?? 1;
+    if(P.symProfile==="uniform"){
+      let any=false; for(let x=0;x<W;x++) if(r[x]>core){ any=true; break; }
+      if(!any) continue;
+      for(let x=0;x<W;x++) if(r[x]>core) prof[x] += w;
+    } else for(let x=0;x<W;x++) if(r[x]>core) prof[x] += w;
+  }
+  let mass=0; for(const v of prof) mass+=v; mass = mass||1;
+  let bestC=torsoCx, bestS=-1, steps=[], scores=[];
+  const lim = P.symWidth/100*W;
+  for(let c=torsoCx-P.symRadius/100*W; c<=torsoCx+P.symRadius/100*W+1e-9; c+=P.symStep){
+    const m = Math.round(2*c); let s=0;
+    for(let x=Math.max(0,Math.round(c-lim)); x<=Math.min(W-1,Math.round(c+lim)); x++){
+      const mx = m-x; if(mx<0||mx>=W) continue;
+      s += Math.min(prof[x], prof[mx]);
+    }
+    s/=mass; steps.push(c); scores.push(s);
+    if(s>bestS){ bestS=s; bestC=c; }
+  }
+  if(P.symSubpixel && scores.length>=3){
+    const i = scores.indexOf(Math.max(...scores));
+    if(i>0 && i<scores.length-1){
+      const a=scores[i-1], b=scores[i], d=scores[i+1], den=(a-2*b+d);
+      if(den!==0) bestC = steps[i] + 0.5*(a-d)/den*P.symStep;
+    }
+  }
+  // ---- gaussian-density centre
+  let denCx = W/2;
+  if(P.method==="density" || P.denBlend>0){
+    let rows=null, roww=null;
+    if(P.denRows==="band") rows=[by0,by1];
+    else if(P.denRows==="gaussian"){
+      rows=[y0,y1];
+      const n=y1-y0+1; roww=new Float64Array(n);
+      for(let i=0;i<n;i++) roww[i]=Math.exp(-(((y0+i-yc)/sg)**2));
+    }
+    denCx = densityAxis(px, W, H, P, rows, roww);
+  }
+  const pct = c => (W/2-c)/W*100;
+  const d = {geometric:0, bbox:pct(bboxCx), torso:pct(torsoCx), sym:pct(bestC), density:pct(denCx)};
+  let base = P.method==="blend" ? d.torso + P.blend/100*(d.sym-d.torso) : (d[P.method] ?? d.torso);
+  if(P.denBlend) base = base*(1-P.denBlend/100) + d.density*P.denBlend/100;
+  base = base*P.biasScale + P.bias;
+  const dx = Math.max(-P.clamp, Math.min(P.clamp, base));
+  return {w:W, h:H, band:[by0,by1], rows:centres.length, bboxCx, torsoCx, symCx:bestC, denCx,
+          dx:{bbox:d.bbox, torso:d.torso, sym:d.sym, density:d.density}, final:dx};
+}
+
+/* ==================================================================
+   UI
+   ================================================================== */
+function ctlHTML([k,label,mn,mx,step,sel]){
+  if(sel==="bool") return `<div class="p"><label>${label}</label>
+      <input type="checkbox" data-k="${k}" ${PARAMS[k]?"checked":""}><b>${PARAMS[k]?"on":"off"}</b></div>`;
+  if(Array.isArray(sel)) return `<div class="p"><label>${label}</label>
+      <select data-k="${k}">${sel.map(o=>`<option ${PARAMS[k]===o?"selected":""}>${o}</option>`).join("")}</select><b></b></div>`;
+  return `<div class="p"><label>${label}</label>
+      <input type="range" data-k="${k}" min="${mn}" max="${mx}" step="${step}" value="${PARAMS[k]}">
+      <b data-v="${k}">${PARAMS[k]}</b></div>`;
+}
+function buildParams(){
+  $("#params").innerHTML = SPEC.map(([g,ps])=>`<div class="group"><h3>${g}</h3>${ps.map(ctlHTML).join("")}</div>`).join("");
+  $("#params").querySelectorAll("[data-k]").forEach(el=>{
+    el.addEventListener("input",()=>{
+      const k = el.dataset.k;
+      PARAMS[k] = el.type==="checkbox" ? el.checked : (el.tagName==="SELECT" ? el.value : +el.value);
+      const v = $(`[data-v="${k}"]`); if(v) v.textContent = el.type==="checkbox" ? (el.checked?"on":"off") : PARAMS[k];
+      recompute(); updateGrid(); renderTable(); writeSettings();
+    });
+  });
+}
+function syncControls(){
+  $("#params").querySelectorAll("[data-k]").forEach(el=>{
+    const k=el.dataset.k;
+    if(el.type==="checkbox") el.checked = !!PARAMS[k];
+    else el.value = PARAMS[k];
+    const v = $(`[data-v="${k}"]`); if(v) v.textContent = el.type==="checkbox" ? (PARAMS[k]?"on":"off") : PARAMS[k];
+  });
+  document.querySelectorAll("#presets button").forEach(b=>b.classList.toggle("on", false));
+}
+function recompute(){
+  for(const s of N) RES[s] = analyse(s, PARAMS);
+}
+function cardHTML(slug){
+  const r = RES[slug], ar = (r.w/r.h).toFixed(4);
+  const bt = (r.band[0]/r.h*100).toFixed(2), bh = ((r.band[1]-r.band[0])/r.h*100).toFixed(2);
+  const marks = `<span class="ln canvas" style="left:50%"></span>
+    <span class="ln bbox" style="left:${(r.bboxCx/r.w*100).toFixed(2)}%"></span>
+    <span class="ln torso" style="left:${(r.torsoCx/r.w*100).toFixed(2)}%"></span>
+    <span class="ln sym" style="left:${(r.symCx/r.w*100).toFixed(2)}%"></span>
+    <span class="ln den" style="left:${(r.denCx/r.w*100).toFixed(2)}%"></span>
+    <span class="ln manual" style="left:${(r.torsoCx/r.w*100).toFixed(2)}%"></span>
+    <span class="band" style="top:${bt}%;height:${bh}%"></span>`;
+  const tile = (label) => `<div class="tile"><div class="holder" style="aspect-ratio:${ar}">
+      <img loading="lazy" decoding="async" src="character_images/${slug}.webp" alt="">${marks}</div></div>
+    <div class="cap"><span>${label}</span><b>dx 0.00%</b></div>`;
+  return `<div class="cmp" data-slug="${slug}">
+    <h4>${(window.PRECOMPUTED[slug]||{}).display||slug} <em class="meta"></em></h4>
+    <div class="pair">
+      <div class="case" data-pick="${slug}">${tile("before · geometric")}</div>
+      <div class="case" data-pick="${slug}">${tile("after")}</div>
+    </div></div>`;
+}
+/* build the DOM once (images load a single time) */
+function buildGrid(){
+  $("#grid").innerHTML = N.map(cardHTML).join("");
+  orderGrid(); updateGrid();
+}
+const cardVal = c => Math.abs(RES[c.dataset.slug].final + (MANUAL[c.dataset.slug]||0));
+/* show/hide only — runs on every parameter change, never moves nodes */
+function applyFilter(){
+  $("#grid").querySelectorAll(".cmp").forEach(c=>{ c.style.display = cardVal(c) >= FILT ? "" : "none"; });
+}
+/* explicit re-sort — moves the existing nodes (never recreates images) */
+function orderGrid(){
+  const g = $("#grid"), cards = [...g.querySelectorAll(".cmp")];
+  cards.sort((a,b)=>cardVal(b)-cardVal(a)).forEach(c=>g.appendChild(c));
+  applyFilter();
+}
+/* cheap in-place update: only transforms, marker positions and captions move */
+function updateGrid(){
+  $("#grid").querySelectorAll(".cmp").forEach(card=>{
+    const slug = card.dataset.slug, r = RES[slug], dx = r.final + (MANUAL[slug]||0);
+    const bt = (r.band[0]/r.h*100).toFixed(2), bh = ((r.band[1]-r.band[0])/r.h*100).toFixed(2);
+    const xB = (r.bboxCx/r.w*100).toFixed(2)+"%", xT = (r.torsoCx/r.w*100).toFixed(2)+"%",
+          xS = (r.symCx/r.w*100).toFixed(2)+"%";
+    card.querySelectorAll(".holder").forEach((h,i)=>{
+      if(i===1) h.style.setProperty("--dx", dx.toFixed(2)+"%");
+      h.querySelector(".ln.bbox").style.left   = xB;
+      h.querySelector(".ln.torso").style.left  = xT;
+      h.querySelector(".ln.sym").style.left    = xS;
+      h.querySelector(".ln.den").style.left    = (r.denCx/r.w*100).toFixed(2)+"%";
+      const man = h.querySelector(".ln.manual");
+      man.style.left = xT; man.style.display = MANUAL[slug] ? "" : "none";
+      const b = h.querySelector(".band"); b.style.top = bt+"%"; b.style.height = bh+"%";
+    });
+    card.querySelector(".meta").textContent = r.rows+" band rows · "+PARAMS.method;
+    const caps = card.querySelectorAll(".cap b");
+    caps[0].textContent = "dx 0.00%";
+    caps[1].textContent = "dx "+(dx>0?"+":"")+dx.toFixed(2)+"%"+(MANUAL[slug]?" (nudged)":"");
+    card.querySelector(".case:last-child .cap span").textContent = "after · "+PARAMS.method;
+    card.querySelector(".case:last-child .holder").style.setProperty("--dx", dx.toFixed(2)+"%");
+    card.classList.toggle("sel", SELECTED===slug);
+  });
+  applyFilter();
+}
+function renderTable(){
+  const list = [...N].sort((a,b)=>Math.abs(RES[b].final)-Math.abs(RES[a].final));
+  const cell = v => `<td class="n ${v>0.5?"pos":v<-0.5?"neg":""}">${(v>0?"+":"")+v.toFixed(2)}%</td>`;
+  $("#tbl tbody").innerHTML = list.map(slug=>{
+    const r = RES[slug], m = MANUAL[slug]||0;
+    return `<tr><td>${(window.PRECOMPUTED[slug]||{}).display||slug}</td><td class="n">${r.w}×${r.h}</td>
+      <td class="n">${r.bboxCx.toFixed(0)}</td><td class="n">${r.torsoCx.toFixed(0)}</td><td class="n">${r.symCx.toFixed(0)}</td>
+      <td class="n">${r.rows}</td>${cell(r.dx.bbox)}${cell(r.dx.torso)}${cell(r.dx.sym)}${cell(r.final+m)}
+      <td class="n">${m?(m>0?"+":"")+m.toFixed(1)+"%":"—"}</td></tr>`;
+  }).join("");
+}
+function writeSettings(){
+  $("#settings").value = JSON.stringify({method:PARAMS.method, params:PARAMS, manual:MANUAL}, null, 1);
+}
+function applyPreset(name){
+  PARAMS = {...DEFAULTS, ...(PRESETS[name]||{})};
+  syncControls(); recompute(); updateGrid(); renderTable(); writeSettings();
+  $("#status").innerHTML = "preset <b>"+name+"</b>";
+}
+$("#presets").innerHTML = Object.keys(PRESETS).map(p=>`<button data-p="${p}">${p}</button>`).join("");
+document.querySelectorAll("#presets button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("#presets button").forEach(x=>x.classList.toggle("on", x===b));
+  applyPreset(b.dataset.p);
+}));
+document.querySelectorAll("#filt button").forEach(b=>b.addEventListener("click",()=>{
+  if(+b.dataset.f < 0){ orderGrid(); $("#status").innerHTML = "re-sorted by <b>|dx|</b>"; return; }
+  FILT = +b.dataset.f;
+  document.querySelectorAll("#filt button").forEach(x=>x.classList.toggle("on", x===b));
+  applyFilter();
+}));
+$("#reset").addEventListener("click",()=>{ MANUAL={}; SELECTED=null; applyPreset("torso axis"); document.querySelectorAll("#presets button").forEach(x=>x.classList.toggle("on", x.dataset.p==="torso axis")); });
+$("#copy").addEventListener("click",()=>{
+  const t = $("#settings"); t.select();
+  navigator.clipboard?.writeText(t.value).then(()=>$("#status").innerHTML="settings <b>copied</b>",
+    ()=>document.execCommand("copy"));
+});
+$("#apply").addEventListener("click",()=>{
+  try{
+    const j = JSON.parse($("#settings").value);
+    PARAMS = {...DEFAULTS, ...(j.params||{})}; MANUAL = j.manual||{};
+    syncControls(); recompute(); updateGrid(); renderTable();
+    $("#status").innerHTML = "settings <b>applied</b>";
+  }catch(e){ $("#status").innerHTML = "could not parse — "+e.message; }
+});
+// manual nudge hook (slider lives in the Final group)
+$("#grid").addEventListener("click", e=>{
+  const el = e.target.closest("[data-pick]"); if(!el) return;
+  SELECTED = el.dataset.pick; PARAMS.manualNudge = MANUAL[SELECTED]||0;
+  syncControls(); updateGrid();
+});
+buildParams();
+recompute(); buildGrid(); renderTable(); writeSettings();
+$("#status").innerHTML = "<b>"+N.length+"</b> masks · packed, offline";
+// keep the nudge slider in sync when a selection changes
+document.addEventListener("input", e=>{
+  if(e.target.dataset && e.target.dataset.k==="manualNudge" && SELECTED){
+    MANUAL[SELECTED] = +e.target.value; updateGrid(); renderTable(); writeSettings();
+  }
+});
+</script>
+</body>
+</html>

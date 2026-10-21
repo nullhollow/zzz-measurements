@@ -4,6 +4,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 data = json.load(open(ROOT/'tools/data.json'))
 by_key = {d['name']: d for d in data}
+# stature baseline for the profile text, using effective height where the chart counts an appendage
+ROSTER_AVG = sum(d['cm_eff'] or d['cm'] for d in data) / len(data)
 
 def rel_bust(p):
     if p is None: return "hard to place"
@@ -54,11 +56,17 @@ def describe(d, unit, compare=None):
 
     n = d['display']; cmv = d['cm']; ft = d.get('ftin') or d['ft']
     hg = d['height_group']
-    frame = {
-        'Petite': f"{n} measures just {cmv:g} cm ({ft}), one of the most compact frames on the chart.",
-        'Tall':   f"{n} is one of the tallest figures on the chart at {cmv:g} cm ({ft}).",
-        'Mid':    f"{n} measures {cmv:g} cm ({ft}), right around the roster average.",
-    }[hg]
+    if d.get('cm_eff'):
+        gap = d['cm_eff'] - ROSTER_AVG
+        where = 'just under' if gap < -2 else ('above' if gap > 2 else 'right around')
+        frame = (f"{n} is charted at {cmv:g} cm ({ft}), but that figure counts her ears: at head height "
+                 f"she stands about {d['cm_eff']:g} cm ({d['ftin_eff']}), {where} the roster average.")
+    else:
+        frame = {
+            'Petite': f"{n} measures just {cmv:g} cm ({ft}), one of the most compact frames on the chart.",
+            'Tall':   f"{n} is one of the tallest figures on the chart at {cmv:g} cm ({ft}).",
+            'Mid':    f"{n} measures {cmv:g} cm ({ft}), right around the roster average.",
+        }[hg]
     bust = f"Her {v('bust_in','bust_cm')} bust (UK {d['uk']}) is {rel_bust(d['p_bust_cm'])}."
     waist = (f"The waist comes in at {v('waist_in','waist_cm')} (waist-to-height {d['whtr']:.2f}), "
              f"{WAIST_PHRASE[d['waist_level']]}.")
@@ -91,8 +99,11 @@ def describe(d, unit, compare=None):
         if max(abs(dB), abs(dW), abs(dH)) >= (1.2 if cmu else 0.5):
             parts.append(f"Versus her standard model this outfit reads {dB:+.1f} {u} bust, "
                          f"{dW:+.1f} {u} waist, {dH:+.1f} {u} hips.")
-    if d['notes']:
-        parts.append(f"Chart note: {d['notes']}.")
+    notes = d['notes']
+    if d.get('cm_eff') and notes.lower().startswith('height includes ears'):
+        notes = ''          # already spelled out in the first sentence
+    if notes:
+        parts.append(f"Chart note: {notes}.")
     return ' '.join(parts)
 
 BALANCE_WORD = {'top': "top-heavy", 'bottom': "bottom-heavy", 'even': "balanced"}

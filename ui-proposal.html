@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZZZ Archive · UI proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* palette lifted from zenless.hoyoverse.com */
+  --acid:#D8FA00;      /* primary — the ZZZ chartreuse  */
+  --acid-deep:#C6E800;
+  --hazard:#FFDE00;    /* secondary yellow             */
+  --signal:#FF5E41;    /* alert orange-red             */
+  --holo:#29D4FF;      /* cyan                         */
+  --blue:#4E6FFF;
+  --gold:#DB9A45;
+  --tan:#D3BC8E;
+  --ink:#0B0B0C;       /* page black                   */
+  --coal:#121214;
+  --panel:#17171C;
+  --line:#ffffff1f;
+  --dim:#9A9AA3;
+  --concrete:#EFEFEF;  /* light sections               */
+  --graphite:#61636B;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:#fff;font:14px/1.5 Inter,system-ui,sans-serif}
+a{color:var(--acid)}
+.wrap{max-width:1180px;margin:0 auto;padding:18px}
+
+/* type */
+.disp{font-family:Anton,'Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.94}
+.num{font-family:'Chakra Petch',ui-monospace,monospace;font-weight:700}
+.lab{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+
+/* ---------- textures ---------- */
+.hatch{background-image:repeating-linear-gradient(45deg,#ffffff1c 0 2px,transparent 2px 7px)}
+.halftone{background-image:radial-gradient(#ffffff26 1px,transparent 1.4px);background-size:6px 6px}
+.tape{height:14px;background:repeating-linear-gradient(45deg,var(--hazard) 0 12px,#111 12px 24px)}
+.film{height:26px;background:#0d0d0f;display:flex;gap:8px;align-items:center;padding:0 6px}
+.film i{flex:1;height:14px;border-radius:3px;background:#fff}
+
+/* ---------- hero ---------- */
+.device{background:#111113;border-radius:26px;overflow:hidden;border:1px solid #ffffff14}
+.hero{position:relative;min-height:230px;overflow:hidden;background:
+   linear-gradient(180deg,#161618,#0e0e10)}
+.hero .acid{position:absolute;inset:-40% -10% auto auto;width:62%;height:150%;
+  background:var(--acid);clip-path:polygon(28% 0,100% 0,100% 100%,0 100%);transform:rotate(0deg)}
+.hero .dots{position:absolute;left:0;right:0;bottom:0;height:60%;
+  background-image:radial-gradient(#ffffff10 1px,transparent 1.4px);background-size:7px 7px}
+.hero .inner{position:relative;padding:26px 30px}
+.kicker{display:inline-block;background:#000;color:#fff;border:1px solid #fff5;padding:3px 10px;
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase}
+.sticker{position:relative;display:inline-block;margin:14px 0 6px;padding:6px 16px 4px;background:#000;transform:rotate(-2deg)}
+.sticker b{font-family:Anton,sans-serif;font-size:54px;line-height:1;letter-spacing:.01em;color:#fff;
+  -webkit-text-stroke:2px #fff;text-shadow:5px 5px 0 #000,-1px -1px 0 #000}
+.sticker b span{color:var(--acid);-webkit-text-stroke:0}
+.hero h2{margin:6px 0 10px;font-size:20px;letter-spacing:.02em}
+.hero p{margin:0;max-width:560px;color:#c9c9cf;font-size:13px}
+.sidenote{position:absolute;right:8px;top:20px;writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:9px;letter-spacing:.3em;color:#111;font-weight:800;z-index:2}
+.hero .tape{position:absolute;left:0;right:0;bottom:0}
+
+/* ---------- sections ---------- */
+section{margin:26px 0}
+.shead{display:flex;align-items:baseline;gap:12px;margin:0 0 12px}
+.shead h3{margin:0;font-size:26px}
+.shead em{font-style:normal;color:var(--acid)}
+.shead .ln{flex:1;height:1px;background:var(--line)}
+.note{color:var(--dim);font-size:12px;max-width:820px}
+
+/* ---------- palette ---------- */
+.sw{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px}
+.sw div{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.sw .c{height:56px}
+.sw .t{padding:7px 9px;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.sw .t b{display:block;font-family:'Chakra Petch',monospace;font-size:12px;letter-spacing:0}
+
+/* ---------- type ---------- */
+.type{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+@media (max-width:820px){.type{grid-template-columns:1fr}}
+.tbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.tbox .big{font-family:Anton,sans-serif;font-size:44px;line-height:1;text-transform:uppercase}
+.tbox .numbig{font-family:'Chakra Petch',monospace;font-weight:700;font-size:40px;color:var(--acid);line-height:1}
+.tbox hr{border:0;border-top:1px solid var(--line);margin:12px 0}
+
+/* ---------- controls ---------- */
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#0f0f12;
+  border:1px solid var(--line);border-radius:999px;padding:8px 10px}
+.search{flex:1 1 220px;display:flex;gap:8px;align-items:center;background:#08080a;border-radius:999px;padding:8px 14px;color:var(--dim)}
+.pill{background:#0f0f12;color:#fff;border:1px solid #ffffff33;border-radius:999px;
+  padding:9px 16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:.12s}
+.pill:hover{border-color:var(--acid);color:var(--acid)}
+.pill.on{background:var(--acid);border-color:var(--acid);color:#0b0b0c;font-weight:800}
+.pill.ghost{background:transparent}
+.pill .bdg{display:inline-block;background:#000;color:var(--acid);border-radius:999px;padding:0 6px;margin-left:7px;font-weight:800}
+.pill.on .bdg{background:#0b0b0c;color:var(--acid)}
+
+.panel{width:340px;background:linear-gradient(180deg,#18181d,#0f0f12);border:1px solid var(--line);
+  border-radius:16px;padding:14px 16px;margin-top:12px}
+.frow{margin-top:12px}
+.frl{display:flex;justify-content:space-between;align-items:baseline}
+.frl .v{color:var(--acid);font-family:'Chakra Petch',monospace;font-size:12px}
+.dual{position:relative;height:18px;margin-top:4px}
+.dual .tr{position:absolute;left:0;right:0;top:7px;height:4px;background:#ffffff1f}
+.dual .tr i{position:absolute;top:0;bottom:0;background:var(--acid)}
+.dual b{position:absolute;top:1px;width:12px;height:16px;background:var(--acid);border:1px solid #000}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip{border:1px solid #ffffff33;border-radius:999px;padding:4px 11px;font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:#e8e8ee}
+.chip.acid{border-color:var(--acid);color:var(--acid)}
+.chip.sig{border-color:var(--signal);color:var(--signal)}
+
+/* ---------- cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{position:relative;background:linear-gradient(180deg,#18181d,#101014);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;transition:.15s}
+.card:hover{border-color:var(--acid);transform:translateY(-4px);box-shadow:0 16px 34px #000a}
+.card:hover:after{content:"";position:absolute;inset:auto -30% -30% auto;width:120px;height:120px;
+  background:var(--acid);opacity:.16;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.card .shot{position:relative;aspect-ratio:260/497;overflow:hidden;background:#0c0c10;
+  background-image:radial-gradient(#ffffff12 1px,transparent 1.4px);background-size:7px 7px}
+.card .shot img{position:absolute;top:0;left:50%;transform:translateX(-50%);height:100%;width:auto;max-width:none}
+.card .nm{min-height:2.1em}
+.card .bars{position:absolute;left:8px;top:8px;display:flex;flex-direction:column;gap:4px}
+.card .bars span{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:#ffffffb3}
+.card .bars i{display:block;height:5px;margin-top:2px}
+.card .stick{position:absolute;right:-6px;top:12px;background:var(--acid);color:#0b0b0c;font-family:Anton,sans-serif;
+  font-size:12px;letter-spacing:.06em;padding:3px 10px 2px;transform:rotate(-2deg);box-shadow:0 0 0 2px #fff,3px 3px 0 #000}
+.card .body{padding:12px 13px 14px}
+.card .nm{font-family:Anton,sans-serif;font-size:20px;text-transform:uppercase;line-height:1}
+.card .sub{color:var(--dim);font-size:11px;margin-top:3px;letter-spacing:.06em}
+.card .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:11px 0 0}
+.card .nums div{background:#08080a;border:1px solid var(--line);border-radius:9px;padding:6px 7px}
+.card .nums b{font-family:'Chakra Petch',monospace;font-size:15px;display:block;line-height:1.1}
+.card .nums small{font-size:8px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+
+/* ---------- table ---------- */
+table{width:100%;border-collapse:collapse;background:#101014;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+th{font-family:'Chakra Petch',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#0b0b0c;
+  background:var(--acid);text-align:left;padding:9px 11px;white-space:nowrap}
+td{padding:9px 11px;border-top:1px solid var(--line);font-size:12px}
+td b{font-family:Anton,sans-serif;font-size:13px;letter-spacing:.03em}
+tr:hover td{background:#ffffff08}
+
+/* ---------- modal sketch ---------- */
+.modal{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#17171c,#0d0d10);display:grid;grid-template-columns:290px 1fr}
+@media (max-width:820px){.modal{grid-template-columns:1fr}}
+.modal .img{border-right:1px solid var(--line);background:#0b0b0f;padding:10px}
+.modal .img img{width:100%;display:block;border-radius:12px;background:#0b0b0f}
+.seg{display:inline-flex;border:1px solid #ffffff33;border-radius:999px;overflow:hidden;margin:0 6px 8px 0}
+.seg button{background:#0f0f12;border:0;color:#fff;padding:7px 13px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.seg button.on{background:var(--acid);color:#0b0b0c;font-weight:800}
+.kv{background:#08080a;border:1px solid var(--line);border-radius:10px;padding:7px 9px;margin:4px}
+.kgrid{display:flex;flex-wrap:wrap}
+.kgrid .k{font-size:8px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+.kgrid .v{font-family:'Chakra Petch',monospace;font-size:14px}
+
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.box{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--panel)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ================= HERO ================= -->
+<div class="device">
+  <div class="hero">
+    <div class="acid"></div>
+    <div class="dots"></div>
+    <span class="sidenote">ZENLESS ZONE ZERO · MODEL METRICS</span>
+    <div class="inner">
+      <span class="kicker">New Eridu · Figure Division</span>
+      <div class="sticker"><b>FIGURE <span>ARCHIVE</span></b></div>
+      <h2 class="disp" style="font-size:26px">51 agents · measurements, proportions &amp; silhouette reads</h2>
+      <p>Proposal skin: chartreuse slanted colour fields, condensed sticker type, pill controls,
+        film-strip dividers and hazard tape — the visual language of the official Zenless Zone Zero site,
+        applied to the measurement archive.</p>
+    </div>
+    <div class="tape"></div>
+  </div>
+  <div class="film"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<!-- ================= PALETTE ================= -->
+<section>
+  <div class="shead"><h3 class="disp">01 · Palette</h3><em class="lab">sampled from zenless.hoyoverse.com</em><span class="ln"></span></div>
+  <div class="sw">
+    <div><div class="c" style="background:#D8FA00"></div><div class="t">ZZZ Acid<b>#D8FA00</b></div></div>
+    <div><div class="c" style="background:#C6E800"></div><div class="t">Acid Deep<b>#C6E800</b></div></div>
+    <div><div class="c" style="background:#FFDE00"></div><div class="t">Hazard<b>#FFDE00</b></div></div>
+    <div><div class="c" style="background:#FF5E41"></div><div class="t">Signal<b>#FF5E41</b></div></div>
+    <div><div class="c" style="background:#29D4FF"></div><div class="t">Holo<b>#29D4FF</b></div></div>
+    <div><div class="c" style="background:#4E6FFF"></div><div class="t">Hollo Blue<b>#4E6FFF</b></div></div>
+    <div><div class="c" style="background:#DB9A45"></div><div class="t">Brass<b>#DB9A45</b></div></div>
+    <div><div class="c" style="background:#61636B"></div><div class="t">Graphite<b>#61636B</b></div></div>
+    <div><div class="c" style="background:#17171C;border-bottom:1px solid #ffffff1f"></div><div class="t">Panel<b>#17171C</b></div></div>
+    <div><div class="c" style="background:#0B0B0C;border-bottom:1px solid #ffffff1f"></div><div class="t">Ink<b>#0B0B0C</b></div></div>
+    <div><div class="c" style="background:#EFEFEF"></div><div class="t">Concrete<b>#EFEFEF</b></div></div>
+  </div>
+  <p class="note" style="margin-top:10px">Metric coding moves to the official set: <b style="color:var(--signal)">bust · #FF5E41</b>,
+    <b style="color:var(--holo)">waist · #29D4FF</b>, <b style="color:var(--acid)">hips · #D8FA00</b>,
+    <b style="color:var(--hazard)">thighs · #FFDE00</b>. Everything else stays monochrome ink/white so numbers read first.</p>
+</section>
+
+<!-- ================= TYPE ================= -->
+<section>
+  <div class="shead"><h3 class="disp">02 · Type</h3><em class="lab">official uses TT Hoves Pro Compact Bold + Mont Heavy</em><span class="ln"></span></div>
+  <div class="type">
+    <div class="tbox">
+      <div class="big">Hoshimi Miyabi</div>
+      <div class="sub lab" style="margin-top:6px">display · Anton (stand-in for TT Hoves Pro Compact Bold)</div>
+      <hr>
+      <div class="numbig">173.0 <small style="font-size:14px">CM</small> · 31.7 <small style="font-size:14px">IN</small></div>
+      <div class="sub lab" style="margin-top:6px">numerals · Chakra Petch 700 (technical, squared)</div>
+    </div>
+    <div class="tbox">
+      <div class="lab">body copy</div>
+      <p style="margin:6px 0 0">Waist-to-hip 0.700 puts her in the straightest silhouette on the roster; the
+        stable frame keeps long-form commentary readable at 13–14 px.</p>
+      <hr>
+      <div class="chips">
+        <span class="chip">Tall</span><span class="chip acid">bust GG+</span>
+        <span class="chip">waist Fuller</span><span class="chip">hips Compact</span>
+        <span class="chip sig">thighs Slim</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTROLS ================= -->
+<section>
+  <div class="shead"><h3 class="disp">03 · Controls</h3><em class="lab">one pill bar, one filters menu</em><span class="ln"></span></div>
+  <div class="bar">
+    <div class="search">⌕ <span>Search character…</span></div>
+    <button class="pill on">Filters<span class="bdg">3</span></button>
+    <button class="pill">Sort ⌄</button>
+    <button class="pill on">CM</button><button class="pill">IN</button>
+    <button class="pill">Sheet</button><button class="pill on">Official</button>
+    <button class="pill on">Cards</button><button class="pill">Table</button>
+    <button class="pill ghost">Reset</button>
+  </div>
+
+  <div class="panel">
+    <div class="lab" style="display:flex;justify-content:space-between">Numeric ranges<span style="color:var(--acid)">reset</span></div>
+    <div class="frow">
+      <div class="frl"><span class="lab">Height</span><span class="v num">140–176 CM</span></div>
+      <div class="dual"><div class="tr"><i style="left:31%;width:69%"></i></div><b style="left:31%"></b><b style="left:98%"></b></div>
+    </div>
+    <div class="frow">
+      <div class="frl"><span class="lab">Thighs</span><span class="v num">42–56 CM</span></div>
+      <div class="dual"><div class="tr"><i style="left:22%;width:78%"></i></div><b style="left:22%"></b><b style="left:99%"></b></div>
+    </div>
+    <div class="frow">
+      <div class="frl"><span class="lab">Bust</span><span class="v num">55–81 CM</span></div>
+      <div class="dual"><div class="tr"><i style="left:35%;width:63%"></i></div><b style="left:35%"></b><b style="left:98%"></b></div>
+    </div>
+    <div class="chips">
+      <span class="chip">Bust tier · All</span><span class="chip acid">Shape · Hourglass</span>
+      <span class="chip">Build · All</span><span class="chip acid">Thighs · Thick</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CARDS ================= -->
+<section>
+  <div class="shead"><h3 class="disp">04 · Agent cards</h3><em class="lab">hover = lift + acid corner sweep</em><span class="ln"></span></div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="shot">
+        <img src="character_images/rina.webp" alt="Rina">
+        <div class="bars">
+          <span>Bust 97</span><i style="width:97%;background:var(--signal)"></i>
+          <span>Waist 95</span><i style="width:95%;background:var(--holo)"></i>
+          <span>Hips 85</span><i style="width:85%;background:var(--acid)"></i>
+        </div>
+        <div class="stick">GG+</div>
+      </div>
+      <div class="body">
+        <div class="nm">Rina</div>
+        <div class="sub">Tall · 1.73 m (5′8″) · Balanced silhouette</div>
+        <div class="nums">
+          <div><b>80.5</b><small>bust</small></div>
+          <div><b>51.3</b><small>waist</small></div>
+          <div><b>92.5</b><small>hips</small></div>
+          <div><b>23GG</b><small>uk</small></div>
+        </div>
+        <div class="chips">
+          <span class="chip acid">thighs Thick</span><span class="chip">balanced</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shot">
+        <img src="character_images/aria_construct.webp" alt="Aria">
+        <div class="bars">
+          <span>Bust 34</span><i style="width:34%;background:var(--signal)"></i>
+          <span>Waist 92</span><i style="width:92%;background:var(--holo)"></i>
+          <span>Hips 99</span><i style="width:99%;background:var(--acid)"></i>
+        </div>
+        <div class="stick">MAX THIGH</div>
+      </div>
+      <div class="body">
+        <div class="nm">Aria (Construct)</div>
+        <div class="sub">Petite · 1.40 m (4′7″) · Hourglass silhouette</div>
+        <div class="nums">
+          <div><b>51.6</b><small>bust</small></div>
+          <div><b>41.3</b><small>waist</small></div>
+          <div><b>80.4</b><small>hips</small></div>
+          <div><b>19C</b><small>uk</small></div>
+        </div>
+        <div class="chips">
+          <span class="chip sig">thighs Thick</span><span class="chip">bottom-heavy</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shot">
+        <img src="images/belle_summer.webp" alt="Belle">
+        <div class="bars">
+          <span>Bust 56</span><i style="width:56%;background:var(--signal)"></i>
+          <span>Waist 49</span><i style="width:49%;background:var(--holo)"></i>
+          <span>Hips 30</span><i style="width:30%;background:var(--acid)"></i>
+        </div>
+        <div class="stick">SUMMER</div>
+      </div>
+      <div class="body">
+        <div class="nm">Belle (Summer)</div>
+        <div class="sub">Mid · 1.58 m (5′2″) · Straight silhouette</div>
+        <div class="nums">
+          <div><b>63.6</b><small>bust</small></div>
+          <div><b>43.1</b><small>waist</small></div>
+          <div><b>76.1</b><small>hips</small></div>
+          <div><b>21DD</b><small>uk</small></div>
+        </div>
+        <div class="chips">
+          <span class="chip">thighs Average</span><span class="chip">top-heavy</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shot">
+        <img src="character_images/zhao.webp" alt="Zhao">
+        <div class="bars">
+          <span>Bust 19</span><i style="width:19%;background:var(--signal)"></i>
+          <span>Waist 99</span><i style="width:99%;background:var(--holo)"></i>
+          <span>Hips 90</span><i style="width:90%;background:var(--acid)"></i>
+        </div>
+        <div class="stick">3′10″</div>
+      </div>
+      <div class="body">
+        <div class="nm">Zhao</div>
+        <div class="sub">Petite · 1.18 m (3′10″) · Straight silhouette</div>
+        <div class="nums">
+          <div><b>40.5</b><small>bust</small></div>
+          <div><b>36.7</b><small>waist</small></div>
+          <div><b>63.5</b><small>hips</small></div>
+          <div><b>15A</b><small>uk</small></div>
+        </div>
+        <div class="chips">
+          <span class="chip sig">thighs Thick</span><span class="chip">bottom-heavy</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= TABLE + MODAL ================= -->
+<section>
+  <div class="shead"><h3 class="disp">05 · Table &amp; detail</h3><em class="lab">acid header strip, pill toggles</em><span class="ln"></span></div>
+  <table>
+    <tr><th>Agent</th><th>Height</th><th>Bust</th><th>Waist</th><th>Hips</th><th>Thigh</th><th>Thigh / H</th><th>Shape</th><th>Thigh class</th></tr>
+    <tr><td><b>Rina</b> <small style="color:var(--dim)">Tall · GG+</small></td><td class="num">173</td><td class="num">80.5</td><td class="num">51.3</td><td class="num">92.5</td><td class="num">54.3</td><td class="num">0.314</td><td>Balanced</td><td><span class="chip acid">Thick</span></td></tr>
+    <tr><td><b>Aria (Construct)</b> <small style="color:var(--dim)">Petite · C–D</small></td><td class="num">140</td><td class="num">51.6</td><td class="num">41.3</td><td class="num">80.4</td><td class="num">53.2</td><td class="num">0.380</td><td>Hourglass</td><td><span class="chip sig">Thick</span></td></tr>
+  </table>
+
+  <div style="height:14px"></div>
+
+  <div class="modal">
+    <div class="img">
+      <img src="character_images/rina.webp" alt="Rina">
+      <div class="lab" style="margin:8px 2px 0">official art · detail view</div>
+      <div style="padding:8px 2px">
+        <span class="seg"><button class="on">Sheet</button><button>Official</button></span>
+        <span class="seg"><button class="on">Standard</button><button>Nocturne</button></span>
+      </div>
+    </div>
+    <div style="padding:14px 16px">
+      <div class="disp" style="font-size:26px">Rina <span class="chip acid" style="vertical-align:6px">GG+</span></div>
+      <div class="lab" style="margin:4px 0 10px">outfit: default · 173 cm (5′8″) · UK 23GG / US 23J / EU 47L</div>
+      <div class="kgrid">
+        <div class="kv"><div class="k">Bust</div><div class="v">80.5 <small>cm</small></div></div>
+        <div class="kv"><div class="k">Under-bust</div><div class="v">57.0</div></div>
+        <div class="kv"><div class="k">Waist</div><div class="v">51.3</div></div>
+        <div class="kv"><div class="k">Hip</div><div class="v">92.5</div></div>
+        <div class="kv"><div class="k">Thigh</div><div class="v">54.3</div></div>
+        <div class="kv"><div class="k">Bust diff</div><div class="v">24</div></div>
+      </div>
+      <p class="note" style="margin-top:10px">Figure read keeps the orange-lit comment box, now as an acid-edged
+        callout. Percentile bars stay chunky, 5–6 px, no gradients.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEXTURES ================= -->
+<section>
+  <div class="shead"><h3 class="disp">06 · Texture kit</h3><em class="lab">the small things that sell it</em><span class="ln"></span></div>
+  <div class="grid3">
+    <div class="box"><div class="lab">Film strip divider</div><div class="film" style="margin-top:8px"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="box"><div class="lab">Hazard tape edge</div><div class="tape" style="margin-top:14px"></div></div>
+    <div class="box"><div class="lab">Diagonal hatch panel</div><div class="hatch" style="height:46px;margin-top:8px;border:1px solid var(--line)"></div></div>
+    <div class="box"><div class="lab">Halftone field</div><div class="halftone" style="height:46px;margin-top:8px;border:1px solid var(--line)"></div></div>
+    <div class="box"><div class="lab">Sticker badge</div>
+      <div style="margin-top:16px"><span class="stick" style="position:static;display:inline-block">STD + SKIN</span></div></div>
+    <div class="box"><div class="lab">Slanted acid field (45° cuts)</div>
+      <div style="height:46px;margin-top:8px;background:var(--acid);clip-path:polygon(12% 0,100% 0,88% 100%,0 100%)"></div></div>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--line);margin-top:30px;padding:18px 0 60px;color:var(--dim);font-size:11px">
+  Proposal only — nothing here touches <b>index.html</b> yet. Say the word and I port it: tokens → template CSS,
+  sticker header, pill control bar, acid filter panel, card/table/modal restyle, texture kit.
+</footer>
+</div>
+</body>
+</html>

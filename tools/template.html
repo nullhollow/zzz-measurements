@@ -881,7 +881,8 @@ function openModal(d, opts){
         <div class="sect"><h3>Figure read</h3>
           <div class="vline">${r.read||""}</div>
           <div class="infog">
-            ${readRow("frame", isCm()? `${fmt(r.cm,0)} cm` : r.ftin, isCm()? r.ftin : `${fmt(r.cm,0)} cm`,
+            ${readRow("frame", isCm()? `${fmt(r.cm,0)} cm` : r.ftin,
+                      (isCm()? r.ftin : `${fmt(r.cm,0)} cm`) + (r.cm_eff? ` · ${fmt(r.cm_eff,0)} cm excl. ears` : ``),
                       pct(r.p_cm), r.tags.height, "var(--tan)")}
             ${readRow("bust", fmt(U(r,'bust'))+USUF(), `UK ${r.uk}`, pct(r.p_bust_cm), rankword(r.p_bust_cm), "var(--bust)")}
             ${readRow("waist", fmt(U(r,'waist'))+USUF(), `WHtR ${r.whtr.toFixed(3)}`, pct(r.p_waist_cm), rankword(r.p_waist_cm), "var(--waist)")}

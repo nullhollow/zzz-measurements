@@ -1,0 +1,236 @@
+{
+ "alice.png": {
+  "name": "Alice",
+  "items": [
+   {
+    "label": "Sea of Thyme",
+    "type": "Paid",
+    "file": "skins/alice_sea_of_thyme.png",
+    "wiki_file": "File:Agent Alice Thymefield Sea of Thyme Portrait.png"
+   }
+  ]
+ },
+ "aria.png": {
+  "name": "Aria",
+  "items": [
+   {
+    "label": "Cuteness Loading",
+    "type": "Event Reward",
+    "file": "skins/aria_cuteness_loading.png",
+    "wiki_file": "File:Agent Aria Cuteness Loading Portrait.png"
+   },
+   {
+    "label": "Discordant Note",
+    "type": "Paid",
+    "file": "skins/aria_discordant_note.png",
+    "wiki_file": "File:Agent Aria Discordant Note Portrait.png"
+   }
+  ]
+ },
+ "astra_yao.png": {
+  "name": "Astra Yao",
+  "items": [
+   {
+    "label": "Chandelier",
+    "type": "Paid",
+    "file": "skins/astra_yao_chandelier.png",
+    "wiki_file": "File:Agent Astra Yao Chandelier Portrait.png"
+   }
+  ]
+ },
+ "belle.png": {
+  "name": "Belle",
+  "items": [
+   {
+    "label": "Brilliance of Stars",
+    "type": "Commission Reward",
+    "file": "skins/belle_brilliance_of_stars.png",
+    "wiki_file": "File:Agent Belle Brilliance of Stars Portrait.png"
+   },
+   {
+    "label": "Delicate Sunlight",
+    "type": "Commission Reward",
+    "file": "skins/belle_delicate_sunlight.png",
+    "wiki_file": "File:Agent Belle Delicate Sunlight Portrait.png"
+   },
+   {
+    "label": "Summer Skies",
+    "type": "Event Reward;Paid",
+    "file": "skins/belle_summer_skies.png",
+    "wiki_file": "File:Agent Belle Summer Skies Portrait.png"
+   }
+  ]
+ },
+ "ellen_joe.png": {
+  "name": "Ellen Joe",
+  "items": [
+   {
+    "label": "On Campus",
+    "type": "Paid",
+    "file": "skins/ellen_joe_on_campus.png",
+    "wiki_file": "File:Agent Ellen Joe On Campus Portrait.png"
+   }
+  ]
+ },
+ "jane_doe.png": {
+  "name": "Jane Doe",
+  "items": [
+   {
+    "label": "Nocturne of Light",
+    "type": "Paid",
+    "file": "skins/jane_doe_nocturne_of_light.png",
+    "wiki_file": "File:Agent Jane Doe Nocturne of Light Portrait.png"
+   }
+  ]
+ },
+ "lucy.png": {
+  "name": "Lucy",
+  "items": [
+   {
+    "label": "Princess on Holiday",
+    "type": "Event Reward;Paid",
+    "file": "skins/lucy_princess_on_holiday.png",
+    "wiki_file": "File:Agent Luciana de Montefio Princess on Holiday Portrait.png"
+   }
+  ]
+ },
+ "miyabi.png": {
+  "name": "Miyabi",
+  "items": [
+   {
+    "label": "Dignified Blossom",
+    "type": "Paid",
+    "file": "skins/miyabi_dignified_blossom.png",
+    "wiki_file": "File:Agent Hoshimi Miyabi Dignified Blossom Portrait.png"
+   }
+  ]
+ },
+ "nangong_yu.png": {
+  "name": "Nangong Yu",
+  "items": [
+   {
+    "label": "Heartfelt Support",
+    "type": "Event Reward",
+    "file": "skins/nangong_yu_heartfelt_support.png",
+    "wiki_file": "File:Agent Nangong Yu Heartfelt Support Portrait.png"
+   },
+   {
+    "label": "Rhapsody's Muse",
+    "type": "Paid",
+    "file": "skins/nangong_yu_rhapsody_s_muse.png",
+    "wiki_file": "File:Agent Nangong Yu Rhapsody's Muse Portrait.png"
+   }
+  ]
+ },
+ "nicole.png": {
+  "name": "Nicole",
+  "items": [
+   {
+    "label": "Cunning Cutie",
+    "type": "Event Reward;Paid",
+    "file": "skins/nicole_cunning_cutie.png",
+    "wiki_file": "File:Agent Nicole Demara Cunning Cutie Portrait.png"
+   }
+  ]
+ },
+ "remielle.png": {
+  "name": "Remielle",
+  "items": [
+   {
+    "label": "Moonlight Whispers",
+    "type": "Paid",
+    "file": "skins/remielle_moonlight_whispers.png",
+    "wiki_file": "File:Agent Remielle Dan Moonlight Whispers Portrait.png"
+   },
+   {
+    "label": "Seashade Pas Seul",
+    "type": "Paid",
+    "file": "skins/remielle_seashade_pas_seul.png",
+    "wiki_file": "File:Agent Remielle Dan Seashade Pas Seul Portrait.png"
+   }
+  ]
+ },
+ "sigrid.png": {
+  "name": "Sigrid",
+  "items": [
+   {
+    "label": "Majestic Wavechaser",
+    "type": "Paid",
+    "file": "skins/sigrid_majestic_wavechaser.png",
+    "wiki_file": "File:Agent Sigrid de L'Azur Majestic Wavechaser Portrait.png"
+   }
+  ]
+ },
+ "sunna.png": {
+  "name": "Sunna",
+  "items": [
+   {
+    "label": "Afternoon Tea Break",
+    "type": "Paid",
+    "file": "skins/sunna_afternoon_tea_break.png",
+    "wiki_file": "File:Agent Sunna Afternoon Tea Break Portrait.png"
+   },
+   {
+    "label": "Delusions in Business",
+    "type": "Event Reward",
+    "file": "skins/sunna_delusions_in_business.png",
+    "wiki_file": "File:Agent Sunna Delusions in Business Portrait.png"
+   }
+  ]
+ },
+ "velina.png": {
+  "name": "Velina",
+  "items": [
+   {
+    "label": "Shade of Leisure",
+    "type": "Paid",
+    "file": "skins/velina_shade_of_leisure.png",
+    "wiki_file": "File:Agent Velina Airgid Shade of Leisure Portrait.png"
+   }
+  ]
+ },
+ "vivian.png": {
+  "name": "Vivian",
+  "items": [
+   {
+    "label": "Iris of the Shore",
+    "type": "Event Reward;Paid",
+    "file": "skins/vivian_iris_of_the_shore.png",
+    "wiki_file": "File:Agent Vivian Banshee Iris of the Shore Portrait.png"
+   }
+  ]
+ },
+ "ye_shunguang.png": {
+  "name": "Ye Shunguang",
+  "items": [
+   {
+    "label": "Touch of Dawnlight",
+    "type": "Paid",
+    "file": "skins/ye_shunguang_touch_of_dawnlight.png",
+    "wiki_file": "File:Agent Ye Shunguang Touch of Dawnlight Portrait.png"
+   }
+  ]
+ },
+ "yi_xuan.png": {
+  "name": "Yi Xuan",
+  "items": [
+   {
+    "label": "Trails of Ink",
+    "type": "Paid",
+    "file": "skins/yi_xuan_trails_of_ink.png",
+    "wiki_file": "File:Agent Yixuan Trails of Ink Portrait.png"
+   }
+  ]
+ },
+ "yuzuha.png": {
+  "name": "Yuzuha",
+  "items": [
+   {
+    "label": "Tanuki in Broad Daylight",
+    "type": "Paid",
+    "file": "skins/yuzuha_tanuki_in_broad_daylight.png",
+    "wiki_file": "File:Agent Ukinami Yuzuha Tanuki in Broad Daylight Portrait.png"
+   }
+  ]
+ }
+}
