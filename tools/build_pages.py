@@ -154,10 +154,14 @@ def similar(d, key='slug'):
 CSS = '''
 :root{--acid:#D8FA00;--hazard:#FFDE00;--signal:#FF5E41;--ink:#0B0B0C;--panel:#17171C;
   --line:#ffffff22;--dim:#A6A6AE;--dim2:#8A8A94;--bust:#FF5E41;--waist:#29D4FF;--hips:#D8FA00;
-  --thighs:#FFDE00;--tan:#D3BC8E;--disp:'Anton','Arial Narrow',Impact,sans-serif;
-  --num:'Chakra Petch',ui-monospace,Menlo,monospace}
+  --thighs:#FFDE00;--tan:#D3BC8E;--disp:'ZZZ Hongmeng','Anton','Noto Sans JP 900','Dela Gothic One','Arial Narrow',Impact,sans-serif;
+  --body:'ZZZ Hongmeng',Inter,'Noto Sans JP 900','Noto Sans JP',system-ui,-apple-system,sans-serif;
+  --num:'Chakra Petch','ZZZ Hongmeng','Noto Sans JP 900','Noto Sans JP',ui-monospace,Menlo,monospace}
+html[lang^="zh"]{--disp:'ZZZ Hongmeng','Anton','Noto Sans SC Display','Arial Narrow',Impact,sans-serif;
+  --body:'ZZZ Hongmeng',Inter,'Noto Sans SC Display','Noto Sans SC',system-ui,-apple-system,sans-serif;
+  --num:'Chakra Petch','ZZZ Hongmeng','Noto Sans SC Display','Noto Sans SC',ui-monospace,Menlo,monospace}
 *{box-sizing:border-box}
-body{margin:0;background:var(--ink);color:#fff;font:14px/1.6 Inter,system-ui,-apple-system,sans-serif;
+body{margin:0;background:var(--ink);color:#fff;font:14px/1.6 var(--body);
   -webkit-font-smoothing:antialiased}
 a{color:var(--acid)}
 :focus-visible{outline:2px solid var(--acid);outline-offset:2px}
@@ -175,7 +179,9 @@ main{max-width:1100px;margin:0 auto;padding:22px 20px 60px}
 .hero picture{display:block}
 .eyebrow{margin:0 0 6px;font-family:var(--num);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
 h1{margin:0 0 10px;font-family:var(--disp);font-weight:400;font-size:clamp(36px,6vw,64px);line-height:.96;
-  text-transform:uppercase}
+  text-transform:uppercase;word-break:keep-all;line-break:strict}
+html[lang="ja"] h1{font-size:clamp(30px,5vw,54px);line-height:1.04;letter-spacing:.01em}
+@media(max-width:560px){.top{flex-wrap:nowrap;padding:14px 16px;gap:10px;font-size:10px;letter-spacing:.1em}.top>span{display:none}.top a{white-space:nowrap}.langnav{gap:8px;margin-left:auto}}
 .lead{margin:0 0 14px;color:#cfd0d6;font-size:13px}
 .altname{margin:-6px 0 10px;color:var(--dim);font-family:var(--num);font-size:11px;letter-spacing:.08em}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}

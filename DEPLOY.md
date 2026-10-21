@@ -18,12 +18,12 @@ docs/
   404.html                 absolute-base not-found page
   robots.txt sitemap.xml .nojekyll
   og.png favicon.* icon-*.png
-  fonts/                   16 woff2 + fonts.css (local, no CDN)
+  fonts/                   22 woff2 + fonts.css + OFL/licence notes (local)
   images/                  48 sheet crops
   character_images/        52 portraits + 24 outfit renders + responsive thumbs/
 ```
 
-≈ **618 files / 23 MB** (the responsive thumb set adds storage but cuts transfer).
+≈ **628 files / 24 MB** (the responsive thumb set adds storage but cuts transfer).
 
 ## 1. Set the URL
 

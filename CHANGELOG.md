@@ -2,6 +2,16 @@
 
 ## Unreleased — audit implementation
 
+### Typography
+- Added a subset of **印品鸿蒙体 / inpin hongmengti**, the ZZZ Chinese UI face,
+  for the Latin, Chinese and Japanese interface and profiles.
+- Added OFL fallbacks for glyphs missing from the GB2312 cut: a weight-matched
+  Noto Sans JP 900 for missing Japanese glyphs, Noto Sans JP / Noto Sans SC for
+  body text, Dela Gothic One as a secondary Japanese display fallback and Noto
+  Sans SC 900 for Chinese display. Japanese punctuation such as `・` and 58
+  Japanese characters fall back instead of showing tofu.
+- Added reproducible subset scripts and the inpin licence/attribution note.
+
 ### Multilingual profiles and names
 - The EN / 日本語 / 中文 switch now localizes character names, generated profile
   copy in cm and inches, figure-read lines, class labels, filters, table headers,

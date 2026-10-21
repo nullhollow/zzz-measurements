@@ -13,7 +13,7 @@ index.html                 dev build of the interactive page
 measurements.csv           source sheet (the only hand-edited data)
 character_images/          52 official portraits + 24 outfit renders + thumbs/
 images/                    48 sheet crops
-fonts/                     bundled Anton / Chakra Petch / Inter woff2
+fonts/                     ZZZ Hongmeng subset + Anton / Chakra / Inter / Noto fallbacks
 tools/                     build pipeline, scrapers and the alignment lab
 docs/                      the packed site (served by GitHub Pages)
 ```
@@ -63,6 +63,34 @@ the official localized names taken from the HoYoverse character pages (recorded 
 exist as crawlable pages at `/ja/characters/<slug>.html` and
 `/zh/characters/<slug>.html`, with matching localized methodology pages and
 `hreflang` alternates. The source/export fields stay in English.
+
+## Typography
+
+The primary UI face is a subset of **印品鸿蒙体 / inpin hongmengti**, the Chinese
+face used by ZZZ's UI. It was subset from the site owner's installed `ZZZ.ttf`
+to the characters on this site, so it covers the English labels, Chinese copy
+and most Japanese kana/kanji in one family.
+
+Two notes:
+
+- 印品鸿蒙体 is a commercial typeface. The subset is included at the owner's
+  direction; public web embedding/redistribution needs a licence from
+  [inpin](https://inpin.cn/). See `fonts/LICENSE-ZZZ-Hongmeng.txt`.
+- The available GB2312 cut does not contain 58 Japanese characters used by the
+  profiles, including `見`, `長`, `開`, `時` and `・`. Those glyphs fall back to a
+  weight-matched **Noto Sans JP 900** subset, with Noto Sans JP and Dela Gothic
+  One as further fallbacks. Chinese display/body fallbacks use the Noto Sans SC
+  variable and 900 subsets. This avoids tofu while keeping the ZZZ face wherever
+  it has a glyph.
+
+Rebuild the fallback font subsets with `tools/update_cjk_fonts.py`; rebuild the
+primary ZZZ subset from a licensed local source with:
+
+```bash
+python3 tools/pack_site.py
+python3 tools/subset_zzz_font.py --font /path/to/ZZZ.ttf
+python3 tools/pack_site.py
+```
 
 ## Payload
 

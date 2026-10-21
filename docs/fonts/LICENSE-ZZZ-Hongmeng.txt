@@ -1,0 +1,8 @@
+ZZZ-Hongmeng-web.woff2 is a subset of 印品鸿蒙体 (inpin hongmengti),
+Copyright (c) 2019 Shanghai Mengyan Culture and Creative Co., Ltd. (inpin font).
+Trademark of 印品字库 (inpin font), https://inpin.cn/.
+
+This subset is included at the site owner's direction. 印品鸿蒙体 is a
+commercial typeface; embedding it in a public website and redistributing the
+WOFF2 requires a web/embedding licence from the rights holder. The OFL fallback
+faces in this directory remain separately licensed under their own OFL files.
