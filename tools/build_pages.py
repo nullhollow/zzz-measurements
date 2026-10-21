@@ -199,7 +199,7 @@ def pct_bars(r):
         ('waist', r['p_waist_cm'], 'var(--waist)'),
         ('hips', r['p_hip_cm'], 'var(--hips)'),
         ('thigh', r['p_thigh_cm'], 'var(--thighs)'),
-        ('stature', r['p_stature_cm'], 'var(--tan)'),
+        ('height', r['p_stature_cm'], 'var(--tan)'),
     ]
     return ''.join(
         f'<div class="prow"><span>{label}</span><div class="pbar"><i style="width:{pct(p)}%;background:{col}"></i></div><b>{pct(p) if p is not None else "—"}</b></div>'
@@ -246,8 +246,7 @@ def character_page(d, prev_d, next_d):
              "additionalProperty": [
                  {"@type": "PropertyValue", "name": name, "value": value, "unitText": "cm"}
                  for name, value in (
-                     ("height (charted)", d['cm']),
-                     ("stature", d['stature_cm']),
+                     ("height", d['stature_cm']),
                      ("bust", d['bust_cm']),
                      ("under-bust", d['band_cm']),
                      ("waist", d['waist_cm']),
@@ -264,8 +263,7 @@ def character_page(d, prev_d, next_d):
     ld_tag = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>'
 
     rows = [
-        ('Height (charted)', f"{fmt(d['cm'], 0)} cm · {d['ftin']}"),
-        ('Stature used', f"{fmt(d['stature_cm'], 0)} cm · {d['ftin_stature']}" + (' (head height)' if d['stature_basis'] == 'head' else '')),
+        ('Height', f"{fmt(d['stature_cm'], 0)} cm · {d['ftin_stature']}" + (f" · {fmt(d['cm'], 0)} cm charted" if d['stature_basis'] == 'head' else '')),
         ('Bust', f"{fmt(d['bust_cm'])} cm · {fmt(d['bust_in'])} in"),
         ('Under-bust', f"{fmt(d['band_cm'])} cm · {fmt(d['band_in'])} in"),
         ('Waist', f"{fmt(d['waist_cm'])} cm · {fmt(d['waist_in'])} in"),
@@ -277,9 +275,9 @@ def character_page(d, prev_d, next_d):
     rows_html = ''.join(f'<tr><th scope="row">{esc(k)}</th><td>{esc(v)}</td></tr>' for k, v in rows)
 
     props = [
-        ('Waist / hip', d['whr']), ('Waist / stature', d['whtr']), ('Waist / thigh', d['wtr']),
-        ('Thigh / stature', d['thr']), ('Thigh / hip', d['thh']), ('Bust / stature', d['bhr']),
-        ('Hip / stature', d['hhr']),
+        ('Waist / hip', d['whr']), ('Waist / height', d['whtr']), ('Waist / thigh', d['wtr']),
+        ('Thigh / height', d['thr']), ('Thigh / hip', d['thh']), ('Bust / height', d['bhr']),
+        ('Hip / height', d['hhr']),
     ]
     props_html = ''.join(f'<tr><th scope="row">{esc(k)}</th><td>{fmt(v, 3)}</td></tr>' for k, v in props)
 
@@ -303,8 +301,8 @@ def character_page(d, prev_d, next_d):
                 f"{esc(d['source_page'])}</a>" if d.get('source_page') else '—')
     measured_note = (f"<p class=\"note\">This agent has a measured outfit ({esc(d['skin']['outfit'])}). The numbers on this page "
                      f"are the <b>standard model</b>; the outfit record is kept separate in the dataset.</p>" if d.get('skin') else '')
-    stature_note = ("<p class=\"note\">Charted height counts her ears. Stature comparisons use the ~"
-                    f"{fmt(d['stature_cm'], 0)} cm head height.</p>" if d['stature_basis'] == 'head' else '')
+    stature_note = ("<p class=\"note\">Height uses the ~"
+                    f"{fmt(d['stature_cm'], 0)} cm head height; the charted {fmt(d['cm'], 0)} cm includes her ears.</p>" if d['stature_basis'] == 'head' else '')
 
     return head(title, desc, canonical, og, ld_tag) + f'''
 <main>
@@ -321,7 +319,7 @@ def character_page(d, prev_d, next_d):
         <li class="chip hips">hips {esc(d['tags']['hips'])}</li>
         <li class="chip thighs">thighs {esc(d['tags']['thighs'])}</li>
       </ul>
-      <p class="meta">{fmt(d['cm'], 0)} cm charted · {fmt(d['stature_cm'], 0)} cm stature · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
+      <p class="meta">{fmt(d['stature_cm'], 0)} cm height{(' · ' + fmt(d['cm'], 0) + ' cm charted') if d['stature_basis'] == 'head' else ''} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
       <div class="btns">
         <a class="btn primary" href="../#p={esc(d['slug'])}">Open in the chart</a>
         <a class="btn" href="../data/measurements.json" download>Dataset</a>
@@ -339,7 +337,7 @@ def character_page(d, prev_d, next_d):
   <div class="grid2">
     <div><h2>Proportions</h2><table><tbody>{props_html}</tbody></table></div>
     <div><h2>Roster percentiles</h2><div class="bars">{pct_bars(d)}</div>
-      <p class="small" style="margin-top:10px">Percentiles of the raw centimetre measurement across the {N} displayed entries; stature uses head height. 0 = smallest, 100 = largest.</p></div>
+      <p class="small" style="margin-top:10px">Percentiles of the raw centimetre measurement across the {N} displayed entries; height uses head height. 0 = smallest, 100 = largest.</p></div>
   </div>
 
   <h2>Figure read</h2>
@@ -370,7 +368,7 @@ FAQ = [
     ("Where do the numbers come from?",
      "Heights come from official listings where available. The remaining circumferences come from curves measured around the official 3D models, so treat every value as an estimate rather than an in-game stat."),
     ("Why does Miyabi show 170 cm and 155 cm?",
-     "Her charted 170 cm includes her ears. Stature comparisons use the ~155 cm head height, while the charted number stays visible in the table, the card and the exports."),
+     "Her charted 170 cm includes her ears. The UI uses the ~155 cm head height as Height, while the charted number stays visible as a note and in the exports."),
     ("Why is the card value the standard model?",
      "The standard model is the canonical figure. A measured outfit is stored as its own record with its own numbers and deltas, so no card or ranking mixes two outfits into one body."),
     ("What do the silhouette classes mean?",
@@ -387,7 +385,7 @@ FAQ = [
 def methodology_page():
     canonical = SITE + 'methodology.html'
     title = "Methodology, classes and FAQ — ZZZ Female Measurements"
-    desc = ("How the Zenless Zone Zero measurements were taken, why stature and charted height differ, "
+    desc = ("How the Zenless Zone Zero measurements were taken, how height normalises charted ears, "
             "and what the silhouette classes and percentiles mean.")
     faq_ld = {
         "@context": "https://schema.org",
@@ -412,7 +410,7 @@ def methodology_page():
   <div class="grid2">
     <section class="card">
       <h3>Height</h3>
-      <p>Charted height comes from official listings and may include ears, footwear or accessories. Stature comparisons use head height where the chart notes an appendage. Both values appear in the table and in the exports; <code>stature_cm</code> is the comparison value.</p>
+      <p>Charted height comes from official listings and may include ears, footwear or accessories. The UI uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 155 cm used). The charted value stays visible as a note; <code>stature_cm</code> remains the comparison field in the exports.</p>
     </section>
     <section class="card">
       <h3>Circumferences</h3>
@@ -432,7 +430,7 @@ def methodology_page():
     </section>
     <section class="card">
       <h3>Percentiles</h3>
-      <p>Bars show the roster percentile of the raw centimetre measurement, with stature using head height. 0 is the smallest value in the set, 50 the midpoint and 100 the largest.</p>
+      <p>Bars show the roster percentile of the raw centimetre measurement, with height using head height. 0 is the smallest value in the set, 50 the midpoint and 100 the largest.</p>
     </section>
     <section class="card">
       <h3>Corrections</h3>

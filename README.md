@@ -50,7 +50,7 @@ python3 tools/make_og.py          # social card (needs Chrome)
 Every card has a labelled **Compare** pill inside its artwork. Pick 2–4 agents; the
 tray explains the next step and enables **Compare** at two picks. The comparison
 table uses larger values, shows direction arrows, and highlights the winner in
-yellow for stature, bust diff, waist (smaller), hips, thighs and cup. Confidence
+yellow for height, bust diff, waist (smaller), hips, thighs and cup. Confidence
 badges are no longer shown; the raw field remains in the dataset exports.
 
 ## Payload
@@ -69,7 +69,7 @@ derived field, carries the schema version and the data date.
 
 * **Standard model is canonical.** Measured outfits are separate `skin` records;
   art-only outfits never touch a number.
-* **`stature_cm`** is the comparison height. It equals the charted height unless
+* **`stature_cm`** is the comparison height shown in the UI as **Height**. It equals the charted height unless
   the chart counts an appendage (Miyabi's ears), where it uses head height.
 * **Confidence** values remain in the dataset exports as provenance; the UI no longer renders confidence badges.
 * Percentiles are roster percentiles of the raw centimetre value; stature uses `stature_cm`.

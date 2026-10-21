@@ -136,13 +136,16 @@ for d in sorted(DATA, key=lambda x: x['display']):
     def v(k, dec=1):
         x = d.get(k)
         return '—' if x is None else f"{x:.{dec}f}"
-    rows.append("<tr><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td></tr>".format(
-        _html.escape(d['display']), d['ftin'] or '—', v('stature_cm', 0), v('bust_cm'), v('band_cm'),
+    height = f"{v('stature_cm', 0)} cm · {d['ftin_stature']}"
+    if d['stature_basis'] == 'head':
+        height += f" ({v('cm', 0)} charted)"
+    rows.append("<tr><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td></tr>".format(
+        _html.escape(d['display']), _html.escape(height), v('bust_cm'), v('band_cm'),
         v('waist_cm'), v('hip_cm'), v('thigh_cm')))
 noscript = f'''<div class="nsTable">
 <h2>ZZZ female measurements: all {N} agents</h2>
 <p>Zenless Zone Zero female character measurements in centimetres (1 cm = 0.394 in). The interactive chart on this page also shows imperial units, UK / US / EU bra sizing, proportions and silhouette reads for every agent. Enable JavaScript for filtering, sorting and the detail view.</p>
-<table><thead><tr><th scope="col">Agent</th><th scope="col">Height (ft/in)</th><th scope="col">Stature (cm)</th><th scope="col">Bust (cm)</th><th scope="col">Under-bust (cm)</th><th scope="col">Waist (cm)</th><th scope="col">Hips (cm)</th><th scope="col">Thigh (cm)</th></tr></thead>
+<table><thead><tr><th scope="col">Agent</th><th scope="col">Height</th><th scope="col">Bust (cm)</th><th scope="col">Under-bust (cm)</th><th scope="col">Waist (cm)</th><th scope="col">Hips (cm)</th><th scope="col">Thigh (cm)</th></tr></thead>
 <tbody>{''.join(rows)}</tbody></table>
 </div>'''
 

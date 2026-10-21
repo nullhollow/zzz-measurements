@@ -32,10 +32,10 @@ def pct(p):
 
 
 def height_line(d, unit='cm'):
-    if d['stature_basis'] == 'head':
-        return f"{fmt(d['cm'], 0)} cm chart · {fmt(d['stature_cm'], 0)} cm head"
-    return (f"{fmt(d['cm'], 0)} cm · {d['ftin']}" if unit == 'cm'
-            else f"{d['ftin']} · {fmt(d['cm'], 0)} cm")
+    head = f" · {fmt(d['cm'], 0)} charted" if d['stature_basis'] == 'head' else ''
+    if unit == 'cm':
+        return f"{fmt(d['stature_cm'], 0)} cm · {d['ftin_stature']}{head}"
+    return f"{d['ftin_stature']} · {fmt(d['stature_cm'], 0)} cm{head}"
 
 
 def thumb(d, size=None):

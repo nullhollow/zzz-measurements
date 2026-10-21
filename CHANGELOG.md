@@ -51,6 +51,12 @@
 - `tools/validate.py` + GitHub Actions: build, validate, reproducibility diff.
 - Fixed `fetch_images.py` missing imports and `optimize_images.py` division by zero.
 
+### Height terminology (follow-up)
+- The UI now uses a single **Height** value (`stature_cm`) instead of separate Height/Stature
+  rows, columns and labels. Miyabi still shows her 170 cm charted figure as a note, while
+  comparisons use the 155 cm head height.
+- Removed the explanatory yellow-highlight sentence from the comparison table.
+
 ### Comparison UX (follow-up)
 - Each card has a labelled **Compare** pill inside the artwork; selected cards get an acid
   border and the pill switches to **Added**.
