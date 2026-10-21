@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OG card</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root{
+    --acid:#D8FA00; --hazard:#FFDE00; --signal:#FF5E41;
+    --ink:#0B0B0C; --dim:#9A9AA3;
+    --disp:'Anton','Arial Narrow',Impact,sans-serif;
+    --num:'Chakra Petch',ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; width:1200px; height:630px; overflow:hidden; background:var(--ink); color:#fff;
+    font-family:'Inter',-apple-system,sans-serif}
+  .wrap{position:relative; width:1200px; height:630px; overflow:hidden}
+  /* top band: halftone dots on the left, acid diagonal field on the right */
+  .hero{position:absolute; left:0; right:0; top:0; height:352px; overflow:hidden}
+  .hero .dots{position:absolute; inset:0 52% 0 0;
+    background-image:radial-gradient(#ffffff1a 1.2px, transparent 1.3px); background-size:9px 9px}
+  .hero .diag{position:absolute; inset:0 0 0 44%; background:var(--acid);
+    clip-path:polygon(30% 0,100% 0,100% 100%,0 100%)}
+  .hero .diag:after{content:''; position:absolute; inset:0;
+    background-image:radial-gradient(#0b0b0c22 1.2px, transparent 1.3px); background-size:8px 8px}
+  .head{position:absolute; left:52px; top:44px; width:600px}
+  .sticker{display:inline-block; background:#0B0B0C; padding:16px 24px 11px; position:relative}
+  .sticker:after{content:''; position:absolute; left:9px; top:9px; right:-9px; bottom:-9px;
+    border-right:9px solid #ffffff1f; border-bottom:9px solid #ffffff1f; z-index:-1}
+  .sticker b{font-family:var(--disp); font-weight:400; font-size:78px; line-height:.94;
+    text-transform:uppercase; -webkit-text-stroke:1.6px #fff}
+  .sticker b span{color:var(--acid); -webkit-text-stroke:0}
+  h2{font-family:var(--disp); font-weight:400; font-size:26px; line-height:1.14; margin:22px 0 10px;
+    text-transform:uppercase; letter-spacing:.02em}
+  .src{font-family:var(--num); font-size:13.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--dim)}
+  .chat{position:absolute; right:44px; top:60px; width:440px; text-align:right; font-family:var(--num);
+    font-size:17px; letter-spacing:.1em; text-transform:uppercase; color:#0b0b0c; font-weight:700; line-height:1.5}
+  .chat small{display:block; font-size:12.5px; letter-spacing:.2em; opacity:.75; margin-top:6px}
+  .chat u{display:block; width:74px; height:5px; background:#0b0b0c; margin:14px 0 0 auto; text-decoration:none; opacity:.85}
+  /* dark stage for the characters, then the hazard tape */
+  .stage{position:absolute; left:0; right:0; bottom:30px; height:322px; background:linear-gradient(180deg,#0e0e11,#0B0B0C)}
+  .stage:before{content:''; position:absolute; inset:0;
+    background-image:radial-gradient(#ffffff12 1.1px, transparent 1.2px); background-size:9px 9px}
+  /* cells size to the art, so a wide character (Remielle's wings) keeps the same
+     height as everyone else instead of being squeezed by max-width */
+  .strip{position:absolute; left:0; right:0; bottom:32px; height:300px; display:flex; align-items:flex-end;
+    justify-content:space-between; gap:10px; padding:0 34px}
+  .cell{position:relative; flex:0 0 auto; display:flex; flex-direction:column; align-items:center;
+    justify-content:flex-end; height:100%}
+  .cell img{height:242px; width:auto; max-width:none; object-fit:contain; object-position:bottom;
+    filter:drop-shadow(0 8px 20px #000b); margin-bottom:8px}
+  .cell.lead img{height:258px}
+  .plate{align-self:stretch; background:#ffffff12; border-top:2px solid #ffffff2e;
+    font-family:var(--num); font-size:13px; text-align:center; padding:7px 6px; color:#e8e8ee;
+    letter-spacing:.06em; white-space:nowrap}
+  .plate b{font-weight:700}
+  .cell.lead .plate{background:var(--acid); color:#0b0b0c; border-top-color:#fff}
+  .tape{position:absolute; left:0; right:0; bottom:0; height:30px;
+    background:repeating-linear-gradient(135deg,var(--hazard) 0 16px,#0B0B0C 16px 32px)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="dots"></div>
+    <div class="diag"></div>
+    <div class="head">
+      <span class="sticker"><b>ZZZ <span>FEMALE</span></b></span>
+      <h2>Measurements, proportions &amp; silhouette reads for 48 agents</h2>
+      <div class="src">modelmetrics.net · cm / inches · UK·US·EU bra sizing</div>
+    </div>
+    <div class="chat">48 female agents<small>height · bust · under-bust · waist · hips · thighs</small><u></u></div>
+  </div>
+  <div class="stage"></div>
+  <div class="strip" id="strip"></div>
+  <div class="tape"></div>
+</div>
+<script>
+/* five agents from the same roster the site plots, with their podium wins */
+const PICKS = [
+  ['zhu_yuan', 'Zhu Yuan',  '3', '54.3 cm'],
+  ['astra_yao', 'Astra Yao', '1', '176 cm'],
+  ['yidhari',  'Yidhari',   '2', '25.6 cm'],
+  ['remielle', 'Remielle',  '1', 'WHR 0.501'],
+  ['rina',     'Rina',      '3', '23.5 cm'],
+];
+const strip = document.getElementById('strip');
+strip.innerHTML = PICKS.map(p=>`
+  <div class="cell${p[2] === '1' ? ' lead' : ''}">
+    <img src="../character_images/${p[0]}.webp" alt="${p[1]}">
+    <div class="plate"><b>${p[2]}</b> · ${p[1]} · ${p[3]}</div>
+  </div>`).join('');
+
+/* self-check: no art distorted, no plate wrapped, nothing overflowing the strip */
+function ogCheck(){
+  let ok = strip.scrollWidth <= strip.clientWidth + 1;
+  strip.querySelectorAll('img').forEach(i=>{
+    const want = i.naturalWidth / i.naturalHeight, got = i.width / i.height;
+    if (Math.abs(want - got) > want * 0.01) ok = false;
+  });
+  strip.querySelectorAll('.plate').forEach(p=>{ if (p.scrollWidth > p.clientWidth + 1) ok = false; });
+  const plates = [...strip.querySelectorAll('.plate')].map(p=>Math.round(p.getBoundingClientRect().height));
+  if (new Set(plates).size !== 1) ok = false;   // one-line plates must share a baseline
+  document.documentElement.dataset.ogcheck = ok ? 'ok' : 'FAIL';
+  document.title = 'OG card ' + document.documentElement.dataset.ogcheck + ' plates:' + plates.join('/');
+}
+window.addEventListener('load', ogCheck);
+setTimeout(ogCheck, 400);
+</script>
+</body>
+</html>
