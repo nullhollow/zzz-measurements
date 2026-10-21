@@ -19,10 +19,10 @@ docs/
   og.png favicon.* icon-*.png
   fonts/                   16 woff2 + fonts.css (local, no CDN)
   images/                  48 sheet crops
-  character_images/        52 portraits + 24 outfit renders + thumbs/
+  character_images/        52 portraits + 24 outfit renders + responsive thumbs/
 ```
 
-≈ **260 files / 10.7 MB**.
+≈ **416 files / 14 MB** (the responsive thumb set adds storage but cuts transfer).
 
 ## 1. Set the URL
 
@@ -90,7 +90,7 @@ somewhere else.
 Asset-only steps (outputs are committed):
 
 ```bash
-python3 tools/make_thumbs.py      # 640 px thumbs used by cards/podium/tables
+python3 tools/make_thumbs.py      # 320/640 px WebP + AVIF (needs Pillow AVIF)
 python3 tools/make_favicon.py     # SVG, ICO, PWA + maskable icons
 python3 tools/make_og.py          # 1200×630 social card (needs Chrome)
 ```
@@ -130,8 +130,9 @@ search-console verification files (`google*.html`, `BingSiteAuth.xml`, `yandex_*
 * 48 static pages in the sitemap, plus the chart and methodology page
 * a `<noscript>` table and 48 pre-rendered cards, so crawlers and no-JS visitors get
   every measurement
-* local fonts, 640 px thumbs for first paint, full 1024 px art only in the detail
-  view, one `fetchpriority="high"` podium image, lazy loading below the fold
+* local fonts, responsive `srcset` artwork (AVIF first, WebP fallback, 320/640 px),
+  full 1024 px art only in the detail view, one `fetchpriority="high"` podium image,
+  lazy loading below the fold
 * shareable URL state (filters, sort, view, unit, comparison, open character)
 
 ## Troubleshooting

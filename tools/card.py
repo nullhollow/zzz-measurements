@@ -38,8 +38,27 @@ def height_line(d, unit='cm'):
             else f"{d['ftin']} · {fmt(d['cm'], 0)} cm")
 
 
-def thumb(d):
-    return f"character_images/thumbs/{d['official']}.webp"
+def thumb(d, size=None):
+    base = f"character_images/thumbs/{size + '/' if size else ''}{d['official']}.webp"
+    return base
+
+
+def media(d, sizes, art='official', lazy=True, priority=None):
+    """AVIF + WebP <picture> for official art; a plain crop for sheet mode."""
+    if art == 'sheet':
+        return f'<img loading="lazy" decoding="async" src="images/{d["img"]}.webp" alt="">'
+    load = ' loading="lazy"' if lazy else ''
+    prio = f' fetchpriority="{priority}"' if priority else ''
+    slug = d['official']
+    base = 'character_images/thumbs'
+    dx = f' style="--dx:{d["dx"]}%"' if d.get('dx') is not None else ''
+    return (f'<picture>'
+            f'<source type="image/avif" srcset="{base}/avif/320/{slug}.avif 320w, '
+            f'{base}/avif/{slug}.avif 640w" sizes="{sizes}">'
+            f'<img{load}{prio} decoding="async" src="{base}/{slug}.webp" '
+            f'srcset="{base}/320/{slug}.webp 320w, {base}/{slug}.webp 640w" '
+            f'sizes="{sizes}" alt=""{dx}>'
+            f'</picture>')
 
 
 def chips_html(d):
@@ -66,17 +85,13 @@ def values(d, unit='cm', lang='en'):
     unit_suffix = 'cm' if unit == 'cm' else 'in'
     note = f'<div class="note">{esc(d["notes"])}</div>' if d['notes'] else ''
     stick = f'<span class="stick">{esc(d["outfit"] or "variant")}</span>' if d['variant_of'] else ''
-    dx = ''
-    if d.get('dx') is not None:
-        dx = f' style="--dx:{d["dx"]}%"'
     suffix = '_cm' if unit == 'cm' else '_in'
     val = lambda k: fmt(d[k + suffix])  # noqa: E731
     return {
         'name': esc(d['name']),
         'cmpAria': esc(f"Add {d['display']} to comparison"),
         'href': f"characters/{d['slug']}.html",
-        'thumb': thumb(d),
-        'dx': dx,
+        'media': media(d, '(max-width:560px) 132px, (max-width:900px) 200px, 240px'),
         'stick': stick,
         'display': esc(d['display']),
         'heightLine': esc(height_line(d, unit)),

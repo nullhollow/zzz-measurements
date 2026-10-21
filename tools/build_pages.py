@@ -85,6 +85,7 @@ main{max-width:1100px;margin:0 auto;padding:22px 20px 60px}
 .hero{display:grid;grid-template-columns:min(340px,38vw) 1fr;gap:26px;align-items:center;
   border-bottom:1px solid var(--line);padding-bottom:24px}
 .hero img{width:100%;height:auto;border-radius:16px;border:1px solid var(--line);background:#101014}
+.hero picture{display:block}
 .eyebrow{margin:0 0 6px;font-family:var(--num);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
 h1{margin:0 0 10px;font-family:var(--disp);font-weight:400;font-size:clamp(36px,6vw,64px);line-height:.96;
   text-transform:uppercase}
@@ -194,6 +195,19 @@ def pct_bars(r):
         for label, p, col in rows)
 
 
+def hero_picture(d):
+    s = d['official']
+    sizes = '(max-width:760px) 320px, 340px'
+    height = round(440 / d['ar']) if d.get('ar') else 700
+    return (f'<picture>'
+            f'<source type="image/avif" srcset="../character_images/thumbs/avif/320/{s}.avif 320w, '
+            f'../character_images/thumbs/avif/{s}.avif 640w" sizes="{sizes}">'
+            f'<img src="../character_images/thumbs/320/{s}.webp" '
+            f'srcset="../character_images/thumbs/320/{s}.webp 320w, ../character_images/thumbs/{s}.webp 640w" '
+            f'sizes="{sizes}" width="440" height="{height}" alt="{esc(d["display"])} official portrait">'
+            f'</picture>')
+
+
 def character_page(d, prev_d, next_d):
     canonical = f"{SITE}characters/{d['slug']}.html"
     title = f"{d['display']} measurements — height, bust, waist, hips | ZZZ"
@@ -251,7 +265,7 @@ def character_page(d, prev_d, next_d):
     props_html = ''.join(f'<tr><th scope="row">{esc(k)}</th><td>{fmt(v, 3)}</td></tr>' for k, v in props)
 
     gallery = []
-    gallery.append((f"character_images/{d['official']}.webp", f"{d['display']} — official portrait", 'Standard model'))
+    gallery.append((f"character_images/thumbs/320/{d['official']}.webp", f"{d['display']} — official portrait", 'Standard model'))
     if d.get('skin'):
         s = d['skin']
         gallery.append((f"character_images/{s['official']}.webp", f"{s['outfit']} — measured outfit", 'Measured outfit · has its own numbers'))
@@ -277,7 +291,7 @@ def character_page(d, prev_d, next_d):
     return head(title, desc, canonical, og, ld_tag) + f'''
 <main>
   <section class="hero">
-    <img src="../character_images/{esc(d['official'])}.webp" alt="{esc(d['display'])} official portrait" width="440" height="700">
+    {hero_picture(d)}
     <div>
       <p class="eyebrow">Zenless Zone Zero · measurements</p>
       <h1>{esc(d['display'])}</h1>

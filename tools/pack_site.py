@@ -224,7 +224,10 @@ def link_check(out, site):
     for page in sorted(out.rglob('*.html')):
         rel = page.relative_to(out)
         text = page.read_text()
-        for attr in re.findall(r'(?:src|href)="([^"]+)"', text):
+        refs = re.findall(r'(?:src|href)="([^"]+)"', text)
+        for srcset in re.findall(r'srcset="([^"]+)"', text):
+            refs += [part.strip().split()[0] for part in srcset.split(',') if part.strip()]
+        for attr in refs:
             target = local_target(attr, str(rel.parent).replace('\\', '/'), out, site)
             if target is None:
                 continue

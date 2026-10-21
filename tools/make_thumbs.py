@@ -1,53 +1,91 @@
 #!/usr/bin/env python3
-"""Build small WebP thumbs for cards, the table, the podium and character pages.
+"""Build the responsive artwork set used by cards, the table and the podium.
 
-Full portraits stay in character_images/ for the detail view (1024 px), while
-everything that paints on first load uses a 900 px longest-side copy. Sizes are
-kept in character_images/thumbs/ so pack_site.py ships them automatically.
+For every portrait in character_images/ this writes four files under thumbs/:
+
+    <slug>.webp            640 px longest side, WebP q78
+    320/<slug>.webp        320 px longest side, WebP q76
+    avif/<slug>.avif       640 px longest side, AVIF q60
+    avif/320/<slug>.avif   320 px longest side, AVIF q60
+
+AVIF is used first (roughly 35% smaller); WebP is the fallback. Full 1024 px
+renders stay in character_images/ for the detail view.
 
 Usage: python3 tools/make_thumbs.py [--force]
 """
 import os
 import sys
 from pathlib import Path
-from PIL import Image
+from PIL import Image, features
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / 'character_images'
 OUT = SRC / 'thumbs'
-MAX_DIM = 640
-QUALITY = 78
+WEBP640 = OUT
+WEBP320 = OUT / '320'
+AVIF640 = OUT / 'avif'
+AVIF320 = AVIF640 / '320'
 FORCE = '--force' in sys.argv
+AVIF = features.check('avif')
+
+
+def resize(im, longest):
+    w, h = im.size
+    scale = min(1.0, longest / max(w, h))
+    if scale >= 1.0:
+        return im.copy()
+    return im.resize((max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS)
+
+
+def encode(im, dst, fmt, quality):
+    if fmt == 'WEBP':
+        im.save(dst, 'WEBP', quality=quality, method=6)
+    else:
+        im.save(dst, 'AVIF', quality=quality, speed=6)
+
+
+def make(src, targets):
+    if not FORCE and all(p.exists() and p.stat().st_mtime >= src.stat().st_mtime for p in targets):
+        return False
+    im = Image.open(src)
+    im.load()
+    if im.mode not in ('RGB', 'RGBA'):
+        im = im.convert('RGBA')
+    avif = src.stem + '.avif'
+    targets = [
+        (WEBP640 / src.name, 640, 'WEBP', 78),
+        (WEBP320 / src.name, 320, 'WEBP', 76),
+    ]
+    if AVIF:
+        targets += [(AVIF640 / avif, 640, 'AVIF', 60), (AVIF320 / avif, 320, 'AVIF', 60)]
+    for path, longest, fmt, q in targets:
+        encode(resize(im, longest), path, fmt, q)
+    return True
 
 
 def main():
-    OUT.mkdir(exist_ok=True)
+    for d in (WEBP320, AVIF640, AVIF320):
+        d.mkdir(parents=True, exist_ok=True)
     files = sorted(p for p in SRC.glob('*.webp') if p.is_file())
     if not files:
         sys.exit('no source portraits found')
-    total_in = total_out = 0
     made = kept = 0
     for src in files:
-        dst = OUT / src.name
-        total_in += src.stat().st_size
-        if not FORCE and dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
-            total_out += dst.stat().st_size
+        avif = src.stem + '.avif'
+        targets = [WEBP640 / src.name, WEBP320 / src.name]
+        if AVIF:
+            targets += [AVIF640 / avif, AVIF320 / avif]
+        if make(src, targets):
+            made += 1
+        else:
             kept += 1
-            continue
-        im = Image.open(src)
-        im.load()
-        w, h = im.size
-        scale = min(1.0, MAX_DIM / max(w, h))
-        if scale < 1.0:
-            im = im.resize((max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS)
-        if im.mode not in ('RGB', 'RGBA'):
-            im = im.convert('RGBA')
-        im.save(dst, 'WEBP', quality=QUALITY, method=6)
-        total_out += dst.stat().st_size
-        made += 1
+    if not AVIF:
+        print('warning: Pillow has no AVIF support; avif/ files were not written')
+    total = sum(p.stat().st_size for p in OUT.rglob('*.webp')) + \
+        sum(p.stat().st_size for p in OUT.rglob('*.avif'))
+    src_total = sum(p.stat().st_size for p in files)
     print(f'thumbs: {made} written, {kept} current · '
-          f'{total_in/1048576:.1f} MB -> {total_out/1048576:.1f} MB '
-          f'({100*(1-total_out/max(1,total_in)):.0f}% smaller)')
+          f'{src_total/1048576:.1f} MB sources -> {total/1048576:.1f} MB responsive set')
 
 
 if __name__ == '__main__':

@@ -40,10 +40,18 @@ python3 tools/validate.py  --site-url https://<user>.github.io/<repo>/
 Optional asset steps (already committed):
 
 ```bash
-python3 tools/make_thumbs.py      # 640 px card/podium thumbs
+python3 tools/make_thumbs.py      # 320/640 px WebP + AVIF responsive set
 python3 tools/make_favicon.py     # SVG, ICO, PWA + maskable icons
 python3 tools/make_og.py          # social card (needs Chrome)
 ```
+
+## Payload
+
+Cards, the table and the podium use a `<picture>` set: AVIF 320/640 with WebP
+fallbacks and `sizes`, so a phone downloads ~120 KB of artwork for the first screen
+instead of ~0.5 MB. Full 1024 px renders are only fetched when a detail view opens.
+The HTML is ~61 KB gzipped locally (GitHub Pages serves it compressed), and the
+page keeps its 48 static cards.
 
 ## Data model
 

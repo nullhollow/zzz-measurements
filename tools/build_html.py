@@ -16,12 +16,15 @@ N = len(DATA)
 MISSING = []
 
 # ---- asset checks ----------------------------------------------------------
+THUMBS = ('', '320/', 'avif/', 'avif/320/')
 for d in DATA:
     checks = {
         'sheet crop': ROOT / f"images/{d['img']}.webp",
         'official render': ROOT / f"character_images/{d['official']}.webp",
-        'card thumb': ROOT / f"character_images/thumbs/{d['official']}.webp",
     }
+    for prefix in THUMBS:
+        ext = 'avif' if 'avif' in prefix else 'webp'
+        checks[f'thumb {prefix or "640"}'] = ROOT / f"character_images/thumbs/{prefix}{d['official']}.{ext}"
     if d.get('skin'):
         checks['outfit render'] = ROOT / f"character_images/{d['skin']['official']}.webp"
     for label, path in checks.items():
@@ -32,8 +35,8 @@ for d in DATA:
         if not p.exists():
             MISSING.append(f"{d['display']}: outfit art ({p.relative_to(ROOT)})")
 if MISSING:
-    raise SystemExit('missing artwork:\n  ' + '\n  '.join(MISSING))
-print(f'artwork: all {N} entries and their outfits present')
+    raise SystemExit('missing artwork (run tools/make_thumbs.py):\n  ' + '\n  '.join(MISSING))
+print(f'artwork: all {N} entries and their responsive variants present')
 
 DESC = (f"Measurements for all {N} female Zenless Zone Zero agents: height, bust, under-bust, waist, "
         "hips and thigh circumference in cm and inches, with waist-to-hip proportions, silhouette "
@@ -137,7 +140,15 @@ cards_html = card.render_cards(initial)
 
 tpl = (ROOT / 'tools/template.html').read_text()
 card_tmpl_js = json.dumps(card.TEMPLATE, ensure_ascii=False).replace('</', '<\\/')
-data_js = json.dumps(DATA, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+# the page only needs the fields the client renders; provenance and class
+# internals stay in tools/data.json and the exported dataset
+JS_SKIP = {'source_url', 'source_file', 'cm_eff', 'waist_level', 'hip_level', 'thigh_level'}
+def slim(d):
+    out = {k: v for k, v in d.items() if k not in JS_SKIP}
+    if out.get('skin'):
+        out['skin'] = {k: v for k, v in out['skin'].items() if k not in JS_SKIP}
+    return out
+data_js = json.dumps([slim(d) for d in DATA], ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 html = (tpl
         .replace('/*__DATA__*/[]', data_js)
         .replace('/*__CARD_TMPL__*/""', card_tmpl_js)

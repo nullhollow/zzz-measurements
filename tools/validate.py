@@ -142,7 +142,10 @@ def check_data(out):
 def check_assets(out):
     for d in DATA:
         for rel in (f"images/{d['img']}.webp", f"character_images/{d['official']}.webp",
-                    f"character_images/thumbs/{d['official']}.webp"):
+                    f"character_images/thumbs/{d['official']}.webp",
+                    f"character_images/thumbs/320/{d['official']}.webp",
+                    f"character_images/thumbs/avif/{d['official']}.avif",
+                    f"character_images/thumbs/avif/320/{d['official']}.avif"):
             if not (ROOT / rel).exists():
                 err(f'missing source asset {rel}')
         if d.get('skin'):

@@ -50,3 +50,17 @@
 - Font preloads and a single high-priority podium image instead of twelve.
 - `tools/validate.py` + GitHub Actions: build, validate, reproducibility diff.
 - Fixed `fetch_images.py` missing imports and `optimize_images.py` division by zero.
+
+### Payload and phones (follow-up)
+- Responsive `<picture>` set: AVIF 320/640 with WebP 320/640 fallbacks and `sizes`.
+  Measured first-screen artwork drops from ~556 KB to ~120 KB on a 390 px phone.
+- Character pages load the 320/640 hero set instead of the 1024 px render.
+- The embedded client dataset drops provenance-only fields; static cards are reused
+  on first paint instead of being rebuilt.
+- Phones get one horizontal card per row (art left, data right), a swipeable podium
+  strip, a compact three-row control bar with the count moved into the filter sheet,
+  and a four-column table (name, bust, waist, hip) with no horizontal scroll and a
+  sticky name column; tapping a row opens the full record.
+- The filter sheet is taller, applies from a sticky footer, and carries Reset/Share.
+- Compare, filter and modal tap targets were enlarged; the modal art is capped at
+  34vh so measurements are reachable without a long scroll.

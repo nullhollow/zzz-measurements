@@ -31,7 +31,7 @@
 <link rel="apple-touch-icon" href="icon-512.png">
 <link rel="preload" href="fonts/Anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/Inter-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ChakraPetch-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">/*__JSONLD__*/</script>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -165,6 +165,7 @@
   .count b{color:var(--acid); font-family:var(--num); font-weight:700; font-size:13px}
   .cmpbtn .n{display:inline-block; min-width:16px; margin-left:7px; padding:1px 5px; border-radius:999px;
     background:var(--acid); color:#0b0b0c; font-family:var(--num); font-weight:800; font-size:9px}
+  .cmpbtn:before{content:"⇄"; font-family:var(--num); margin-right:7px; font-size:12px}
   .cmpbtn[aria-pressed="true"]{border-color:var(--acid); color:var(--acid)}
 
   /* ---------- filter dropdown ---------- */
@@ -208,6 +209,7 @@
   .chipbtn:hover{border-color:var(--acid); color:var(--acid)}
   .chipbtn[aria-pressed="true"]{background:var(--acid); border-color:var(--acid); color:#0b0b0c; font-weight:800}
   .fapply{display:none; width:100%; margin-top:14px}
+  .fmobile{display:none}
 
   /* ---------- cards ---------- */
   .wrap{max-width:1400px; margin:0 auto; padding:18px 22px 60px}
@@ -497,6 +499,8 @@
   html[data-theme="light"] .tname{color:#0b0b0c}
   html[data-theme="light"] .cmptable thead th,html[data-theme="light"] .cmptable td{color:#0b0b0c}
   html[data-theme="light"] .cmptable .cmdesc{color:#3d3d45}
+  html[data-theme="light"] #tbl tbody td:first-child{background:#fff}
+  html[data-theme="light"] #tbl tbody tr:hover td:first-child{background:#f0f0e9}
   html[data-theme="light"] .cmp{background:#fff;color:#0b0b0c}
   html[data-theme="light"] .fpanel{background:linear-gradient(180deg,#ffffff,#f4f4ed)}
   html[data-theme="light"] .comparebar{background:rgba(243,243,236,.97)}
@@ -561,8 +565,9 @@
     .hl .v{font-size:15px}
     .hl .n{font-size:11px}
     .wrap{padding:14px 12px 48px}
-    .podstrip{padding:0 12px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:10px}
-    .podstrip .pod{padding:10px 10px 0}
+    .podstrip{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:10px;
+      padding:0 12px 8px; -webkit-overflow-scrolling:touch; scrollbar-width:thin}
+    .podstrip .pod{flex:0 0 88%; max-width:none; scroll-snap-align:center; padding:10px 10px 0}
     .podstrip .phead b{font-size:16px}
     .podstrip .slot .plate b{font-size:12px}
     .podstrip .slot.p1 .plate b{font-size:13.5px}
@@ -573,11 +578,22 @@
     .hero-inner{padding:20px 16px 24px}
     .hero-side{display:none}
     .count{flex-basis:auto; margin-left:auto}
-    select,.btn,.viewtoggle button{padding:8px 12px}
+    #count{display:none}
+    .cmpbtn > span:first-child{display:none}
+    .cmpbtn .n{margin-left:4px}
+    .cmpbtn:before{margin-right:4px}
+    select,.btn,.viewtoggle button{padding:8px 9px; font-size:10px}
+    .viewtoggle button{padding:8px 9px}
+    #shareBtn,#reset{display:none}
+    .fmobile{display:flex; gap:8px; margin-top:10px}
+    .fmobile .btn{flex:1; justify-content:center}
+    .chipbtn{padding:7px 12px}
     .mhead h2{font-size:22px}
-    .fpanel{position:fixed; left:8px; right:8px; bottom:8px; top:auto; width:auto; max-height:72vh;
-      overflow:auto; border-radius:18px}
-    .fpanel .fapply{display:block}
+    .mimg img{max-height:34vh}
+    .fpanel{position:fixed; left:8px; right:8px; bottom:8px; top:auto; width:auto; max-height:82vh;
+      overflow:auto; border-radius:18px; padding-bottom:10px}
+    .fpanel .fapply{display:block; position:sticky; bottom:-10px; z-index:2;
+      background:#121216; padding:10px 0 4px; margin-top:10px}
     .comparebar{padding:8px 10px}
     .comparebar .cchip{font-size:10px}
     .toast{bottom:104px}
@@ -590,8 +606,42 @@
     .plot .pt text{font-size:20px}
     .plegend{display:none}
   }
-  @media (max-width:480px){
-    .col-low{display:none}
+  @media (max-width:560px){
+    /* one horizontal card per row: art on the left, readable data on the right */
+    .grid{grid-template-columns:1fr}
+    .card-main{display:grid; grid-template-columns:132px minmax(0,1fr)}
+    .card .imgbox{aspect-ratio:auto; height:100%; min-height:230px;
+      border-bottom:0; border-right:1px solid var(--line)}
+    .card .imgbox picture{display:block; height:100%}
+    .card .imgbox img{position:static; left:auto; height:100%; width:100%;
+      object-fit:cover; object-position:center top; transform:none}
+    .card .stick{font-size:10px; right:-6px; top:8px}
+    .card .body{padding:10px 11px; gap:7px}
+    .card .name{font-size:18px}
+    .card .pct{padding:6px 8px}
+    .card .chips{gap:4px}
+    .card .chip{font-size:8.5px; padding:3px 8px}
+    .card .desc{-webkit-line-clamp:3; font-size:11.5px}
+    .card .cmp{width:30px; height:30px; left:6px; top:6px}
+  }
+  @media (max-width:760px){
+    .col-low,.col-med{display:none}
+    .tablewrap{max-height:none}
+    #tbl{table-layout:fixed}
+    #tbl th[data-k="name"]{width:52%}
+    #tbl th[data-k="bust"]{width:16%}
+    #tbl th[data-k="waist"]{width:16%}
+    #tbl th[data-k="hip"]{width:16%}
+    #tbl thead th:first-child{position:sticky; left:0; z-index:4}
+    #tbl tbody td:first-child{position:sticky; left:0; z-index:1; background:#101014}
+    #tbl tbody tr:hover td:first-child{background:#191920}
+    #tbl .thumb{width:28px; height:52px}
+    #tbl tbody td .mini{display:none}
+    #tbl tbody td:first-child .mini{display:block; font-size:9px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    #tbl tbody td:first-child > div{gap:6px !important}
+    #tbl thead th{white-space:normal}
+    #tbl thead th button{padding:9px 6px; font-size:9px; overflow-wrap:anywhere}
+    #tbl tbody td{padding:8px 6px; font-size:11px}
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto}
@@ -651,6 +701,7 @@
       <button class="btn fbtn" id="fBtn" aria-expanded="false" aria-controls="fPanel"><span data-i18n="filters">Filters</span><span class="fbadge" id="fBadge"></span><span class="car" aria-hidden="true">▾</span></button>
       <div class="fpanel" id="fPanel" role="group" aria-label="Filters">
         <div class="fhead"><span data-i18n="ranges">Numeric ranges</span><button class="lnk" id="fClearRanges" data-i18n="resetRanges">reset</button></div>
+        <div class="fnote" id="fCount" aria-live="polite"></div>
         <div id="fRanges"></div>
         <div class="fnote" data-i18n="statureNote">Stature uses head height where the charted figure counts ears or headgear; charted height stays visible in the table.</div>
         <div class="fhead" style="margin-top:14px"><span data-i18n="classes">Classes</span></div>
@@ -684,6 +735,10 @@
           <button class="chipbtn" data-g="thighs" data-v="Thick" aria-pressed="false" data-i18n="thick">Thick</button>
         </div>
         <button class="btn fapply" id="fApply" data-i18n="apply">Apply &amp; close</button>
+        <div class="fmobile">
+          <button class="btn" id="fResetAll" data-i18n="reset">Reset all</button>
+          <button class="btn" id="fShare" data-i18n="share">Share</button>
+        </div>
       </div>
     </div>
     <div class="fgroup" id="sortGroup"><label for="fSort" data-i18n="sort">Sort</label>
@@ -700,7 +755,7 @@
       <button id="vTable" aria-pressed="false" data-i18n="table">TABLE</button>
       <button id="vPlot" aria-pressed="false" data-i18n="plot">PLOT</button>
     </div>
-    <button class="btn cmpbtn" id="compareBtn" aria-pressed="false"><span data-i18n="compare">COMPARE</span><span class="n" id="cmpCount">0</span></button>
+    <button class="btn cmpbtn" id="compareBtn" aria-pressed="false" aria-label="Compare" title="Compare"><span data-i18n="compare">COMPARE</span><span class="n" id="cmpCount">0</span></button>
     <button class="btn" id="shareBtn" data-i18n="share">SHARE</button>
     <button class="btn" id="reset" data-i18n="reset">RESET</button>
     <div class="count" id="count" aria-live="polite" aria-atomic="true"></div>
@@ -1062,8 +1117,19 @@ function filtered(){
 }
 
 /* ---------------- cards (shared template) ---------------- */
+const THUMB = 'character_images/thumbs';
 const officialSrc = r => `character_images/${r.official}.webp`;
-const thumbSrc = d => state.art==="official" ? `character_images/thumbs/${d.official}.webp` : `images/${d.img}.webp`;
+const thumbSrc = d => state.art==="official" ? `${THUMB}/320/${d.official}.webp` : `images/${d.img}.webp`;
+function mediaFor(d, sizes, opts={}){
+  const lazy = opts.lazy !== false;
+  const load = lazy ? ' loading="lazy"' : '';
+  const prio = opts.priority ? ` fetchpriority="${opts.priority}"` : '';
+  if(state.art==="sheet") return `<img${load}${prio} decoding="async" src="images/${d.img}.webp" alt="">`;
+  const s = d.official;
+  const dx = d.dx!=null ? ` style="--dx:${d.dx}%"` : '';
+  return `<picture><source type="image/avif" srcset="${THUMB}/avif/320/${s}.avif 320w, ${THUMB}/avif/${s}.avif 640w" sizes="${sizes}">`+
+    `<img${load}${prio} decoding="async" src="${THUMB}/${s}.webp" srcset="${THUMB}/320/${s}.webp 320w, ${THUMB}/${s}.webp 640w" sizes="${sizes}" alt=""${dx}></picture>`;
+}
 function heightLine(d){
   if(d.stature_basis==='head'){
     return `${fmt(d.cm,0)} cm ${t('charted')} · ${fmt(d.stature_cm,0)} cm ${t('headHeight')}`;
@@ -1092,7 +1158,8 @@ function cardValues(d){
     name: esc(d.name),
     cmpAria: esc(`${cmpOn?t('removeFromCompare'):t('addCompare')}: ${d.display}`),
     href: `characters/${d.slug}.html`,
-    thumb: thumbSrc(d), dx, stick,
+    media: mediaFor(d, '(max-width:560px) 132px, (max-width:900px) 200px, 240px'),
+    stick,
     display: esc(d.display),
     heightLine: esc(heightLine(d)),
     pctTitle: esc(t('pctLong')),
@@ -1111,6 +1178,9 @@ function cardHTML(d){
   return CARD_TMPL.replace(/\{\{(\w+)\}\}/g, (_,k)=> v[k] ?? '');
 }
 function renderCards(list){
+  const sig = list.map(d=>d.name).join('|') + '|' + state.unit + state.art + state.lang;
+  if(sig === renderCards._sig && $("#grid").children.length === list.length){ syncCardCompare(); return; }
+  renderCards._sig = sig;
   $("#grid").innerHTML = list.map(cardHTML).join("");
   syncCardCompare();
 }
@@ -1128,9 +1198,9 @@ function columns(){
   });
   return [
     {k:"name",   t:t('sortName').replace(' A→Z',''), s:d=>d.display, num:false},
-    {k:"cm",     t:`${t('height')} (cm)`, s:d=>d.cm, num:true, cls:'',
+    {k:"cm",     t:`${t('height')} (cm)`, s:d=>d.cm, num:true, cls:'col-low',
       fmtv:(v,d)=>`${fmt(d.cm,0)}${d.stature_basis==='head'?`<div class="mini">${fmt(d.stature_cm,0)} ${t('headHeight')}</div>`:''}`},
-    {k:"stature",t:`${t('stature')} (cm)`, s:d=>d.stature_cm, num:true, cls:'',
+    {k:"stature",t:`${t('stature')} (cm)`, s:d=>d.stature_cm, num:true, cls:'col-med',
       fmtv:(v,d)=>fmt(d.stature_cm,0)},
     {k:"ft",     t:"ft/in", s:d=>d.ftin, num:false, cls:'col-low', fmtv:(v,d)=>d.ftin??"—"},
     unitCol("bust","Bust"),
@@ -1138,11 +1208,11 @@ function columns(){
     unitCol("waist","Waist"),
     unitCol("hip","Hip"),
     unitCol("thigh","Thigh",1,'col-low'),
-    unitCol("diff","Bust diff"),
-    {k:"uk",     t:"UK", s:d=>d.uk, num:false, cls:''},
+    unitCol("diff","Bust diff",1,'col-med'),
+    {k:"uk",     t:"UK", s:d=>d.uk, num:false, cls:'col-med'},
     {k:"us",     t:"US", s:d=>d.us, num:false, cls:'col-low'},
     {k:"eu",     t:"EU", s:d=>d.eu, num:false, cls:'col-low'},
-    {k:"whr",    t:"Waist/Hip", s:d=>d.whr, num:true, cls:'', fmtv:v=>fmtPct(v)},
+    {k:"whr",    t:"Waist/Hip", s:d=>d.whr, num:true, cls:'col-med', fmtv:v=>fmtPct(v)},
     {k:"whtr",   t:"Waist/H", s:d=>d.whtr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
     {k:"thr",    t:"Thigh/H", s:d=>d.thr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
     {k:"thh",    t:"Thigh/Hip", s:d=>d.thh, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
@@ -1181,12 +1251,12 @@ function renderTable(list){
     const tds = COLS.map(c=>{
       if(c.k==="name"){
         return `<td><div style="display:flex;align-items:center;gap:8px">
-          <img class="thumb" loading="lazy" decoding="async" src="${thumbSrc(d)}" alt="">
-          <span><a class="tname" data-slug="${esc(d.slug)}" href="characters/${d.slug}.html">${esc(d.display)}</a>${d.variant_of?'<span class="badge">variant</span>':''}<div class="mini">${esc(d.height_group)} · UK ${esc(d.uk)} · ${esc(d.shape)}</div></span></div></td>`;
+          <img class="thumb" loading="lazy" decoding="async" src="${thumbSrc(d)}" alt="" width="34" height="64">
+          <span><a class="tname" data-slug="${esc(d.slug)}" href="characters/${d.slug}.html">${esc(d.display)}</a>${d.variant_of?'<span class="badge">variant</span>':''}<div class="mini">${esc(d.stature_basis==='head'?`${fmt(d.cm,0)}→${fmt(d.stature_cm,0)} cm`:`${fmt(d.cm,0)} cm`)} · UK ${esc(d.uk)} · ${esc(d.shape)}</div></span></div></td>`;
       }
       const raw = c.s(d);
       const val = c.fmtv ? c.fmtv(raw, d) : (raw==null?"—":(c.num?fmt(raw, c.k==="diff"?0:1):esc(raw)));
-      return `<td class="${c.num?'num':''}">${val}</td>`;
+      return `<td class="${c.num?'num':''} ${esc(c.cls||'')}">${val}</td>`;
     }).join("");
     return `<tr data-name="${esc(d.name)}">${tds}</tr>`;
   }).join("");
@@ -1257,7 +1327,7 @@ function renderPodium(){
       <div class="stage">
         ${slots.map((d,i)=> !d ? `<div class="slot blank p${rank[i]}" style="--g:0.42"><div class="pimg"></div><div class="step">${rank[i]}</div><div class="plate"></div></div>`
         : `<a class="slot p${rank[i]}" href="characters/${d.slug}.html" data-slug="${esc(d.slug)}" title="${esc(d.display)} — ${esc(cat.f(d))}"${d.dx<0?' data-dxn="1"':''} style="--g:${wgt(d).toFixed(3)};--k:${nudge(d)}">
-            <div class="pimg"><img fetchpriority="${rank[i]===1?'high':'low'}" decoding="async" src="character_images/thumbs/${d.official}.webp" alt=""></div>
+            <div class="pimg">${mediaFor(d, '(max-width:640px) 30vw, 220px', {lazy:false, priority:rank[i]===1?'high':'low'})}</div>
             <div class="step">${rank[i]}</div>
             <div class="plate"><b>${esc(d.display)}</b><i>${esc(cat.f(d))}</i>${cat.x(d)?`<u>${esc(cat.x(d))}</u>`:""}</div>
           </a>`).join("")}
@@ -1442,7 +1512,7 @@ function openModal(slug, opts){
           ${r.notes?`<div class="mnote">Chart note: ${esc(r.notes)}</div>`:""}
         </div>
         <div class="sect"><h3>${esc(t('similar'))}</h3>
-          <div class="simrow">${similarTo(d).map(s=>`<button type="button" class="sim" data-sim="${esc(s.d.slug)}"><img src="character_images/thumbs/${s.d.official}.webp" alt="" width="22" height="34">${esc(s.d.display)}</button>`).join('')}</div>
+          <div class="simrow">${similarTo(d).map(s=>`<button type="button" class="sim" data-sim="${esc(s.d.slug)}"><img src="${THUMB}/320/${s.d.official}.webp" alt="" width="22" height="34">${esc(s.d.display)}</button>`).join('')}</div>
         </div>
         <div class="mfoot">
           <a class="btn primary" href="characters/${d.slug}.html">${esc(t('fullProfile'))}</a>
@@ -1586,6 +1656,7 @@ function render(skipHash){
   renderPodium();
   renderHighlights();
   $("#count").innerHTML = `<b>${list.length}</b> / ${DATA.length} ${esc(t('entries'))}`;
+  const fcount = $("#fCount"); if(fcount) fcount.textContent = `${list.length} / ${DATA.length} ${t('entries')}`;
   $("#empty").hidden = list.length>0;
   const v = state.view;
   $("#cardsView").hidden = v!=="cards";
@@ -1717,14 +1788,17 @@ function applyTheme(theme){
 $("#theme").addEventListener("change", e=>applyTheme(e.target.value));
 
 /* reset */
-$("#reset").addEventListener("click", ()=>{
+function resetAll(){
   Object.assign(state,{q:"",cup:"all",shape:"all",balance:"all",thighs:"all",height:"all",
     sort:"bust-desc",view:"cards",rng:{},compare:[]});
   $("#q").value="";
   $$("#fPanel .chipbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v==="all"?"true":"false"));
   $("#fSort").value="bust-desc";
   renderFilterPanel(); renderCompare(); render();
-});
+}
+$("#reset").addEventListener("click", resetAll);
+$("#fResetAll").addEventListener("click", ()=>{ resetAll(); setFilters(false); });
+$("#fShare").addEventListener("click", share);
 
 /* keyboard + routing */
 document.addEventListener("keydown", e=>{
@@ -1830,6 +1904,9 @@ function applyHashState(){
     const th=localStorage.getItem("zzz-theme"); if(th==="light") document.documentElement.dataset.theme="light";
   }catch(e){}
   $("#agentCount").textContent = DATA.length;
+  /* the HTML already contains the 48 default cards; only rebuild when a saved
+     preference or URL state differs from that initial render */
+  renderCards._sig = [...DATA].sort(SORTS["bust-desc"]).map(d=>d.name).join('|') + '|cm|official|en';
   applyLang(state.lang, false);
   syncControls();
   applyHashState();
