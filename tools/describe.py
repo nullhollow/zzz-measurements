@@ -6,6 +6,17 @@ data = json.load(open(ROOT/'tools/data.json'))
 by_key = {d['name']: d for d in data}
 # stature baseline for the profile text, using effective height where the chart counts an appendage
 ROSTER_AVG = sum(d['cm_eff'] or d['cm'] for d in data) / len(data)
+# rank by stature (1 = tallest) so the "tallest" claim matches the actual chart position;
+# tied statures share the better rank, hence the "among the tallest" wording for the top group
+_HEIGHTS = [d['cm_eff'] or d['cm'] for d in data]
+H_TOTAL = len(data)
+H_RANK = {d['name']: 1 + sum(1 for x in _HEIGHTS if x > (d['cm_eff'] or d['cm'])) for d in data}
+
+
+def ordinal(n):
+    if 10 <= n % 100 <= 20: suf = 'th'
+    else: suf = {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')
+    return f"{n}{suf}"
 
 def rel_bust(p):
     if p is None: return "hard to place"
@@ -61,10 +72,19 @@ def describe(d, unit, compare=None):
         where = 'just under' if gap < -2 else ('above' if gap > 2 else 'right around')
         frame = (f"{n} is charted at {cmv:g} cm ({ft}), but that figure counts her ears: at head height "
                  f"she stands about {d['cm_eff']:g} cm ({d['ftin_eff']}), {where} the roster average.")
+    elif hg == 'Tall':
+        r = H_RANK.get(d['name'], H_TOTAL)
+        if r <= 3:
+            frame = f"{n} is among the tallest figures on the chart at {cmv:g} cm ({ft})."
+        elif r <= 8:
+            frame = (f"{n} is one of the taller figures here, {ordinal(r)} tallest of {H_TOTAL}, "
+                     f"at {cmv:g} cm ({ft}).")
+        else:
+            frame = (f"{n} measures {cmv:g} cm ({ft}), above the roster average at "
+                     f"{ordinal(r)} tallest of {H_TOTAL}.")
     else:
         frame = {
             'Petite': f"{n} measures just {cmv:g} cm ({ft}), one of the most compact frames on the chart.",
-            'Tall':   f"{n} is one of the tallest figures on the chart at {cmv:g} cm ({ft}).",
             'Mid':    f"{n} measures {cmv:g} cm ({ft}), right around the roster average.",
         }[hg]
     bust = f"Her {v('bust_in','bust_cm')} bust (UK {d['uk']}) is {rel_bust(d['p_bust_cm'])}."
