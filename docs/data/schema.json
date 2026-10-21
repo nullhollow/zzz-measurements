@@ -236,9 +236,32 @@
        "null"
       ]
      },
+     "display_ja": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "display_zh": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
      "profile": {
       "type": "string",
       "format": "uri"
+     },
+     "profile_ja": {
+      "type": "string",
+      "format": "uri"
+     },
+     "profile_zh": {
+      "type": "string",
+      "format": "uri"
+     },
+     "profile_text": {
+      "type": "object"
      },
      "measured_outfit": {
       "type": [

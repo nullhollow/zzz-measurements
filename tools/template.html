@@ -810,7 +810,7 @@
   <div class="fbox">
     <div class="mark"><span>ZZZ MEASUREMENTS</span><i></i><span style="color:var(--dim)">MODELMETRICS.NET</span></div>
     <div class="flinks">
-      <a href="methodology.html" data-i18n="methodology">Methodology &amp; FAQ</a>
+      <a href="methodology.html" id="methodologyLink" data-i18n="methodology">Methodology &amp; FAQ</a>
       <a href="data/measurements.json" download data-i18n="downloadJson">Download JSON</a>
       <a href="data/measurements.csv" download data-i18n="downloadCsv">Download CSV</a>
       <a href="__REPO__/blob/main/CHANGELOG.md" rel="noopener">Changelog</a>
@@ -819,7 +819,7 @@
     <b>Source:</b> modelmetrics.net · <i>Zenless Zone Zero · Female Character Measurements</i>. Schema v__SCHEMA_VERSION__ · data updated <time datetime="__DATA_UPDATED__">__DATA_UPDATED__</time>.<br>
     <b>Height:</b> the charted figure may include ears, footwear or accessories. Height uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 152.1 cm used); the charted figure stays visible as a note.<br>
     <b>Basis:</b> every card, filter and ranking uses the <b>standard model</b>. A measured outfit is kept as its own record, shown in the detail view with its deltas; art-only outfits never touch a number.<br>
-    <b>Classes:</b> waist (Cinched / Average / Fuller), hips (Compact / Average-width / Wide) and thighs (Slim / Average / Thick) are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles; bust tier comes from bust minus under-bust. Thirteen agents (Rina, Yidhari, Caesar, Velina, Yanagi, Pulchra, Astra Yao, Sigrid, Jane Doe, Trigger, Cissia, Burnice, Orphie) are hand-pinned to Thick by curator read, so their detail view is marked “hand-pinned”. Shape uses bust, waist and hips. Hourglass needs both bust/waist and hip/waist ≥1.45 and a bust–hip balance within 15%; Straight is a flare below 1.30 or a bust–hip mismatch over 25%; the rest is Balanced. The sharpest-hourglass ranking uses flare × bust–hip balance.<br>
+    <b>Classes:</b> waist (Cinched / Average / Fuller), hips (Compact / Average-width / Wide) and thighs (Slim / Average / Thick) are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles; the cup group follows the source UK cup letter. Thirteen agents (Rina, Yidhari, Caesar, Velina, Yanagi, Pulchra, Astra Yao, Sigrid, Jane Doe, Trigger, Cissia, Burnice, Orphie) are hand-pinned to Thick by curator read, so their detail view is marked “hand-pinned”. Shape uses bust, waist and hips. Hourglass needs both bust/waist and hip/waist ≥1.45 and a bust–hip balance within 15%; Straight is a flare below 1.30 or a bust–hip mismatch over 25%; the rest is Balanced. The sharpest-hourglass ranking uses flare × bust–hip balance.<br>
     <b>Percentile bars:</b> roster percentiles of the raw cm measurement; height percentiles use head height. 0 = smallest, 100 = largest. Build is the bust percentile minus the hip percentile.<br>
     <b>Bust diff:</b> recomputed as bust minus under-bust so it keeps one decimal (the sheet's own diff column is whole-number rounded).<br>
     <b>Images:</b> scale renders from modelmetrics.net; official art from the ZZZ Fandom wiki, © HoYoverse. Auto-comments are generated from the measurements; treat them as figure-chart commentary, not in-game canon.
@@ -853,7 +853,21 @@ const I18N = {
     apply:'Apply & close', sort:'Sort', sheet:'SHEET', official:'OFFICIAL', cards:'CARDS', table:'TABLE', plot:'PLOT',
     compare:'COMPARE', share:'SHARE', reset:'RESET', noMatch:'No characters match these filters.',
     compareNow:'Compare', clear:'Clear', methodology:'Methodology & FAQ', downloadJson:'Download JSON', downloadCsv:'Download CSV',
-    langNote:'Roster commentary stays in English; controls and labels are translated.',
+    langNote:'Character names and profiles use their official language; interface labels are translated.', pageTitle:'ZZZ Female Measurements — roster, profiles & comparisons',
+    name:'Name', band:'Band', notes:'Notes', chartNote:'Chart note', variant:'variant', variantOf:'Variant of',
+    waistHip:'Waist / hip', waistHeight:'Waist / height', waistThigh:'Waist / thigh', thighHeight:'Thigh / height',
+    thighHip:'Thigh / hip', bustHeight:'Bust / height', hipHeight:'Hip / height', even:'even', vs:'vs', points:'pts', score:'score',
+    plotWaistHip:'Waist ÷ hip', plotWaistHeight:'Waist ÷ height', plotThighHip:'Thigh ÷ hip', plotBustHeight:'Bust ÷ height',
+    cupUnit:' cup', noThigh:'no reliable thigh measurement', percentileBy:'percentile by raw thigh circumference',
+    officialPortrait:'Official character portrait', outfitPortrait:'{outfit} outfit portrait', fandomCredit:'ZZZ Fandom wiki (© HoYoverse, fair use)',
+    artOnlyLabel:'Art only', renderCredit:'Render from modelmetrics.net. Scale: 1 square = 10 cm × 10 cm; characters are drawn to relative scale.',
+    noSeparateRender:'There is no separate render for this outfit, so this image shows her standard model.',
+    artOnlyNote:'“{outfit}” has no measured data, so it never affects a figure, a filter or a ranking on this page.',
+    measuredOutfitNote:'“{outfit}” has its own measured data. Cards, table, filters and rankings stay on the <b>standard model</b>; this view is the outfit record.',
+    standardOutfitNote:'Standard model — the canonical figure for every card, filter and ranking.',
+    extraOutfits:'{n} extra outfits available as art only.',
+    mergedNote:'This entry has a measured outfit ({outfit}). <b>Standard model is canonical</b> for cards, filters and rankings; the toggle shows the outfit’s own numbers and art.',
+    handPinned:'hand-pinned', terciles:'Terciles of the roster, measured in cm.', thighPercentile:'thigh circumference percentile',
     plotY:'Y axis', searchPh:'Search character, outfit or alias…',
     entries:'entries', picked:'selected for comparison', addCompare:'Add to comparison',
     cmpShort:'Compare', added:'Added', cup:'Cup', cmpAddOne:'Add one more agent to compare',
@@ -878,20 +892,34 @@ const I18N = {
   ja: {
     skip:'名簿へスキップ', heroSuffix:'人の女性エージェント · 寸法・比率・シルエット',
     source:'出典', updated:'データ更新', filters:'絞り込み', ranges:'数値範囲', resetRanges:'リセット',
-    statureNote:'耳や頭部装備を含む公式身長は、頭頂高を高さとして使います。Miyabiの公式170cmは注記として残ります。',
+    statureNote:'耳や頭部装備を含む公式身長は、頭頂高を高さとして使います。星見雅の公式170cmは注記として残ります。',
     classes:'分類', bustTier:'カップ区分', heightClass:'身長', shape:'シルエット', build:'体型', thighClass:'太もも区分',
     all:'すべて', petite:'小柄', mid:'中背', tall:'高身長', hourglass:'砂時計型', balanced:'バランス型', straight:'直線型',
     topHeavy:'上半身型', bottomHeavy:'下半身型', slim:'細め', average:'普通', thick:'太め',
-    apply:'適用して閉じる', sort:'並び順', sheet:'一覧', official:'公式', cards:'カード', table:'表', plot:'散布図',
+    apply:'適用して閉じる', sort:'並び順', sheet:'シート', official:'公式', cards:'カード', table:'表', plot:'散布図',
     compare:'比較', share:'共有', reset:'初期化', noMatch:'条件に合うキャラクターがいません。',
     compareNow:'比較する', clear:'クリア', methodology:'算出方法とFAQ', downloadJson:'JSONを保存', downloadCsv:'CSVを保存',
-    langNote:'解説文は英語のままです。操作ラベルを翻訳しています。',
+    langNote:'キャラクター名とプロフィールは各言語の公式表記、操作ラベルは翻訳しています。', pageTitle:'ZZZ 女性キャラ寸法 — 名簿・プロフィール・比較',
+    name:'名前', band:'アンダー', notes:'注記', chartNote:'チャート注記', variant:'バリエーション', variantOf:'標準モデル',
+    waistHip:'ウエスト / ヒップ', waistHeight:'ウエスト / 身長', waistThigh:'ウエスト / 太もも', thighHeight:'太もも / 身長',
+    thighHip:'太もも / ヒップ', bustHeight:'バスト / 身長', hipHeight:'ヒップ / 身長', even:'均等', vs:'対', points:'ポイント', score:'スコア',
+    plotWaistHip:'ウエスト ÷ ヒップ', plotWaistHeight:'ウエスト ÷ 身長', plotThighHip:'太もも ÷ ヒップ', plotBustHeight:'バスト ÷ 身長',
+    cupUnit:'カップ', noThigh:'信頼できる太ももの計測なし', percentileBy:'太もも周囲のロスター内パーセンタイル',
+    officialPortrait:'公式キャラクターポートレート', outfitPortrait:'{outfit}の衣装ポートレート', fandomCredit:'ZZZ Fandom wiki経由（© HoYoverse、フェアユース）',
+    artOnlyLabel:'画像のみ', renderCredit:'modelmetrics.netのレンダー。1マス＝10cm×10cmで、相対的な身長差に合わせて描画しています。',
+    noSeparateRender:'この衣装専用のレンダーがないため、標準モデルの画像を表示しています。',
+    artOnlyNote:'「{outfit}」には計測データがないため、数値・フィルター・ランキングには影響しません。',
+    measuredOutfitNote:'「{outfit}」は独自の計測データを持っています。カード・表・フィルター・ランキングは<b>標準モデル</b>のまま。ここでは衣装の記録を表示しています。',
+    standardOutfitNote:'標準モデル。カード・フィルター・ランキングの基準です。',
+    extraOutfits:'画像だけの衣装がさらに{n}点あります。',
+    mergedNote:'この項目には計測済み衣装（{outfit}）があります。カード・フィルター・ランキングは<b>標準モデル</b>が基準で、切り替えると衣装の数値と画像を表示します。',
+    handPinned:'手動分類', terciles:'ロスターをcmの実寸で三分割。', thighPercentile:'太もも周囲のパーセンタイル',
     plotY:'縦軸', searchPh:'名前・衣装・別名で検索…',
     entries:'件', picked:'件を比較に追加', addCompare:'比較に追加',
     cmpShort:'比較', added:'追加済み', cup:'カップ', cmpAddOne:'もう1人選ぶと比較できます',
     cmpReady:'比較できます', cmpStart:'カードの「比較」を押して2〜4人選んでください。',
     cmpMax:'比較は最大4人までです。',
-    measurements:'寸法', bra:'ブラサイズ', proportions:'比率', percentiles:'名单内パーセンタイル',
+    measurements:'寸法', bra:'ブラサイズ', proportions:'比率', percentiles:'名簿内パーセンタイル',
     figureRead:'体型の読み', outfits:'衣装', standard:'標準', fullProfile:'詳細ページ', report:'誤りを報告',
     addToCompare:'比較に追加', removeFromCompare:'比較から外す', similar:'似た体型',
     sourceArt:'画像出典', close:'閉じる', zoomHint:'画像をクリックで拡大。',
@@ -903,21 +931,35 @@ const I18N = {
     sortCupDesc:'カップ · 大きい順', sortCupAsc:'カップ · 小さい順', sortHeightDesc:'身長 · 高い順',
     sortHeightAsc:'身長 · 低い順', sortWaistAsc:'ウエスト · 細い順', sortHipDesc:'ヒップ · 広い順',
     sortThighDesc:'太もも · 太い順', sortThighAsc:'太もも · 細い順', sortWhrAsc:'砂時計型順',
-    sortName:'名前 A→Z', sortStatureLabel:'身長', cm:'cm', inch:'in', uk:'UK',
-    tally:'最高身長', cupLargest:'最大カップサイズ', hourglassTop:'最も砂時計型', thickest:'太もも最太', outfitsN:'衣装画像',
-    pctLong:'roster内の生cm値パーセンタイル。身長は頭頂高。0=最小、100=最大。'
+    sortName:'名前順', sortStatureLabel:'身長', cm:'cm', inch:'in', uk:'UK',
+    tally:'身長トップ', cupLargest:'最大カップ', hourglassTop:'砂時計型トップ', thickest:'太もも最強', outfitsN:'衣装画像',
+    pctLong:'ロスター内の実寸cm値の百分位。身長は頭頂ベース。0=最小、100=最大。'
   },
   zh: {
     skip:'跳到名单', heroSuffix:'位女性代理人 · 三围、比例与轮廓',
     source:'来源', updated:'数据更新', filters:'筛选', ranges:'数值范围', resetRanges:'重置',
-    statureNote:'若官方身高包含耳朵或头饰，则使用头顶高度；Miyabi 的官方 170 cm 仍以注释保留。',
+    statureNote:'若官方身高包含耳朵或头饰，则使用头顶高度；星见雅的官方 170 cm 仍以注释保留。',
     classes:'分类', bustTier:'罩杯分组', heightClass:'身高', shape:'轮廓', build:'体型', thighClass:'大腿分类',
     all:'全部', petite:'娇小', mid:'中等', tall:'高挑', hourglass:'沙漏型', balanced:'均衡型', straight:'直筒型',
     topHeavy:'上重', bottomHeavy:'下重', slim:'纤细', average:'适中', thick:'丰满',
-    apply:'应用并关闭', sort:'排序', sheet:'拼图', official:'官方', cards:'卡片', table:'表格', plot:'散点图',
+    apply:'应用并关闭', sort:'排序', sheet:'设定图', official:'官方', cards:'卡片', table:'表格', plot:'散点图',
     compare:'对比', share:'分享', reset:'重置', noMatch:'没有符合筛选条件的角色。',
     compareNow:'对比', clear:'清空', methodology:'方法与常见问题', downloadJson:'下载 JSON', downloadCsv:'下载 CSV',
-    langNote:'角色评论仍为英文；控件与标签已翻译。',
+    langNote:'角色名与档案使用官方译名和各语言版本，界面标签已完成本地化。', pageTitle:'ZZZ 女性角色测量 — 名单、档案与对比',
+    name:'名称', band:'下胸围', notes:'注记', chartNote:'榜单注记', variant:'变体', variantOf:'标准模型',
+    waistHip:'腰围 / 臀围', waistHeight:'腰围 / 身高', waistThigh:'腰围 / 大腿', thighHeight:'大腿 / 身高',
+    thighHip:'大腿 / 臀围', bustHeight:'胸围 / 身高', hipHeight:'臀围 / 身高', even:'均衡', vs:'对', points:'分', score:'评分',
+    plotWaistHip:'腰围 ÷ 臀围', plotWaistHeight:'腰围 ÷ 身高', plotThighHip:'大腿 ÷ 臀围', plotBustHeight:'胸围 ÷ 身高',
+    cupUnit:' 罩杯', noThigh:'没有可靠的大腿数据', percentileBy:'大腿围的全榜百分位',
+    officialPortrait:'官方角色立绘', outfitPortrait:'{outfit} 服装立绘', fandomCredit:'ZZZ Fandom wiki，© HoYoverse，合理使用',
+    artOnlyLabel:'仅立绘', renderCredit:'来自 modelmetrics.net 的渲染图。一格 = 10cm × 10cm，按角色相对身高绘制。',
+    noSeparateRender:'这套服装没有单独渲染图，因此显示标准模型。',
+    artOnlyNote:'「{outfit}」没有测量数据，不会影响任何数值、筛选或排名。',
+    measuredOutfitNote:'「{outfit}」有独立测量数据。卡片、表格、筛选和排名仍使用<b>标准模型</b>；这里显示的是服装记录。',
+    standardOutfitNote:'标准模型，所有卡片、筛选和排名的基准。',
+    extraOutfits:'另有 {n} 套仅立绘服装。',
+    mergedNote:'该条目有一套已测量服装（{outfit}）。卡片、筛选和排名以<b>标准模型</b>为准；切换后可查看服装自己的数据和立绘。',
+    handPinned:'人工分类', terciles:'按厘米实围把全榜三等分。', thighPercentile:'大腿围百分位',
     plotY:'纵轴', searchPh:'搜索角色、服装或别名…',
     entries:'条', picked:'项已加入对比', addCompare:'加入对比',
     cmpShort:'对比', added:'已加入', cup:'罩杯', cmpAddOne:'再选一位即可对比',
@@ -935,8 +977,8 @@ const I18N = {
     sortCupDesc:'罩杯 · 大到小', sortCupAsc:'罩杯 · 小到大', sortHeightDesc:'身高 · 高到低',
     sortHeightAsc:'身高 · 低到高', sortWaistAsc:'腰围 · 细到粗', sortHipDesc:'臀围 · 宽到窄',
     sortThighDesc:'大腿 · 粗到细', sortThighAsc:'大腿 · 细到粗', sortWhrAsc:'沙漏型优先',
-    sortName:'姓名 A→Z', sortStatureLabel:'身高', cm:'cm', inch:'in', uk:'UK',
-    tally:'最高身高', cupLargest:'最大罩杯', hourglassTop:'最沙漏', thickest:'大腿最粗', outfitsN:'服装立绘',
+    sortName:'名称排序', sortStatureLabel:'身高', cm:'cm', inch:'in', uk:'UK',
+    tally:'最高身高', cupLargest:'最大罩杯', hourglassTop:'最沙漏型', thickest:'大腿最丰满', outfitsN:'服装立绘',
     pctLong:'名单内原始厘米值的百分位。0=最小，100=最大。'
   }
 };
@@ -952,18 +994,17 @@ const pct = p => p==null?0:Math.round(p*100);
 const isCm = () => state.unit==='cm';
 const U = (d,k) => isCm()? d[k+'_cm'] : d[k+'_in'];
 const USUF = () => isCm()? ' cm' : ' in';
-const descFor = d => isCm()? (d.desc_cm||d.desc_in) : (d.desc_in||d.desc_cm);
 const bySlug = new Map(DATA.map(d=>[d.slug,d]));
 const byName = new Map(DATA.map(d=>[d.name,d]));
 const fmtPct = v => v==null ? '—' : v.toFixed(3);
 
 /* ---------------- state ---------------- */
 const RANGES = [
-  {k:'stature_cm', label:'Height'},
-  {k:'bust_cm',  label:'Bust'},
-  {k:'waist_cm', label:'Waist'},
-  {k:'hip_cm',   label:'Hips'},
-  {k:'thigh_cm', label:'Thighs'},
+  {k:'stature_cm', lk:'height'},
+  {k:'bust_cm',  lk:'bust'},
+  {k:'waist_cm', lk:'waist'},
+  {k:'hip_cm',   lk:'hip'},
+  {k:'thigh_cm', lk:'thigh'},
 ];
 const BOUNDS = {};
 for(const m of RANGES){
@@ -973,6 +1014,42 @@ for(const m of RANGES){
 const state = {q:"", cup:"all", shape:"all", balance:"all", thighs:"all", height:"all",
                sort:"cup-desc", view:"cards", unit:"cm", art:"official", lang:"en",
                rng:{}, compare:[], plotY:"whr"};
+function nameOf(d){
+  if(!d) return '';
+  return state.lang==='ja' ? (d.name_ja || d.display)
+       : state.lang==='zh' ? (d.name_zh || d.display)
+       : d.display;
+}
+function charHref(d){
+  const base = `characters/${d.slug}.html`;
+  return state.lang==='ja' ? `ja/${base}` : state.lang==='zh' ? `zh/${base}` : base;
+}
+function descFor(d){
+  const u = state.unit==='cm' ? 'cm' : 'in';
+  if(state.lang==='ja') return d[`desc_ja_${u}`] || d[`desc_${u}`] || '';
+  if(state.lang==='zh') return d[`desc_zh_${u}`] || d[`desc_${u}`] || '';
+  return d[`desc_${u}`] || '';
+}
+function readFor(d){
+  return state.lang==='ja' ? (d.read_ja || d.read)
+       : state.lang==='zh' ? (d.read_zh || d.read)
+       : d.read || '';
+}
+function tagsFor(d){
+  return state.lang==='ja' ? (d.tags_ja || d.tags)
+       : state.lang==='zh' ? (d.tags_zh || d.tags)
+       : d.tags;
+}
+function noteFor(d){
+  if(state.lang==='ja' && Object.prototype.hasOwnProperty.call(d,'notes_ja')) return d.notes_ja || '';
+  if(state.lang==='zh' && Object.prototype.hasOwnProperty.call(d,'notes_zh')) return d.notes_zh || '';
+  return d.notes || '';
+}
+function tagText(v){
+  if(state.lang==='ja') return ({Petite:'小柄',Mid:'中背',Tall:'高身長',Cinched:'くびれ',Average:'平均',Fuller:'しっかり',Compact:'コンパクト','Average-width':'平均的',Wide:'広め',Slim:'細め',Thick:'太め',Hourglass:'砂時計型',Balanced:'バランス型',Straight:'直線型','Top-heavy':'上半身寄り','Bottom-heavy':'下半身寄り','n/a':'計測なし'})[v] || v;
+  if(state.lang==='zh') return ({Petite:'娇小',Mid:'中等',Tall:'高挑',Cinched:'纤细',Average:'适中',Fuller:'丰满',Compact:'窄胯','Average-width':'适中',Wide:'宽胯',Slim:'纤细',Thick:'丰满',Hourglass:'沙漏型',Balanced:'匀称型',Straight:'直线型','Top-heavy':'上围偏重','Bottom-heavy':'下围偏重','n/a':'无数据'})[v] || v;
+  return v;
+}
 const CUP_BASE = {A:1, B:2, C:3, D:4, E:5, F:6, G:7, H:8, J:9, K:10, L:11, M:12, N:13};
 function cupParts(d){
   const m = String(d && d.uk || '').match(/^(\d+)\s*([A-Za-z]+)$/);
@@ -988,7 +1065,7 @@ function cupScore(d){
   return base * 10000 + single * 1000 + p.band;
 }
 const SORTS = {
-  "name":        (a,b)=>a.display.localeCompare(b.display),
+  "name":        (a,b)=>nameOf(a).localeCompare(nameOf(b), state.lang==='ja'?'ja':state.lang==='zh'?'zh-Hans':'en'),
   "height-desc": (a,b)=>b.stature_cm-a.stature_cm,
   "height-asc":  (a,b)=>a.stature_cm-b.stature_cm,
   "cup-desc":    (a,b)=>cupScore(b)-cupScore(a),
@@ -1007,10 +1084,10 @@ const SORT_LABEL_KEY = {
   "whr-asc":"sortWhrAsc","name":"sortName"
 };
 const PLOT_METRICS = [
-  {k:'whr', label:'Waist ÷ hip', dec:3},
-  {k:'whtr', label:'Waist ÷ height', dec:3},
-  {k:'thh', label:'Thigh ÷ hip', dec:3},
-  {k:'bhr', label:'Bust ÷ height', dec:3},
+  {k:'whr', lk:'plotWaistHip', dec:3},
+  {k:'whtr', lk:'plotWaistHeight', dec:3},
+  {k:'thh', lk:'plotThighHip', dec:3},
+  {k:'bhr', lk:'plotBustHeight', dec:3},
 ];
 
 /* ---------------- URL state ---------------- */
@@ -1102,11 +1179,11 @@ function renderFilterPanel(){
     const v0 = Math.min(Math.max(snapTo(toDisp(r[0]),step), b0), b1);
     const v1 = Math.min(Math.max(snapTo(toDisp(r[1]),step), b0), b1);
     return `<div class="frow" data-k="${k}">
-      <div class="frl"><span>${esc(k==='stature_cm'?t('height'):m.label)}<button class="rreset" data-reset="${k}" title="Reset ${esc(m.label)}" aria-label="Reset ${esc(m.label)}">↺</button></span><span class="frv"></span></div>
+      <div class="frl"><span>${esc(t(m.lk))}<button class="rreset" data-reset="${k}" title="Reset ${esc(t(m.lk))}" aria-label="Reset ${esc(t(m.lk))}">↺</button></span><span class="frv"></span></div>
       <div class="dual">
         <div class="dtr"><i></i></div>
-        <input type="range" class="dlo" min="${b0}" max="${b1}" step="${step}" value="${v0}" aria-label="${esc(m.label)} minimum">
-        <input type="range" class="dhi" min="${b0}" max="${b1}" step="${step}" value="${v1}" aria-label="${esc(m.label)} maximum">
+        <input type="range" class="dlo" min="${b0}" max="${b1}" step="${step}" value="${v0}" aria-label="${esc(t(m.lk))} minimum">
+        <input type="range" class="dhi" min="${b0}" max="${b1}" step="${step}" value="${v1}" aria-label="${esc(t(m.lk))} maximum">
       </div>
     </div>`;
   }).join("");
@@ -1142,7 +1219,7 @@ function renderFilterPanel(){
 function filtered(){
   const q = norm(state.q.trim());
   return DATA.filter(d=>{
-    if(q && !(norm(d.display).includes(q) || d.aliases.some(a=>norm(a).includes(q)))) return false;
+    if(q && !(norm(nameOf(d)).includes(q) || norm(d.name_ja||'').includes(q) || norm(d.name_zh||'').includes(q) || norm(d.display).includes(q) || d.aliases.some(a=>norm(a).includes(q)))) return false;
     for(const m of RANGES) if(!inRange(d, m.k)) return false;
     if(state.cup!=="all" && d.cup_group!==state.cup) return false;
     if(state.shape!=="all" && d.shape!==state.shape) return false;
@@ -1186,32 +1263,34 @@ function heightLine(d){
     : `${d.ftin_stature} · ${fmt(d.stature_cm,1)} cm${head}`;
 }
 function chipsHTML(d){
+  const tags = tagsFor(d);
   const chips = [
-    `<span class="chip height">${esc(d.tags.height)}</span>`,
+    `<span class="chip height">${esc(tagText(tags.height))}</span>`,
     `<span class="chip bust">${t('uk')} ${esc(d.uk)}</span>`,
-    `<span class="chip waist">${esc(t('waist'))} ${esc(d.tags.waist)}</span>`,
-    `<span class="chip hips">${esc(t('hip'))} ${esc(d.tags.hips)}</span>`,
+    `<span class="chip waist">${esc(t('waist'))} ${esc(tagText(tags.waist))}</span>`,
+    `<span class="chip hips">${esc(t('hip'))} ${esc(tagText(tags.hips))}</span>`,
   ];
-  if(d.thigh_cm!=null) chips.push(`<span class="chip thighs">${esc(t('thigh'))} ${esc(d.tags.thighs)}</span>`);
-  chips.push(`<span class="chip shape">${esc(d.tags.shape)}</span>`);
-  chips.push(`<span class="chip">${esc(d.tags.balance)}</span>`);
+  if(d.thigh_cm!=null) chips.push(`<span class="chip thighs">${esc(t('thigh'))} ${esc(tagText(tags.thighs))}</span>`);
+  chips.push(`<span class="chip shape">${esc(tagText(tags.shape))}</span>`);
+  chips.push(`<span class="chip">${esc(tagText(tags.balance))}</span>`);
   return chips.join('');
 }
+
 function cardValues(d){
   const u = isCm()? 'cm' : 'in';
   const dx = (d.dx!=null && state.art==="official") ? ` style="--dx:${d.dx}%"` : '';
-  const note = d.notes ? `<div class="note">${esc(d.notes)}</div>` : '';
+  const note = noteFor(d) ? `<div class="note">${esc(noteFor(d))}</div>` : '';
   const stick = d.variant_of ? `<span class="stick">${esc(d.outfit||"variant")}</span>` : '';
   const cmpOn = state.compare.includes(d.slug);
   return {
     name: esc(d.name),
-    cmpAria: esc(`${cmpOn?t('removeFromCompare'):t('addCompare')}: ${d.display}`),
+    cmpAria: esc(`${cmpOn?t('removeFromCompare'):t('addCompare')}: ${nameOf(d)}`),
     cmpIco: cmpOn?'✓':'+',
     cmpLbl: cmpOn?t('added'):t('cmpShort'),
-    href: `characters/${d.slug}.html`,
+    href: charHref(d),
     media: mediaFor(d, cardSizes(d)),
     stick,
-    display: esc(d.display),
+    display: esc(nameOf(d)),
     heightLine: esc(heightLine(d)),
     pctTitle: esc(t('pctLong')),
     bustWord: t('bust'), waistWord: t('waist'), hipWord: t('hip'),
@@ -1248,25 +1327,25 @@ function columns(){
     }
   });
   return [
-    {k:"name",   t:t('sortName').replace(' A→Z',''), s:d=>d.display, num:false},
+    {k:"name",   t:t('name'), s:d=>nameOf(d), num:false},
     {k:"height", t:t('height'), s:d=>d.stature_cm, num:true, cls:'col-med',
       fmtv:(v,d)=>`${fmt(d.stature_cm,1)}<div class="mini">${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}</div>`},
-    unitCol("bust","Bust"),
-    unitCol("band","Band",1,'col-low'),
-    unitCol("waist","Waist"),
-    unitCol("hip","Hip"),
-    unitCol("thigh","Thigh",1,'col-low'),
+    unitCol("bust",t('bust')),
+    unitCol("band",t('band'),1,'col-low'),
+    unitCol("waist",t('waist')),
+    unitCol("hip",t('hip')),
+    unitCol("thigh",t('thigh'),1,'col-low'),
     {k:"uk",     t:"UK", s:d=>cupScore(d), num:true, cls:'col-med', fmtv:(v,d)=>esc(d.uk)},
     {k:"us",     t:"US", s:d=>d.us, num:false, cls:'col-low'},
     {k:"eu",     t:"EU", s:d=>d.eu, num:false, cls:'col-low'},
-    {k:"whr",    t:"Waist/Hip", s:d=>d.whr, num:true, cls:'col-med', fmtv:v=>fmtPct(v)},
-    {k:"whtr",   t:"Waist/Height", s:d=>d.whtr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
-    {k:"thr",    t:"Thigh/Height", s:d=>d.thr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
-    {k:"thh",    t:"Thigh/Hip", s:d=>d.thh, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
-    {k:"shape",  t:t('shape'), s:d=>d.shape, num:false, cls:'col-low'},
-    {k:"bal",    t:t('build'), s:d=>d.tags.balance, num:false, cls:'col-low'},
-    {k:"note",   t:"Notes", s:d=>d.notes?1:0, num:true, cls:'col-low',
-      fmtv:(v,d)=>d.notes?`<span class="warn" title="${esc(d.notes)}">⚠</span>`:""},
+    {k:"whr",    t:t('waistHip'), s:d=>d.whr, num:true, cls:'col-med', fmtv:v=>fmtPct(v)},
+    {k:"whtr",   t:t('waistHeight'), s:d=>d.whtr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
+    {k:"thr",    t:t('thighHeight'), s:d=>d.thr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
+    {k:"thh",    t:t('thighHip'), s:d=>d.thh, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
+    {k:"shape",  t:t('shape'), s:d=>tagsFor(d).shape, num:false, cls:'col-low', fmtv:(v,d)=>esc(tagText(tagsFor(d).shape))},
+    {k:"bal",    t:t('build'), s:d=>tagsFor(d).balance, num:false, cls:'col-low', fmtv:(v,d)=>esc(tagText(tagsFor(d).balance))},
+    {k:"note",   t:t('notes'), s:d=>noteFor(d)?1:0, num:true, cls:'col-low',
+      fmtv:(v,d)=>noteFor(d)?`<span class="warn" title="${esc(noteFor(d))}">⚠</span>`:""},
   ];
 }
 let tblSort = {k:"uk", dir:-1};
@@ -1297,7 +1376,7 @@ function renderTable(list){
       if(c.k==="name"){
         return `<td><div style="display:flex;align-items:center;gap:8px">
           <img class="thumb" loading="lazy" decoding="async" src="${thumbSrc(d)}" alt="" width="34" height="64">
-          <span><a class="tname" data-slug="${esc(d.slug)}" href="characters/${d.slug}.html">${esc(d.display)}</a>${d.variant_of?'<span class="badge">variant</span>':''}<div class="mini">${esc(`${fmt(d.stature_cm,1)} cm`)} · UK ${esc(d.uk)} · ${esc(d.shape)}</div></span></div></td>`;
+          <span><a class="tname" data-slug="${esc(d.slug)}" href="${charHref(d)}">${esc(nameOf(d))}</a>${d.variant_of?`<span class="badge">${esc(t('variant'))}</span>`:''}<div class="mini">${esc(`${fmt(d.stature_cm,1)} cm`)} · UK ${esc(d.uk)} · ${esc(tagText(tagsFor(d).shape))}</div></span></div></td>`;
       }
       const raw = c.s(d);
       const val = c.fmtv ? c.fmtv(raw, d) : (raw==null?"—":(c.num?fmt(raw, c.k==="diff"?0:1):esc(raw)));
@@ -1328,15 +1407,15 @@ function renderPlot(list){
   for(const v of ticks(x0,x1,6)) g+=`<line class="gridline" x1="${sx(v).toFixed(1)}" x2="${sx(v).toFixed(1)}" y1="${P.t}" y2="${H-P.b}"/><text class="tick" x="${sx(v).toFixed(1)}" y="${H-P.b+18}" text-anchor="middle">${Math.round(v)}</text>`;
   g+=`<line class="axis" x1="${P.l}" x2="${W-P.r}" y1="${H-P.b}" y2="${H-P.b}"/><line class="axis" x1="${P.l}" x2="${P.l}" y1="${P.t}" y2="${H-P.b}"/>`;
   g+=`<text class="alab" x="${(P.l+W-P.r)/2}" y="${H-14}" text-anchor="middle">${esc(t('height'))} (cm)</text>`;
-  g+=`<text class="alab" transform="translate(14 ${(P.t+H-P.b)/2}) rotate(-90)" text-anchor="middle">${esc(m.label)}</text>`;
+  g+=`<text class="alab" transform="translate(14 ${(P.t+H-P.b)/2}) rotate(-90)" text-anchor="middle">${esc(t(m.lk))}</text>`;
   for(const d of pts){
     const cx=sx(d.stature_cm), cy=sy(d[m.k]);
-    g+=`<g class="pt" data-slug="${esc(d.slug)}" tabindex="0" role="button" aria-label="${esc(d.display)}: ${esc(fmt(d[m.k], m.dec))}">
+    g+=`<g class="pt" data-slug="${esc(d.slug)}" tabindex="0" role="button" aria-label="${esc(nameOf(d))}: ${esc(fmt(d[m.k], m.dec))}">
       <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5" fill="${shapeColor[d.shape]||'var(--acid)'}"/>
-      <title>${esc(d.display)} — ${esc(fmt(d.stature_cm,1))} cm · ${esc(m.label)} ${esc(fmt(d[m.k], m.dec))}</title>
-      <text x="${(cx+8).toFixed(1)}" y="${(cy-8).toFixed(1)}">${esc(d.display)}</text></g>`;
+      <title>${esc(nameOf(d))} — ${esc(fmt(d.stature_cm,1))} cm · ${esc(t(m.lk))} ${esc(fmt(d[m.k], m.dec))}</title>
+      <text x="${(cx+8).toFixed(1)}" y="${(cy-8).toFixed(1)}">${esc(nameOf(d))}</text></g>`;
   }
-  svg.setAttribute('aria-label', `${t('height')} × ${m.label} scatter plot, ${pts.length} agents`);
+  svg.setAttribute('aria-label', `${t('height')} × ${t(m.lk)} scatter plot, ${pts.length} agents`);
   svg.innerHTML = g;
 }
 
@@ -1346,7 +1425,7 @@ const PODIUM_CATS = [
     f:d=> isCm()? `${fmt(d.stature_cm,1)} cm` : d.ftin_stature,
     x:d=> d.stature_basis==='head' ? `${fmt(d.cm,0)} cm ${t('charted')}` : (isCm()? d.ftin : `${fmt(d.cm,0)} cm`)},
   {t:'cupLargest', s:'byCup', pick:d=>cupScore(d), asc:false,
-    f:d=> `${cupLetter(d)} cup`, x:d=>`UK ${d.uk}`},
+    f:d=> `${cupLetter(d)}${t('cupUnit')}`, x:d=>`UK ${d.uk}`},
   {t:'thickest', s:'byThigh', pick:d=>d.thigh_cm, asc:false,
     f:d=> fmt(U(d,'thigh'))+USUF(), x:()=>''},
   {t:'hourglassTop', s:'byHourglass', pick:d=>d.hourglass_score, asc:false,
@@ -1371,10 +1450,10 @@ function renderPodium(){
       <div class="phead"><b>${esc(t(cat.t))}</b><span>${esc(cat.x(top[0])||'')}</span></div>
       <div class="stage">
         ${slots.map((d,i)=> !d ? `<div class="slot blank p${rank[i]}" style="--g:0.42"><div class="pimg"></div><div class="step">${rank[i]}</div><div class="plate"></div></div>`
-        : `<a class="slot p${rank[i]}" href="characters/${d.slug}.html" data-slug="${esc(d.slug)}" title="${esc(d.display)} — ${esc(cat.f(d))}"${d.dx<0?' data-dxn="1"':''} style="--g:${wgt(d).toFixed(3)};--k:${nudge(d)}">
+        : `<a class="slot p${rank[i]}" href="${charHref(d)}" data-slug="${esc(d.slug)}" title="${esc(nameOf(d))} — ${esc(cat.f(d))}"${d.dx<0?' data-dxn="1"':''} style="--g:${wgt(d).toFixed(3)};--k:${nudge(d)}">
             <div class="pimg">${mediaFor(d, podiumSizes(d), {lazy:false, priority:rank[i]===1?'high':'low'})}</div>
             <div class="step">${rank[i]}</div>
-            <div class="plate"><b>${esc(d.display)}</b><i>${esc(cat.f(d))}</i>${cat.x(d)?`<u>${esc(cat.x(d))}</u>`:""}</div>
+            <div class="plate"><b>${esc(nameOf(d))}</b><i>${esc(cat.f(d))}</i>${cat.x(d)?`<u>${esc(cat.x(d))}</u>`:""}</div>
           </a>`).join("")}
       </div>
     </div>`;
@@ -1388,9 +1467,9 @@ function renderHighlights(){
   const outfits=DATA.reduce((n,d)=>n+d.outfits.length,0);
   const outfitChars=DATA.filter(d=>d.outfits.length).length;
   const items=[
-    {k:t('tally'),v:tallest.map(d=>d.display).join(' · '),n:`${fmt(tallest[0].stature_cm,1)} cm · ${tallest[0].ftin_stature}`,bar:100},
-    {k:t('cupLargest'),v:cup[0].display,n:`${cupLetter(cup[0])} cup · UK ${cup[0].uk}`,bar:100},
-    {k:t('hourglassTop'),v:hour[0].display,n:`score ${hour[0].hourglass_score.toFixed(3)} · WHR ${hour[0].whr.toFixed(3)}`,bar:100},
+    {k:t('tally'),v:tallest.map(nameOf).join(' · '),n:`${fmt(tallest[0].stature_cm,1)} cm · ${tallest[0].ftin_stature}`,bar:100},
+    {k:t('cupLargest'),v:nameOf(cup[0]),n:`${cupLetter(cup[0])}${t('cupUnit')} · UK ${cup[0].uk}`,bar:100},
+    {k:t('hourglassTop'),v:nameOf(hour[0]),n:`score ${hour[0].hourglass_score.toFixed(3)} · WHR ${hour[0].whr.toFixed(3)}`,bar:100},
     {k:t('outfitsN'),v:`${outfits}`,n:`${outfitChars} ${t('entries')}`,bar:Math.round(outfits/(DATA.length*.6)*100)},
   ];
   $("#highlights").innerHTML=items.map(x=>`<div class="hl"><div class="k">${esc(x.k)}</div><div class="v">${esc(x.v)}</div><div class="n">${esc(x.n)}</div><div class="bar"><i style="width:${Math.max(4,Math.min(100,x.bar))}%;background:var(--acid)"></i></div></div>`).join('');
@@ -1399,7 +1478,13 @@ function renderHighlights(){
 /* ---------------- modal ---------------- */
 let mctx = {slug:null, src:"official", skin:false, more:null};
 let lastFocus = null;
-function rankword(p){ return p==null? "unranked" : p>=0.85? `top ${Math.max(1,Math.round((1-p)*100))}%` : p<=0.15? `bottom ${Math.max(1,Math.round(p*100))}%` : "mid-pack"; }
+function rankword(p){
+  if(p==null) return state.lang==='ja'?'順位なし':state.lang==='zh'?'无排名':'unranked';
+  const x = p>=0.85 ? Math.max(1,Math.round((1-p)*100)) : Math.max(1,Math.round(p*100));
+  if(state.lang==='ja') return p>=0.85?`上位${x}%`:p<=0.15?`下位${x}%`:'中位';
+  if(state.lang==='zh') return p>=0.85?`前${x}%`:p<=0.15?`后${x}%`:'中游';
+  return p>=0.85?`top ${x}%`:p<=0.15?`bottom ${x}%`:'mid-pack';
+}
 function similarTo(d){
   const keys=[['bust_cm',.25],['waist_cm',.2],['hip_cm',.2],['thigh_cm',.15],['stature_cm',.2]];
   const ranges={};
@@ -1411,8 +1496,8 @@ function similarTo(d){
   }).sort((a,b)=>a.score-b.score).slice(0,3);
 }
 function issueURL(d){
-  const title = `[data] ${d.display}`;
-  const body = `Character: ${d.display}\nField: \nCurrent value: \nSource: \n\nWhat looks wrong?\n`;
+  const title = `[data] ${nameOf(d)}`;
+  const body = `Character: ${nameOf(d)}\nField: \nCurrent value: \nSource: \n\nWhat looks wrong?\n`;
   return `${META.repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
 }
 function openModal(slug, opts){
@@ -1427,6 +1512,7 @@ function openModal(slug, opts){
   const moreOn = (mctx.more!=null && outfits[mctx.more]) ? outfits[mctx.more] : null;
   const skinOn = hasSkin && !!mctx.skin && !moreOn;
   const r = skinOn ? d.skin : d;
+  const tags = tagsFor(r);
   const official = mctx.src === "official" || !!moreOn;
   const kv = (k,v) => `<div class="kv"><div class="k">${k}</div><div class="v">${v}</div></div>`;
   const meas = (label, key, dec=1)=>{
@@ -1454,19 +1540,19 @@ function openModal(slug, opts){
       if(Math.abs(dv) < (isCm()?0.6:0.25)) return "";
       return `<span class="odelta">${k} ${dv>0?"▲":"▼"} ${dv>0?"+":""}${fmt(dv,1)}${USUF()}</span>`;
     };
-    const parts = [cell('bust','bust_in','bust_cm'), cell('waist','waist_in','waist_cm'), cell('hip','hip_in','hip_cm')].filter(Boolean).join("");
-    return parts? `<div class="irow outfit"><span class="ik">outfit</span><span class="isub wide">${esc(rec.outfit||"variant")}</span>${parts}</div>` : "";
+    const parts = [cell(t('bust'),'bust_in','bust_cm'), cell(t('waist'),'waist_in','waist_cm'), cell(t('hip'),'hip_in','hip_cm')].filter(Boolean).join("");
+    return parts? `<div class="irow outfit"><span class="ik">${esc(t('outfits'))}</span><span class="isub wide">${esc(rec.outfit||"variant")}</span>${parts}</div>` : "";
   };
   const cap = moreOn
-    ? `<b>${esc(moreOn.label)} outfit portrait</b> · ZZZ Fandom wiki (© HoYoverse, fair use). <b>Art only:</b> this outfit is not measured, so no number, filter or ranking on this page uses it.`
+    ? `<b>${esc(t('outfitPortrait').replace('{outfit}', moreOn.label))}</b> · ${esc(t('fandomCredit'))}. <b>${esc(t('artOnlyLabel'))}:</b> ${esc(t('artOnlyNote').replace('{outfit}', moreOn.label))} ${esc(t('zoomHint'))}`
     : official
-    ? `<b>${esc(r.outfit?r.outfit+' outfit portrait':'Official character portrait')}</b> · ZZZ Fandom wiki (© HoYoverse, fair use), via <a href="https://zenless-zone-zero.fandom.com/" target="_blank" rel="noopener">zenless-zone-zero.fandom.com</a>. ${esc(t('zoomHint'))}`
-    : `Render from modelmetrics.net. Scale: 1 square = 10 cm × 10 cm; characters are drawn to relative scale.${skinOn?" There is no separate render for this outfit, so this image shows her standard model.":""} ${esc(t('zoomHint'))}`;
+    ? `<b>${esc(r.outfit?t('outfitPortrait').replace('{outfit}', r.outfit):t('officialPortrait'))}</b> · ${esc(t('fandomCredit'))}, via <a href="https://zenless-zone-zero.fandom.com/" target="_blank" rel="noopener">zenless-zone-zero.fandom.com</a>. ${esc(t('zoomHint'))}`
+    : `${esc(t('renderCredit'))}${skinOn?' '+esc(t('noSeparateRender')):''} ${esc(t('zoomHint'))}`;
   const outfitNote = (hasSkin || outfits.length) ? `<div class="onote" style="margin:0 9px 10px">${moreOn
-            ? `Art only. “${esc(moreOn.label)}” has no measured data, so it never affects a figure, a filter or a ranking on this page.`
+            ? esc(t('artOnlyNote').replace('{outfit}', moreOn.label))
             : skinOn
-            ? `“${esc(d.skin.outfit||'This outfit')}” has its own measured data. Cards, table, filters and rankings stay on the <b>standard model</b>; this view is the outfit record.`
-            : `Standard model — the canonical figure for every card, filter and ranking.${hasSkin?` “${esc(d.skin.outfit)}” is kept as a separate measured outfit.`:''}${outfits.length?` ${outfits.length} extra outfit${outfits.length>1?'s':''} available as art only.`:''}`}</div>` : "";
+            ? t('measuredOutfitNote').replace('{outfit}', esc(d.skin.outfit||'This outfit'))
+            : `${esc(t('standardOutfitNote'))}${hasSkin?` ${t('measuredOutfitNote').replace('{outfit}', esc(d.skin.outfit))}`:''}${outfits.length?` ${esc(t('extraOutfits').replace('{n}', outfits.length))}`:''}`}</div>` : "";
   const segBtn = (attr, val, on, label, dis) => `<button type="button" data-${attr}="${val}" aria-pressed="${on?'true':'false'}"${dis?' disabled':''}>${label}</button>`;
   const chips = [
     {label:t('standard'), sel:!skinOn && !moreOn, attrs:'data-card="0"', type:t('standard')},
@@ -1483,8 +1569,8 @@ function openModal(slug, opts){
   $("#modal").innerHTML = `
     <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
     <div class="mhead">
-      <h2 id="mTitle">${esc(d.display)}</h2>
-      <div class="sub2">${r.outfit?`${esc(t('outfits'))}: ${esc(r.outfit)} · `:(r.variant_of?`Variant of ${esc(r.variant_of)} · `:"")}${isCm()? `${fmt(r.stature_cm,1)} cm (${r.ftin_stature})` : `${r.ftin_stature} (${fmt(r.stature_cm,1)} cm)`}${r.stature_basis==='head'?` · ${fmt(r.cm,0)} cm ${esc(t('charted'))}`:''} · UK ${esc(r.uk)} / US ${esc(r.us)} / EU ${esc(r.eu)}</div>
+      <h2 id="mTitle">${esc(nameOf(d))}</h2>
+      <div class="sub2">${r.outfit?`${esc(t('outfits'))}: ${esc(r.outfit)} · `:(r.variant_of?`${esc(t('variantOf'))} ${esc(r.variant_of)} · `:"")}${isCm()? `${fmt(r.stature_cm,1)} cm (${r.ftin_stature})` : `${r.ftin_stature} (${fmt(r.stature_cm,1)} cm)`}${r.stature_basis==='head'?` · ${fmt(r.cm,0)} cm ${esc(t('charted'))}`:''} · UK ${esc(r.uk)} / US ${esc(r.us)} / EU ${esc(r.eu)}</div>
     </div>
     <div class="mbody">
       <div class="mimg">
@@ -1492,10 +1578,10 @@ function openModal(slug, opts){
           <div class="seg" role="group" aria-label="Portrait">${segBtn('v','sheet',!official && !moreOn,t('sheet'),!!moreOn)}${segBtn('v','official',official,t('official'))}</div>
         </div>
         ${outfitStrip}
-        <img id="mimg" decoding="async" src="${moreOn? `character_images/${moreOn.file}` : official?officialSrc(r):imgSrc(d)}" alt="${esc(moreOn?moreOn.label:r.display)} portrait">
+        <img id="mimg" decoding="async" src="${moreOn? `character_images/${moreOn.file}` : official?officialSrc(r):imgSrc(d)}" alt="${esc(moreOn?moreOn.label:nameOf(r))} portrait">
         <div class="scale">${cap}</div>
         ${outfitNote}
-        ${d.merged?`<div class="mnote" style="margin:0 9px 10px">This entry has a measured outfit (${esc(d.skin.outfit)}). <b>Standard model is canonical</b> for cards, filters and rankings; the toggle shows the outfit's own numbers and art.</div>`:''}
+        ${d.merged?`<div class="mnote" style="margin:0 9px 10px">${t('mergedNote').replace('{outfit}', esc(d.skin.outfit))}</div>`:''}
       </div>
       <div class="mdata">
         <div class="sect"><h3>${esc(t('measurements'))}</h3><div class="kgrid">
@@ -1510,57 +1596,57 @@ function openModal(slug, opts){
           ${kv("UK", esc(r.uk))} ${kv("US", esc(r.us))} ${kv("EU", esc(r.eu))} ${kv(t('bustDiff'), r.diff_cm!=null? (isCm()? fmt(r.diff_cm,1)+" cm" : fmt(r.diff_in,1)+" in") : "—")}
         </div></div>
         <div class="sect"><h3>${esc(t('proportions'))}</h3><div class="kgrid">
-          ${kv("Waist / hip", r.whr?.toFixed(3)??"—")}
-          ${kv("Waist / height", r.whtr?.toFixed(3)??"—")}
-          ${kv("Waist / thigh", r.wtr?.toFixed(3)??"—")}
-          ${kv("Thigh / height", r.thr?.toFixed(3)??"—")}
-          ${kv("Thigh / hip", r.thh?.toFixed(3)??"—")}
-          ${kv("Bust / height", r.bhr?.toFixed(3)??"—")}
-          ${kv("Hip / height", r.hhr?.toFixed(3)??"—")}
+          ${kv(t('waistHip'), r.whr?.toFixed(3)??"—")}
+          ${kv(t('waistHeight'), r.whtr?.toFixed(3)??"—")}
+          ${kv(t('waistThigh'), r.wtr?.toFixed(3)??"—")}
+          ${kv(t('thighHeight'), r.thr?.toFixed(3)??"—")}
+          ${kv(t('thighHip'), r.thh?.toFixed(3)??"—")}
+          ${kv(t('bustHeight'), r.bhr?.toFixed(3)??"—")}
+          ${kv(t('hipHeight'), r.hhr?.toFixed(3)??"—")}
         </div>
-        ${r.thigh_cm!=null?`<div class="mnote">${esc(t('thighNote'))} <b>${esc(r.tags.thighs)}</b> · ${pct(r.p_thigh_cm)}th percentile by raw thigh circumference${r.thigh_pin?' · <b>hand-pinned</b>':''}. Terciles of the roster, measured in cm.</div>`:''}
+        ${r.thigh_cm!=null?`<div class="mnote">${esc(t('thighNote'))} <b>${esc(tagText(tags.thighs))}</b> · ${esc(t('thighPercentile'))} ${pct(r.p_thigh_cm)}%${r.thigh_pin?` · <b>${esc(t('handPinned'))}</b>`:''}${state.lang!=='en' ? '。' : '.'} ${esc(t('terciles'))}</div>`:''}
         </div>
         <div class="sect"><h3>${esc(t('percentiles'))}</h3>
           <div class="pct wide">
-            <div class="prow"><span>bust</span><div class="pbar"><i style="width:${pct(r.p_bust_cm)}%;background:var(--bust)"></i></div><b>${pct(r.p_bust_cm)}</b></div>
-            <div class="prow"><span>waist</span><div class="pbar"><i style="width:${pct(r.p_waist_cm)}%;background:var(--waist)"></i></div><b>${pct(r.p_waist_cm)}</b></div>
-            <div class="prow"><span>hips</span><div class="pbar"><i style="width:${pct(r.p_hip_cm)}%;background:var(--hips)"></i></div><b>${pct(r.p_hip_cm)}</b></div>
-            <div class="prow"><span>thigh</span><div class="pbar"><i style="width:${pct(r.p_thigh_cm)}%;background:var(--thighs)"></i></div><b>${r.p_thigh_cm!=null?pct(r.p_thigh_cm):"—"}</b></div>
-            <div class="prow"><span>height</span><div class="pbar"><i style="width:${pct(r.p_stature_cm)}%;background:var(--tan)"></i></div><b>${pct(r.p_stature_cm)}</b></div>
+            <div class="prow"><span>${esc(t('bust'))}</span><div class="pbar"><i style="width:${pct(r.p_bust_cm)}%;background:var(--bust)"></i></div><b>${pct(r.p_bust_cm)}</b></div>
+            <div class="prow"><span>${esc(t('waist'))}</span><div class="pbar"><i style="width:${pct(r.p_waist_cm)}%;background:var(--waist)"></i></div><b>${pct(r.p_waist_cm)}</b></div>
+            <div class="prow"><span>${esc(t('hip'))}</span><div class="pbar"><i style="width:${pct(r.p_hip_cm)}%;background:var(--hips)"></i></div><b>${pct(r.p_hip_cm)}</b></div>
+            <div class="prow"><span>${esc(t('thigh'))}</span><div class="pbar"><i style="width:${pct(r.p_thigh_cm)}%;background:var(--thighs)"></i></div><b>${r.p_thigh_cm!=null?pct(r.p_thigh_cm):"—"}</b></div>
+            <div class="prow"><span>${esc(t('height'))}</span><div class="pbar"><i style="width:${pct(r.p_stature_cm)}%;background:var(--tan)"></i></div><b>${pct(r.p_stature_cm)}</b></div>
           </div>
           <div class="mnote">${esc(t('pctLong'))}</div>
         </div>
         <div class="sect"><h3>${esc(t('figureRead'))}</h3>
-          <div class="vline">${esc(r.read||"")}</div>
+          <div class="vline">${esc(readFor(r))}</div>
           <div class="infog">
             ${readRow(t('height'), isCm()? `${fmt(r.stature_cm,1)} cm` : r.ftin_stature,
                       (isCm()? r.ftin_stature : `${fmt(r.stature_cm,1)} cm`) + (r.stature_basis==='head'? ` · ${fmt(r.cm,0)} ${t('charted')}` : ``),
-                      pct(r.p_stature_cm), r.tags.height, "var(--tan)")}
+                      pct(r.p_stature_cm), tagText(tags.height), "var(--tan)")}
             ${readRow(t('bust'), fmt(U(r,'bust'))+USUF(), `UK ${esc(r.uk)}`, pct(r.p_bust_cm), rankword(r.p_bust_cm), "var(--bust)")}
-            ${readRow(t('waist'), fmt(U(r,'waist'))+USUF(), `WHtR ${r.whtr.toFixed(3)}`, pct(r.p_waist_cm), rankword(r.p_waist_cm), "var(--waist)")}
-            ${readRow(t('hip'), fmt(U(r,'hip'))+USUF(), `hip/height ${r.hhr.toFixed(3)}`, pct(r.p_hip_cm), rankword(r.p_hip_cm), "var(--hips)")}
-            ${r.thigh_cm!=null?readRow(t('thigh'), fmt(U(r,'thigh'))+USUF(), `thigh/height ${r.thr.toFixed(3)} · thigh/hip ${r.thh.toFixed(3)}`,
-                      pct(r.p_thigh_cm), r.tags.thighs, "var(--thighs)"):""}
-            ${readRow(t('silhouette'), r.tags.shape,
-                      `bust/waist ${(r.bust_cm/r.waist_cm).toFixed(2)} · hip/waist ${(r.hip_cm/r.waist_cm).toFixed(2)}`,
+            ${readRow(t('waist'), fmt(U(r,'waist'))+USUF(), `${esc(t('waistHeight'))} ${r.whtr.toFixed(3)}`, pct(r.p_waist_cm), rankword(r.p_waist_cm), "var(--waist)")}
+            ${readRow(t('hip'), fmt(U(r,'hip'))+USUF(), `${esc(t('hipHeight'))} ${r.hhr.toFixed(3)}`, pct(r.p_hip_cm), rankword(r.p_hip_cm), "var(--hips)")}
+            ${r.thigh_cm!=null?readRow(t('thigh'), fmt(U(r,'thigh'))+USUF(), `${esc(t('thighHeight'))} ${r.thr.toFixed(3)} · ${esc(t('thighHip'))} ${r.thh.toFixed(3)}`,
+                      pct(r.p_thigh_cm), tagText(tags.thighs), "var(--thighs)"):""}
+            ${readRow(t('silhouette'), tagText(tags.shape),
+                      `${esc(t('bust'))}/${esc(t('waist'))} ${(r.bust_cm/r.waist_cm).toFixed(2)} · ${esc(t('hip'))}/${esc(t('waist'))} ${(r.hip_cm/r.waist_cm).toFixed(2)}`,
                       Math.max(0, Math.min(100, Math.round(100*r.hourglass_score/1.6))),
-                      `score ${r.hourglass_score.toFixed(3)}`, "var(--blue)")}
+                      `${esc(t('score'))} ${r.hourglass_score.toFixed(3)}`, "var(--blue)")}
             <div class="irow">
               <span class="ik">${esc(t('balance'))}</span>
-              <span class="iv">${esc(r.tags.balance)}</span>
-              <span class="isub">bust ${pct(r.p_bust_cm)} vs hips ${pct(r.p_hip_cm)}</span>
-              <span class="isym">${(r.p_bhr-r.p_hhr) >= 0 ? "▲" : "▼"} ${Math.abs(Math.round((r.p_bhr-r.p_hhr)*100))} pts</span>
-              <span class="ichip dim">${r.balance==='top'?"top-heavy":r.balance==='bottom'?"bottom-heavy":"even"}</span>
+              <span class="iv">${esc(tagText(tags.balance))}</span>
+              <span class="isub">${esc(t('bust'))} ${pct(r.p_bust_cm)} ${esc(t('vs'))} ${esc(t('hip'))} ${pct(r.p_hip_cm)}</span>
+              <span class="isym">${(r.p_bhr-r.p_hhr) >= 0 ? "▲" : "▼"} ${Math.abs(Math.round((r.p_bhr-r.p_hhr)*100))} ${esc(t('points'))}</span>
+              <span class="ichip dim">${esc(t(r.balance==='top'?'topHeavy':r.balance==='bottom'?'bottomHeavy':'even'))}</span>
             </div>
             ${outfitRow(r)}
           </div>
-          ${r.notes?`<div class="mnote">Chart note: ${esc(r.notes)}</div>`:""}
+          ${noteFor(r)?`<div class="mnote">${esc(t('chartNote'))}: ${esc(noteFor(r))}</div>`:""}
         </div>
         <div class="sect"><h3>${esc(t('similar'))}</h3>
-          <div class="simrow">${similarTo(d).map(s=>`<button type="button" class="sim" data-sim="${esc(s.d.slug)}"><img src="${THUMB}/320/${s.d.official}.webp" alt="" width="22" height="34">${esc(s.d.display)}</button>`).join('')}</div>
+          <div class="simrow">${similarTo(d).map(s=>`<button type="button" class="sim" data-sim="${esc(s.d.slug)}"><img src="${THUMB}/320/${s.d.official}.webp" alt="" width="22" height="34">${esc(nameOf(s.d))}</button>`).join('')}</div>
         </div>
         <div class="mfoot">
-          <a class="btn primary" href="characters/${d.slug}.html">${esc(t('fullProfile'))}</a>
+          <a class="btn primary" href="${charHref(d)}">${esc(t('fullProfile'))}</a>
           <button class="btn" id="mCompare" aria-pressed="${cmpOn?'true':'false'}">${esc(cmpOn?t('removeFromCompare'):t('addToCompare'))}</button>
           <a class="btn" href="${issueURL(d)}" target="_blank" rel="noopener">${esc(t('report'))}</a>
           <span class="fnote" style="margin:0">${esc(t('sourceArt'))}: ${srcLink}</span>
@@ -1629,7 +1715,7 @@ function renderCompare(){
   $("#cmpHint").textContent = n===0 ? "" : n===1 ? t('cmpAddOne') : t('cmpReady');
   chips.innerHTML = state.compare.map(slug=>{
     const d = bySlug.get(slug); if(!d) return "";
-    return `<span class="cchip">${esc(d.display)}<button type="button" data-uncmp="${esc(slug)}" aria-label="Remove ${esc(d.display)}">×</button></span>`;
+    return `<span class="cchip">${esc(nameOf(d))}<button type="button" data-uncmp="${esc(slug)}" aria-label="Remove ${esc(nameOf(d))}">×</button></span>`;
   }).join("");
 }
 function syncCardCompare(){
@@ -1639,7 +1725,7 @@ function syncCardCompare(){
     if(!b) return;
     const on = state.compare.includes(d.slug);
     b.setAttribute("aria-pressed", on? "true":"false");
-    b.setAttribute("aria-label", `${on?t('removeFromCompare'):t('addCompare')}: ${d.display}`);
+    b.setAttribute("aria-label", `${on?t('removeFromCompare'):t('addCompare')}: ${nameOf(d)}`);
     const ico = b.querySelector(".cmp-ico"), lbl = b.querySelector(".cmp-lbl");
     if(ico) ico.textContent = on?"✓":"+";
     if(lbl) lbl.textContent = on?t('added'):t('cmpShort');
@@ -1667,11 +1753,11 @@ function openCompare(){
     {label:t('bust'), fmt:d=>cmIn(d.bust_cm,d.bust_in)},
     {label:t('underbust'), fmt:d=>cmIn(d.band_cm,d.band_in)},
     {label:'UK / US / EU', fmt:d=>`${d.uk} / ${d.us} / ${d.eu}`},
-    {label:'Waist / hip', fmt:d=>fmtPct(d.whr)},
-    {label:'Waist / height', fmt:d=>fmtPct(d.whtr)},
-    {label:t('shape'), fmt:d=>d.tags.shape},
-    {label:t('build'), fmt:d=>d.tags.balance},
-    {label:t('thighNote'), fmt:d=>d.tags.thighs},
+    {label:t('waistHip'), fmt:d=>fmtPct(d.whr)},
+    {label:t('waistHeight'), fmt:d=>fmtPct(d.whtr)},
+    {label:t('shape'), fmt:d=>tagText(tagsFor(d).shape)},
+    {label:t('build'), fmt:d=>tagText(tagsFor(d).balance)},
+    {label:t('thighNote'), fmt:d=>tagText(tagsFor(d).thighs)},
   ];
   const body = rows.map(r=>{
     const vals = r.get ? list.map(r.get) : list.map(()=>null);
@@ -1683,9 +1769,9 @@ function openCompare(){
     <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
     <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><div class="sub2">${list.length} ${esc(t('picked'))}</div></div>
     <div class="cmpwrap"><table class="cmptable">
-      <thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(d.display)}</th>`).join('')}</tr></thead>
+      <thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(nameOf(d))}</th>`).join('')}</tr></thead>
       <tbody>${body}
-      <tr><th scope="row">${esc(t('figureRead'))}</th>${list.map(d=>`<td class="cmdesc">${esc(d.read||'')}</td>`).join('')}</tr>
+      <tr><th scope="row">${esc(t('figureRead'))}</th>${list.map(d=>`<td class="cmdesc">${esc(readFor(d))}</td>`).join('')}</tr>
       </tbody></table></div>`;
   const wasOpen = $("#overlay").classList.contains("open");
   if(!wasOpen) lastFocus = document.activeElement;
@@ -1830,16 +1916,20 @@ function fillSort(){
   $("#fSort").value = state.sort;
 }
 function fillPlot(){
-  $("#plotY").innerHTML = PLOT_METRICS.map(m=>`<option value="${m.k}">${esc(m.label)}</option>`).join("");
+  $("#plotY").innerHTML = PLOT_METRICS.map(m=>`<option value="${m.k}">${esc(t(m.lk))}</option>`).join("");
   $("#plotY").value = state.plotY;
 }
 function applyLang(lang, doRender=true){
   state.lang = I18N[lang]? lang : 'en';
   document.documentElement.lang = state.lang;
+  document.title = t('pageTitle');
   $$('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(I18N[state.lang][k]){ el.innerHTML = t(k); } });
   $("#q").placeholder = t('searchPh');
   $("#fSort").setAttribute('aria-label', t('sort'));
-  fillSort(); fillPlot();
+  $("#lang").value = state.lang;
+  const ml = $("#methodologyLink");
+  if(ml) ml.href = state.lang==='ja'?'ja/methodology.html':state.lang==='zh'?'zh/methodology.html':'methodology.html';
+  fillSort(); fillPlot(); renderFilterPanel();
   try{ localStorage.setItem("zzz-lang", state.lang); }catch(e){}
   if(doRender){
     renderPodium._sig = null;

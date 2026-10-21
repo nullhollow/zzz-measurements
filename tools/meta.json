@@ -32,6 +32,18 @@
   "confidence": "charted, estimated or partial (see methodology)",
   "basis": "standard, except Jane Doe uses her measured outfit as the canonical record; other outfit variants are exposed under skin",
   "skin": "Measured outfit variant with its own numbers",
-  "outfits": "Art-only outfit renders (no measured data)"
+  "outfits": "Art-only outfit renders (no measured data)",
+  "name_ja": "Official Japanese name from the HoYoverse character page",
+  "name_zh": "Official Simplified Chinese name from the HoYoverse character page",
+  "desc_ja_cm": "Japanese profile copy, centimetre version",
+  "desc_ja_in": "Japanese profile copy, inch version",
+  "desc_zh_cm": "Simplified Chinese profile copy, centimetre version",
+  "desc_zh_in": "Simplified Chinese profile copy, inch version",
+  "read_ja": "Japanese short figure-read line",
+  "read_zh": "Simplified Chinese short figure-read line",
+  "tags_ja": "Japanese display labels for the computed classes",
+  "tags_zh": "Simplified Chinese display labels for the computed classes",
+  "shape": "Hourglass / Balanced / Straight from bust, waist and hips",
+  "hourglass_score": "flare × bust–hip balance; higher is a sharper hourglass"
  }
 }

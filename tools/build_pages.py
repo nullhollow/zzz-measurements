@@ -39,6 +39,81 @@ SITE = 'https://nullhollow.github.io/zzz-measurements/'
 N = len(DATA)
 DISPLAY_SORTED = sorted(DATA, key=lambda d: d['display'].lower())
 
+PAGE = {
+    'en': {
+        'home': '← ZZZ Measurements', 'top': 'Zenless Zone Zero · <b>{n}</b> agents',
+        'eyebrow': 'Zenless Zone Zero · measurements', 'open': 'Open in the chart',
+        'dataset': 'Dataset', 'report': 'Report an error', 'measurements': 'Measurements',
+        'caption': 'Centimetres and inches; bra sizing as supplied by the source.',
+        'proportions': 'Proportions', 'percentiles': 'Roster percentiles',
+        'pct_note': 'Percentiles of the raw centimetre measurement across the {n} displayed entries; height uses head height. 0 = smallest, 100 = largest.',
+        'figure_read': 'Figure read', 'classes': 'Classes', 'outfits': 'Outfits',
+        'provenance': 'Provenance', 'portrait_source': 'Portrait source', 'updated': 'Data updated',
+        'similar': 'Similar figures', 'previous': 'Previous', 'next': 'Next',
+        'height': 'Height', 'bust': 'Bust', 'underbust': 'Under-bust', 'waist': 'Waist',
+        'hip': 'Hip', 'thigh': 'Thigh', 'bust_diff': 'Bust diff', 'bra': 'Bra size',
+        'no_thigh': 'no reliable measurement', 'charted': 'charted',
+        'waist_hip': 'Waist / hip', 'waist_height': 'Waist / height', 'waist_thigh': 'Waist / thigh',
+        'thigh_height': 'Thigh / height', 'thigh_hip': 'Thigh / hip',
+        'bust_height': 'Bust / height', 'hip_height': 'Hip / height',
+        'official_portrait': 'Official portrait', 'measured_outfit': 'Measured outfit · has its own numbers',
+        'outfit_portrait': 'outfit portrait', 'art_only': 'art only',
+        'stature_note': 'Height uses the ~{st} cm head height; the charted {cm} cm includes her ears.',
+        'measured_note': 'This agent has a measured outfit ({outfit}). The numbers on this page are the <b>standard model</b>; the outfit record is kept separate in the dataset.',
+        'chart_note': 'Chart note', 'source': 'Source', 'rights': 'Official art via the ZZZ Fandom wiki, © HoYoverse (fair use). Auto-generated commentary is not in-game canon.',
+        'methodology': 'Methodology &amp; FAQ', 'data_updated': 'Data updated', 'back': 'Back to the chart',
+        'shape': 'Shape', 'build_word': 'build', 'hand_pinned': 'hand-pinned', 'language': 'Language', 'roster_nav': 'Roster navigation',
+    },
+    'ja': {
+        'home': '← ZZZ 寸法', 'top': 'ゼンレスゾーンゼロ · <b>{n}</b> 名',
+        'eyebrow': 'ゼンレスゾーンゼロ · 寸法', 'open': 'チャートで開く',
+        'dataset': 'データセット', 'report': '誤りを報告', 'measurements': '寸法',
+        'caption': 'センチとインチ。ブラサイズは出典の表記のまま。',
+        'proportions': '比率', 'percentiles': '名簿内パーセンタイル',
+        'pct_note': '{n}名の実寸cm値のパーセンタイル。身長は頭頂ベース。0＝最小、100＝最大。',
+        'figure_read': '体型の読み', 'classes': '分類', 'outfits': '衣装',
+        'provenance': '出典', 'portrait_source': '画像出典', 'updated': 'データ更新',
+        'similar': '似た体型', 'previous': '前', 'next': '次',
+        'height': '身長', 'bust': 'バスト', 'underbust': 'アンダー', 'waist': 'ウエスト',
+        'hip': 'ヒップ', 'thigh': '太もも', 'bust_diff': 'バスト差', 'bra': 'ブラサイズ',
+        'no_thigh': '信頼できる計測なし', 'charted': '公式',
+        'waist_hip': 'ウエスト / ヒップ', 'waist_height': 'ウエスト / 身長', 'waist_thigh': 'ウエスト / 太もも',
+        'thigh_height': '太もも / 身長', 'thigh_hip': '太もも / ヒップ',
+        'bust_height': 'バスト / 身長', 'hip_height': 'ヒップ / 身長',
+        'official_portrait': '公式ポートレート', 'measured_outfit': '計測済み衣装・独自の数値あり',
+        'outfit_portrait': '衣装ポートレート', 'art_only': '画像のみ',
+        'stature_note': '身長は頭頂ベースの約{st}cm。公式の{cm}cmは耳を含みます。',
+        'measured_note': 'このエージェントには計測済み衣装（{outfit}）があります。このページの数値は<b>標準モデル</b>で、衣装の記録はデータセット内に別途保存しています。',
+        'chart_note': 'チャート注記', 'source': '出典', 'rights': '公式画像はZZZ Fandom wiki経由、© HoYoverse（フェアユース）。自動生成の解説はゲーム内設定ではありません。',
+        'methodology': '算出方法とFAQ', 'data_updated': 'データ更新', 'back': 'チャートに戻る',
+        'shape': 'シルエット', 'build_word': '体型', 'hand_pinned': '手動分類', 'language': '言語', 'roster_nav': '名簿ナビゲーション',
+    },
+    'zh': {
+        'home': '← ZZZ 测量', 'top': '绝区零 · <b>{n}</b> 位角色',
+        'eyebrow': '绝区零 · 三围', 'open': '在图表中打开',
+        'dataset': '数据集', 'report': '报告错误', 'measurements': '测量',
+        'caption': '厘米和英寸；内衣尺码沿用来源写法。',
+        'proportions': '比例', 'percentiles': '名单百分位',
+        'pct_note': '{n} 位角色原始厘米数据的百分位；身高按头顶高度计算。0 = 最小，100 = 最大。',
+        'figure_read': '体型解读', 'classes': '分类', 'outfits': '服装',
+        'provenance': '来源', 'portrait_source': '立绘来源', 'updated': '数据更新',
+        'similar': '相似体型', 'previous': '上一位', 'next': '下一位',
+        'height': '身高', 'bust': '胸围', 'underbust': '下胸围', 'waist': '腰围',
+        'hip': '臀围', 'thigh': '大腿', 'bust_diff': '胸围差', 'bra': '内衣尺码',
+        'no_thigh': '没有可靠数据', 'charted': '官方',
+        'waist_hip': '腰围 / 臀围', 'waist_height': '腰围 / 身高', 'waist_thigh': '腰围 / 大腿',
+        'thigh_height': '大腿 / 身高', 'thigh_hip': '大腿 / 臀围',
+        'bust_height': '胸围 / 身高', 'hip_height': '臀围 / 身高',
+        'official_portrait': '官方立绘', 'measured_outfit': '已测量服装 · 有独立数据',
+        'outfit_portrait': '服装立绘', 'art_only': '仅立绘',
+        'stature_note': '身高采用约 {st} 厘米的头顶高度；官方 {cm} 厘米包含耳朵。',
+        'measured_note': '这位角色有一套已测量服装（{outfit}）。本页数值是<b>标准模型</b>；服装数据单独保存在数据集中。',
+        'chart_note': '榜单注记', 'source': '来源', 'rights': '官方立绘来自 ZZZ Fandom wiki，© HoYoverse（合理使用）。自动生成的解读并非游戏内设定。',
+        'methodology': '方法与常见问题', 'data_updated': '数据更新', 'back': '返回图表',
+        'shape': '轮廓', 'build_word': '体型', 'hand_pinned': '人工分类', 'language': '语言', 'roster_nav': '名单导航',
+    },
+}
+
 
 def esc(v):
     return html.escape('' if v is None else str(v), quote=True)
@@ -92,6 +167,7 @@ a{color:var(--acid)}
 .top a{text-decoration:none;color:var(--dim)}
 .top a:hover{color:var(--acid)}
 .top b{font-family:var(--num);color:var(--acid)}
+.langnav{display:flex;gap:10px;margin-left:auto}.langnav a{text-decoration:none}.langnav a[data-lang]{opacity:.55}.langnav a:hover{color:var(--acid);opacity:1}.langnav a.on{color:var(--acid);opacity:1}
 main{max-width:1100px;margin:0 auto;padding:22px 20px 60px}
 .hero{display:grid;grid-template-columns:min(340px,38vw) 1fr;gap:26px;align-items:center;
   border-bottom:1px solid var(--line);padding-bottom:24px}
@@ -101,6 +177,7 @@ main{max-width:1100px;margin:0 auto;padding:22px 20px 60px}
 h1{margin:0 0 10px;font-family:var(--disp);font-weight:400;font-size:clamp(36px,6vw,64px);line-height:.96;
   text-transform:uppercase}
 .lead{margin:0 0 14px;color:#cfd0d6;font-size:13px}
+.altname{margin:-6px 0 10px;color:var(--dim);font-family:var(--num);font-size:11px;letter-spacing:.08em}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}
 .chip{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:9.5px;
   letter-spacing:.13em;text-transform:uppercase;color:#e8e8ee}
@@ -152,16 +229,21 @@ footer .rule{border-top:1px solid var(--line);padding-top:14px}
 '''
 
 
-def head(title, desc, canonical, og_image, extra_ld='', prefix='../'):
+def head(title, desc, canonical, og_image, extra_ld='', prefix='../', lang='en', alts=None, home=None, path=''):
+    p = PAGE[lang]
+    home = home if home is not None else prefix
+    alt = ''
+    if alts:
+        alt = ''.join(f'<link rel="alternate" hreflang="{esc(h)}" href="{esc(url)}">\n' for h, url in alts)
     return f'''<!DOCTYPE html>
-<html lang="en">
+<html lang="{ 'zh-Hans' if lang=='zh' else lang }">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{esc(canonical)}">
-<meta property="og:type" content="article">
+{alt}<meta property="og:type" content="article">
 <meta property="og:site_name" content="ZZZ Female Measurements">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
@@ -178,36 +260,48 @@ def head(title, desc, canonical, og_image, extra_ld='', prefix='../'):
 {extra_ld}
 </head>
 <body>
-<header class="top"><a href="{prefix}">← ZZZ Measurements</a><span>Zenless Zone Zero · <b>{N}</b> agents</span></header>
+<header class="top">
+  <a href="{home}">{p['home']}</a>
+  <nav class="langnav" aria-label="{p['language']}">
+    <a href="{prefix}{path}" data-lang="en" class="{ 'on' if lang=='en' else ''}" onclick="try{{localStorage.setItem('zzz-lang','en')}}catch(e){{}}">EN</a>
+    <a href="{prefix}ja/{path}" data-lang="ja" class="{ 'on' if lang=='ja' else ''}" onclick="try{{localStorage.setItem('zzz-lang','ja')}}catch(e){{}}">日本語</a>
+    <a href="{prefix}zh/{path}" data-lang="zh" class="{ 'on' if lang=='zh' else ''}" onclick="try{{localStorage.setItem('zzz-lang','zh')}}catch(e){{}}">中文</a>
+  </nav>
+  <span>{p['top'].format(n=N)}</span>
+</header>
 '''
 
 
-def footer(updated, prefix='../'):
+def footer(updated, prefix='../', lang='en', methodology=None):
+    p = PAGE[lang]
+    methodology = methodology or (prefix + ('methodology.html' if lang == 'en' else f'{lang}/methodology.html'))
     return f'''<footer><div class="rule">
-<b>Source:</b> modelmetrics.net · <i>Zenless Zone Zero · Female Character Measurements</i>. Data updated <time datetime="{updated}">{updated}</time>.<br>
-Official art via the ZZZ Fandom wiki, © HoYoverse (fair use). Auto-generated commentary is not in-game canon.<br>
-<a href="{prefix}methodology.html">Methodology &amp; FAQ</a> · <a href="{prefix}data/measurements.json" download>Dataset (JSON)</a> ·
+<b>{p['source']}:</b> modelmetrics.net · <i>Zenless Zone Zero · Female Character Measurements</i>. {p['data_updated']} <time datetime="{updated}">{updated}</time>.<br>
+{p['rights']}<br>
+<a href="{methodology}">{p['methodology']}</a> · <a href="{prefix}data/measurements.json" download>{esc(p["dataset"])} (JSON)</a> ·
 <a href="{prefix}data/measurements.csv" download>CSV</a> · <a href="{META['repo']}" rel="noopener">Source</a>
 </div></footer>
 </body>
 </html>'''
 
 
-def pct_bars(r):
+def pct_bars(r, lang='en'):
+    labels = PAGE[lang]
     rows = [
-        ('bust', r['p_bust_cm'], 'var(--bust)'),
-        ('waist', r['p_waist_cm'], 'var(--waist)'),
-        ('hips', r['p_hip_cm'], 'var(--hips)'),
-        ('thigh', r['p_thigh_cm'], 'var(--thighs)'),
-        ('height', r['p_stature_cm'], 'var(--tan)'),
+        (labels['bust'], r['p_bust_cm'], 'var(--bust)'),
+        (labels['waist'], r['p_waist_cm'], 'var(--waist)'),
+        (labels['hip'], r['p_hip_cm'], 'var(--hips)'),
+        (labels['thigh'], r['p_thigh_cm'], 'var(--thighs)'),
+        (labels['height'], r['p_stature_cm'], 'var(--tan)'),
     ]
     return ''.join(
         f'<div class="prow"><span>{label}</span><div class="pbar"><i style="width:{pct(p)}%;background:{col}"></i></div><b>{pct(p) if p is not None else "—"}</b></div>'
         for label, p, col in rows)
 
 
-def hero_picture(d):
+def hero_picture(d, prefix='../', name=None, alt_word='official portrait'):
     s = d['official']
+    name = name or d['display']
     sizes = '(max-width:760px) 360px, 340px'
     height = round(440 / d['ar']) if d.get('ar') else 700
     w320 = intrinsic_width(f'character_images/thumbs/320/{s}.webp')
@@ -215,155 +309,277 @@ def hero_picture(d):
     w1024 = intrinsic_width(f'character_images/thumbs/avif/1024/{s}.avif')
     w1280 = intrinsic_width(f'character_images/thumbs/avif/1280/{s}.avif')
     wfull = intrinsic_width(f'character_images/{s}.webp')
-    avif = (f'../character_images/thumbs/avif/320/{s}.avif {w320}w, '
-            f'../character_images/thumbs/avif/{s}.avif {w640}w, '
-            f'../character_images/thumbs/avif/1024/{s}.avif {w1024}w, '
-            f'../character_images/thumbs/avif/1280/{s}.avif {w1280}w')
-    webp = (f'../character_images/thumbs/320/{s}.webp {w320}w, '
-            f'../character_images/thumbs/{s}.webp {w640}w, '
-            f'../character_images/{s}.webp {wfull}w')
+    avif = (f'{prefix}character_images/thumbs/avif/320/{s}.avif {w320}w, '
+            f'{prefix}character_images/thumbs/avif/{s}.avif {w640}w, '
+            f'{prefix}character_images/thumbs/avif/1024/{s}.avif {w1024}w, '
+            f'{prefix}character_images/thumbs/avif/1280/{s}.avif {w1280}w')
+    webp = (f'{prefix}character_images/thumbs/320/{s}.webp {w320}w, '
+            f'{prefix}character_images/thumbs/{s}.webp {w640}w, '
+            f'{prefix}character_images/{s}.webp {wfull}w')
     return (f'<picture>'
             f'<source type="image/avif" srcset="{avif}" sizes="{sizes}">'
-            f'<img src="../character_images/thumbs/{s}.webp" srcset="{webp}" '
-            f'sizes="{sizes}" width="440" height="{height}" alt="{esc(d["display"])} official portrait">'
+            f'<img src="{prefix}character_images/thumbs/{s}.webp" srcset="{webp}" '
+            f'sizes="{sizes}" width="440" height="{height}" alt="{esc(name)} {esc(alt_word)}">'
             f'</picture>')
 
 
-def character_page(d, prev_d, next_d):
-    canonical = f"{SITE}characters/{d['slug']}.html"
-    title = f"{d['display']} measurements — height, bust, waist, hips | ZZZ"
-    desc = (d['desc_cm'] or '')[:150].rstrip() + ('…' if len(d['desc_cm'] or '') > 150 else '')
-    desc = f"{d['display']}: {desc}"
+def character_page(d, prev_d, next_d, lang='en'):
+    p = PAGE[lang]
+    nm = d.get(f'name_{lang}') or d['display']
+    read = d.get(f'read_{lang}') or d['read']
+    tags = d.get(f'tags_{lang}') or d['tags']
+    note = d.get(f'notes_{lang}') if lang != 'en' else d.get('notes')
+    if lang == 'en':
+        profile_cm, profile_in = d['desc_cm'], d['desc_in']
+    else:
+        profile_cm = d.get(f'desc_{lang}_cm') or d['desc_cm']
+        profile_in = d.get(f'desc_{lang}_in') or d['desc_in']
+    sub = '' if lang == 'en' else f'<p class="altname" lang="en">{esc(d["display"])}</p>'
+    prefix = '../' if lang == 'en' else '../../'
+    page_path = f"characters/{d['slug']}.html"
+    base = SITE + (f'{lang}/' if lang != 'en' else '')
+    canonical = base + page_path
+    alts = [
+        ('en', SITE + f"characters/{d['slug']}.html"),
+        ('ja', SITE + f"ja/characters/{d['slug']}.html"),
+        ('zh-Hans', SITE + f"zh/characters/{d['slug']}.html"),
+        ('x-default', SITE + f"characters/{d['slug']}.html"),
+    ]
+    if lang == 'en':
+        title = f"{d['display']} measurements — height, bust, waist, hips | ZZZ"
+    elif lang == 'ja':
+        title = f"{nm}の寸法 — 身長・バスト・ウエスト・ヒップ | ZZZ"
+    else:
+        title = f"{nm}的三围 — 身高、胸围、腰围、臀围 | ZZZ"
+    desc = (profile_cm or '')[:150].rstrip() + ('…' if len(profile_cm or '') > 150 else '')
+    desc = f"{nm}: {desc}"
     og = f"{SITE}character_images/{d['official']}.webp"
     ld = {
         "@context": "https://schema.org",
         "@graph": [
             {"@type": "ProfilePage", "@id": canonical + "#page", "url": canonical,
              "name": title, "description": desc, "dateModified": META['data_updated'],
+             "inLanguage": lang,
              "isPartOf": {"@id": f"{SITE}#website"},
              "mainEntity": {"@id": canonical + "#person"},
              "about": {"@type": "VideoGame", "name": "Zenless Zone Zero"}},
-            {"@type": "Person", "@id": canonical + "#person", "name": d['display'],
-             "description": d['desc_cm'], "image": og,
+            {"@type": "Person", "@id": canonical + "#person", "name": nm,
+             "alternateName": [d['display'], d.get('name_ja'), d.get('name_zh')],
+             "description": profile_cm, "image": og,
              "additionalProperty": [
-                 {"@type": "PropertyValue", "name": name, "value": value, "unitText": "cm"}
-                 for name, value in (
-                     ("height", d['stature_cm']),
-                     ("bust", d['bust_cm']),
-                     ("under-bust", d['band_cm']),
-                     ("waist", d['waist_cm']),
-                     ("hip", d['hip_cm']),
-                     ("thigh", d['thigh_cm']),
+                 {"@type": "PropertyValue", "name": label, "value": value, "unitText": "cm"}
+                 for label, value in (
+                     (p['height'], d['stature_cm']),
+                     (p['bust'], d['bust_cm']),
+                     (p['underbust'], d['band_cm']),
+                     (p['waist'], d['waist_cm']),
+                     (p['hip'], d['hip_cm']),
+                     (p['thigh'], d['thigh_cm']),
                  ) if value is not None
-             ] + [{"@type": "PropertyValue", "name": "bra size (UK)", "value": d['uk']}]},
+             ] + [{"@type": "PropertyValue", "name": p['bra'] + " (UK)", "value": d['uk']}]},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "ZZZ Measurements", "item": SITE},
-                {"@type": "ListItem", "position": 2, "name": d['display'], "item": canonical},
+                {"@type": "ListItem", "position": 2, "name": nm, "item": canonical},
             ]},
         ],
     }
     ld_tag = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>'
 
+    charted = f" · {fmt(d['cm'], 0)} cm {p['charted']}" if d['stature_basis'] == 'head' else ''
     rows = [
-        ('Height', f"{fmt(d['stature_cm'], 1)} cm · {d['ftin_stature']}" + (f" · {fmt(d['cm'], 0)} cm charted" if d['stature_basis'] == 'head' else '')),
-        ('Bust', f"{fmt(d['bust_cm'])} cm · {fmt(d['bust_in'])} in"),
-        ('Under-bust', f"{fmt(d['band_cm'])} cm · {fmt(d['band_in'])} in"),
-        ('Waist', f"{fmt(d['waist_cm'])} cm · {fmt(d['waist_in'])} in"),
-        ('Hip', f"{fmt(d['hip_cm'])} cm · {fmt(d['hip_in'])} in"),
-        ('Thigh', (f"{fmt(d['thigh_cm'])} cm · {fmt(d['thigh_in'])} in" if d['thigh_cm'] is not None else 'no reliable measurement')),
-        ('Bust diff', (f"{fmt(d['diff_cm'])} cm · {fmt(d['diff_in'])} in" if d['diff_cm'] is not None else '—')),
-        ('Bra size', f"UK {d['uk']} · US {d['us']} · EU {d['eu']}"),
+        (p['height'], f"{fmt(d['stature_cm'], 1)} cm · {d['ftin_stature']}" + charted),
+        (p['bust'], f"{fmt(d['bust_cm'])} cm · {fmt(d['bust_in'])} in"),
+        (p['underbust'], f"{fmt(d['band_cm'])} cm · {fmt(d['band_in'])} in"),
+        (p['waist'], f"{fmt(d['waist_cm'])} cm · {fmt(d['waist_in'])} in"),
+        (p['hip'], f"{fmt(d['hip_cm'])} cm · {fmt(d['hip_in'])} in"),
+        (p['thigh'], f"{fmt(d['thigh_cm'])} cm · {fmt(d['thigh_in'])} in" if d['thigh_cm'] is not None else p['no_thigh']),
+        (p['bust_diff'], f"{fmt(d['diff_cm'])} cm · {fmt(d['diff_in'])} in" if d['diff_cm'] is not None else '—'),
+        (p['bra'], f"UK {d['uk']} · US {d['us']} · EU {d['eu']}"),
     ]
     rows_html = ''.join(f'<tr><th scope="row">{esc(k)}</th><td>{esc(v)}</td></tr>' for k, v in rows)
 
     props = [
-        ('Waist / hip', d['whr']), ('Waist / height', d['whtr']), ('Waist / thigh', d['wtr']),
-        ('Thigh / height', d['thr']), ('Thigh / hip', d['thh']), ('Bust / height', d['bhr']),
-        ('Hip / height', d['hhr']),
+        (p['waist_hip'], d['whr']), (p['waist_height'], d['whtr']), (p['waist_thigh'], d['wtr']),
+        (p['thigh_height'], d['thr']), (p['thigh_hip'], d['thh']), (p['bust_height'], d['bhr']),
+        (p['hip_height'], d['hhr']),
     ]
     props_html = ''.join(f'<tr><th scope="row">{esc(k)}</th><td>{fmt(v, 3)}</td></tr>' for k, v in props)
 
     gallery = []
-    gallery.append((f"character_images/thumbs/{d['official']}.webp", f"{d['display']} — official portrait", 'Official portrait'))
+    gallery.append((f"{prefix}character_images/thumbs/{d['official']}.webp",
+                    f"{nm} — {p['official_portrait']}", p['official_portrait']))
     if d.get('skin'):
-        s = d['skin']
-        gallery.append((f"character_images/{s['official']}.webp", f"{s['outfit']} — measured outfit", 'Measured outfit · has its own numbers'))
+        skin = d['skin']
+        gallery.append((f"{prefix}character_images/{skin['official']}.webp",
+                        f"{skin['outfit']} — {p['measured_outfit']}",
+                        p['measured_outfit']))
     for it in d['outfits']:
-        gallery.append((f"character_images/{it['file']}", f"{it['label']} — outfit portrait", f"{it['type']} · art only"))
+        gallery.append((f"{prefix}character_images/{it['file']}",
+                        f"{it['label']} — {p['outfit_portrait']}",
+                        f"{it['type']} · {p['art_only']}"))
     gallery_html = ''.join(
-        f'<figure><img loading="lazy" decoding="async" src="../{esc(src)}" alt="{esc(alt)}">'
+        f'<figure><img loading="lazy" decoding="async" src="{esc(src)}" alt="{esc(alt)}">'
         f'<figcaption><b>{esc(alt.split(" — ")[0])}</b>{esc(cap)}</figcaption></figure>'
         for src, alt, cap in gallery)
 
     sim = similar(d)
-    sim_html = ' · '.join(f'<a href="{esc(x["slug"])}.html">{esc(x["display"])}</a>' for x in sim)
-    report = (f"{META['repo']}/issues/new?title=" + quote(f"[data] {d['display']}") +
-              "&body=" + quote(f"Character: {d['display']}\nField: \nCurrent value: \nSource: \n\nWhat looks wrong?\n"))
+    sim_html = ' · '.join(
+        f'<a href="{esc(x["slug"])}.html">{esc(x.get(f"name_{lang}") or x["display"])}</a>'
+        for x in sim)
+    report = (f"{META['repo']}/issues/new?title=" + quote(f"[data] {nm}") +
+              "&body=" + quote(f"Character: {nm}\nField: \nCurrent value: \nSource: \n\nWhat looks wrong?\n"))
     src_link = (f"<a href=\"https://zenless-zone-zero.fandom.com/wiki/{quote(d['source_page'].replace(' ', '_'))}\" rel=\"noopener\">"
                 f"{esc(d['source_page'])}</a>" if d.get('source_page') else '—')
-    measured_note = (f"<p class=\"note\">This agent has a measured outfit ({esc(d['skin']['outfit'])}). The numbers on this page "
-                     f"are the <b>standard model</b>; the outfit record is kept separate in the dataset.</p>" if d.get('skin') else '')
-    stature_note = ("<p class=\"note\">Height uses the ~"
-                    f"{fmt(d['stature_cm'], 1)} cm head height; the charted {fmt(d['cm'], 0)} cm includes her ears.</p>" if d['stature_basis'] == 'head' else '')
+    measured_note = (f"<p class=\"note\">{p['measured_note'].format(outfit=esc(d['skin']['outfit']))}</p>" if d.get('skin') else '')
+    stature_note = (f"<p class=\"note\">{p['stature_note'].format(st=fmt(d['stature_cm'], 1), cm=fmt(d['cm'], 0))}</p>"
+                    if d['stature_basis'] == 'head' else '')
+    chart_note = ''
+    if note and not (d['stature_basis'] == 'head' and d['notes'].lower().startswith('height includes ears')):
+        chart_note = f'<p class="note">{esc(p["chart_note"])}: {esc(note)}</p>'
+    chart_link = f"{prefix}#p={quote(d['slug'])}&amp;lang={lang}"
 
-    return head(title, desc, canonical, og, ld_tag) + f'''
+    return head(title, desc, canonical, og, ld_tag, prefix=prefix, lang=lang, alts=alts,
+                home=prefix, path=page_path) + f'''
 <main>
   <section class="hero">
-    {hero_picture(d)}
+    {hero_picture(d, prefix=prefix, name=nm, alt_word=p['official_portrait'])}
     <div>
-      <p class="eyebrow">Zenless Zone Zero · measurements</p>
-      <h1>{esc(d['display'])}</h1>
-      <p class="lead">{esc(d['read'])}</p>
+      <p class="eyebrow">{esc(p['eyebrow'])}</p>
+      <h1>{esc(nm)}</h1>
+      {sub}
+      <p class="lead">{esc(read)}</p>
       <ul class="chips">
-        <li class="chip height">{esc(d['tags']['height'])}</li>
+        <li class="chip height">{esc(tags['height'])}</li>
         <li class="chip bust">UK {esc(d['uk'])}</li>
-        <li class="chip waist">waist {esc(d['tags']['waist'])}</li>
-        <li class="chip hips">hips {esc(d['tags']['hips'])}</li>
-        <li class="chip thighs">thighs {esc(d['tags']['thighs'])}</li>
+        <li class="chip waist">{esc(p['waist'])} {esc(tags['waist'])}</li>
+        <li class="chip hips">{esc(p['hip'])} {esc(tags['hips'])}</li>
+        <li class="chip thighs">{esc(p['thigh'])} {esc(tags['thighs'])}</li>
       </ul>
-      <p class="meta">{fmt(d['stature_cm'], 1)} cm height{(' · ' + fmt(d['cm'], 0) + ' cm charted') if d['stature_basis'] == 'head' else ''} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
+      <p class="meta">{esc(p['height'])} {fmt(d['stature_cm'], 1)} cm{charted} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
       <div class="btns">
-        <a class="btn primary" href="../#p={esc(d['slug'])}">Open in the chart</a>
-        <a class="btn" href="../data/measurements.json" download>Dataset</a>
-        <a class="btn" href="{report}" rel="noopener">Report an error</a>
+        <a class="btn primary" href="{chart_link}">{esc(p['open'])}</a>
+        <a class="btn" href="{prefix}data/measurements.json" download>{esc(p['dataset'])}</a>
+        <a class="btn" href="{report}" rel="noopener">{esc(p['report'])}</a>
       </div>
     </div>
   </section>
 
   {stature_note}{measured_note}
 
-  <h2>Measurements</h2>
-  <table><caption class="small" style="text-align:left;padding-bottom:6px">Centimetres and inches; bra sizing as supplied by the source.</caption>
+  <h2>{esc(p['measurements'])}</h2>
+  <table><caption class="small" style="text-align:left;padding-bottom:6px">{esc(p['caption'])}</caption>
     <tbody>{rows_html}</tbody></table>
 
   <div class="grid2">
-    <div><h2>Proportions</h2><table><tbody>{props_html}</tbody></table></div>
-    <div><h2>Roster percentiles</h2><div class="bars">{pct_bars(d)}</div>
-      <p class="small" style="margin-top:10px">Percentiles of the raw centimetre measurement across the {N} displayed entries; height uses head height. 0 = smallest, 100 = largest.</p></div>
+    <div><h2>{esc(p['proportions'])}</h2><table><tbody>{props_html}</tbody></table></div>
+    <div><h2>{esc(p['percentiles'])}</h2><div class="bars">{pct_bars(d, lang)}</div>
+      <p class="small" style="margin-top:10px">{p['pct_note'].format(n=N)}</p></div>
   </div>
 
-  <h2>Figure read</h2>
-  <div class="card"><p>{esc(d['desc_cm'])}</p>
-    <p class="small" style="margin-top:10px">Classes: waist {esc(d['tags']['waist'])} · hips {esc(d['tags']['hips'])} · thighs {esc(d['tags']['thighs'])}{' (hand-pinned)' if d['thigh_pin'] else ''} · shape {esc(d['shape'])} · build {esc(d['tags']['balance'])}.</p>
-    {f'<p class="note">Chart note: {esc(d["notes"])}</p>' if d['notes'] and not (d['stature_basis'] == 'head' and d['notes'].lower().startswith('height includes ears')) else ''}
+  <h2>{esc(p['figure_read'])}</h2>
+  <div class="card"><p>{esc(profile_cm)}</p>
+    <p class="small" style="margin-top:10px">{esc(p['classes'])}: {esc(p['waist'])} {esc(tags['waist'])} · {esc(p['hip'])} {esc(tags['hips'])} · {esc(p['thigh'])} {esc(tags['thighs'])}{(' · ' + p['hand_pinned']) if d['thigh_pin'] else ''} · {esc(p['shape'])} {esc(tags['shape'])} · {esc(p['build_word'])} {esc(tags['balance'])}{'。' if lang != 'en' else '.'}</p>
+    {chart_note}
   </div>
 
-  <h2>Outfits</h2>
+  <h2>{esc(p['outfits'])}</h2>
   <div class="gallery">{gallery_html}</div>
 
-  <h2>Provenance</h2>
+  <h2>{esc(p['provenance'])}</h2>
   <table><tbody>
-    <tr><th scope="row">Portrait source</th><td>{src_link}</td></tr>
-    <tr><th scope="row">Data updated</th><td>{META['data_updated']}</td></tr>
-    <tr><th scope="row">Similar figures</th><td>{sim_html}</td></tr>
+    <tr><th scope="row">{esc(p['portrait_source'])}</th><td>{src_link}</td></tr>
+    <tr><th scope="row">{esc(p['updated'])}</th><td>{META['data_updated']}</td></tr>
+    <tr><th scope="row">{esc(p['similar'])}</th><td>{sim_html}</td></tr>
   </tbody></table>
 
-  <nav class="nav" aria-label="Roster navigation">
-    <div><span>Previous</span><br><a href="{esc(prev_d['slug'])}.html">← {esc(prev_d['display'])}</a></div>
-    <div style="text-align:right"><span>Next</span><br><a href="{esc(next_d['slug'])}.html">{esc(next_d['display'])} →</a></div>
+  <nav class="nav" aria-label="{esc(p['roster_nav'])}">
+    <div><span>{esc(p['previous'])}</span><br><a href="{esc(prev_d['slug'])}.html">← {esc(prev_d.get(f'name_{lang}') or prev_d['display'])}</a></div>
+    <div style="text-align:right"><span>{esc(p['next'])}</span><br><a href="{esc(next_d['slug'])}.html">{esc(next_d.get(f'name_{lang}') or next_d['display'])} →</a></div>
   </nav>
 </main>
-''' + footer(META['data_updated'])
+''' + footer(META['data_updated'], prefix=prefix, lang=lang,
+              methodology=(prefix + ('methodology.html' if lang == 'en' else f'{lang}/methodology.html')))
+
+METHOD = {
+ 'en': {
+  'title': 'Methodology, classes and FAQ — ZZZ Female Measurements',
+  'desc': 'How the Zenless Zone Zero measurements were taken, how height normalises charted ears, and what the silhouette classes and percentiles mean.',
+  'intro': 'A short, honest account of what the chart measures, what it estimates, and how every class and percentile is calculated.',
+  'sections': [
+   ('Height', 'Charted height comes from official listings and may include ears, footwear or accessories. The UI uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 152.1 cm used). The charted value stays visible as a note; <code>stature_cm</code> remains the comparison field in the exports.'),
+   ('Circumferences', 'Bust, under-bust, waist, hip and thigh come from curves wrapped around the official 3D models. Clothing, armour and removed geometry make some readings approximate; the source notes are preserved verbatim.'),
+   ('Standard model vs outfit', 'The standard model is canonical, with one exception: Jane Doe\'s canonical entry uses the measured Nocturne of Light outfit. Other measured outfits are separate records with their own numbers and deltas; art-only outfits are never measured and never affect a figure, filter or ranking.'),
+   ('Bra sizing', 'The cup group follows the source\'s UK cup letter (A-B, C-D, DD-E, F-G, GG+). UK / US / EU letters are reproduced from the source for comparison, not as a fit recommendation.'),
+   ('Classes', 'Waist, hip and thigh classes are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles. Shape uses all three circumferences: Hourglass needs bust/waist and hip/waist ≥1.45 with bust and hips within 15%; Straight is flare below 1.30 or bust–hip mismatch over 25%; everything else is Balanced. Thirteen agents are hand-pinned to Thick by curator read and labelled as such.'),
+   ('Percentiles', 'Bars show the roster percentile of the raw centimetre measurement, with height using head height. 0 is the smallest value in the set, 50 the midpoint and 100 the largest.'),
+   ('Corrections', 'Every character page has a pre-filled “Report an error” link. Corrections are recorded in the changelog, and the dataset carries a schema version and an update date.'),
+  ],
+  'data_heading': 'Data &amp; exports',
+  'data_lead': 'The same numbers power the interactive chart and the static pages. Downloads are versioned by schema v{schema} and dated {date}.',
+  'json': 'JSON dataset', 'csv': 'CSV export', 'schema': 'JSON Schema', 'back': 'Back to the chart',
+  'faq': [
+   ('Where do the numbers come from?', 'Heights come from official listings where available. The remaining circumferences come from curves measured around the official 3D models, so treat every value as an estimate rather than an in-game stat.'),
+   ('Why does Miyabi show 170 cm and 152.1 cm?', 'Her charted 170 cm includes her ears. The UI uses the ~152.1 cm head height as Height, while the charted number stays visible as a note and in the exports.'),
+   ('Why is the card value the standard model?', 'The standard model is the canonical figure, except Jane Doe, where the measured Nocturne of Light outfit is the only record used. Other measured outfits are stored separately with their own numbers and deltas, so no card or ranking mixes two outfits into one body.'),
+   ('What do the silhouette classes mean?', 'Shape uses bust, waist and hips: Hourglass requires both bust/waist and hip/waist ≥1.45 plus a bust–hip balance within 15%; Straight is a flare below 1.30 or a bust–hip mismatch over 25%; the rest is Balanced. Build compares the raw bust and hip percentiles. Waist, hip and thigh classes are roster terciles of their raw circumference.'),
+   ('What does hand-pinned mean?', 'A few agents read as visibly thicker or slimmer than a single circumference suggests. Thirteen are marked thick by curator read and labelled hand-pinned in their detail view.'),
+   ('How is the cup group calculated?', 'The cup group follows the source\'s UK cup letter (A-B, C-D, DD-E, F-G, GG+). The letter is not a fit recommendation; it is the source\'s sizing label.'),
+   ('Can I reuse the data?', 'The measurements are compiled from modelmetrics.net and the character art is © HoYoverse, shown via the ZZZ Fandom wiki as fair use. Link back to the source and respect those rights.'),
+  ],
+ },
+ 'ja': {
+  'title': '算出方法・分類・FAQ — ZZZ 女性キャラ寸法',
+  'desc': 'ゼンレスゾーンゼロの寸法の測り方、耳を含む公式身長の扱い、シルエット分類とパーセンタイルの意味をまとめています。',
+  'intro': 'このチャートが何を測っていて、どこが推定なのか。各分類とパーセンタイルの出し方を、できるだけ正直に説明します。',
+  'sections': [
+   ('身長', '公式身長は公式の表記によるもので、耳・靴・アクセサリーを含むことがあります。耳などの注記がある場合は頭頂ベースを「身長」に使い、公式値は注記として残します（星見雅：公式170cm／表示152.1cm）。書き出しでは <code>stature_cm</code> が比較用の値です。'),
+   ('周囲', 'バスト、アンダー、ウエスト、ヒップ、太ももは公式3Dモデルに沿って測った値です。服や鎧、欠けたジオメトリで概算になることがあり、出典の注記はそのまま残しています。'),
+   ('標準モデルと衣装', '標準モデルが基本です。例外はジェーン・ドゥで、計測済みの「Nocturne of Light」を正式値にしています。ほかの計測済み衣装は独立した数値と差分を持つ別記録。画像だけの衣装は数値・フィルター・ランキングに影響しません。'),
+   ('ブラサイズ', 'カップ区分は出典のUKカップ表記（A-B、C-D、DD-E、F-G、GG+）に沿っています。フィッティングの提案ではなく、出典のサイズ表記です。'),
+   ('分類', 'ウエスト、ヒップ、太ももの区分は実寸cmのロスター三分位。体型（Build）はバストとヒップの百分位を比較します。シルエットは3周を使い、砂時計型はバスト/ウエストとヒップ/ウエストが1.45以上、バストとヒップの差が15%以内。直線型はフレア1.30未満またはバストとヒップの差が25%超。それ以外はバランス型です。13名は目視で太めとして手動分類しています。'),
+   ('パーセンタイル', 'バーは実寸cmのロスター内パーセンタイル。身長は頭頂ベースです。0が最小、50が中央、100が最大。'),
+   ('修正', '各キャラクターページに記入済みの「誤りを報告」リンクがあります。修正は変更履歴に残し、データセットにはスキーマ版と更新日があります。'),
+  ],
+  'data_heading': 'データと書き出し',
+  'data_lead': 'チャートと静的ページは同じ数値を使っています。ダウンロードはスキーマv{schema}、更新日{date}。',
+  'json': 'JSONデータ', 'csv': 'CSV書き出し', 'schema': 'JSONスキーマ', 'back': 'チャートに戻る',
+  'faq': [
+   ('数値の出典は？', '身長は公式の表記がある場合に採用。それ以外の周囲は公式3Dモデルに沿って測った値なので、ゲーム内ステータスではなく推定値として見てください。'),
+   ('星見雅が170cmと152.1cmなのはなぜ？', '公式の170cmは耳を含みます。UIでは頭頂ベースの約152.1cmを身長に使い、公式値は注記と書き出しに残しています。'),
+   ('カードの数値は標準モデル？', '標準モデルが基本で、ジェーン・ドゥだけは計測済みの「Nocturne of Light」を正式値にしています。ほかの衣装は独立した数値と差分を持ち、カードやランキングでは混ぜません。'),
+   ('シルエット分類の意味は？', 'バスト・ウエスト・ヒップの3周を使います。砂時計型はバスト/ウエストとヒップ/ウエストが1.45以上、バストとヒップの差が15%以内。直線型はフレア1.30未満またはバストとヒップの差が25%超。それ以外はバランス型。体型（Build）はバストとヒップの百分位を比べます。'),
+   ('手動分類とは？', '数字だけでは厚みが伝わりにくい一部のキャラを、目視で太めに分類しています。13名が該当し、詳細で「手動分類」と表示しています。'),
+   ('カップ区分の計算は？', '出典のUKカップ表記（A-B、C-D、DD-E、F-G、GG+）に沿った区分です。フィッティングの提案ではありません。'),
+   ('データは再利用できますか？', '計測値はmodelmetrics.net、キャラクター画像は©HoYoverse。ZZZ Fandom wiki経由でフェアユースとして掲載しています。出典へのリンクと権利表示を守ってください。'),
+  ],
+ },
+ 'zh': {
+  'title': '方法与常见问题 — ZZZ 女性角色测量',
+  'desc': '绝区零角色测量数据的来源、官方身高包含耳朵时的处理方式，以及轮廓分类和百分位的含义。',
+  'intro': '这份图表量了什么、哪些是估算、每个分类和百分位怎么算——尽量坦白地说清楚。',
+  'sections': [
+   ('身高', '官方身高来自官方资料，可能包含耳朵、鞋子或配饰。如果图表有相关注记，界面会用头顶高度作为“身高”，官方数字仍保留为注释（星见雅：官方 170cm／显示 152.1cm）。导出数据里的 <code>stature_cm</code> 是对比用字段。'),
+   ('围度', '胸围、下胸围、腰围、臀围和大腿围是沿官方 3D 模型量出的曲线。服装、铠甲和缺失的几何体会让部分读数变成估算，来源注记按原文保留。'),
+   ('标准模型与服装', '标准模型是默认版本，唯一的例外是简·杜：她的正式记录采用已测量的「Nocturne of Light」服装。其他已测量服装是独立记录，带有自己的数值和差值；仅立绘服装从不参与数值、筛选或排名。'),
+   ('内衣尺码', '罩杯分组沿用来源的 UK 罩杯字母（A-B、C-D、DD-E、F-G、GG+）。这不是合身建议，只是来源的尺码标注。'),
+   ('分类', '腰围、臀围和大腿分类按厘米实围把全榜三等分。体型（Build）比较胸围和臀围的百分位。轮廓使用三围：沙漏型要求胸围/腰围和臀围/腰围都≥1.45，且胸围与臀围差距在15%以内；直线型是外扩低于1.30，或胸胯差距超过25%；其余为匀称型。有13位角色按视觉判断人工归为“丰满”，并标注为人工分类。'),
+   ('百分位', '进度条显示厘米实围在全榜中的百分位，身高按头顶高度计算。0是最小值，50是中位，100是最大值。'),
+   ('修正', '每个角色页都有预填好的“报告错误”链接。修正记录在更新日志里，数据集带有 schema 版本和更新日期。'),
+  ],
+  'data_heading': '数据与导出',
+  'data_lead': '交互图表和静态页面使用同一套数据。下载文件的 schema 版本为 v{schema}，更新日期为 {date}。',
+  'json': 'JSON 数据集', 'csv': 'CSV 导出', 'schema': 'JSON Schema', 'back': '返回图表',
+  'faq': [
+   ('这些数字从哪来？', '有官方身高资料时优先采用官方值。其余围度是沿官方 3D 模型量出来的，所以请把它们当作估算，不要当成游戏内数值。'),
+   ('为什么星见雅同时显示 170cm 和 152.1cm？', '官方 170cm 包含耳朵。界面把约 152.1cm 的头顶高度作为“身高”，官方数字仍保留在注释和导出数据里。'),
+   ('卡片用的是标准模型吗？', '默认是标准模型，只有简·杜例外：她的正式记录采用已测量的「Nocturne of Light」服装。其他已测量服装独立保存，卡片和排名不会把两套服装混在一起。'),
+   ('轮廓分类是什么意思？', '用胸围、腰围和臀围三项。沙漏型要求胸围/腰围和臀围/腰围都≥1.45，且胸围与臀围差距在15%以内；直线型是外扩低于1.30，或胸胯差距超过25%；其余为匀称型。体型（Build）比较胸围和臀围的原始百分位。'),
+   ('“人工分类”是什么？', '有些角色单看围度数字不够直观，编辑会按视觉判断归为“丰满”。共有13位，详情页会标注“人工分类”。'),
+   ('罩杯分组怎么算？', '沿用来源的 UK 罩杯字母（A-B、C-D、DD-E、F-G、GG+）。这不是合身建议，只是来源的尺码标注。'),
+   ('数据可以复用吗？', '测量数据整理自 modelmetrics.net，角色立绘©HoYoverse，经由 ZZZ Fandom wiki 以合理使用方式展示。请链接回来源并遵守相关权利。'),
+  ],
+ },
+}
 
 
 FAQ = [
@@ -384,78 +600,59 @@ FAQ = [
 ]
 
 
-def methodology_page():
-    canonical = SITE + 'methodology.html'
-    title = "Methodology, classes and FAQ — ZZZ Female Measurements"
-    desc = ("How the Zenless Zone Zero measurements were taken, how height normalises charted ears, "
-            "and what the silhouette classes and percentiles mean.")
+def methodology_page(lang='en'):
+    p = PAGE[lang]
+    m = METHOD[lang]
+    prefix = '' if lang == 'en' else '../'
+    path = 'methodology.html'
+    canonical = SITE + (f'{lang}/' if lang != 'en' else '') + path
+    alts = [
+        ('en', SITE + 'methodology.html'),
+        ('ja', SITE + 'ja/methodology.html'),
+        ('zh-Hans', SITE + 'zh/methodology.html'),
+        ('x-default', SITE + 'methodology.html'),
+    ]
     faq_ld = {
         "@context": "https://schema.org",
         "@graph": [
-            {"@type": "FAQPage", "@id": canonical + "#faq",
+            {"@type": "FAQPage", "@id": canonical + "#faq", "inLanguage": lang,
              "mainEntity": [{"@type": "Question", "name": q,
-                             "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]},
+                             "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in m['faq']]},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "ZZZ Measurements", "item": SITE},
-                {"@type": "ListItem", "position": 2, "name": "Methodology", "item": canonical},
+                {"@type": "ListItem", "position": 2, "name": p['methodology'], "item": canonical},
             ]},
         ],
     }
     ld_tag = '<script type="application/ld+json">' + json.dumps(faq_ld, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>'
-    faq_html = ''.join(f'<dt>{esc(q)}</dt><dd>{esc(a)}</dd>' for q, a in FAQ)
-    return head(title, desc, canonical, SITE + 'og.png', ld_tag, prefix='') + f'''
+    sections = ''.join(f'<section class="card"><h3>{esc(h)}</h3><p>{body}</p></section>' for h, body in m['sections'])
+    faq_html = ''.join(f'<dt>{esc(q)}</dt><dd>{esc(a)}</dd>' for q, a in m['faq'])
+    home = './' if lang == 'en' else '../'
+    methodology = prefix + ('methodology.html' if lang == 'en' else f'{lang}/methodology.html')
+    return head(m['title'], m['desc'], canonical, SITE + 'og.png', ld_tag, prefix=prefix,
+                lang=lang, alts=alts, home=home, path=path) + f'''
 <main>
-  <p class="eyebrow">Reference</p>
-  <h1>Methodology &amp; FAQ</h1>
-  <p class="lead">A short, honest account of what the chart measures, what it estimates, and how every class and percentile is calculated.</p>
+  <p class="eyebrow">{esc(p['methodology'])}</p>
+  <h1>{esc(p['methodology'])}</h1>
+  <p class="lead">{esc(m['intro'])}</p>
 
-  <div class="grid2">
-    <section class="card">
-      <h3>Height</h3>
-      <p>Charted height comes from official listings and may include ears, footwear or accessories. The UI uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 152.1 cm used). The charted value stays visible as a note; <code>stature_cm</code> remains the comparison field in the exports.</p>
-    </section>
-    <section class="card">
-      <h3>Circumferences</h3>
-      <p>Bust, under-bust, waist, hip and thigh come from curves wrapped around the official 3D models. Clothing, armour and removed geometry make some readings approximate; the source notes are preserved verbatim.</p>
-    </section>
-    <section class="card">
-      <h3>Standard model vs outfit</h3>
-      <p>The standard model is canonical, with one exception: Jane Doe's canonical entry uses the measured Nocturne of Light outfit. Other measured outfits are separate records with their own numbers and deltas; art-only outfits are never measured and never affect a figure, filter or ranking.</p>
-    </section>
-    <section class="card">
-      <h3>Bra sizing</h3>
-      <p>The cup group follows the source's UK cup letter (A-B, C-D, DD-E, F-G, GG+). UK / US / EU letters are reproduced from the source for comparison, not as a fit recommendation.</p>
-    </section>
-    <section class="card">
-      <h3>Classes</h3>
-      <p>Waist, hip and thigh classes are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles. Shape uses all three circumferences: Hourglass needs bust/waist and hip/waist ≥1.45 with bust and hips within 15%; Straight is flare below 1.30 or bust–hip mismatch over 25%; everything else is Balanced. Thirteen agents are hand-pinned to Thick by curator read and labelled as such.</p>
-    </section>
-    <section class="card">
-      <h3>Percentiles</h3>
-      <p>Bars show the roster percentile of the raw centimetre measurement, with height using head height. 0 is the smallest value in the set, 50 the midpoint and 100 the largest.</p>
-    </section>
-    <section class="card">
-      <h3>Corrections</h3>
-      <p>Every character page has a pre-filled “Report an error” link. Corrections are recorded in the changelog, and the dataset carries a schema version and an update date.</p>
-    </section>
-  </div>
+  <div class="grid2">{sections}</div>
 
-  <h2>Data &amp; exports</h2>
-  <p class="lead">The same numbers power the interactive chart and the static pages. Downloads are versioned by schema v{META['schema_version']} and dated {META['data_updated']}.</p>
+  <h2>{m['data_heading']}</h2>
+  <p class="lead">{m['data_lead'].format(schema=META['schema_version'], date=META['data_updated'])}</p>
   <div class="btns">
-    <a class="btn primary" href="data/measurements.json" download>JSON dataset</a>
-    <a class="btn" href="data/measurements.csv" download>CSV export</a>
-    <a class="btn" href="data/schema.json" download>JSON Schema</a>
+    <a class="btn primary" href="{prefix}data/measurements.json" download>{esc(m['json'])}</a>
+    <a class="btn" href="{prefix}data/measurements.csv" download>{esc(m['csv'])}</a>
+    <a class="btn" href="{prefix}data/schema.json" download>{esc(m['schema'])}</a>
   </div>
-  <p class="small">Rights: {esc(META['rights'])}</p>
+  <p class="small">{esc(p['rights'])}</p>
 
   <h2>FAQ</h2>
   <dl class="faq">{faq_html}</dl>
 
-  <div class="btns"><a class="btn primary" href="./">Back to the chart</a></div>
+  <div class="btns"><a class="btn primary" href="{home}">{esc(m['back'])}</a></div>
 </main>
-''' + footer(META['data_updated'], prefix='')
-
+''' + footer(META['data_updated'], prefix=prefix, lang=lang, methodology=methodology)
 
 def export_json():
     out = {"meta": {
@@ -489,7 +686,15 @@ def export_json():
                         "shape": d['shape'], "build": d['balance']},
             "confidence": d['confidence'], "confidence_note": d['confidence_note'],
             "notes": d['notes'], "source_page": d['source_page'],
+            "display_ja": d.get('name_ja'), "display_zh": d.get('name_zh'),
             "profile": SITE + f"characters/{d['slug']}.html",
+            "profile_ja": SITE + f"ja/characters/{d['slug']}.html",
+            "profile_zh": SITE + f"zh/characters/{d['slug']}.html",
+            "profile_text": {
+                "en": {"cm": d['desc_cm'], "in": d['desc_in'], "read": d['read']},
+                "ja": {"cm": d.get('desc_ja_cm'), "in": d.get('desc_ja_in'), "read": d.get('read_ja')},
+                "zh": {"cm": d.get('desc_zh_cm'), "in": d.get('desc_zh_in'), "read": d.get('read_zh')},
+            },
             "measured_outfit": None,
             "art_only_outfits": [{"label": o['label'], "type": o['type']} for o in d['outfits']],
         }
@@ -574,7 +779,11 @@ def schema_doc():
                         "confidence_note": {"type": "string"},
                         "notes": {"type": "string"},
                         "source_page": {"type": ["string", "null"]},
+                        "display_ja": {"type": ["string", "null"]}, "display_zh": {"type": ["string", "null"]},
                         "profile": {"type": "string", "format": "uri"},
+                        "profile_ja": {"type": "string", "format": "uri"},
+                        "profile_zh": {"type": "string", "format": "uri"},
+                        "profile_text": {"type": "object"},
                         "measured_outfit": {"type": ["object", "null"]},
                         "art_only_outfits": {"type": "array"},
                     },
@@ -614,21 +823,27 @@ def main():
     a = ap.parse_args()
     SITE = a.site_url if a.site_url.endswith('/') else a.site_url + '/'
     out = Path(a.out)
-    (out / 'characters').mkdir(parents=True, exist_ok=True)
-    (out / 'data').mkdir(parents=True, exist_ok=True)
-
-    for i, d in enumerate(DISPLAY_SORTED):
-        prev_d = DISPLAY_SORTED[(i - 1) % N]
-        next_d = DISPLAY_SORTED[(i + 1) % N]
-        (out / 'characters' / f"{d['slug']}.html").write_text(character_page(d, prev_d, next_d))
-    (out / 'methodology.html').write_text(methodology_page())
+    for lang in ('en', 'ja', 'zh'):
+        page_dir = out / 'characters' if lang == 'en' else out / lang / 'characters'
+        page_dir.mkdir(parents=True, exist_ok=True)
+        (out / 'data').mkdir(parents=True, exist_ok=True)
+        for i, d in enumerate(DISPLAY_SORTED):
+            prev_d = DISPLAY_SORTED[(i - 1) % N]
+            next_d = DISPLAY_SORTED[(i + 1) % N]
+            page_html = character_page(d, prev_d, next_d, lang)
+            page_html = '\n'.join(line.rstrip() for line in page_html.splitlines()) + '\n'
+            (page_dir / f"{d['slug']}.html").write_text(page_html)
+        methodology_dir = out if lang == 'en' else out / lang
+        method_html = methodology_page(lang)
+        method_html = '\n'.join(line.rstrip() for line in method_html.splitlines()) + '\n'
+        (methodology_dir / 'methodology.html').write_text(method_html)
     (out / 'offline.html').write_text(OFFLINE)
     (out / 'data' / 'measurements.json').write_text(
         json.dumps(export_json(), indent=1, ensure_ascii=False) + '\n')
     export_csv(out / 'data' / 'measurements.csv')
     (out / 'data' / 'schema.json').write_text(
         json.dumps(schema_doc(), indent=1, ensure_ascii=False) + '\n')
-    print(f'pages: {N} character pages + methodology + offline + 3 data files -> {out}')
+    print(f'pages: {N * 3} character pages + 3 methodology + offline + 3 data files -> {out}')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方法与常见问题 — ZZZ 女性角色测量</title>
+<meta name="description" content="绝区零角色测量数据的来源、官方身高包含耳朵时的处理方式，以及轮廓分类和百分位的含义。">
+<link rel="canonical" href="https://nullhollow.github.io/zzz-measurements/zh/methodology.html">
+<link rel="alternate" hreflang="en" href="https://nullhollow.github.io/zzz-measurements/methodology.html">
+<link rel="alternate" hreflang="ja" href="https://nullhollow.github.io/zzz-measurements/ja/methodology.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://nullhollow.github.io/zzz-measurements/zh/methodology.html">
+<link rel="alternate" hreflang="x-default" href="https://nullhollow.github.io/zzz-measurements/methodology.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ZZZ Female Measurements">
+<meta property="og:title" content="方法与常见问题 — ZZZ 女性角色测量">
+<meta property="og:description" content="绝区零角色测量数据的来源、官方身高包含耳朵时的处理方式，以及轮廓分类和百分位的含义。">
+<meta property="og:url" content="https://nullhollow.github.io/zzz-measurements/zh/methodology.html">
+<meta property="og:image" content="https://nullhollow.github.io/zzz-measurements/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="方法与常见问题 — ZZZ 女性角色测量">
+<meta name="twitter:description" content="绝区零角色测量数据的来源、官方身高包含耳朵时的处理方式，以及轮廓分类和百分位的含义。">
+<meta name="twitter:image" content="https://nullhollow.github.io/zzz-measurements/og.png">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+:root{--acid:#D8FA00;--hazard:#FFDE00;--signal:#FF5E41;--ink:#0B0B0C;--panel:#17171C;
+  --line:#ffffff22;--dim:#A6A6AE;--dim2:#8A8A94;--bust:#FF5E41;--waist:#29D4FF;--hips:#D8FA00;
+  --thighs:#FFDE00;--tan:#D3BC8E;--disp:'Anton','Arial Narrow',Impact,sans-serif;
+  --num:'Chakra Petch',ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:#fff;font:14px/1.6 Inter,system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--acid)}
+:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
+.top{max-width:1100px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;
+  align-items:center;gap:12px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase}
+.top a{text-decoration:none;color:var(--dim)}
+.top a:hover{color:var(--acid)}
+.top b{font-family:var(--num);color:var(--acid)}
+.langnav{display:flex;gap:10px;margin-left:auto}.langnav a{text-decoration:none}.langnav a[data-lang]{opacity:.55}.langnav a:hover{color:var(--acid);opacity:1}.langnav a.on{color:var(--acid);opacity:1}
+main{max-width:1100px;margin:0 auto;padding:22px 20px 60px}
+.hero{display:grid;grid-template-columns:min(340px,38vw) 1fr;gap:26px;align-items:center;
+  border-bottom:1px solid var(--line);padding-bottom:24px}
+.hero img{width:100%;height:auto;border-radius:16px;border:1px solid var(--line);background:#101014}
+.hero picture{display:block}
+.eyebrow{margin:0 0 6px;font-family:var(--num);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+h1{margin:0 0 10px;font-family:var(--disp);font-weight:400;font-size:clamp(36px,6vw,64px);line-height:.96;
+  text-transform:uppercase}
+.lead{margin:0 0 14px;color:#cfd0d6;font-size:13px}
+.altname{margin:-6px 0 10px;color:var(--dim);font-family:var(--num);font-size:11px;letter-spacing:.08em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:9.5px;
+  letter-spacing:.13em;text-transform:uppercase;color:#e8e8ee}
+.chip.bust{border-color:var(--bust);color:var(--bust)}.chip.waist{border-color:var(--waist);color:var(--waist)}
+.chip.hips{border-color:var(--hips);color:var(--hips)}.chip.thighs{border-color:var(--thighs);color:var(--thighs)}
+.chip.height{border-color:var(--tan);color:var(--tan)}
+.meta{font-family:var(--num);font-size:12px;color:var(--dim);letter-spacing:.03em}
+h2{margin:30px 0 10px;font-family:var(--disp);font-weight:400;font-size:22px;text-transform:uppercase}
+h3{margin:18px 0 6px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--acid)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+thead th{font-family:var(--num);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+tbody th{font-weight:500;color:var(--dim)}
+td{font-family:var(--num);font-weight:600}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:14px}
+.card p{margin:0;color:#cfd0d6;font-size:12.5px}
+.bars{display:grid;gap:7px}
+.prow{display:grid;grid-template-columns:64px 1fr 36px;gap:8px;align-items:center;font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.pbar{height:6px;background:#ffffff1a;border-radius:99px;overflow:hidden}
+.pbar i{display:block;height:100%}
+.prow b{font-family:var(--num);text-align:right;color:#e8e8ee;font-size:11px}
+.note{border-left:2px solid var(--hazard);padding-left:10px;color:var(--dim);font-size:12px;margin-top:12px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.gallery figure{margin:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#101014}
+.gallery img{width:100%;height:auto;display:block;background:#0c0c10}
+.gallery figcaption{padding:8px 10px;font-size:10.5px;color:var(--dim)}
+.gallery b{display:block;color:#fff;font-size:12px}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:34px;border-top:1px solid var(--line);padding-top:16px}
+.nav a{text-decoration:none;font-family:var(--num);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.nav span{color:var(--dim)}
+footer{max-width:1100px;margin:0 auto;padding:0 20px 60px;color:var(--dim2);font-size:11px;line-height:1.7}
+footer a{color:var(--dim)}
+footer .rule{border-top:1px solid var(--line);padding-top:14px}
+.btn{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:8px 14px;
+  font-family:var(--num);font-size:10px;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;color:#fff}
+.btn:hover{border-color:var(--acid);color:var(--acid)}
+.btn.primary{background:var(--acid);border-color:var(--acid);color:#0b0b0c;font-weight:800}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.faq dt{font-weight:700;margin-top:14px;color:#fff}
+.faq dd{margin:4px 0 0;color:#cfd0d6}
+.small{font-size:11px;color:var(--dim2)}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.hero img{max-width:320px}
+  .grid2{grid-template-columns:1fr}}
+@media print{body{background:#fff;color:#000}.top,footer,.nav,.btns{display:none}
+  .hero img{max-height:300px;width:auto}.card{background:#fff}.lead,.card p{color:#333}
+  a{color:#000}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"FAQPage","@id":"https://nullhollow.github.io/zzz-measurements/zh/methodology.html#faq","inLanguage":"zh","mainEntity":[{"@type":"Question","name":"这些数字从哪来？","acceptedAnswer":{"@type":"Answer","text":"有官方身高资料时优先采用官方值。其余围度是沿官方 3D 模型量出来的，所以请把它们当作估算，不要当成游戏内数值。"}},{"@type":"Question","name":"为什么星见雅同时显示 170cm 和 152.1cm？","acceptedAnswer":{"@type":"Answer","text":"官方 170cm 包含耳朵。界面把约 152.1cm 的头顶高度作为“身高”，官方数字仍保留在注释和导出数据里。"}},{"@type":"Question","name":"卡片用的是标准模型吗？","acceptedAnswer":{"@type":"Answer","text":"默认是标准模型，只有简·杜例外：她的正式记录采用已测量的「Nocturne of Light」服装。其他已测量服装独立保存，卡片和排名不会把两套服装混在一起。"}},{"@type":"Question","name":"轮廓分类是什么意思？","acceptedAnswer":{"@type":"Answer","text":"用胸围、腰围和臀围三项。沙漏型要求胸围/腰围和臀围/腰围都≥1.45，且胸围与臀围差距在15%以内；直线型是外扩低于1.30，或胸胯差距超过25%；其余为匀称型。体型（Build）比较胸围和臀围的原始百分位。"}},{"@type":"Question","name":"“人工分类”是什么？","acceptedAnswer":{"@type":"Answer","text":"有些角色单看围度数字不够直观，编辑会按视觉判断归为“丰满”。共有13位，详情页会标注“人工分类”。"}},{"@type":"Question","name":"罩杯分组怎么算？","acceptedAnswer":{"@type":"Answer","text":"沿用来源的 UK 罩杯字母（A-B、C-D、DD-E、F-G、GG+）。这不是合身建议，只是来源的尺码标注。"}},{"@type":"Question","name":"数据可以复用吗？","acceptedAnswer":{"@type":"Answer","text":"测量数据整理自 modelmetrics.net，角色立绘©HoYoverse，经由 ZZZ Fandom wiki 以合理使用方式展示。请链接回来源并遵守相关权利。"}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ZZZ Measurements","item":"https://nullhollow.github.io/zzz-measurements/"},{"@type":"ListItem","position":2,"name":"方法与常见问题","item":"https://nullhollow.github.io/zzz-measurements/zh/methodology.html"}]}]}</script>
+</head>
+<body>
+<header class="top">
+  <a href="../">← ZZZ 测量</a>
+  <nav class="langnav" aria-label="语言">
+    <a href="../methodology.html" data-lang="en" class="" onclick="try{localStorage.setItem('zzz-lang','en')}catch(e){}">EN</a>
+    <a href="../ja/methodology.html" data-lang="ja" class="" onclick="try{localStorage.setItem('zzz-lang','ja')}catch(e){}">日本語</a>
+    <a href="../zh/methodology.html" data-lang="zh" class="on" onclick="try{localStorage.setItem('zzz-lang','zh')}catch(e){}">中文</a>
+  </nav>
+  <span>绝区零 · <b>48</b> 位角色</span>
+</header>
+
+<main>
+  <p class="eyebrow">方法与常见问题</p>
+  <h1>方法与常见问题</h1>
+  <p class="lead">这份图表量了什么、哪些是估算、每个分类和百分位怎么算——尽量坦白地说清楚。</p>
+
+  <div class="grid2"><section class="card"><h3>身高</h3><p>官方身高来自官方资料，可能包含耳朵、鞋子或配饰。如果图表有相关注记，界面会用头顶高度作为“身高”，官方数字仍保留为注释（星见雅：官方 170cm／显示 152.1cm）。导出数据里的 <code>stature_cm</code> 是对比用字段。</p></section><section class="card"><h3>围度</h3><p>胸围、下胸围、腰围、臀围和大腿围是沿官方 3D 模型量出的曲线。服装、铠甲和缺失的几何体会让部分读数变成估算，来源注记按原文保留。</p></section><section class="card"><h3>标准模型与服装</h3><p>标准模型是默认版本，唯一的例外是简·杜：她的正式记录采用已测量的「Nocturne of Light」服装。其他已测量服装是独立记录，带有自己的数值和差值；仅立绘服装从不参与数值、筛选或排名。</p></section><section class="card"><h3>内衣尺码</h3><p>罩杯分组沿用来源的 UK 罩杯字母（A-B、C-D、DD-E、F-G、GG+）。这不是合身建议，只是来源的尺码标注。</p></section><section class="card"><h3>分类</h3><p>腰围、臀围和大腿分类按厘米实围把全榜三等分。体型（Build）比较胸围和臀围的百分位。轮廓使用三围：沙漏型要求胸围/腰围和臀围/腰围都≥1.45，且胸围与臀围差距在15%以内；直线型是外扩低于1.30，或胸胯差距超过25%；其余为匀称型。有13位角色按视觉判断人工归为“丰满”，并标注为人工分类。</p></section><section class="card"><h3>百分位</h3><p>进度条显示厘米实围在全榜中的百分位，身高按头顶高度计算。0是最小值，50是中位，100是最大值。</p></section><section class="card"><h3>修正</h3><p>每个角色页都有预填好的“报告错误”链接。修正记录在更新日志里，数据集带有 schema 版本和更新日期。</p></section></div>
+
+  <h2>数据与导出</h2>
+  <p class="lead">交互图表和静态页面使用同一套数据。下载文件的 schema 版本为 v2，更新日期为 2026-10-21。</p>
+  <div class="btns">
+    <a class="btn primary" href="../data/measurements.json" download>JSON 数据集</a>
+    <a class="btn" href="../data/measurements.csv" download>CSV 导出</a>
+    <a class="btn" href="../data/schema.json" download>JSON Schema</a>
+  </div>
+  <p class="small">官方立绘来自 ZZZ Fandom wiki，© HoYoverse（合理使用）。自动生成的解读并非游戏内设定。</p>
+
+  <h2>FAQ</h2>
+  <dl class="faq"><dt>这些数字从哪来？</dt><dd>有官方身高资料时优先采用官方值。其余围度是沿官方 3D 模型量出来的，所以请把它们当作估算，不要当成游戏内数值。</dd><dt>为什么星见雅同时显示 170cm 和 152.1cm？</dt><dd>官方 170cm 包含耳朵。界面把约 152.1cm 的头顶高度作为“身高”，官方数字仍保留在注释和导出数据里。</dd><dt>卡片用的是标准模型吗？</dt><dd>默认是标准模型，只有简·杜例外：她的正式记录采用已测量的「Nocturne of Light」服装。其他已测量服装独立保存，卡片和排名不会把两套服装混在一起。</dd><dt>轮廓分类是什么意思？</dt><dd>用胸围、腰围和臀围三项。沙漏型要求胸围/腰围和臀围/腰围都≥1.45，且胸围与臀围差距在15%以内；直线型是外扩低于1.30，或胸胯差距超过25%；其余为匀称型。体型（Build）比较胸围和臀围的原始百分位。</dd><dt>“人工分类”是什么？</dt><dd>有些角色单看围度数字不够直观，编辑会按视觉判断归为“丰满”。共有13位，详情页会标注“人工分类”。</dd><dt>罩杯分组怎么算？</dt><dd>沿用来源的 UK 罩杯字母（A-B、C-D、DD-E、F-G、GG+）。这不是合身建议，只是来源的尺码标注。</dd><dt>数据可以复用吗？</dt><dd>测量数据整理自 modelmetrics.net，角色立绘©HoYoverse，经由 ZZZ Fandom wiki 以合理使用方式展示。请链接回来源并遵守相关权利。</dd></dl>
+
+  <div class="btns"><a class="btn primary" href="../">返回图表</a></div>
+</main>
+<footer><div class="rule">
+<b>来源:</b> modelmetrics.net · <i>Zenless Zone Zero · Female Character Measurements</i>. 数据更新 <time datetime="2026-10-21">2026-10-21</time>.<br>
+官方立绘来自 ZZZ Fandom wiki，© HoYoverse（合理使用）。自动生成的解读并非游戏内设定。<br>
+<a href="../zh/methodology.html">方法与常见问题</a> · <a href="../data/measurements.json" download>数据集 (JSON)</a> ·
+<a href="../data/measurements.csv" download>CSV</a> · <a href="https://github.com/nullhollow/zzz-measurements" rel="noopener">Source</a>
+</div></footer>
+</body>
+</html>

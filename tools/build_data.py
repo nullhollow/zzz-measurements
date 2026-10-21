@@ -204,6 +204,18 @@ if jane and jane.get('skin'):
     jane.pop('skin', None)
     jane.pop('merged', None)
 
+# Official localized agent names. These are the names used by the official
+# HoYoverse character pages, not literal translations of the English display.
+LOCALIZED_NAMES = json.loads((ROOT / 'tools/localized_names.json').read_text())
+for d in recs:
+    loc = LOCALIZED_NAMES.get(d['slug'])
+    if loc:
+        d['name_ja'] = loc['ja']
+        d['name_zh'] = loc['zh']
+        if d.get('skin'):
+            d['skin']['name_ja'] = loc['ja']
+            d['skin']['name_zh'] = loc['zh']
+
 # search aliases: roster key, wiki page title, display name and outfit labels
 for d in recs:
     alias = {d['name'], d['display'], d['slug'].replace('_', ' ')}

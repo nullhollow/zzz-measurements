@@ -1,15 +1,16 @@
 # Deploying ZZZ Female Measurements
 
-Everything the site needs lives in **`docs/`** — the interactive page, 48 static
-character pages, the methodology/FAQ page, the dataset exports, WebP artwork, bundled
-fonts, icons, the service worker and the crawler files. Nothing else in the
-repository is served.
+Everything the site needs lives in **`docs/`** — the interactive page, 144 static
+character pages (48 agents × English/Japanese/Simplified Chinese), three
+methodology/FAQ pages, the dataset exports, WebP artwork, bundled fonts, icons, the
+service worker and the crawler files. Nothing else in the repository is served.
 
 ```
 docs/
   index.html               interactive chart (48 cards pre-rendered)
   methodology.html         method, classes, FAQ
-  characters/*.html        48 crawlable profiles
+  characters/*.html        48 English profiles
+  ja/, zh/                 localized profiles + methodology
   data/                    measurements.json · measurements.csv · schema.json
   offline.html             service-worker fallback
   sw.js                    versioned cache
@@ -22,7 +23,7 @@ docs/
   character_images/        52 portraits + 24 outfit renders + responsive thumbs/
 ```
 
-≈ **520 files / 22 MB** (the responsive thumb set adds storage but cuts transfer).
+≈ **618 files / 23 MB** (the responsive thumb set adds storage but cuts transfer).
 
 ## 1. Set the URL
 
@@ -128,13 +129,15 @@ search-console verification files (`google*.html`, `BingSiteAuth.xml`, `yandex_*
 * JSON-LD: `WebSite`, `WebPage`, `Dataset` (with `dateModified`, `distribution`,
   `measurementTechnique`, rights), `ItemList`, `ProfilePage` + `Person`,
   `BreadcrumbList`, `FAQPage`
-* 48 static pages in the sitemap, plus the chart and methodology page
+* 144 static profile pages (EN/JA/ZH) plus three methodology pages in the sitemap
 * a `<noscript>` table and 48 pre-rendered cards, so crawlers and no-JS visitors get
   every measurement
 * local fonts, responsive `srcset` artwork (AVIF first, WebP fallback, 320/640 px),
   full 1280 px art in character-page heroes and the detail view, one
   `fetchpriority="high"` podium image, lazy loading below the fold
-* shareable URL state (filters, sort, view, unit, comparison, open character)
+* shareable URL state (filters, sort, view, unit, language, comparison, open character)
+* official localized character names from the HoYoverse pages, stored in
+  `tools/localized_names.json`
 
 ## Troubleshooting
 

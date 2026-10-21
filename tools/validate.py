@@ -9,6 +9,7 @@ Designed for CI after tools/pack_site.py.
 """
 import argparse
 import csv
+import html as htmllib
 import json
 import re
 import sys
@@ -156,20 +157,23 @@ def check_assets(out):
         for it in d['outfits']:
             if not (ROOT / 'character_images' / it['file']).exists():
                 err(f'{d["display"]}: missing outfit art {it["file"]}')
-        page = out / 'characters' / f"{d['slug']}.html"
-        if not page.exists():
-            err(f'missing character page {page.relative_to(out)}')
-            continue
-        html = page.read_text()
-        if d['display'] not in html:
-            err(f'{d["slug"]}: page does not name the character')
-        if 'application/ld+json' not in html:
-            err(f'{d["slug"]}: page has no JSON-LD')
-        if 'rel="canonical"' not in html:
-            err(f'{d["slug"]}: page has no canonical URL')
+        for lang in ('en', 'ja', 'zh'):
+            page = (out / 'characters' if lang == 'en' else out / lang / 'characters') / f"{d['slug']}.html"
+            if not page.exists():
+                err(f'missing {lang} character page {page.relative_to(out)}')
+                continue
+            html = page.read_text()
+            expected = d['display'] if lang == 'en' else d.get(f'name_{lang}')
+            if expected and htmllib.escape(expected) not in html:
+                err(f'{d["slug"]} ({lang}): page does not name the character')
+            if 'application/ld+json' not in html:
+                err(f'{d["slug"]} ({lang}): page has no JSON-LD')
+            if 'rel="canonical"' not in html:
+                err(f'{d["slug"]} ({lang}): page has no canonical URL')
     # exports & crawler files
     for rel in ('index.html', 'methodology.html', 'offline.html', 'sw.js', '404.html',
                 'robots.txt', 'sitemap.xml', 'manifest.webmanifest', '.nojekyll',
+                'ja/methodology.html', 'zh/methodology.html',
                 'data/measurements.json', 'data/measurements.csv', 'data/schema.json'):
         if not (out / rel).exists():
             err(f'missing packed file {rel}')

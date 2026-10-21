@@ -2,6 +2,19 @@
 
 ## Unreleased — audit implementation
 
+### Multilingual profiles and names
+- The EN / 日本語 / 中文 switch now localizes character names, generated profile
+  copy in cm and inches, figure-read lines, class labels, filters, table headers,
+  comparison rows and profile captions.
+- Character names use the official HoYoverse localized names, recorded with source
+  links in `tools/localized_names.json`; nothing is machine-translated from the
+  English display name.
+- Added 48 Japanese and 48 Simplified Chinese crawlable profile pages under
+  `ja/characters/` and `zh/characters/`, localized methodology pages, `hreflang`
+  alternates, and localized dataset profile links. English pages remain at the root.
+- Profile wording was written per language rather than translated line by line;
+  the Japanese and Chinese versions use natural, conversational phrasing.
+
 ### Data
 - Standard model is now the canonical basis; measured outfits are stored separately
   instead of taking the larger value of two records per measurement.

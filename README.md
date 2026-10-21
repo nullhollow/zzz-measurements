@@ -32,9 +32,9 @@ python3 tools/validate.py  --site-url https://<user>.github.io/<repo>/
 `pack_site.py` runs the pipeline and writes a complete `docs/`:
 
 1. `build_data.py` — CSV → `tools/data.json` (ratios, classes, percentiles, provenance)
-2. `describe.py` — generated profile text in cm and inches
-3. `build_html.py` — `index.html` incl. static cards and JSON-LD
-4. `build_pages.py` — 48 character pages, methodology/FAQ, dataset exports, offline page
+2. `describe.py` — generated profile text in English, Japanese and Simplified Chinese (cm + inches)
+3. `build_html.py` — `index.html` incl. static cards, localized data and JSON-LD
+4. `build_pages.py` — 48 character pages × 3 languages, 3 methodology/FAQ pages, dataset exports, offline page
 5. crawler files, PWA manifest, service worker, link check
 
 Optional asset steps (already committed):
@@ -54,6 +54,16 @@ table uses larger values, shows direction arrows, and highlights the winner in
 yellow for height, cup, waist (smaller), hips and thighs. Default sorting and the largest-cup podium use UK cup size. Confidence
 badges are no longer shown; the raw field remains in the dataset exports.
 
+## Languages
+
+The language switch in the footer changes the interface, character names and the
+figure-read/profile copy between English, Japanese and Simplified Chinese. Names are
+the official localized names taken from the HoYoverse character pages (recorded in
+`tools/localized_names.json`), not literal translations. The static profiles also
+exist as crawlable pages at `/ja/characters/<slug>.html` and
+`/zh/characters/<slug>.html`, with matching localized methodology pages and
+`hreflang` alternates. The source/export fields stay in English.
+
 ## Payload
 
 Cards, the table and the podium use a `<picture>` set: AVIF 320/640/full-1024
@@ -61,7 +71,7 @@ with WebP fallbacks and per-card `sizes`. 1x desktop cards get the 640 set at
 roughly 1:1; 2x desktop and phone cards pick the full 1024 render instead of
 upscaling the 640 thumb. A 2x phone loads ~430 KB of artwork for the first screen
 (podium plus visible cards), and the rest lazy-loads. Character-page heroes use a 1280 px AVIF/source set, the gallery uses 640 px
-thumbs and the detail view uses the 1280 px source render. The HTML is ~61 KB
+thumbs and the detail view uses the 1280 px source render. The HTML is ~82 KB
 gzipped locally (GitHub Pages serves it compressed), and the page keeps its 48
 static cards.
 
@@ -80,6 +90,10 @@ derived field, carries the schema version and the data date.
   the rest is Balanced. The sharpest-hourglass score is flare × bust–hip balance.
 * **Cup ranking** follows the UK cup letter first (single letters outrank doubled forms,
   so G > GG) and then the band number.
+* **Localized names and profiles** are stored as `name_ja`, `name_zh`, `desc_ja_cm`,
+  `desc_ja_in`, `desc_zh_cm`, `desc_zh_in`, `read_ja`, `read_zh`, `tags_ja`, `tags_zh`
+  and `notes_ja`/`notes_zh`. The names come from `tools/localized_names.json`, which
+  records the official HoYoverse source for each character.
 * **Confidence** values remain in the dataset exports as provenance; the UI no longer renders confidence badges.
 * Percentiles are roster percentiles of the raw centimetre value; height uses `stature_cm`.
 
