@@ -22,7 +22,7 @@ docs/
   character_images/        52 portraits + 24 outfit renders + responsive thumbs/
 ```
 
-≈ **468 files / 17 MB** (the responsive thumb set adds storage but cuts transfer).
+≈ **520 files / 22 MB** (the responsive thumb set adds storage but cuts transfer).
 
 ## 1. Set the URL
 
@@ -90,7 +90,8 @@ somewhere else.
 Asset-only steps (outputs are committed):
 
 ```bash
-python3 tools/make_thumbs.py      # 320/640 px WebP + AVIF (needs Pillow AVIF)
+python3 tools/refetch_images.py   # official portraits at 1280 px tall (network)
+python3 tools/make_thumbs.py      # 320/640/1024/1280 WebP + AVIF (needs Pillow AVIF)
 python3 tools/make_favicon.py     # SVG, ICO, PWA + maskable icons
 python3 tools/make_og.py          # 1200×630 social card (needs Chrome)
 ```
@@ -131,8 +132,8 @@ search-console verification files (`google*.html`, `BingSiteAuth.xml`, `yandex_*
 * a `<noscript>` table and 48 pre-rendered cards, so crawlers and no-JS visitors get
   every measurement
 * local fonts, responsive `srcset` artwork (AVIF first, WebP fallback, 320/640 px),
-  full 1024 px art only in the detail view, one `fetchpriority="high"` podium image,
-  lazy loading below the fold
+  full 1280 px art in character-page heroes and the detail view, one
+  `fetchpriority="high"` podium image, lazy loading below the fold
 * shareable URL state (filters, sort, view, unit, comparison, open character)
 
 ## Troubleshooting

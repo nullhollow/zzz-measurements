@@ -34,8 +34,8 @@ def pct(p):
 def height_line(d, unit='cm'):
     head = f" · {fmt(d['cm'], 0)} charted" if d['stature_basis'] == 'head' else ''
     if unit == 'cm':
-        return f"{fmt(d['stature_cm'], 0)} cm · {d['ftin_stature']}{head}"
-    return f"{d['ftin_stature']} · {fmt(d['stature_cm'], 0)} cm{head}"
+        return f"{fmt(d['stature_cm'], 1)} cm · {d['ftin_stature']}{head}"
+    return f"{d['ftin_stature']} · {fmt(d['stature_cm'], 1)} cm{head}"
 
 
 def thumb(d, size=None):
@@ -60,7 +60,9 @@ def card_sizes(d):
 def media(d, sizes, art='official', lazy=True, priority=None):
     """AVIF + WebP <picture> for official art; a plain crop for sheet mode."""
     if art == 'sheet':
-        return f'<img loading="lazy" decoding="async" src="images/{d["img"]}.webp" alt="">'
+        return (f'<img loading="lazy" decoding="async" src="images/{d["img"]}.webp" '
+                f'data-fallback="character_images/{d["official"]}.webp" '
+                f'onerror="this.onerror=null;this.src=this.dataset.fallback" alt="">')
     load = ' loading="lazy"' if lazy else ''
     prio = f' fetchpriority="{priority}"' if priority else ''
     slug = d['official']

@@ -3,6 +3,7 @@ import hashlib
 import html as _html
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from PIL import Image
@@ -17,7 +18,7 @@ N = len(DATA)
 MISSING = []
 
 # ---- asset checks ----------------------------------------------------------
-THUMBS = ('', '320/', 'avif/', 'avif/320/', 'avif/1024/')
+THUMBS = ('', '320/', 'avif/', 'avif/320/', 'avif/1024/', 'avif/1280/')
 for d in DATA:
     checks = {
         'sheet crop': ROOT / f"images/{d['img']}.webp",
@@ -136,7 +137,7 @@ for d in sorted(DATA, key=lambda x: x['display']):
     def v(k, dec=1):
         x = d.get(k)
         return '—' if x is None else f"{x:.{dec}f}"
-    height = f"{v('stature_cm', 0)} cm · {d['ftin_stature']}"
+    height = f"{v('stature_cm', 1)} cm · {d['ftin_stature']}"
     if d['stature_basis'] == 'head':
         height += f" ({v('cm', 0)} charted)"
     rows.append("<tr><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td></tr>".format(
@@ -153,8 +154,20 @@ noscript = f'''<div class="nsTable">
 og = ROOT / 'og.png'
 ogv = hashlib.md5(og.read_bytes()).hexdigest()[:8] if og.exists() else '1'
 
-# initial card order mirrors SORTS["bust-desc"] in template.html
-initial = sorted(DATA, key=lambda d: (d['diff_cm'] if d['diff_cm'] is not None else -99), reverse=True)
+# initial card order mirrors SORTS["cup-desc"] in template.html
+CUP_BASE = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8,
+            'J': 9, 'K': 10, 'L': 11, 'M': 12, 'N': 13}
+def cup_score(d):
+    m = re.match(r'^(\d+)\s*([A-Za-z]+)$', d.get('uk') or '')
+    if not m:
+        return -1
+    cup = m.group(2).upper()
+    base = CUP_BASE.get(cup[0], 0)
+    if not base:
+        return -1
+    single = 1 if len(cup) == 1 else 0
+    return base * 10000 + single * 1000 + int(m.group(1))
+initial = sorted(DATA, key=cup_score, reverse=True)
 cards_html = card.render_cards(initial)
 
 tpl = (ROOT / 'tools/template.html').read_text()

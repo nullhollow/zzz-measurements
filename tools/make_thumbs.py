@@ -7,7 +7,8 @@ For every portrait in character_images/ this writes five files under thumbs/:
     320/<slug>.webp             320 px longest side, WebP q76
     avif/<slug>.avif            640 px longest side, AVIF q60
     avif/320/<slug>.avif        320 px longest side, AVIF q60
-    avif/1024/<slug>.avif       full 1024 px longest side, AVIF q60
+    avif/1024/<slug>.avif       1024 px longest side, AVIF q60
+    avif/1280/<slug>.avif       full 1280 px source, AVIF q60
 
 AVIF is used first (roughly 35% smaller); WebP is the fallback. The 1024 set is
 what 2x desktop cards and character-page heroes pick, so they stay sharp instead
@@ -29,6 +30,7 @@ WEBP320 = OUT / '320'
 AVIF640 = OUT / 'avif'
 AVIF320 = AVIF640 / '320'
 AVIF1024 = AVIF640 / '1024'
+AVIF1280 = AVIF640 / '1280'
 FORCE = '--force' in sys.argv
 AVIF = features.check('avif')
 
@@ -62,14 +64,15 @@ def make(src, targets):
     ]
     if AVIF:
         targets += [(AVIF640 / avif, 640, 'AVIF', 60), (AVIF320 / avif, 320, 'AVIF', 60),
-                    (AVIF1024 / avif, 1024, 'AVIF', 60)]
+                    (AVIF1024 / avif, 1024, 'AVIF', 60),
+                    (AVIF1280 / avif, 1280, 'AVIF', 60)]
     for path, longest, fmt, q in targets:
         encode(resize(im, longest), path, fmt, q)
     return True
 
 
 def main():
-    for d in (WEBP320, AVIF640, AVIF320, AVIF1024):
+    for d in (WEBP320, AVIF640, AVIF320, AVIF1024, AVIF1280):
         d.mkdir(parents=True, exist_ok=True)
     files = sorted(p for p in SRC.glob('*.webp') if p.is_file())
     if not files:
@@ -79,7 +82,7 @@ def main():
         avif = src.stem + '.avif'
         targets = [WEBP640 / src.name, WEBP320 / src.name]
         if AVIF:
-            targets += [AVIF640 / avif, AVIF320 / avif, AVIF1024 / avif]
+            targets += [AVIF640 / avif, AVIF320 / avif, AVIF1024 / avif, AVIF1280 / avif]
         if make(src, targets):
             made += 1
         else:

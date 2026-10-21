@@ -13,6 +13,7 @@ Design rules
 import copy
 import csv
 import json
+import re
 from pathlib import Path
 
 from PIL import Image
@@ -182,6 +183,27 @@ for d in recs:
         d['skin']['source_file'] = ssrc['wiki_file'] if ssrc else None
         d['skin']['source_url'] = ssrc['source'] if ssrc else None
 
+# Jane Doe: the measured Nocturne of Light outfit is the canonical record.
+# The standard-model numbers are discarded for this entry, and the nested
+# outfit copy is removed so nothing can fall back to the standard body.
+jane = by_name.get('Jane Doe')
+if jane and jane.get('skin'):
+    skin = jane['skin']
+    for key in (
+        'cm', 'cm_eff', 'stature_cm', 'stature_basis', 'ftin', 'ftin_stature',
+        'bust_cm', 'band_cm', 'waist_cm', 'hip_cm', 'thigh_cm',
+        'bust_in', 'band_in', 'waist_in', 'hip_in', 'thigh_in',
+        'diff_cm', 'diff_in', 'uk', 'us', 'eu',
+        'source_page', 'source_file', 'source_url',
+    ):
+        if key in skin:
+            jane[key] = skin[key]
+    jane['outfit'] = skin.get('outfit')
+    jane['notes'] = ('Measurements use the Nocturne of Light outfit; '
+                     'standard-model values are not used.').strip()
+    jane.pop('skin', None)
+    jane.pop('merged', None)
+
 # search aliases: roster key, wiki page title, display name and outfit labels
 for d in recs:
     alias = {d['name'], d['display'], d['slug'].replace('_', ' ')}
@@ -189,6 +211,8 @@ for d in recs:
         alias.add(d['source_page'])
     if d.get('skin') and d['skin'].get('outfit'):
         alias.add(d['skin']['outfit'])
+    if d.get('outfit'):
+        alias.add(d['outfit'])
     for it in d['outfits']:
         alias.add(it['label'])
     d['aliases'] = sorted(a for a in alias if a and a.lower() != d['display'].lower())
@@ -245,18 +269,20 @@ for d in allrecs:
         d['p_' + k] = round(pct_rank(lists[k], d[k]), 3) if d[k] is not None else None
 
 
-def cup_group(diff):
-    if diff is None:
-        return '?'
-    if diff <= 2:
+def cup_group(uk):
+    """Group by the UK cup letter, the same ordering used for ranking."""
+    letter = re.sub(r'^\d+', '', (uk or '')).upper()
+    if letter in ('AA', 'A', 'B'):
         return 'A-B'
-    if diff <= 4:
+    if letter in ('C', 'D'):
         return 'C-D'
-    if diff <= 6:
+    if letter in ('DD', 'E'):
         return 'DD-E'
-    if diff <= 8:
+    if letter in ('F', 'FF', 'G'):
         return 'F-G'
-    return 'GG+'
+    if letter:
+        return 'GG+'
+    return '?'
 
 
 def height_group(cm):
@@ -278,16 +304,33 @@ def level(p, lo=0.33, hi=0.66):
 
 
 def add_groups(d):
-    d['cup_group'] = cup_group(d['diff_cm'])
+    d['cup_group'] = cup_group(d['uk'])
     d['height_group'] = height_group(d['stature_cm'])
     d['waist_level'] = level(d['p_waist_cm'])     # raw waist cm terciles
     d['hip_level'] = level(d['p_hip_cm'])         # raw hip cm terciles
     bp, hp = d['p_bust_cm'], d['p_hip_cm']
     bal = (bp - hp) if (bp is not None and hp is not None) else 0
     d['balance'] = 'top' if bal > 0.18 else ('bottom' if bal < -0.18 else 'even')
-    d['shape'] = ('Hourglass' if d['whr'] is not None and d['p_whr'] < 0.33
-                  else 'Straight' if d['whr'] is not None and d['p_whr'] > 0.66
-                  else 'Balanced')
+    # Shape uses all three circumferences, not WHR alone.
+    #   flare  = min(bust/waist, hip/waist): both curves must clear the waist
+    #   balance= min(bust,hip)/max(bust,hip): bust and hips must be comparable
+    # Hourglass needs a strong flare on both sides and a balanced bust/hip pair.
+    # Straight is a weak flare or a strongly top/bottom-heavy pair; the rest is
+    # Balanced. hourglass_score ranks the continuous version of the same idea.
+    b, w, h = d['bust_cm'], d['waist_cm'], d['hip_cm']
+    if b and w and h:
+        flare = min(b / w, h / w)
+        balance = min(b, h) / max(b, h)
+        d['hourglass_score'] = round(flare * balance, 3)
+        if flare >= 1.45 and balance >= 0.85:
+            d['shape'] = 'Hourglass'
+        elif flare < 1.30 or balance < 0.75:
+            d['shape'] = 'Straight'
+        else:
+            d['shape'] = 'Balanced'
+    else:
+        d['hourglass_score'] = None
+        d['shape'] = 'Balanced'
 
 
 for d in allrecs:
@@ -320,7 +363,8 @@ if centres.exists():
 out = ROOT / 'tools/data.json'
 out.write_text(json.dumps(roster, indent=1, ensure_ascii=False) + '\n')
 print(f'wrote data.json (schema {META["schema_version"]}): {len(roster)} entries')
-print(f'  canonical basis: standard model · measured outfits kept separately: '
+print(f'  canonical basis: standard model; Jane Doe uses her measured outfit · '
+      f'other measured outfits kept separately: '
       f'{", ".join(d["display"] for d in roster if d.get("merged"))}')
 print(f'  stature overrides: '
       f'{", ".join(f"{d["display"]} {d["cm"]:g}→{d["stature_cm"]:g}" for d in roster if d["stature_basis"] == "head") or "none"}')

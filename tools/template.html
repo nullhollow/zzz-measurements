@@ -721,7 +721,7 @@
         <div class="fnote" data-i18n="statureNote">Height uses head height where the charted figure counts ears or headgear; Miyabi's charted 170 cm stays visible as a note.</div>
         <div class="fhead" style="margin-top:14px"><span data-i18n="classes">Classes</span></div>
         <div class="fchips" id="fChips">
-          <span class="fl" data-i18n="bustTier">Bust tier</span>
+          <span class="fl" data-i18n="bustTier">Cup group</span>
           <button class="chipbtn" data-g="cup" data-v="all" aria-pressed="true" data-i18n="all">All</button>
           <button class="chipbtn" data-g="cup" data-v="A-B" aria-pressed="false">A–B</button>
           <button class="chipbtn" data-g="cup" data-v="C-D" aria-pressed="false">C–D</button>
@@ -817,9 +817,9 @@
       <a href="__REPO__" rel="noopener">Source repository</a>
     </div>
     <b>Source:</b> modelmetrics.net · <i>Zenless Zone Zero · Female Character Measurements</i>. Schema v__SCHEMA_VERSION__ · data updated <time datetime="__DATA_UPDATED__">__DATA_UPDATED__</time>.<br>
-    <b>Height:</b> the charted figure may include ears, footwear or accessories. Height uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 155 cm used); the charted figure stays visible as a note.<br>
+    <b>Height:</b> the charted figure may include ears, footwear or accessories. Height uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 152.1 cm used); the charted figure stays visible as a note.<br>
     <b>Basis:</b> every card, filter and ranking uses the <b>standard model</b>. A measured outfit is kept as its own record, shown in the detail view with its deltas; art-only outfits never touch a number.<br>
-    <b>Classes:</b> waist (Cinched / Average / Fuller), hips (Compact / Average-width / Wide) and thighs (Slim / Average / Thick) are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles; bust tier comes from bust minus under-bust. Thirteen agents (Rina, Yidhari, Caesar, Velina, Yanagi, Pulchra, Astra Yao, Sigrid, Jane Doe, Trigger, Cissia, Burnice, Orphie) are hand-pinned to Thick by curator read, so their detail view is marked “hand-pinned”. Shape (Hourglass / Balanced / Straight) uses waist ÷ hip.<br>
+    <b>Classes:</b> waist (Cinched / Average / Fuller), hips (Compact / Average-width / Wide) and thighs (Slim / Average / Thick) are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles; bust tier comes from bust minus under-bust. Thirteen agents (Rina, Yidhari, Caesar, Velina, Yanagi, Pulchra, Astra Yao, Sigrid, Jane Doe, Trigger, Cissia, Burnice, Orphie) are hand-pinned to Thick by curator read, so their detail view is marked “hand-pinned”. Shape uses bust, waist and hips. Hourglass needs both bust/waist and hip/waist ≥1.45 and a bust–hip balance within 15%; Straight is a flare below 1.30 or a bust–hip mismatch over 25%; the rest is Balanced. The sharpest-hourglass ranking uses flare × bust–hip balance.<br>
     <b>Percentile bars:</b> roster percentiles of the raw cm measurement; height percentiles use head height. 0 = smallest, 100 = largest. Build is the bust percentile minus the hip percentile.<br>
     <b>Bust diff:</b> recomputed as bust minus under-bust so it keeps one decimal (the sheet's own diff column is whole-number rounded).<br>
     <b>Images:</b> scale renders from modelmetrics.net; official art from the ZZZ Fandom wiki, © HoYoverse. Auto-comments are generated from the measurements; treat them as figure-chart commentary, not in-game canon.
@@ -847,7 +847,7 @@ const I18N = {
     skip:'Skip to the roster', heroSuffix:'female agents · measurements, proportions & silhouette reads',
     source:'Source', updated:'Data updated', filters:'Filters', ranges:'Numeric ranges', resetRanges:'reset',
     statureNote:'Height uses head height where the charted figure counts ears or headgear; Miyabi\'s charted 170 cm stays visible as a note.',
-    classes:'Classes', bustTier:'Bust tier', heightClass:'Height', shape:'Shape', build:'Build', thighClass:'Thigh class',
+    classes:'Classes', bustTier:'Cup group', heightClass:'Height', shape:'Shape', build:'Build', thighClass:'Thigh class',
     all:'All', petite:'Petite', mid:'Mid', tall:'Tall', hourglass:'Hourglass', balanced:'Balanced', straight:'Straight',
     topHeavy:'Top-heavy', bottomHeavy:'Bottom-heavy', slim:'Slim', average:'Average', thick:'Thick',
     apply:'Apply & close', sort:'Sort', sheet:'SHEET', official:'OFFICIAL', cards:'CARDS', table:'TABLE', plot:'PLOT',
@@ -868,18 +868,18 @@ const I18N = {
     height:'Height', charted:'charted',
     compareTitle:'Compare agents', pickTwo:'Pick at least two agents to compare.', clearAll:'Clear all',
     copyLink:'Link copied', shareFail:'Could not share this link.',
-    sortBustDesc:'Bust diff · high→low', sortBustAsc:'Bust diff · low→high', sortHeightDesc:'Height · tall→short',
+    sortCupDesc:'Cup size · large→small', sortCupAsc:'Cup size · small→large', sortHeightDesc:'Height · tall→short',
     sortHeightAsc:'Height · short→tall', sortWaistAsc:'Waist · thin→thick', sortHipDesc:'Hips · wide→narrow',
     sortThighDesc:'Thigh cm · thick→slim', sortThighAsc:'Thigh cm · slim→thick', sortWhrAsc:'Hourglass first',
     sortName:'Name A→Z', sortStatureLabel:'Height', cm:'cm', inch:'in', uk:'UK',
-    tally:'tallest', bustiest:'largest bust diff', hourglassTop:'sharpest hourglass', thickest:'fullest thighs', outfitsN:'outfit renders',
+    tally:'tallest', cupLargest:'largest cup size', hourglassTop:'sharpest hourglass', thickest:'fullest thighs', outfitsN:'outfit renders',
     pctLong:'Roster percentile of the raw centimetre measurement; height uses head height. 0 = smallest in the cast, 100 = largest.'
   },
   ja: {
     skip:'名簿へスキップ', heroSuffix:'人の女性エージェント · 寸法・比率・シルエット',
     source:'出典', updated:'データ更新', filters:'絞り込み', ranges:'数値範囲', resetRanges:'リセット',
     statureNote:'耳や頭部装備を含む公式身長は、頭頂高を高さとして使います。Miyabiの公式170cmは注記として残ります。',
-    classes:'分類', bustTier:'バスト区分', heightClass:'身長', shape:'シルエット', build:'体型', thighClass:'太もも区分',
+    classes:'分類', bustTier:'カップ区分', heightClass:'身長', shape:'シルエット', build:'体型', thighClass:'太もも区分',
     all:'すべて', petite:'小柄', mid:'中背', tall:'高身長', hourglass:'砂時計型', balanced:'バランス型', straight:'直線型',
     topHeavy:'上半身型', bottomHeavy:'下半身型', slim:'細め', average:'普通', thick:'太め',
     apply:'適用して閉じる', sort:'並び順', sheet:'一覧', official:'公式', cards:'カード', table:'表', plot:'散布図',
@@ -900,18 +900,18 @@ const I18N = {
     height:'身長', charted:'公式',
     compareTitle:'エージェント比較', pickTwo:'2人以上を選んでください。', clearAll:'すべて解除',
     copyLink:'リンクをコピーしました', shareFail:'共有できませんでした。',
-    sortBustDesc:'バスト差 · 高い順', sortBustAsc:'バスト差 · 低い順', sortHeightDesc:'身長 · 高い順',
+    sortCupDesc:'カップ · 大きい順', sortCupAsc:'カップ · 小さい順', sortHeightDesc:'身長 · 高い順',
     sortHeightAsc:'身長 · 低い順', sortWaistAsc:'ウエスト · 細い順', sortHipDesc:'ヒップ · 広い順',
     sortThighDesc:'太もも · 太い順', sortThighAsc:'太もも · 細い順', sortWhrAsc:'砂時計型順',
     sortName:'名前 A→Z', sortStatureLabel:'身長', cm:'cm', inch:'in', uk:'UK',
-    tally:'最高身長', bustiest:'最大バスト差', hourglassTop:'最も砂時計型', thickest:'太もも最太', outfitsN:'衣装画像',
+    tally:'最高身長', cupLargest:'最大カップサイズ', hourglassTop:'最も砂時計型', thickest:'太もも最太', outfitsN:'衣装画像',
     pctLong:'roster内の生cm値パーセンタイル。身長は頭頂高。0=最小、100=最大。'
   },
   zh: {
     skip:'跳到名单', heroSuffix:'位女性代理人 · 三围、比例与轮廓',
     source:'来源', updated:'数据更新', filters:'筛选', ranges:'数值范围', resetRanges:'重置',
     statureNote:'若官方身高包含耳朵或头饰，则使用头顶高度；Miyabi 的官方 170 cm 仍以注释保留。',
-    classes:'分类', bustTier:'胸围等级', heightClass:'身高', shape:'轮廓', build:'体型', thighClass:'大腿分类',
+    classes:'分类', bustTier:'罩杯分组', heightClass:'身高', shape:'轮廓', build:'体型', thighClass:'大腿分类',
     all:'全部', petite:'娇小', mid:'中等', tall:'高挑', hourglass:'沙漏型', balanced:'均衡型', straight:'直筒型',
     topHeavy:'上重', bottomHeavy:'下重', slim:'纤细', average:'适中', thick:'丰满',
     apply:'应用并关闭', sort:'排序', sheet:'拼图', official:'官方', cards:'卡片', table:'表格', plot:'散点图',
@@ -932,11 +932,11 @@ const I18N = {
     height:'身高', charted:'官方',
     compareTitle:'角色对比', pickTwo:'请至少选择两位角色。', clearAll:'全部清除',
     copyLink:'链接已复制', shareFail:'无法分享此链接。',
-    sortBustDesc:'胸围差 · 高到低', sortBustAsc:'胸围差 · 低到高', sortHeightDesc:'身高 · 高到低',
+    sortCupDesc:'罩杯 · 大到小', sortCupAsc:'罩杯 · 小到大', sortHeightDesc:'身高 · 高到低',
     sortHeightAsc:'身高 · 低到高', sortWaistAsc:'腰围 · 细到粗', sortHipDesc:'臀围 · 宽到窄',
     sortThighDesc:'大腿 · 粗到细', sortThighAsc:'大腿 · 细到粗', sortWhrAsc:'沙漏型优先',
     sortName:'姓名 A→Z', sortStatureLabel:'身高', cm:'cm', inch:'in', uk:'UK',
-    tally:'最高身高', bustiest:'最大胸围差', hourglassTop:'最沙漏', thickest:'大腿最粗', outfitsN:'服装立绘',
+    tally:'最高身高', cupLargest:'最大罩杯', hourglassTop:'最沙漏', thickest:'大腿最粗', outfitsN:'服装立绘',
     pctLong:'名单内原始厘米值的百分位。0=最小，100=最大。'
   }
 };
@@ -971,24 +971,38 @@ for(const m of RANGES){
   BOUNDS[m.k] = [Math.floor(Math.min(...vals)), Math.ceil(Math.max(...vals))];
 }
 const state = {q:"", cup:"all", shape:"all", balance:"all", thighs:"all", height:"all",
-               sort:"bust-desc", view:"cards", unit:"cm", art:"official", lang:"en",
+               sort:"cup-desc", view:"cards", unit:"cm", art:"official", lang:"en",
                rng:{}, compare:[], plotY:"whr"};
+const CUP_BASE = {A:1, B:2, C:3, D:4, E:5, F:6, G:7, H:8, J:9, K:10, L:11, M:12, N:13};
+function cupParts(d){
+  const m = String(d && d.uk || '').match(/^(\d+)\s*([A-Za-z]+)$/);
+  return {band: m ? +m[1] : 0, cup: m ? m[2].toUpperCase() : ''};
+}
+function cupLetter(d){ return cupParts(d).cup; }
+function cupScore(d){
+  const p = cupParts(d), base = CUP_BASE[p.cup[0]] || 0;
+  if(!base) return -1;
+  // As specified: single-letter cups outrank their doubled form (G > GG),
+  // then the band number decides larger sizes (22E > 19E, 23GG > 21GG).
+  const single = p.cup.length === 1 ? 1 : 0;
+  return base * 10000 + single * 1000 + p.band;
+}
 const SORTS = {
   "name":        (a,b)=>a.display.localeCompare(b.display),
   "height-desc": (a,b)=>b.stature_cm-a.stature_cm,
   "height-asc":  (a,b)=>a.stature_cm-b.stature_cm,
-  "bust-desc":   (a,b)=>(b.diff_cm??-99)-(a.diff_cm??-99),
-  "bust-asc":    (a,b)=>(a.diff_cm??99)-(b.diff_cm??99),
+  "cup-desc":    (a,b)=>cupScore(b)-cupScore(a),
+  "cup-asc":     (a,b)=>cupScore(a)-cupScore(b),
   "waist-asc":   (a,b)=>(a.waist_cm??99)-(b.waist_cm??99),
   "hip-desc":    (a,b)=>(b.hip_cm??-99)-(a.hip_cm??-99),
   "thigh-desc":  (a,b)=>(b.thigh_cm??-99)-(a.thigh_cm??-99),
   "thigh-asc":   (a,b)=>(a.thigh_cm??99)-(b.thigh_cm??99),
   "whr-asc":     (a,b)=>(a.whr??9)-(b.whr??9),
 };
-const SORT_KEYS = ["bust-desc","bust-asc","height-desc","height-asc","waist-asc","hip-desc",
+const SORT_KEYS = ["cup-desc","cup-asc","height-desc","height-asc","waist-asc","hip-desc",
                    "thigh-desc","thigh-asc","whr-asc","name"];
 const SORT_LABEL_KEY = {
-  "bust-desc":"sortBustDesc","bust-asc":"sortBustAsc","height-desc":"sortHeightDesc","height-asc":"sortHeightAsc",
+  "cup-desc":"sortCupDesc","cup-asc":"sortCupAsc","height-desc":"sortHeightDesc","height-asc":"sortHeightAsc",
   "waist-asc":"sortWaistAsc","hip-desc":"sortHipDesc","thigh-desc":"sortThighDesc","thigh-asc":"sortThighAsc",
   "whr-asc":"sortWhrAsc","name":"sortName"
 };
@@ -997,7 +1011,6 @@ const PLOT_METRICS = [
   {k:'whtr', label:'Waist ÷ height', dec:3},
   {k:'thh', label:'Thigh ÷ hip', dec:3},
   {k:'bhr', label:'Bust ÷ height', dec:3},
-  {k:'diff_cm', label:'Bust diff (cm)', dec:1},
 ];
 
 /* ---------------- URL state ---------------- */
@@ -1028,7 +1041,7 @@ function readHash(){
 function writeHash(replace=true){
   const p = new URLSearchParams();
   if(state.q) p.set('q', state.q);
-  if(state.sort!=="bust-desc") p.set('sort', state.sort);
+  if(state.sort!=="cup-desc") p.set('sort', state.sort);
   if(state.view!=="cards") p.set('view', state.view);
   if(state.unit!=="cm") p.set('unit', state.unit);
   if(state.art!=="official") p.set('art', state.art);
@@ -1143,12 +1156,13 @@ function filtered(){
 /* ---------------- cards (shared template) ---------------- */
 const THUMB = 'character_images/thumbs';
 const officialSrc = r => `character_images/${r.official}.webp`;
+const imgSrc = d => `images/${d.img}.webp`;
 const thumbSrc = d => state.art==="official" ? `${THUMB}/320/${d.official}.webp` : `images/${d.img}.webp`;
 function mediaFor(d, sizes, opts={}){
   const lazy = opts.lazy !== false;
   const load = lazy ? ' loading="lazy"' : '';
   const prio = opts.priority ? ` fetchpriority="${opts.priority}"` : '';
-  if(state.art==="sheet") return `<img${load}${prio} decoding="async" src="images/${d.img}.webp" alt="">`;
+  if(state.art==="sheet") return `<img${load}${prio} decoding="async" src="images/${d.img}.webp" data-fallback="character_images/${d.official}.webp" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="">`;
   const s = d.official;
   const dx = d.dx!=null ? ` style="--dx:${d.dx}%"` : '';
   const w320=d.w320||320, w640=d.w640||640, w1024=d.w1024||1024, wfull=d.wfull||w1024;
@@ -1168,8 +1182,8 @@ function podiumSizes(d){
 function heightLine(d){
   const head = d.stature_basis==='head' ? ` · ${fmt(d.cm,0)} ${t('charted')}` : '';
   return isCm()
-    ? `${fmt(d.stature_cm,0)} cm · ${d.ftin_stature}${head}`
-    : `${d.ftin_stature} · ${fmt(d.stature_cm,0)} cm${head}`;
+    ? `${fmt(d.stature_cm,1)} cm · ${d.ftin_stature}${head}`
+    : `${d.ftin_stature} · ${fmt(d.stature_cm,1)} cm${head}`;
 }
 function chipsHTML(d){
   const chips = [
@@ -1236,14 +1250,14 @@ function columns(){
   return [
     {k:"name",   t:t('sortName').replace(' A→Z',''), s:d=>d.display, num:false},
     {k:"height", t:t('height'), s:d=>d.stature_cm, num:true, cls:'col-med',
-      fmtv:(v,d)=>`${fmt(d.stature_cm,0)}<div class="mini">${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}</div>`},
+      fmtv:(v,d)=>`${fmt(d.stature_cm,1)}<div class="mini">${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}</div>`},
     unitCol("bust","Bust"),
     unitCol("band","Band",1,'col-low'),
     unitCol("waist","Waist"),
     unitCol("hip","Hip"),
     unitCol("thigh","Thigh",1,'col-low'),
     unitCol("diff","Bust diff",1,'col-med'),
-    {k:"uk",     t:"UK", s:d=>d.uk, num:false, cls:'col-med'},
+    {k:"uk",     t:"UK", s:d=>cupScore(d), num:true, cls:'col-med', fmtv:(v,d)=>esc(d.uk)},
     {k:"us",     t:"US", s:d=>d.us, num:false, cls:'col-low'},
     {k:"eu",     t:"EU", s:d=>d.eu, num:false, cls:'col-low'},
     {k:"whr",    t:"Waist/Hip", s:d=>d.whr, num:true, cls:'col-med', fmtv:v=>fmtPct(v)},
@@ -1256,7 +1270,7 @@ function columns(){
       fmtv:(v,d)=>d.notes?`<span class="warn" title="${esc(d.notes)}">⚠</span>`:""},
   ];
 }
-let tblSort = {k:"diff", dir:-1};
+let tblSort = {k:"uk", dir:-1};
 
 function renderTable(list){
   const COLS = columns();
@@ -1284,7 +1298,7 @@ function renderTable(list){
       if(c.k==="name"){
         return `<td><div style="display:flex;align-items:center;gap:8px">
           <img class="thumb" loading="lazy" decoding="async" src="${thumbSrc(d)}" alt="" width="34" height="64">
-          <span><a class="tname" data-slug="${esc(d.slug)}" href="characters/${d.slug}.html">${esc(d.display)}</a>${d.variant_of?'<span class="badge">variant</span>':''}<div class="mini">${esc(`${fmt(d.stature_cm,0)} cm`)} · UK ${esc(d.uk)} · ${esc(d.shape)}</div></span></div></td>`;
+          <span><a class="tname" data-slug="${esc(d.slug)}" href="characters/${d.slug}.html">${esc(d.display)}</a>${d.variant_of?'<span class="badge">variant</span>':''}<div class="mini">${esc(`${fmt(d.stature_cm,1)} cm`)} · UK ${esc(d.uk)} · ${esc(d.shape)}</div></span></div></td>`;
       }
       const raw = c.s(d);
       const val = c.fmtv ? c.fmtv(raw, d) : (raw==null?"—":(c.num?fmt(raw, c.k==="diff"?0:1):esc(raw)));
@@ -1320,7 +1334,7 @@ function renderPlot(list){
     const cx=sx(d.stature_cm), cy=sy(d[m.k]);
     g+=`<g class="pt" data-slug="${esc(d.slug)}" tabindex="0" role="button" aria-label="${esc(d.display)}: ${esc(fmt(d[m.k], m.dec))}">
       <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5" fill="${shapeColor[d.shape]||'var(--acid)'}"/>
-      <title>${esc(d.display)} — ${esc(fmt(d.stature_cm,0))} cm · ${esc(m.label)} ${esc(fmt(d[m.k], m.dec))}</title>
+      <title>${esc(d.display)} — ${esc(fmt(d.stature_cm,1))} cm · ${esc(m.label)} ${esc(fmt(d[m.k], m.dec))}</title>
       <text x="${(cx+8).toFixed(1)}" y="${(cy-8).toFixed(1)}">${esc(d.display)}</text></g>`;
   }
   svg.setAttribute('aria-label', `${t('height')} × ${m.label} scatter plot, ${pts.length} agents`);
@@ -1330,14 +1344,14 @@ function renderPlot(list){
 /* ---------------- podium + highlights ---------------- */
 const PODIUM_CATS = [
   {t:'tally', s:'byStature', pick:d=>d.stature_cm, asc:false,
-    f:d=> isCm()? `${fmt(d.stature_cm,0)} cm` : d.ftin_stature,
+    f:d=> isCm()? `${fmt(d.stature_cm,1)} cm` : d.ftin_stature,
     x:d=> d.stature_basis==='head' ? `${fmt(d.cm,0)} cm ${t('charted')}` : (isCm()? d.ftin : `${fmt(d.cm,0)} cm`)},
-  {t:'bustiest', s:'byBustDiff', pick:d=>d.diff_cm, asc:false,
-    f:d=> fmt(U(d,'diff'))+USUF(), x:d=>`UK ${d.uk}`},
+  {t:'cupLargest', s:'byCup', pick:d=>cupScore(d), asc:false,
+    f:d=> `${cupLetter(d)} cup`, x:d=>`UK ${d.uk}`},
   {t:'thickest', s:'byThigh', pick:d=>d.thigh_cm, asc:false,
     f:d=> fmt(U(d,'thigh'))+USUF(), x:()=>''},
-  {t:'hourglassTop', s:'byWhr', pick:d=>d.whr, asc:true,
-    f:d=>`WHR ${d.whr.toFixed(3)}`, x:()=>''},
+  {t:'hourglassTop', s:'byHourglass', pick:d=>d.hourglass_score, asc:false,
+    f:d=>`score ${d.hourglass_score.toFixed(3)}`, x:d=>`WHR ${d.whr.toFixed(3)}`},
 ];
 function renderPodium(){
   const picks = PODIUM_CATS.map(cat=>{
@@ -1370,14 +1384,14 @@ function renderPodium(){
 function renderHighlights(){
   const byStature=[...DATA].sort((a,b)=>b.stature_cm-a.stature_cm);
   const tallest=byStature.filter(d=>d.stature_cm===byStature[0].stature_cm);
-  const bust=[...DATA].sort((a,b)=>(b.diff_cm??-99)-(a.diff_cm??-99));
-  const hour=[...DATA].sort((a,b)=>(a.whr??9)-(b.whr??9));
+  const cup=[...DATA].sort((a,b)=>cupScore(b)-cupScore(a));
+  const hour=[...DATA].sort((a,b)=>(b.hourglass_score??-9)-(a.hourglass_score??-9));
   const outfits=DATA.reduce((n,d)=>n+d.outfits.length,0);
   const outfitChars=DATA.filter(d=>d.outfits.length).length;
   const items=[
-    {k:t('tally'),v:tallest.map(d=>d.display).join(' · '),n:`${fmt(tallest[0].stature_cm,0)} cm · ${tallest[0].ftin_stature}`,bar:100},
-    {k:t('bustiest'),v:bust[0].display,n:`${fmt(bust[0].diff_cm,1)} cm diff · UK ${bust[0].uk}`,bar:pct(bust[0].p_bust_cm)},
-    {k:t('hourglassTop'),v:hour[0].display,n:`WHR ${hour[0].whr.toFixed(3)}`,bar:100-100*hour[0].p_whr},
+    {k:t('tally'),v:tallest.map(d=>d.display).join(' · '),n:`${fmt(tallest[0].stature_cm,1)} cm · ${tallest[0].ftin_stature}`,bar:100},
+    {k:t('cupLargest'),v:cup[0].display,n:`${cupLetter(cup[0])} cup · UK ${cup[0].uk}`,bar:100},
+    {k:t('hourglassTop'),v:hour[0].display,n:`score ${hour[0].hourglass_score.toFixed(3)} · WHR ${hour[0].whr.toFixed(3)}`,bar:100},
     {k:t('outfitsN'),v:`${outfits}`,n:`${outfitChars} ${t('entries')}`,bar:Math.round(outfits/(DATA.length*.6)*100)},
   ];
   $("#highlights").innerHTML=items.map(x=>`<div class="hl"><div class="k">${esc(x.k)}</div><div class="v">${esc(x.v)}</div><div class="n">${esc(x.n)}</div><div class="bar"><i style="width:${Math.max(4,Math.min(100,x.bar))}%;background:var(--acid)"></i></div></div>`).join('');
@@ -1471,7 +1485,7 @@ function openModal(slug, opts){
     <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
     <div class="mhead">
       <h2 id="mTitle">${esc(d.display)}</h2>
-      <div class="sub2">${r.outfit?`${esc(t('outfits'))}: ${esc(r.outfit)} · `:(r.variant_of?`Variant of ${esc(r.variant_of)} · `:"")}${isCm()? `${fmt(r.stature_cm,0)} cm (${r.ftin_stature})` : `${r.ftin_stature} (${fmt(r.stature_cm,0)} cm)`}${r.stature_basis==='head'?` · ${fmt(r.cm,0)} cm ${esc(t('charted'))}`:''} · UK ${esc(r.uk)} / US ${esc(r.us)} / EU ${esc(r.eu)}</div>
+      <div class="sub2">${r.outfit?`${esc(t('outfits'))}: ${esc(r.outfit)} · `:(r.variant_of?`Variant of ${esc(r.variant_of)} · `:"")}${isCm()? `${fmt(r.stature_cm,1)} cm (${r.ftin_stature})` : `${r.ftin_stature} (${fmt(r.stature_cm,1)} cm)`}${r.stature_basis==='head'?` · ${fmt(r.cm,0)} cm ${esc(t('charted'))}`:''} · UK ${esc(r.uk)} / US ${esc(r.us)} / EU ${esc(r.eu)}</div>
     </div>
     <div class="mbody">
       <div class="mimg">
@@ -1520,16 +1534,18 @@ function openModal(slug, opts){
         <div class="sect"><h3>${esc(t('figureRead'))}</h3>
           <div class="vline">${esc(r.read||"")}</div>
           <div class="infog">
-            ${readRow(t('height'), isCm()? `${fmt(r.stature_cm,0)} cm` : r.ftin_stature,
-                      (isCm()? r.ftin_stature : `${fmt(r.stature_cm,0)} cm`) + (r.stature_basis==='head'? ` · ${fmt(r.cm,0)} ${t('charted')}` : ``),
+            ${readRow(t('height'), isCm()? `${fmt(r.stature_cm,1)} cm` : r.ftin_stature,
+                      (isCm()? r.ftin_stature : `${fmt(r.stature_cm,1)} cm`) + (r.stature_basis==='head'? ` · ${fmt(r.cm,0)} ${t('charted')}` : ``),
                       pct(r.p_stature_cm), r.tags.height, "var(--tan)")}
             ${readRow(t('bust'), fmt(U(r,'bust'))+USUF(), `UK ${esc(r.uk)}`, pct(r.p_bust_cm), rankword(r.p_bust_cm), "var(--bust)")}
             ${readRow(t('waist'), fmt(U(r,'waist'))+USUF(), `WHtR ${r.whtr.toFixed(3)}`, pct(r.p_waist_cm), rankword(r.p_waist_cm), "var(--waist)")}
             ${readRow(t('hip'), fmt(U(r,'hip'))+USUF(), `hip/height ${r.hhr.toFixed(3)}`, pct(r.p_hip_cm), rankword(r.p_hip_cm), "var(--hips)")}
             ${r.thigh_cm!=null?readRow(t('thigh'), fmt(U(r,'thigh'))+USUF(), `thigh/height ${r.thr.toFixed(3)} · thigh/hip ${r.thh.toFixed(3)}`,
                       pct(r.p_thigh_cm), r.tags.thighs, "var(--thighs)"):""}
-            ${readRow(t('silhouette'), r.tags.shape, `waist/hip ${r.whr.toFixed(3)}`, Math.round(100*(1-r.p_whr)),
-                      `${Math.round(100*(1-r.p_whr))}% hourglass`, "var(--blue)")}
+            ${readRow(t('silhouette'), r.tags.shape,
+                      `bust/waist ${(r.bust_cm/r.waist_cm).toFixed(2)} · hip/waist ${(r.hip_cm/r.waist_cm).toFixed(2)}`,
+                      Math.max(0, Math.min(100, Math.round(100*r.hourglass_score/1.6))),
+                      `score ${r.hourglass_score.toFixed(3)}`, "var(--blue)")}
             <div class="irow">
               <span class="ik">${esc(t('balance'))}</span>
               <span class="iv">${esc(r.tags.balance)}</span>
@@ -1552,6 +1568,8 @@ function openModal(slug, opts){
         </div>
       </div>
     </div>`;
+  const mimg = $("#mimg");
+  if(mimg) mimg.onerror = () => { mimg.onerror = null; mimg.src = officialSrc(r); };
   if(!wasOpen) lastFocus = document.activeElement;
   $("#overlay").classList.add("open");
   $("#overlay").setAttribute("aria-hidden","false");
@@ -1633,9 +1651,6 @@ function openCompare(){
   const list = state.compare.map(s=>bySlug.get(s)).filter(Boolean);
   if(list.length<2){ toast(t('pickTwo')); return; }
   const cmIn = (a,b)=>`${fmt(a)} cm\n${fmt(b)} in`;
-  const cupLetter = v => (v||'').replace(/^\d+/,'');
-  const CUP_ORDER = ['AA','A','B','C','D','DD','E','F','FF','G','GG','H','HH','J'];
-  const cupRank = d => { const i=CUP_ORDER.indexOf(cupLetter(d.uk)); return i<0?null:i; };
   const winnerFlags = (vals, mode) => {
     const nums = vals.filter(v=>v!=null);
     if(!nums.length) return vals.map(()=>false);
@@ -1644,13 +1659,12 @@ function openCompare(){
   };
   const rows = [
     {label:t('height'), get:d=>d.stature_cm, best:'max',
-     fmt:d=>`${fmt(d.stature_cm,0)} cm\n${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}`},
-    {label:t('bustDiff'), get:d=>d.diff_cm, best:'max', fmt:d=>`${fmt(d.diff_cm)} cm`},
+     fmt:d=>`${fmt(d.stature_cm,1)} cm\n${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}`},
     {label:t('waist'), get:d=>d.waist_cm, best:'min', fmt:d=>cmIn(d.waist_cm,d.waist_in)},
     {label:t('hip'), get:d=>d.hip_cm, best:'max', fmt:d=>cmIn(d.hip_cm,d.hip_in)},
     {label:t('thigh'), get:d=>d.thigh_cm, best:'max',
      fmt:d=>d.thigh_cm!=null?cmIn(d.thigh_cm,d.thigh_in):'—'},
-    {label:t('cup'), key:'cup', get:cupRank, best:'max', fmt:d=>`${cupLetter(d.uk)}\nUK ${d.uk}`},
+    {label:t('cup'), get:cupScore, best:'max', fmt:d=>`${cupLetter(d)}\nUK ${d.uk}`},
     {label:t('bust'), fmt:d=>cmIn(d.bust_cm,d.bust_in)},
     {label:t('underbust'), fmt:d=>cmIn(d.band_cm,d.band_in)},
     {label:'UK / US / EU', fmt:d=>`${d.uk} / ${d.us} / ${d.eu}`},
@@ -1662,11 +1676,7 @@ function openCompare(){
   ];
   const body = rows.map(r=>{
     const vals = r.get ? list.map(r.get) : list.map(()=>null);
-    let wins = r.best ? winnerFlags(vals, r.best) : list.map(()=>false);
-    if(r.key==='cup' && wins.filter(Boolean).length>1){
-      const bestDiff = Math.max(...list.filter((d,i)=>wins[i]).map(d=>d.diff_cm));
-      wins = wins.map((w,i)=>w && Math.abs(list[i].diff_cm-bestDiff)<1e-9);
-    }
+    const wins = r.best ? winnerFlags(vals, r.best) : list.map(()=>false);
     const dir = r.best ? ` <span class="dir" aria-hidden="true" title="${esc(r.best==='min'?t('smallerWins'):t('largerWins'))}">${r.best==='min'?'↓':'↑'}</span>` : '';
     return `<tr><th scope="row">${esc(r.label)}${dir}</th>${list.map((d,i)=>`<td class="${wins[i]?'win':''}">${esc(r.fmt(d))}</td>`).join('')}</tr>`;
   }).join('');
@@ -1854,10 +1864,10 @@ $("#theme").addEventListener("change", e=>applyTheme(e.target.value));
 /* reset */
 function resetAll(){
   Object.assign(state,{q:"",cup:"all",shape:"all",balance:"all",thighs:"all",height:"all",
-    sort:"bust-desc",view:"cards",rng:{},compare:[]});
+    sort:"cup-desc",view:"cards",rng:{},compare:[]});
   $("#q").value="";
   $$("#fPanel .chipbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v==="all"?"true":"false"));
-  $("#fSort").value="bust-desc";
+  $("#fSort").value="cup-desc";
   renderFilterPanel(); renderCompare(); render();
 }
 $("#reset").addEventListener("click", resetAll);
@@ -1943,7 +1953,9 @@ function applyHashState(){
   state.balance = h.balance ?? "all";
   state.thighs = h.thighs ?? "all";
   state.height = h.height ?? "all";
-  state.sort = SORTS[h.sort] ? h.sort : "bust-desc";
+  const sortAlias = {"bust-desc":"cup-desc", "bust-asc":"cup-asc"};
+  const wantedSort = sortAlias[h.sort] || h.sort;
+  state.sort = SORTS[wantedSort] ? wantedSort : "cup-desc";
   state.view = ["cards","table","plot"].includes(h.view) ? h.view : "cards";
   state.unit = h.unit ? (h.unit==="in"?"in":"cm") : state.unit;
   state.art = h.art ? (h.art==="sheet"?"sheet":"official") : state.art;
@@ -1971,7 +1983,7 @@ function applyHashState(){
   $("#agentCount").textContent = DATA.length;
   /* the HTML already contains the 48 default cards; only rebuild when a saved
      preference or URL state differs from that initial render */
-  renderCards._sig = [...DATA].sort(SORTS["bust-desc"]).map(d=>d.name).join('|') + '|cm|official|en';
+  renderCards._sig = [...DATA].sort(SORTS["cup-desc"]).map(d=>d.name).join('|') + '|cm|official|en';
   applyLang(state.lang, false);
   syncControls();
   applyHashState();

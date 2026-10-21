@@ -11,7 +11,7 @@
    "slug": "URL slug used by the per-character pages",
    "aliases": "Extra search terms (wiki page, outfit names)",
    "cm": "Height as charted, in cm (may include ears, footwear or accessories)",
-   "stature_cm": "Head height used for stature comparisons; equals cm unless the chart counts an appendage",
+   "stature_cm": "Height shown in the UI and used for comparisons; equals cm unless the chart counts an appendage",
    "stature_basis": "charted or head",
    "bust_cm": "Bust circumference, cm",
    "band_cm": "Under-bust circumference, cm",
@@ -21,7 +21,7 @@
    "diff_cm": "Bust minus under-bust, cm (recomputed for 1 dp precision)",
    "uk": "UK bra size as supplied by the source",
    "confidence": "charted, estimated or partial (see methodology)",
-   "basis": "standard; outfit variants are exposed separately under skin",
+   "basis": "standard, except Jane Doe uses her measured outfit as the canonical record; other outfit variants are exposed under skin",
    "skin": "Measured outfit variant with its own numbers",
    "outfits": "Art-only outfit renders (no measured data)"
   },
@@ -74,7 +74,7 @@
    },
    "classes": {
     "height": "Petite",
-    "cup": "C-D",
+    "cup": "A-B",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
@@ -131,7 +131,7 @@
    },
    "classes": {
     "height": "Petite",
-    "cup": "DD-E",
+    "cup": "A-B",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
@@ -188,7 +188,7 @@
    },
    "classes": {
     "height": "Petite",
-    "cup": "C-D",
+    "cup": "A-B",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
@@ -244,11 +244,11 @@
     "waist": 0.24,
     "hip": 0.135,
     "thigh": 0.149,
-    "stature": 0.323
+    "stature": 0.344
    },
    "classes": {
     "height": "Mid",
-    "cup": "C-D",
+    "cup": "A-B",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
@@ -316,12 +316,12 @@
    },
    "classes": {
     "height": "Petite",
-    "cup": "F-G",
+    "cup": "C-D",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Hourglass",
+    "shape": "Straight",
     "build": "even"
    },
    "confidence": "charted",
@@ -377,12 +377,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "DD-E",
+    "cup": "C-D",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Hourglass",
+    "shape": "Straight",
     "build": "even"
    },
    "confidence": "charted",
@@ -447,12 +447,12 @@
    },
    "classes": {
     "height": "Petite",
-    "cup": "DD-E",
+    "cup": "C-D",
     "waist": "avg",
     "hip": "avg",
     "thigh": "high",
     "thigh_hand_pinned": false,
-    "shape": "Hourglass",
+    "shape": "Straight",
     "build": "bottom"
    },
    "confidence": "charted",
@@ -506,7 +506,7 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "C-D",
+    "cup": "A-B",
     "waist": "low",
     "hip": "low",
     "thigh": "avg",
@@ -565,12 +565,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "DD-E",
+    "cup": "C-D",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Balanced",
+    "shape": "Straight",
     "build": "even"
    },
    "confidence": "charted",
@@ -625,12 +625,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "F-G",
+    "cup": "C-D",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Straight",
+    "shape": "Balanced",
     "build": "top"
    },
    "confidence": "charted",
@@ -700,12 +700,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "DD-E",
+    "cup": "C-D",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Balanced",
+    "shape": "Straight",
     "build": "even"
    },
    "confidence": "charted",
@@ -766,12 +766,12 @@
    },
    "classes": {
     "height": "Petite",
-    "cup": "F-G",
+    "cup": "C-D",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Hourglass",
+    "shape": "Straight",
     "build": "even"
    },
    "confidence": "charted",
@@ -825,7 +825,7 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "DD-E",
+    "cup": "C-D",
     "waist": "avg",
     "hip": "low",
     "thigh": "avg",
@@ -884,7 +884,7 @@
    },
    "classes": {
     "height": "Petite",
-    "cup": "DD-E",
+    "cup": "C-D",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
@@ -943,12 +943,12 @@
    },
    "classes": {
     "height": "Petite",
-    "cup": "DD-E",
+    "cup": "C-D",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Straight",
+    "shape": "Balanced",
     "build": "even"
    },
    "confidence": "estimated",
@@ -1000,12 +1000,12 @@
    },
    "classes": {
     "height": "Petite",
-    "cup": "DD-E",
+    "cup": "C-D",
     "waist": "low",
     "hip": "low",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Hourglass",
+    "shape": "Straight",
     "build": "even"
    },
    "confidence": "charted",
@@ -1053,11 +1053,11 @@
     "waist": 0.469,
     "hip": 0.385,
     "thigh": 0.415,
-    "stature": 0.302
+    "stature": 0.323
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "C-D",
     "waist": "avg",
     "hip": "avg",
     "thigh": "avg",
@@ -1117,12 +1117,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "C-D",
     "waist": "low",
     "hip": "avg",
     "thigh": "avg",
     "thigh_hand_pinned": false,
-    "shape": "Hourglass",
+    "shape": "Balanced",
     "build": "even"
    },
    "confidence": "charted",
@@ -1147,7 +1147,7 @@
     "Hoshimi Miyabi"
    ],
    "height_cm": 170.0,
-   "stature_cm": 155.0,
+   "stature_cm": 152.1,
    "stature_basis": "head",
    "bust_cm": 60.8,
    "underbust_cm": 46.5,
@@ -1166,28 +1166,28 @@
    "eu": "37G",
    "ratios": {
     "waist_hip": 0.7,
-    "waist_stature": 0.299,
+    "waist_stature": 0.305,
     "waist_thigh": 1.154,
-    "thigh_stature": 0.259,
+    "thigh_stature": 0.264,
     "thigh_hip": 0.606,
-    "bust_stature": 0.392,
-    "hip_stature": 0.428
+    "bust_stature": 0.4,
+    "hip_stature": 0.436
    },
    "percentiles": {
     "bust": 0.396,
     "waist": 0.719,
     "hip": 0.052,
     "thigh": 0.074,
-    "stature": 0.344
+    "stature": 0.302
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "high",
     "hip": "low",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Straight",
+    "shape": "Balanced",
     "build": "top"
    },
    "confidence": "charted",
@@ -1247,12 +1247,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "avg",
     "hip": "avg",
     "thigh": "avg",
     "thigh_hand_pinned": false,
-    "shape": "Balanced",
+    "shape": "Straight",
     "build": "even"
    },
    "confidence": "charted",
@@ -1323,7 +1323,7 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "C-D",
     "waist": "low",
     "hip": "avg",
     "thigh": "low",
@@ -1406,7 +1406,7 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "avg",
     "hip": "avg",
     "thigh": "avg",
@@ -1459,19 +1459,19 @@
    },
    "percentiles": {
     "bust": 0.448,
-    "waist": 0.781,
+    "waist": 0.76,
     "hip": 0.635,
     "thigh": 0.532,
     "stature": 0.49
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "high",
     "hip": "avg",
     "thigh": "avg",
     "thigh_hand_pinned": false,
-    "shape": "Straight",
+    "shape": "Balanced",
     "build": "bottom"
    },
    "confidence": "charted",
@@ -1525,7 +1525,7 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "avg",
     "hip": "avg",
     "thigh": "avg",
@@ -1582,12 +1582,12 @@
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "high",
     "hip": "high",
     "thigh": "avg",
     "thigh_hand_pinned": false,
-    "shape": "Hourglass",
+    "shape": "Straight",
     "build": "bottom"
    },
    "confidence": "charted",
@@ -1633,7 +1633,7 @@
     "hip_stature": 0.464
    },
    "percentiles": {
-    "bust": 0.667,
+    "bust": 0.646,
     "waist": 0.542,
     "hip": 0.417,
     "thigh": 0.479,
@@ -1641,12 +1641,12 @@
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "avg",
     "hip": "avg",
     "thigh": "avg",
     "thigh_hand_pinned": false,
-    "shape": "Straight",
+    "shape": "Hourglass",
     "build": "top"
    },
    "confidence": "charted",
@@ -1700,7 +1700,7 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "avg",
     "hip": "avg",
     "thigh": "avg",
@@ -1765,12 +1765,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "avg",
     "hip": "avg",
     "thigh": "avg",
     "thigh_hand_pinned": false,
-    "shape": "Hourglass",
+    "shape": "Balanced",
     "build": "even"
    },
    "confidence": "charted",
@@ -1829,12 +1829,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "avg",
     "hip": "avg",
     "thigh": "low",
     "thigh_hand_pinned": false,
-    "shape": "Balanced",
+    "shape": "Hourglass",
     "build": "top"
    },
    "confidence": "charted",
@@ -1893,12 +1893,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "avg",
     "hip": "avg",
     "thigh": "high",
     "thigh_hand_pinned": true,
-    "shape": "Straight",
+    "shape": "Hourglass",
     "build": "even"
    },
    "confidence": "charted",
@@ -1944,7 +1944,7 @@
     "hip_stature": 0.497
    },
    "percentiles": {
-    "bust": 0.667,
+    "bust": 0.646,
     "waist": 0.542,
     "hip": 0.531,
     "thigh": 0.532,
@@ -1952,7 +1952,7 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "avg",
     "hip": "avg",
     "thigh": "high",
@@ -2001,7 +2001,7 @@
     "hip_stature": 0.494
    },
    "percentiles": {
-    "bust": 0.625,
+    "bust": 0.615,
     "waist": 0.427,
     "hip": 0.417,
     "thigh": 0.383,
@@ -2009,12 +2009,12 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "avg",
     "hip": "avg",
     "thigh": "high",
     "thigh_hand_pinned": true,
-    "shape": "Balanced",
+    "shape": "Hourglass",
     "build": "top"
    },
    "confidence": "charted",
@@ -2061,7 +2061,7 @@
     "hip_stature": 0.493
    },
    "percentiles": {
-    "bust": 0.698,
+    "bust": 0.677,
     "waist": 0.625,
     "hip": 0.615,
     "thigh": 0.564,
@@ -2069,7 +2069,7 @@
    },
    "classes": {
     "height": "Mid",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "avg",
     "hip": "avg",
     "thigh": "avg",
@@ -2123,7 +2123,7 @@
     "hip_stature": 0.514
    },
    "percentiles": {
-    "bust": 0.719,
+    "bust": 0.698,
     "waist": 0.854,
     "hip": 0.802,
     "thigh": 0.777,
@@ -2131,7 +2131,7 @@
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
@@ -2152,73 +2152,59 @@
    "name": "Jane Doe",
    "display": "Jane Doe",
    "aliases": [
+    "(explicit)",
     "Nocturne of Light"
    ],
    "height_cm": 170.0,
    "stature_cm": 170.0,
    "stature_basis": "charted",
-   "bust_cm": 67.2,
-   "underbust_cm": 55.6,
-   "waist_cm": 47.0,
-   "hip_cm": 91.4,
+   "bust_cm": 71.3,
+   "underbust_cm": 56.8,
+   "waist_cm": 49.1,
+   "hip_cm": 89.6,
    "thigh_cm": 52.9,
-   "bust_in": 26.5,
-   "underbust_in": 21.9,
-   "waist_in": 18.5,
-   "hip_in": 36.0,
+   "bust_in": 28.1,
+   "underbust_in": 22.4,
+   "waist_in": 19.3,
+   "hip_in": 35.3,
    "thigh_in": 20.8,
-   "bust_diff_cm": 11.6,
-   "bust_diff_in": 4.57,
-   "uk": "22DD",
-   "us": "22DD",
-   "eu": "46F",
+   "bust_diff_cm": 14.5,
+   "bust_diff_in": 5.71,
+   "uk": "23E",
+   "us": "23DDD",
+   "eu": "47G",
    "ratios": {
-    "waist_hip": 0.514,
-    "waist_stature": 0.276,
-    "waist_thigh": 0.888,
+    "waist_hip": 0.548,
+    "waist_stature": 0.289,
+    "waist_thigh": 0.928,
     "thigh_stature": 0.311,
-    "thigh_hip": 0.579,
-    "bust_stature": 0.395,
-    "hip_stature": 0.538
+    "thigh_hip": 0.59,
+    "bust_stature": 0.419,
+    "hip_stature": 0.527
    },
    "percentiles": {
-    "bust": 0.625,
-    "waist": 0.76,
-    "hip": 0.896,
+    "bust": 0.74,
+    "waist": 0.823,
+    "hip": 0.854,
     "thigh": 0.851,
     "stature": 0.729
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": true,
-    "shape": "Hourglass",
-    "build": "bottom"
+    "shape": "Balanced",
+    "build": "even"
    },
    "confidence": "charted",
    "confidence_note": "No approximation is flagged in the source note.",
-   "notes": "",
-   "source_page": "Jane Doe",
+   "notes": "Measurements use the Nocturne of Light outfit; standard-model values are not used.",
+   "source_page": "(explicit)",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/jane_doe.html",
-   "measured_outfit": {
-    "outfit": "Nocturne of Light",
-    "bust_cm": 71.3,
-    "underbust_cm": 56.8,
-    "waist_cm": 49.1,
-    "hip_cm": 89.6,
-    "thigh_cm": 52.9,
-    "bust_diff_cm": 14.5,
-    "uk": "23E",
-    "us": "23DDD",
-    "eu": "47G",
-    "ratios": {
-     "waist_hip": 0.548,
-     "waist_stature": 0.289
-    }
-   },
+   "measured_outfit": null,
    "art_only_outfits": []
   },
   {
@@ -2254,7 +2240,7 @@
     "hip_stature": 0.538
    },
    "percentiles": {
-    "bust": 0.74,
+    "bust": 0.719,
     "waist": 0.948,
     "hip": 0.99,
     "thigh": 0.989,
@@ -2262,7 +2248,7 @@
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
@@ -2315,19 +2301,19 @@
    },
    "percentiles": {
     "bust": 0.802,
-    "waist": 0.823,
-    "hip": 0.844,
+    "waist": 0.802,
+    "hip": 0.854,
     "thigh": 0.894,
     "stature": 0.938
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "DD-E",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": true,
-    "shape": "Hourglass",
+    "shape": "Balanced",
     "build": "even"
    },
    "confidence": "charted",
@@ -2386,12 +2372,12 @@
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": true,
-    "shape": "Hourglass",
+    "shape": "Balanced",
     "build": "even"
    },
    "confidence": "charted",
@@ -2450,12 +2436,12 @@
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": false,
-    "shape": "Straight",
+    "shape": "Hourglass",
     "build": "even"
    },
    "confidence": "charted",
@@ -2511,7 +2497,7 @@
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "avg",
     "hip": "high",
     "thigh": "high",
@@ -2572,19 +2558,19 @@
    },
    "percentiles": {
     "bust": 0.823,
-    "waist": 0.802,
+    "waist": 0.781,
     "hip": 0.969,
     "thigh": 0.894,
     "stature": 0.854
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": true,
-    "shape": "Hourglass",
+    "shape": "Balanced",
     "build": "even"
    },
    "confidence": "charted",
@@ -2639,12 +2625,12 @@
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": false,
-    "shape": "Straight",
+    "shape": "Hourglass",
     "build": "even"
    },
    "confidence": "charted",
@@ -2697,18 +2683,18 @@
    "percentiles": {
     "bust": 0.948,
     "waist": 0.927,
-    "hip": 0.865,
+    "hip": 0.885,
     "thigh": 0.67,
     "stature": 0.698
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": true,
-    "shape": "Balanced",
+    "shape": "Hourglass",
     "build": "even"
    },
    "confidence": "charted",
@@ -2756,7 +2742,7 @@
    "percentiles": {
     "bust": 0.885,
     "waist": 0.854,
-    "hip": 0.896,
+    "hip": 0.906,
     "thigh": 0.798,
     "stature": 0.729
    },
@@ -2767,7 +2753,7 @@
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": false,
-    "shape": "Hourglass",
+    "shape": "Balanced",
     "build": "even"
    },
    "confidence": "charted",
@@ -2886,12 +2872,12 @@
    },
    "classes": {
     "height": "Tall",
-    "cup": "GG+",
+    "cup": "F-G",
     "waist": "high",
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": true,
-    "shape": "Straight",
+    "shape": "Hourglass",
     "build": "even"
    },
    "confidence": "charted",
@@ -3009,7 +2995,7 @@
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": true,
-    "shape": "Balanced",
+    "shape": "Hourglass",
     "build": "even"
    },
    "confidence": "charted",

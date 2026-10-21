@@ -213,10 +213,12 @@ def hero_picture(d):
     w320 = intrinsic_width(f'character_images/thumbs/320/{s}.webp')
     w640 = intrinsic_width(f'character_images/thumbs/{s}.webp')
     w1024 = intrinsic_width(f'character_images/thumbs/avif/1024/{s}.avif')
+    w1280 = intrinsic_width(f'character_images/thumbs/avif/1280/{s}.avif')
     wfull = intrinsic_width(f'character_images/{s}.webp')
     avif = (f'../character_images/thumbs/avif/320/{s}.avif {w320}w, '
             f'../character_images/thumbs/avif/{s}.avif {w640}w, '
-            f'../character_images/thumbs/avif/1024/{s}.avif {w1024}w')
+            f'../character_images/thumbs/avif/1024/{s}.avif {w1024}w, '
+            f'../character_images/thumbs/avif/1280/{s}.avif {w1280}w')
     webp = (f'../character_images/thumbs/320/{s}.webp {w320}w, '
             f'../character_images/thumbs/{s}.webp {w640}w, '
             f'../character_images/{s}.webp {wfull}w')
@@ -263,7 +265,7 @@ def character_page(d, prev_d, next_d):
     ld_tag = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>'
 
     rows = [
-        ('Height', f"{fmt(d['stature_cm'], 0)} cm · {d['ftin_stature']}" + (f" · {fmt(d['cm'], 0)} cm charted" if d['stature_basis'] == 'head' else '')),
+        ('Height', f"{fmt(d['stature_cm'], 1)} cm · {d['ftin_stature']}" + (f" · {fmt(d['cm'], 0)} cm charted" if d['stature_basis'] == 'head' else '')),
         ('Bust', f"{fmt(d['bust_cm'])} cm · {fmt(d['bust_in'])} in"),
         ('Under-bust', f"{fmt(d['band_cm'])} cm · {fmt(d['band_in'])} in"),
         ('Waist', f"{fmt(d['waist_cm'])} cm · {fmt(d['waist_in'])} in"),
@@ -282,7 +284,7 @@ def character_page(d, prev_d, next_d):
     props_html = ''.join(f'<tr><th scope="row">{esc(k)}</th><td>{fmt(v, 3)}</td></tr>' for k, v in props)
 
     gallery = []
-    gallery.append((f"character_images/thumbs/320/{d['official']}.webp", f"{d['display']} — official portrait", 'Standard model'))
+    gallery.append((f"character_images/thumbs/{d['official']}.webp", f"{d['display']} — official portrait", 'Official portrait'))
     if d.get('skin'):
         s = d['skin']
         gallery.append((f"character_images/{s['official']}.webp", f"{s['outfit']} — measured outfit", 'Measured outfit · has its own numbers'))
@@ -302,7 +304,7 @@ def character_page(d, prev_d, next_d):
     measured_note = (f"<p class=\"note\">This agent has a measured outfit ({esc(d['skin']['outfit'])}). The numbers on this page "
                      f"are the <b>standard model</b>; the outfit record is kept separate in the dataset.</p>" if d.get('skin') else '')
     stature_note = ("<p class=\"note\">Height uses the ~"
-                    f"{fmt(d['stature_cm'], 0)} cm head height; the charted {fmt(d['cm'], 0)} cm includes her ears.</p>" if d['stature_basis'] == 'head' else '')
+                    f"{fmt(d['stature_cm'], 1)} cm head height; the charted {fmt(d['cm'], 0)} cm includes her ears.</p>" if d['stature_basis'] == 'head' else '')
 
     return head(title, desc, canonical, og, ld_tag) + f'''
 <main>
@@ -319,7 +321,7 @@ def character_page(d, prev_d, next_d):
         <li class="chip hips">hips {esc(d['tags']['hips'])}</li>
         <li class="chip thighs">thighs {esc(d['tags']['thighs'])}</li>
       </ul>
-      <p class="meta">{fmt(d['stature_cm'], 0)} cm height{(' · ' + fmt(d['cm'], 0) + ' cm charted') if d['stature_basis'] == 'head' else ''} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
+      <p class="meta">{fmt(d['stature_cm'], 1)} cm height{(' · ' + fmt(d['cm'], 0) + ' cm charted') if d['stature_basis'] == 'head' else ''} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
       <div class="btns">
         <a class="btn primary" href="../#p={esc(d['slug'])}">Open in the chart</a>
         <a class="btn" href="../data/measurements.json" download>Dataset</a>
@@ -367,16 +369,16 @@ def character_page(d, prev_d, next_d):
 FAQ = [
     ("Where do the numbers come from?",
      "Heights come from official listings where available. The remaining circumferences come from curves measured around the official 3D models, so treat every value as an estimate rather than an in-game stat."),
-    ("Why does Miyabi show 170 cm and 155 cm?",
-     "Her charted 170 cm includes her ears. The UI uses the ~155 cm head height as Height, while the charted number stays visible as a note and in the exports."),
+    ("Why does Miyabi show 170 cm and 152.1 cm?",
+     "Her charted 170 cm includes her ears. The UI uses the ~152.1 cm head height as Height, while the charted number stays visible as a note and in the exports."),
     ("Why is the card value the standard model?",
-     "The standard model is the canonical figure. A measured outfit is stored as its own record with its own numbers and deltas, so no card or ranking mixes two outfits into one body."),
+     "The standard model is the canonical figure, except Jane Doe, where the measured Nocturne of Light outfit is the only record used. Other measured outfits are stored separately with their own numbers and deltas, so no card or ranking mixes two outfits into one body."),
     ("What do the silhouette classes mean?",
-     "Shape (Hourglass / Balanced / Straight) is the waist ÷ hip percentile. Build compares the raw bust and hip percentiles. Waist, hip and thigh classes are roster terciles of their raw circumference."),
+     "Shape uses bust, waist and hips: Hourglass requires both bust/waist and hip/waist ≥1.45 plus a bust–hip balance within 15%; Straight is a flare below 1.30 or a bust–hip mismatch over 25%; the rest is Balanced. Build compares the raw bust and hip percentiles. Waist, hip and thigh classes are roster terciles of their raw circumference."),
     ("What does hand-pinned mean?",
      "A few agents read as visibly thicker or slimmer than a single circumference suggests. Thirteen are marked thick by curator read and labelled hand-pinned in their detail view."),
-    ("How is the bust tier calculated?",
-     "Bust minus under-bust, recomputed to one decimal rather than using the sheet's rounded diff column. The letter is the source's UK sizing, not a fit recommendation."),
+    ("How is the cup group calculated?",
+     "The cup group follows the source's UK cup letter (A-B, C-D, DD-E, F-G, GG+). The letter is not a fit recommendation; it is the source's sizing label."),
     ("Can I reuse the data?",
      "The measurements are compiled from modelmetrics.net and the character art is © HoYoverse, shown via the ZZZ Fandom wiki as fair use. Link back to the source and respect those rights."),
 ]
@@ -410,7 +412,7 @@ def methodology_page():
   <div class="grid2">
     <section class="card">
       <h3>Height</h3>
-      <p>Charted height comes from official listings and may include ears, footwear or accessories. The UI uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 155 cm used). The charted value stays visible as a note; <code>stature_cm</code> remains the comparison field in the exports.</p>
+      <p>Charted height comes from official listings and may include ears, footwear or accessories. The UI uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 152.1 cm used). The charted value stays visible as a note; <code>stature_cm</code> remains the comparison field in the exports.</p>
     </section>
     <section class="card">
       <h3>Circumferences</h3>
@@ -418,15 +420,15 @@ def methodology_page():
     </section>
     <section class="card">
       <h3>Standard model vs outfit</h3>
-      <p>The standard model is canonical. A measured outfit is a separate record with its own numbers and deltas; art-only outfits are never measured and never affect a figure, filter or ranking.</p>
+      <p>The standard model is canonical, with one exception: Jane Doe's canonical entry uses the measured Nocturne of Light outfit. Other measured outfits are separate records with their own numbers and deltas; art-only outfits are never measured and never affect a figure, filter or ranking.</p>
     </section>
     <section class="card">
       <h3>Bra sizing</h3>
-      <p>The bust tier uses bust minus under-bust, recomputed to one decimal. UK / US / EU letters are reproduced from the source for comparison, not as a fit recommendation.</p>
+      <p>The cup group follows the source's UK cup letter (A-B, C-D, DD-E, F-G, GG+). UK / US / EU letters are reproduced from the source for comparison, not as a fit recommendation.</p>
     </section>
     <section class="card">
       <h3>Classes</h3>
-      <p>Waist, hip and thigh classes are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles. Shape is waist ÷ hip. Thirteen agents are hand-pinned to Thick by curator read and labelled as such.</p>
+      <p>Waist, hip and thigh classes are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles. Shape uses all three circumferences: Hourglass needs bust/waist and hip/waist ≥1.45 with bust and hips within 15%; Straight is flare below 1.30 or bust–hip mismatch over 25%; everything else is Balanced. Thirteen agents are hand-pinned to Thick by curator read and labelled as such.</p>
     </section>
     <section class="card">
       <h3>Percentiles</h3>

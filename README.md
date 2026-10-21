@@ -40,7 +40,8 @@ python3 tools/validate.py  --site-url https://<user>.github.io/<repo>/
 Optional asset steps (already committed):
 
 ```bash
-python3 tools/make_thumbs.py      # 320/640/full-1024 WebP + AVIF responsive set
+python3 tools/refetch_images.py   # official renders at 1280 px tall (needs network)
+python3 tools/make_thumbs.py      # 320/640/1024/1280 WebP + AVIF responsive set
 python3 tools/make_favicon.py     # SVG, ICO, PWA + maskable icons
 python3 tools/make_og.py          # social card (needs Chrome)
 ```
@@ -50,7 +51,7 @@ python3 tools/make_og.py          # social card (needs Chrome)
 Every card has a labelled **Compare** pill inside its artwork. Pick 2–4 agents; the
 tray explains the next step and enables **Compare** at two picks. The comparison
 table uses larger values, shows direction arrows, and highlights the winner in
-yellow for height, bust diff, waist (smaller), hips, thighs and cup. Confidence
+yellow for height, cup, waist (smaller), hips and thighs. Default sorting and the largest-cup podium use UK cup size. Confidence
 badges are no longer shown; the raw field remains in the dataset exports.
 
 ## Payload
@@ -59,20 +60,28 @@ Cards, the table and the podium use a `<picture>` set: AVIF 320/640/full-1024
 with WebP fallbacks and per-card `sizes`. 1x desktop cards get the 640 set at
 roughly 1:1; 2x desktop and phone cards pick the full 1024 render instead of
 upscaling the 640 thumb. A 2x phone loads ~430 KB of artwork for the first screen
-(podium plus visible cards), and the rest lazy-loads. The HTML is ~61 KB gzipped
-locally (GitHub Pages serves it compressed), and the page keeps its 48 static cards.
+(podium plus visible cards), and the rest lazy-loads. Character-page heroes use a 1280 px AVIF/source set, the gallery uses 640 px
+thumbs and the detail view uses the 1280 px source render. The HTML is ~61 KB
+gzipped locally (GitHub Pages serves it compressed), and the page keeps its 48
+static cards.
 
 ## Data model
 
 One row per character in `measurements.csv`. `tools/meta.json` documents every
 derived field, carries the schema version and the data date.
 
-* **Standard model is canonical.** Measured outfits are separate `skin` records;
-  art-only outfits never touch a number.
+* **Standard model is canonical**, except **Jane Doe**: her canonical entry uses the
+  measured Nocturne of Light outfit. Other measured outfits are separate `skin`
+  records; art-only outfits never touch a number.
 * **`stature_cm`** is the comparison height shown in the UI as **Height**. It equals the charted height unless
   the chart counts an appendage (Miyabi's ears), where it uses head height.
+* **Shape** uses bust, waist and hips: Hourglass needs bust/waist and hip/waist ≥1.45
+  with bust and hips within 15%; Straight is flare <1.30 or a bust–hip mismatch >25%;
+  the rest is Balanced. The sharpest-hourglass score is flare × bust–hip balance.
+* **Cup ranking** follows the UK cup letter first (single letters outrank doubled forms,
+  so G > GG) and then the band number.
 * **Confidence** values remain in the dataset exports as provenance; the UI no longer renders confidence badges.
-* Percentiles are roster percentiles of the raw centimetre value; stature uses `stature_cm`.
+* Percentiles are roster percentiles of the raw centimetre value; height uses `stature_cm`.
 
 ## Validation
 

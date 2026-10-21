@@ -20,7 +20,7 @@
   "slug": "URL slug used by the per-character pages",
   "aliases": "Extra search terms (wiki page, outfit names)",
   "cm": "Height as charted, in cm (may include ears, footwear or accessories)",
-  "stature_cm": "Head height used for stature comparisons; equals cm unless the chart counts an appendage",
+  "stature_cm": "Height shown in the UI and used for comparisons; equals cm unless the chart counts an appendage",
   "stature_basis": "charted or head",
   "bust_cm": "Bust circumference, cm",
   "band_cm": "Under-bust circumference, cm",
@@ -30,7 +30,7 @@
   "diff_cm": "Bust minus under-bust, cm (recomputed for 1 dp precision)",
   "uk": "UK bra size as supplied by the source",
   "confidence": "charted, estimated or partial (see methodology)",
-  "basis": "standard; outfit variants are exposed separately under skin",
+  "basis": "standard, except Jane Doe uses her measured outfit as the canonical record; other outfit variants are exposed under skin",
   "skin": "Measured outfit variant with its own numbers",
   "outfits": "Art-only outfit renders (no measured data)"
  }

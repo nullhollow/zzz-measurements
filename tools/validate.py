@@ -146,7 +146,8 @@ def check_assets(out):
                     f"character_images/thumbs/320/{d['official']}.webp",
                     f"character_images/thumbs/avif/{d['official']}.avif",
                     f"character_images/thumbs/avif/320/{d['official']}.avif",
-                    f"character_images/thumbs/avif/1024/{d['official']}.avif"):
+                    f"character_images/thumbs/avif/1024/{d['official']}.avif",
+                    f"character_images/thumbs/avif/1280/{d['official']}.avif"):
             if not (ROOT / rel).exists():
                 err(f'missing source asset {rel}')
         if d.get('skin'):

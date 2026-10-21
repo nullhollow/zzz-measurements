@@ -51,10 +51,29 @@
 - `tools/validate.py` + GitHub Actions: build, validate, reproducibility diff.
 - Fixed `fetch_images.py` missing imports and `optimize_images.py` division by zero.
 
+### Art resolution and sheet fix (follow-up)
+- Official portraits were refetched at **1280 px tall** (+25% linear). Character-page
+  heroes use the 1280 AVIF set, the gallery uses 640 px thumbs, and the detail view uses
+  the 1280 px source WebP.
+- Fixed the missing `imgSrc()` helper that broke the sheet toggle in the detail modal;
+  sheet images now also fall back to the official portrait if a crop is unavailable.
+
+### Data and ranking corrections (follow-up)
+- Jane Doe now uses the Nocturne of Light measurements as her canonical record; the
+  standard-model values are discarded for that entry.
+- Miyabi's head height is corrected to **152.1 cm** (charted 170 cm still shown as a note).
+- The default sort, table UK sort, podium and highlight now rank by **UK cup size**:
+  single-letter cups outrank doubled forms (G > GG), then the band number decides
+  (22E > 19E, 23GG > 21GG). Bust diff is kept as a measurement, not a ranking metric.
+- Cup groups and the filter now follow the UK cup letter (A-B, C-D, DD-E, F-G, GG+).
+- Shape now uses bust, waist and hips: Hourglass requires bust/waist and hip/waist ≥1.45
+  plus bust–hip balance within 15%; Straight is flare <1.30 or mismatch >25%; the rest is
+  Balanced. The sharpest-hourglass ranking uses flare × bust–hip balance.
+
 ### Height terminology (follow-up)
 - The UI now uses a single **Height** value (`stature_cm`) instead of separate Height/Stature
   rows, columns and labels. Miyabi still shows her 170 cm charted figure as a note, while
-  comparisons use the 155 cm head height.
+  comparisons use the 152.1 cm head height.
 - Removed the explanatory yellow-highlight sentence from the comparison table.
 
 ### Comparison UX (follow-up)
@@ -63,16 +82,15 @@
 - The compare tray says how many are picked, explains the next step, and disables
   **Compare** until two agents are selected.
 - The comparison table uses 16 px values / 19 px headers on desktop (13 px on phones,
-  all picks visible without horizontal scroll). Yellow marks the winner for stature,
-  bust diff, waist (smaller), hips, thighs and cup; arrows show direction, and cup
-  ties break on bust diff.
+  all picks visible without horizontal scroll). Yellow marks the winner for height,
+  cup, waist (smaller), hips and thighs; arrows show direction.
 - Removed the confidence badges, table column, detail row and methodology section from
   the UI; confidence remains in the dataset exports as provenance.
 
 ### Payload and phones (follow-up)
 - Responsive `<picture>` set: AVIF 320/640 with WebP 320/640 fallbacks and `sizes`.
   Measured first-screen artwork drops from ~556 KB to ~120 KB on a 390 px phone.
-- Character pages load the 320/640 hero set instead of the 1024 px render.
+- Character pages load the 320/640/1280 hero set instead of the old 1024 px render.
 - Cards gained a full 1024 px AVIF candidate and exact per-image `srcset` widths;
   2x desktop and phone cards now pick the full render instead of upscaling the
   640 thumb (1x desktop stays on the lighter 640 set).

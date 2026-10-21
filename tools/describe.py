@@ -89,10 +89,15 @@ def describe(d, unit, compare=None):
     else:
         hips = (f"Below that, hips read {HIP_WORD[d['hip_level']]} at {v('hip_in','hip_cm')}; "
                 f"no reliable thigh measurement exists for her.")
-    bal = {'top': "The chest carries noticeably more visual weight than the hips",
-           'bottom': "The hips carry more visual weight than the chest",
-           'even': "Chest and hips are fairly evenly matched"}[d['balance']]
-    shape = (f"The result is a {d['shape'].lower()} silhouette (waist-to-hip {d['whr']:.2f}): {bal}.")
+    b, h = d['bust_cm'], d['hip_cm']
+    balance_text = ("The chest carries noticeably more visual weight than the hips" if b > h * 1.10
+                    else "The hips carry more visual weight than the chest" if h > b * 1.10
+                    else "Chest and hips are fairly evenly matched")
+    bw = b / d['waist_cm'] if b and d['waist_cm'] else 0
+    hw = h / d['waist_cm'] if h and d['waist_cm'] else 0
+    bhi = min(b, h) / max(b, h)
+    shape = (f"The result is a {d['shape'].lower()} silhouette "
+             f"(bust/waist {bw:.2f}, hip/waist {hw:.2f}, bust–hip balance {bhi*100:.0f}%): {balance_text}.")
     parts = [frame, bust, waist, hips, shape]
     if compare is None and d.get('variant_of'):
         compare = by_key.get(d['variant_of'])
@@ -173,7 +178,12 @@ for d in data:
 
 json.dump(data, open(ROOT/'tools/data.json','w'), indent=1, ensure_ascii=False)
 print('descriptions written (cm + in)\n')
-for d in data[:2] + [by_key['Rina'], by_key['Jane Doe']['skin']]:
+samples = data[:2] + [by_key['Rina']]
+for d in data:
+    if d.get('skin'):
+        samples.append(d['skin'])
+        break
+for d in samples:
     print('*', d['display'], '· CM:')
     print(' ', d['desc_cm'])
     print(' · IN:')

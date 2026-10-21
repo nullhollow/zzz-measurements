@@ -2,8 +2,8 @@
 """Convert the dashboard's PNG artwork to WebP with cwebp.
 
 Rules
-  * height capped at 1024 px (never enlarged; wider than tall images keep their
-    aspect, so a 2128x1332 render becomes 1636x1024)
+  * height capped at 1280 px (never enlarged; wider than tall images keep their
+    aspect, so a 2128x1332 render becomes 2044x1280)
   * quality 85 by default (override with --quality N)
   * -m 6 (slowest/best search), -sharp_yuv (keeps line-art edges crisp on the
     flat anime fills), -alpha_q 100 (alpha plane stays exact, verified 0 delta)
@@ -19,7 +19,7 @@ import os, subprocess, sys
 from PIL import Image
 
 QUALITY = 85
-MAX_H = 1024
+MAX_H = 1280
 FORCE = '--force' in sys.argv
 PRUNE = '--prune' in sys.argv
 REPORT = '--report' in sys.argv
