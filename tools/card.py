@@ -110,6 +110,8 @@ def values(d, unit='cm', lang='en'):
     return {
         'name': esc(d['name']),
         'cmpAria': esc(f"Add {d['display']} to comparison"),
+        'cmpIco': '+',
+        'cmpLbl': 'Compare',
         'href': f"characters/{d['slug']}.html",
         'media': media(d, card_sizes(d)),
         'stick': stick,

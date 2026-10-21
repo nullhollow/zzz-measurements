@@ -1,10 +1,11 @@
 <article class="card" data-name="{{name}}">
-  <button class="cmp" type="button" data-cmp="1" aria-pressed="false" aria-label="{{cmpAria}}">+</button>
+  <div class="imgbox">
+    <a class="img-link" href="{{href}}" aria-hidden="true" tabindex="-1"></a>
+    {{media}}
+    {{stick}}
+    <button class="cmp" type="button" data-cmp="1" aria-pressed="false" aria-label="{{cmpAria}}"><span class="cmp-ico" aria-hidden="true">{{cmpIco}}</span><span class="cmp-lbl">{{cmpLbl}}</span></button>
+  </div>
   <a class="card-main" href="{{href}}">
-    <div class="imgbox">
-      {{media}}
-      {{stick}}
-    </div>
     <div class="body">
       <div class="name">{{display}}<small>{{heightLine}}</small></div>
       <div class="pct" title="{{pctTitle}}">

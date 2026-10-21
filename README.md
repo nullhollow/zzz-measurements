@@ -40,10 +40,18 @@ python3 tools/validate.py  --site-url https://<user>.github.io/<repo>/
 Optional asset steps (already committed):
 
 ```bash
-python3 tools/make_thumbs.py      # 320/640 px WebP + AVIF responsive set
+python3 tools/make_thumbs.py      # 320/640/full-1024 WebP + AVIF responsive set
 python3 tools/make_favicon.py     # SVG, ICO, PWA + maskable icons
 python3 tools/make_og.py          # social card (needs Chrome)
 ```
+
+## Compare
+
+Every card has a labelled **Compare** pill inside its artwork. Pick 2–4 agents; the
+tray explains the next step and enables **Compare** at two picks. The comparison
+table uses larger values, shows direction arrows, and highlights the winner in
+yellow for stature, bust diff, waist (smaller), hips, thighs and cup. Confidence
+badges are no longer shown; the raw field remains in the dataset exports.
 
 ## Payload
 
@@ -63,7 +71,7 @@ derived field, carries the schema version and the data date.
   art-only outfits never touch a number.
 * **`stature_cm`** is the comparison height. It equals the charted height unless
   the chart counts an appendage (Miyabi's ears), where it uses head height.
-* **Confidence** is derived from the sheet's own notes: `charted`, `estimated`, `partial`.
+* **Confidence** values remain in the dataset exports as provenance; the UI no longer renders confidence badges.
 * Percentiles are roster percentiles of the raw centimetre value; stature uses `stature_cm`.
 
 ## Validation

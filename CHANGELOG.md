@@ -51,6 +51,18 @@
 - `tools/validate.py` + GitHub Actions: build, validate, reproducibility diff.
 - Fixed `fetch_images.py` missing imports and `optimize_images.py` division by zero.
 
+### Comparison UX (follow-up)
+- Each card has a labelled **Compare** pill inside the artwork; selected cards get an acid
+  border and the pill switches to **Added**.
+- The compare tray says how many are picked, explains the next step, and disables
+  **Compare** until two agents are selected.
+- The comparison table uses 16 px values / 19 px headers on desktop (13 px on phones,
+  all picks visible without horizontal scroll). Yellow marks the winner for stature,
+  bust diff, waist (smaller), hips, thighs and cup; arrows show direction, and cup
+  ties break on bust diff.
+- Removed the confidence badges, table column, detail row and methodology section from
+  the UI; confidence remains in the dataset exports as provenance.
+
 ### Payload and phones (follow-up)
 - Responsive `<picture>` set: AVIF 320/640 with WebP 320/640 fallbacks and `sizes`.
   Measured first-screen artwork drops from ~556 KB to ~120 KB on a 390 px phone.

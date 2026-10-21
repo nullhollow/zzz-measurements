@@ -8,7 +8,7 @@ repository is served.
 ```
 docs/
   index.html               interactive chart (48 cards pre-rendered)
-  methodology.html         method, classes, confidence, FAQ
+  methodology.html         method, classes, FAQ
   characters/*.html        48 crawlable profiles
   data/                    measurements.json · measurements.csv · schema.json
   offline.html             service-worker fallback

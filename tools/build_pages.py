@@ -5,7 +5,7 @@
 
 Outputs
     <out>/characters/<slug>.html    one crawlable page per agent
-    <out>/methodology.html          method, classes, confidence, FAQ (FAQPage JSON-LD)
+    <out>/methodology.html          method, classes, FAQ (FAQPage JSON-LD)
     <out>/data/measurements.json    versioned public dataset
     <out>/data/measurements.csv     flat export
     <out>/data/schema.json          JSON Schema for the export
@@ -297,7 +297,6 @@ def character_page(d, prev_d, next_d):
 
     sim = similar(d)
     sim_html = ' · '.join(f'<a href="{esc(x["slug"])}.html">{esc(x["display"])}</a>' for x in sim)
-    conf = {'charted': 'Charted', 'estimated': 'Estimated', 'partial': 'Partial'}.get(d['confidence'], d['confidence'])
     report = (f"{META['repo']}/issues/new?title=" + quote(f"[data] {d['display']}") +
               "&body=" + quote(f"Character: {d['display']}\nField: \nCurrent value: \nSource: \n\nWhat looks wrong?\n"))
     src_link = (f"<a href=\"https://zenless-zone-zero.fandom.com/wiki/{quote(d['source_page'].replace(' ', '_'))}\" rel=\"noopener\">"
@@ -322,7 +321,7 @@ def character_page(d, prev_d, next_d):
         <li class="chip hips">hips {esc(d['tags']['hips'])}</li>
         <li class="chip thighs">thighs {esc(d['tags']['thighs'])}</li>
       </ul>
-      <p class="meta">{fmt(d['cm'], 0)} cm charted · {fmt(d['stature_cm'], 0)} cm stature · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])} · {esc(conf)} confidence</p>
+      <p class="meta">{fmt(d['cm'], 0)} cm charted · {fmt(d['stature_cm'], 0)} cm stature · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
       <div class="btns">
         <a class="btn primary" href="../#p={esc(d['slug'])}">Open in the chart</a>
         <a class="btn" href="../data/measurements.json" download>Dataset</a>
@@ -354,7 +353,6 @@ def character_page(d, prev_d, next_d):
 
   <h2>Provenance</h2>
   <table><tbody>
-    <tr><th scope="row">Confidence</th><td>{esc(conf)} — {esc(d['confidence_note'])}</td></tr>
     <tr><th scope="row">Portrait source</th><td>{src_link}</td></tr>
     <tr><th scope="row">Data updated</th><td>{META['data_updated']}</td></tr>
     <tr><th scope="row">Similar figures</th><td>{sim_html}</td></tr>
@@ -381,8 +379,6 @@ FAQ = [
      "A few agents read as visibly thicker or slimmer than a single circumference suggests. Thirteen are marked thick by curator read and labelled hand-pinned in their detail view."),
     ("How is the bust tier calculated?",
      "Bust minus under-bust, recomputed to one decimal rather than using the sheet's rounded diff column. The letter is the source's UK sizing, not a fit recommendation."),
-    ("What do the confidence badges mean?",
-     "Charted means no caveat is flagged. Estimated means the source marks at least one value as approximated. Partial means a value is missing or unreadable."),
     ("Can I reuse the data?",
      "The measurements are compiled from modelmetrics.net and the character art is © HoYoverse, shown via the ZZZ Fandom wiki as fair use. Link back to the source and respect those rights."),
 ]
@@ -392,7 +388,7 @@ def methodology_page():
     canonical = SITE + 'methodology.html'
     title = "Methodology, classes and FAQ — ZZZ Female Measurements"
     desc = ("How the Zenless Zone Zero measurements were taken, why stature and charted height differ, "
-            "what the silhouette classes and percentiles mean, and the confidence flags.")
+            "and what the silhouette classes and percentiles mean.")
     faq_ld = {
         "@context": "https://schema.org",
         "@graph": [
@@ -437,10 +433,6 @@ def methodology_page():
     <section class="card">
       <h3>Percentiles</h3>
       <p>Bars show the roster percentile of the raw centimetre measurement, with stature using head height. 0 is the smallest value in the set, 50 the midpoint and 100 the largest.</p>
-    </section>
-    <section class="card">
-      <h3>Confidence</h3>
-      <p><b>Charted</b>: no caveat flagged. <b>Estimated</b>: the source marks a value as approximated. <b>Partial</b>: a value is missing or unreadable. The flag is derived from the source note, never invented.</p>
     </section>
     <section class="card">
       <h3>Corrections</h3>
