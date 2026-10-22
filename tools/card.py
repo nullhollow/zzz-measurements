@@ -106,7 +106,7 @@ def values(d, unit='cm', lang='en'):
     }[lang]
     unit_suffix = 'cm' if unit == 'cm' else 'in'
     note = f'<div class="note">{esc(d["notes"])}</div>' if d['notes'] else ''
-    stick = f'<span class="stick">{esc(d["outfit"] or "variant")}</span>' if d['variant_of'] else ''
+    stick = f'<span class="stick">{esc(d["outfit"] or "variant")}</span>' if d.get('outfit') or d['variant_of'] else ''
     suffix = '_cm' if unit == 'cm' else '_in'
     val = lambda k: fmt(d[k + suffix])  # noqa: E731
     return {

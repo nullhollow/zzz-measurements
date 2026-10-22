@@ -203,7 +203,7 @@ if jane and jane.get('skin'):
         'bust_cm', 'band_cm', 'waist_cm', 'hip_cm', 'thigh_cm',
         'bust_in', 'band_in', 'waist_in', 'hip_in', 'thigh_in',
         'diff_cm', 'diff_in', 'uk', 'us', 'eu',
-        'source_page', 'source_file', 'source_url',
+        'source_page', 'source_file', 'source_url', 'official',
     ):
         if key in skin:
             jane[key] = skin[key]

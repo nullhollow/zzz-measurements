@@ -21,6 +21,7 @@ import json
 from pathlib import Path
 from urllib.parse import quote
 from PIL import Image
+from profile_text import profile_summary
 
 ROOT = Path(__file__).resolve().parent.parent
 _WIDTH = {}
@@ -60,7 +61,9 @@ PAGE = {
         'outfit_portrait': 'outfit portrait', 'art_only': 'art only',
         'stature_note': 'Height uses the ~{st} cm head height; the charted {cm} cm includes her ears.',
         'measured_note': 'This agent has a measured outfit ({outfit}). The numbers on this page are the <b>standard model</b>; the outfit record is kept separate in the dataset.',
-        'chart_note': 'Chart note', 'source': 'Source', 'rights': 'Official art via HoYoverse and the ZZZ Fandom wiki, © HoYoverse (fair use). Auto-generated commentary is not in-game canon.',
+        'chart_note': 'Chart note', 'source': 'Source', 'source_repository': 'Source repository',
+        'source_title': 'Zenless Zone Zero · Female Character Measurements',
+        'rights': 'Official art via HoYoverse and the ZZZ Fandom wiki, © HoYoverse (fair use). Auto-generated commentary is not in-game canon.',
         'methodology': 'Methodology &amp; FAQ', 'data_updated': 'Data updated', 'back': 'Back to the chart',
         'shape': 'Shape', 'build_word': 'build', 'hand_pinned': 'hand-pinned', 'language': 'Language', 'roster_nav': 'Roster navigation',
     },
@@ -84,7 +87,9 @@ PAGE = {
         'outfit_portrait': '衣装ポートレート', 'art_only': '画像のみ',
         'stature_note': '身長は頭頂ベースの約{st}cm。公式の{cm}cmは耳を含みます。',
         'measured_note': 'このエージェントには計測済み衣装（{outfit}）があります。このページの数値は<b>標準モデル</b>で、衣装の記録はデータセット内に別途保存しています。',
-        'chart_note': 'チャート注記', 'source': '出典', 'rights': '公式画像はHoYoverse公式サイトおよびZZZ Fandom wiki経由、© HoYoverse（フェアユース）。自動生成の解説はゲーム内設定ではありません。',
+        'chart_note': 'チャート注記', 'source': '出典', 'source_repository': 'ソースリポジトリ',
+        'source_title': 'ゼンレスゾーンゼロ · 女性キャラクター寸法',
+        'rights': '公式画像はHoYoverse公式サイトおよびZZZ Fandom wiki経由、© HoYoverse（フェアユース）。自動生成の解説はゲーム内設定ではありません。',
         'methodology': '算出方法とFAQ', 'data_updated': 'データ更新', 'back': 'チャートに戻る',
         'shape': 'シルエット', 'build_word': '体型', 'hand_pinned': '手動分類', 'language': '言語', 'roster_nav': '名簿ナビゲーション',
     },
@@ -108,7 +113,9 @@ PAGE = {
         'outfit_portrait': '服装立绘', 'art_only': '仅立绘',
         'stature_note': '身高采用约 {st} 厘米的头顶高度；官方 {cm} 厘米包含耳朵。',
         'measured_note': '这位角色有一套已测量服装（{outfit}）。本页数值是<b>标准模型</b>；服装数据单独保存在数据集中。',
-        'chart_note': '榜单注记', 'source': '来源', 'rights': '官方立绘来自 HoYoverse 官网和 ZZZ Fandom wiki，© HoYoverse（合理使用）。自动生成的解读并非游戏内设定。',
+        'chart_note': '榜单注记', 'source': '来源', 'source_repository': '源码仓库',
+        'source_title': '绝区零 · 女性角色测量',
+        'rights': '官方立绘来自 HoYoverse 官网和 ZZZ Fandom wiki，© HoYoverse（合理使用）。自动生成的解读并非游戏内设定。',
         'methodology': '方法与常见问题', 'data_updated': '数据更新', 'back': '返回图表',
         'shape': '轮廓', 'build_word': '体型', 'hand_pinned': '人工分类', 'language': '语言', 'roster_nav': '名单导航',
     },
@@ -282,10 +289,10 @@ def footer(updated, prefix='../', lang='en', methodology=None):
     p = PAGE[lang]
     methodology = methodology or (prefix + ('methodology.html' if lang == 'en' else f'{lang}/methodology.html'))
     return f'''<footer><div class="rule">
-<b>{p['source']}:</b> modelmetrics.net · <i>Zenless Zone Zero · Female Character Measurements</i>. {p['data_updated']} <time datetime="{updated}">{updated}</time>.<br>
+<b>{p['source']}:</b> modelmetrics.net · <i>{p['source_title']}</i>. {p['data_updated']} <time datetime="{updated}">{updated}</time>.<br>
 {p['rights']}<br>
 <a href="{methodology}">{p['methodology']}</a> · <a href="{prefix}data/measurements.json" download>{esc(p["dataset"])} (JSON)</a> ·
-<a href="{prefix}data/measurements.csv" download>CSV</a> · <a href="{META['repo']}" rel="noopener">Source</a>
+<a href="{prefix}data/measurements.csv" download>CSV</a> · <a href="{META['repo']}" rel="noopener">{p['source_repository']}</a>
 </div></footer>
 </body>
 </html>'''
@@ -357,8 +364,7 @@ def character_page(d, prev_d, next_d, lang='en'):
         title = f"{nm}の寸法 — 身長・バスト・ウエスト・ヒップ | ZZZ"
     else:
         title = f"{nm}的三围 — 身高、胸围、腰围、臀围 | ZZZ"
-    desc = (profile_cm or '')[:150].rstrip() + ('…' if len(profile_cm or '') > 150 else '')
-    desc = f"{nm}: {desc}"
+    desc = profile_summary(d, lang)
     og = f"{SITE}character_images/{d['official']}.webp"
     ld = {
         "@context": "https://schema.org",
@@ -413,7 +419,9 @@ def character_page(d, prev_d, next_d, lang='en'):
 
     gallery = []
     gallery.append((f"{prefix}character_images/thumbs/{d['official']}.webp",
-                    f"{nm} — {p['official_portrait']}", p['official_portrait'], None))
+                    f"{d.get('outfit') or nm} — {p['outfit_portrait'] if d.get('outfit') else p['official_portrait']}",
+                    p['measured_outfit'] if d.get('outfit') else p['official_portrait'],
+                    f"{prefix}character_images/thumbs/avif/{d['official']}.avif" if d.get('outfit') else None))
     if d.get('skin'):
         skin = d['skin']
         gallery.append((f"{prefix}character_images/{skin['official']}.webp",
@@ -452,7 +460,7 @@ def character_page(d, prev_d, next_d, lang='en'):
                 home=prefix, path=page_path) + f'''
 <main>
   <section class="hero">
-    {hero_picture(d, prefix=prefix, name=nm, alt_word=p['official_portrait'])}
+    {hero_picture(d, prefix=prefix, name=nm, alt_word=d.get('outfit') or p['official_portrait'])}
     <div>
       <p class="eyebrow">{esc(p['eyebrow'])}</p>
       <h1>{esc(nm)}</h1>
@@ -465,7 +473,7 @@ def character_page(d, prev_d, next_d, lang='en'):
         <li class="chip hips">{esc(p['hip'])} {esc(tags['hips'])}</li>
         <li class="chip thighs">{esc(p['thigh'])} {esc(tags['thighs'])}</li>
       </ul>
-      <p class="meta">{esc(p['height'])} {fmt(d['stature_cm'], 1)} cm{charted} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
+      <p class="meta">{esc(d['outfit']) + ' · ' if d.get('outfit') else ''}{esc(p['height'])} {fmt(d['stature_cm'], 1)} cm{charted} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
       <div class="btns">
         <a class="btn primary" href="{chart_link}">{esc(p['open'])}</a>
         <a class="btn" href="{prefix}data/measurements.json" download>{esc(p['dataset'])}</a>

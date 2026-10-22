@@ -15,6 +15,7 @@ import re
 import sys
 from datetime import date
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'tools'))
@@ -53,6 +54,9 @@ def check_data(out):
             err(f'duplicate slug {d.get("slug")}')
         names.add(d.get('name'))
         slugs.add(d.get('slug'))
+        if d.get('slug') == 'jane_doe' and (d.get('official') != 'jane_doe_skin' or
+                d.get('outfit') != 'Nocturne of Light' or d.get('skin')):
+            err('Jane Doe must use her canonical Nocturne of Light record and portrait')
         if not re.fullmatch(r'[a-z0-9_]+', d.get('slug', '')):
             err(f'{d.get("display")}: slug is not url-safe: {d.get("slug")}')
         if d.get('stature_basis') == 'head':
@@ -93,6 +97,26 @@ def check_data(out):
             err(f'{d["display"]}: tags.height mismatch')
         if d.get('tags', {}).get('shape') != d.get('shape'):
             err(f'{d["display"]}: tags.shape mismatch')
+        for rec in [d] + ([d['skin']] if d.get('skin') else []):
+            bp, hp = rec.get('p_bust_cm'), rec.get('p_hip_cm')
+            delta = bp - hp if bp is not None and hp is not None else 0
+            balance = 'top' if delta > .18 else 'bottom' if delta < -.18 else 'even'
+            if rec.get('balance') != balance:
+                err(f'{rec["display"]}: Build disagrees with bust/hip percentiles')
+            # Check the actual generated prose, including both unit variants.
+            phrases = {
+                'top': ('the bust ranks higher', 'バストがヒップより上位', '胸围在全榜中的排名高于臀围'),
+                'bottom': ('the hips rank higher', 'ヒップがバストより上位', '臀围在全榜中的排名高于胸围'),
+                'even': ('bust and hip percentile ranks are close', '順位は近い位置', '胸围与臀围在全榜中的排名接近'),
+            }[balance]
+            for lang, phrase in zip(('en', 'ja', 'zh'), phrases):
+                for unit in ('cm', 'in'):
+                    key = f'desc_{unit}' if lang == 'en' else f'desc_{lang}_{unit}'
+                    prose = rec.get(key, '')
+                    if phrase not in prose:
+                        err(f'{rec["display"]}: {key} disagrees with Build')
+                    if re.search(r'ありますです|ですです|\.\.|。。', prose):
+                        err(f'{rec["display"]}: malformed punctuation/grammar in {key}')
         if d.get('notes') and ('<' in d['notes'] or '>' in d['notes']):
             warn(f'{d["display"]}: note contains angle brackets')
         for it in d.get('outfits', []):
@@ -170,6 +194,19 @@ def check_assets(out):
                 err(f'{d["slug"]} ({lang}): page has no JSON-LD')
             if 'rel="canonical"' not in html:
                 err(f'{d["slug"]} ({lang}): page has no canonical URL')
+            meta = re.search(r'<meta name="description" content="([^"]*)"', html)
+            desc = htmllib.unescape(meta[1]) if meta else ''
+            if not desc or not expected or desc.count(expected) != 1 or desc.endswith(('…', '...')) or not desc.endswith(('.', '。')):
+                err(f'{d["slug"]} ({lang}): missing, repeated or incomplete meta description')
+            footer = html.split('<footer>', 1)[-1]
+            if lang != 'en' and re.search(r'>Source(?: repository)?</a>', footer):
+                err(f'{d["slug"]} ({lang}): untranslated source link')
+            if d.get('outfit'):
+                hero = html.split('<section class="hero">', 1)[-1].split('</section>', 1)[0]
+                gallery = html.split('<div class="gallery">', 1)[-1].split('</div>', 1)[0]
+                for label, section in (('hero', hero), ('gallery', gallery)):
+                    if f"/{d['official']}.webp" not in section or d['outfit'] not in section:
+                        err(f'{d["slug"]} ({lang}): canonical outfit missing from {label}')
     # exports & crawler files
     for rel in ('index.html', 'methodology.html', 'offline.html', 'sw.js', '404.html',
                 'robots.txt', 'sitemap.xml', 'manifest.webmanifest', '.nojekyll',
@@ -196,6 +233,28 @@ def check_assets(out):
 
 # ---------------------------------------------------------------- HTML
 def check_html(out, site):
+    def check_jsonld(value, rel):
+        if isinstance(value, list):
+            for item in value:
+                check_jsonld(item, rel)
+        elif isinstance(value, dict):
+            if value.get('@type') == 'ItemList':
+                items = value.get('itemListElement', [])
+                expected_urls = {f"{site}characters/{d['slug']}.html" for d in DATA}
+                if {item.get('url') for item in items} != expected_urls or len(items) != N:
+                    err(f'{rel}: ItemList does not link to all {N} character pages')
+                for item in items:
+                    desc = item.get('description', '')
+                    if not desc.endswith('.') or desc.endswith(('…', '...')):
+                        err(f'{rel}: incomplete ItemList description for {item.get("name")}')
+            for key, item in value.items():
+                if key in ('url', '@id', 'contentUrl', 'image', 'item') and isinstance(item, str) and item.startswith(site):
+                    path = unquote(urlsplit(item[len(site):]).path)
+                    target = out / (path + 'index.html' if not path or path.endswith('/') else path)
+                    if not target.is_file():
+                        err(f'{rel}: broken local JSON-LD reference {item}')
+                check_jsonld(item, rel)
+
     pages = sorted(out.rglob('*.html'))
     if not pages:
         err('no HTML files found')
@@ -211,7 +270,7 @@ def check_html(out, site):
                 err(f'{rel}: unreplaced token {token}')
         for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', text, re.S):
             try:
-                json.loads(block)
+                check_jsonld(json.loads(block), rel)
             except json.JSONDecodeError as e:
                 err(f'{rel}: invalid JSON-LD: {e}')
         if '<html lang="en">' not in text and '<html lang=' not in text:
@@ -224,6 +283,28 @@ def check_html(out, site):
             err(f'index.html: missing {label}')
     if idx.count('class="card"') < N:
         err(f'index.html: only {idx.count("class=\"card\"")} static cards, expected {N}')
+    for d in DATA:
+        if d.get('outfit'):
+            card = re.search(r'<article class="card" data-name="' + re.escape(htmllib.escape(d['name'], quote=True)) + r'">(.*?)</article>', idx, re.S)
+            if not card or f"/{d['official']}.webp" not in card[1] or d['outfit'] not in card[1]:
+                err(f'index.html: canonical outfit missing from {d["display"]} card')
+    # All marked strings, including footer controls, need all three translations.
+    i18n = re.search(r'const I18N = \{(.*?)\n\};', idx, re.S)
+    if i18n:
+        blocks = re.split(r'\n  (?:en|ja|zh): \{', i18n[1])[1:]
+        if len(blocks) != 3:
+            err('index.html: expected three I18N language blocks')
+        keys = set(re.findall(r'data-i18n="([^"]+)"', idx))
+        for lang, block in zip(('en', 'ja', 'zh'), blocks):
+            present = set(re.findall(r'\b(\w+):\s*[\'\"]', block))
+            if keys - present:
+                err(f'index.html ({lang}): missing translations {sorted(keys - present)}')
+    else:
+        err('index.html: missing I18N translations')
+    footer = idx.split('<footer>', 1)[-1].split('</footer>', 1)[0]
+    for key in ('changelog', 'sourceRepository', 'source', 'sourceTitle', 'schema', 'updated', 'language', 'theme', 'dark', 'light'):
+        if f'data-i18n="{key}"' not in footer:
+            err(f'index.html: footer {key} is not localizable')
     checked, broken = link_check(out, site)
     if broken:
         for b in broken[:20]:

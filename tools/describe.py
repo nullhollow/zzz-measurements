@@ -90,9 +90,11 @@ def describe(d, unit, compare=None):
         hips = (f"Below that, hips read {HIP_WORD[d['hip_level']]} at {v('hip_in','hip_cm')}; "
                 f"no reliable thigh measurement exists for her.")
     b, h = d['bust_cm'], d['hip_cm']
-    balance_text = ("The chest carries noticeably more visual weight than the hips" if b > h * 1.10
-                    else "The hips carry more visual weight than the chest" if h > b * 1.10
-                    else "Chest and hips are fairly evenly matched")
+    balance_text = {
+        'top': "the bust ranks higher in the roster than the hips",
+        'bottom': "the hips rank higher in the roster than the bust",
+        'even': "bust and hip percentile ranks are close",
+    }[d['balance']]
     bw = b / d['waist_cm'] if b and d['waist_cm'] else 0
     hw = h / d['waist_cm'] if h and d['waist_cm'] else 0
     bhi = min(b, h) / max(b, h)
@@ -121,7 +123,7 @@ def describe(d, unit, compare=None):
     if d['stature_basis'] == 'head' and notes.lower().startswith('height includes ears'):
         notes = ''          # already spelled out in the first sentence
     if notes:
-        parts.append(f"Chart note: {notes}.")
+        parts.append(f"Chart note: {notes.rstrip('.。')}.")
     return ' '.join(parts)
 
 BALANCE_WORD = {'top': "top-heavy", 'bottom': "bottom-heavy", 'even': "balanced"}
@@ -201,7 +203,7 @@ NOTE_ZH = {
 }
 REL_BUST_JA = (
     (0.85, 'チャートでもトップクラスのボリューム'),
-    (0.66, 'ロスター平均をはっきり上回る'),
+    (0.66, 'ロスター平均よりはっきり大きめ'),
     (0.34, 'ロスター平均とほぼ同じ'),
     (0.15, 'チャートでは控えめなほう'),
     (0.00, 'チャートでも小さいほう'),
@@ -242,11 +244,6 @@ TAG_ZH = {
     'Top-heavy': '上围偏重', 'Bottom-heavy': '下围偏重', 'n/a': '无数据',
 }
 FRAME_JA = {'Petite': '小柄な体格', 'Mid': '中背', 'Tall': '高身長'}
-
-
-def shape_balance(d):
-    b, h = d['bust_cm'], d['hip_cm']
-    return 'top' if b > h * 1.10 else ('bottom' if h > b * 1.10 else 'even')
 FRAME_ZH = {'Petite': '个子娇小', 'Mid': '中等身高', 'Tall': '身材高挑'}
 
 
@@ -306,18 +303,18 @@ def describe_ja(d, unit, compare=None):
     r = H_RANK.get(d.get('variant_of') or d['name'], H_TOTAL)
     if d['stature_basis'] == 'head':
         gap = d['stature_cm'] - ROSTER_AVG
-        where = ('少し低めです' if gap < -2 else
-                 ('少し高めです' if gap > 2 else 'ほぼ同じです'))
+        where = ('より少し低めです' if gap < -2 else
+                 ('より少し高めです' if gap > 2 else 'とほぼ同じです'))
         frame = (f"{n}は公式で{cm}cm（{ft}）ですが、この数字は耳を含みます。"
                  f"頭頂ベースだと約{lnum(d['stature_cm'])}cm（{d['ftin_stature']}）で、"
-                 f"ロスター平均より{where}。")
+                 f"ロスター平均{where}。")
     elif d['height_group'] == 'Tall':
         if r <= 3:
             frame = f"{n}は{cm}cm（{ft}）で、チャートでもトップクラスの高さです。"
         elif r <= 8:
             frame = f"{n}は{cm}cm（{ft}）。{H_TOTAL}人中{r}番目で、かなり背が高いほうです。"
         else:
-            frame = f"{n}は{cm}cm（{ft}）。ロスター平均を上回る、{H_TOTAL}人中{r}番目の高さです。"
+            frame = f"{n}は{cm}cm（{ft}）で、ロスター平均より高めです。身長順では{H_TOTAL}人中{r}番目です。"
     elif d['height_group'] == 'Petite':
         frame = f"{n}は{cm}cm（{ft}）と小柄で、チャートでもかなりコンパクトなほうです。"
     else:
@@ -333,17 +330,16 @@ def describe_ja(d, unit, compare=None):
         hips = (f"ヒップは{lv(d, unit, 'ja', 'hip_in', 'hip_cm')}で、{HIP_SENT_JA[d['hip_level']]}。"
                 f"太ももは信頼できる計測がありません。")
     b, h = d['bust_cm'], d['hip_cm']
-    if b > h * 1.10:
-        balance = 'バストのほうがやや存在感があります'
-    elif h > b * 1.10:
-        balance = 'ヒップのほうがやや存在感があります'
-    else:
-        balance = 'バストとヒップはほぼ均等'
+    balance = {
+        'top': 'ロスター内の順位では、バストがヒップより上位です',
+        'bottom': 'ロスター内の順位では、ヒップがバストより上位です',
+        'even': 'バストとヒップのロスター内の順位は近い位置にあります',
+    }[d['balance']]
     bw = b / d['waist_cm'] if b and d['waist_cm'] else 0
     hw = h / d['waist_cm'] if h and d['waist_cm'] else 0
     bhi = min(b, h) / max(b, h)
     shape = (f"バスト/ウエスト{bw:.2f}、ヒップ/ウエスト{hw:.2f}、"
-             f"バストとヒップのバランスは{bhi*100:.0f}%。全体は{SHAPE_JA[d['shape']]}シルエットで、{balance}です。")
+             f"バストとヒップのバランスは{bhi*100:.0f}%。全体は{SHAPE_JA[d['shape']]}のシルエットです。{balance}。")
     parts = [frame, bust, waist, hips, shape]
     if compare is None and d.get('variant_of'):
         compare = by_key.get(d['variant_of'])
@@ -363,7 +359,7 @@ def describe_ja(d, unit, compare=None):
                          f"ウエスト{dW:+.1f}{u}、ヒップ{dH:+.1f}{u}。")
     note = note_l(d, 'ja')
     if note:
-        parts.append(f"チャート注記：{note}。")
+        parts.append(f"チャート注記：{note.rstrip('.。')}。")
     return ''.join(parts)
 
 
@@ -400,12 +396,11 @@ def describe_zh(d, unit, compare=None):
         hips = (f"臀围{lv(d, unit, 'zh', 'hip_in', 'hip_cm')}，{HIP_SENT_ZH[d['hip_level']]}；"
                 f"大腿没有可靠数据。")
     b, h = d['bust_cm'], d['hip_cm']
-    if b > h * 1.10:
-        balance = '胸部更有存在感'
-    elif h > b * 1.10:
-        balance = '臀部更有存在感'
-    else:
-        balance = '胸胯比较均衡'
+    balance = {
+        'top': '胸围在全榜中的排名高于臀围',
+        'bottom': '臀围在全榜中的排名高于胸围',
+        'even': '胸围与臀围在全榜中的排名接近',
+    }[d['balance']]
     bw = b / d['waist_cm'] if b and d['waist_cm'] else 0
     hw = h / d['waist_cm'] if h and d['waist_cm'] else 0
     bhi = min(b, h) / max(b, h)
@@ -430,7 +425,7 @@ def describe_zh(d, unit, compare=None):
                          f"腰围{dW:+.1f}{u}、臀围{dH:+.1f}{u}。")
     note = note_l(d, 'zh')
     if note:
-        parts.append(f"榜单注记：{note}。")
+        parts.append(f"榜单注记：{note.rstrip('.。')}。")
     return ''.join(parts)
 
 
@@ -449,7 +444,7 @@ def read_line_ja(d):
     if d['thigh_cm'] is not None and d['p_thigh_cm'] is not None:
         if d['p_thigh_cm'] >= 0.66: bits.append('太ももは太め')
         elif d['p_thigh_cm'] <= 0.33: bits.append('太ももは細め')
-    line = frame + 'で'
+    line = frame
     if bits:
         line += '、' + '、'.join(bits)
     line += f"。{SHAPE_JA[d['shape']]}シルエットで、{BALANCE_JA[d['balance']]}。"

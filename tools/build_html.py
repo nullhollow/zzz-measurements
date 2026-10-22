@@ -11,6 +11,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'tools'))
 import card  # noqa: E402
+from profile_text import profile_summary  # noqa: E402
 
 DATA = json.loads((ROOT / 'tools/data.json').read_text())
 META = json.loads((ROOT / 'tools/meta.json').read_text())
@@ -124,8 +125,8 @@ jsonld = {
             "itemListOrder": "https://schema.org/ItemListOrderAscending",
             "itemListElement": [
                 {"@type": "ListItem", "position": i + 1, "name": d['display'],
-                 "url": f"__SITE_URL__characters/{d['slug']}/",
-                 "description": (d['desc_cm'] or '')[:180]}
+                 "url": f"__SITE_URL__characters/{d['slug']}.html",
+                 "description": profile_summary(d)}
                 for i, d in enumerate(sorted(DATA, key=lambda x: x['display']))
             ],
         },

@@ -2,6 +2,20 @@
 
 ## Unreleased — audit implementation
 
+### Correctness and localization (2026-10-22)
+
+- Fixed all roster JSON-LD profile links and replaced truncated search descriptions
+  with complete summaries in English, Japanese and Simplified Chinese.
+- Aligned profile prose with the existing percentile-based Build class, corrected
+  Japanese sentence endings and normalized chart-note punctuation.
+- Restored Jane Doe's Nocturne of Light portrait and outfit name on the cards,
+  static profiles and detail view without changing her canonical measurements.
+- Localized footer links, controls and source metadata; corrected the under-bust
+  table label and removed misleading US/EU text sorting. UK sorting is unchanged.
+- Regenerated the existing CJK fallback subsets to cover the new localized copy.
+- Added validation for structured-data links, Build/prose agreement, generated
+  grammar, search descriptions, footer translations and canonical outfit art.
+
 ### Version 3.3 — Phoenix
 
 - Added **Phoenix** (156 cm, UK 21C) from `measurements3.3.csv`: 59.4 cm bust,
