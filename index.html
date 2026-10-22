@@ -348,6 +348,9 @@
   html[lang="ja"] .mhead h2{font-size:23px}
   .mhead .badge{margin-left:2px}
   .mhead .sub2{color:var(--dim); font-size:12px; flex-basis:100%}
+  .cmpcontrols{display:flex;align-items:center;gap:10px;flex-wrap:wrap;width:100%}
+  .cmpcontrols .seg,.cmpcontrols .fnote{margin:0}
+  .cmpcontrols .seg button{min-height:40px}
   .mbody{display:grid; grid-template-columns:min(470px,38vw) 1fr}
   .mimg{border-right:1px solid var(--line); background:#0b0b0f; padding:12px}
   .mimg picture{display:block}
@@ -621,7 +624,7 @@
     .cmptable thead th:first-child{z-index:2}
     .cmptable th,.cmptable td{padding:9px 7px;font-size:12px;overflow-wrap:anywhere}
     .cmptable td{font-size:13px}
-    .cmptable thead th{font-size:15px}
+    .cmptable thead th{font-size:12px;line-height:1.3;letter-spacing:0;white-space:normal}
     .cmptable .cmdesc{font-size:12px}
     .cmpwrap{padding:0 8px 14px}
     .plot .tick,.plot .alab{font-size:20px}
@@ -2180,6 +2183,8 @@ const META = {updated:"2026-10-22", schema:"2", repo:"https://github.com/nullhol
 /* ---------------- i18n ---------------- */
 const I18N = {
   en: {
+    compareBasis:'Comparison basis', rawMeasurements:'Raw measurements', heightAdjusted:'Height-adjusted',
+    heightAdjustedNote:'Circumference ÷ height × 100', smallerWins:'Smaller value', largerWins:'Larger value',
     changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', dark:'Dark', light:'Light', schema:'Schema',
     sourceTitle:'Zenless Zone Zero · Female Character Measurements',
     skip:'Skip to the roster', heroSuffix:'female agents · measurements, proportions & silhouette reads',
@@ -2234,6 +2239,8 @@ const I18N = {
     pctLong:'Roster percentile of the raw centimetre measurement; height uses head height. 0 = smallest in the cast, 100 = largest.'
   },
   ja: {
+    compareBasis:'比較の基準', rawMeasurements:'実寸', heightAdjusted:'身長比',
+    heightAdjustedNote:'周囲長 ÷ 身長 × 100', smallerWins:'小さい値', largerWins:'大きい値',
     changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', dark:'ダーク', light:'ライト', schema:'スキーマ',
     sourceTitle:'ゼンレスゾーンゼロ · 女性キャラクター寸法',
     skip:'名簿へスキップ', heroSuffix:'人の女性エージェント · 寸法・比率・シルエット',
@@ -2288,6 +2295,8 @@ const I18N = {
     pctLong:'ロスター内の実寸cm値の百分位。身長は頭頂ベース。0=最小、100=最大。'
   },
   zh: {
+    compareBasis:'对比方式', rawMeasurements:'实测围度', heightAdjusted:'身高占比',
+    heightAdjustedNote:'围度 ÷ 身高 × 100', smallerWins:'较小值', largerWins:'较大值',
     changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', dark:'深色', light:'浅色', schema:'数据结构',
     sourceTitle:'绝区零 · 女性角色测量',
     skip:'跳到名单', heroSuffix:'位女性代理人 · 三围、比例与轮廓',
@@ -2393,6 +2402,7 @@ function pctRank(values, v){
   for(const x of nums){ if(x < v) below++; else if(x === v) equal++; }
   return (below + 0.5*equal) / nums.length;
 }
+const CIRCUMFERENCES = {bust:'bust_cm', underbust:'band_cm', waist:'waist_cm', hip:'hip_cm', thigh:'thigh_cm'};
 function computeDerived(){
   const roster = DATA;
   const all = DATA.concat(DATA.filter(d=>d.skin).map(d=>d.skin));
@@ -2410,6 +2420,8 @@ function computeDerived(){
     d.thh = (d.thigh_cm && d.hip_cm) ? r3(d.thigh_cm/d.hip_cm) : null;
     d.bhr = (d.bust_cm && d.stature_cm) ? r3(d.bust_cm/d.stature_cm) : null;
     d.hhr = (d.hip_cm && d.stature_cm) ? r3(d.hip_cm/d.stature_cm) : null;
+    d.height_adjusted = Object.fromEntries(Object.entries(CIRCUMFERENCES).map(([key, field]) =>
+      [key, d[field] != null && d.stature_cm > 0 ? d[field] / d.stature_cm * 100 : null]));
   }
   const keys = ['bust_cm','waist_cm','hip_cm','thigh_cm','whr','bhr','hhr','stature_cm'];
   const lists = {};
@@ -2467,7 +2479,7 @@ for(const m of RANGES){
 }
 const state = {q:"", cup:"all", shape:"all", balance:"all", thighs:"all", height:"all",
                sort:"cup-desc", view:"cards", unit:"cm", art:"official", lang:"en",
-               rng:{}, compare:[], plotY:"whr"};
+               rng:{}, compare:[], compareMode:"raw", plotY:"whr"};
 function nameOf(d){
   if(!d) return '';
   return state.lang==='ja' ? (d.name_ja || d.display)
@@ -2551,6 +2563,7 @@ function readHash(){
   take('q','q'); take('sort','sort'); take('view','view'); take('unit','unit');
   take('art','art'); take('cup','cup'); take('shape','shape'); take('bal','balance');
   take('thigh','thighs'); take('h','height'); take('y','plotY');
+  take('basis','compareMode');
   if(p.has('r')){
     const rng = {};
     for(const part of p.get('r').split(';')){
@@ -2586,6 +2599,7 @@ function writeHash(replace=true){
   const r = Object.entries(state.rng).map(([k,[a,b]])=>`${k}:${a}:${b}`).join(';');
   if(r) p.set('r', r);
   if(state.compare.length) p.set('c', state.compare.join(','));
+  if(state.compareMode!=="raw") p.set('basis', state.compareMode);
   if(mctx.slug) p.set('p', mctx.slug);
   const hash = p.toString();
   const url = location.pathname + location.search + (hash ? '#'+hash : '');
@@ -3191,10 +3205,19 @@ function syncCardCompare(){
   });
 }
 function openCompare(){
+  const focusedMode = document.activeElement?.dataset.compareMode;
   const tel = $("#toast"); if(tel) tel.classList.remove("show");
   const list = state.compare.map(s=>bySlug.get(s)).filter(Boolean);
   if(list.length<2){ toast(t('pickTwo')); return; }
   const cmIn = (a,b)=>`${fmt(a)} cm\n${fmt(b)} in`;
+  const adjusted = state.compareMode === 'height';
+  const circumference = (key, best) => ({
+    key, label:t(key), best,
+    get:d=>adjusted ? (d.height_adjusted[key] == null ? null : Number(d.height_adjusted[key].toFixed(1))) : d[CIRCUMFERENCES[key]],
+    fmt:d=>adjusted
+      ? (d.height_adjusted[key] == null ? '—' : `${fmt(d.height_adjusted[key])}%`)
+      : (d[CIRCUMFERENCES[key]] == null ? '—' : cmIn(d[CIRCUMFERENCES[key]], d[CIRCUMFERENCES[key].replace('_cm','_in')])),
+  });
   const winnerFlags = (vals, mode) => {
     const nums = vals.filter(v=>v!=null);
     if(!nums.length) return vals.map(()=>false);
@@ -3204,16 +3227,15 @@ function openCompare(){
   const rows = [
     {label:t('height'), get:d=>d.stature_cm, best:'max',
      fmt:d=>`${fmt(d.stature_cm,1)} cm\n${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}`},
-    {label:t('waist'), get:d=>d.waist_cm, best:'min', fmt:d=>cmIn(d.waist_cm,d.waist_in)},
-    {label:t('hip'), get:d=>d.hip_cm, best:'max', fmt:d=>cmIn(d.hip_cm,d.hip_in)},
-    {label:t('thigh'), get:d=>d.thigh_cm, best:'max',
-     fmt:d=>d.thigh_cm!=null?cmIn(d.thigh_cm,d.thigh_in):'—'},
+    circumference('waist', 'min'),
+    circumference('hip', 'max'),
+    circumference('thigh', 'max'),
     {label:t('cup'), get:cupScore, best:'max', fmt:d=>`${cupLetter(d)}\nUK ${d.uk}`},
-    {label:t('bust'), fmt:d=>cmIn(d.bust_cm,d.bust_in)},
-    {label:t('underbust'), fmt:d=>cmIn(d.band_cm,d.band_in)},
+    circumference('bust'),
+    circumference('underbust'),
     {label:'UK / US / EU', fmt:d=>`${d.uk} / ${d.us} / ${d.eu}`},
     {label:t('waistHip'), fmt:d=>fmtPct(d.whr)},
-    {label:t('waistHeight'), fmt:d=>fmtPct(d.whtr)},
+    ...(!adjusted ? [{label:t('waistHeight'), fmt:d=>fmtPct(d.whtr)}] : []),
     {label:t('shape'), fmt:d=>tagText(tagsFor(d).shape)},
     {label:t('build'), fmt:d=>tagText(tagsFor(d).balance)},
     {label:t('thighNote'), fmt:d=>tagText(tagsFor(d).thighs)},
@@ -3222,12 +3244,20 @@ function openCompare(){
     const vals = r.get ? list.map(r.get) : list.map(()=>null);
     const wins = r.best ? winnerFlags(vals, r.best) : list.map(()=>false);
     const dir = r.best ? ` <span class="dir" aria-hidden="true" title="${esc(r.best==='min'?t('smallerWins'):t('largerWins'))}">${r.best==='min'?'↓':'↑'}</span>` : '';
-    return `<tr><th scope="row">${esc(r.label)}${dir}</th>${list.map((d,i)=>`<td class="${wins[i]?'win':''}">${esc(r.fmt(d))}</td>`).join('')}</tr>`;
+    return `<tr${r.key?` data-metric="${r.key}"`:''}><th scope="row">${esc(r.label)}${dir}</th>${list.map((d,i)=>`<td class="${wins[i]?'win':''}">${esc(r.fmt(d))}</td>`).join('')}</tr>`;
   }).join('');
   $("#modal").innerHTML = `
     <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
-    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><div class="sub2">${list.length} ${esc(t('picked'))}</div></div>
-    <div class="cmpwrap"><table class="cmptable">
+    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><div class="sub2">${list.length} ${esc(t('picked'))}</div>
+      <div class="cmpcontrols">
+        <div class="seg" role="group" aria-label="${esc(t('compareBasis'))}">
+          <button type="button" data-compare-mode="raw" aria-pressed="${!adjusted}" data-i18n="rawMeasurements">${esc(t('rawMeasurements'))}</button>
+          <button type="button" data-compare-mode="height" aria-pressed="${adjusted}" data-i18n="heightAdjusted">${esc(t('heightAdjusted'))}</button>
+        </div>
+        ${adjusted?`<span class="fnote" id="compareBasisNote" data-i18n="heightAdjustedNote">${esc(t('heightAdjustedNote'))}</span>`:''}
+      </div>
+    </div>
+    <div class="cmpwrap"><table class="cmptable"${adjusted?' aria-describedby="compareBasisNote"':''}>
       <thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(nameOf(d))}</th>`).join('')}</tr></thead>
       <tbody>${body}
       <tr><th scope="row">${esc(t('figureRead'))}</th>${list.map(d=>`<td class="cmdesc">${esc(readFor(d))}</td>`).join('')}</tr>
@@ -3238,8 +3268,13 @@ function openCompare(){
   $("#overlay").setAttribute("aria-hidden","false");
   document.body.classList.add("modal-open");
   const main=$("#main"); if(main && 'inert' in main) main.inert=true;
-  $("#closeModal").focus();
+  (focusedMode ? $(`#modal [data-compare-mode="${focusedMode}"]`) : $("#closeModal")).focus();
   $("#closeModal").addEventListener("click", closeModal);
+  $$('#modal [data-compare-mode]').forEach(button=>button.addEventListener('click', ()=>{
+    state.compareMode = button.dataset.compareMode;
+    openCompare();
+    writeHash(true);
+  }));
 }
 
 /* ---------------- toast + share ---------------- */
@@ -3395,6 +3430,7 @@ function applyLang(lang, doRender=true){
     render();
     renderCompare();
     if($("#overlay").classList.contains("open") && mctx.slug) openModal(mctx.slug);
+    else if($("#overlay").classList.contains("open") && $("#modal .cmptable")) openCompare();
   }
 }
 $("#lang").addEventListener("change", e=>applyLang(e.target.value));
@@ -3412,7 +3448,7 @@ $("#theme").addEventListener("change", e=>applyTheme(e.target.value));
 /* reset */
 function resetAll(){
   Object.assign(state,{q:"",cup:"all",shape:"all",balance:"all",thighs:"all",height:"all",
-    sort:"cup-desc",view:"cards",rng:{},compare:[]});
+    sort:"cup-desc",view:"cards",rng:{},compare:[],compareMode:"raw"});
   $("#q").value="";
   $$("#fPanel .chipbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v==="all"?"true":"false"));
   $("#fSort").value="cup-desc";
@@ -3510,6 +3546,7 @@ function applyHashState(){
   state.lang = (h.lang && I18N[h.lang]) ? h.lang : state.lang;
   state.rng = h.rng || {};
   state.compare = Array.isArray(h.compare) ? h.compare.slice(0,4) : [];
+  state.compareMode = h.compareMode === 'height' ? 'height' : 'raw';
   state.plotY = PLOT_METRICS.some(m=>m.k===h.plotY) ? h.plotY : state.plotY;
   if(h.theme) applyTheme(h.theme);
   applyLang(state.lang, false);

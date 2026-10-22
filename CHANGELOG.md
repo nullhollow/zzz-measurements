@@ -2,6 +2,17 @@
 
 ## Unreleased — audit implementation
 
+### Height-adjusted comparison (2026-10-22)
+
+- Added a comparison-only switch between raw measurements and circumferences
+  expressed as a percentage of effective height in English, Japanese and Chinese.
+- The adjusted mode uses `circumference_cm / stature_cm × 100`, with missing
+  measurements left unranked and displayed ties sharing the highlight.
+- Preserved the selected mode in shared URLs. Existing roster rankings, sorting,
+  filters, percentiles, classes, podiums and cup rules are unchanged.
+- Added mobile name wrapping and regenerated the existing CJK font subsets for
+  the new controls and methodology copy.
+
 ### Correctness and localization (2026-10-22)
 
 - Fixed all roster JSON-LD profile links and replaced truncated search descriptions

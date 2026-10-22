@@ -98,6 +98,14 @@ def check_data(out):
         if d.get('tags', {}).get('shape') != d.get('shape'):
             err(f'{d["display"]}: tags.shape mismatch')
         for rec in [d] + ([d['skin']] if d.get('skin') else []):
+            for key, field in (('bust', 'bust_cm'), ('underbust', 'band_cm'), ('waist', 'waist_cm'),
+                               ('hip', 'hip_cm'), ('thigh', 'thigh_cm')):
+                expected = rec[field] / rec['stature_cm'] * 100 if rec[field] is not None and rec['stature_cm'] > 0 else None
+                actual = rec.get('height_adjusted', {}).get(key)
+                if (key not in rec.get('height_adjusted', {}) or
+                        (expected is None and actual is not None) or
+                        (expected is not None and not close(actual, expected, 1e-10))):
+                    err(f'{rec["display"]}: height_adjusted.{key} must use raw cm / stature_cm × 100')
             bp, hp = rec.get('p_bust_cm'), rec.get('p_hip_cm')
             delta = bp - hp if bp is not None and hp is not None else 0
             balance = 'top' if delta > .18 else 'bottom' if delta < -.18 else 'even'

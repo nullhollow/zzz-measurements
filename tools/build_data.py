@@ -270,6 +270,11 @@ def add_ratios(d):
     d['thh'] = round(d['thigh_cm'] / d['hip_cm'], 3) if d['thigh_cm'] and d['hip_cm'] else None
     d['bhr'] = round(d['bust_cm'] / d['stature_cm'], 3) if d['bust_cm'] and d['stature_cm'] else None
     d['hhr'] = round(d['hip_cm'] / d['stature_cm'], 3) if d['hip_cm'] and d['stature_cm'] else None
+    d['height_adjusted'] = {
+        key: d[field] / d['stature_cm'] * 100 if d[field] is not None and d['stature_cm'] > 0 else None
+        for key, field in (('bust', 'bust_cm'), ('underbust', 'band_cm'), ('waist', 'waist_cm'),
+                           ('hip', 'hip_cm'), ('thigh', 'thigh_cm'))
+    }
 
 
 for d in allrecs:

@@ -54,6 +54,14 @@ table uses larger values, shows direction arrows, and highlights the winner in
 yellow for height, cup, waist (smaller), hips and thighs. Default sorting and the largest-cup podium use UK cup size. Confidence
 badges are no longer shown; the raw field remains in the dataset exports.
 
+The comparison dialog offers **Raw measurements** and **Height-adjusted** modes.
+Height-adjusted mode shows bust, under-bust, waist, hips and thighs as
+`circumference_cm / stature_cm × 100`, displayed as percentages to one decimal
+place. Matching displayed values share the highlight, and missing measurements
+stay unranked. Height, bra sizes and classes retain their values. This mode is
+separate from roster rankings, filters, percentiles and podiums. The selected
+mode is included in shared URLs as `basis=height`.
+
 ## Live calculations
 
 The derived numbers used by the interactive chart are computed in the browser

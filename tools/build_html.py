@@ -178,7 +178,7 @@ card_tmpl_js = json.dumps(card.TEMPLATE, ensure_ascii=False).replace('</', '<\\/
 # the page only needs the fields the client renders; provenance and class
 # internals stay in tools/data.json and the exported dataset
 JS_SKIP = {'source_url', 'source_file', 'cm_eff', 'waist_level', 'hip_level', 'thigh_level',
-           'confidence', 'confidence_note'}
+           'confidence', 'confidence_note', 'height_adjusted'}
 def slim(d):
     out = {k: v for k, v in d.items() if k not in JS_SKIP}
     if out.get('skin'):
