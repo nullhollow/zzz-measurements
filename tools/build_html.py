@@ -191,25 +191,54 @@ for lang, strings in explorer_i18n.items():
     tpl = tpl.replace(f'/*__EXPLORER_I18N_{lang.upper()}__*/', copy)
 for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.js'), ('EXPLORER_CSS', 'explorer.css')):
     tpl = tpl.replace(f'/*__{token}__*/', (ROOT / 'tools' / source).read_text())
-html = (tpl
+def render_interactive(tools=False):
+    page = tpl
+    title = explorer_i18n['en']['toolsPageTitle'] if tools else TITLE
+    description = explorer_i18n['en']['toolsDescription'] if tools else DESC
+    structured = jsonld_txt
+    nav = ''
+    if tools:
+        structured = json.dumps({'@context': 'https://schema.org', '@type': 'WebPage',
+                                 'url': '__SITE_URL__tools.html', 'name': title,
+                                 'description': description, 'inLanguage': ['en', 'ja', 'zh'],
+                                 'isPartOf': {'@id': '__SITE_URL__#website'}}, ensure_ascii=False)
+        page = re.sub(r'<header class="hero">.*?<div class="film".*?</div>',
+                      '<header class="toolsheader"><h1 data-i18n="toolsTitle">Comparison tools</h1></header>', page, flags=re.S)
+        page = page.replace('data-i18n="skip">Skip to the roster', 'data-i18n="skipTools">Skip to the tools')
+        nav = '<nav class="tooltabs" id="toolsNav" aria-label="Tools">' + ''.join(
+            f'<a href="tools.html#view={key}" data-tool-link="{key}" data-i18n="{key}">{_html.escape(explorer_i18n["en"][key])}</a>'
+            for key in ('distribution', 'matches', 'game', 'sandbox')) + '</nav>'
+    fallback = ('<p data-i18n="toolsNoScript">' + _html.escape(explorer_i18n['en']['toolsNoScript']) +
+                '</p><a href="index.html">Measurements</a>') if tools else noscript
+    result = (page
         .replace('/*__DATA__*/[]', data_js)
         .replace('/*__CARD_TMPL__*/""', card_tmpl_js)
-        .replace('/*__JSONLD__*/', jsonld_txt)
-        .replace('/*__NOSCRIPT__*/', noscript)
-        .replace('/*__CARDS__*/', cards_html)
+        .replace('/*__JSONLD__*/', structured)
+        .replace('/*__NOSCRIPT__*/', fallback)
+        .replace('/*__CARDS__*/', '' if tools else cards_html)
         .replace('/*__COUNT__*/', str(N))
-        .replace('__DESC__', _html.escape(DESC, quote=True))
-        .replace('__TITLE__', _html.escape(TITLE, quote=True))
+        .replace('/*__TOOLS_NAV__*/', nav)
+        .replace('/*__ROSTER_CURRENT__*/', '' if tools else 'aria-current="page"')
+        .replace('/*__TOOLS_CURRENT__*/', 'aria-current="page"' if tools else '')
+        .replace('__PAGE__', 'tools' if tools else 'roster')
+        .replace('__PAGE_URL__', '__SITE_URL__tools.html' if tools else '__SITE_URL__')
+        .replace('__DESC__', _html.escape(description, quote=True))
+        .replace('__TITLE__', _html.escape(title, quote=True))
         .replace('__DATA_UPDATED__', META['data_updated'])
         .replace('__SCHEMA_VERSION__', str(META['schema_version']))
         .replace('__REPO__', PERMALINK)
         .replace('__OGV__', ogv)
-        .replace('__SITE_URL__', 'https://nullhollow.github.io/zzz-measurements/'))  # pack_site.py swaps in the real URL
-(ROOT / 'index.html').write_text(html)
-print('index.html written:', round(len(html) / 1024, 1), 'KB,', N, 'entries')
-leftovers = [t for t in ('/*__DATA__*/', '/*__CARD_TMPL__*/', '/*__JSONLD__*/', '/*__NOSCRIPT__*/',
-                         '/*__CARDS__*/', '/*__COUNT__*/', '/*__EXPLORER', '/*__ANALYSIS', '__DESC__', '__TITLE__',
-                         '__DATA_UPDATED__', '__SCHEMA_VERSION__', '__REPO__', '__OGV__')
-             if t in html]
-if leftovers:
-    raise SystemExit('unreplaced tokens: ' + ', '.join(leftovers))
+        .replace('__SITE_URL__', 'https://nullhollow.github.io/zzz-measurements/'))
+    if tools:
+        for tag in ('property="og:title"', 'name="twitter:title"'):
+            result = result.replace(tag + ' content="ZZZ Female Measurements"', tag + ' content="Comparison tools · ZZZ Measurements"')
+    leftovers = re.findall(r'/\*__[A-Z_]+__\*/|__[A-Z_]+__', result)
+    if leftovers:
+        raise SystemExit('unreplaced tokens: ' + ', '.join(sorted(set(leftovers))))
+    return result
+
+
+for filename, is_tools in (('index.html', False), ('tools.html', True)):
+    html = render_interactive(is_tools)
+    (ROOT / filename).write_text(html)
+    print(filename + ' written:', round(len(html) / 1024, 1), 'KB,', N, 'entries')

@@ -10,13 +10,13 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#0B0B0C">
 <meta name="color-scheme" content="dark light">
-<link rel="canonical" href="__SITE_URL__">
+<link rel="canonical" href="__PAGE_URL__">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="ZZZ Female Measurements">
 <meta property="og:title" content="ZZZ Female Measurements">
 <meta property="og:description" content="__DESC__">
-<meta property="og:url" content="__SITE_URL__">
+<meta property="og:url" content="__PAGE_URL__">
 <meta property="og:image" content="__SITE_URL__og.png?v=__OGV__">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -700,9 +700,14 @@
 /*__EXPLORER_CSS__*/
 </style>
 </head>
-<body>
+<body data-page="__PAGE__">
 
 <a class="skip" href="#main" data-i18n="skip">Skip to the roster</a>
+
+<nav class="site-nav" aria-label="ZZZ">
+  <a href="index.html" id="measurementsLink" data-i18n="measurementsNav" /*__ROSTER_CURRENT__*/>Measurements</a>
+  <a href="tools.html" id="toolsLink" data-i18n="tools" /*__TOOLS_CURRENT__*/>Tools</a>
+</nav>
 
 <header class="hero">
   <div class="dots"></div>
@@ -720,6 +725,7 @@
   <section class="highlights" id="highlights" aria-label="Roster highlights"></section>
   <section class="podstrip" id="podstrip" aria-label="Roster leaders"></section>
 
+/*__TOOLS_NAV__*/
   <div class="controls" role="region" aria-label="Roster controls">
     <div class="search">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -778,18 +784,10 @@
     <div class="viewtoggle" id="artToggle" role="group" aria-label="Portrait source">
       <button id="aSheet" aria-pressed="false" data-i18n="sheet">SHEET</button><button id="aOff" aria-pressed="true" data-i18n="official">OFFICIAL</button>
     </div>
-    <div class="viewtoggle" role="group" aria-label="View">
+    <div class="viewtoggle" id="rosterViews" role="group" aria-label="View">
       <button id="vCards" aria-pressed="true" data-i18n="cards">CARDS</button>
       <button id="vTable" aria-pressed="false" data-i18n="table">TABLE</button>
       <button id="vPlot" aria-pressed="false" data-i18n="plot">PLOT</button>
-    </div>
-    <div class="fgroup"><label for="toolSelect" data-i18n="tools">Tools</label>
-      <select id="toolSelect"><option value="" data-i18n="tools">Tools</option>
-        <option value="distribution" data-i18n="distribution">Distribution</option>
-        <option value="matches" data-i18n="matches">Find similar figures</option>
-        <option value="game" data-i18n="game">Higher or Lower</option>
-        <option value="sandbox" data-i18n="sandbox">Figure sandbox</option>
-      </select>
     </div>
     <button class="btn cmpbtn" id="compareBtn" aria-pressed="false" aria-label="Compare" title="Compare"><span data-i18n="compare">COMPARE</span><span class="n" id="cmpCount">0</span></button>
     <button class="btn" id="shareBtn" data-i18n="share">SHARE</button>
@@ -861,6 +859,7 @@
 'use strict';
 const DATA = /*__DATA__*/[];
 const CARD_TMPL = /*__CARD_TMPL__*/"";
+const TOOLS_PAGE = document.body.dataset.page === "tools";
 const META = {updated:"__DATA_UPDATED__", schema:"__SCHEMA_VERSION__", repo:"__REPO__"};
 
 /* ---------------- i18n ---------------- */
@@ -1167,8 +1166,8 @@ for(const m of RANGES){
 }
 const state = {q:"", cup:"all", shape:"all", balance:"all", thighs:"all", height:"all",
                sort:"cup-desc", view:"cards", unit:"cm", art:"official", lang:"en",
-               rng:{}, compare:[], compareMode:"raw", plotY:"whr", compareRows:null, compareBase:"", compareHeight:160,
-               sandbox:null, matchSource:"", matchBasis:"raw", matchWeights:null, distMetric:"waist", distBasis:"raw",
+               rng:{}, compare:[], compareMode:"raw", plotY:"whr", rosterView:"cards", compareRows:null, compareBase:"", compareHeight:160,
+               sandbox:null, matchSource:"", matchBasis:"raw", matchWeights:null, distMetric:"cup", distBasis:"raw",
                gameMetric:"waist", gameBasis:"raw"};
 function nameOf(d){
   if(!d) return '';
@@ -1253,7 +1252,7 @@ function readHash(){
   take('q','q'); take('sort','sort'); take('view','view'); take('unit','unit');
   take('art','art'); take('cup','cup'); take('shape','shape'); take('bal','balance');
   take('thigh','thighs'); take('h','height'); take('y','plotY');
-  take('basis','compareMode');
+  take('basis','compareMode'); take('from','rosterView');
   if(p.has('r')){
     const rng = {};
     for(const part of p.get('r').split(';')){
@@ -1277,6 +1276,7 @@ function writeHash(replace=true){
   if(state.q) p.set('q', state.q);
   if(state.sort!=="cup-desc") p.set('sort', state.sort);
   if(state.view!=="cards") p.set('view', state.view);
+  if(TOOLS_PAGE && state.rosterView!=="cards")p.set('from',state.rosterView);
   if(state.unit!=="cm") p.set('unit', state.unit);
   if(state.art!=="official") p.set('art', state.art);
   if(state.lang!=="en") p.set('lang', state.lang);
@@ -1293,6 +1293,7 @@ function writeHash(replace=true){
   if(state.compareMode!=="raw") p.set('basis', state.compareMode);
   writeExplorerHash(p);
   if(mctx.slug) p.set('p', mctx.slug);
+  syncPageLinks(p);
   const hash = p.toString();
   const url = location.pathname + location.search + (hash ? '#'+hash : '');
   try{
@@ -1920,8 +1921,7 @@ function scheduleRender(){
 }
 function render(skipHash){
   const list = filtered();
-  renderPodium();
-  renderHighlights();
+  if(!TOOLS_PAGE){renderPodium(); renderHighlights();}
   $("#count").innerHTML = `<b>${list.length}</b> / ${DATA.length} ${esc(t('entries'))}`;
   const fcount = $("#fCount"); if(fcount) fcount.textContent = `${list.length} / ${DATA.length} ${t('entries')}`;
   $("#empty").hidden = list.length>0 || TOOL_VIEWS.includes(state.view);
@@ -1934,7 +1934,11 @@ function render(skipHash){
   else if(v==="plot") renderPlot(list);
   else if(v==="cards") renderCards([...list].sort(SORTS[state.sort]));
   $("#toolsView").hidden = !TOOL_VIEWS.includes(v);
-  $("#toolSelect").value = TOOL_VIEWS.includes(v) ? v : "";
+  if(TOOLS_PAGE){
+    $('.search').hidden = v!=="distribution"; $('#fDrop').hidden = v!=="distribution";
+    $('#count').hidden = v!=="distribution";
+    $$('#toolsNav [data-tool-link]').forEach(a=>{if(a.dataset.toolLink===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  }
   if(TOOL_VIEWS.includes(v)) renderTool(list);
   $("#vCards").setAttribute("aria-pressed", v==="cards"?"true":"false");
   $("#vTable").setAttribute("aria-pressed", v==="table"?"true":"false");
@@ -2035,9 +2039,11 @@ function fillPlot(){
 function applyLang(lang, doRender=true){
   state.lang = I18N[lang]? lang : 'en';
   document.documentElement.lang = state.lang;
-  document.title = t('pageTitle');
+  document.title = t(TOOLS_PAGE?'toolsPageTitle':'pageTitle');
   $$('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(I18N[state.lang][k]){ el.innerHTML = t(k); } });
   $("#q").placeholder = t('searchPh');
+  if(TOOLS_PAGE)$('.controls').setAttribute('aria-label',t('tools'));
+  if($('#toolsNav'))$('#toolsNav').setAttribute('aria-label',t('tools'));
   $("#fSort").setAttribute('aria-label', t('sort'));
   $("#lang").value = state.lang;
   const ml = $("#methodologyLink");
@@ -2067,7 +2073,7 @@ $("#theme").addEventListener("change", e=>applyTheme(e.target.value));
 /* reset */
 function resetAll(){
   Object.assign(state,{q:"",cup:"all",shape:"all",balance:"all",thighs:"all",height:"all",
-    sort:"cup-desc",view:"cards",rng:{},compare:[],compareMode:"raw", ...explorerDefaults()});
+    sort:"cup-desc",view:TOOLS_PAGE?"distribution":"cards",rng:{},compare:[],compareMode:"raw", ...explorerDefaults()});
   gameRound=null; gameScore={correct:0,total:0,streak:0};
   $("#q").value="";
   $$("#fPanel .chipbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v==="all"?"true":"false"));
@@ -2151,6 +2157,7 @@ function syncControls(){
 }
 function applyHashState(){
   const h = readHash();
+  if(!TOOLS_PAGE && TOOL_VIEWS.includes(h.view)){location.replace('tools.html'+location.hash);return;}
   state.q = h.q ?? "";
   state.cup = h.cup ?? "all";
   state.shape = h.shape ?? "all";
@@ -2160,7 +2167,8 @@ function applyHashState(){
   const sortAlias = {"bust-desc":"cup-desc", "bust-asc":"cup-asc"};
   const wantedSort = sortAlias[h.sort] || h.sort;
   state.sort = SORTS[wantedSort] ? wantedSort : "cup-desc";
-  state.view = ["cards","table","plot",...TOOL_VIEWS].includes(h.view) ? h.view : "cards";
+  state.view = TOOLS_PAGE ? (TOOL_VIEWS.includes(h.view)?h.view:"distribution") : (["cards","table","plot"].includes(h.view)?h.view:"cards");
+  state.rosterView = TOOLS_PAGE ? (["table","plot"].includes(h.rosterView)?h.rosterView:"cards") : state.view;
   state.unit = h.unit ? (h.unit==="in"?"in":"cm") : state.unit;
   state.art = h.art ? (h.art==="sheet"?"sheet":"official") : state.art;
   state.lang = (h.lang && I18N[h.lang]) ? h.lang : state.lang;
@@ -2176,6 +2184,7 @@ function applyHashState(){
   renderFilterPanel();
   render(true);
   renderCompare();
+  syncPageLinks(new URLSearchParams(location.hash.slice(1)));
   if(h.p && bySlug.has(h.p)) openModal(h.p, {src:state.art});
   else if($("#overlay").classList.contains("open")) closeModal();
 }
@@ -2189,7 +2198,7 @@ function applyHashState(){
     const l=localStorage.getItem("zzz-lang"); if(l && I18N[l]) state.lang=l;
     const th=localStorage.getItem("zzz-theme"); if(th==="light") document.documentElement.dataset.theme="light";
   }catch(e){}
-  $("#agentCount").textContent = DATA.length;
+  if($("#agentCount"))$("#agentCount").textContent = DATA.length;
   /* the HTML already contains the 48 default cards; only rebuild when a saved
      preference or URL state differs from that initial render */
   renderCards._sig = [...DATA].sort(SORTS["cup-desc"]).map(d=>d.name).join('|') + '|cm|official|en';

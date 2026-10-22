@@ -46,6 +46,11 @@
    "url": "./#view=table"
   },
   {
+   "name": "Comparison tools",
+   "short_name": "Tools",
+   "url": "./tools.html"
+  },
+  {
    "name": "Methodology",
    "short_name": "Method",
    "url": "./methodology.html"

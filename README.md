@@ -9,7 +9,8 @@ Live site: <https://nullhollow.github.io/zzz-measurements/>
 ## What is in here
 
 ```
-index.html                 dev build of the interactive page
+index.html                 generated roster page
+tools.html                 generated comparison/exploration page
 measurements3.3.csv        source sheet (the only hand-edited data)
 character_images/          53 official portraits + 26 outfit renders + thumbs/
 images/                    49 sheet crops
@@ -33,7 +34,7 @@ python3 tools/validate.py  --site-url https://<user>.github.io/<repo>/
 
 1. `build_data.py` — CSV → `tools/data.json` (ratios, classes, percentiles, provenance)
 2. `describe.py` — generated profile text in English, Japanese and Simplified Chinese (cm + inches)
-3. `build_html.py` — `index.html` incl. static cards, localized data and JSON-LD
+3. `build_html.py` — `index.html` and `tools.html`, localized data and JSON-LD
 4. `build_pages.py` — 49 character pages × 3 languages, 3 methodology/FAQ pages, dataset exports, offline page
 5. crawler files, PWA manifest, service worker, link check
 
@@ -71,10 +72,13 @@ reorder them, and select a reference character for signed differences. Adjusted
 circumferences use percentage-point differences; raw and scaled differences use the
 selected unit. Missing measurements stay unknown.
 
-The **Tools** menu contains:
+The separate **Tools** page (`tools.html`), linked from the page navigation, contains:
 
-- **Distribution**: equal-width histograms and medians of the filtered roster, with
-  comparison selections shown as markers. Missing measurements are omitted.
+- **Distribution**: UK cup-letter counts by default, using the existing cup order
+  and retaining full band-and-cup sizes in the value table. Equal cup letters do
+  not imply equal volume. Numeric metrics use equal-width histograms and medians
+  of the filtered roster. Comparison selections appear as markers; missing
+  values and sandbox cup sizes are omitted.
 - **Find similar figures**: raw or height-adjusted matching with per-metric weights
   from 0 to 100. Distances use the full canonical roster range for each metric,
   skip missing pairs, and renormalize the remaining weights. Default weights and
@@ -89,7 +93,10 @@ The **Tools** menu contains:
 `tools/analysis_math.py` and `tools/analysis.js` implement the same exploration math.
 `tools/explorer.js` and `tools/explorer.css` are inlined by `build_html.py`; the shared
 EN/JA/ZH copy in `tools/explorer_i18n.json` supplies both the interactive UI and static
-methodology. The public measurement schema is unchanged.
+methodology. The public measurement schema is unchanged. Old `#view=distribution`, `matches`,
+`game` and `sandbox` links redirect to the Tools page with their state intact.
+Navigation carries filters, comparison selections, units and language between
+pages. The packed site contains 49 entries, 147 profiles and 644 files (about 25.4 MB).
 
 Run the regression and Python/JavaScript parity suite with Node.js available:
 

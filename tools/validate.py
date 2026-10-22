@@ -216,7 +216,7 @@ def check_assets(out):
                     if f"/{d['official']}.webp" not in section or d['outfit'] not in section:
                         err(f'{d["slug"]} ({lang}): canonical outfit missing from {label}')
     # exports & crawler files
-    for rel in ('index.html', 'methodology.html', 'offline.html', 'sw.js', '404.html',
+    for rel in ('index.html', 'tools.html', 'methodology.html', 'offline.html', 'sw.js', '404.html',
                 'robots.txt', 'sitemap.xml', 'manifest.webmanifest', '.nojekyll',
                 'ja/methodology.html', 'zh/methodology.html',
                 'data/measurements.json', 'data/measurements.csv', 'data/schema.json'):
@@ -284,6 +284,19 @@ def check_html(out, site):
         if '<html lang="en">' not in text and '<html lang=' not in text:
             err(f'{rel}: missing lang attribute')
     idx = (out / 'index.html').read_text()
+    tools = (out / 'tools.html').read_text()
+    if 'id="toolSelect"' in idx:
+        err('index.html: tools selector belongs on the dedicated tools page')
+    for needle in ('id="toolsLink"', 'href="tools.html"'):
+        if needle not in idx:
+            err(f'index.html: missing tools navigation {needle}')
+    for needle in ('data-page="tools"', 'id="toolsNav"', 'id="toolsView"',
+                   f'rel="canonical" href="{site}tools.html"'):
+        if needle not in tools:
+            err(f'tools.html: missing {needle}')
+    for key in ('distribution', 'matches', 'game', 'sandbox'):
+        if f'data-tool-link="{key}"' not in tools:
+            err(f'tools.html: missing navigation for {key}')
     for needle, label in (('class="skip"', 'skip link'), ('id="main"', 'main landmark'),
                           ('aria-modal="true"', 'modal aria-modal'), ('aria-live="polite"', 'live region'),
                           ('rel="manifest"', 'manifest link'), ('sw.js', 'service worker registration')):
@@ -302,7 +315,7 @@ def check_html(out, site):
         blocks = re.split(r'\n  (?:en|ja|zh): \{', i18n[1])[1:]
         if len(blocks) != 3:
             err('index.html: expected three I18N language blocks')
-        keys = set(re.findall(r'data-i18n="([^"]+)"', idx))
+        keys = set(re.findall(r'data-i18n="([^"]+)"', idx + tools))
         for lang, block in zip(('en', 'ja', 'zh'), blocks):
             present = set(re.findall(r'\b(\w+):\s*[\'\"]', block))
             if keys - present:
@@ -320,6 +333,8 @@ def check_html(out, site):
     if checked < 50:
         err(f'link check only resolved {checked} references')
     sm = (out / 'sitemap.xml').read_text()
+    if f'{site}tools.html' not in sm:
+        err('sitemap missing tools.html')
     for d in DATA:
         if f"characters/{d['slug']}.html" not in sm:
             err(f'sitemap missing {d["slug"]}')
@@ -327,7 +342,7 @@ def check_html(out, site):
     if '<base href=' not in notfound:
         err('404.html needs a <base href> so nested URLs resolve assets')
     sw = (out / 'sw.js').read_text()
-    for needle in ('offline.html', 'cache', 'fetch'):
+    for needle in ('offline.html', 'tools.html', 'cache', 'fetch'):
         if needle not in sw:
             err(f'sw.js missing {needle}')
     # generated copy must agree with the roster size

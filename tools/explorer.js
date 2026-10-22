@@ -6,7 +6,7 @@ const SANDBOX_SLUG='~sandbox';
 let gameRound=null, gameScore={correct:0,total:0,streak:0};
 function explorerDefaults(){
   return {compareRows:null,compareBase:'',compareHeight:160,sandbox:null,matchSource:'',matchBasis:'raw',matchWeights:null,
-    distMetric:'waist',distBasis:'raw',gameMetric:'waist',gameBasis:'raw'};
+    distMetric:'cup',distBasis:'raw',gameMetric:'waist',gameBasis:'raw'};
 }
 function validSandbox(raw){
   if(!raw || typeof raw!=='object' || !Number.isFinite(raw.stature_cm) || raw.stature_cm<1 || raw.stature_cm>300) return null;
@@ -42,7 +42,7 @@ function readExplorerHash(params){
   if(bySlug.has(raw.matchSource)||raw.matchSource===SANDBOX_SLUG&&out.sandbox) out.matchSource=raw.matchSource;
   for(const key of ['matchBasis','gameBasis']) if(['raw','height'].includes(raw[key])) out[key]=raw[key];
   if(['raw','height','scaled'].includes(raw.distBasis)) out.distBasis=raw.distBasis;
-  for(const key of ['distMetric','gameMetric']) if(METRIC_KEYS.includes(raw[key])) out[key]=raw[key];
+  for(const key of ['distMetric','gameMetric']) if((key==='distMetric'?['cup',...METRIC_KEYS]:METRIC_KEYS).includes(raw[key])) out[key]=raw[key];
   if(raw.matchWeights && typeof raw.matchWeights==='object'){
     out.matchWeights=Object.fromEntries(Object.keys(Analysis.fields).map(k=>[k,Number.isFinite(raw.matchWeights[k])?Math.round(Math.max(0,Math.min(1,raw.matchWeights[k]))*100)/100:0]));
   }
@@ -75,15 +75,35 @@ function setTarget(input){
   if(!input.checkValidity()){ input.reportValidity(); return false; }
   state.compareHeight=+input.value; return true;
 }
+function pageHref(tools,params,view){
+  const p=new URLSearchParams(params);
+  if(tools){
+    if(!TOOLS_PAGE && ['table','plot'].includes(state.view))p.set('from',state.view);
+    p.set('view',view||'distribution');
+  }else{
+    const roster=p.get('from');p.delete('from');
+    if(TOOL_VIEWS.includes(p.get('view'))){if(['table','plot'].includes(roster))p.set('view',roster);else p.delete('view');}
+  }
+  return (tools?'tools.html':'index.html')+(p.size?'#'+p.toString():'');
+}
+function syncPageLinks(params){
+  $('#measurementsLink').href=pageHref(false,params);
+  $('#toolsLink').href=pageHref(true,params,TOOL_VIEWS.includes(state.view)?state.view:'distribution');
+  $$('#toolsNav [data-tool-link]').forEach(a=>a.href=pageHref(true,params,a.dataset.toolLink));
+}
 function openTool(view,source){
   if(!TOOL_VIEWS.includes(view)) return;
   if($('#overlay').classList.contains('open')) closeModal();
   if(source) state.matchSource=source;
+  if(!TOOLS_PAGE){writeHash(true);location.href=pageHref(true,new URLSearchParams(location.hash.slice(1)),view);return;}
   state.view=view; render();
   $('#toolTitle').focus({preventScroll:true});
   $('#toolsView').scrollIntoView({block:'start',behavior:'instant'});
 }
-$('#toolSelect').addEventListener('change',e=>{ if(e.target.value) openTool(e.target.value); });
+$('#toolsNav')?.addEventListener('click',e=>{
+  const a=e.target.closest('[data-tool-link]');
+  if(a && !(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)){e.preventDefault();openTool(a.dataset.toolLink);}
+});
 window.addEventListener('resize',debounce(()=>{if(state.view==='distribution')renderTool(filtered());},150));
 function renderTool(list){
   const root=$('#toolsView');
@@ -176,8 +196,23 @@ function openCompare(){
   $('#restoreRows').onclick=()=>{state.compareRows=null;update();};
 }
 
+function distributionOptions(key){
+  return `<option value="cup"${key==='cup'?' selected':''}>${esc(t('cupSize'))}</option>`+metricOptions(key);
+}
+function cupDistributionHTML(list){
+  const summary=Analysis.cupDistribution(list), counts=new Map(summary.bins.map(b=>[b.cup,b.count]));
+  const bins=Analysis.cupDistribution(DATA).bins.map(b=>({cup:b.cup,count:counts.get(b.cup)||0}));
+  const measured=list.map(d=>({d,s:Analysis.cupSize(d.uk)})).filter(x=>x.s).sort((a,b)=>a.s.score-b.s.score);
+  const markers=state.compare.map(comparisonRecord).filter(Boolean).map(d=>({d,s:Analysis.cupSize(d.uk)})).filter(x=>x.s);
+  const width=innerWidth<=700?460:920,step=(width-80)/bins.length,x=cup=>40+(bins.findIndex(b=>b.cup===cup)+.5)*step;
+  const peak=Math.max(1,...bins.map(b=>b.count));
+  const chart=`<svg class="histogram cuphistogram" viewBox="0 0 ${width} 355" role="img" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(t('cupSize'))}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('mostCommon')+': '+summary.modes.join(' / '))}</desc><line class="axis" x1="30" y1="290" x2="${width-30}" y2="290"/>${bins.map(b=>{const h=b.count/peak*205;return `<g><title>${esc(b.cup+': '+b.count)}</title><rect class="bar" x="${x(b.cup)-step*.4}" y="${290-h}" width="${step*.8}" height="${h}"/><text x="${x(b.cup)}" y="${282-h}" text-anchor="middle">${b.count}</text><text x="${x(b.cup)}" y="318" text-anchor="middle">${esc(b.cup)}</text></g>`;}).join('')}${markers.map((m,i)=>`<g><line class="marker" x1="${x(m.s.cup)}" x2="${x(m.s.cup)}" y1="${25+i*18}" y2="300"/><text class="markerlabel" x="${x(m.s.cup)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}</svg>`;
+  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label></div><p class="toolnote">${esc(t('cupDistributionNote'))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: UK ${esc(m.d.uk)}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}<details class="tooldata"><summary>${esc(t('dataTable'))}</summary><table class="tooltable"><thead><tr><th>${esc(t('name'))}</th><th>${esc(t('cupSize'))}</th></tr></thead><tbody>${measured.map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>UK ${esc(m.d.uk)}</td></tr>`).join('')}</tbody></table></details>`;
+}
+
 /* Filtered roster distribution; references are markers, never observations. */
 function distributionHTML(list){
+  if(state.distMetric==='cup')return cupDistributionHTML(list);
   const key=state.distMetric,basis=key==='height'?'raw':state.distBasis;
   const measured=list.map(d=>({d,v:shownValue(d,key,basis)})).filter(x=>x.v!=null);
   const summary=Analysis.distribution(measured.map(x=>x.v));
@@ -194,7 +229,7 @@ function distributionHTML(list){
     }).join('');
     chart=`<svg class="histogram" viewBox="0 0 ${width} 355" role="img" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(t('distribution')+': '+t(key))}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('median')+': '+fmt(summary.median)+valueSuffix(key,basis))}</desc><line class="axis" x1="40" y1="290" x2="${width-35}" y2="290"/>${bars}<line class="median" x1="${x(summary.median)}" x2="${x(summary.median)}" y1="60" y2="300"><title>${esc(t('median'))}</title></line>${markers.map((m,i)=>`<g><line class="marker" x1="${x(m.v)}" x2="${x(m.v)}" y1="${25+i*18}" y2="300"/><text x="${x(m.v)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}<text x="${x(min)}" y="325" text-anchor="middle">${esc(fmt(min)+(min===max?valueSuffix(key,basis):''))}</text>${min===max?'':`<text x="${x(max)}" y="325" text-anchor="middle">${esc(fmt(max)+valueSuffix(key,basis))}</text>`}</svg>`;
   }
-  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${metricOptions(key)}</select></label><label for="distBasis">${esc(t('basis'))}<select id="distBasis"${key==='height'?' disabled':''}>${basisOptions(basis,true)}</select></label>${basis==='scaled'?targetControl('distTarget'):''}</div>
+  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions(key)}</select></label><label for="distBasis">${esc(t('basis'))}<select id="distBasis"${key==='height'?' disabled':''}>${basisOptions(basis,true)}</select></label>${basis==='scaled'?targetControl('distTarget'):''}</div>
     <p class="toolnote">${esc(t('distributionNote'))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('median'))}<strong>${esc(fmt(summary.median)+valueSuffix(key,basis))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(fmt(m.v)+valueSuffix(key,basis))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}
     <details class="tooldata"><summary>${esc(t('dataTable'))}</summary><table class="tooltable"><thead><tr><th>${esc(t('name'))}</th><th>${esc(t('value'))}</th></tr></thead><tbody>${measured.sort((a,b)=>a.v-b.v).map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>${esc(fmt(m.v)+valueSuffix(key,basis))}</td></tr>`).join('')}</tbody></table></details>`;
 }
@@ -203,7 +238,7 @@ function toolUpdate(id,fn){
 }
 function bindDistribution(){
   $('#distMetric').onchange=e=>toolUpdate('distMetric',()=>{state.distMetric=e.target.value;});
-  $('#distBasis').onchange=e=>toolUpdate('distBasis',()=>{state.distBasis=e.target.value;});
+  if($('#distBasis'))$('#distBasis').onchange=e=>toolUpdate('distBasis',()=>{state.distBasis=e.target.value;});
   if($('#distTarget')) $('#distTarget').onchange=e=>{if(setTarget(e.target))toolUpdate('distTarget',()=>{});};
 }
 

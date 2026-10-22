@@ -2,6 +2,17 @@
 
 ## Unreleased — audit implementation
 
+### Cup distributions and dedicated tools page (2026-10-22)
+
+- Added source UK cup-letter distributions with selected-character markers,
+  categorical counts and full band-and-cup sizes in the value table. Cup size
+  is the default distribution; existing cup order and rankings are preserved.
+- Moved exploration to `tools.html`, with its own header and tool navigation.
+  Removed the selector from the roster toolbar and preserved state across page
+  navigation and older shared tool links.
+- Added the page to the sitemap, offline cache, PWA shortcut and build checks,
+  with finished EN/JA/ZH copy and regenerated fallback font subsets.
+
 ### Comparison and exploration tools (2026-10-22)
 
 - Added comparison row selection/order, reference differences and same-height

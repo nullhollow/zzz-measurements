@@ -71,3 +71,29 @@ html[data-theme="light"] .histogram .median{stroke:#007b96}
   .cmpcontrols .seg{flex-wrap:wrap;border-radius:6px}.cmpcontrols .seg button{font-size:11px;padding:8px}
   .cmpcontrols select{font-size:12px;max-width:190px}
 }
+
+.site-nav{display:flex;gap:28px;max-width:1500px;margin:auto;padding:14px 42px;border-bottom:1px solid var(--line)}
+.site-nav a{color:var(--dim);text-decoration:none;font-size:13px;min-height:36px;display:inline-flex;align-items:center;border-bottom:2px solid transparent}
+.site-nav a[aria-current="page"]{color:var(--concrete);border-color:var(--acid)}
+.site-nav a:hover{color:var(--acid)}
+.toolsheader{max-width:1500px;margin:auto;padding:36px 42px 20px}
+.toolsheader h1{font:clamp(30px,5vw,56px)/1.15 var(--disp);margin:0}
+.tooltabs{display:flex;flex-wrap:wrap;gap:0 28px;padding:0 42px;max-width:1500px;margin:auto;border-bottom:1px solid var(--line)}
+.tooltabs a{padding:14px 0;color:var(--dim);text-decoration:none;border-bottom:3px solid transparent;min-height:48px}
+.tooltabs a[aria-current="page"]{border-color:var(--acid);color:var(--concrete)}
+.tooltabs a:hover{color:var(--acid)}
+body[data-page="tools"] #highlights,body[data-page="tools"] #podstrip,
+body[data-page="tools"] #artToggle,body[data-page="tools"] #rosterViews{display:none}
+body[data-page="tools"] #toolsView{padding-top:26px}
+@media(max-width:700px){
+  .site-nav{padding:10px 12px;gap:24px}
+  .toolsheader{padding:24px 12px 18px}
+  .tooltabs{padding:0 12px;gap:0 18px}
+  .tooltabs a{font-size:12px}
+  .cuphistogram text{font-size:14px}
+}
+.tooltabs{position:sticky;top:0;z-index:45;background:var(--ink)}
+body[data-page="tools"] .controls{position:static}
+body[data-page="tools"] #toolsView{scroll-margin-top:110px}
+.histogram .markerlabel{fill:var(--signal)}
+html[data-theme="light"] .histogram .markerlabel{fill:#bc3923}

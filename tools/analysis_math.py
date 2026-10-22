@@ -1,10 +1,35 @@
 """Exploration calculations, mirrored in analysis.js. Roster rules stay separate."""
 import math
+import re
 from decimal import Decimal, ROUND_HALF_UP
 
 FIELDS = {'bust': 'bust_cm', 'waist': 'waist_cm', 'hip': 'hip_cm',
           'thigh': 'thigh_cm', 'height': 'stature_cm', 'underbust': 'band_cm'}
 WEIGHTS = {'bust': .25, 'waist': .2, 'hip': .2, 'thigh': .15, 'height': .2, 'underbust': 0}
+CUP_BASE = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7,
+            'H': 8, 'J': 9, 'K': 10, 'L': 11, 'M': 12, 'N': 13}
+
+
+def cup_size(size):
+    match = re.fullmatch(r'(\d+)\s*([A-Za-z]+)', size or '')
+    if not match or match[2][0].upper() not in CUP_BASE:
+        return None
+    cup, band = match[2].upper(), int(match[1])
+    return {'cup': cup, 'band': band,
+            'score': CUP_BASE[cup[0]] * 10000 + (1000 if len(cup) == 1 else 0) + band}
+
+
+def cup_distribution(roster):
+    groups = {}
+    for record in roster:
+        size = cup_size(record.get('uk'))
+        if size:
+            groups[size['cup']] = groups.get(size['cup'], 0) + 1
+    bins = [{'cup': cup, 'count': count} for cup, count in groups.items()]
+    bins.sort(key=lambda b: cup_size('0' + b['cup'])['score'])
+    peak = max(groups.values(), default=0)
+    return {'count': sum(groups.values()), 'bins': bins,
+            'modes': [b['cup'] for b in bins if b['count'] == peak]}
 
 
 def percentage(value, height):

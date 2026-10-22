@@ -1,13 +1,15 @@
 """Regression and Python/JavaScript parity tests for the exploration tools."""
 import json
 import math
+import ast
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 import subprocess
 import unittest
 
 from fontTools.ttLib import TTFont
-from analysis_math import (FIELDS, WEIGHTS, difference, displayed, distribution,
+from analysis_math import (FIELDS, WEIGHTS, cup_distribution, cup_size, difference, displayed, distribution,
                            matches, metric_value, outcome, percentage)
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -15,6 +17,24 @@ ROSTER = json.loads((ROOT / 'tools/data.json').read_text())
 
 
 class AnalysisTests(unittest.TestCase):
+    def test_cup_categories_preserve_band_context_and_order(self):
+        self.assertGreater(cup_size('19G')['score'], cup_size('24GG')['score'])
+        self.assertGreater(cup_size('22E')['score'], cup_size('19E')['score'])
+        self.assertEqual(cup_size('22E')['cup'], cup_size('19E')['cup'])
+        self.assertNotEqual(cup_size('22E')['band'], cup_size('19E')['band'])
+        self.assertEqual(cup_distribution(ROSTER)['count'], len(ROSTER))
+        self.assertEqual(cup_distribution(ROSTER)['modes'], ['C'])
+
+    def test_cup_distribution_missing_values_and_modes(self):
+        data = [{'uk': '23G'}, {'uk': '19GG'}, {'uk': '20DD'}, {'uk': '21D'}, {'uk': ''}, {}]
+        result = cup_distribution(data)
+        self.assertEqual([b['cup'] for b in result['bins']], ['DD', 'D', 'GG', 'G'])
+        self.assertEqual(result['count'], 4)
+        self.assertEqual(result['modes'], ['DD', 'D', 'GG', 'G'])
+        self.assertEqual(cup_distribution([]), {'count': 0, 'bins': [], 'modes': []})
+        for value in (None, '', '??', '32I', 'E', '32'):
+            self.assertIsNone(cup_size(value))
+
     def test_effective_height_and_scaling(self):
         miyabi = next(d for d in ROSTER if d['slug'] == 'miyabi')
         self.assertEqual(miyabi['stature_cm'], 152.1)
@@ -88,7 +108,8 @@ const values=p.fixtures.map(d=>Object.keys(a.fields).map(k=>['raw','height','sca
 const match=p.fixtures.map(d=>['raw','height'].map(b=>a.matches(p.roster,d,a.weights,b).map(x=>[x.d.slug,x.score])));
 const dist=Object.keys(a.fields).map(k=>['raw','height','scaled'].map(b=>a.distribution(p.roster.map(d=>a.value(d,k,b,172.3)))));
 const rounds=[[31.32,31.34],[31.32,31.36],[31.32,31.24],[null,1],[2.55,2.56]].map(v=>a.outcome(...v));
-process.stdout.write(JSON.stringify({values,match,dist,rounds}));
+const cups=p.fixtures.map(d=>a.cupSize(d.uk)),cupDist=a.cupDistribution(p.roster);
+process.stdout.write(JSON.stringify({values,match,dist,rounds,cups,cupDist}));
 '''
         result = subprocess.run(['node', '-e', js], input=json.dumps(payload), text=True, cwd=ROOT, check=True, capture_output=True)
         expected = {
@@ -96,6 +117,8 @@ process.stdout.write(JSON.stringify({values,match,dist,rounds}));
             'match': [[[[x['d']['slug'], x['score']] for x in matches(ROSTER, d, WEIGHTS, b)] for b in ('raw', 'height')] for d in fixtures],
             'dist': [[distribution([metric_value(d, k, b, 172.3) for d in ROSTER]) for b in ('raw', 'height', 'scaled')] for k in FIELDS],
             'rounds': [outcome(*v) for v in [(31.32, 31.34), (31.32, 31.36), (31.32, 31.24), (None, 1), (2.55, 2.56)]],
+            'cups': [cup_size(d.get('uk')) for d in fixtures],
+            'cupDist': cup_distribution(ROSTER),
         }
         def compare(a, b):
             if isinstance(a, dict):
@@ -118,6 +141,16 @@ process.stdout.write(JSON.stringify({values,match,dist,rounds}));
         for language in ('ja', 'zh'):
             self.assertEqual(strings['en'].keys(), strings[language].keys())
             self.assertTrue(all(strings[language].values()))
+        source = (ROOT / 'tools/template.html').read_text()
+        blocks = re.split(r'\n  (?:en|ja|zh): \{', re.search(r'const I18N = \{(.*?)\n\};', source, re.S)[1])[1:]
+        for lang, block in zip(('en', 'ja', 'zh'), blocks):
+            existing = set(re.findall(r'\b(\w+):\s*[\'\"]', block))
+            self.assertFalse(existing & strings[lang].keys())
+        module = ast.parse((ROOT / 'tools/build_pages.py').read_text())
+        page = next(ast.literal_eval(node.value) for node in module.body if isinstance(node, ast.Assign) and
+                    any(isinstance(target, ast.Name) and target.id == 'PAGE' for target in node.targets))
+        for lang in strings:
+            self.assertFalse(page[lang].keys() & strings[lang].keys())
 
     def test_localized_font_coverage(self):
         class Text(HTMLParser):

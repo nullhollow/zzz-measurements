@@ -1,6 +1,6 @@
 # Deploying ZZZ Female Measurements
 
-Everything the site needs lives in **`docs/`** — the interactive page, 147 static
+Everything the site needs lives in **`docs/`** — the roster and tools pages, 147 static
 character pages (49 agents × English/Japanese/Simplified Chinese), three
 methodology/FAQ pages, the dataset exports, WebP artwork, bundled fonts, icons, the
 service worker and the crawler files. Nothing else in the repository is served.
@@ -8,6 +8,7 @@ service worker and the crawler files. Nothing else in the repository is served.
 ```
 docs/
   index.html               interactive chart (49 cards pre-rendered)
+  tools.html               cup distributions, matching, game and sandbox
   methodology.html         method, classes, FAQ
   characters/*.html        49 English profiles
   ja/, zh/                 localized profiles + methodology
@@ -23,7 +24,7 @@ docs/
   character_images/        53 portraits + 26 outfit renders + responsive thumbs/
 ```
 
-≈ **643 files / 25 MB** (the responsive thumb set adds storage but cuts transfer).
+≈ **644 files / 25.4 MB** (the responsive thumb set adds storage but cuts transfer).
 
 ## 1. Set the URL
 

@@ -57,7 +57,16 @@
     "gameScore": "Correct answers",
     "comparisonMethod": "Choose which rows to show and move them into your preferred order. A reference column adds signed differences: cm or inches for raw and same-height values, percentage points for height-adjusted circumferences. Same-height values use circumference ÷ effective height × reference height, assuming uniform scaling. They are hypothetical equivalents, not new measurements or anatomical predictions. Height itself always keeps its measured value. Rounded equal values share the highlight; missing values have no difference.",
     "matchingMethod": "The default weights remain bust 25, waist 20, hip 20, thigh 15 and height 20, with under-bust excluded. Custom weights range from 0 to 100. Each absolute difference is divided by that metric’s range across the full canonical roster, then averaged using the chosen weights. Missing pairs are skipped and the remaining weights are renormalized. Zero total shared weight produces no match. Height-adjusted matching uses circumference ÷ effective height × 100; selecting height still compares measured heights.",
-    "playMethod": "Distributions use the current filtered roster and omit missing values. Equal-width bins include the maximum in the final bin; identical values form one bin. Comparison selections appear as markers, not extra observations. Higher or Lower uses canonical measured records and judges one-decimal displayed values, including equal answers. Sandbox references are fictional, temporary and excluded from roster counts, classes, percentiles, rankings, game rounds and exports. Shared links include the sandbox inputs and tool settings. Official rankings and cup rules remain unchanged."
+    "playMethod": "Distributions use the current filtered roster and omit missing values. Equal-width bins include the maximum in the final bin; identical values form one bin. Comparison selections appear as markers, not extra observations. Higher or Lower uses canonical measured records and judges one-decimal displayed values, including equal answers. Sandbox references are fictional, temporary and excluded from roster counts, classes, percentiles, rankings, game rounds and exports. Shared links include the sandbox inputs and tool settings. Official rankings and cup rules remain unchanged. Cup distributions group the source UK letters in the existing cup order, retaining full band sizes in the table. Cup letters are categories, so no centimetre scaling or numeric median is applied.",
+    "toolsTitle": "Comparison tools",
+    "toolsPageTitle": "Comparison tools · ZZZ Measurements",
+    "toolsDescription": "Compare UK cup-size distributions, measurements and proportions, find similar figures, play Higher or Lower and try fictional references.",
+    "skipTools": "Skip to the tools",
+    "cupSize": "Cup size (UK)",
+    "mostCommon": "Most common",
+    "cupDistributionNote": "Filtered roster, grouped by UK cup letter. Markers show selected figures; the table retains band sizes. Equal letters do not imply equal volume.",
+    "toolsNoScript": "These tools need JavaScript. The measurements and character profiles remain available on the main page.",
+    "measurementsNav": "Measurements"
   },
   "ja": {
     "tools": "ツール",
@@ -117,7 +126,16 @@
     "gameScore": "正解数",
     "comparisonMethod": "比較に表示する項目を選び、順番を入れ替えられます。差の基準を指定すると、実寸と同じ身長への換算値はcmまたはインチ、身長比はポイントで差を表示します。同じ身長への換算式は「周囲長 ÷ 比較用の身長 × 換算先の身長」です。全体を同じ倍率で拡大・縮小した仮の数値であり、新たな計測値や人体の変化を予測する値ではありません。身長の欄は実測値を保ちます。丸めた表示値が同じ場合は両方を強調し、未計測の値には差を付けません。",
     "matchingMethod": "初期設定の重みはバスト25、ウエスト20、ヒップ20、太もも15、身長20で、アンダーは使いません。各項目を0〜100の範囲で変更できます。差の絶対値を全メンバーのその項目の最大値と最小値の差で割り、重み付き平均を取ります。どちらかが未計測の項目は外し、残った重みで平均を計算し直します。共通する計測項目の重みがすべて0なら結果は表示しません。身長比で探す場合は「周囲長 ÷ 比較用の身長 × 100」を使います。身長の項目そのものは、どちらの方法でも実測値で比べます。",
-    "playMethod": "分布は現在の絞り込み結果から未計測値を除いて集計します。区間の幅は均等で、最大値は最後の区間に含めます。全員同じ値なら区間は1つです。比較で選んだ体型は位置を示すだけで、人数には加えません。「どちらが大きい？」は正式な計測記録を使い、小数第1位までの表示値で大小と同値を判定します。シミュレーターの体型は仮の参照用で、名簿の人数・分類・パーセンタイル・ランキング・クイズ・書き出しには含みません。共有リンクには仮の計測値とツールの設定も入ります。既存のランキングとカップの順位規則は変わりません。"
+    "playMethod": "分布は現在の絞り込み結果から未計測値を除いて集計します。区間の幅は均等で、最大値は最後の区間に含めます。全員同じ値なら区間は1つです。比較で選んだ体型は位置を示すだけで、人数には加えません。「どちらが大きい？」は正式な計測記録を使い、小数第1位までの表示値で大小と同値を判定します。シミュレーターの体型は仮の参照用で、名簿の人数・分類・パーセンタイル・ランキング・クイズ・書き出しには含みません。共有リンクには仮の計測値とツールの設定も入ります。既存のランキングとカップの順位規則は変わりません。 カップの分布は出典のUK記号で集計し、従来のカップ順位に沿って並べます。一覧にはアンダーを含むサイズを残します。記号による分類のため、cm換算や数値の中央値は使いません。",
+    "toolsTitle": "比較・分析ツール",
+    "toolsPageTitle": "比較・分析ツール · ZZZ 寸法一覧",
+    "toolsDescription": "UKカップの分布や寸法・比率を比較し、近い体型を探せます。大小当てクイズや架空の体型シミュレーターも使えます。",
+    "skipTools": "ツールへ移動",
+    "cupSize": "カップサイズ（UK）",
+    "mostCommon": "最多のカップ",
+    "cupDistributionNote": "絞り込み後のUKカップ分布です。選択中の体型は位置で示し、一覧にはアンダーを含むサイズを残します。同じ記号でも容量は同じとは限りません。",
+    "toolsNoScript": "ツールの利用にはJavaScriptが必要です。寸法一覧と各キャラクターのページは、メインページから閲覧できます。",
+    "measurementsNav": "寸法一覧"
   },
   "zh": {
     "tools": "工具",
@@ -177,6 +195,15 @@
     "gameScore": "答对题数",
     "comparisonMethod": "可以选择对比项目并调整顺序。指定差值基准后，实测值及同身高换算值的差以厘米或英寸表示，身高占比的差以百分点表示。同身高换算采用「围度 ÷ 对比用身高 × 换算身高」，假定体型整体等比缩放。这是虚构的等效数值，并非新的测量结果，也不预测人体变化。身高一栏始终保留实测值。四舍五入后的显示值相同就同时高亮，缺失数据不计算差值。",
     "matchingMethod": "默认权重保持为胸围25、腰围20、臀围20、大腿围15、身高20，下胸围不参与。各项权重可在0至100之间调整。每项取绝对差值，除以全体正式角色该项的最大值与最小值之差，再按所选权重求平均。任一方缺少的数据均跳过，并按剩余权重重新计算平均值；共同有效项目的权重总和为0时不显示匹配结果。选择身高占比时，围度按「围度 ÷ 对比用身高 × 100」计算；身高项目本身仍按实测值比较。",
-    "playMethod": "分布图统计当前筛选结果，排除缺失值。各区间等宽，最大值计入最后一个区间；所有值相同时只设一个区间。对比中选中的体型只标示位置，不会重复计入人数。「比一比大小」使用正式测量记录，按显示的一位小数判断大小或相同。沙盒体型仅作临时虚构参照，不计入名单人数、分类、百分位、排名、游戏题目或导出数据。分享链接包含沙盒输入值和工具设置。正式排名及罩杯排序规则保持不变。"
+    "playMethod": "分布图统计当前筛选结果，排除缺失值。各区间等宽，最大值计入最后一个区间；所有值相同时只设一个区间。对比中选中的体型只标示位置，不会重复计入人数。「比一比大小」使用正式测量记录，按显示的一位小数判断大小或相同。沙盒体型仅作临时虚构参照，不计入名单人数、分类、百分位、排名、游戏题目或导出数据。分享链接包含沙盒输入值和工具设置。正式排名及罩杯排序规则保持不变。 罩杯分布按来源的UK字母分组，并沿用原有罩杯顺序；列表保留含下围的完整尺码。罩杯字母属于分类数据，不做厘米缩放或数值中位数计算。",
+    "toolsTitle": "对比与分析工具",
+    "toolsPageTitle": "对比与分析工具 · ZZZ 测量一览",
+    "toolsDescription": "查看UK罩杯分布、对比尺寸与比例、查找相近体型，还可以玩大小竞猜或尝试虚构体型。",
+    "skipTools": "跳转至工具",
+    "cupSize": "罩杯尺码（UK）",
+    "mostCommon": "最多的罩杯",
+    "cupDistributionNote": "按当前筛选统计UK罩杯字母，并标出已选角色。列表保留下围尺码；相同罩杯字母不代表相同容积。",
+    "toolsNoScript": "这些工具需要启用JavaScript。主页面的测量一览和角色资料仍可正常浏览。",
+    "measurementsNav": "测量一览"
   }
 }
