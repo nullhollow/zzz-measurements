@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comparison tools · ZZZ Measurements</title>
+<title>ZZZ Measurements</title>
 <meta name="description" content="Compare UK cup-size distributions, measurements and proportions, find similar figures, play Higher or Lower and try fictional references.">
 <meta name="keywords" content="Zenless Zone Zero, ZZZ, female measurements, character measurements, height, bust, waist, hips, thigh circumference, bra size, UK US EU sizing, hourglass, proportions, modelmetrics.net">
 <meta name="author" content="modelmetrics.net">
@@ -32,7 +32,7 @@
 <link rel="preload" href="fonts/Anton-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ChakraPetch-600-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "url": "https://nullhollow.github.io/zzz-measurements/tools.html", "name": "Comparison tools · ZZZ Measurements", "description": "Compare UK cup-size distributions, measurements and proportions, find similar figures, play Higher or Lower and try fictional references.", "inLanguage": ["en", "ja", "zh"], "isPartOf": {"@id": "https://nullhollow.github.io/zzz-measurements/#website"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "url": "https://nullhollow.github.io/zzz-measurements/tools.html", "name": "ZZZ Measurements", "description": "Compare UK cup-size distributions, measurements and proportions, find similar figures, play Higher or Lower and try fictional references.", "inLanguage": ["en", "ja", "zh"], "isPartOf": {"@id": "https://nullhollow.github.io/zzz-measurements/#website"}}</script>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" href="fonts/fonts.css">
@@ -60,9 +60,11 @@
   [hidden]{display:none !important}
   html{scroll-behavior:smooth}
   html[data-theme="light"]{
-    --ink:#F3F3EC; --coal:#E9E9E1; --panel:#FFFFFF; --panel2:#F7F7F1;
-    --line:#0b0b0c1f; --line2:#0b0b0c33; --dim:#4C4C55; --dimmer:#5D5D66;
-    --concrete:#0B0B0C; --acid:#5C6E00; --acid-deep:#4F5F00;
+    --ink:#F2F4F6; --coal:#E7EBEF; --panel:#FFFFFF; --panel2:#F7F9FB;
+    --line:#DCE1E6; --line2:#BAC3CD; --dim:#505B68; --dimmer:#626D79;
+    --concrete:#20262E; --acid:#485D00; --acid-deep:#394B00;
+    --bust:#B4402D; --waist:#006F87; --hips:#485D00; --thighs:#7B6000;
+    --signal:#B4402D; --holo:#006F87; --blue:#3659B7; --brass:#80601F;
     color-scheme:light;
   }
   body{
@@ -148,7 +150,7 @@
     padding:10px 22px; background:rgba(10,10,12,.93); backdrop-filter:blur(10px);
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
     background-image:repeating-linear-gradient(45deg,#ffffff08 0 2px,transparent 2px 9px)}
-  html[data-theme="light"] .controls{background:rgba(243,243,236,.94)}
+  html[data-theme="light"] .controls{background:rgba(242,244,246,.97)}
   .search{position:relative; flex:1 1 220px; min-width:170px; display:flex; align-items:center; gap:9px;
     background:#08080a; border:1px solid var(--line2); border-radius:999px; padding:9px 15px; color:var(--dim)}
   .search input{flex:1; background:none; border:0; outline:0; color:#fff; font:inherit; min-width:60px}
@@ -452,10 +454,6 @@
   footer .mark span{font-family:var(--disp); font-size:15px; color:var(--acid); letter-spacing:.04em}
   footer .mark i{flex:1; height:1px; background:var(--line)}
   .flinks{display:flex; flex-wrap:wrap; gap:14px; margin:0 0 14px}
-  .fopts{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px; padding-top:14px;
-    border-top:1px solid var(--line)}
-  .fopts label{font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--dimmer)}
-  .fopts select{padding:7px 12px; font-size:10px}
 
   /* ---------- podium ---------- */
   .pod{position:relative; min-width:0; overflow:hidden; border:1px solid var(--line); border-radius:var(--radius); padding:12px 12px 0;
@@ -490,7 +488,7 @@
   .slot.blank .step{background:#141418; border-top-color:var(--line)}
 
   /* ---------- light theme overrides ---------- */
-  html[data-theme="light"] .hero{background:linear-gradient(180deg,#ffffff,#ededE6)}
+  html[data-theme="light"] .hero{background:#FFFFFF}
   html[data-theme="light"] .hero:before{background:#D8FA00}
   html[data-theme="light"] .hero .meta{color:#0b0b0c}
   html[data-theme="light"] .hero .meta b{color:#0b0b0c}
@@ -500,48 +498,48 @@
   html[data-theme="light"] .hero p{color:#3d3d45}
   html[data-theme="light"] .film{background:#0b0b0c}
   html[data-theme="light"] .hl,html[data-theme="light"] .card,html[data-theme="light"] .pod{
-    background:linear-gradient(180deg,#ffffff,#f4f4ed)}
-  html[data-theme="light"] .card .imgbox,html[data-theme="light"] .thumb{background:#e8e8e0}
+    background:#FFFFFF}
+  html[data-theme="light"] .card .imgbox,html[data-theme="light"] .thumb{background:#E8EDF2}
   html[data-theme="light"] .card .desc{color:#3d3d45}
   html[data-theme="light"] .pct,html[data-theme="light"] .card .stat,html[data-theme="light"] .kv,
-  html[data-theme="light"] .irow,html[data-theme="light"] .mdesc{background:#f7f7f1}
+  html[data-theme="light"] .irow,html[data-theme="light"] .mdesc{background:#F7F9FB}
   html[data-theme="light"] .mdesc,html[data-theme="light"] .vline,html[data-theme="light"] .irow .isub{color:#333}
   html[data-theme="light"] .search,html[data-theme="light"] select,html[data-theme="light"] .btn,
   html[data-theme="light"] .viewtoggle button,html[data-theme="light"] .chipbtn,
   html[data-theme="light"] .seg button,html[data-theme="light"] .ochip,html[data-theme="light"] .sim,
   html[data-theme="light"] .cchip{background:#fff;color:#0b0b0c}
   html[data-theme="light"] .search input{color:#0b0b0c}
-  html[data-theme="light"] .modal{background:linear-gradient(180deg,#ffffff,#f4f4ed)}
-  html[data-theme="light"] .mimg,html[data-theme="light"] .mimg img{background:#e8e8e0}
+  html[data-theme="light"] .modal{background:#FFFFFF}
+  html[data-theme="light"] .mimg,html[data-theme="light"] .mimg img{background:#E8EDF2}
   html[data-theme="light"] .tname{color:#0b0b0c}
   html[data-theme="light"] .cmptable thead th,html[data-theme="light"] .cmptable td{color:#0b0b0c}
   html[data-theme="light"] .cmptable .cmdesc{color:#3d3d45}
-  html[data-theme="light"] .cmptable td.win{color:#6d7900}
+  html[data-theme="light"] .cmptable td.win{color:#405400;background:#F0F6D9}
   html[data-theme="light"] .cmptable th:first-child,html[data-theme="light"] .cmptable td:first-child{background:#fff}
   html[data-theme="light"] #tbl tbody td:first-child{background:#fff}
-  html[data-theme="light"] #tbl tbody tr:hover td:first-child{background:#f0f0e9}
+  html[data-theme="light"] #tbl tbody tr:hover td:first-child{background:#EFF3F6}
   html[data-theme="light"] .cmp{background:#fff;color:#0b0b0c}
-  html[data-theme="light"] .fpanel{background:linear-gradient(180deg,#ffffff,#f4f4ed)}
-  html[data-theme="light"] .comparebar{background:rgba(243,243,236,.97)}
+  html[data-theme="light"] .fpanel{background:#FFFFFF}
+  html[data-theme="light"] .comparebar{background:rgba(242,244,246,.98)}
   html[data-theme="light"] .plotwrap{background:#fff}
   html[data-theme="light"] .plot .tick,html[data-theme="light"] .plot .alab{fill:#4C4C55}
   html[data-theme="light"] .plot .gridline{stroke:#0b0b0c14}
   html[data-theme="light"] .plot .pt text{fill:#0b0b0c}
-  html[data-theme="light"] .slot .step{background:#e4e4dc;color:#5C6E00}
-  html[data-theme="light"] .slot.p1 .step{background:linear-gradient(180deg,#5C6E00,#4F5F00);color:#fff}
+  html[data-theme="light"] .slot .step{background:#E7EBEF;color:#5C6E00}
+  html[data-theme="light"] .slot.p1 .step{background:#D8FA00;color:#20262E}
   html[data-theme="light"] .chip,html[data-theme="light"] .irow .ichip,html[data-theme="light"] .prow b,
   html[data-theme="light"] .slot .plate u{color:#0b0b0c}
   html[data-theme="light"] .chip.height{color:#7a6320}
   html[data-theme="light"] .chip.bust{color:#b3361f}
   html[data-theme="light"] .chip.waist{color:#0b6f8c}
-  html[data-theme="light"] .chip.hips{color:#5C6E00}
+  html[data-theme="light"] .chip.hips{color:var(--hips)}
   html[data-theme="light"] .chip.thighs{color:#8a6b00}
   html[data-theme="light"] .chip.shape{color:#3049c9}
   html[data-theme="light"] .viewtoggle button[aria-pressed="true"],
   html[data-theme="light"] .chipbtn[aria-pressed="true"],
   html[data-theme="light"] .seg button[aria-pressed="true"],
   html[data-theme="light"] .ochip[aria-pressed="true"],
-  html[data-theme="light"] .cmp[aria-pressed="true"]{background:#0B0B0C;color:var(--acid);border-color:#0B0B0C}
+  html[data-theme="light"] .cmp[aria-pressed="true"]{background:#20262E;color:#D8FA00;border-color:#20262E}
 
   /* ---------- responsive ---------- */
   @media (max-width:1100px){
@@ -710,7 +708,7 @@
 .toolstats strong{color:var(--acid);font-size:24px;font-variant-numeric:tabular-nums;margin-left:8px}
 .tooltable{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 .tooltable th,.tooltable td{padding:12px 8px;border-bottom:1px solid var(--line);text-align:left}
-.tooltable th{color:var(--dim);font-size:12px}
+.tooltable thead th{color:#0b0b0c;background:#D8FA00;font-size:12px;position:static}
 .tooltable .btn{white-space:normal}
 .toolinput{font:inherit;color:inherit;background:var(--panel);border:1px solid var(--line2);border-radius:6px;padding:9px 10px;min-height:42px;width:100%;min-width:0}
 .toolform .toolinput{width:100px}
@@ -791,9 +789,10 @@ body[data-page="tools"] #toolsView{padding-top:26px}
   .tooltabs a{font-size:12px}
   .cuphistogram text{font-size:14px}
 }
-.tooltabs{position:sticky;top:0;z-index:45;background:var(--ink)}
-body[data-page="tools"] .controls{position:static}
-body[data-page="tools"] #toolsView{scroll-margin-top:110px}
+.tools-shell{position:sticky;top:0;z-index:45;background:var(--ink)}
+.tooltabs{background:var(--ink)}
+body[data-page="tools"] .controls{position:relative;z-index:40}
+body[data-page="tools"] #toolsView{scroll-margin-top:calc(var(--tools-offset,150px) + 12px)}
 .histogram .markerlabel{fill:var(--signal)}
 html[data-theme="light"] .histogram .markerlabel{fill:#bc3923}
 .settings-dialog{width:min(440px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;border:1px solid var(--line2);border-radius:var(--radius);padding:26px;background:var(--panel);color:var(--concrete);font:inherit}
@@ -809,6 +808,113 @@ html[data-theme="light"] .histogram .markerlabel{fill:#bc3923}
 .cuphistogram .cupcategory{font-family:var(--num);letter-spacing:0}
 .tooltabs #settingsBtn{margin-left:auto;align-self:center;min-height:40px}
 html[data-theme="light"] .settings-dialog .viewtoggle button[aria-pressed="true"]{background:var(--acid);color:#fff}
+
+/* Compact tool chrome leaves room for the active task. */
+.toolsheader{padding:12px 28px}
+.toolsheader h1{font-size:24px}
+.site-nav{padding:6px 28px}
+.tooltabs{padding:0 28px;gap:0 24px}
+.tooltabs a{padding:10px 0;min-height:44px}
+body[data-page="tools"] .controls{padding:8px 22px;gap:8px;background:var(--ink);border-top:0}
+body[data-page="tools"] #toolsView{padding-top:18px}
+.toolhead{margin-bottom:12px;border-bottom-width:2px}
+.toolhead h2{font-size:30px;margin-bottom:10px}
+.toolform{margin:12px 0;gap:12px}
+.toolstats{margin:12px 0;gap:20px}
+.toolstats strong{font-size:22px}
+body[data-tool-view="game"] .toolsheader{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0)}
+body[data-tool-view="game"] .toolnote{margin:10px 0;font-size:12px;line-height:1.45}
+.gamepair{margin:12px 0}
+.gamefigure{padding:16px 20px}
+.gamefigure img{height:110px;width:75px}
+.gamefigure h3{margin-bottom:6px}
+.gamevalue{font-size:32px}
+.gameresult{margin:8px 0;min-height:22px}
+.gameactions .btn{min-height:44px}
+.settings-selects{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.settings-selects label{display:grid;gap:8px;color:var(--dim);font-size:13px;min-width:0}
+.settings-selects select{width:100%;min-height:44px;color:var(--concrete)}
+.toolform .figurepicker,.cmpcontrols .figurepicker{width:250px;max-width:100%;min-height:42px;font-size:14px}
+.cmpcontrols .figurepicker{width:200px}
+.cmptable th,.cmptable td{padding:10px 13px}
+.cmptable td{white-space:normal}
+.saved-dialog{width:min(620px,calc(100% - 32px))}
+.savedform{display:flex;gap:10px;margin-top:8px}
+.savedgroup{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);padding:12px 0}
+.savedgroup>span{flex:1;overflow-wrap:anywhere;min-width:0}
+.savedgroup .btn{flex-shrink:0}
+.saved-dialog label{font-size:13px;color:var(--dim)}
+.saved-dialog [role="status"]{min-height:20px;color:var(--acid)}
+.matchbreakdown{margin-top:8px;font-size:12px;max-width:400px;color:var(--dim)}
+.matchbreakdown summary{cursor:pointer;padding:6px 0;min-height:32px;color:var(--concrete)}
+.matchbreakdown ul{list-style:none;padding:0;margin:8px 0}
+.matchbreakdown li{display:grid;grid-template-columns:1fr auto auto;gap:14px;padding:6px 0;border-bottom:1px solid var(--line)}
+.matchbreakdown p{font-size:11px;line-height:1.5}
+.distancepart{color:var(--concrete);min-width:42px;text-align:right}
+.histogram .hit{fill:transparent;stroke:none}
+.histbutton{cursor:pointer;outline:none}
+.histbutton:hover .bar,.histbutton:focus .bar,.histbutton[aria-pressed="true"] .bar{stroke:var(--concrete);stroke-width:3px}
+.histbutton:focus .hit{stroke:var(--concrete);stroke-width:2px}
+.chartmarker{pointer-events:none}
+.distresults{scroll-margin-top:calc(var(--tools-offset,150px) + 16px);margin-top:20px}
+.selectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.selectionhead h3{font:20px/1.3 var(--disp);margin:0}
+.matrixwrap{max-width:100%;overflow:auto;margin-top:20px;border:1px solid var(--line2)}
+.cupmatrix{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.cupmatrix caption{text-align:left;padding:12px;font-size:13px;color:var(--dim)}
+.cupmatrix th{font-size:12px;background:var(--panel2);color:var(--concrete);padding:10px 8px;position:static;white-space:nowrap}
+.cupmatrix th:first-child{position:sticky;left:0;z-index:1;background:var(--panel)}
+.cupmatrix td{padding:2px;border:1px solid var(--line);text-align:center}
+.matrixcell{font:inherit;background:var(--panel);color:var(--concrete);border:1px solid var(--line2);border-bottom:3px solid var(--acid);min-width:38px;min-height:42px;width:100%;cursor:pointer}
+.matrixcell:hover,.matrixcell[aria-pressed="true"]{background:#D8FA00;color:#20262E;border-color:#20262E}
+.matrixempty{display:block;min-width:38px;color:var(--dimmer)}
+html[data-theme="light"] #tbl thead th{background:#D8FA00;color:#20262E}
+html[data-theme="light"] .cupmatrix th{background:var(--panel2);color:var(--concrete)}
+html[data-theme="light"] .settings-dialog .viewtoggle button[aria-pressed="true"]{background:#20262E;color:#D8FA00}
+html[data-theme="light"] .btn.primary{background:#D8FA00;color:#20262E;border-color:#A4BB26}
+html[data-theme="light"] .btn:hover,html[data-theme="light"] .viewtoggle button:hover{border-color:#485D00}
+html[data-theme="light"] .toolstats strong,html[data-theme="light"] .gamevalue,html[data-theme="light"] .gameresult{color:var(--acid)}
+html[data-theme="light"] .histogram .bar{fill:#536B00}
+html[data-theme="light"] .histogram .marker{stroke:var(--signal)}
+html[data-theme="light"] .histogram .markerlabel{fill:var(--signal)}
+html[data-theme="light"] ::-webkit-scrollbar-track{background:var(--coal)}
+html[data-theme="light"] ::-webkit-scrollbar-thumb{background:#A7B1BD;border-color:var(--coal)}
+html[data-theme="light"] ::selection{background:#D8FA00;color:#20262E}
+html[data-theme="light"] .chip{background:var(--panel2);border-color:var(--line2)}
+.btn:disabled{opacity:.45;cursor:default}
+html[data-theme="light"] .btn:disabled,html[data-theme="light"] .comparebar .btn.primary[disabled]{background:var(--coal);color:var(--dim);border-color:var(--line);opacity:1}
+html[data-theme="light"] .sticker b span{color:var(--concrete)}
+@media(max-width:700px){
+  .site-nav{padding:4px 12px}
+  .toolsheader{padding:10px 12px}
+  .toolsheader h1{font-size:20px}
+  .tooltabs{padding:0 12px;gap:0 14px}
+  .tooltabs a{font-size:11px;padding:8px 0;min-height:40px}
+  .tooltabs #settingsBtn{min-height:40px;padding:8px 12px}
+  body[data-page="tools"] .controls{padding:8px 12px;gap:6px}
+  body[data-page="tools"] .controls .btn{font-size:10px;min-height:36px;padding:8px 10px}
+  .toolhead h2{font-size:25px}
+  body[data-page="tools"] #toolsView{padding-top:14px}
+  .toolform{margin:10px 0;gap:8px}
+  .toolform label{font-size:11px;gap:4px}
+  .toolform .figurepicker{width:100%}
+  .toolform select{min-height:38px}
+  .gamefigure{padding:12px 8px}
+  .gamefigure img{width:60px;height:90px}
+  .gamefigure h3{font-size:15px;min-height:38px}
+  .gamevalue{font-size:25px}
+  .gameactions{gap:8px}
+  .gameactions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .gameactions #nextRound{grid-column:1/-1}
+  .gameactions .btn{padding:10px 12px;font-size:11px}
+  .toolstats{gap:16px;font-size:12px}
+  .toolstats strong{font-size:20px}
+  .savedgroup{flex-wrap:wrap}.savedgroup>span{flex-basis:100%}
+  .savedform{flex-wrap:wrap}.savedform input{flex-basis:100%}
+  .matchbreakdown li{gap:6px}
+  .selectionhead{align-items:start}.selectionhead h3{font-size:17px}
+  .cmptable th,.cmptable td{padding:10px 7px}
+}
 
 </style>
 </head>
@@ -827,7 +933,7 @@ html[data-theme="light"] .settings-dialog .viewtoggle button[aria-pressed="true"
   <section class="highlights" id="highlights" aria-label="Roster highlights"></section>
   <section class="podstrip" id="podstrip" aria-label="Roster leaders"></section>
 
-<nav class="tooltabs" id="toolsNav" aria-label="Tools"><a href="tools.html#view=distribution" data-tool-link="distribution" data-i18n="distribution">Distribution</a><a href="tools.html#view=matches" data-tool-link="matches" data-i18n="matches">Find similar figures</a><a href="tools.html#view=game" data-tool-link="game" data-i18n="game">Higher or Lower</a><a href="tools.html#view=sandbox" data-tool-link="sandbox" data-i18n="sandbox">Figure sandbox</a><button class="btn" id="settingsBtn" data-open-settings data-i18n="settingsButton">Settings</button></nav>
+<div class="tools-shell"><nav class="tooltabs" id="toolsNav" aria-label="Tools"><a href="tools.html#view=distribution" data-tool-link="distribution" data-i18n="distribution">Distribution</a><a href="tools.html#view=matches" data-tool-link="matches" data-i18n="matches">Find similar figures</a><a href="tools.html#view=game" data-tool-link="game" data-i18n="game">Higher or Lower</a><a href="tools.html#view=sandbox" data-tool-link="sandbox" data-i18n="sandbox">Figure sandbox</a><button class="btn" id="settingsBtn" data-open-settings data-i18n="settingsButton">Settings</button></nav>
   <div class="controls" role="region" aria-label="Roster controls">
     <div class="search">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -890,11 +996,14 @@ html[data-theme="light"] .settings-dialog .viewtoggle button[aria-pressed="true"
       <button id="vPlot" aria-pressed="false" data-i18n="plot">PLOT</button>
     </div>
     <button class="btn cmpbtn" id="compareBtn" aria-pressed="false" aria-label="Compare" title="Compare"><span data-i18n="compare">COMPARE</span><span class="n" id="cmpCount">0</span></button>
+    <a class="btn" id="chooseAgents" href="index.html" hidden data-i18n="chooseAgents">Choose agents</a>
+    <button class="btn" id="savedCompareBtn" data-i18n="savedComparisons">Saved comparisons</button>
     <button class="btn" id="shareBtn" data-i18n="share">SHARE</button>
     <button class="btn" id="reset" data-i18n="reset">RESET</button>
     <div class="count" id="count" aria-live="polite" aria-atomic="true"></div>
   </div>
 
+</div>
   <div class="wrap">
     <noscript><style>#grid{display:none}.controls,#settingsBtn{display:none}</style></noscript>
     <div id="cardsView"><div class="grid" id="grid"></div></div>
@@ -935,8 +1044,13 @@ html[data-theme="light"] .settings-dialog .viewtoggle button[aria-pressed="true"
   <fieldset><legend data-i18n="cupSystem">Cup sizing system</legend>
     <div class="viewtoggle" id="cupSystemToggle"><button id="cup-uk" type="button" data-cup-system="uk" aria-pressed="true">UK</button><button id="cup-us" type="button" data-cup-system="us" aria-pressed="false">US</button><button id="cup-eu" type="button" data-cup-system="eu" aria-pressed="false">EU</button></div>
   </fieldset>
+  <div class="settings-selects">
+    <label for="lang"><span data-i18n="language">Language</span><select id="lang"><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option></select></label>
+    <label for="theme"><span data-i18n="theme">Theme</span><select id="theme"><option value="dark" data-i18n="dark">Dark</option><option value="light" data-i18n="light">Light</option></select></label>
+  </div>
   <button class="btn primary" id="settingsDone" type="button" data-i18n="doneSettings">Done</button>
 </dialog>
+<dialog class="settings-dialog saved-dialog" id="savedDialog" aria-labelledby="savedTitle"></dialog>
 
 <footer>
   <div class="fbox">
@@ -955,13 +1069,6 @@ html[data-theme="light"] .settings-dialog .viewtoggle button[aria-pressed="true"
     <span data-i18n="footPercentiles"><b>Percentile bars:</b> roster percentiles of the raw cm measurement; height percentiles use head height. 0 = smallest, 100 = largest.</span><br>
     <span data-i18n="footBustDiff"><b>Bust diff:</b> recomputed as bust minus under-bust so it keeps one decimal (the sheet's own diff column is whole-number rounded).</span><br>
     <span data-i18n="footImages"><b>Images:</b> scale renders from modelmetrics.net; official art from the ZZZ Fandom wiki, © HoYoverse. Auto-comments are generated from the measurements; treat them as figure-chart commentary, not in-game canon.</span>
-    <div class="fopts">
-      <label for="lang" data-i18n="language">Language</label>
-      <select id="lang"><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option></select>
-      <label for="theme" data-i18n="theme">Theme</label>
-      <select id="theme"><option value="dark" data-i18n="dark">Dark</option><option value="light" data-i18n="light">Light</option></select>
-      <span class="fnote" style="margin:0" data-i18n="langNote">Character names and profiles use their official language; interface labels are translated.</span>
-    </div>
   </div>
 </footer>
 
@@ -998,6 +1105,14 @@ const Analysis = (() => {
     const peak=Math.max(0,...groups.values());
     return {count:[...groups.values()].reduce((a,b)=>a+b,0),bins,modes:bins.filter(b=>b.count===peak).map(b=>b.cup)};
   }
+  function cupMatrix(roster,system='uk'){
+    if(!['uk','us','eu'].includes(system))system='uk';
+    const sizes=roster.map(d=>({d,s:system==='uk'?cupSize(d.uk):sizeParts(d[system])})).filter(x=>x.s);
+    const bands=[...new Set(sizes.map(x=>x.s.band))].sort((a,b)=>a-b);
+    const cups=cupDistribution(roster,system).bins.map(b=>b.cup);
+    const cells=bands.flatMap(band=>cups.map(cup=>({band,cup,slugs:sizes.filter(x=>x.s.band===band&&x.s.cup===cup).map(x=>x.d.slug)})));
+    return {bands,cups,cells};
+  }
   const percentage = (v,h) => v != null && h > 0 ? v / h * 100 : null;
   function value(d,key,basis='raw',target=160){
     const v = d[fields[key]];
@@ -1025,13 +1140,14 @@ const Analysis = (() => {
       spans[key]=vs.length ? Math.max(...vs)-Math.min(...vs)||1 : 1;
     }
     return roster.filter(d=>d.slug!==source.slug).map(d=>{
-      let score=0,total=0;
+      let score=0,total=0;const components=[];
       for(const key of Object.keys(fields)){
         const w=chosen[key]||0, a=value(source,key,basis), b=value(d,key,basis);
         if(!Number.isFinite(w)||w<=0||a==null||b==null) continue;
-        score+=w*Math.abs(a-b)/spans[key]; total+=w;
+        const difference=Math.abs(a-b),weighted=w*difference/spans[key];
+        score+=weighted; total+=w;components.push({key,difference,weight:w,contribution:weighted});
       }
-      return {d,score:total ? score/total : null};
+      return {d,score:total ? score/total : null,components:components.map(c=>({...c,weight:c.weight/total,contribution:c.contribution/total}))};
     }).filter(x=>x.score!=null).sort((a,b)=>a.score-b.score);
   }
   function distribution(values,count=10){
@@ -1039,10 +1155,17 @@ const Analysis = (() => {
     if(!n) return {count:0,median:null,bins:[]};
     const lo=vs[0],hi=vs[n-1],size=lo===hi?1:count,step=(hi-lo)/size;
     const bins=Array.from({length:size},(_,i)=>({lo:lo+i*step,hi:lo+(i+1)*step,count:0}));
+    bins[bins.length-1].hi=hi;
     for(const v of vs) bins[step ? Math.min(size-1,Math.floor((v-lo)/step)) : 0].count++;
     return {count:n,median:(vs[Math.floor((n-1)/2)]+vs[Math.floor(n/2)])/2,bins};
   }
-  return {fields,weights,sizeParts,cupSize,cupDistribution,percentage,value,displayed,difference,outcome,gameOutcome,matches,distribution};
+  function binIndex(value,bins){
+    if(!Number.isFinite(value)||!bins.length)return -1;
+    const lo=bins[0].lo,hi=bins[bins.length-1].hi;
+    if(value<lo||value>hi)return -1;
+    return hi===lo?0:Math.min(bins.length-1,Math.floor((value-lo)/((hi-lo)/bins.length)));
+  }
+  return {fields,weights,sizeParts,cupSize,cupDistribution,cupMatrix,percentage,value,displayed,difference,outcome,gameOutcome,matches,distribution,binIndex};
 })();
 
 
@@ -1087,7 +1210,7 @@ const I18N = {
     correct: "Correct",
     incorrect: "Incorrect",
     streak: "Streak",
-    gameNote: "Is the right-hand value higher, lower or equal? Answers use the displayed one-decimal values.",
+    gameNote: "Answers use the displayed values, rounded to one decimal.",
     notEnough: "At least two measured entries are needed.",
     temporary: "Temporary reference",
     sandboxNote: "Enter fictional measurements in cm. Blank circumferences stay unknown. This reference is excluded from the roster, rankings and exports.",
@@ -1103,11 +1226,10 @@ const I18N = {
     gameReset: "Reset score",
     noValues: "No measurements in this selection.",
     gameScore: "Correct answers",
-    comparisonMethod: "Choose which rows to show and move them into your preferred order. A reference column adds signed differences: cm or inches for raw and same-height values, percentage points for height-adjusted circumferences. Same-height values use circumference ÷ effective height × reference height, assuming uniform scaling. They are hypothetical equivalents, not new measurements or anatomical predictions. Height itself always keeps its measured value. Rounded equal values share the highlight; missing values have no difference.",
-    matchingMethod: "The default weights remain bust 25, waist 20, hip 20, thigh 15 and height 20, with under-bust excluded. Custom weights range from 0 to 100. Each absolute difference is divided by that metric’s range across the full canonical roster, then averaged using the chosen weights. Missing pairs are skipped and the remaining weights are renormalized. Zero total shared weight produces no match. Height-adjusted matching uses circumference ÷ effective height × 100; selecting height still compares measured heights.",
-    playMethod: "Distributions use the current filtered roster and omit missing values. Equal-width bins include the maximum in the final bin; identical values form one bin. Comparison selections appear as markers, not extra observations. Higher or Lower uses canonical measured records and judges one-decimal displayed values, including equal answers. Sandbox references are fictional, temporary and excluded from roster counts, classes, percentiles, rankings, game rounds and exports. Shared links include the sandbox inputs and tool settings. Official rankings and cup rules remain unchanged. Cup distributions group source labels in the selected UK/US/EU system, retaining full band sizes. These categories have no centimetre scaling or numeric median. UK categories keep the existing order; other labels are grouped in letter order, with repeated D forms together.",
+    comparisonMethod: "Choose which rows to show and move them into your preferred order. A reference column adds signed differences: cm or inches for raw and same-height values, percentage points for height-adjusted circumferences. Same-height values use circumference ÷ effective height × reference height, assuming uniform scaling. They are hypothetical equivalents, not new measurements or anatomical predictions. Height itself always keeps its measured value. Rounded equal values share the highlight; missing values have no difference. Save named comparison sets on this device or export the visible rows and reference differences as CSV.",
+    matchingMethod: "The default weights remain bust 25, waist 20, hip 20, thigh 15 and height 20, with under-bust excluded. Custom weights range from 0 to 100. Each absolute difference is divided by that metric’s range across the full canonical roster, then averaged using the chosen weights. Missing pairs are skipped and the remaining weights are renormalized. Zero total shared weight produces no match. Height-adjusted matching uses circumference ÷ effective height × 100; selecting height still compares measured heights. Expand a result to see the differences and each metric’s contribution to its distance.",
+    playMethod: "Distributions use the current filtered roster and omit missing values. Equal-width bins include the maximum in the final bin; identical values form one bin. Comparison selections appear as markers, not extra observations. Higher or Lower uses canonical measured records and judges one-decimal displayed values, including equal answers. Sandbox references are fictional, temporary and excluded from roster counts, classes, percentiles, rankings, game rounds and exports. Shared links include the sandbox inputs and tool settings. Official rankings and cup rules remain unchanged. Cup distributions group source labels in the selected UK/US/EU system, retaining full band sizes. These categories have no centimetre scaling or numeric median. UK categories keep the existing order; other labels are grouped in letter order, with repeated D forms together. Select a bar or band-by-cup cell to view its agents and add them to comparison. Band labels come from the selected source system and do not estimate volume.",
     toolsTitle: "Comparison tools",
-    toolsPageTitle: "Comparison tools · ZZZ Measurements",
     toolsDescription: "Compare UK cup-size distributions, measurements and proportions, find similar figures, play Higher or Lower and try fictional references.",
     skipTools: "Skip to the tools",
     cupSize: "Cup size",
@@ -1115,19 +1237,43 @@ const I18N = {
     cupDistributionNote: "Filtered roster, grouped by source {system} cup letter. Markers show selected figures; the table retains band sizes. Equal letters do not imply equal volume.",
     toolsNoScript: "These tools need JavaScript. The measurements and character profiles remain available on the main page.",
     measurementsNav: "Measurements",
-    measurementSettings: "Measurement settings",
+    measurementSettings: "Settings",
     settingsButton: "Settings",
     lengthUnit: "Length units",
     cupSystem: "Cup sizing system",
     doneSettings: "Done",
     cupRankNote: "Ranking uses UK cup letter first, then band (G > GG). Displayed sizes come directly from the selected source system.",
-    cupGameNote: "Guess the right-hand size using the UK cup ranking: letter first, then band (G > GG). After answering, UK sizes are shown alongside other display systems.",
-    settingsMethod: "Measurement settings select cm/inches and the source UK/US/EU bra sizes across the interactive pages. Preferences are saved locally and included in shared links. These are supplied source labels, with no inferred conversions. Rankings, filters and game answers retain the UK cup rule: letter first, then band, with single letters above doubled forms. Cup game rounds use full UK scores, including equal scores, and reveal UK references when another display system is selected.",
+    cupGameNote: "Judge the right-hand size by UK cup letter, then band (G > GG).",
+    settingsMethod: "Measurement settings select cm/inches and the source UK/US/EU bra sizes across the interactive pages. Preferences are saved locally and included in shared links. These are supplied source labels, with no inferred conversions. Rankings, filters and game answers retain the UK cup rule: letter first, then band, with single letters above doubled forms. Cup game rounds use full UK scores, including equal scores, and reveal UK references when another display system is selected. Language and theme are available in the same Settings window.",
+    chooseAgents: "Choose agents",
+    savedComparisons: "Saved comparisons",
+    comparisonName: "Comparison name",
+    saveComparison: "Save",
+    loadComparison: "Open",
+    deleteComparison: "Remove",
+    savedLocal: "Saved on this device. Saving the same name replaces it.",
+    noSavedComparisons: "No saved comparisons yet.",
+    storageUnavailable: "This browser could not save the comparison.",
+    savedLimit: "Up to 20 comparisons can be saved.",
+    comparisonSaved: "Comparison saved.",
+    undoDelete: "Undo removal",
+    exportComparison: "Export CSV",
+    comparisonExported: "Comparison exported.",
+    searchFigure: "Type a character name",
+    chooseKnownFigure: "Choose a character from the suggestions.",
+    chartView: "Chart",
+    cupLetters: "Cup letters",
+    bandByCup: "Band × cup",
+    sourceBand: "Source band",
+    showAllValues: "Show all values",
+    whyMatch: "Why this match?",
+    contributionNote: "Right column: contribution to total distance.",
+    comparisonExportedCanonical: "Comparison exported. Temporary references are omitted.",
     compareBasis:'Comparison basis', rawMeasurements:'Raw measurements', heightAdjusted:'Height-adjusted',
     heightAdjustedNote:'Circumference ÷ height × 100', smallerWins:'Smaller value', largerWins:'Larger value',
     changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', dark:'Dark', light:'Light', schema:'Schema',
     sourceTitle:'Zenless Zone Zero · Female Character Measurements',
-    skip:'Skip to the roster', heroSuffix:'female agents · measurements, proportions & silhouette reads',
+    skip:'Skip to the roster', heroSuffix:'female agents · measurements & proportions',
     source:'Source', updated:'Data updated', filters:'Filters', ranges:'Numeric ranges', resetRanges:'reset',
     statureNote:'Height uses head height where the charted figure counts ears or headgear; Miyabi\'s charted 170 cm stays visible as a note.',
     classes:'Classes', bustTier:'Cup group (UK)', heightClass:'Height', shape:'Shape', build:'Build', thighClass:'Thigh class',
@@ -1136,7 +1282,6 @@ const I18N = {
     apply:'Apply & close', sort:'Sort', sheet:'SHEET', official:'OFFICIAL', cards:'CARDS', table:'TABLE', plot:'PLOT',
     compare:'COMPARE', share:'SHARE', reset:'RESET', noMatch:'No characters match these filters.',
     compareNow:'Compare', clear:'Clear', methodology:'Methodology & FAQ', downloadJson:'Download JSON', downloadCsv:'Download CSV',
-    langNote:'Character names and profiles use their official language; interface labels are translated.', pageTitle:'ZZZ Female Measurements — roster, profiles & comparisons',
     footHeight:'<b>Height:</b> the charted figure may include ears, footwear or accessories. Height uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 152.1 cm used); the charted figure stays visible as a note.',
     footBasis:'<b>Basis:</b> cards, filters and rankings use the <b>standard model</b>, except Jane Doe, whose canonical record is Nocturne of Light. Other measured outfits are separate records with their own deltas; art-only outfits never touch a number.',
     footClasses:'<b>Classes:</b> waist (Cinched / Average / Fuller), hips (Compact / Average-width / Wide) and thighs (Slim / Average / Thick) are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles; the cup group follows the source UK cup letter. Thirteen agents are hand-pinned to Thick by curator read. Shape uses bust, waist and hips: Hourglass needs bust/waist and hip/waist ≥1.45 and a bust–hip balance within 15%; Straight is a flare below 1.30 or a mismatch over 25%; the rest is Balanced.',
@@ -1218,7 +1363,7 @@ const I18N = {
     correct: "正解",
     incorrect: "不正解",
     streak: "連続正解",
-    gameNote: "右側の値は左側より大きい、小さい、それとも同じ？小数第1位までの表示値で判定します。",
+    gameNote: "小数第1位までの表示値で比べます。",
     notEnough: "計測値のあるメンバーが2人以上必要です。",
     temporary: "仮の体型",
     sandboxNote: "架空の計測値をcmで入力します。周囲長の空欄は未計測の扱いです。この体型は名簿・ランキング・書き出しデータには入りません。",
@@ -1234,11 +1379,10 @@ const I18N = {
     gameReset: "成績をリセット",
     noValues: "この条件では計測値がありません。",
     gameScore: "正解数",
-    comparisonMethod: "比較に表示する項目を選び、順番を入れ替えられます。差の基準を指定すると、実寸と同じ身長への換算値はcmまたはインチ、身長比はポイントで差を表示します。同じ身長への換算式は「周囲長 ÷ 比較用の身長 × 換算先の身長」です。全体を同じ倍率で拡大・縮小した仮の数値であり、新たな計測値や人体の変化を予測する値ではありません。身長の欄は実測値を保ちます。丸めた表示値が同じ場合は両方を強調し、未計測の値には差を付けません。",
-    matchingMethod: "初期設定の重みはバスト25、ウエスト20、ヒップ20、太もも15、身長20で、アンダーは使いません。各項目を0〜100の範囲で変更できます。差の絶対値を全メンバーのその項目の最大値と最小値の差で割り、重み付き平均を取ります。どちらかが未計測の項目は外し、残った重みで平均を計算し直します。共通する計測項目の重みがすべて0なら結果は表示しません。身長比で探す場合は「周囲長 ÷ 比較用の身長 × 100」を使います。身長の項目そのものは、どちらの方法でも実測値で比べます。",
-    playMethod: "分布は現在の絞り込み結果から未計測値を除いて集計します。区間の幅は均等で、最大値は最後の区間に含めます。全員同じ値なら区間は1つです。比較で選んだ体型は位置を示すだけで、人数には加えません。「どちらが大きい？」は正式な計測記録を使い、小数第1位までの表示値で大小と同値を判定します。シミュレーターの体型は仮の参照用で、名簿の人数・分類・パーセンタイル・ランキング・クイズ・書き出しには含みません。共有リンクには仮の計測値とツールの設定も入ります。既存のランキングとカップの順位規則は変わりません。 カップの分布は選んだUK・US・EUの出典記号で集計し、アンダーを含むサイズを残します。記号による分類のためcm換算や数値の中央値は使いません。UKは従来の順序で、ほかの表記は記号順に並べ、Dの重複形をまとめます。",
+    comparisonMethod: "比較に表示する項目を選び、順番を入れ替えられます。差の基準を指定すると、実寸と同じ身長への換算値はcmまたはインチ、身長比はポイントで差を表示します。同じ身長への換算式は「周囲長 ÷ 比較用の身長 × 換算先の身長」です。全体を同じ倍率で拡大・縮小した仮の数値であり、新たな計測値や人体の変化を予測する値ではありません。身長の欄は実測値を保ちます。丸めた表示値が同じ場合は両方を強調し、未計測の値には差を付けません。 比較セットに名前を付けてこの端末に保存したり、表示中の項目と基準との差をCSVに出力したりできます。",
+    matchingMethod: "初期設定の重みはバスト25、ウエスト20、ヒップ20、太もも15、身長20で、アンダーは使いません。各項目を0〜100の範囲で変更できます。差の絶対値を全メンバーのその項目の最大値と最小値の差で割り、重み付き平均を取ります。どちらかが未計測の項目は外し、残った重みで平均を計算し直します。共通する計測項目の重みがすべて0なら結果は表示しません。身長比で探す場合は「周囲長 ÷ 比較用の身長 × 100」を使います。身長の項目そのものは、どちらの方法でも実測値で比べます。 各結果を開くと、項目ごとの差と距離への寄与を確認できます。",
+    playMethod: "分布は現在の絞り込み結果から未計測値を除いて集計します。区間の幅は均等で、最大値は最後の区間に含めます。全員同じ値なら区間は1つです。比較で選んだ体型は位置を示すだけで、人数には加えません。「どちらが大きい？」は正式な計測記録を使い、小数第1位までの表示値で大小と同値を判定します。シミュレーターの体型は仮の参照用で、名簿の人数・分類・パーセンタイル・ランキング・クイズ・書き出しには含みません。共有リンクには仮の計測値とツールの設定も入ります。既存のランキングとカップの順位規則は変わりません。 カップの分布は選んだUK・US・EUの出典記号で集計し、アンダーを含むサイズを残します。記号による分類のためcm換算や数値の中央値は使いません。UKは従来の順序で、ほかの表記は記号順に並べ、Dの重複形をまとめます。 棒やバンド別のマスを選ぶと、該当するキャラクターを表示して比較に追加できます。バンドは選択した元データの表記を使い、容積の推定は行いません。",
     toolsTitle: "比較・分析ツール",
-    toolsPageTitle: "比較・分析ツール · ZZZ 寸法一覧",
     toolsDescription: "UKカップの分布や寸法・比率を比較し、近い体型を探せます。大小当てクイズや架空の体型シミュレーターも使えます。",
     skipTools: "ツールへ移動",
     cupSize: "カップサイズ",
@@ -1246,19 +1390,43 @@ const I18N = {
     cupDistributionNote: "絞り込み後の{system}カップ分布です。選択中の体型は位置で示し、一覧にはアンダーを含むサイズを残します。同じ記号でも容量は同じとは限りません。",
     toolsNoScript: "ツールの利用にはJavaScriptが必要です。寸法一覧と各キャラクターのページは、メインページから閲覧できます。",
     measurementsNav: "寸法一覧",
-    measurementSettings: "寸法の表示設定",
+    measurementSettings: "設定",
     settingsButton: "設定",
     lengthUnit: "長さの単位",
     cupSystem: "ブラサイズの表記",
     doneSettings: "完了",
     cupRankNote: "順位はUKのカップ記号を優先し、同じ記号ならアンダーで決めます（G > GG）。表示には選んだ方式の出典値を使います。",
-    cupGameNote: "右側のサイズをUKの順位で当てます。カップ記号を優先し、同じ記号ならアンダーで判定します（G > GG）。別の表記を選んでいる場合も、解答後にUKサイズを併記します。",
-    settingsMethod: "表示設定で長さの単位とUK・US・EUのブラサイズ表記を選べます。設定はブラウザーに保存し、共有リンクにも含めます。各方式の値は出典の記録をそのまま使い、換算で補いません。順位・絞り込み・大小当ての判定はUKのカップ記号を優先し、同じ記号ならアンダーで決めます。1文字の記号は同じ文字の重複形より上位です。カップのクイズでは同順位も正解に含め、ほかの表記を選んでいる場合は解答後にUKの値も表示します。",
+    cupGameNote: "右のサイズをUKのカップ、次にバンドの順で比べます（G > GG）。",
+    settingsMethod: "表示設定で長さの単位とUK・US・EUのブラサイズ表記を選べます。設定はブラウザーに保存し、共有リンクにも含めます。各方式の値は出典の記録をそのまま使い、換算で補いません。順位・絞り込み・大小当ての判定はUKのカップ記号を優先し、同じ記号ならアンダーで決めます。1文字の記号は同じ文字の重複形より上位です。カップのクイズでは同順位も正解に含め、ほかの表記を選んでいる場合は解答後にUKの値も表示します。 言語とテーマも同じ設定画面で切り替えられます。",
+    chooseAgents: "比較するキャラを選ぶ",
+    savedComparisons: "保存した比較",
+    comparisonName: "比較セット名",
+    saveComparison: "保存",
+    loadComparison: "開く",
+    deleteComparison: "削除",
+    savedLocal: "この端末に保存します。同じ名前で保存すると上書きされます。",
+    noSavedComparisons: "保存した比較はまだありません。",
+    storageUnavailable: "このブラウザーでは比較を保存できませんでした。",
+    savedLimit: "保存できる比較は20件までです。",
+    comparisonSaved: "比較を保存しました。",
+    undoDelete: "削除を取り消す",
+    exportComparison: "CSV出力",
+    comparisonExported: "比較をCSVに出力しました。",
+    searchFigure: "キャラクター名を入力",
+    chooseKnownFigure: "候補にあるキャラクターを選んでください。",
+    chartView: "グラフ",
+    cupLetters: "カップ別",
+    bandByCup: "バンド × カップ",
+    sourceBand: "元データのバンド",
+    showAllValues: "すべての値を見る",
+    whyMatch: "近さの内訳",
+    contributionNote: "右の列は、距離の合計に占める各項目の値です。",
+    comparisonExportedCanonical: "比較をCSVに出力しました。仮の体型は出力対象に含まれません。",
     compareBasis:'比較の基準', rawMeasurements:'実寸', heightAdjusted:'身長比',
     heightAdjustedNote:'周囲長 ÷ 身長 × 100', smallerWins:'小さい値', largerWins:'大きい値',
     changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', dark:'ダーク', light:'ライト', schema:'スキーマ',
     sourceTitle:'ゼンレスゾーンゼロ · 女性キャラクター寸法',
-    skip:'名簿へスキップ', heroSuffix:'人の女性エージェント · 寸法・比率・シルエット',
+    skip:'名簿へスキップ', heroSuffix:'人の女性エージェント · 寸法と比率',
     source:'出典', updated:'データ更新', filters:'絞り込み', ranges:'数値範囲', resetRanges:'リセット',
     statureNote:'耳や頭部装備を含む公式身長は、頭頂高を高さとして使います。星見雅の公式170cmは注記として残ります。',
     classes:'分類', bustTier:'カップ区分（UK）', heightClass:'身長', shape:'シルエット', build:'体型', thighClass:'太もも区分',
@@ -1267,7 +1435,6 @@ const I18N = {
     apply:'適用して閉じる', sort:'並び順', sheet:'シート', official:'公式', cards:'カード', table:'表', plot:'散布図',
     compare:'比較', share:'共有', reset:'初期化', noMatch:'条件に合うキャラクターがいません。',
     compareNow:'比較する', clear:'クリア', methodology:'算出方法とFAQ', downloadJson:'JSONを保存', downloadCsv:'CSVを保存',
-    langNote:'キャラクター名とプロフィールは各言語の公式表記、操作ラベルは翻訳しています。', pageTitle:'ZZZ 女性キャラ寸法 — 名簿・プロフィール・比較',
     footHeight:'<b>身長：</b>公式値は耳・靴・小物を含む場合があります。耳などの注記があるキャラは頭頂ベースを表示し、公式値は注記として残します（星見雅：170cm公式／152.1cm表示）。',
     footBasis:'<b>基準：</b>カード・フィルター・ランキングは<b>標準モデル</b>が基準です。ジェーン・ドゥのみ「Nocturne of Light」の計測値を使います。ほかの計測済み衣装は別の記録として差分を表示し、画像だけの衣装は数値に影響しません。',
     footClasses:'<b>分類：</b>ウエスト・ヒップ・太ももは実寸cmのロスター三分位。体型はバストとヒップの百分位、カップ区分は出典のUKカップ表記。13名は目視で太めに分類しています。シルエットはバスト・ウエスト・ヒップを使い、砂時計型はバスト/ウエストとヒップ/ウエストが1.45以上、バストとヒップの差が15%以内。直線型はフレア1.30未満または差25%超。それ以外はバランス型です。',
@@ -1349,7 +1516,7 @@ const I18N = {
     correct: "答对了",
     incorrect: "答错了",
     streak: "连续答对",
-    gameNote: "右侧数值比左侧更大、更小，还是相同？按显示的一位小数判定。",
+    gameNote: "按界面显示的一位小数判断。",
     notEnough: "至少需要两名有数据的角色。",
     temporary: "临时参照",
     sandboxNote: "以厘米输入虚构体型的数据。围度留空表示未知，该参照不会加入角色名单、排名或导出数据。",
@@ -1365,11 +1532,10 @@ const I18N = {
     gameReset: "重置成绩",
     noValues: "当前筛选下没有测量数据。",
     gameScore: "答对题数",
-    comparisonMethod: "可以选择对比项目并调整顺序。指定差值基准后，实测值及同身高换算值的差以厘米或英寸表示，身高占比的差以百分点表示。同身高换算采用「围度 ÷ 对比用身高 × 换算身高」，假定体型整体等比缩放。这是虚构的等效数值，并非新的测量结果，也不预测人体变化。身高一栏始终保留实测值。四舍五入后的显示值相同就同时高亮，缺失数据不计算差值。",
-    matchingMethod: "默认权重保持为胸围25、腰围20、臀围20、大腿围15、身高20，下胸围不参与。各项权重可在0至100之间调整。每项取绝对差值，除以全体正式角色该项的最大值与最小值之差，再按所选权重求平均。任一方缺少的数据均跳过，并按剩余权重重新计算平均值；共同有效项目的权重总和为0时不显示匹配结果。选择身高占比时，围度按「围度 ÷ 对比用身高 × 100」计算；身高项目本身仍按实测值比较。",
-    playMethod: "分布图统计当前筛选结果，排除缺失值。各区间等宽，最大值计入最后一个区间；所有值相同时只设一个区间。对比中选中的体型只标示位置，不会重复计入人数。「比一比大小」使用正式测量记录，按显示的一位小数判断大小或相同。沙盒体型仅作临时虚构参照，不计入名单人数、分类、百分位、排名、游戏题目或导出数据。分享链接包含沙盒输入值和工具设置。正式排名及罩杯排序规则保持不变。 罩杯分布按所选UK、US或EU体系的来源字母分组，并保留完整下围尺码。分类数据不做厘米缩放或数值中位数计算。UK沿用原顺序；其他体系按字母顺序排列，重复的D字母形式归在一起。",
+    comparisonMethod: "可以选择对比项目并调整顺序。指定差值基准后，实测值及同身高换算值的差以厘米或英寸表示，身高占比的差以百分点表示。同身高换算采用「围度 ÷ 对比用身高 × 换算身高」，假定体型整体等比缩放。这是虚构的等效数值，并非新的测量结果，也不预测人体变化。身高一栏始终保留实测值。四舍五入后的显示值相同就同时高亮，缺失数据不计算差值。 可为对比命名并保存在此设备上，或将当前显示的项目与基准差值导出为 CSV。",
+    matchingMethod: "默认权重保持为胸围25、腰围20、臀围20、大腿围15、身高20，下胸围不参与。各项权重可在0至100之间调整。每项取绝对差值，除以全体正式角色该项的最大值与最小值之差，再按所选权重求平均。任一方缺少的数据均跳过，并按剩余权重重新计算平均值；共同有效项目的权重总和为0时不显示匹配结果。选择身高占比时，围度按「围度 ÷ 对比用身高 × 100」计算；身高项目本身仍按实测值比较。 展开结果可查看各项差值及其对总距离的贡献。",
+    playMethod: "分布图统计当前筛选结果，排除缺失值。各区间等宽，最大值计入最后一个区间；所有值相同时只设一个区间。对比中选中的体型只标示位置，不会重复计入人数。「比一比大小」使用正式测量记录，按显示的一位小数判断大小或相同。沙盒体型仅作临时虚构参照，不计入名单人数、分类、百分位、排名、游戏题目或导出数据。分享链接包含沙盒输入值和工具设置。正式排名及罩杯排序规则保持不变。 罩杯分布按所选UK、US或EU体系的来源字母分组，并保留完整下围尺码。分类数据不做厘米缩放或数值中位数计算。UK沿用原顺序；其他体系按字母顺序排列，重复的D字母形式归在一起。 选择柱形或底围尺码与罩杯交叉的单元格，可查看对应角色并加入对比。底围尺码沿用所选来源体系的标注，不用于推算容积。",
     toolsTitle: "对比与分析工具",
-    toolsPageTitle: "对比与分析工具 · ZZZ 测量一览",
     toolsDescription: "查看UK罩杯分布、对比尺寸与比例、查找相近体型，还可以玩大小竞猜或尝试虚构体型。",
     skipTools: "跳转至工具",
     cupSize: "罩杯尺码",
@@ -1377,19 +1543,43 @@ const I18N = {
     cupDistributionNote: "按当前筛选统计来源中的{system}罩杯字母，并标出已选角色。列表保留下围尺码；相同罩杯字母不代表相同容积。",
     toolsNoScript: "这些工具需要启用JavaScript。主页面的测量一览和角色资料仍可正常浏览。",
     measurementsNav: "测量一览",
-    measurementSettings: "测量显示设置",
+    measurementSettings: "设置",
     settingsButton: "设置",
     lengthUnit: "长度单位",
     cupSystem: "内衣尺码体系",
     doneSettings: "完成",
     cupRankNote: "排名先比较UK罩杯字母，再比较下围（G > GG）。显示值直接采用所选体系的来源记录。",
-    cupGameNote: "按UK排名猜右侧尺码：先比罩杯字母，再比下围（G > GG）。选择其他体系时，答题后会同时显示UK尺码。",
-    settingsMethod: "在测量显示设置中选择厘米或英寸，以及UK、US、EU内衣尺码。偏好会保存在浏览器中，并写入分享链接。各体系均使用来源记录，不通过换算补值。排名、筛选和大小竞猜仍按UK规则：先比罩杯字母，再比下围，单字母排在对应的双字母之前。罩杯题按完整UK分数判断，支持相同答案；选择其他显示体系时，答题后也会列出UK尺码。",
+    cupGameNote: "按 UK 罩杯字母、再按底围尺码判断右侧大小（G > GG）。",
+    settingsMethod: "在测量显示设置中选择厘米或英寸，以及UK、US、EU内衣尺码。偏好会保存在浏览器中，并写入分享链接。各体系均使用来源记录，不通过换算补值。排名、筛选和大小竞猜仍按UK规则：先比罩杯字母，再比下围，单字母排在对应的双字母之前。罩杯题按完整UK分数判断，支持相同答案；选择其他显示体系时，答题后也会列出UK尺码。 语言和主题也可在同一设置窗口中切换。",
+    chooseAgents: "选择对比角色",
+    savedComparisons: "已保存的对比",
+    comparisonName: "对比名称",
+    saveComparison: "保存",
+    loadComparison: "打开",
+    deleteComparison: "移除",
+    savedLocal: "保存在此设备上。同名保存会覆盖原有对比。",
+    noSavedComparisons: "尚未保存任何对比。",
+    storageUnavailable: "当前浏览器无法保存此对比。",
+    savedLimit: "最多可保存20组对比。",
+    comparisonSaved: "对比已保存。",
+    undoDelete: "撤销移除",
+    exportComparison: "导出 CSV",
+    comparisonExported: "对比已导出。",
+    searchFigure: "输入角色名",
+    chooseKnownFigure: "请从建议列表中选择角色。",
+    chartView: "图表",
+    cupLetters: "按罩杯字母",
+    bandByCup: "底围尺码 × 罩杯",
+    sourceBand: "来源底围尺码",
+    showAllValues: "查看全部数值",
+    whyMatch: "相似原因",
+    contributionNote: "右列为各项对总距离的贡献值。",
+    comparisonExportedCanonical: "对比已导出，临时参考体型未包含在内。",
     compareBasis:'对比方式', rawMeasurements:'实测围度', heightAdjusted:'身高占比',
     heightAdjustedNote:'围度 ÷ 身高 × 100', smallerWins:'较小值', largerWins:'较大值',
     changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', dark:'深色', light:'浅色', schema:'数据结构',
     sourceTitle:'绝区零 · 女性角色测量',
-    skip:'跳到名单', heroSuffix:'位女性代理人 · 三围、比例与轮廓',
+    skip:'跳到名单', heroSuffix:'位女性代理人 · 尺寸与比例',
     source:'来源', updated:'数据更新', filters:'筛选', ranges:'数值范围', resetRanges:'重置',
     statureNote:'若官方身高包含耳朵或头饰，则使用头顶高度；星见雅的官方 170 cm 仍以注释保留。',
     classes:'分类', bustTier:'罩杯分组（UK）', heightClass:'身高', shape:'轮廓', build:'体型', thighClass:'大腿分类',
@@ -1398,7 +1588,6 @@ const I18N = {
     apply:'应用并关闭', sort:'排序', sheet:'设定图', official:'官方', cards:'卡片', table:'表格', plot:'散点图',
     compare:'对比', share:'分享', reset:'重置', noMatch:'没有符合筛选条件的角色。',
     compareNow:'对比', clear:'清空', methodology:'方法与常见问题', downloadJson:'下载 JSON', downloadCsv:'下载 CSV',
-    langNote:'角色名与档案使用官方译名和各语言版本，界面标签已完成本地化。', pageTitle:'ZZZ 女性角色测量 — 名单、档案与对比',
     footHeight:'<b>身高：</b>官方数字可能包含耳朵、鞋子或配饰。有相关注记时，界面使用头顶高度并把官方数字保留为注释（星见雅：官方 170cm／显示 152.1cm）。',
     footBasis:'<b>基准：</b>卡片、筛选和排名采用<b>标准模型</b>的数据，简·杜例外，使用「Nocturne of Light」服装的测量值。其他已测量服装单独记录，并在详情中列出差值；仅有立绘的服装不影响数值。',
     footClasses:'<b>分类：</b>腰围、臀围和大腿按厘米实围三等分。体型比较胸围和臀围百分位，罩杯分组沿用来源的 UK 罩杯字母。13 位按视觉判断归为丰满。轮廓使用三围：沙漏型要求胸腰比和臀腰比都≥1.45，且胸胯差距在 15% 以内；直线型是外扩低于 1.30 或差距超过 25%；其余为匀称型。',
@@ -1682,8 +1871,8 @@ function writeHash(replace=true){
   p.set('unit',state.unit);
   p.set('cups',state.cupSystem);
   if(state.art!=="official") p.set('art', state.art);
-  if(state.lang!=="en") p.set('lang', state.lang);
-  if(document.documentElement.dataset.theme==="light") p.set('th','light');
+  p.set('lang', state.lang);
+  p.set('th',document.documentElement.dataset.theme==='light'?'light':'dark');
   if(state.cup!=="all") p.set('cup', state.cup);
   if(state.shape!=="all") p.set('shape', state.shape);
   if(state.balance!=="all") p.set('bal', state.balance);
@@ -2271,6 +2460,8 @@ function renderCompare(){
   bar.hidden = n===0;
   document.body.classList.toggle("has-compare", n>0);
   const btn = $("#compareBtn");
+  btn.hidden=TOOLS_PAGE&&n===0;
+  $("#chooseAgents").hidden=!(TOOLS_PAGE&&n===0);
   btn.setAttribute("aria-pressed", n? "true":"false");
   btn.setAttribute("aria-label", `${t('compare')} (${n})`);
   $("#cmpCount").textContent = n;
@@ -2302,7 +2493,7 @@ function toast(msg){
 }
 async function share(){
   const url = location.href;
-  const data = {title:"ZZZ Female Measurements", text:"Zenless Zone Zero measurements, proportions and silhouette reads", url};
+  const data = {title:"ZZZ Female Measurements", text:"Zenless Zone Zero measurements and proportions", url};
   try{
     if(navigator.share){ await navigator.share(data); return; }
     await navigator.clipboard.writeText(url);
@@ -2428,7 +2619,7 @@ function fillPlot(){
 function applyLang(lang, doRender=true){
   state.lang = I18N[lang]? lang : 'en';
   document.documentElement.lang = state.lang;
-  document.title = t(TOOLS_PAGE?'toolsPageTitle':'pageTitle');
+  document.title = 'ZZZ Measurements';
   $$('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(I18N[state.lang][k]){ el.innerHTML = t(k); } });
   $("#q").placeholder = t('searchPh');
   if(TOOLS_PAGE)$('.controls').setAttribute('aria-label',t('tools'));
@@ -2449,14 +2640,15 @@ function applyLang(lang, doRender=true){
   }
 }
 $("#lang").addEventListener("change", e=>applyLang(e.target.value));
-function applyTheme(theme){
+function applyTheme(theme,doWrite=true){
   const t2 = theme==="light"?"light":"dark";
   if(t2==="light") document.documentElement.dataset.theme="light";
   else delete document.documentElement.dataset.theme;
   const meta = document.querySelector('meta[name="theme-color"]');
-  if(meta) meta.content = t2==="light" ? "#F3F3EC" : "#0B0B0C";
+  if(meta) meta.content = t2==="light" ? "#F2F4F6" : "#0B0B0C";
   $("#theme").value = t2;
   try{ localStorage.setItem("zzz-theme", t2); }catch(e){}
+  if(doWrite)writeHash(true);
 }
 $("#theme").addEventListener("change", e=>applyTheme(e.target.value));
 
@@ -2476,6 +2668,7 @@ $("#fShare").addEventListener("click", share);
 
 /* keyboard + routing */
 document.addEventListener("keydown", e=>{
+  if($("#savedDialog").open){trapDialogFocus($("#savedDialog"),e);return;}
   if($("#settingsDialog").open){trapSettingsFocus(e);return;}
   if(e.key==="Escape"){
     if($("#overlay").classList.contains("open")) closeModal();
@@ -2571,7 +2764,7 @@ function applyHashState(){
   if(!state.compare.includes(state.compareBase)) state.compareBase="";
   state.compareMode = ['height','scaled'].includes(h.compareMode) ? h.compareMode : 'raw';
   state.plotY = PLOT_METRICS.some(m=>m.k===h.plotY) ? h.plotY : state.plotY;
-  if(h.theme) applyTheme(h.theme);
+  if(h.theme) applyTheme(h.theme,false);
   applyLang(state.lang, false);
   syncControls();
   renderFilterPanel();
@@ -2611,15 +2804,17 @@ function setUnit(unit){
 function setCupSystem(system){
   if(!['uk','us','eu'].includes(system))return;
   state.cupSystem=system;
+  state.distSelection='';
   try{localStorage.setItem('zzz-cup-system',system);}catch(_){}
   refreshMeasurements();
 }
-function trapSettingsFocus(event){
+function trapDialogFocus(dialog,event){
   if(event.key!=='Tab')return;
-  const buttons=$$('#settingsDialog button').filter(b=>!b.disabled),first=buttons[0],last=buttons[buttons.length-1];
+  const buttons=[...dialog.querySelectorAll('button,input,select,a[href]')].filter(b=>!b.disabled&&b.offsetParent!==null),first=buttons[0],last=buttons[buttons.length-1];
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
 }
+function trapSettingsFocus(event){trapDialogFocus($('#settingsDialog'),event);}
 let settingsTrigger=null,settingsTriggerId='';
 function openSettings(){
   if($('#settingsDialog').open)return;
@@ -2649,11 +2844,12 @@ $('#settingsClose').onclick=closeSettings;$('#settingsDone').onclick=closeSettin
 const TOOL_VIEWS=['distribution','matches','game','sandbox'];
 const METRIC_KEYS=['height','bust','underbust','waist','hip','thigh'];
 const COMPARE_ROWS=['height','waist','hip','thigh','cup','bust','underbust','sizes','whr','whtr','shape','build','thighNote','figureRead'];
+const DEFAULT_COMPARE_ROWS=['height','waist','hip','thigh','cup','bust','underbust','whr','whtr'];
 const SANDBOX_SLUG='~sandbox';
 let gameRound=null, gameScore={correct:0,total:0,streak:0};
 function explorerDefaults(){
   return {compareRows:null,compareBase:'',compareHeight:160,sandbox:null,matchSource:'',matchBasis:'raw',matchWeights:null,
-    distMetric:'cup',distBasis:'raw',gameMetric:'waist',gameBasis:'raw'};
+    distMetric:'cup',distBasis:'raw',distCupView:'letters',distSelection:'',gameMetric:'waist',gameBasis:'raw'};
 }
 function validSandbox(raw){
   if(!raw || typeof raw!=='object' || !Number.isFinite(raw.stature_cm) || raw.stature_cm<1 || raw.stature_cm>300) return null;
@@ -2684,6 +2880,8 @@ function readExplorerHash(params){
     const rows=[...new Set(raw.compareRows.filter(k=>COMPARE_ROWS.includes(k)))];
     if(rows.length) out.compareRows=rows;
   }
+  if(['letters','matrix'].includes(raw.distCupView))out.distCupView=raw.distCupView;
+  if(typeof raw.distSelection==='string'&&/^(cup:[A-Z]{1,8}|size:\d{1,3}:[A-Z]{1,8}|bin:\d)$/.test(raw.distSelection))out.distSelection=raw.distSelection;
   if(typeof raw.compareBase==='string') out.compareBase=raw.compareBase;
   if(Number.isFinite(raw.compareHeight)&&raw.compareHeight>=1&&raw.compareHeight<=300) out.compareHeight=Number(raw.compareHeight.toFixed(1));
   if(bySlug.has(raw.matchSource)||raw.matchSource===SANDBOX_SLUG&&out.sandbox) out.matchSource=raw.matchSource;
@@ -2704,10 +2902,23 @@ function metricOptions(selected){ return METRIC_KEYS.map(k=>`<option value="${k}
 function basisOptions(selected,scaled=false){
   return ['raw','height',...(scaled?['scaled']:[])].map(k=>`<option value="${k}"${selected===k?' selected':''}>${esc(t(k==='raw'?'rawMeasurements':k==='height'?'heightAdjusted':'sameHeight'))}</option>`).join('');
 }
-function figureOptions(selected){
-  const records=[...DATA].sort((a,b)=>nameOf(a).localeCompare(nameOf(b),state.lang));
-  if(state.sandbox) records.push(sandboxRecord());
-  return records.map(d=>`<option value="${esc(d.slug)}"${d.slug===selected?' selected':''}>${esc(nameOf(d))}${d.temporary?' ('+esc(t('temporary'))+')':''}</option>`).join('');
+function figurePicker(id,records,selected,label,optional=false){
+  const sorted=[...records].sort((a,b)=>nameOf(a).localeCompare(nameOf(b),state.lang));
+  const current=records.find(d=>d.slug===selected);
+  return `<label for="${id}">${esc(label)}<input class="toolinput figurepicker" type="search" id="${id}" list="${id}-options" autocomplete="off" value="${esc(current?nameOf(current):'')}" placeholder="${esc(t(optional?'noReference':'searchFigure'))}"${optional?'':' required'}><datalist id="${id}-options">${sorted.map(d=>`<option value="${esc(nameOf(d))}">${esc(d.slug)}</option>`).join('')}</datalist></label>`;
+}
+function bindFigurePicker(id,records,fn,optional=false){
+  const input=document.getElementById(id);
+  input.oninput=()=>input.setCustomValidity('');
+  input.onchange=()=>{
+    const value=input.value.trim().toLocaleLowerCase(state.lang);
+    const d=records.find(d=>[nameOf(d),d.display,d.name,d.slug,d.name_ja,d.name_zh].some(n=>n&&n.toLocaleLowerCase(state.lang)===value));
+    if(!d&&!(optional&&!value)){input.setCustomValidity(t('chooseKnownFigure'));input.reportValidity();return;}
+    requestAnimationFrame(()=>{
+      const nextId=document.activeElement?.id;fn(d?.slug||'');
+      if(nextId)document.getElementById(nextId)?.focus();
+    });
+  };
 }
 function shownValue(record,key,basis='raw'){
   const v=Analysis.value(record,key,basis,state.compareHeight);
@@ -2725,6 +2936,7 @@ function setTarget(input){
 function pageHref(tools,params,view){
   const p=new URLSearchParams(params);
   p.set('unit',state.unit);p.set('cups',state.cupSystem);
+  p.set('lang',state.lang);p.set('th',document.documentElement.dataset.theme==='light'?'light':'dark');
   if(tools){
     if(!TOOLS_PAGE && ['table','plot'].includes(state.view))p.set('from',state.view);
     p.set('view',view||'distribution');
@@ -2736,6 +2948,7 @@ function pageHref(tools,params,view){
 }
 function syncPageLinks(params){
   $('#measurementsLink').href=pageHref(false,params);
+  $('#chooseAgents').href=pageHref(false,params);
   $('#toolsLink').href=pageHref(true,params,TOOL_VIEWS.includes(state.view)?state.view:'distribution');
   $$('#toolsNav [data-tool-link]').forEach(a=>a.href=pageHref(true,params,a.dataset.toolLink));
 }
@@ -2744,7 +2957,8 @@ function openTool(view,source){
   if($('#overlay').classList.contains('open')) closeModal();
   if(source) state.matchSource=source;
   if(!TOOLS_PAGE){writeHash(true);location.href=pageHref(true,new URLSearchParams(location.hash.slice(1)),view);return;}
-  state.view=view; render();
+  const changed=state.view!==view;
+  state.view=view; writeHash(!changed); render(true);
   $('#toolTitle').focus({preventScroll:true});
   $('#toolsView').scrollIntoView({block:'start',behavior:'instant'});
 }
@@ -2753,8 +2967,12 @@ $('#toolsNav')?.addEventListener('click',e=>{
   if(a && !(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)){e.preventDefault();openTool(a.dataset.toolLink);}
 });
 window.addEventListener('resize',debounce(()=>{if(state.view==='distribution')renderTool(filtered());},150));
+if(TOOLS_PAGE){
+  const shell=$('.tools-shell');
+  new ResizeObserver(()=>document.documentElement.style.setProperty('--tools-offset',shell.offsetHeight+'px')).observe(shell);
+}
 function renderTool(list){
-  const root=$('#toolsView');
+  const root=$('#toolsView');document.body.dataset.toolView=state.view;
   const content=state.view==='distribution'?distributionHTML(list):state.view==='matches'?matchesHTML():state.view==='game'?gameHTML():sandboxHTML();
   root.innerHTML=`<div class="toolhead"><h2 id="toolTitle" tabindex="-1">${esc(t(state.view))}</h2></div>${content}`;
   if(state.view==='distribution') bindDistribution();
@@ -2765,6 +2983,19 @@ function renderTool(list){
 
 /* Comparison rows, reference differences and same-height equivalents. */
 function rowLabel(key){ return key==='sizes'?'UK / US / EU':t(key==='whr'?'waistHip':key==='whtr'?'waistHeight':key); }
+function comparisonText(d,key,basis){
+  if(METRIC_KEYS.includes(key)){
+    const text=valueText(d,key,basis);
+    return key==='height'&&d.stature_basis==='head'?text+` · ${fmt(d.cm,0)} cm ${t('charted')}`:text;
+  }
+  if(key==='cup')return d.temporary?'—':cupText(d);
+  if(key==='sizes')return d.temporary?'—':`${d.uk} / ${d.us} / ${d.eu}`;
+  if(key==='whr'||key==='whtr')return fmtPct(d[key]);
+  if(d.temporary)return '—';
+  if(key==='figureRead')return readFor(d)||'—';
+  if(key==='thighNote')return tagText(tagsFor(d).thighs);
+  return tagText(tagsFor(d)[key==='build'?'balance':key])||'—';
+}
 function openCompare(){
   const active=document.activeElement, focusId=active?.id, focusMode=active?.dataset.compareMode;
   const pickerOpen=$('#rowPicker')?.open||false;
@@ -2772,22 +3003,8 @@ function openCompare(){
   if(list.length<2){ toast(t('pickTwo')); return; }
   if(!state.compare.includes(state.compareBase)) state.compareBase='';
   const reference=comparisonRecord(state.compareBase), basis=state.compareMode;
-  const rowKeys=(state.compareRows||COMPARE_ROWS).filter(k=>!(basis==='height'&&k==='whtr'&&!state.compareRows));
+  const rowKeys=(state.compareRows||DEFAULT_COMPARE_ROWS).filter(k=>!(basis==='height'&&k==='whtr'&&!state.compareRows));
   const numeric=(d,key)=>METRIC_KEYS.includes(key)?shownValue(d,key,basis):['whr','whtr'].includes(key)?d[key]??null:null;
-  function text(d,key){
-    if(key==='height') return d.temporary?`${fmt(d.stature_cm)} cm\n${fmt(d.stature_cm/2.54)} in`:`${fmt(d.stature_cm)} cm\n${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}`;
-    if(CIRCUMFERENCES[key]){
-      if(basis==='raw') return d[CIRCUMFERENCES[key]]==null?'—':`${fmt(d[CIRCUMFERENCES[key]])} cm\n${fmt(d[CIRCUMFERENCES[key]]/2.54)} in`;
-      return valueText(d,key,basis);
-    }
-    if(d.temporary){ if(key==='whr'||key==='whtr') return fmtPct(d[key]); return '—'; }
-    if(key==='cup') return cupText(d);
-    if(key==='sizes') return `${d.uk} / ${d.us} / ${d.eu}`;
-    if(key==='whr'||key==='whtr') return fmtPct(d[key]);
-    if(key==='figureRead') return readFor(d)||'—';
-    if(key==='thighNote') return tagText(tagsFor(d).thighs);
-    return tagText(tagsFor(d)[key==='build'?'balance':key])||'—';
-  }
   const best={height:'max',waist:'min',hip:'max',thigh:'max',cup:'max'};
   const body=rowKeys.map(key=>{
     const vals=list.map(d=>key==='cup'?(d.temporary?null:cupScore(d)):numeric(d,key));
@@ -2804,19 +3021,19 @@ function openCompare(){
         const suffix=decimals===3?'':basis==='height'&&key!=='height'?' '+t('pp'):USUF();
         if(diff!=null){ const rounded=Number(diff.toFixed(decimals)); delta=`<small class="cmpdelta">${rounded>0?'+':''}${fmt(rounded,decimals)}${esc(suffix)}</small>`; }
       }
-      return `<td class="${best[key]&&ranked[i]!=null&&ranked[i]===target?'win':''}${key==='figureRead'?' cmdesc':''}">${esc(text(d,key))}${delta}</td>`;
+      return `<td class="${best[key]&&ranked[i]!=null&&ranked[i]===target?'win':''}${key==='figureRead'?' cmdesc':''}">${esc(comparisonText(d,key,basis))}${delta}</td>`;
     }).join('')}</tr>`;
   }).join('');
-  const selected=state.compareRows||COMPARE_ROWS, options=[...selected,...COMPARE_ROWS.filter(k=>!selected.includes(k))];
+  const selected=state.compareRows||DEFAULT_COMPARE_ROWS, options=[...selected,...COMPARE_ROWS.filter(k=>!selected.includes(k))];
   const rowPicker=`<details class="rowpicker" id="rowPicker"${pickerOpen?' open':''}><summary>${esc(t('rows'))}</summary><div class="rowoptions">${options.map(key=>{
     const index=selected.indexOf(key);
     return `<div class="rowoption"><label><input type="checkbox" id="row-${key}" data-row="${key}"${index>=0?' checked':''}>${esc(rowLabel(key))}</label><button class="btn" id="up-${key}" data-move="${key}" data-direction="-1"${index<=0?' disabled':''} aria-label="${esc(t('moveUp')+': '+rowLabel(key))}">↑</button><button class="btn" id="down-${key}" data-move="${key}" data-direction="1"${index<0||index===selected.length-1?' disabled':''} aria-label="${esc(t('moveDown')+': '+rowLabel(key))}">↓</button></div>`;
   }).join('')}</div><button class="btn" id="restoreRows">${esc(t('restoreRows'))}</button></details>`;
   $('#modal').innerHTML=`<button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
-    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><button class="btn" id="modalSettings" data-open-settings>${esc(t('settingsButton'))}</button><div class="sub2">${list.length} ${esc(t('picked'))}</div>
+    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><button class="btn" id="modalSettings" data-open-settings>${esc(t('settingsButton'))}</button><button class="btn" id="compareSaved">${esc(t('savedComparisons'))}</button><button class="btn" id="exportCompare">${esc(t('exportComparison'))}</button><div class="sub2">${list.length} ${esc(t('picked'))}</div>
       <div class="cmpcontrols"><div class="seg" role="group" aria-label="${esc(t('compareBasis'))}">${['raw','height','scaled'].map(k=>`<button id="basis-${k}" data-compare-mode="${k}" aria-pressed="${basis===k}">${esc(t(k==='raw'?'rawMeasurements':k==='height'?'heightAdjusted':'sameHeight'))}</button>`).join('')}</div>
       ${basis==='scaled'?targetControl('compareTarget'):''}
-      <label for="compareReference">${esc(t('reference'))}<select id="compareReference"><option value="">${esc(t('noReference'))}</option>${list.map(d=>`<option value="${esc(d.slug)}"${d.slug===state.compareBase?' selected':''}>${esc(nameOf(d))}</option>`).join('')}</select></label>
+      ${figurePicker('compareReference',list,state.compareBase,t('reference'),true)}
       ${basis!=='raw'?`<p class="fnote" id="compareBasisNote">${esc(t(basis==='height'?'heightAdjustedNote':'scaledNote'))}</p>`:''}${state.cupSystem!=='uk'?`<p class="fnote">${esc(t('cupRankNote'))}</p>`:''}${rowPicker}</div></div>
     <div class="cmpwrap"><table class="cmptable"${basis!=='raw'?' aria-describedby="compareBasisNote"':''}><thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(nameOf(d))}${d.temporary?`<small class="cmpdelta">${esc(t('temporary'))}</small>`:''}${d.slug===state.compareBase?`<small class="cmpdelta">${esc(t('referenceMark'))}</small>`:''}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
   if(!$('#overlay').classList.contains('open')) lastFocus=active;
@@ -2828,34 +3045,148 @@ function openCompare(){
   $('#closeModal').onclick=closeModal;
   const update=()=>{ openCompare(); writeHash(true); };
   $$('#modal [data-compare-mode]').forEach(b=>b.onclick=()=>{state.compareMode=b.dataset.compareMode;update();});
-  $('#compareReference').onchange=e=>{state.compareBase=e.target.value;update();};
+  bindFigurePicker('compareReference',list,slug=>{state.compareBase=slug;update();},true);
+  $('#compareSaved').onclick=openSavedComparisons;
+  $('#exportCompare').onclick=exportComparison;
   if($('#compareTarget')) $('#compareTarget').onchange=e=>{if(setTarget(e.target)) update();};
   $$('#modal [data-row]').forEach(input=>input.onchange=()=>{
-    const chosen=[...(state.compareRows||COMPARE_ROWS)];
+    const chosen=[...(state.compareRows||DEFAULT_COMPARE_ROWS)];
     if(input.checked) chosen.push(input.dataset.row);
     else {if(chosen.length===1){input.checked=true;toast(t('keepRow'));return;} chosen.splice(chosen.indexOf(input.dataset.row),1);}
     state.compareRows=chosen;update();
   });
   $$('#modal [data-move]').forEach(b=>b.onclick=()=>{
-    const chosen=[...(state.compareRows||COMPARE_ROWS)],a=chosen.indexOf(b.dataset.move),z=a+Number(b.dataset.direction);
+    const chosen=[...(state.compareRows||DEFAULT_COMPARE_ROWS)],a=chosen.indexOf(b.dataset.move),z=a+Number(b.dataset.direction);
     if(a<0||z<0||z>=chosen.length)return;
     [chosen[a],chosen[z]]=[chosen[z],chosen[a]];state.compareRows=chosen;update();
   });
   $('#restoreRows').onclick=()=>{state.compareRows=null;update();};
 }
 
+/* Saved groups are local preferences, never roster records. */
+const SAVED_COMPARISONS='zzz-comparisons-v1';
+function validSavedComparison(raw){
+  if(!raw||typeof raw!=='object'||typeof raw.name!=='string'||!raw.name.trim()||raw.name.length>60)return null;
+  const sandbox=validSandbox(raw.sandbox);
+  if(!Array.isArray(raw.compare))return null;
+  const compare=[...new Set(raw.compare.filter(slug=>bySlug.has(slug)||slug===SANDBOX_SLUG&&sandbox))].slice(0,4);
+  if(compare.length<2)return null;
+  const rows=Array.isArray(raw.compareRows)?[...new Set(raw.compareRows.filter(k=>COMPARE_ROWS.includes(k)))]:null;
+  return {name:raw.name.trim(),compare,sandbox:compare.includes(SANDBOX_SLUG)?sandbox:null,
+    compareRows:rows?.length?rows:null,compareBase:compare.includes(raw.compareBase)?raw.compareBase:'',
+    compareMode:['height','scaled'].includes(raw.compareMode)?raw.compareMode:'raw',
+    compareHeight:Number.isFinite(raw.compareHeight)&&raw.compareHeight>=1&&raw.compareHeight<=300?raw.compareHeight:160,
+    unit:raw.unit==='in'?'in':'cm',cupSystem:['uk','us','eu'].includes(raw.cupSystem)?raw.cupSystem:'uk'};
+}
+function savedComparisons(){
+  try{
+    const raw=localStorage.getItem(SAVED_COMPARISONS);if(!raw||raw.length>100000)return [];
+    const parsed=JSON.parse(raw);return Array.isArray(parsed)?parsed.slice(0,20).map(validSavedComparison).filter(Boolean):[];
+  }catch(_){return [];}
+}
+function storeComparisons(groups){
+  try{localStorage.setItem(SAVED_COMPARISONS,JSON.stringify(groups));return true;}
+  catch(_){$('#savedStatus').textContent=t('storageUnavailable');return false;}
+}
+let savedTrigger=null,removedComparison=null;
+function openSavedComparisons(){
+  if($('#savedDialog').open)return;
+  savedTrigger=document.activeElement;removedComparison=null;renderSavedComparisons();
+  $('#savedDialog').showModal();document.body.classList.add('modal-open');
+  ($('#comparisonName')||$('#savedClose')).focus();
+}
+function closeSavedComparisons(){
+  $('#savedDialog').close();
+  if(!$('#overlay').classList.contains('open'))document.body.classList.remove('modal-open');
+  (savedTrigger?.isConnected?savedTrigger:$('#savedCompareBtn')).focus();
+}
+function renderSavedComparisons(){
+  const groups=savedComparisons(),canSave=state.compare.length>=2;
+  $('#savedDialog').innerHTML=`<button class="settings-close btn" id="savedClose" aria-label="${esc(t('close'))}">✕</button><h2 id="savedTitle">${esc(t('savedComparisons'))}</h2>
+    ${canSave?`<form id="saveComparisonForm"><label for="comparisonName">${esc(t('comparisonName'))}</label><div class="savedform"><input class="toolinput" id="comparisonName" maxlength="60" required autocomplete="off"><button class="btn primary" type="submit">${esc(t('saveComparison'))}</button></div></form>`:''}
+    <p class="toolnote">${esc(t('savedLocal'))}</p><div class="savedgroups">${groups.length?groups.map((g,i)=>`<div class="savedgroup"><span>${esc(g.name)}</span><button class="btn" data-load-comparison="${i}" aria-label="${esc(t('loadComparison')+': '+g.name)}">${esc(t('loadComparison'))}</button><button class="btn" data-delete-comparison="${i}" aria-label="${esc(t('deleteComparison')+': '+g.name)}">${esc(t('deleteComparison'))}</button></div>`).join(''):`<p>${esc(t('noSavedComparisons'))}</p>`}</div><p id="savedStatus" role="status"></p>${removedComparison?`<button class="btn" id="undoComparison">${esc(t('undoDelete'))}</button>`:''}`;
+  $('#savedClose').onclick=closeSavedComparisons;
+  if(canSave)$('#saveComparisonForm').onsubmit=e=>{
+    e.preventDefault();const name=$('#comparisonName').value.trim();if(!name)return;
+    const group=validSavedComparison({...state,name}),items=savedComparisons(),index=items.findIndex(g=>g.name===name);
+    if(index<0&&items.length>=20){$('#savedStatus').textContent=t('savedLimit');return;}
+    if(index<0)items.push(group);else items[index]=group;
+    if(storeComparisons(items)){renderSavedComparisons();$('#savedStatus').textContent=t('comparisonSaved');$('#comparisonName').focus();}
+  };
+  $$('#savedDialog [data-load-comparison]').forEach(b=>b.onclick=()=>{
+    const group=savedComparisons()[+b.dataset.loadComparison];if(!group)return;
+    const {name,sandbox,...settings}=group;Object.assign(state,settings);if(sandbox)state.sandbox=sandbox;
+    try{localStorage.setItem('zzz-unit',state.unit);localStorage.setItem('zzz-cup-system',state.cupSystem);}catch(_){}
+    closeSavedComparisons();syncControls();renderFilterPanel();render();openCompare();
+  });
+  $$('#savedDialog [data-delete-comparison]').forEach(b=>b.onclick=()=>{
+    const items=savedComparisons(),removed=items.splice(+b.dataset.deleteComparison,1)[0];
+    if(storeComparisons(items)){removedComparison=removed;renderSavedComparisons();$('#undoComparison').focus();}
+  });
+  if($('#undoComparison'))$('#undoComparison').onclick=()=>{
+    const items=savedComparisons();if(items.length>=20){$('#savedStatus').textContent=t('savedLimit');return;}
+    items.push(removedComparison);if(storeComparisons(items)){removedComparison=null;renderSavedComparisons();$('#savedClose').focus();}
+  };
+}
+$('#savedCompareBtn').onclick=openSavedComparisons;
+$('#savedDialog').addEventListener('cancel',e=>{e.preventDefault();closeSavedComparisons();});
+$('#savedDialog').addEventListener('click',e=>{if(e.target===e.currentTarget){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeSavedComparisons();}});
+function csvText(rows){
+  const cell=value=>{
+    let text=value==null?'':String(value);
+    if(typeof value==='string'&&/^[\s]*[=+@-]/.test(text))text="'"+text;
+    return '"'+text.replaceAll('"','""')+'"';
+  };
+  return '\uFEFF'+rows.map(row=>row.map(cell).join(',')).join('\r\n')+'\r\n';
+}
+function exportComparison(){
+  const selected=state.compare.map(comparisonRecord).filter(Boolean),list=selected.filter(d=>!d.temporary),basis=state.compareMode;
+  const chosenReference=comparisonRecord(state.compareBase),reference=chosenReference?.temporary?null:chosenReference;
+  const keys=(state.compareRows||DEFAULT_COMPARE_ROWS).filter(k=>!(basis==='height'&&k==='whtr'&&!state.compareRows));
+  const rows=[['character_slug','character','measurement','value','unit','reference_slug','difference','difference_unit','basis','cup_system','reference_height_cm']];
+  for(const key of keys)for(const d of list){
+    const numeric=METRIC_KEYS.includes(key)||['whr','whtr'].includes(key),decimals=METRIC_KEYS.includes(key)?1:3;
+    const value=record=>METRIC_KEYS.includes(key)?shownValue(record,key,basis):record[key]??null;
+    const shown=record=>{const v=value(record);return v==null?null:Number(v.toFixed(decimals));};
+    const unit=METRIC_KEYS.includes(key)?basis==='height'&&key!=='height'?'%':state.unit:'';
+    const delta=reference&&d.slug!==reference.slug&&numeric?Analysis.difference(shown(d),shown(reference)):null;
+    rows.push([d.slug,nameOf(d),key,numeric?shown(d):comparisonText(d,key,basis),unit,reference?.slug||'',delta==null?null:Number(delta.toFixed(decimals)),delta==null?'':unit==='%'?'pp':unit,basis,state.cupSystem,basis==='scaled'?state.compareHeight:'']);
+  }
+  const url=URL.createObjectURL(new Blob([csvText(rows)],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');
+  a.href=url;a.download='zzz-comparison.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  toast(t(selected.length===list.length?'comparisonExported':'comparisonExportedCanonical'));
+}
+
 function distributionOptions(key){
   return `<option value="cup"${key==='cup'?' selected':''}>${esc(cupSizeLabel())}</option>`+metricOptions(key);
 }
+function distributionResults(records,label,value){
+  const selected=!!state.distSelection;
+  const rows=records.map(d=>`<tr><td><a href="${esc(charHref(d))}" data-tool-profile="${esc(d.slug)}">${esc(nameOf(d))}</a></td><td>${esc(value(d))}</td><td><button class="btn" id="dist-add-${esc(d.slug)}" data-dist-add="${esc(d.slug)}" aria-pressed="${state.compare.includes(d.slug)}" aria-label="${esc((state.compare.includes(d.slug)?t('removeFromCompare'):t('addCompare'))+': '+nameOf(d))}">${esc(t(state.compare.includes(d.slug)?'added':'cmpShort'))}</button></td></tr>`).join('');
+  const table=`<table class="tooltable"><thead><tr><th scope="col">${esc(t('name'))}</th><th scope="col">${esc(t('value'))}</th><th scope="col"><span class="sr">${esc(t('compare'))}</span></th></tr></thead><tbody>${rows}</tbody></table>`;
+  return selected?`<section class="distresults" id="distResults" aria-labelledby="distResultTitle"><div class="selectionhead"><h3 id="distResultTitle" tabindex="-1">${esc(label)} · ${records.length} ${esc(t('entries'))}</h3><button class="btn" id="clearDistribution">${esc(t('showAllValues'))}</button></div>${table}</section>`:`<details class="tooldata"><summary>${esc(t('dataTable'))}</summary>${table}</details>`;
+}
+function barAttributes(selection,label,count){
+  return count?`class="histbutton" role="button" tabindex="0" data-dist-select="${esc(selection)}" aria-pressed="${state.distSelection===selection}" aria-label="${esc(label+': '+count)}"`:'';
+}
 function cupDistributionHTML(list){
-  const summary=Analysis.cupDistribution(list,state.cupSystem), counts=new Map(summary.bins.map(b=>[b.cup,b.count]));
-  const bins=Analysis.cupDistribution(DATA,state.cupSystem).bins.map(b=>({cup:b.cup,count:counts.get(b.cup)||0}));
-  const measured=list.map(d=>({d,s:Analysis.sizeParts(d[state.cupSystem])})).filter(x=>x.s).sort((a,b)=>bins.findIndex(g=>g.cup===a.s.cup)-bins.findIndex(g=>g.cup===b.s.cup)||cupScore(a.d)-cupScore(b.d));
-  const markers=state.compare.map(comparisonRecord).filter(Boolean).map(d=>({d,s:Analysis.sizeParts(d[state.cupSystem])})).filter(x=>x.s);
+  const system=state.cupSystem,summary=Analysis.cupDistribution(list,system),counts=new Map(summary.bins.map(b=>[b.cup,b.count]));
+  const bins=Analysis.cupDistribution(DATA,system).bins.map(b=>({cup:b.cup,count:counts.get(b.cup)||0}));
+  const measured=list.map(d=>({d,s:Analysis.sizeParts(d[system])})).filter(x=>x.s).sort((a,b)=>bins.findIndex(g=>g.cup===a.s.cup)-bins.findIndex(g=>g.cup===b.s.cup)||cupScore(a.d)-cupScore(b.d));
+  const markers=state.compare.map(comparisonRecord).filter(Boolean).map(d=>({d,s:Analysis.sizeParts(d[system])})).filter(x=>x.s);
   const width=innerWidth<=700?460:920,step=(width-80)/bins.length,x=cup=>40+(bins.findIndex(b=>b.cup===cup)+.5)*step;
-  const peak=Math.max(1,...bins.map(b=>b.count)),rotate=innerWidth<=700&&state.cupSystem==='us';
-  const chart=`<svg class="histogram cuphistogram" viewBox="0 0 ${width} ${rotate?390:355}" role="img" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(cupSizeLabel())}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('mostCommon')+': '+summary.modes.join(' / '))}</desc><line class="axis" x1="30" y1="290" x2="${width-30}" y2="290"/>${bins.map(b=>{const h=b.count/peak*205;return `<g><title>${esc(b.cup+': '+b.count)}</title><rect class="bar" x="${x(b.cup)-step*.4}" y="${290-h}" width="${step*.8}" height="${h}"/><text x="${x(b.cup)}" y="${282-h}" text-anchor="middle">${b.count}</text><text class="cupcategory" x="${x(b.cup)}" y="318"${rotate?` transform="rotate(-45 ${x(b.cup)} 318)"`:""} text-anchor="${rotate?'end':'middle'}">${esc(b.cup)}</text></g>`;}).join('')}${markers.map((m,i)=>`<g><line class="marker" x1="${x(m.s.cup)}" x2="${x(m.s.cup)}" y1="${25+i*18}" y2="300"/><text class="markerlabel" x="${x(m.s.cup)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}</svg>`;
-  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label></div><p class="toolnote">${esc(t('cupDistributionNote').replace('{system}',cupSystemName()))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(cupText(m.d))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}<details class="tooldata"><summary>${esc(t('dataTable'))}</summary><table class="tooltable"><thead><tr><th>${esc(t('name'))}</th><th>${esc(cupSizeLabel())}</th></tr></thead><tbody>${measured.map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>${esc(cupText(m.d))}</td></tr>`).join('')}</tbody></table></details>`;
+  const peak=Math.max(1,...bins.map(b=>b.count)),rotate=innerWidth<=700&&system==='us';
+  let chart;
+  if(state.distCupView==='matrix'){
+    const matrix=Analysis.cupMatrix(DATA,system),filteredMatrix=Analysis.cupMatrix(list,system);
+    const cells=new Map(filteredMatrix.cells.map(c=>[c.band+':'+c.cup,c.slugs.length]));
+    chart=`<div class="matrixwrap" role="region" tabindex="0" aria-label="${esc(t('bandByCup')+' ('+cupSystemName()+')')}"><table class="cupmatrix"><caption>${esc(t('bandByCup')+' ('+cupSystemName()+')')}</caption><thead><tr><th scope="col">${esc(t('sourceBand'))}</th>${matrix.cups.map(cup=>`<th scope="col">${esc(cup)}</th>`).join('')}</tr></thead><tbody>${matrix.bands.map(band=>`<tr><th scope="row">${band}</th>${matrix.cups.map(cup=>{const count=cells.get(band+':'+cup)||0,selection='size:'+band+':'+cup;return `<td>${count?`<button class="matrixcell" data-dist-select="${selection}" aria-pressed="${state.distSelection===selection}" aria-label="${esc(cupSystemName()+' '+band+cup+': '+count)}">${count}</button>`:'<span class="matrixempty">0</span>'}</td>`;}).join('')}</tr>`).join('')}</tbody></table></div>`;
+  }else{
+    chart=`<svg class="histogram cuphistogram" viewBox="0 0 ${width} ${rotate?390:355}" role="group" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(cupSizeLabel())}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('mostCommon')+': '+summary.modes.join(' / '))}</desc><line class="axis" x1="30" y1="290" x2="${width-30}" y2="290"/>${bins.map(b=>{const h=b.count/peak*205;return `<g ${barAttributes('cup:'+b.cup,b.cup,b.count)}><title>${esc(b.cup+': '+b.count)}</title><rect class="hit" x="${x(b.cup)-step*.48}" y="70" width="${step*.96}" height="255"/><rect class="bar" x="${x(b.cup)-step*.4}" y="${290-h}" width="${step*.8}" height="${h}"/><text x="${x(b.cup)}" y="${282-h}" text-anchor="middle">${b.count}</text><text class="cupcategory" x="${x(b.cup)}" y="318"${rotate?` transform="rotate(-45 ${x(b.cup)} 318)"`:''} text-anchor="${rotate?'end':'middle'}">${esc(b.cup)}</text></g>`;}).join('')}${markers.map((m,i)=>`<g class="chartmarker"><line class="marker" x1="${x(m.s.cup)}" x2="${x(m.s.cup)}" y1="${25+i*18}" y2="300"/><text class="markerlabel" x="${x(m.s.cup)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}</svg>`;
+  }
+  const parts=state.distSelection.split(':'),selected=measured.filter(m=>parts[0]==='cup'?m.s.cup===parts[1]:parts[0]==='size'?m.s.band===+parts[1]&&m.s.cup===parts[2]:true);
+  const label=parts[0]==='cup'?cupSystemName()+' '+parts[1]:parts[0]==='size'?cupSystemName()+' '+parts[1]+parts[2]:cupSizeLabel();
+  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label><label for="distCupView">${esc(t('chartView'))}<select id="distCupView"><option value="letters"${state.distCupView==='letters'?' selected':''}>${esc(t('cupLetters'))}</option><option value="matrix"${state.distCupView==='matrix'?' selected':''}>${esc(t('bandByCup'))}</option></select></label></div><p class="toolnote">${esc(t('cupDistributionNote').replace('{system}',cupSystemName()))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(cupText(m.d))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}${distributionResults(selected.map(m=>m.d),label,cupText)}`;
 }
 
 /* Filtered roster distribution; references are markers, never observations. */
@@ -2867,39 +3198,57 @@ function distributionHTML(list){
   const markers=state.compare.map(comparisonRecord).filter(Boolean).map(d=>({d,v:shownValue(d,key,basis)})).filter(x=>x.v!=null);
   let chart='';
   if(summary.count){
-    const all=[...measured,...markers].map(x=>x.v), min=Math.min(...all),max=Math.max(...all),span=max-min||1;
+    const all=[...measured,...markers].map(x=>x.v),min=Math.min(...all),max=Math.max(...all),span=max-min||1;
     const width=innerWidth<=700?460:920;
     const x=v=>max===min?width/2:65+(v-min)/span*(width-130),base=290,peak=Math.max(...summary.bins.map(b=>b.count));
-    const bars=summary.bins.map(b=>{
-      const left=x(b.lo),right=x(b.hi),width=summary.bins.length===1?100:Math.max(1,right-left-3),cx=summary.bins.length===1?left+width/2:(left+right)/2;
-      const bx=summary.bins.length===1?left-50:left,h=b.count/peak*205;
-      return `<g><title>${esc(fmt(b.lo)+'–'+fmt(b.hi)+valueSuffix(key,basis)+': '+b.count)}</title><rect class="bar" x="${bx}" y="${base-h}" width="${width}" height="${h}"/><text x="${summary.bins.length===1?left:cx}" y="${base-h-8}" text-anchor="middle">${b.count}</text></g>`;
+    const bars=summary.bins.map((b,i)=>{
+      const left=x(b.lo),right=x(b.hi),barWidth=summary.bins.length===1?100:Math.max(1,right-left-3),cx=summary.bins.length===1?left:(left+right)/2;
+      const bx=summary.bins.length===1?left-50:left,h=b.count/peak*205,label=fmt(b.lo)+'–'+fmt(b.hi)+valueSuffix(key,basis);
+      return `<g ${barAttributes('bin:'+i,label,b.count)}><title>${esc(label+': '+b.count)}</title><rect class="hit" x="${bx}" y="70" width="${barWidth}" height="230"/><rect class="bar" x="${bx}" y="${base-h}" width="${barWidth}" height="${h}"/><text x="${cx}" y="${base-h-8}" text-anchor="middle">${b.count}</text></g>`;
     }).join('');
-    chart=`<svg class="histogram" viewBox="0 0 ${width} 355" role="img" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(t('distribution')+': '+t(key))}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('median')+': '+fmt(summary.median)+valueSuffix(key,basis))}</desc><line class="axis" x1="40" y1="290" x2="${width-35}" y2="290"/>${bars}<line class="median" x1="${x(summary.median)}" x2="${x(summary.median)}" y1="60" y2="300"><title>${esc(t('median'))}</title></line>${markers.map((m,i)=>`<g><line class="marker" x1="${x(m.v)}" x2="${x(m.v)}" y1="${25+i*18}" y2="300"/><text x="${x(m.v)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}<text x="${x(min)}" y="325" text-anchor="middle">${esc(fmt(min)+(min===max?valueSuffix(key,basis):''))}</text>${min===max?'':`<text x="${x(max)}" y="325" text-anchor="middle">${esc(fmt(max)+valueSuffix(key,basis))}</text>`}</svg>`;
+    chart=`<svg class="histogram" viewBox="0 0 ${width} 355" role="group" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(t('distribution')+': '+t(key))}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('median')+': '+fmt(summary.median)+valueSuffix(key,basis))}</desc><line class="axis" x1="40" y1="290" x2="${width-35}" y2="290"/>${bars}<line class="median chartmarker" x1="${x(summary.median)}" x2="${x(summary.median)}" y1="60" y2="300"><title>${esc(t('median'))}</title></line>${markers.map((m,i)=>`<g class="chartmarker"><line class="marker" x1="${x(m.v)}" x2="${x(m.v)}" y1="${25+i*18}" y2="300"/><text x="${x(m.v)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}<text x="${x(min)}" y="325" text-anchor="middle">${esc(fmt(min)+(min===max?valueSuffix(key,basis):''))}</text>${min===max?'':`<text x="${x(max)}" y="325" text-anchor="middle">${esc(fmt(max)+valueSuffix(key,basis))}</text>`}</svg>`;
   }
+  const index=state.distSelection.startsWith('bin:')?+state.distSelection.split(':')[1]:-1,bin=summary.bins[index];
+  const selected=bin?measured.filter(m=>Analysis.binIndex(m.v,summary.bins)===index):measured;
+  const label=bin?fmt(bin.lo)+'–'+fmt(bin.hi)+valueSuffix(key,basis):t(key);
   return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions(key)}</select></label><label for="distBasis">${esc(t('basis'))}<select id="distBasis"${key==='height'?' disabled':''}>${basisOptions(basis,true)}</select></label>${basis==='scaled'?targetControl('distTarget'):''}</div>
-    <p class="toolnote">${esc(t('distributionNote'))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('median'))}<strong>${esc(fmt(summary.median)+valueSuffix(key,basis))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(fmt(m.v)+valueSuffix(key,basis))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}
-    <details class="tooldata"><summary>${esc(t('dataTable'))}</summary><table class="tooltable"><thead><tr><th>${esc(t('name'))}</th><th>${esc(t('value'))}</th></tr></thead><tbody>${measured.sort((a,b)=>a.v-b.v).map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>${esc(fmt(m.v)+valueSuffix(key,basis))}</td></tr>`).join('')}</tbody></table></details>`;
+    <p class="toolnote">${esc(t('distributionNote'))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('median'))}<strong>${esc(fmt(summary.median)+valueSuffix(key,basis))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(fmt(m.v)+valueSuffix(key,basis))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}${distributionResults(selected.sort((a,b)=>a.v-b.v).map(m=>m.d),label,d=>valueText(d,key,basis))}`;
 }
 function toolUpdate(id,fn){
-  const focused=document.activeElement?.id; fn(); render(); if(focused===id) document.getElementById(id)?.focus();
+  const focused=document.activeElement?.id;fn();render();if(focused===id)document.getElementById(id)?.focus();
 }
 function bindDistribution(){
-  $('#distMetric').onchange=e=>toolUpdate('distMetric',()=>{state.distMetric=e.target.value;});
-  if($('#distBasis'))$('#distBasis').onchange=e=>toolUpdate('distBasis',()=>{state.distBasis=e.target.value;});
-  if($('#distTarget')) $('#distTarget').onchange=e=>{if(setTarget(e.target))toolUpdate('distTarget',()=>{});};
+  $('#distMetric').onchange=e=>toolUpdate('distMetric',()=>{state.distMetric=e.target.value;state.distSelection='';});
+  if($('#distCupView'))$('#distCupView').onchange=e=>toolUpdate('distCupView',()=>{state.distCupView=e.target.value;state.distSelection='';});
+  if($('#distBasis'))$('#distBasis').onchange=e=>toolUpdate('distBasis',()=>{state.distBasis=e.target.value;state.distSelection='';});
+  if($('#distTarget'))$('#distTarget').onchange=e=>{if(setTarget(e.target))toolUpdate('distTarget',()=>{state.distSelection='';});};
+  if($('#clearDistribution'))$('#clearDistribution').onclick=()=>{state.distSelection='';render();$('#distMetric').focus();};
+  $$('[data-dist-select]').forEach(b=>{
+    const select=()=>{state.distSelection=b.dataset.distSelect;render();$('#distResultTitle').focus();$('#distResults').scrollIntoView({block:'start'});};
+    b.onclick=select;
+    if(b.tagName.toLowerCase()==='g')b.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}};
+  });
+  $$('[data-dist-add]').forEach(b=>b.onclick=()=>{const id=b.id;toggleCompare(b.dataset.distAdd);document.getElementById(id)?.focus();});
 }
 
 /* User weights affect exploration only. Default matching preserves the original rule. */
 function matchesHTML(){
   const source=comparisonRecord(state.matchSource)||DATA[0],weights=state.matchWeights||Analysis.weights;
   const results=Analysis.matches(DATA,source,weights,state.matchBasis).slice(0,8);
-  return `<div class="toolform"><label for="matchSource">${esc(t('sourceFigure'))}<select id="matchSource">${figureOptions(source.slug)}</select></label><label for="matchBasis">${esc(t('basis'))}<select id="matchBasis">${basisOptions(state.matchBasis)}</select></label><button class="btn" id="resetWeights">${esc(t('resetWeights'))}</button></div>
+  const records=[...DATA,...(state.sandbox?[sandboxRecord()]:[])];
+  return `<div class="toolform">${figurePicker('matchSource',records,source.slug,t('sourceFigure'))}<label for="matchBasis">${esc(t('basis'))}<select id="matchBasis">${basisOptions(state.matchBasis)}</select></label><button class="btn" id="resetWeights">${esc(t('resetWeights'))}</button></div>
     <p class="toolnote">${esc(t('weightNote'))}</p><div class="weights">${METRIC_KEYS.map(key=>`<label for="weight-${key}">${esc(t(key))}<input class="toolinput" id="weight-${key}" data-weight="${key}" type="number" min="0" max="100" step="1" value="${Math.round(weights[key]*100)}"></label>`).join('')}</div>
-    <p class="toolnote" id="distanceNote">${esc(t('distanceNote'))}</p>${results.length?`<table class="tooltable" aria-describedby="distanceNote"><thead><tr><th>${esc(t('name'))}</th><th>${esc(t('distance'))}</th><th></th></tr></thead><tbody>${results.map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>${fmt(m.score,3)}</td><td><button class="btn" data-match-pair="${esc(m.d.slug)}" data-source="${esc(source.slug)}">${esc(t('comparePair'))}</button></td></tr>`).join('')}</tbody></table>`:`<p role="status">${esc(t('noMatches'))}</p>`}`;
+    <p class="toolnote" id="distanceNote">${esc(t('distanceNote'))}</p>${results.length?`<table class="tooltable" aria-describedby="distanceNote"><thead><tr><th>${esc(t('name'))}</th><th>${esc(t('distance'))}</th><th></th></tr></thead><tbody>${results.map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>${fmt(m.score,3)}${matchBreakdown(m)}</td><td><button class="btn" data-match-pair="${esc(m.d.slug)}" data-source="${esc(source.slug)}">${esc(t('comparePair'))}</button></td></tr>`).join('')}</tbody></table>`:`<p role="status">${esc(t('noMatches'))}</p>`}`;
+}
+function matchBreakdown(match){
+  const parts=match.components;
+  return `<details class="matchbreakdown"><summary>${esc(t('whyMatch'))}</summary><ul>${parts.map(c=>{
+    const gap=state.matchBasis==='height'&&c.key!=='height'?c.difference:toDisp(c.difference);
+    return `<li><span>${esc(t(c.key))}</span><span>${esc(fmt(gap)+valueSuffix(c.key,state.matchBasis))}</span><span class="distancepart">${fmt(c.contribution,3)}</span></li>`;
+  }).join('')}</ul><p>${esc(t('contributionNote'))}</p></details>`;
 }
 function bindMatches(){
-  $('#matchSource').onchange=e=>toolUpdate('matchSource',()=>{state.matchSource=e.target.value;});
+  bindFigurePicker('matchSource',[...DATA,...(state.sandbox?[sandboxRecord()]:[])],slug=>toolUpdate('matchSource',()=>{state.matchSource=slug;}));
   $('#matchBasis').onchange=e=>toolUpdate('matchBasis',()=>{state.matchBasis=e.target.value;});
   $('#resetWeights').onclick=()=>toolUpdate('resetWeights',()=>{state.matchWeights=null;});
   $$('[data-weight]').forEach(input=>input.onchange=()=>{
@@ -2923,7 +3272,7 @@ function gameHTML(){
   return `<div class="toolform"><label for="gameMetric">${esc(t('metric'))}<select id="gameMetric">${distributionOptions(key)}</select></label>${key!=='cup'?`<label for="gameBasis">${esc(t('basis'))}<select id="gameBasis"${key==='height'?' disabled':''}>${basisOptions(basis)}</select></label>`:''}<button class="btn" id="gameReset">${esc(t('gameReset'))}</button></div>
     <p class="toolnote">${esc(t(key==='cup'?'cupGameNote':'gameNote'))}</p><div class="toolstats"><span>${esc(t('gameScore'))}<strong>${gameScore.correct} / ${gameScore.total}</strong></span><span>${esc(t('streak'))}<strong>${gameScore.streak}</strong></span></div>
     ${!round?`<p>${esc(t('notEnough'))}</p>`:`<div class="gamepair">${figures.map((d,i)=>`<div class="gamefigure"><img src="${THUMB}/320/${d.official}.webp" width="90" height="140" alt=""><div><h3>${esc(nameOf(d))}</h3><div class="gamevalue">${i===0||round.answer?esc(key==='cup'?cupText(d):valueText(d,key,basis)):'?'}</div>${key==='cup'&&round.answer&&state.cupSystem!=='uk'?`<div class="gamebasis">UK ${esc(d.uk)}</div>`:''}</div></div>`).join('')}</div>
-    <p class="gameresult" role="status">${round.answer?esc(t(round.correct?'correct':'incorrect')+' · '+t(round.outcome)):''}</p><div class="gameactions">${['higher','lower','equal'].map(k=>`<button class="btn" id="guess-${k}" data-guess="${k}"${round.answer?' disabled':''}>${esc(t(k))}</button>`).join('')}<button class="btn primary" id="nextRound"${!round.answer?' disabled':''}>${esc(t('nextRound'))}</button></div>`}`;
+    <p class="gameresult" role="status">${round.answer?esc(t(round.correct?'correct':'incorrect')+' · '+t(round.outcome)):''}</p><div class="gameactions">${['higher','lower','equal'].map(k=>`<button class="btn" id="guess-${k}" data-guess="${k}"${round.answer?' disabled':''}>${esc(t(k))}</button>`).join('')}<button class="btn primary" id="nextRound"${!round.answer?' hidden disabled':''}>${esc(t('nextRound'))}</button></div>`}`;
 }
 function bindGame(){
   $('#gameMetric').onchange=e=>toolUpdate('gameMetric',()=>{state.gameMetric=e.target.value;gameRound=null;});

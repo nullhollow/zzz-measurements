@@ -27,15 +27,17 @@ function setUnit(unit){
 function setCupSystem(system){
   if(!['uk','us','eu'].includes(system))return;
   state.cupSystem=system;
+  state.distSelection='';
   try{localStorage.setItem('zzz-cup-system',system);}catch(_){}
   refreshMeasurements();
 }
-function trapSettingsFocus(event){
+function trapDialogFocus(dialog,event){
   if(event.key!=='Tab')return;
-  const buttons=$$('#settingsDialog button').filter(b=>!b.disabled),first=buttons[0],last=buttons[buttons.length-1];
+  const buttons=[...dialog.querySelectorAll('button,input,select,a[href]')].filter(b=>!b.disabled&&b.offsetParent!==null),first=buttons[0],last=buttons[buttons.length-1];
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
 }
+function trapSettingsFocus(event){trapDialogFocus($('#settingsDialog'),event);}
 let settingsTrigger=null,settingsTriggerId='';
 function openSettings(){
   if($('#settingsDialog').open)return;

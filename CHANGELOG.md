@@ -2,6 +2,23 @@
 
 ## Unreleased — audit implementation
 
+### Tools usability and saved comparisons (2026-10-22)
+
+- Fixed low-contrast table headings, overlapping tool navigation/controls and Back
+  navigation between tools before adding features.
+- Compacted the game layout, moved language/theme into Settings and made empty
+  comparison actions link to the roster. Character/reference pickers accept names.
+- Simplified comparison defaults and used the selected unit; additional source
+  sizing, classes and commentary remain optional rows.
+- Added named local comparison sets with restore, replacement, removal and undo,
+  plus CSV exports of visible canonical values and reference differences.
+- Added per-metric similarity contributions, source band-by-cup distributions and
+  accessible chart/cell drill-down with character comparison actions.
+- Refined light mode with neutral surfaces, stronger text/borders and restrained
+  lime accents. Removed “silhouette reads” promotion and shortened browser titles
+  to “ZZZ Measurements”. Completed EN/JA/ZH copy and regenerated the CJK subsets.
+- Preserved all measurements, existing rankings, cup rules and dataset exports.
+
 ### Measurement settings and cup game rounds (2026-10-22)
 
 - Added cup-size Higher or Lower rounds using the existing UK letter-first,

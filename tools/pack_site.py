@@ -40,7 +40,7 @@ MANIFEST = {
     'id': './',
     'name': 'ZZZ Female Measurements',
     'short_name': 'ZZZ Measurements',
-    'description': 'Measurements, proportions and silhouette reads for all female Zenless Zone Zero agents.',
+    'description': 'Measurements and proportions for all female Zenless Zone Zero agents.',
     'start_url': './',
     'scope': './',
     'display': 'standalone',
@@ -66,7 +66,7 @@ NOT_FOUND = '''<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="__SITE__">
-<title>Page not found · ZZZ Female Measurements</title>
+<title>ZZZ Measurements</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="fonts/fonts.css">

@@ -44,6 +44,18 @@ def percentage(value, height):
     return value / height * 100 if value is not None and height and height > 0 else None
 
 
+def cup_matrix(roster, system='uk'):
+    system = system if system in ('uk', 'us', 'eu') else 'uk'
+    sizes = [(d, (cup_size if system == 'uk' else size_parts)(d.get(system))) for d in roster]
+    sizes = [(d, size) for d, size in sizes if size]
+    bands = sorted({size['band'] for _, size in sizes})
+    cups = [b['cup'] for b in cup_distribution(roster, system)['bins']]
+    cells = [{'band': band, 'cup': cup,
+              'slugs': [d['slug'] for d, size in sizes if size['band'] == band and size['cup'] == cup]}
+             for band in bands for cup in cups]
+    return {'bands': bands, 'cups': cups, 'cells': cells}
+
+
 def metric_value(record, key, basis='raw', target=160):
     value = record.get(FIELDS[key])
     if key == 'height' or basis == 'raw':
@@ -90,6 +102,7 @@ def matches(roster, source, weights=None, basis='raw'):
         if d['slug'] == source['slug']:
             continue
         score = total = 0
+        components = []
         for key in FIELDS:
             weight = weights.get(key, 0)
             if not math.isfinite(weight) or weight <= 0:
@@ -97,10 +110,15 @@ def matches(roster, source, weights=None, basis='raw'):
             a, b = metric_value(source, key, basis), metric_value(d, key, basis)
             if a is None or b is None:
                 continue
-            score += weight * abs(a - b) / spans[key]
+            diff = abs(a - b)
+            weighted = weight * diff / spans[key]
+            score += weighted
             total += weight
+            components.append({'key': key, 'difference': diff, 'weight': weight, 'contribution': weighted})
         if total:
-            results.append({'d': d, 'score': score / total})
+            results.append({'d': d, 'score': score / total,
+                            'components': [{**c, 'weight': c['weight'] / total,
+                                            'contribution': c['contribution'] / total} for c in components]})
     return sorted(results, key=lambda x: x['score'])
 
 
@@ -112,7 +130,17 @@ def distribution(values, count=10):
     size = 1 if lo == hi else count
     step = (hi - lo) / size
     bins = [{'lo': lo + i * step, 'hi': lo + (i + 1) * step, 'count': 0} for i in range(size)]
+    bins[-1]['hi'] = hi
     for value in values:
         index = min(size - 1, int((value - lo) / step)) if step else 0
         bins[index]['count'] += 1
     return {'count': n, 'median': (values[(n - 1) // 2] + values[n // 2]) / 2, 'bins': bins}
+
+
+def bin_index(value, bins):
+    if value is None or not math.isfinite(value) or not bins:
+        return -1
+    lo, hi = bins[0]['lo'], bins[-1]['hi']
+    if value < lo or value > hi:
+        return -1
+    return 0 if hi == lo else min(len(bins) - 1, int((value - lo) / ((hi - lo) / len(bins))))

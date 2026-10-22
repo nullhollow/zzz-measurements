@@ -60,9 +60,11 @@
   [hidden]{display:none !important}
   html{scroll-behavior:smooth}
   html[data-theme="light"]{
-    --ink:#F3F3EC; --coal:#E9E9E1; --panel:#FFFFFF; --panel2:#F7F7F1;
-    --line:#0b0b0c1f; --line2:#0b0b0c33; --dim:#4C4C55; --dimmer:#5D5D66;
-    --concrete:#0B0B0C; --acid:#5C6E00; --acid-deep:#4F5F00;
+    --ink:#F2F4F6; --coal:#E7EBEF; --panel:#FFFFFF; --panel2:#F7F9FB;
+    --line:#DCE1E6; --line2:#BAC3CD; --dim:#505B68; --dimmer:#626D79;
+    --concrete:#20262E; --acid:#485D00; --acid-deep:#394B00;
+    --bust:#B4402D; --waist:#006F87; --hips:#485D00; --thighs:#7B6000;
+    --signal:#B4402D; --holo:#006F87; --blue:#3659B7; --brass:#80601F;
     color-scheme:light;
   }
   body{
@@ -148,7 +150,7 @@
     padding:10px 22px; background:rgba(10,10,12,.93); backdrop-filter:blur(10px);
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
     background-image:repeating-linear-gradient(45deg,#ffffff08 0 2px,transparent 2px 9px)}
-  html[data-theme="light"] .controls{background:rgba(243,243,236,.94)}
+  html[data-theme="light"] .controls{background:rgba(242,244,246,.97)}
   .search{position:relative; flex:1 1 220px; min-width:170px; display:flex; align-items:center; gap:9px;
     background:#08080a; border:1px solid var(--line2); border-radius:999px; padding:9px 15px; color:var(--dim)}
   .search input{flex:1; background:none; border:0; outline:0; color:#fff; font:inherit; min-width:60px}
@@ -452,10 +454,6 @@
   footer .mark span{font-family:var(--disp); font-size:15px; color:var(--acid); letter-spacing:.04em}
   footer .mark i{flex:1; height:1px; background:var(--line)}
   .flinks{display:flex; flex-wrap:wrap; gap:14px; margin:0 0 14px}
-  .fopts{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px; padding-top:14px;
-    border-top:1px solid var(--line)}
-  .fopts label{font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--dimmer)}
-  .fopts select{padding:7px 12px; font-size:10px}
 
   /* ---------- podium ---------- */
   .pod{position:relative; min-width:0; overflow:hidden; border:1px solid var(--line); border-radius:var(--radius); padding:12px 12px 0;
@@ -490,7 +488,7 @@
   .slot.blank .step{background:#141418; border-top-color:var(--line)}
 
   /* ---------- light theme overrides ---------- */
-  html[data-theme="light"] .hero{background:linear-gradient(180deg,#ffffff,#ededE6)}
+  html[data-theme="light"] .hero{background:#FFFFFF}
   html[data-theme="light"] .hero:before{background:#D8FA00}
   html[data-theme="light"] .hero .meta{color:#0b0b0c}
   html[data-theme="light"] .hero .meta b{color:#0b0b0c}
@@ -500,48 +498,48 @@
   html[data-theme="light"] .hero p{color:#3d3d45}
   html[data-theme="light"] .film{background:#0b0b0c}
   html[data-theme="light"] .hl,html[data-theme="light"] .card,html[data-theme="light"] .pod{
-    background:linear-gradient(180deg,#ffffff,#f4f4ed)}
-  html[data-theme="light"] .card .imgbox,html[data-theme="light"] .thumb{background:#e8e8e0}
+    background:#FFFFFF}
+  html[data-theme="light"] .card .imgbox,html[data-theme="light"] .thumb{background:#E8EDF2}
   html[data-theme="light"] .card .desc{color:#3d3d45}
   html[data-theme="light"] .pct,html[data-theme="light"] .card .stat,html[data-theme="light"] .kv,
-  html[data-theme="light"] .irow,html[data-theme="light"] .mdesc{background:#f7f7f1}
+  html[data-theme="light"] .irow,html[data-theme="light"] .mdesc{background:#F7F9FB}
   html[data-theme="light"] .mdesc,html[data-theme="light"] .vline,html[data-theme="light"] .irow .isub{color:#333}
   html[data-theme="light"] .search,html[data-theme="light"] select,html[data-theme="light"] .btn,
   html[data-theme="light"] .viewtoggle button,html[data-theme="light"] .chipbtn,
   html[data-theme="light"] .seg button,html[data-theme="light"] .ochip,html[data-theme="light"] .sim,
   html[data-theme="light"] .cchip{background:#fff;color:#0b0b0c}
   html[data-theme="light"] .search input{color:#0b0b0c}
-  html[data-theme="light"] .modal{background:linear-gradient(180deg,#ffffff,#f4f4ed)}
-  html[data-theme="light"] .mimg,html[data-theme="light"] .mimg img{background:#e8e8e0}
+  html[data-theme="light"] .modal{background:#FFFFFF}
+  html[data-theme="light"] .mimg,html[data-theme="light"] .mimg img{background:#E8EDF2}
   html[data-theme="light"] .tname{color:#0b0b0c}
   html[data-theme="light"] .cmptable thead th,html[data-theme="light"] .cmptable td{color:#0b0b0c}
   html[data-theme="light"] .cmptable .cmdesc{color:#3d3d45}
-  html[data-theme="light"] .cmptable td.win{color:#6d7900}
+  html[data-theme="light"] .cmptable td.win{color:#405400;background:#F0F6D9}
   html[data-theme="light"] .cmptable th:first-child,html[data-theme="light"] .cmptable td:first-child{background:#fff}
   html[data-theme="light"] #tbl tbody td:first-child{background:#fff}
-  html[data-theme="light"] #tbl tbody tr:hover td:first-child{background:#f0f0e9}
+  html[data-theme="light"] #tbl tbody tr:hover td:first-child{background:#EFF3F6}
   html[data-theme="light"] .cmp{background:#fff;color:#0b0b0c}
-  html[data-theme="light"] .fpanel{background:linear-gradient(180deg,#ffffff,#f4f4ed)}
-  html[data-theme="light"] .comparebar{background:rgba(243,243,236,.97)}
+  html[data-theme="light"] .fpanel{background:#FFFFFF}
+  html[data-theme="light"] .comparebar{background:rgba(242,244,246,.98)}
   html[data-theme="light"] .plotwrap{background:#fff}
   html[data-theme="light"] .plot .tick,html[data-theme="light"] .plot .alab{fill:#4C4C55}
   html[data-theme="light"] .plot .gridline{stroke:#0b0b0c14}
   html[data-theme="light"] .plot .pt text{fill:#0b0b0c}
-  html[data-theme="light"] .slot .step{background:#e4e4dc;color:#5C6E00}
-  html[data-theme="light"] .slot.p1 .step{background:linear-gradient(180deg,#5C6E00,#4F5F00);color:#fff}
+  html[data-theme="light"] .slot .step{background:#E7EBEF;color:#5C6E00}
+  html[data-theme="light"] .slot.p1 .step{background:#D8FA00;color:#20262E}
   html[data-theme="light"] .chip,html[data-theme="light"] .irow .ichip,html[data-theme="light"] .prow b,
   html[data-theme="light"] .slot .plate u{color:#0b0b0c}
   html[data-theme="light"] .chip.height{color:#7a6320}
   html[data-theme="light"] .chip.bust{color:#b3361f}
   html[data-theme="light"] .chip.waist{color:#0b6f8c}
-  html[data-theme="light"] .chip.hips{color:#5C6E00}
+  html[data-theme="light"] .chip.hips{color:var(--hips)}
   html[data-theme="light"] .chip.thighs{color:#8a6b00}
   html[data-theme="light"] .chip.shape{color:#3049c9}
   html[data-theme="light"] .viewtoggle button[aria-pressed="true"],
   html[data-theme="light"] .chipbtn[aria-pressed="true"],
   html[data-theme="light"] .seg button[aria-pressed="true"],
   html[data-theme="light"] .ochip[aria-pressed="true"],
-  html[data-theme="light"] .cmp[aria-pressed="true"]{background:#0B0B0C;color:var(--acid);border-color:#0B0B0C}
+  html[data-theme="light"] .cmp[aria-pressed="true"]{background:#20262E;color:#D8FA00;border-color:#20262E}
 
   /* ---------- responsive ---------- */
   @media (max-width:1100px){
@@ -714,7 +712,7 @@
   <span class="hero-side">ZENLESS ZONE ZERO · MEASUREMENTS</span>
   <div class="hero-inner">
     <h1 style="margin:0"><span class="sticker"><b>ZZZ <span>MEASUREMENTS</span></b></span></h1>
-    <h2><span id="agentCount">/*__COUNT__*/</span> <span data-i18n="heroSuffix">female agents · measurements, proportions &amp; silhouette reads</span></h2>
+    <h2><span id="agentCount">/*__COUNT__*/</span> <span data-i18n="heroSuffix">female agents · measurements &amp; proportions</span></h2>
     <div class="meta"><span data-i18n="source">Source</span>: <b>modelmetrics.net</b> · <span data-i18n="updated">Data updated</span> <time datetime="__DATA_UPDATED__">__DATA_UPDATED__</time></div>
   </div>
   <div class="tape"></div>
@@ -788,6 +786,8 @@
       <button id="vPlot" aria-pressed="false" data-i18n="plot">PLOT</button>
     </div>
     <button class="btn cmpbtn" id="compareBtn" aria-pressed="false" aria-label="Compare" title="Compare"><span data-i18n="compare">COMPARE</span><span class="n" id="cmpCount">0</span></button>
+    <a class="btn" id="chooseAgents" href="index.html" hidden data-i18n="chooseAgents">Choose agents</a>
+    <button class="btn" id="savedCompareBtn" data-i18n="savedComparisons">Saved comparisons</button>
     <button class="btn" id="shareBtn" data-i18n="share">SHARE</button>
     <button class="btn" id="reset" data-i18n="reset">RESET</button>
     <div class="count" id="count" aria-live="polite" aria-atomic="true"></div>
@@ -833,8 +833,13 @@
   <fieldset><legend data-i18n="cupSystem">Cup sizing system</legend>
     <div class="viewtoggle" id="cupSystemToggle"><button id="cup-uk" type="button" data-cup-system="uk" aria-pressed="true">UK</button><button id="cup-us" type="button" data-cup-system="us" aria-pressed="false">US</button><button id="cup-eu" type="button" data-cup-system="eu" aria-pressed="false">EU</button></div>
   </fieldset>
+  <div class="settings-selects">
+    <label for="lang"><span data-i18n="language">Language</span><select id="lang"><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option></select></label>
+    <label for="theme"><span data-i18n="theme">Theme</span><select id="theme"><option value="dark" data-i18n="dark">Dark</option><option value="light" data-i18n="light">Light</option></select></label>
+  </div>
   <button class="btn primary" id="settingsDone" type="button" data-i18n="doneSettings">Done</button>
 </dialog>
+<dialog class="settings-dialog saved-dialog" id="savedDialog" aria-labelledby="savedTitle"></dialog>
 
 <footer>
   <div class="fbox">
@@ -853,13 +858,6 @@
     <span data-i18n="footPercentiles"><b>Percentile bars:</b> roster percentiles of the raw cm measurement; height percentiles use head height. 0 = smallest, 100 = largest.</span><br>
     <span data-i18n="footBustDiff"><b>Bust diff:</b> recomputed as bust minus under-bust so it keeps one decimal (the sheet's own diff column is whole-number rounded).</span><br>
     <span data-i18n="footImages"><b>Images:</b> scale renders from modelmetrics.net; official art from the ZZZ Fandom wiki, © HoYoverse. Auto-comments are generated from the measurements; treat them as figure-chart commentary, not in-game canon.</span>
-    <div class="fopts">
-      <label for="lang" data-i18n="language">Language</label>
-      <select id="lang"><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option></select>
-      <label for="theme" data-i18n="theme">Theme</label>
-      <select id="theme"><option value="dark" data-i18n="dark">Dark</option><option value="light" data-i18n="light">Light</option></select>
-      <span class="fnote" style="margin:0" data-i18n="langNote">Character names and profiles use their official language; interface labels are translated.</span>
-    </div>
   </div>
 </footer>
 
@@ -882,7 +880,7 @@ const I18N = {
     heightAdjustedNote:'Circumference ÷ height × 100', smallerWins:'Smaller value', largerWins:'Larger value',
     changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', dark:'Dark', light:'Light', schema:'Schema',
     sourceTitle:'Zenless Zone Zero · Female Character Measurements',
-    skip:'Skip to the roster', heroSuffix:'female agents · measurements, proportions & silhouette reads',
+    skip:'Skip to the roster', heroSuffix:'female agents · measurements & proportions',
     source:'Source', updated:'Data updated', filters:'Filters', ranges:'Numeric ranges', resetRanges:'reset',
     statureNote:'Height uses head height where the charted figure counts ears or headgear; Miyabi\'s charted 170 cm stays visible as a note.',
     classes:'Classes', bustTier:'Cup group (UK)', heightClass:'Height', shape:'Shape', build:'Build', thighClass:'Thigh class',
@@ -891,7 +889,6 @@ const I18N = {
     apply:'Apply & close', sort:'Sort', sheet:'SHEET', official:'OFFICIAL', cards:'CARDS', table:'TABLE', plot:'PLOT',
     compare:'COMPARE', share:'SHARE', reset:'RESET', noMatch:'No characters match these filters.',
     compareNow:'Compare', clear:'Clear', methodology:'Methodology & FAQ', downloadJson:'Download JSON', downloadCsv:'Download CSV',
-    langNote:'Character names and profiles use their official language; interface labels are translated.', pageTitle:'ZZZ Female Measurements — roster, profiles & comparisons',
     footHeight:'<b>Height:</b> the charted figure may include ears, footwear or accessories. Height uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 152.1 cm used); the charted figure stays visible as a note.',
     footBasis:'<b>Basis:</b> cards, filters and rankings use the <b>standard model</b>, except Jane Doe, whose canonical record is Nocturne of Light. Other measured outfits are separate records with their own deltas; art-only outfits never touch a number.',
     footClasses:'<b>Classes:</b> waist (Cinched / Average / Fuller), hips (Compact / Average-width / Wide) and thighs (Slim / Average / Thick) are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles; the cup group follows the source UK cup letter. Thirteen agents are hand-pinned to Thick by curator read. Shape uses bust, waist and hips: Hourglass needs bust/waist and hip/waist ≥1.45 and a bust–hip balance within 15%; Straight is a flare below 1.30 or a mismatch over 25%; the rest is Balanced.',
@@ -939,7 +936,7 @@ const I18N = {
     heightAdjustedNote:'周囲長 ÷ 身長 × 100', smallerWins:'小さい値', largerWins:'大きい値',
     changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', dark:'ダーク', light:'ライト', schema:'スキーマ',
     sourceTitle:'ゼンレスゾーンゼロ · 女性キャラクター寸法',
-    skip:'名簿へスキップ', heroSuffix:'人の女性エージェント · 寸法・比率・シルエット',
+    skip:'名簿へスキップ', heroSuffix:'人の女性エージェント · 寸法と比率',
     source:'出典', updated:'データ更新', filters:'絞り込み', ranges:'数値範囲', resetRanges:'リセット',
     statureNote:'耳や頭部装備を含む公式身長は、頭頂高を高さとして使います。星見雅の公式170cmは注記として残ります。',
     classes:'分類', bustTier:'カップ区分（UK）', heightClass:'身長', shape:'シルエット', build:'体型', thighClass:'太もも区分',
@@ -948,7 +945,6 @@ const I18N = {
     apply:'適用して閉じる', sort:'並び順', sheet:'シート', official:'公式', cards:'カード', table:'表', plot:'散布図',
     compare:'比較', share:'共有', reset:'初期化', noMatch:'条件に合うキャラクターがいません。',
     compareNow:'比較する', clear:'クリア', methodology:'算出方法とFAQ', downloadJson:'JSONを保存', downloadCsv:'CSVを保存',
-    langNote:'キャラクター名とプロフィールは各言語の公式表記、操作ラベルは翻訳しています。', pageTitle:'ZZZ 女性キャラ寸法 — 名簿・プロフィール・比較',
     footHeight:'<b>身長：</b>公式値は耳・靴・小物を含む場合があります。耳などの注記があるキャラは頭頂ベースを表示し、公式値は注記として残します（星見雅：170cm公式／152.1cm表示）。',
     footBasis:'<b>基準：</b>カード・フィルター・ランキングは<b>標準モデル</b>が基準です。ジェーン・ドゥのみ「Nocturne of Light」の計測値を使います。ほかの計測済み衣装は別の記録として差分を表示し、画像だけの衣装は数値に影響しません。',
     footClasses:'<b>分類：</b>ウエスト・ヒップ・太ももは実寸cmのロスター三分位。体型はバストとヒップの百分位、カップ区分は出典のUKカップ表記。13名は目視で太めに分類しています。シルエットはバスト・ウエスト・ヒップを使い、砂時計型はバスト/ウエストとヒップ/ウエストが1.45以上、バストとヒップの差が15%以内。直線型はフレア1.30未満または差25%超。それ以外はバランス型です。',
@@ -996,7 +992,7 @@ const I18N = {
     heightAdjustedNote:'围度 ÷ 身高 × 100', smallerWins:'较小值', largerWins:'较大值',
     changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', dark:'深色', light:'浅色', schema:'数据结构',
     sourceTitle:'绝区零 · 女性角色测量',
-    skip:'跳到名单', heroSuffix:'位女性代理人 · 三围、比例与轮廓',
+    skip:'跳到名单', heroSuffix:'位女性代理人 · 尺寸与比例',
     source:'来源', updated:'数据更新', filters:'筛选', ranges:'数值范围', resetRanges:'重置',
     statureNote:'若官方身高包含耳朵或头饰，则使用头顶高度；星见雅的官方 170 cm 仍以注释保留。',
     classes:'分类', bustTier:'罩杯分组（UK）', heightClass:'身高', shape:'轮廓', build:'体型', thighClass:'大腿分类',
@@ -1005,7 +1001,6 @@ const I18N = {
     apply:'应用并关闭', sort:'排序', sheet:'设定图', official:'官方', cards:'卡片', table:'表格', plot:'散点图',
     compare:'对比', share:'分享', reset:'重置', noMatch:'没有符合筛选条件的角色。',
     compareNow:'对比', clear:'清空', methodology:'方法与常见问题', downloadJson:'下载 JSON', downloadCsv:'下载 CSV',
-    langNote:'角色名与档案使用官方译名和各语言版本，界面标签已完成本地化。', pageTitle:'ZZZ 女性角色测量 — 名单、档案与对比',
     footHeight:'<b>身高：</b>官方数字可能包含耳朵、鞋子或配饰。有相关注记时，界面使用头顶高度并把官方数字保留为注释（星见雅：官方 170cm／显示 152.1cm）。',
     footBasis:'<b>基准：</b>卡片、筛选和排名采用<b>标准模型</b>的数据，简·杜例外，使用「Nocturne of Light」服装的测量值。其他已测量服装单独记录，并在详情中列出差值；仅有立绘的服装不影响数值。',
     footClasses:'<b>分类：</b>腰围、臀围和大腿按厘米实围三等分。体型比较胸围和臀围百分位，罩杯分组沿用来源的 UK 罩杯字母。13 位按视觉判断归为丰满。轮廓使用三围：沙漏型要求胸腰比和臀腰比都≥1.45，且胸胯差距在 15% 以内；直线型是外扩低于 1.30 或差距超过 25%；其余为匀称型。',
@@ -1289,8 +1284,8 @@ function writeHash(replace=true){
   p.set('unit',state.unit);
   p.set('cups',state.cupSystem);
   if(state.art!=="official") p.set('art', state.art);
-  if(state.lang!=="en") p.set('lang', state.lang);
-  if(document.documentElement.dataset.theme==="light") p.set('th','light');
+  p.set('lang', state.lang);
+  p.set('th',document.documentElement.dataset.theme==='light'?'light':'dark');
   if(state.cup!=="all") p.set('cup', state.cup);
   if(state.shape!=="all") p.set('shape', state.shape);
   if(state.balance!=="all") p.set('bal', state.balance);
@@ -1878,6 +1873,8 @@ function renderCompare(){
   bar.hidden = n===0;
   document.body.classList.toggle("has-compare", n>0);
   const btn = $("#compareBtn");
+  btn.hidden=TOOLS_PAGE&&n===0;
+  $("#chooseAgents").hidden=!(TOOLS_PAGE&&n===0);
   btn.setAttribute("aria-pressed", n? "true":"false");
   btn.setAttribute("aria-label", `${t('compare')} (${n})`);
   $("#cmpCount").textContent = n;
@@ -1909,7 +1906,7 @@ function toast(msg){
 }
 async function share(){
   const url = location.href;
-  const data = {title:"ZZZ Female Measurements", text:"Zenless Zone Zero measurements, proportions and silhouette reads", url};
+  const data = {title:"ZZZ Female Measurements", text:"Zenless Zone Zero measurements and proportions", url};
   try{
     if(navigator.share){ await navigator.share(data); return; }
     await navigator.clipboard.writeText(url);
@@ -2035,7 +2032,7 @@ function fillPlot(){
 function applyLang(lang, doRender=true){
   state.lang = I18N[lang]? lang : 'en';
   document.documentElement.lang = state.lang;
-  document.title = t(TOOLS_PAGE?'toolsPageTitle':'pageTitle');
+  document.title = 'ZZZ Measurements';
   $$('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(I18N[state.lang][k]){ el.innerHTML = t(k); } });
   $("#q").placeholder = t('searchPh');
   if(TOOLS_PAGE)$('.controls').setAttribute('aria-label',t('tools'));
@@ -2056,14 +2053,15 @@ function applyLang(lang, doRender=true){
   }
 }
 $("#lang").addEventListener("change", e=>applyLang(e.target.value));
-function applyTheme(theme){
+function applyTheme(theme,doWrite=true){
   const t2 = theme==="light"?"light":"dark";
   if(t2==="light") document.documentElement.dataset.theme="light";
   else delete document.documentElement.dataset.theme;
   const meta = document.querySelector('meta[name="theme-color"]');
-  if(meta) meta.content = t2==="light" ? "#F3F3EC" : "#0B0B0C";
+  if(meta) meta.content = t2==="light" ? "#F2F4F6" : "#0B0B0C";
   $("#theme").value = t2;
   try{ localStorage.setItem("zzz-theme", t2); }catch(e){}
+  if(doWrite)writeHash(true);
 }
 $("#theme").addEventListener("change", e=>applyTheme(e.target.value));
 
@@ -2083,6 +2081,7 @@ $("#fShare").addEventListener("click", share);
 
 /* keyboard + routing */
 document.addEventListener("keydown", e=>{
+  if($("#savedDialog").open){trapDialogFocus($("#savedDialog"),e);return;}
   if($("#settingsDialog").open){trapSettingsFocus(e);return;}
   if(e.key==="Escape"){
     if($("#overlay").classList.contains("open")) closeModal();
@@ -2178,7 +2177,7 @@ function applyHashState(){
   if(!state.compare.includes(state.compareBase)) state.compareBase="";
   state.compareMode = ['height','scaled'].includes(h.compareMode) ? h.compareMode : 'raw';
   state.plotY = PLOT_METRICS.some(m=>m.k===h.plotY) ? h.plotY : state.plotY;
-  if(h.theme) applyTheme(h.theme);
+  if(h.theme) applyTheme(h.theme,false);
   applyLang(state.lang, false);
   syncControls();
   renderFilterPanel();

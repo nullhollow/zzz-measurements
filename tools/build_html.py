@@ -59,9 +59,9 @@ for d in DATA:
     d['wfull'] = intrinsic_width(f'character_images/{o}.webp')
 
 DESC = (f"Measurements for all {N} female Zenless Zone Zero agents: height, bust, under-bust, waist, "
-        "hips and thigh circumference in cm and inches, with waist-to-hip proportions, silhouette "
-        "reads and UK, US and EU bra sizes.")
-TITLE = f"ZZZ Female Measurements — all {N} agents, cm / inches"
+        "hips and thigh circumference in cm and inches, with waist-to-hip proportions "
+        "and UK, US and EU bra sizes.")
+TITLE = "ZZZ Measurements"
 PERMALINK = META['repo']
 
 # ---- structured data -------------------------------------------------------
@@ -148,7 +148,7 @@ for d in sorted(DATA, key=lambda x: x['display']):
         v('waist_cm'), v('hip_cm'), v('thigh_cm')))
 noscript = f'''<div class="nsTable">
 <h2>ZZZ female measurements: all {N} agents</h2>
-<p>Zenless Zone Zero female character measurements in centimetres (1 cm = 0.394 in). The interactive chart on this page also shows imperial units, UK / US / EU bra sizing, proportions and silhouette reads for every agent. Enable JavaScript for filtering, sorting and the detail view.</p>
+<p>Zenless Zone Zero female character measurements in centimetres (1 cm = 0.394 in). The interactive chart on this page also shows imperial units, UK / US / EU bra sizing and proportions for every agent. Enable JavaScript for filtering, sorting and the detail view.</p>
 <table><thead><tr><th scope="col">Agent</th><th scope="col">Height</th><th scope="col">Bust (cm)</th><th scope="col">Under-bust (cm)</th><th scope="col">Waist (cm)</th><th scope="col">Hips (cm)</th><th scope="col">Thigh (cm)</th></tr></thead>
 <tbody>{''.join(rows)}</tbody></table>
 </div>'''
@@ -193,7 +193,7 @@ for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.
     tpl = tpl.replace(f'/*__{token}__*/', (ROOT / 'tools' / source).read_text())
 def render_interactive(tools=False):
     page = tpl
-    title = explorer_i18n['en']['toolsPageTitle'] if tools else TITLE
+    title = TITLE
     description = explorer_i18n['en']['toolsDescription'] if tools else DESC
     structured = jsonld_txt
     nav = ''
@@ -206,9 +206,10 @@ def render_interactive(tools=False):
         page = re.sub(r'<header class="hero">.*?<div class="film".*?</div>',
                       '<header class="toolsheader"><h1 data-i18n="toolsTitle">Comparison tools</h1></header>', page, flags=re.S)
         page = page.replace('data-i18n="skip">Skip to the roster', 'data-i18n="skipTools">Skip to the tools')
-        nav = '<nav class="tooltabs" id="toolsNav" aria-label="Tools">' + ''.join(
+        nav = '<div class="tools-shell"><nav class="tooltabs" id="toolsNav" aria-label="Tools">' + ''.join(
             f'<a href="tools.html#view={key}" data-tool-link="{key}" data-i18n="{key}">{_html.escape(explorer_i18n["en"][key])}</a>'
             for key in ('distribution', 'matches', 'game', 'sandbox')) + settings_button + '</nav>'
+        page = page.replace('  <div class="wrap">', '</div>\n  <div class="wrap">', 1)
     fallback = ('<p data-i18n="toolsNoScript">' + _html.escape(explorer_i18n['en']['toolsNoScript']) +
                 '</p><a href="index.html">Measurements</a>') if tools else noscript
     result = (page

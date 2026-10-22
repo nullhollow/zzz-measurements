@@ -247,7 +247,7 @@ def head(title, desc, canonical, og_image, extra_ld='', prefix='../', lang='en',
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{esc(title)}</title>
+<title>ZZZ Measurements</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{esc(canonical)}">
 {alt}<meta property="og:type" content="article">
@@ -820,7 +820,7 @@ def schema_doc():
 OFFLINE = f'''<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Offline · ZZZ Female Measurements</title>
+<title>ZZZ Measurements</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="fonts/fonts.css">

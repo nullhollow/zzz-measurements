@@ -2,7 +2,7 @@
  "id": "./",
  "name": "ZZZ Female Measurements",
  "short_name": "ZZZ Measurements",
- "description": "Measurements, proportions and silhouette reads for all female Zenless Zone Zero agents.",
+ "description": "Measurements and proportions for all female Zenless Zone Zero agents.",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",

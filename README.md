@@ -49,8 +49,8 @@ python3 tools/make_og.py          # social card (needs Chrome)
 
 ## Measurement settings
 
-The Settings window groups cm/inches and UK/US/EU bra sizing on both interactive
-pages. It is also available from character and comparison dialogs. Preferences
+The Settings window groups cm/inches, UK/US/EU bra sizing, language and theme on
+both interactive pages. It is also available from character and comparison dialogs. Preferences
 are saved locally and included in shared URLs (`unit` and `cups`). The selected
 cup system uses the corresponding source field without converting or inventing
 sizes. Cards, tables, podium values, descriptions, comparisons, distributions and
@@ -75,6 +75,17 @@ mode is included in shared URLs as `basis=height`.
 
 ## Exploration tools
 
+Comparisons show the selected unit only. The default rows focus on measurements
+and ratios; source sizes, classes and profile commentary remain available under
+**Rows and order**. Save up to 20 named comparison sets locally, including selected
+rows/order, reference, raw/adjusted/scaled basis, target height, units and cup
+system. The Saved comparisons window can reopen a group after navigation or reload,
+and supports replacing a name, removal and undo. Local storage failures leave the
+current comparison intact. CSV exports contain the visible canonical-character
+rows and displayed reference differences, with English field names and explicit
+units/basis. Temporary sandbox references and their reference differences are
+omitted from exports. CSV text is quoted and protected against formula injection.
+
 The comparison dialog also offers **Same height**: `circumference_cm / stature_cm × reference_height_cm`
 (default 160 cm). This assumes uniform scaling and produces hypothetical equivalents,
 not new measurements. Height itself retains its measured value. Choose visible rows,
@@ -89,11 +100,16 @@ The separate **Tools** page (`tools.html`), linked from the page navigation, con
   full band-and-cup sizes in the value table. Equal cup letters do
   not imply equal volume. Numeric metrics use equal-width histograms and medians
   of the filtered roster. Comparison selections appear as markers; missing
-  values and sandbox cup sizes are omitted.
+  values and sandbox cup sizes are omitted. The Band × cup view counts supplied
+  band-and-cup labels in a scrollable matrix. Select a bar or occupied matrix cell
+  to view its characters and add them to comparison. Numeric bar selection uses
+  the same histogram boundaries, including the maximum in the final bin.
 - **Find similar figures**: raw or height-adjusted matching with per-metric weights
   from 0 to 100. Distances use the full canonical roster range for each metric,
   skip missing pairs, and renormalize the remaining weights. Default weights and
   static-profile matches retain the original rule. Zero shared weight gives no result.
+  Type a name to select the reference. Expand a match to inspect each measured
+  difference and its contribution to the total distance; this is not a probability.
 - **Higher or Lower**: canonical character pairs with higher, lower and equal
   answers. Numeric rounds use displayed one-decimal values in the selected unit.
   Cup rounds use the existing UK letter-first, band-second score in every display
@@ -110,7 +126,9 @@ The separate **Tools** page (`tools.html`), linked from the page navigation, con
 EN/JA/ZH copy in `tools/explorer_i18n.json` supplies both the interactive UI and static
 methodology. The public measurement schema is unchanged. Old `#view=distribution`, `matches`,
 `game` and `sandbox` links redirect to the Tools page with their state intact.
-Navigation carries filters, comparison selections, units and language between
+Tool section changes create browser-history entries; field edits replace the
+current entry. A shared sticky container keeps tool navigation above its controls.
+Navigation carries filters, comparison selections, units, theme and language between
 pages. The packed site contains 49 entries, 147 profiles and 644 files (about 25.5 MB).
 
 Run the regression and Python/JavaScript parity suite with Node.js available:
@@ -134,7 +152,7 @@ commands; the build and the live page both recalculate from that row.
 
 ## Languages
 
-The language switch in the footer changes the interface, character names and the
+The language switch in Settings changes the interface, character names and the
 figure-read/profile copy between English, Japanese and Simplified Chinese. Names are
 the official localized names taken from the HoYoverse character pages (recorded in
 `tools/localized_names.json`), not literal translations. The static profiles also

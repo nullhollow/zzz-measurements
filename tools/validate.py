@@ -333,9 +333,16 @@ def check_html(out, site):
     else:
         err('index.html: missing I18N translations')
     footer = idx.split('<footer>', 1)[-1].split('</footer>', 1)[0]
-    for key in ('changelog', 'sourceRepository', 'source', 'sourceTitle', 'schema', 'updated', 'language', 'theme', 'dark', 'light'):
+    for key in ('changelog', 'sourceRepository', 'source', 'sourceTitle', 'schema', 'updated'):
         if f'data-i18n="{key}"' not in footer:
             err(f'index.html: footer {key} is not localizable')
+    for filename, content in (('index.html', idx), ('tools.html', tools)):
+        settings = content.split('<dialog class="settings-dialog" id="settingsDialog"', 1)[-1].split('</dialog>', 1)[0]
+        for key in ('language', 'theme', 'dark', 'light', 'lengthUnit', 'cupSystem'):
+            if f'data-i18n="{key}"' not in settings:
+                err(f'{filename}: settings {key} is not localizable')
+        if '<title>ZZZ Measurements</title>' not in content:
+            err(f'{filename}: unexpected browser title')
     checked, broken = link_check(out, site)
     if broken:
         for b in broken[:20]:
