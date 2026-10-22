@@ -10,23 +10,31 @@ CUP_BASE = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7,
             'H': 8, 'J': 9, 'K': 10, 'L': 11, 'M': 12, 'N': 13}
 
 
-def cup_size(size):
+def size_parts(size):
     match = re.fullmatch(r'(\d+)\s*([A-Za-z]+)', size or '')
-    if not match or match[2][0].upper() not in CUP_BASE:
+    if not match:
         return None
-    cup, band = match[2].upper(), int(match[1])
-    return {'cup': cup, 'band': band,
-            'score': CUP_BASE[cup[0]] * 10000 + (1000 if len(cup) == 1 else 0) + band}
+    return {'cup': match[2].upper(), 'band': int(match[1])}
 
 
-def cup_distribution(roster):
+def cup_size(size):
+    parts = size_parts(size)
+    if not parts or parts['cup'][0] not in CUP_BASE:
+        return None
+    cup = parts['cup']
+    return {**parts, 'score': CUP_BASE[cup[0]] * 10000 + (1000 if len(cup) == 1 else 0) + parts['band']}
+
+
+def cup_distribution(roster, system='uk'):
+    system = system if system in ('uk', 'us', 'eu') else 'uk'
     groups = {}
     for record in roster:
-        size = cup_size(record.get('uk'))
+        size = (cup_size if system == 'uk' else size_parts)(record.get(system))
         if size:
             groups[size['cup']] = groups.get(size['cup'], 0) + 1
     bins = [{'cup': cup, 'count': count} for cup, count in groups.items()]
-    bins.sort(key=lambda b: cup_size('0' + b['cup'])['score'])
+    bins.sort(key=lambda b: cup_size('0' + b['cup'])['score'] if system == 'uk'
+              else ord(b['cup'][0]) * 1000 + len(b['cup']))
     peak = max(groups.values(), default=0)
     return {'count': sum(groups.values()), 'bins': bins,
             'modes': [b['cup'] for b in bins if b['count'] == peak]}
@@ -58,6 +66,16 @@ def difference(value, reference):
 def outcome(left, right):
     a, b = displayed(left), displayed(right)
     return None if a is None or b is None else 'equal' if a == b else 'higher' if b > a else 'lower'
+
+
+def game_outcome(left, right, key, basis='raw', unit='cm'):
+    def value(record):
+        if key == 'cup':
+            size = cup_size(record.get('uk'))
+            return size['score'] if size else None
+        result = metric_value(record, key, basis)
+        return result / 2.54 if result is not None and unit == 'in' and (basis != 'height' or key == 'height') else result
+    return outcome(value(left), value(right))
 
 
 def matches(roster, source, weights=None, basis='raw'):

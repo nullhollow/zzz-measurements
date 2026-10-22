@@ -620,6 +620,7 @@ for _lang in PAGE:
         (PAGE[_lang]['sameHeight'], esc(PAGE[_lang]['comparisonMethod'])),
         (PAGE[_lang]['matches'], esc(PAGE[_lang]['matchingMethod'])),
         (PAGE[_lang]['tools'], esc(PAGE[_lang]['playMethod'])),
+        (PAGE[_lang]['measurementSettings'], esc(PAGE[_lang]['settingsMethod'])),
     ])
 
 

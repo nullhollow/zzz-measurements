@@ -285,6 +285,16 @@ def check_html(out, site):
             err(f'{rel}: missing lang attribute')
     idx = (out / 'index.html').read_text()
     tools = (out / 'tools.html').read_text()
+    for rel, page in (('index.html', idx), ('tools.html', tools)):
+        settings = re.search(r'<dialog\b[^>]*id="settingsDialog".*?</dialog>', page, re.S)
+        if not settings or 'id="unitToggle"' not in settings[0] or 'id="cupSystemToggle"' not in settings[0]:
+            err(f'{rel}: measurement settings must group length and cup systems in a dialog')
+        if page.count('id="settingsBtn"') != 1 or page.count('id="unitToggle"') != 1:
+            err(f'{rel}: duplicated or missing measurement settings controls')
+        if settings:
+            for system in ('uk', 'us', 'eu'):
+                if f'data-cup-system="{system}"' not in settings[0]:
+                    err(f'{rel}: missing {system} display setting')
     if 'id="toolSelect"' in idx:
         err('index.html: tools selector belongs on the dedicated tools page')
     for needle in ('id="toolsLink"', 'href="tools.html"'):

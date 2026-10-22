@@ -47,6 +47,16 @@ python3 tools/make_favicon.py     # SVG, ICO, PWA + maskable icons
 python3 tools/make_og.py          # social card (needs Chrome)
 ```
 
+## Measurement settings
+
+The Settings window groups cm/inches and UK/US/EU bra sizing on both interactive
+pages. It is also available from character and comparison dialogs. Preferences
+are saved locally and included in shared URLs (`unit` and `cups`). The selected
+cup system uses the corresponding source field without converting or inventing
+sizes. Cards, tables, podium values, descriptions, comparisons, distributions and
+the game follow that display preference. Rankings and UK cup filters keep their
+original rules. Static profiles and exports retain all source sizing systems.
+
 ## Compare
 
 Every card has a labelled **Compare** pill inside its artwork. Pick 2–4 agents; the
@@ -74,8 +84,9 @@ selected unit. Missing measurements stay unknown.
 
 The separate **Tools** page (`tools.html`), linked from the page navigation, contains:
 
-- **Distribution**: UK cup-letter counts by default, using the existing cup order
-  and retaining full band-and-cup sizes in the value table. Equal cup letters do
+- **Distribution**: source cup-letter counts in the selected sizing system, using the
+  existing UK order or grouped source-letter order for US/EU, and retaining
+  full band-and-cup sizes in the value table. Equal cup letters do
   not imply equal volume. Numeric metrics use equal-width histograms and medians
   of the filtered roster. Comparison selections appear as markers; missing
   values and sandbox cup sizes are omitted.
@@ -83,20 +94,24 @@ The separate **Tools** page (`tools.html`), linked from the page navigation, con
   from 0 to 100. Distances use the full canonical roster range for each metric,
   skip missing pairs, and renormalize the remaining weights. Default weights and
   static-profile matches retain the original rule. Zero shared weight gives no result.
-- **Higher or Lower**: canonical character pairs with higher, lower and equal answers,
-  judged using displayed one-decimal values in the selected unit. Scores stay in the page.
+- **Higher or Lower**: canonical character pairs with higher, lower and equal
+  answers. Numeric rounds use displayed one-decimal values in the selected unit.
+  Cup rounds use the existing UK letter-first, band-second score in every display
+  system, including equal scores. After a guess, UK values appear as references
+  when US/EU display labels are selected. Cup rounds are unaffected by length units
+  or height adjustment. Scores stay in the page.
 - **Figure sandbox**: fictional cm inputs that can join a comparison or serve as the
   matching reference. They never enter the roster, classes, percentiles, rankings,
   game rounds or exports. Optional blank circumferences stay unknown. Shared links
   include the fictional values and validated tool settings in the URL fragment.
 
 `tools/analysis_math.py` and `tools/analysis.js` implement the same exploration math.
-`tools/explorer.js` and `tools/explorer.css` are inlined by `build_html.py`; the shared
+`tools/explorer.js`, `tools/settings.js` and `tools/explorer.css` are inlined by `build_html.py`; the shared
 EN/JA/ZH copy in `tools/explorer_i18n.json` supplies both the interactive UI and static
 methodology. The public measurement schema is unchanged. Old `#view=distribution`, `matches`,
 `game` and `sandbox` links redirect to the Tools page with their state intact.
 Navigation carries filters, comparison selections, units and language between
-pages. The packed site contains 49 entries, 147 profiles and 644 files (about 25.4 MB).
+pages. The packed site contains 49 entries, 147 profiles and 644 files (about 25.5 MB).
 
 Run the regression and Python/JavaScript parity suite with Node.js available:
 

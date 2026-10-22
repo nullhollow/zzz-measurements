@@ -126,7 +126,7 @@ def values(d, unit='cm', lang='en'):
         'bustLabel': f'{words[4]} {unit_suffix}',
         'waistLabel': f'{words[5]} {unit_suffix}',
         'hipLabel': f'{words[6]} {unit_suffix}',
-        'uk': esc(d['uk']),
+        'cupValue': esc(d['uk']), 'cupLabel': 'UK',
         'chips': chips_html(d),
         'desc': esc(d['desc_cm'] if unit == 'cm' else d['desc_in']),
         'note': note,

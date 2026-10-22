@@ -10,7 +10,7 @@ import unittest
 
 from fontTools.ttLib import TTFont
 from analysis_math import (FIELDS, WEIGHTS, cup_distribution, cup_size, difference, displayed, distribution,
-                           matches, metric_value, outcome, percentage)
+                           game_outcome, matches, metric_value, outcome, percentage, size_parts)
 
 ROOT = Path(__file__).resolve().parent.parent
 ROSTER = json.loads((ROOT / 'tools/data.json').read_text())
@@ -34,6 +34,33 @@ class AnalysisTests(unittest.TestCase):
         self.assertEqual(cup_distribution([]), {'count': 0, 'bins': [], 'modes': []})
         for value in (None, '', '??', '32I', 'E', '32'):
             self.assertIsNone(cup_size(value))
+
+    def test_display_systems_use_source_values_without_conversion(self):
+        self.assertEqual(size_parts('23DDDD'), {'band': 23, 'cup': 'DDDD'})
+        self.assertEqual(size_parts('47I'), {'band': 47, 'cup': 'I'})
+        records = [{'uk': '19E', 'eu': '37G'}, {'uk': '21E', 'eu': '42F', 'us': '21DDD'}]
+        self.assertEqual(cup_distribution(records, 'us')['count'], 1)
+        self.assertEqual(cup_distribution(records, 'eu')['bins'], [{'cup': 'F', 'count': 1}, {'cup': 'G', 'count': 1}])
+        for system in ('uk', 'us', 'eu'):
+            self.assertEqual(cup_distribution(ROSTER, system)['count'], len(ROSTER))
+        self.assertEqual([b['cup'] for b in cup_distribution(ROSTER, 'us')['bins']],
+                         ['A', 'B', 'C', 'D', 'DD', 'DDD', 'DDDD', 'H', 'I', 'J', 'K'])
+
+    def test_cup_game_uses_uk_letter_then_band(self):
+        for unit in ('cm', 'in'):
+            for basis in ('raw', 'height', 'scaled'):
+                self.assertEqual(game_outcome({'uk': '24GG'}, {'uk': '19G'}, 'cup', basis, unit), 'higher')
+                self.assertEqual(game_outcome({'uk': '19E'}, {'uk': '22E'}, 'cup', basis, unit), 'higher')
+                self.assertEqual(game_outcome({'uk': '22E'}, {'uk': '19E'}, 'cup', basis, unit), 'lower')
+                self.assertEqual(game_outcome({'uk': '19E'}, {'uk': '19E'}, 'cup', basis, unit), 'equal')
+        # Equal EU labels can represent distinct source UK ranks.
+        left, right = {'uk': '21DD', 'eu': '42F'}, {'uk': '21E', 'eu': '42F'}
+        self.assertEqual(game_outcome(left, right, 'cup'), 'higher')
+        self.assertIsNone(game_outcome({}, right, 'cup'))
+
+    def test_numeric_game_uses_selected_unit_precision(self):
+        self.assertEqual(game_outcome({'waist_cm': 50}, {'waist_cm': 50.1}, 'waist', 'raw', 'cm'), 'higher')
+        self.assertEqual(game_outcome({'waist_cm': 50}, {'waist_cm': 50.1}, 'waist', 'raw', 'in'), 'equal')
 
     def test_effective_height_and_scaling(self):
         miyabi = next(d for d in ROSTER if d['slug'] == 'miyabi')
@@ -108,8 +135,10 @@ const values=p.fixtures.map(d=>Object.keys(a.fields).map(k=>['raw','height','sca
 const match=p.fixtures.map(d=>['raw','height'].map(b=>a.matches(p.roster,d,a.weights,b).map(x=>[x.d.slug,x.score])));
 const dist=Object.keys(a.fields).map(k=>['raw','height','scaled'].map(b=>a.distribution(p.roster.map(d=>a.value(d,k,b,172.3)))));
 const rounds=[[31.32,31.34],[31.32,31.36],[31.32,31.24],[null,1],[2.55,2.56]].map(v=>a.outcome(...v));
-const cups=p.fixtures.map(d=>a.cupSize(d.uk)),cupDist=a.cupDistribution(p.roster);
-process.stdout.write(JSON.stringify({values,match,dist,rounds,cups,cupDist}));
+const cups=p.fixtures.map(d=>a.cupSize(d.uk)),cupDist=['uk','us','eu'].map(s=>a.cupDistribution(p.roster,s));
+const game=p.roster.map(left=>p.roster.map(right=>['cm','in'].map(u=>a.gameOutcome(left,right,'cup','raw',u))));
+const numeric=p.fixtures.map((d,i)=>Object.keys(a.fields).map(k=>['raw','height'].map(b=>['cm','in'].map(u=>a.gameOutcome(d,p.fixtures[(i+1)%p.fixtures.length],k,b,u)))));
+process.stdout.write(JSON.stringify({values,match,dist,rounds,cups,cupDist,game,numeric}));
 '''
         result = subprocess.run(['node', '-e', js], input=json.dumps(payload), text=True, cwd=ROOT, check=True, capture_output=True)
         expected = {
@@ -118,7 +147,10 @@ process.stdout.write(JSON.stringify({values,match,dist,rounds,cups,cupDist}));
             'dist': [[distribution([metric_value(d, k, b, 172.3) for d in ROSTER]) for b in ('raw', 'height', 'scaled')] for k in FIELDS],
             'rounds': [outcome(*v) for v in [(31.32, 31.34), (31.32, 31.36), (31.32, 31.24), (None, 1), (2.55, 2.56)]],
             'cups': [cup_size(d.get('uk')) for d in fixtures],
-            'cupDist': cup_distribution(ROSTER),
+            'cupDist': [cup_distribution(ROSTER, system) for system in ('uk', 'us', 'eu')],
+            'game': [[[game_outcome(left, right, 'cup', 'raw', unit) for unit in ('cm', 'in')] for right in ROSTER] for left in ROSTER],
+            'numeric': [[[[game_outcome(d, fixtures[(i + 1) % len(fixtures)], key, basis, unit) for unit in ('cm', 'in')]
+                          for basis in ('raw', 'height')] for key in FIELDS] for i, d in enumerate(fixtures)],
         }
         def compare(a, b):
             if isinstance(a, dict):

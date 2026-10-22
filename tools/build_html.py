@@ -189,7 +189,7 @@ explorer_i18n = json.loads((ROOT / 'tools/explorer_i18n.json').read_text())
 for lang, strings in explorer_i18n.items():
     copy = ',\n    '.join(f'{key}: {json.dumps(value, ensure_ascii=False)}' for key, value in strings.items()) + ','
     tpl = tpl.replace(f'/*__EXPLORER_I18N_{lang.upper()}__*/', copy)
-for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.js'), ('EXPLORER_CSS', 'explorer.css')):
+for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.js'), ('SETTINGS_JS', 'settings.js'), ('EXPLORER_CSS', 'explorer.css')):
     tpl = tpl.replace(f'/*__{token}__*/', (ROOT / 'tools' / source).read_text())
 def render_interactive(tools=False):
     page = tpl
@@ -197,6 +197,7 @@ def render_interactive(tools=False):
     description = explorer_i18n['en']['toolsDescription'] if tools else DESC
     structured = jsonld_txt
     nav = ''
+    settings_button = '<button class="btn" id="settingsBtn" data-open-settings data-i18n="settingsButton">Settings</button>'
     if tools:
         structured = json.dumps({'@context': 'https://schema.org', '@type': 'WebPage',
                                  'url': '__SITE_URL__tools.html', 'name': title,
@@ -207,7 +208,7 @@ def render_interactive(tools=False):
         page = page.replace('data-i18n="skip">Skip to the roster', 'data-i18n="skipTools">Skip to the tools')
         nav = '<nav class="tooltabs" id="toolsNav" aria-label="Tools">' + ''.join(
             f'<a href="tools.html#view={key}" data-tool-link="{key}" data-i18n="{key}">{_html.escape(explorer_i18n["en"][key])}</a>'
-            for key in ('distribution', 'matches', 'game', 'sandbox')) + '</nav>'
+            for key in ('distribution', 'matches', 'game', 'sandbox')) + settings_button + '</nav>'
     fallback = ('<p data-i18n="toolsNoScript">' + _html.escape(explorer_i18n['en']['toolsNoScript']) +
                 '</p><a href="index.html">Measurements</a>') if tools else noscript
     result = (page
@@ -218,6 +219,7 @@ def render_interactive(tools=False):
         .replace('/*__CARDS__*/', '' if tools else cards_html)
         .replace('/*__COUNT__*/', str(N))
         .replace('/*__TOOLS_NAV__*/', nav)
+        .replace('/*__SETTINGS_BUTTON__*/', '' if tools else settings_button)
         .replace('/*__ROSTER_CURRENT__*/', '' if tools else 'aria-current="page"')
         .replace('/*__TOOLS_CURRENT__*/', 'aria-current="page"' if tools else '')
         .replace('__PAGE__', 'tools' if tools else 'roster')

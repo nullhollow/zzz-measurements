@@ -42,7 +42,7 @@ function readExplorerHash(params){
   if(bySlug.has(raw.matchSource)||raw.matchSource===SANDBOX_SLUG&&out.sandbox) out.matchSource=raw.matchSource;
   for(const key of ['matchBasis','gameBasis']) if(['raw','height'].includes(raw[key])) out[key]=raw[key];
   if(['raw','height','scaled'].includes(raw.distBasis)) out.distBasis=raw.distBasis;
-  for(const key of ['distMetric','gameMetric']) if((key==='distMetric'?['cup',...METRIC_KEYS]:METRIC_KEYS).includes(raw[key])) out[key]=raw[key];
+  for(const key of ['distMetric','gameMetric']) if(['cup',...METRIC_KEYS].includes(raw[key])) out[key]=raw[key];
   if(raw.matchWeights && typeof raw.matchWeights==='object'){
     out.matchWeights=Object.fromEntries(Object.keys(Analysis.fields).map(k=>[k,Number.isFinite(raw.matchWeights[k])?Math.round(Math.max(0,Math.min(1,raw.matchWeights[k]))*100)/100:0]));
   }
@@ -77,6 +77,7 @@ function setTarget(input){
 }
 function pageHref(tools,params,view){
   const p=new URLSearchParams(params);
+  p.set('unit',state.unit);p.set('cups',state.cupSystem);
   if(tools){
     if(!TOOLS_PAGE && ['table','plot'].includes(state.view))p.set('from',state.view);
     p.set('view',view||'distribution');
@@ -133,7 +134,7 @@ function openCompare(){
       return valueText(d,key,basis);
     }
     if(d.temporary){ if(key==='whr'||key==='whtr') return fmtPct(d[key]); return '—'; }
-    if(key==='cup') return `${cupLetter(d)}\nUK ${d.uk}`;
+    if(key==='cup') return cupText(d);
     if(key==='sizes') return `${d.uk} / ${d.us} / ${d.eu}`;
     if(key==='whr'||key==='whtr') return fmtPct(d[key]);
     if(key==='figureRead') return readFor(d)||'—';
@@ -165,11 +166,11 @@ function openCompare(){
     return `<div class="rowoption"><label><input type="checkbox" id="row-${key}" data-row="${key}"${index>=0?' checked':''}>${esc(rowLabel(key))}</label><button class="btn" id="up-${key}" data-move="${key}" data-direction="-1"${index<=0?' disabled':''} aria-label="${esc(t('moveUp')+': '+rowLabel(key))}">↑</button><button class="btn" id="down-${key}" data-move="${key}" data-direction="1"${index<0||index===selected.length-1?' disabled':''} aria-label="${esc(t('moveDown')+': '+rowLabel(key))}">↓</button></div>`;
   }).join('')}</div><button class="btn" id="restoreRows">${esc(t('restoreRows'))}</button></details>`;
   $('#modal').innerHTML=`<button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
-    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><div class="sub2">${list.length} ${esc(t('picked'))}</div>
+    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><button class="btn" id="modalSettings" data-open-settings>${esc(t('settingsButton'))}</button><div class="sub2">${list.length} ${esc(t('picked'))}</div>
       <div class="cmpcontrols"><div class="seg" role="group" aria-label="${esc(t('compareBasis'))}">${['raw','height','scaled'].map(k=>`<button id="basis-${k}" data-compare-mode="${k}" aria-pressed="${basis===k}">${esc(t(k==='raw'?'rawMeasurements':k==='height'?'heightAdjusted':'sameHeight'))}</button>`).join('')}</div>
       ${basis==='scaled'?targetControl('compareTarget'):''}
       <label for="compareReference">${esc(t('reference'))}<select id="compareReference"><option value="">${esc(t('noReference'))}</option>${list.map(d=>`<option value="${esc(d.slug)}"${d.slug===state.compareBase?' selected':''}>${esc(nameOf(d))}</option>`).join('')}</select></label>
-      ${basis!=='raw'?`<p class="fnote" id="compareBasisNote">${esc(t(basis==='height'?'heightAdjustedNote':'scaledNote'))}</p>`:''}${rowPicker}</div></div>
+      ${basis!=='raw'?`<p class="fnote" id="compareBasisNote">${esc(t(basis==='height'?'heightAdjustedNote':'scaledNote'))}</p>`:''}${state.cupSystem!=='uk'?`<p class="fnote">${esc(t('cupRankNote'))}</p>`:''}${rowPicker}</div></div>
     <div class="cmpwrap"><table class="cmptable"${basis!=='raw'?' aria-describedby="compareBasisNote"':''}><thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(nameOf(d))}${d.temporary?`<small class="cmpdelta">${esc(t('temporary'))}</small>`:''}${d.slug===state.compareBase?`<small class="cmpdelta">${esc(t('referenceMark'))}</small>`:''}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
   if(!$('#overlay').classList.contains('open')) lastFocus=active;
   mctx={slug:null,src:state.art,skin:false,more:null};
@@ -197,17 +198,17 @@ function openCompare(){
 }
 
 function distributionOptions(key){
-  return `<option value="cup"${key==='cup'?' selected':''}>${esc(t('cupSize'))}</option>`+metricOptions(key);
+  return `<option value="cup"${key==='cup'?' selected':''}>${esc(cupSizeLabel())}</option>`+metricOptions(key);
 }
 function cupDistributionHTML(list){
-  const summary=Analysis.cupDistribution(list), counts=new Map(summary.bins.map(b=>[b.cup,b.count]));
-  const bins=Analysis.cupDistribution(DATA).bins.map(b=>({cup:b.cup,count:counts.get(b.cup)||0}));
-  const measured=list.map(d=>({d,s:Analysis.cupSize(d.uk)})).filter(x=>x.s).sort((a,b)=>a.s.score-b.s.score);
-  const markers=state.compare.map(comparisonRecord).filter(Boolean).map(d=>({d,s:Analysis.cupSize(d.uk)})).filter(x=>x.s);
+  const summary=Analysis.cupDistribution(list,state.cupSystem), counts=new Map(summary.bins.map(b=>[b.cup,b.count]));
+  const bins=Analysis.cupDistribution(DATA,state.cupSystem).bins.map(b=>({cup:b.cup,count:counts.get(b.cup)||0}));
+  const measured=list.map(d=>({d,s:Analysis.sizeParts(d[state.cupSystem])})).filter(x=>x.s).sort((a,b)=>bins.findIndex(g=>g.cup===a.s.cup)-bins.findIndex(g=>g.cup===b.s.cup)||cupScore(a.d)-cupScore(b.d));
+  const markers=state.compare.map(comparisonRecord).filter(Boolean).map(d=>({d,s:Analysis.sizeParts(d[state.cupSystem])})).filter(x=>x.s);
   const width=innerWidth<=700?460:920,step=(width-80)/bins.length,x=cup=>40+(bins.findIndex(b=>b.cup===cup)+.5)*step;
-  const peak=Math.max(1,...bins.map(b=>b.count));
-  const chart=`<svg class="histogram cuphistogram" viewBox="0 0 ${width} 355" role="img" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(t('cupSize'))}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('mostCommon')+': '+summary.modes.join(' / '))}</desc><line class="axis" x1="30" y1="290" x2="${width-30}" y2="290"/>${bins.map(b=>{const h=b.count/peak*205;return `<g><title>${esc(b.cup+': '+b.count)}</title><rect class="bar" x="${x(b.cup)-step*.4}" y="${290-h}" width="${step*.8}" height="${h}"/><text x="${x(b.cup)}" y="${282-h}" text-anchor="middle">${b.count}</text><text x="${x(b.cup)}" y="318" text-anchor="middle">${esc(b.cup)}</text></g>`;}).join('')}${markers.map((m,i)=>`<g><line class="marker" x1="${x(m.s.cup)}" x2="${x(m.s.cup)}" y1="${25+i*18}" y2="300"/><text class="markerlabel" x="${x(m.s.cup)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}</svg>`;
-  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label></div><p class="toolnote">${esc(t('cupDistributionNote'))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: UK ${esc(m.d.uk)}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}<details class="tooldata"><summary>${esc(t('dataTable'))}</summary><table class="tooltable"><thead><tr><th>${esc(t('name'))}</th><th>${esc(t('cupSize'))}</th></tr></thead><tbody>${measured.map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>UK ${esc(m.d.uk)}</td></tr>`).join('')}</tbody></table></details>`;
+  const peak=Math.max(1,...bins.map(b=>b.count)),rotate=innerWidth<=700&&state.cupSystem==='us';
+  const chart=`<svg class="histogram cuphistogram" viewBox="0 0 ${width} ${rotate?390:355}" role="img" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(cupSizeLabel())}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('mostCommon')+': '+summary.modes.join(' / '))}</desc><line class="axis" x1="30" y1="290" x2="${width-30}" y2="290"/>${bins.map(b=>{const h=b.count/peak*205;return `<g><title>${esc(b.cup+': '+b.count)}</title><rect class="bar" x="${x(b.cup)-step*.4}" y="${290-h}" width="${step*.8}" height="${h}"/><text x="${x(b.cup)}" y="${282-h}" text-anchor="middle">${b.count}</text><text class="cupcategory" x="${x(b.cup)}" y="318"${rotate?` transform="rotate(-45 ${x(b.cup)} 318)"`:""} text-anchor="${rotate?'end':'middle'}">${esc(b.cup)}</text></g>`;}).join('')}${markers.map((m,i)=>`<g><line class="marker" x1="${x(m.s.cup)}" x2="${x(m.s.cup)}" y1="${25+i*18}" y2="300"/><text class="markerlabel" x="${x(m.s.cup)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}</svg>`;
+  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label></div><p class="toolnote">${esc(t('cupDistributionNote').replace('{system}',cupSystemName()))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(cupText(m.d))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}<details class="tooldata"><summary>${esc(t('dataTable'))}</summary><table class="tooltable"><thead><tr><th>${esc(t('name'))}</th><th>${esc(cupSizeLabel())}</th></tr></thead><tbody>${measured.map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>${esc(cupText(m.d))}</td></tr>`).join('')}</tbody></table></details>`;
 }
 
 /* Filtered roster distribution; references are markers, never observations. */
@@ -260,32 +261,31 @@ function bindMatches(){
   });
 }
 
-/* Higher / Lower uses the same displayed precision as the answer. */
+/* Numeric rounds use displayed precision; cup rounds always use the full UK rank. */
 function newGameRound(){
-  const key=state.gameMetric,basis=key==='height'?'raw':state.gameBasis;
-  const pool=DATA.filter(d=>shownValue(d,key,basis)!=null);
+  const key=state.gameMetric,basis=['height','cup'].includes(key)?'raw':state.gameBasis;
+  const pool=DATA.filter(d=>key==='cup'?Analysis.cupSize(d.uk)&&Analysis.sizeParts(d[state.cupSystem]):shownValue(d,key,basis)!=null);
   if(pool.length<2){gameRound=null;return;}
   const a=Math.floor(Math.random()*pool.length),rest=pool.filter((_,i)=>i!==a),b=Math.floor(Math.random()*rest.length);
   gameRound={left:pool[a].slug,right:rest[b].slug,key,basis,unit:state.unit,answer:null};
 }
 function gameHTML(){
-  const key=state.gameMetric,basis=key==='height'?'raw':state.gameBasis;
-  if(!gameRound||gameRound.key!==key||gameRound.basis!==basis||gameRound.unit!==state.unit)newGameRound();
-  const round=gameRound;
-  const figures=round?[bySlug.get(round.left),bySlug.get(round.right)]:[];
-  return `<div class="toolform"><label for="gameMetric">${esc(t('metric'))}<select id="gameMetric">${metricOptions(key)}</select></label><label for="gameBasis">${esc(t('basis'))}<select id="gameBasis"${key==='height'?' disabled':''}>${basisOptions(basis)}</select></label><button class="btn" id="gameReset">${esc(t('gameReset'))}</button></div>
-    <p class="toolnote">${esc(t('gameNote'))}</p><div class="toolstats"><span>${esc(t('gameScore'))}<strong>${gameScore.correct} / ${gameScore.total}</strong></span><span>${esc(t('streak'))}<strong>${gameScore.streak}</strong></span></div>
-    ${!round?`<p>${esc(t('notEnough'))}</p>`:`<div class="gamepair">${figures.map((d,i)=>`<div class="gamefigure"><img src="${THUMB}/320/${d.official}.webp" width="90" height="140" alt=""><div><h3>${esc(nameOf(d))}</h3><div class="gamevalue">${i===0||round.answer?esc(valueText(d,key,basis)):'?'}</div></div></div>`).join('')}</div>
+  const key=state.gameMetric,basis=['height','cup'].includes(key)?'raw':state.gameBasis;
+  if(!gameRound||gameRound.key!==key||gameRound.basis!==basis||(key!=='cup'&&gameRound.unit!==state.unit))newGameRound();
+  const round=gameRound,figures=round?[bySlug.get(round.left),bySlug.get(round.right)]:[];
+  return `<div class="toolform"><label for="gameMetric">${esc(t('metric'))}<select id="gameMetric">${distributionOptions(key)}</select></label>${key!=='cup'?`<label for="gameBasis">${esc(t('basis'))}<select id="gameBasis"${key==='height'?' disabled':''}>${basisOptions(basis)}</select></label>`:''}<button class="btn" id="gameReset">${esc(t('gameReset'))}</button></div>
+    <p class="toolnote">${esc(t(key==='cup'?'cupGameNote':'gameNote'))}</p><div class="toolstats"><span>${esc(t('gameScore'))}<strong>${gameScore.correct} / ${gameScore.total}</strong></span><span>${esc(t('streak'))}<strong>${gameScore.streak}</strong></span></div>
+    ${!round?`<p>${esc(t('notEnough'))}</p>`:`<div class="gamepair">${figures.map((d,i)=>`<div class="gamefigure"><img src="${THUMB}/320/${d.official}.webp" width="90" height="140" alt=""><div><h3>${esc(nameOf(d))}</h3><div class="gamevalue">${i===0||round.answer?esc(key==='cup'?cupText(d):valueText(d,key,basis)):'?'}</div>${key==='cup'&&round.answer&&state.cupSystem!=='uk'?`<div class="gamebasis">UK ${esc(d.uk)}</div>`:''}</div></div>`).join('')}</div>
     <p class="gameresult" role="status">${round.answer?esc(t(round.correct?'correct':'incorrect')+' · '+t(round.outcome)):''}</p><div class="gameactions">${['higher','lower','equal'].map(k=>`<button class="btn" id="guess-${k}" data-guess="${k}"${round.answer?' disabled':''}>${esc(t(k))}</button>`).join('')}<button class="btn primary" id="nextRound"${!round.answer?' disabled':''}>${esc(t('nextRound'))}</button></div>`}`;
 }
 function bindGame(){
   $('#gameMetric').onchange=e=>toolUpdate('gameMetric',()=>{state.gameMetric=e.target.value;gameRound=null;});
-  $('#gameBasis').onchange=e=>toolUpdate('gameBasis',()=>{state.gameBasis=e.target.value;gameRound=null;});
+  if($('#gameBasis'))$('#gameBasis').onchange=e=>toolUpdate('gameBasis',()=>{state.gameBasis=e.target.value;gameRound=null;});
   $('#gameReset').onclick=()=>toolUpdate('gameReset',()=>{gameScore={correct:0,total:0,streak:0};gameRound=null;});
   $$('[data-guess]').forEach(b=>b.onclick=()=>{
     if(gameRound.answer)return;
     const left=bySlug.get(gameRound.left),right=bySlug.get(gameRound.right);
-    const result=Analysis.outcome(shownValue(left,gameRound.key,gameRound.basis),shownValue(right,gameRound.key,gameRound.basis));
+    const result=Analysis.gameOutcome(left,right,gameRound.key,gameRound.basis,state.unit);
     gameRound.answer=b.dataset.guess;gameRound.outcome=result;gameRound.correct=result===b.dataset.guess;
     gameScore.total++;if(gameRound.correct){gameScore.correct++;gameScore.streak++;}else gameScore.streak=0;
     renderTool(filtered());$('#nextRound').focus();

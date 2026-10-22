@@ -2,6 +2,18 @@
 
 ## Unreleased — audit implementation
 
+### Measurement settings and cup game rounds (2026-10-22)
+
+- Added cup-size Higher or Lower rounds using the existing UK letter-first,
+  band-second ranking, including equal answers and UK references after a guess.
+- Grouped cm/inches and a global UK/US/EU display choice in a keyboard-accessible
+  Settings dialog on both pages, with saved preferences and shared URL state.
+- Applied the supplied sizing labels to interactive cards, table, podium values,
+  detail/comparison views, distributions and game values. US/EU display choices
+  preserve UK ranking, filtering and game answers; no conversion is inferred.
+- Added mirrored math/regression checks, finished EN/JA/ZH copy and regenerated
+  the existing CJK subsets for the new settings and methodology text.
+
 ### Cup distributions and dedicated tools page (2026-10-22)
 
 - Added source UK cup-letter distributions with selected-character markers,
