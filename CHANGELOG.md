@@ -8,6 +8,8 @@
   51.9 cm under-bust, 40.6 cm waist, 78.8 cm hips and 44.9 cm thigh.
 - Added the official HoYoverse portrait plus both paid outfit renders,
   **The Illness Called Life** and **Daydream Complex**, as art-only outfit views.
+- Replaced the Phoenix outfit art with the new high-resolution painted renders;
+  the gallery and detail view serve AVIF with WebP fallback.
 - Added the official Japanese and Chinese names from the HoYoverse character
   page, and regenerated all 49 EN/JA/ZH profile pages and dataset exports.
 - Re-imported the 3.3 contact sheet (`zzz3.3.webp`); all 49 sheet crops were

@@ -173,8 +173,11 @@ for d in recs:
         for it in rec['items']:
             if it['wiki_file'] in measured:
                 continue            # measured outfit lives in the standard / outfit toggle
-            items.append({'label': it['label'], 'type': it['type'],
-                          'file': it['file'].replace('.png', '.webp')})
+            item = {'label': it['label'], 'type': it['type'],
+                    'file': it['file'].replace('.png', '.webp')}
+            if it.get('avif'):
+                item['avif'] = it['avif']
+            items.append(item)
     d['outfits'] = items
 
 # ---------------------------------------------------------------- provenance

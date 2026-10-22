@@ -112,7 +112,8 @@ with WebP fallbacks and per-card `sizes`. 1x desktop cards get the 640 set at
 roughly 1:1; 2x desktop and phone cards pick the full 1024 render instead of
 upscaling the 640 thumb. A 2x phone loads ~430 KB of artwork for the first screen
 (podium plus visible cards), and the rest lazy-loads. Character-page heroes use a 1280 px AVIF/source set, the gallery uses 640 px
-thumbs and the detail view uses the 1280 px source render. The HTML is ~84 KB
+thumbs and the detail view uses the 1280 px source render. Outfit art with an
+AVIF source serves AVIF first and WebP as the fallback. The HTML is ~84 KB
 gzipped locally (GitHub Pages serves it compressed), and the page keeps its 49
 static cards.
 

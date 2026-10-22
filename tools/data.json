@@ -1859,12 +1859,14 @@
    {
     "label": "The Illness Called Life",
     "type": "Paid",
-    "file": "skins/phoenix_the_illness_called_life.webp"
+    "file": "skins/phoenix_the_illness_called_life.webp",
+    "avif": "skins/phoenix_the_illness_called_life.avif"
    },
    {
     "label": "Daydream Complex",
     "type": "Paid",
-    "file": "skins/phoenix_daydream_complex.webp"
+    "file": "skins/phoenix_daydream_complex.webp",
+    "avif": "skins/phoenix_daydream_complex.avif"
    }
   ],
   "source_page": "Phoenix Reffaella",

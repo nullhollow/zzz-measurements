@@ -155,6 +155,8 @@ def check_assets(out):
         for it in d['outfits']:
             if not (ROOT / 'character_images' / it['file']).exists():
                 err(f'{d["display"]}: missing outfit art {it["file"]}')
+            if it.get('avif') and not (ROOT / 'character_images' / it['avif']).exists():
+                err(f'{d["display"]}: missing outfit AVIF {it["avif"]}')
         for lang in ('en', 'ja', 'zh'):
             page = (out / 'characters' if lang == 'en' else out / lang / 'characters') / f"{d['slug']}.html"
             if not page.exists():

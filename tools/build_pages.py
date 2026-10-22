@@ -413,20 +413,24 @@ def character_page(d, prev_d, next_d, lang='en'):
 
     gallery = []
     gallery.append((f"{prefix}character_images/thumbs/{d['official']}.webp",
-                    f"{nm} — {p['official_portrait']}", p['official_portrait']))
+                    f"{nm} — {p['official_portrait']}", p['official_portrait'], None))
     if d.get('skin'):
         skin = d['skin']
         gallery.append((f"{prefix}character_images/{skin['official']}.webp",
                         f"{skin['outfit']} — {p['measured_outfit']}",
-                        p['measured_outfit']))
+                        p['measured_outfit'], None))
     for it in d['outfits']:
+        avif = f"{prefix}character_images/{it['avif']}" if it.get('avif') else None
         gallery.append((f"{prefix}character_images/{it['file']}",
                         f"{it['label']} — {p['outfit_portrait']}",
-                        f"{it['type']} · {p['art_only']}"))
-    gallery_html = ''.join(
-        f'<figure><img loading="lazy" decoding="async" src="{esc(src)}" alt="{esc(alt)}">'
-        f'<figcaption><b>{esc(alt.split(" — ")[0])}</b>{esc(cap)}</figcaption></figure>'
-        for src, alt, cap in gallery)
+                        f"{it['type']} · {p['art_only']}", avif))
+    def gallery_item(src, alt, cap, avif=None):
+        img = f'<img loading="lazy" decoding="async" src="{esc(src)}" alt="{esc(alt)}">'
+        if avif:
+            img = f'<picture><source type="image/avif" srcset="{esc(avif)}">{img}</picture>'
+        return (f'<figure>{img}<figcaption><b>{esc(alt.split(" — ")[0])}</b>'
+                f'{esc(cap)}</figcaption></figure>')
+    gallery_html = ''.join(gallery_item(*item) for item in gallery)
 
     sim = similar(d)
     sim_html = ' · '.join(

@@ -23,7 +23,7 @@ docs/
   character_images/        53 portraits + 26 outfit renders + responsive thumbs/
 ```
 
-≈ **641 files / 25 MB** (the responsive thumb set adds storage but cuts transfer).
+≈ **643 files / 25 MB** (the responsive thumb set adds storage but cuts transfer).
 
 ## 1. Set the URL
 

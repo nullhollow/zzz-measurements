@@ -30,9 +30,11 @@ EXTRA = {
     'phoenix.png': {'name': 'Phoenix', 'items': [
         {'label': 'The Illness Called Life', 'type': 'Paid',
          'file': 'skins/phoenix_the_illness_called_life.webp',
+         'avif': 'skins/phoenix_the_illness_called_life.avif',
          'wiki_file': 'File:Agent Phoenix Reffaella The Illness Called Life In-Game.png'},
         {'label': 'Daydream Complex', 'type': 'Paid',
          'file': 'skins/phoenix_daydream_complex.webp',
+         'avif': 'skins/phoenix_daydream_complex.avif',
          'wiki_file': 'File:Agent Phoenix Reffaella Daydream Complex In-Game.png'},
     ]},
 }
@@ -136,8 +138,11 @@ def main():
             fname = f"{base[:-4]}_{slug(it['label'])}.png"
             dest = os.path.join(SKIN_DIR, fname)
             if it.get('file') and os.path.exists(os.path.join(IMG_DIR, it['file'])) and not FORCE:
-                items.append({'label': it['label'], 'type': it['type'].replace('; ', ';'),
-                              'file': it['file'], 'wiki_file': it['wiki_file']})
+                extra = {'label': it['label'], 'type': it['type'].replace('; ', ';'),
+                         'file': it['file'], 'wiki_file': it['wiki_file']}
+                if it.get('avif'):
+                    extra['avif'] = it['avif']
+                items.append(extra)
                 continue
             if FORCE or not os.path.exists(dest):
                 url, w, h = file_url(it['wiki_file'])

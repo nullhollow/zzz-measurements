@@ -350,6 +350,7 @@
   .mhead .sub2{color:var(--dim); font-size:12px; flex-basis:100%}
   .mbody{display:grid; grid-template-columns:min(470px,38vw) 1fr}
   .mimg{border-right:1px solid var(--line); background:#0b0b0f; padding:12px}
+  .mimg picture{display:block}
   .mimg img{display:block; width:100%; height:auto; max-height:86vh; object-fit:contain;
     border-radius:12px; background:#0b0b0f; cursor:zoom-in}
   .mimg img.zoom{max-height:none; cursor:zoom-out}
@@ -1685,6 +1686,11 @@ function openModal(slug, opts){
         </div>` : "";
   const cmpOn = state.compare.includes(d.slug);
   const srcLink = r.source_page ? `<a href="https://zenless-zone-zero.fandom.com/wiki/${encodeURIComponent(r.source_page.replace(/ /g,'_'))}" target="_blank" rel="noopener">${esc(r.source_page)}</a>` : '—';
+  const artSrc = moreOn ? `character_images/${moreOn.file}` : official ? officialSrc(r) : imgSrc(d);
+  const artAvif = moreOn && moreOn.avif ? `character_images/${moreOn.avif}` : null;
+  const artTag = artAvif
+    ? `<picture><source type="image/avif" srcset="${artAvif}"><img id="mimg" decoding="async" src="${artSrc}" alt="${esc(moreOn?moreOn.label:nameOf(r))} portrait"></picture>`
+    : `<img id="mimg" decoding="async" src="${artSrc}" alt="${esc(moreOn?moreOn.label:nameOf(r))} portrait">`;
   $("#modal").innerHTML = `
     <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
     <div class="mhead">
@@ -1697,7 +1703,7 @@ function openModal(slug, opts){
           <div class="seg" role="group" aria-label="Portrait">${segBtn('v','sheet',!official && !moreOn,t('sheet'),!!moreOn)}${segBtn('v','official',official,t('official'))}</div>
         </div>
         ${outfitStrip}
-        <img id="mimg" decoding="async" src="${moreOn? `character_images/${moreOn.file}` : official?officialSrc(r):imgSrc(d)}" alt="${esc(moreOn?moreOn.label:nameOf(r))} portrait">
+        ${artTag}
         <div class="scale">${cap}</div>
         ${outfitNote}
         ${d.merged?`<div class="mnote" style="margin:0 9px 10px">${t('mergedNote').replace('{outfit}', esc(d.skin.outfit))}</div>`:''}

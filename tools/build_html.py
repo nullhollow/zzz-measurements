@@ -36,6 +36,8 @@ for d in DATA:
         p = ROOT / 'character_images' / it['file']
         if not p.exists():
             MISSING.append(f"{d['display']}: outfit art ({p.relative_to(ROOT)})")
+        if it.get('avif') and not (ROOT / 'character_images' / it['avif']).exists():
+            MISSING.append(f"{d['display']}: outfit AVIF ({it['avif']})")
 if MISSING:
     raise SystemExit('missing artwork (run tools/make_thumbs.py):\n  ' + '\n  '.join(MISSING))
 print(f'artwork: all {N} entries and their responsive variants present')
