@@ -697,6 +697,80 @@
     tbody td{color:#000}
     a{color:#000;text-decoration:underline}
   }
+/* Exploration tools share the roster's type, rules and measurement colours. */
+#toolsView{scroll-margin-top:160px;padding:30px 0 60px;min-height:420px}
+#toolsView[hidden]{display:none}
+.toolhead{display:flex;align-items:baseline;gap:20px;border-bottom:3px solid var(--acid);margin-bottom:24px}
+.toolhead h2{font:clamp(26px,4vw,48px)/1.12 var(--disp);margin:0 0 16px;letter-spacing:.01em}
+.toolform{display:flex;align-items:end;gap:16px;flex-wrap:wrap;margin:20px 0}
+.toolform label,.sandboxfields label{display:flex;flex-direction:column;gap:7px;font-size:12px;color:var(--dim)}
+.toolform select{max-width:100%}
+.toolnote{color:var(--dim);font-size:13px;line-height:1.6;max-width:85ch;margin:16px 0}
+.toolstats{display:flex;gap:28px;flex-wrap:wrap;font-size:14px;margin:20px 0}
+.toolstats strong{color:var(--acid);font-size:24px;font-variant-numeric:tabular-nums;margin-left:8px}
+.tooltable{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tooltable th,.tooltable td{padding:12px 8px;border-bottom:1px solid var(--line);text-align:left}
+.tooltable th{color:var(--dim);font-size:12px}
+.tooltable .btn{white-space:normal}
+.toolinput{font:inherit;color:inherit;background:var(--panel);border:1px solid var(--line2);border-radius:6px;padding:9px 10px;min-height:42px;width:100%;min-width:0}
+.toolform .toolinput{width:100px}
+.weights{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;max-width:850px;border-top:1px solid var(--line);padding-top:18px}
+.weights label{font-size:12px;color:var(--dim);display:grid;gap:8px}
+.weights input{max-width:120px}
+.histogram{display:block;width:100%;max-height:420px;overflow:visible;font-family:inherit}
+.histogram text{fill:var(--dim);font-size:13px}
+.histogram .bar{fill:var(--acid)}
+.histogram .axis{stroke:var(--dim);stroke-width:1}
+.histogram .marker{stroke:var(--signal);stroke-width:2;stroke-dasharray:5 4}
+.histogram .median{stroke:var(--waist);stroke-width:2}
+.markerlist{display:flex;flex-wrap:wrap;gap:10px 24px;font-size:13px;margin:14px 0}
+.markerlist span{border-left:3px solid var(--signal);padding-left:8px}
+.tooldata{margin-top:24px}
+.tooldata summary,.rowpicker summary{cursor:pointer;padding:12px 0;color:var(--dim)}
+.sandboxfields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;max-width:850px}
+.sandboxfields .widename{grid-column:1/-1}
+.sandboxactions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+.gamepair{display:grid;grid-template-columns:1fr 1fr;gap:0;border-block:1px solid var(--line);margin:24px 0}
+.gamefigure{padding:24px;min-width:0;display:flex;gap:20px;align-items:center}
+.gamefigure+ .gamefigure{border-left:1px solid var(--line)}
+.gamefigure img{width:90px;height:140px;object-fit:contain}
+.gamefigure h3{font:20px/1.3 var(--disp);margin:0 0 12px;overflow-wrap:anywhere}
+.gamevalue{font-size:clamp(24px,4vw,42px);font-weight:900;font-variant-numeric:tabular-nums;color:var(--acid)}
+.gameactions{display:flex;flex-wrap:wrap;gap:12px}
+.gameresult{min-height:24px;color:var(--acid);font-weight:700}
+.rowpicker{width:100%;border-block:1px solid var(--line);font-size:13px}
+.rowoptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 20px;padding-bottom:14px}
+.rowoption{display:flex;gap:8px;align-items:center;min-width:0}
+.rowoption label{display:flex;gap:8px;align-items:center;flex:1;min-height:40px}
+.rowoption input{accent-color:var(--acid);width:18px;height:18px}
+.rowoption button{min-width:40px;min-height:40px;padding:4px}
+.rowpicker .btn{margin-bottom:10px}
+.cmpdelta{display:block;color:var(--dim);font-size:11px;margin-top:6px;white-space:normal}
+.cmptable th .cmpdelta{font-weight:400}
+.cmpcontrols label{display:flex;align-items:center;gap:8px;font-size:12px;flex-wrap:wrap}
+.cmpcontrols input{width:85px}
+.cmpcontrols select{max-width:230px}
+.cmptable td{overflow-wrap:anywhere}
+html[data-theme="light"] .toolinput{background:#fff}
+html[data-theme="light"] .toolstats strong,html[data-theme="light"] .gamevalue,html[data-theme="light"] .gameresult{color:#566000}
+html[data-theme="light"] .histogram .bar{fill:#697500}
+html[data-theme="light"] .histogram .marker{stroke:#bc3923}
+html[data-theme="light"] .histogram .median{stroke:#007b96}
+@media(max-width:700px){
+  #toolsView{padding-top:24px;scroll-margin-top:160px}
+  .toolform{gap:12px}.toolform label{max-width:100%}.toolform select{width:100%;font-size:12px}
+  .weights,.sandboxfields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rowoptions{grid-template-columns:1fr}
+  .histogram text{font-size:16px}
+  .gamefigure{padding:18px 10px;display:block;text-align:center}
+  .gamefigure img{width:70px;height:110px}
+  .gamefigure h3{font-size:16px;min-height:42px}.gamevalue{font-size:24px}
+  .tooltable th,.tooltable td{padding:10px 5px;font-size:12px}
+  .tooltable .btn{font-size:10px;padding:8px;min-height:40px}
+  .cmpcontrols .seg{flex-wrap:wrap;border-radius:6px}.cmpcontrols .seg button{font-size:11px;padding:8px}
+  .cmpcontrols select{font-size:12px;max-width:190px}
+}
+
 </style>
 </head>
 <body>
@@ -781,6 +855,14 @@
       <button id="vCards" aria-pressed="true" data-i18n="cards">CARDS</button>
       <button id="vTable" aria-pressed="false" data-i18n="table">TABLE</button>
       <button id="vPlot" aria-pressed="false" data-i18n="plot">PLOT</button>
+    </div>
+    <div class="fgroup"><label for="toolSelect" data-i18n="tools">Tools</label>
+      <select id="toolSelect"><option value="" data-i18n="tools">Tools</option>
+        <option value="distribution" data-i18n="distribution">Distribution</option>
+        <option value="matches" data-i18n="matches">Find similar figures</option>
+        <option value="game" data-i18n="game">Higher or Lower</option>
+        <option value="sandbox" data-i18n="sandbox">Figure sandbox</option>
+      </select>
     </div>
     <button class="btn cmpbtn" id="compareBtn" aria-pressed="false" aria-label="Compare" title="Compare"><span data-i18n="compare">COMPARE</span><span class="n" id="cmpCount">0</span></button>
     <button class="btn" id="shareBtn" data-i18n="share">SHARE</button>
@@ -2126,6 +2208,7 @@
       <caption class="sr">Measurements for every agent; use the header buttons to sort.</caption>
       <thead></thead><tbody></tbody>
     </table></div></div>
+    <section id="toolsView" hidden aria-labelledby="toolTitle"></section>
     <p class="empty" id="empty" hidden data-i18n="noMatch">No characters match these filters.</p>
     <noscript><div class="nsTable">
 <h2>ZZZ female measurements: all 49 agents</h2>
@@ -2181,8 +2264,110 @@ const CARD_TMPL = "<article class=\"card\" data-name=\"{{name}}\">\n  <div class
 const META = {updated:"2026-10-22", schema:"2", repo:"https://github.com/nullhollow/zzz-measurements"};
 
 /* ---------------- i18n ---------------- */
+/* Pure exploration math. Keep in step with analysis_math.py. */
+const Analysis = (() => {
+  const fields = {bust:'bust_cm', waist:'waist_cm', hip:'hip_cm', thigh:'thigh_cm', height:'stature_cm', underbust:'band_cm'};
+  const weights = {bust:.25, waist:.2, hip:.2, thigh:.15, height:.2, underbust:0};
+  const percentage = (v,h) => v != null && h > 0 ? v / h * 100 : null;
+  function value(d,key,basis='raw',target=160){
+    const v = d[fields[key]];
+    if(key === 'height' || basis === 'raw') return v ?? null;
+    return v != null && d.stature_cm > 0 ? v / d.stature_cm * (basis === 'scaled' ? target : 100) : null;
+  }
+  const displayed = v => v == null ? null : Number(v.toFixed(1));
+  const difference = (v,r) => v != null && r != null ? v-r : null;
+  function outcome(left,right){
+    const a=displayed(left), b=displayed(right);
+    return a == null || b == null ? null : a === b ? 'equal' : b > a ? 'higher' : 'lower';
+  }
+  function matches(roster,source,chosen=weights,basis='raw'){
+    const spans={};
+    for(const key of Object.keys(fields)){
+      const vs=roster.map(d=>value(d,key,basis)).filter(v=>v!=null);
+      spans[key]=vs.length ? Math.max(...vs)-Math.min(...vs)||1 : 1;
+    }
+    return roster.filter(d=>d.slug!==source.slug).map(d=>{
+      let score=0,total=0;
+      for(const key of Object.keys(fields)){
+        const w=chosen[key]||0, a=value(source,key,basis), b=value(d,key,basis);
+        if(!Number.isFinite(w)||w<=0||a==null||b==null) continue;
+        score+=w*Math.abs(a-b)/spans[key]; total+=w;
+      }
+      return {d,score:total ? score/total : null};
+    }).filter(x=>x.score!=null).sort((a,b)=>a.score-b.score);
+  }
+  function distribution(values,count=10){
+    const vs=values.filter(v=>v!=null&&Number.isFinite(v)).sort((a,b)=>a-b), n=vs.length;
+    if(!n) return {count:0,median:null,bins:[]};
+    const lo=vs[0],hi=vs[n-1],size=lo===hi?1:count,step=(hi-lo)/size;
+    const bins=Array.from({length:size},(_,i)=>({lo:lo+i*step,hi:lo+(i+1)*step,count:0}));
+    for(const v of vs) bins[step ? Math.min(size-1,Math.floor((v-lo)/step)) : 0].count++;
+    return {count:n,median:(vs[Math.floor((n-1)/2)]+vs[Math.floor(n/2)])/2,bins};
+  }
+  return {fields,weights,percentage,value,displayed,difference,outcome,matches,distribution};
+})();
+
+
 const I18N = {
   en: {
+    tools: "Tools",
+    distribution: "Distribution",
+    matches: "Find similar figures",
+    game: "Higher or Lower",
+    sandbox: "Figure sandbox",
+    sameHeight: "Same height",
+    targetHeight: "Reference height (cm)",
+    scaledNote: "Circumference ÷ height × reference height. Height keeps its measured value.",
+    reference: "Reference",
+    noReference: "No differences",
+    referenceMark: "Reference",
+    rows: "Rows and order",
+    moveUp: "Move up",
+    moveDown: "Move down",
+    restoreRows: "Restore rows",
+    keepRow: "Keep at least one row.",
+    pp: "pp",
+    metric: "Measurement",
+    basis: "Basis",
+    sourceFigure: "Reference figure",
+    weight: "Weight",
+    weightNote: "Set a weight from 0 to 100 for each measurement. Zero excludes it.",
+    distance: "Distance",
+    distanceNote: "Lower is closer. Differences are divided by each measurement’s roster range, then averaged by weight. Missing pairs are skipped.",
+    noMatches: "Choose at least one measured field with a positive weight.",
+    comparePair: "Compare pair",
+    customize: "Customize",
+    median: "Median",
+    population: "Measured entries",
+    distributionNote: "The chart uses the filtered roster. Selected figures mark their values; sandbox references do not enter the distribution.",
+    dataTable: "View values",
+    frequency: "Count",
+    higher: "Higher",
+    lower: "Lower",
+    equal: "Equal",
+    nextRound: "Next round",
+    correct: "Correct",
+    incorrect: "Incorrect",
+    streak: "Streak",
+    gameNote: "Is the right-hand value higher, lower or equal? Answers use the displayed one-decimal values.",
+    notEnough: "At least two measured entries are needed.",
+    temporary: "Temporary reference",
+    sandboxNote: "Enter fictional measurements in cm. Blank circumferences stay unknown. This reference is excluded from the roster, rankings and exports.",
+    sandboxName: "Name (optional)",
+    saveSandbox: "Use reference",
+    clearSandbox: "Remove reference",
+    sandboxSaved: "Reference saved for this page.",
+    sandboxLinkNote: "Shared links include these fictional values.",
+    addSandbox: "Add to comparison",
+    sandboxHeight: "Height is required (1–300 cm). Circumferences must be blank or 0.1–300 cm.",
+    value: "Value",
+    resetWeights: "Restore weights",
+    gameReset: "Reset score",
+    noValues: "No measurements in this selection.",
+    gameScore: "Correct answers",
+    comparisonMethod: "Choose which rows to show and move them into your preferred order. A reference column adds signed differences: cm or inches for raw and same-height values, percentage points for height-adjusted circumferences. Same-height values use circumference ÷ effective height × reference height, assuming uniform scaling. They are hypothetical equivalents, not new measurements or anatomical predictions. Height itself always keeps its measured value. Rounded equal values share the highlight; missing values have no difference.",
+    matchingMethod: "The default weights remain bust 25, waist 20, hip 20, thigh 15 and height 20, with under-bust excluded. Custom weights range from 0 to 100. Each absolute difference is divided by that metric’s range across the full canonical roster, then averaged using the chosen weights. Missing pairs are skipped and the remaining weights are renormalized. Zero total shared weight produces no match. Height-adjusted matching uses circumference ÷ effective height × 100; selecting height still compares measured heights.",
+    playMethod: "Distributions use the current filtered roster and omit missing values. Equal-width bins include the maximum in the final bin; identical values form one bin. Comparison selections appear as markers, not extra observations. Higher or Lower uses canonical measured records and judges one-decimal displayed values, including equal answers. Sandbox references are fictional, temporary and excluded from roster counts, classes, percentiles, rankings, game rounds and exports. Shared links include the sandbox inputs and tool settings. Official rankings and cup rules remain unchanged.",
     compareBasis:'Comparison basis', rawMeasurements:'Raw measurements', heightAdjusted:'Height-adjusted',
     heightAdjustedNote:'Circumference ÷ height × 100', smallerWins:'Smaller value', largerWins:'Larger value',
     changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', dark:'Dark', light:'Light', schema:'Schema',
@@ -2239,6 +2424,64 @@ const I18N = {
     pctLong:'Roster percentile of the raw centimetre measurement; height uses head height. 0 = smallest in the cast, 100 = largest.'
   },
   ja: {
+    tools: "ツール",
+    distribution: "分布を見る",
+    matches: "似た体型を探す",
+    game: "どちらが大きい？",
+    sandbox: "体型シミュレーター",
+    sameHeight: "同じ身長に換算",
+    targetHeight: "換算先の身長 (cm)",
+    scaledNote: "周囲長 ÷ 身長 × 換算先の身長。身長の欄は実測値のままです。",
+    reference: "差の基準",
+    noReference: "差を表示しない",
+    referenceMark: "基準",
+    rows: "項目と表示順",
+    moveUp: "上へ",
+    moveDown: "下へ",
+    restoreRows: "項目を元に戻す",
+    keepRow: "少なくとも1項目は残してください。",
+    pp: "ポイント",
+    metric: "計測項目",
+    basis: "表示方法",
+    sourceFigure: "基準にする体型",
+    weight: "重み",
+    weightNote: "重みは0〜100で指定します。0の項目は使いません。",
+    distance: "隔たり",
+    distanceNote: "値が小さいほど近い体型です。各項目の差を全員の値の幅で割り、重み付き平均を取ります。どちらかが未計測の項目は除きます。",
+    noMatches: "計測値のある項目に、0より大きい重みを設定してください。",
+    comparePair: "2人を比較",
+    customize: "条件を変える",
+    median: "中央値",
+    population: "計測済み",
+    distributionNote: "絞り込み後のメンバーで分布を描きます。比較中の体型は値の位置を示します。シミュレーターの体型は集計に含みません。",
+    dataTable: "数値一覧",
+    frequency: "人数",
+    higher: "大きい",
+    lower: "小さい",
+    equal: "同じ",
+    nextRound: "次の問題",
+    correct: "正解",
+    incorrect: "不正解",
+    streak: "連続正解",
+    gameNote: "右側の値は左側より大きい、小さい、それとも同じ？小数第1位までの表示値で判定します。",
+    notEnough: "計測値のあるメンバーが2人以上必要です。",
+    temporary: "仮の体型",
+    sandboxNote: "架空の計測値をcmで入力します。周囲長の空欄は未計測の扱いです。この体型は名簿・ランキング・書き出しデータには入りません。",
+    sandboxName: "名前（任意）",
+    saveSandbox: "この体型を使う",
+    clearSandbox: "仮の体型を削除",
+    sandboxSaved: "このページで使う体型を保存しました。",
+    sandboxLinkNote: "共有リンクには、この架空の計測値も含まれます。",
+    addSandbox: "比較に追加",
+    sandboxHeight: "身長は1〜300cmで必須です。周囲長は空欄、または0.1〜300cmで入力してください。",
+    value: "値",
+    resetWeights: "重みを元に戻す",
+    gameReset: "成績をリセット",
+    noValues: "この条件では計測値がありません。",
+    gameScore: "正解数",
+    comparisonMethod: "比較に表示する項目を選び、順番を入れ替えられます。差の基準を指定すると、実寸と同じ身長への換算値はcmまたはインチ、身長比はポイントで差を表示します。同じ身長への換算式は「周囲長 ÷ 比較用の身長 × 換算先の身長」です。全体を同じ倍率で拡大・縮小した仮の数値であり、新たな計測値や人体の変化を予測する値ではありません。身長の欄は実測値を保ちます。丸めた表示値が同じ場合は両方を強調し、未計測の値には差を付けません。",
+    matchingMethod: "初期設定の重みはバスト25、ウエスト20、ヒップ20、太もも15、身長20で、アンダーは使いません。各項目を0〜100の範囲で変更できます。差の絶対値を全メンバーのその項目の最大値と最小値の差で割り、重み付き平均を取ります。どちらかが未計測の項目は外し、残った重みで平均を計算し直します。共通する計測項目の重みがすべて0なら結果は表示しません。身長比で探す場合は「周囲長 ÷ 比較用の身長 × 100」を使います。身長の項目そのものは、どちらの方法でも実測値で比べます。",
+    playMethod: "分布は現在の絞り込み結果から未計測値を除いて集計します。区間の幅は均等で、最大値は最後の区間に含めます。全員同じ値なら区間は1つです。比較で選んだ体型は位置を示すだけで、人数には加えません。「どちらが大きい？」は正式な計測記録を使い、小数第1位までの表示値で大小と同値を判定します。シミュレーターの体型は仮の参照用で、名簿の人数・分類・パーセンタイル・ランキング・クイズ・書き出しには含みません。共有リンクには仮の計測値とツールの設定も入ります。既存のランキングとカップの順位規則は変わりません。",
     compareBasis:'比較の基準', rawMeasurements:'実寸', heightAdjusted:'身長比',
     heightAdjustedNote:'周囲長 ÷ 身長 × 100', smallerWins:'小さい値', largerWins:'大きい値',
     changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', dark:'ダーク', light:'ライト', schema:'スキーマ',
@@ -2295,6 +2538,64 @@ const I18N = {
     pctLong:'ロスター内の実寸cm値の百分位。身長は頭頂ベース。0=最小、100=最大。'
   },
   zh: {
+    tools: "工具",
+    distribution: "分布查看",
+    matches: "查找相近体型",
+    game: "比一比大小",
+    sandbox: "体型沙盒",
+    sameHeight: "换算为相同身高",
+    targetHeight: "换算身高（厘米）",
+    scaledNote: "围度 ÷ 身高 × 换算身高。身高一栏仍显示实测值。",
+    reference: "差值基准",
+    noReference: "不显示差值",
+    referenceMark: "基准",
+    rows: "项目与顺序",
+    moveUp: "上移",
+    moveDown: "下移",
+    restoreRows: "恢复默认项目",
+    keepRow: "请至少保留一个项目。",
+    pp: "个百分点",
+    metric: "测量项目",
+    basis: "显示方式",
+    sourceFigure: "参照体型",
+    weight: "权重",
+    weightNote: "为各项设置0至100的权重，设为0即不参与匹配。",
+    distance: "差异值",
+    distanceNote: "数值越小越接近。各项差值除以全榜该项的极差，再按权重求平均；任一方缺少的数据不参与计算。",
+    noMatches: "请为至少一项有数据的测量值设置大于0的权重。",
+    comparePair: "对比两者",
+    customize: "调整条件",
+    median: "中位数",
+    population: "有数据的角色",
+    distributionNote: "图表统计当前筛选结果，并标出已选体型的位置。沙盒参照不计入分布。",
+    dataTable: "查看数据",
+    frequency: "人数",
+    higher: "更大",
+    lower: "更小",
+    equal: "相同",
+    nextRound: "下一题",
+    correct: "答对了",
+    incorrect: "答错了",
+    streak: "连续答对",
+    gameNote: "右侧数值比左侧更大、更小，还是相同？按显示的一位小数判定。",
+    notEnough: "至少需要两名有数据的角色。",
+    temporary: "临时参照",
+    sandboxNote: "以厘米输入虚构体型的数据。围度留空表示未知，该参照不会加入角色名单、排名或导出数据。",
+    sandboxName: "名称（可选）",
+    saveSandbox: "使用此参照",
+    clearSandbox: "删除参照",
+    sandboxSaved: "已保存当前页面的参照。",
+    sandboxLinkNote: "分享链接会包含这些虚构数据。",
+    addSandbox: "加入对比",
+    sandboxHeight: "身高必填，范围为1至300厘米；围度可留空，或填写0.1至300厘米。",
+    value: "数值",
+    resetWeights: "恢复默认权重",
+    gameReset: "重置成绩",
+    noValues: "当前筛选下没有测量数据。",
+    gameScore: "答对题数",
+    comparisonMethod: "可以选择对比项目并调整顺序。指定差值基准后，实测值及同身高换算值的差以厘米或英寸表示，身高占比的差以百分点表示。同身高换算采用「围度 ÷ 对比用身高 × 换算身高」，假定体型整体等比缩放。这是虚构的等效数值，并非新的测量结果，也不预测人体变化。身高一栏始终保留实测值。四舍五入后的显示值相同就同时高亮，缺失数据不计算差值。",
+    matchingMethod: "默认权重保持为胸围25、腰围20、臀围20、大腿围15、身高20，下胸围不参与。各项权重可在0至100之间调整。每项取绝对差值，除以全体正式角色该项的最大值与最小值之差，再按所选权重求平均。任一方缺少的数据均跳过，并按剩余权重重新计算平均值；共同有效项目的权重总和为0时不显示匹配结果。选择身高占比时，围度按「围度 ÷ 对比用身高 × 100」计算；身高项目本身仍按实测值比较。",
+    playMethod: "分布图统计当前筛选结果，排除缺失值。各区间等宽，最大值计入最后一个区间；所有值相同时只设一个区间。对比中选中的体型只标示位置，不会重复计入人数。「比一比大小」使用正式测量记录，按显示的一位小数判断大小或相同。沙盒体型仅作临时虚构参照，不计入名单人数、分类、百分位、排名、游戏题目或导出数据。分享链接包含沙盒输入值和工具设置。正式排名及罩杯排序规则保持不变。",
     compareBasis:'对比方式', rawMeasurements:'实测围度', heightAdjusted:'身高占比',
     heightAdjustedNote:'围度 ÷ 身高 × 100', smallerWins:'较小值', largerWins:'较大值',
     changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', dark:'深色', light:'浅色', schema:'数据结构',
@@ -2421,7 +2722,7 @@ function computeDerived(){
     d.bhr = (d.bust_cm && d.stature_cm) ? r3(d.bust_cm/d.stature_cm) : null;
     d.hhr = (d.hip_cm && d.stature_cm) ? r3(d.hip_cm/d.stature_cm) : null;
     d.height_adjusted = Object.fromEntries(Object.entries(CIRCUMFERENCES).map(([key, field]) =>
-      [key, d[field] != null && d.stature_cm > 0 ? d[field] / d.stature_cm * 100 : null]));
+      [key, Analysis.percentage(d[field], d.stature_cm)]));
   }
   const keys = ['bust_cm','waist_cm','hip_cm','thigh_cm','whr','bhr','hhr','stature_cm'];
   const lists = {};
@@ -2479,7 +2780,9 @@ for(const m of RANGES){
 }
 const state = {q:"", cup:"all", shape:"all", balance:"all", thighs:"all", height:"all",
                sort:"cup-desc", view:"cards", unit:"cm", art:"official", lang:"en",
-               rng:{}, compare:[], compareMode:"raw", plotY:"whr"};
+               rng:{}, compare:[], compareMode:"raw", plotY:"whr", compareRows:null, compareBase:"", compareHeight:160,
+               sandbox:null, matchSource:"", matchBasis:"raw", matchWeights:null, distMetric:"waist", distBasis:"raw",
+               gameMetric:"waist", gameBasis:"raw"};
 function nameOf(d){
   if(!d) return '';
   return state.lang==='ja' ? (d.name_ja || d.display)
@@ -2575,7 +2878,8 @@ function readHash(){
     }
     out.rng = rng;
   }
-  if(p.has('c')) out.compare = p.get('c').split(',').map(s=>bySlug.get(s)).filter(Boolean).map(d=>d.slug);
+  if(p.has('c')) out.compare = [...new Set(p.get('c').split(','))];
+  out.explorer = readExplorerHash(p);
   if(p.has('lang')) out.lang = p.get('lang');
   if(p.has('th')) out.theme = p.get('th');
   if(p.has('p')) out.p = p.get('p');
@@ -2600,6 +2904,7 @@ function writeHash(replace=true){
   if(r) p.set('r', r);
   if(state.compare.length) p.set('c', state.compare.join(','));
   if(state.compareMode!=="raw") p.set('basis', state.compareMode);
+  writeExplorerHash(p);
   if(mctx.slug) p.set('p', mctx.slug);
   const hash = p.toString();
   const url = location.pathname + location.search + (hash ? '#'+hash : '');
@@ -2954,14 +3259,7 @@ function rankword(p){
   return p>=0.85?`top ${x}%`:p<=0.15?`bottom ${x}%`:'mid-pack';
 }
 function similarTo(d){
-  const keys=[['bust_cm',.25],['waist_cm',.2],['hip_cm',.2],['thigh_cm',.15],['stature_cm',.2]];
-  const ranges={};
-  for(const [k] of keys){ const v=DATA.map(x=>x[k]).filter(x=>x!=null); ranges[k]=Math.max(...v)-Math.min(...v)||1; }
-  return DATA.filter(x=>x.slug!==d.slug).map(x=>{
-    let s=0, n=0;
-    for(const [k,w] of keys){ if(d[k]==null||x[k]==null) continue; s+=w*Math.abs(d[k]-x[k])/ranges[k]; n+=w; }
-    return {d:x, score:n? s/n : 9};
-  }).sort((a,b)=>a.score-b.score).slice(0,3);
+  return Analysis.matches(DATA,d,state.matchWeights||Analysis.weights,state.matchBasis).slice(0,3);
 }
 function issueURL(d){
   const title = `[data] ${nameOf(d)}`;
@@ -3115,7 +3413,7 @@ function openModal(slug, opts){
           </div>
           ${noteFor(r)?`<div class="mnote">${esc(t('chartNote'))}: ${esc(noteFor(r))}</div>`:""}
         </div>
-        <div class="sect"><h3>${esc(t('similar'))}</h3>
+        <div class="sect"><h3>${esc(t('similar'))}</h3><button class="btn" id="customizeMatch">${esc(t('customize'))}</button>
           <div class="simrow">${similarTo(d).map(s=>`<button type="button" class="sim" data-sim="${esc(s.d.slug)}"><img src="${THUMB}/320/${s.d.official}.webp" alt="" width="22" height="34">${esc(nameOf(s.d))}</button>`).join('')}</div>
         </div>
         <div class="mfoot">
@@ -3146,6 +3444,7 @@ function openModal(slug, opts){
       openModal(slug, patch);
     });
   });
+  $("#customizeMatch").addEventListener("click", ()=>openTool("matches",d.slug));
   $("#mCompare").addEventListener("click", ()=>{ toggleCompare(d.slug); openModal(slug); });
   $$("#modal [data-sim]").forEach(b=>b.addEventListener("click", ()=>openModal(b.dataset.sim)));
   const img = $("#mimg");
@@ -3168,12 +3467,14 @@ function toggleCompare(slug){
   const i = state.compare.indexOf(slug);
   if(i>=0){
     state.compare.splice(i,1);
+    if(state.compareBase===slug) state.compareBase="";
   }else{
     if(state.compare.length>=4){ toast(t('cmpMax')); return; }
     state.compare.push(slug);
   }
   renderCompare();
   syncCardCompare();
+  if(state.view==="distribution") renderTool(filtered());
   writeHash(true);
 }
 function renderCompare(){
@@ -3187,8 +3488,8 @@ function renderCompare(){
   $("#cmpOpen").disabled = n<2;
   $("#cmpHint").textContent = n===0 ? "" : n===1 ? t('cmpAddOne') : t('cmpReady');
   chips.innerHTML = state.compare.map(slug=>{
-    const d = bySlug.get(slug); if(!d) return "";
-    return `<span class="cchip">${esc(nameOf(d))}<button type="button" data-uncmp="${esc(slug)}" aria-label="Remove ${esc(nameOf(d))}">×</button></span>`;
+    const d = comparisonRecord(slug); if(!d) return "";
+    return `<span class="cchip">${esc(nameOf(d))}<button type="button" data-uncmp="${esc(slug)}" aria-label="${esc(t('removeFromCompare'))}: ${esc(nameOf(d))}">×</button></span>`;
   }).join("");
 }
 function syncCardCompare(){
@@ -3204,79 +3505,6 @@ function syncCardCompare(){
     if(lbl) lbl.textContent = on?t('added'):t('cmpShort');
   });
 }
-function openCompare(){
-  const focusedMode = document.activeElement?.dataset.compareMode;
-  const tel = $("#toast"); if(tel) tel.classList.remove("show");
-  const list = state.compare.map(s=>bySlug.get(s)).filter(Boolean);
-  if(list.length<2){ toast(t('pickTwo')); return; }
-  const cmIn = (a,b)=>`${fmt(a)} cm\n${fmt(b)} in`;
-  const adjusted = state.compareMode === 'height';
-  const circumference = (key, best) => ({
-    key, label:t(key), best,
-    get:d=>adjusted ? (d.height_adjusted[key] == null ? null : Number(d.height_adjusted[key].toFixed(1))) : d[CIRCUMFERENCES[key]],
-    fmt:d=>adjusted
-      ? (d.height_adjusted[key] == null ? '—' : `${fmt(d.height_adjusted[key])}%`)
-      : (d[CIRCUMFERENCES[key]] == null ? '—' : cmIn(d[CIRCUMFERENCES[key]], d[CIRCUMFERENCES[key].replace('_cm','_in')])),
-  });
-  const winnerFlags = (vals, mode) => {
-    const nums = vals.filter(v=>v!=null);
-    if(!nums.length) return vals.map(()=>false);
-    const target = mode==='min' ? Math.min(...nums) : Math.max(...nums);
-    return vals.map(v=>v!=null && Math.abs(v-target)<1e-9);
-  };
-  const rows = [
-    {label:t('height'), get:d=>d.stature_cm, best:'max',
-     fmt:d=>`${fmt(d.stature_cm,1)} cm\n${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}`},
-    circumference('waist', 'min'),
-    circumference('hip', 'max'),
-    circumference('thigh', 'max'),
-    {label:t('cup'), get:cupScore, best:'max', fmt:d=>`${cupLetter(d)}\nUK ${d.uk}`},
-    circumference('bust'),
-    circumference('underbust'),
-    {label:'UK / US / EU', fmt:d=>`${d.uk} / ${d.us} / ${d.eu}`},
-    {label:t('waistHip'), fmt:d=>fmtPct(d.whr)},
-    ...(!adjusted ? [{label:t('waistHeight'), fmt:d=>fmtPct(d.whtr)}] : []),
-    {label:t('shape'), fmt:d=>tagText(tagsFor(d).shape)},
-    {label:t('build'), fmt:d=>tagText(tagsFor(d).balance)},
-    {label:t('thighNote'), fmt:d=>tagText(tagsFor(d).thighs)},
-  ];
-  const body = rows.map(r=>{
-    const vals = r.get ? list.map(r.get) : list.map(()=>null);
-    const wins = r.best ? winnerFlags(vals, r.best) : list.map(()=>false);
-    const dir = r.best ? ` <span class="dir" aria-hidden="true" title="${esc(r.best==='min'?t('smallerWins'):t('largerWins'))}">${r.best==='min'?'↓':'↑'}</span>` : '';
-    return `<tr${r.key?` data-metric="${r.key}"`:''}><th scope="row">${esc(r.label)}${dir}</th>${list.map((d,i)=>`<td class="${wins[i]?'win':''}">${esc(r.fmt(d))}</td>`).join('')}</tr>`;
-  }).join('');
-  $("#modal").innerHTML = `
-    <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
-    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><div class="sub2">${list.length} ${esc(t('picked'))}</div>
-      <div class="cmpcontrols">
-        <div class="seg" role="group" aria-label="${esc(t('compareBasis'))}">
-          <button type="button" data-compare-mode="raw" aria-pressed="${!adjusted}" data-i18n="rawMeasurements">${esc(t('rawMeasurements'))}</button>
-          <button type="button" data-compare-mode="height" aria-pressed="${adjusted}" data-i18n="heightAdjusted">${esc(t('heightAdjusted'))}</button>
-        </div>
-        ${adjusted?`<span class="fnote" id="compareBasisNote" data-i18n="heightAdjustedNote">${esc(t('heightAdjustedNote'))}</span>`:''}
-      </div>
-    </div>
-    <div class="cmpwrap"><table class="cmptable"${adjusted?' aria-describedby="compareBasisNote"':''}>
-      <thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(nameOf(d))}</th>`).join('')}</tr></thead>
-      <tbody>${body}
-      <tr><th scope="row">${esc(t('figureRead'))}</th>${list.map(d=>`<td class="cmdesc">${esc(readFor(d))}</td>`).join('')}</tr>
-      </tbody></table></div>`;
-  const wasOpen = $("#overlay").classList.contains("open");
-  if(!wasOpen) lastFocus = document.activeElement;
-  $("#overlay").classList.add("open");
-  $("#overlay").setAttribute("aria-hidden","false");
-  document.body.classList.add("modal-open");
-  const main=$("#main"); if(main && 'inert' in main) main.inert=true;
-  (focusedMode ? $(`#modal [data-compare-mode="${focusedMode}"]`) : $("#closeModal")).focus();
-  $("#closeModal").addEventListener("click", closeModal);
-  $$('#modal [data-compare-mode]').forEach(button=>button.addEventListener('click', ()=>{
-    state.compareMode = button.dataset.compareMode;
-    openCompare();
-    writeHash(true);
-  }));
-}
-
 /* ---------------- toast + share ---------------- */
 let toastTimer;
 function toast(msg){
@@ -3309,7 +3537,7 @@ function render(skipHash){
   renderHighlights();
   $("#count").innerHTML = `<b>${list.length}</b> / ${DATA.length} ${esc(t('entries'))}`;
   const fcount = $("#fCount"); if(fcount) fcount.textContent = `${list.length} / ${DATA.length} ${t('entries')}`;
-  $("#empty").hidden = list.length>0;
+  $("#empty").hidden = list.length>0 || TOOL_VIEWS.includes(state.view);
   const v = state.view;
   $("#cardsView").hidden = v!=="cards";
   $("#plotView").hidden = v!=="plot";
@@ -3317,7 +3545,10 @@ function render(skipHash){
   $("#sortGroup").hidden = v!=="cards";
   if(v==="table") renderTable(list);
   else if(v==="plot") renderPlot(list);
-  else renderCards([...list].sort(SORTS[state.sort]));
+  else if(v==="cards") renderCards([...list].sort(SORTS[state.sort]));
+  $("#toolsView").hidden = !TOOL_VIEWS.includes(v);
+  $("#toolSelect").value = TOOL_VIEWS.includes(v) ? v : "";
+  if(TOOL_VIEWS.includes(v)) renderTool(list);
   $("#vCards").setAttribute("aria-pressed", v==="cards"?"true":"false");
   $("#vTable").setAttribute("aria-pressed", v==="table"?"true":"false");
   $("#vPlot").setAttribute("aria-pressed", v==="plot"?"true":"false");
@@ -3347,7 +3578,7 @@ $("#compareBtn").addEventListener("click", ()=>{
   openCompare();
 });
 $("#cmpOpen").addEventListener("click", openCompare);
-$("#cmpClear").addEventListener("click", ()=>{ state.compare=[]; renderCompare(); syncCardCompare(); writeHash(true); });
+$("#cmpClear").addEventListener("click", ()=>{ state.compare=[]; state.compareBase=""; renderCompare(); syncCardCompare(); if(state.view==="distribution") renderTool(filtered()); writeHash(true); });
 $("#cmpChips").addEventListener("click", e=>{
   const b = e.target.closest("[data-uncmp]");
   if(b){ toggleCompare(b.dataset.uncmp); }
@@ -3389,6 +3620,7 @@ function setUnit(u){
   try{ localStorage.setItem("zzz-unit", u); }catch(e){}
   renderFilterPanel(); render();
   if($("#overlay").classList.contains("open") && mctx.slug) openModal(mctx.slug, mctx);
+  else if($("#overlay").classList.contains("open") && $("#modal .cmptable")) openCompare();
 }
 $("#uCm").addEventListener("click", ()=>setUnit("cm"));
 $("#uIn").addEventListener("click", ()=>setUnit("in"));
@@ -3448,7 +3680,8 @@ $("#theme").addEventListener("change", e=>applyTheme(e.target.value));
 /* reset */
 function resetAll(){
   Object.assign(state,{q:"",cup:"all",shape:"all",balance:"all",thighs:"all",height:"all",
-    sort:"cup-desc",view:"cards",rng:{},compare:[],compareMode:"raw"});
+    sort:"cup-desc",view:"cards",rng:{},compare:[],compareMode:"raw", ...explorerDefaults()});
+  gameRound=null; gameScore={correct:0,total:0,streak:0};
   $("#q").value="";
   $$("#fPanel .chipbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v==="all"?"true":"false"));
   $("#fSort").value="cup-desc";
@@ -3540,13 +3773,15 @@ function applyHashState(){
   const sortAlias = {"bust-desc":"cup-desc", "bust-asc":"cup-asc"};
   const wantedSort = sortAlias[h.sort] || h.sort;
   state.sort = SORTS[wantedSort] ? wantedSort : "cup-desc";
-  state.view = ["cards","table","plot"].includes(h.view) ? h.view : "cards";
+  state.view = ["cards","table","plot",...TOOL_VIEWS].includes(h.view) ? h.view : "cards";
   state.unit = h.unit ? (h.unit==="in"?"in":"cm") : state.unit;
   state.art = h.art ? (h.art==="sheet"?"sheet":"official") : state.art;
   state.lang = (h.lang && I18N[h.lang]) ? h.lang : state.lang;
   state.rng = h.rng || {};
-  state.compare = Array.isArray(h.compare) ? h.compare.slice(0,4) : [];
-  state.compareMode = h.compareMode === 'height' ? 'height' : 'raw';
+  Object.assign(state, explorerDefaults(), h.explorer);
+  state.compare = Array.isArray(h.compare) ? h.compare.filter(s=>comparisonRecord(s)).slice(0,4) : [];
+  if(!state.compare.includes(state.compareBase)) state.compareBase="";
+  state.compareMode = ['height','scaled'].includes(h.compareMode) ? h.compareMode : 'raw';
   state.plotY = PLOT_METRICS.some(m=>m.k===h.plotY) ? h.plotY : state.plotY;
   if(h.theme) applyTheme(h.theme);
   applyLang(state.lang, false);
@@ -3557,6 +3792,296 @@ function applyHashState(){
   if(h.p && bySlug.has(h.p)) openModal(h.p, {src:state.art});
   else if($("#overlay").classList.contains("open")) closeModal();
 }
+
+/* Exploration state is separate from the official roster and its derived rules. */
+const TOOL_VIEWS=['distribution','matches','game','sandbox'];
+const METRIC_KEYS=['height','bust','underbust','waist','hip','thigh'];
+const COMPARE_ROWS=['height','waist','hip','thigh','cup','bust','underbust','sizes','whr','whtr','shape','build','thighNote','figureRead'];
+const SANDBOX_SLUG='~sandbox';
+let gameRound=null, gameScore={correct:0,total:0,streak:0};
+function explorerDefaults(){
+  return {compareRows:null,compareBase:'',compareHeight:160,sandbox:null,matchSource:'',matchBasis:'raw',matchWeights:null,
+    distMetric:'waist',distBasis:'raw',gameMetric:'waist',gameBasis:'raw'};
+}
+function validSandbox(raw){
+  if(!raw || typeof raw!=='object' || !Number.isFinite(raw.stature_cm) || raw.stature_cm<1 || raw.stature_cm>300) return null;
+  const out={stature_cm:Number(raw.stature_cm.toFixed(1)),name:typeof raw.name==='string'?raw.name.trim().slice(0,40):''};
+  for(const field of Object.values(CIRCUMFERENCES)){
+    const v=raw[field];
+    if(v!=null && (!Number.isFinite(v)||v<.1||v>300)) return null;
+    out[field]=v==null?null:Number(v.toFixed(1));
+  }
+  return out;
+}
+function sandboxRecord(){
+  if(!state.sandbox) return null;
+  const s=state.sandbox, d={...s,slug:SANDBOX_SLUG,display:s.name||t('temporary'),temporary:true};
+  for(const field of ['stature_cm',...Object.values(CIRCUMFERENCES)]) d[field.replace('_cm','_in')]=s[field]==null?null:s[field]/2.54;
+  d.whr=s.waist_cm&&s.hip_cm?r3(s.waist_cm/s.hip_cm):null;
+  d.whtr=s.waist_cm?r3(s.waist_cm/s.stature_cm):null;
+  return d;
+}
+function comparisonRecord(slug){ return slug===SANDBOX_SLUG?sandboxRecord():bySlug.get(slug); }
+function readExplorerHash(params){
+  let raw={};
+  try{ const text=params.get('x'); if(text && text.length<=5000) raw=JSON.parse(text); }catch(_){}
+  if(!raw || typeof raw!=='object') return {};
+  const out={};
+  out.sandbox=validSandbox(raw.sandbox);
+  if(Array.isArray(raw.compareRows)){
+    const rows=[...new Set(raw.compareRows.filter(k=>COMPARE_ROWS.includes(k)))];
+    if(rows.length) out.compareRows=rows;
+  }
+  if(typeof raw.compareBase==='string') out.compareBase=raw.compareBase;
+  if(Number.isFinite(raw.compareHeight)&&raw.compareHeight>=1&&raw.compareHeight<=300) out.compareHeight=Number(raw.compareHeight.toFixed(1));
+  if(bySlug.has(raw.matchSource)||raw.matchSource===SANDBOX_SLUG&&out.sandbox) out.matchSource=raw.matchSource;
+  for(const key of ['matchBasis','gameBasis']) if(['raw','height'].includes(raw[key])) out[key]=raw[key];
+  if(['raw','height','scaled'].includes(raw.distBasis)) out.distBasis=raw.distBasis;
+  for(const key of ['distMetric','gameMetric']) if(METRIC_KEYS.includes(raw[key])) out[key]=raw[key];
+  if(raw.matchWeights && typeof raw.matchWeights==='object'){
+    out.matchWeights=Object.fromEntries(Object.keys(Analysis.fields).map(k=>[k,Number.isFinite(raw.matchWeights[k])?Math.round(Math.max(0,Math.min(1,raw.matchWeights[k]))*100)/100:0]));
+  }
+  return out;
+}
+function writeExplorerHash(params){
+  const out={}, defaults=explorerDefaults();
+  for(const key of Object.keys(defaults)) if(JSON.stringify(state[key])!==JSON.stringify(defaults[key])) out[key]=state[key];
+  if(Object.keys(out).length) params.set('x',JSON.stringify(out));
+}
+function metricOptions(selected){ return METRIC_KEYS.map(k=>`<option value="${k}"${selected===k?' selected':''}>${esc(t(k))}</option>`).join(''); }
+function basisOptions(selected,scaled=false){
+  return ['raw','height',...(scaled?['scaled']:[])].map(k=>`<option value="${k}"${selected===k?' selected':''}>${esc(t(k==='raw'?'rawMeasurements':k==='height'?'heightAdjusted':'sameHeight'))}</option>`).join('');
+}
+function figureOptions(selected){
+  const records=[...DATA].sort((a,b)=>nameOf(a).localeCompare(nameOf(b),state.lang));
+  if(state.sandbox) records.push(sandboxRecord());
+  return records.map(d=>`<option value="${esc(d.slug)}"${d.slug===selected?' selected':''}>${esc(nameOf(d))}${d.temporary?' ('+esc(t('temporary'))+')':''}</option>`).join('');
+}
+function shownValue(record,key,basis='raw'){
+  const v=Analysis.value(record,key,basis,state.compareHeight);
+  return v==null?null:(basis==='height'&&key!=='height'?v:toDisp(v));
+}
+function valueSuffix(key,basis){ return basis==='height'&&key!=='height'?'%':USUF(); }
+function valueText(d,key,basis){ const v=shownValue(d,key,basis); return v==null?'—':fmt(v)+valueSuffix(key,basis); }
+function targetControl(id){
+  return `<label for="${id}">${esc(t('targetHeight'))}<input class="toolinput" id="${id}" type="number" min="1" max="300" step="0.1" value="${state.compareHeight}" required></label>`;
+}
+function setTarget(input){
+  if(!input.checkValidity()){ input.reportValidity(); return false; }
+  state.compareHeight=+input.value; return true;
+}
+function openTool(view,source){
+  if(!TOOL_VIEWS.includes(view)) return;
+  if($('#overlay').classList.contains('open')) closeModal();
+  if(source) state.matchSource=source;
+  state.view=view; render();
+  $('#toolTitle').focus({preventScroll:true});
+  $('#toolsView').scrollIntoView({block:'start',behavior:'instant'});
+}
+$('#toolSelect').addEventListener('change',e=>{ if(e.target.value) openTool(e.target.value); });
+window.addEventListener('resize',debounce(()=>{if(state.view==='distribution')renderTool(filtered());},150));
+function renderTool(list){
+  const root=$('#toolsView');
+  const content=state.view==='distribution'?distributionHTML(list):state.view==='matches'?matchesHTML():state.view==='game'?gameHTML():sandboxHTML();
+  root.innerHTML=`<div class="toolhead"><h2 id="toolTitle" tabindex="-1">${esc(t(state.view))}</h2></div>${content}`;
+  if(state.view==='distribution') bindDistribution();
+  else if(state.view==='matches') bindMatches();
+  else if(state.view==='game') bindGame();
+  else bindSandbox();
+}
+
+/* Comparison rows, reference differences and same-height equivalents. */
+function rowLabel(key){ return key==='sizes'?'UK / US / EU':t(key==='whr'?'waistHip':key==='whtr'?'waistHeight':key); }
+function openCompare(){
+  const active=document.activeElement, focusId=active?.id, focusMode=active?.dataset.compareMode;
+  const pickerOpen=$('#rowPicker')?.open||false;
+  const list=state.compare.map(comparisonRecord).filter(Boolean);
+  if(list.length<2){ toast(t('pickTwo')); return; }
+  if(!state.compare.includes(state.compareBase)) state.compareBase='';
+  const reference=comparisonRecord(state.compareBase), basis=state.compareMode;
+  const rowKeys=(state.compareRows||COMPARE_ROWS).filter(k=>!(basis==='height'&&k==='whtr'&&!state.compareRows));
+  const numeric=(d,key)=>METRIC_KEYS.includes(key)?shownValue(d,key,basis):['whr','whtr'].includes(key)?d[key]??null:null;
+  function text(d,key){
+    if(key==='height') return d.temporary?`${fmt(d.stature_cm)} cm\n${fmt(d.stature_cm/2.54)} in`:`${fmt(d.stature_cm)} cm\n${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}`;
+    if(CIRCUMFERENCES[key]){
+      if(basis==='raw') return d[CIRCUMFERENCES[key]]==null?'—':`${fmt(d[CIRCUMFERENCES[key]])} cm\n${fmt(d[CIRCUMFERENCES[key]]/2.54)} in`;
+      return valueText(d,key,basis);
+    }
+    if(d.temporary){ if(key==='whr'||key==='whtr') return fmtPct(d[key]); return '—'; }
+    if(key==='cup') return `${cupLetter(d)}\nUK ${d.uk}`;
+    if(key==='sizes') return `${d.uk} / ${d.us} / ${d.eu}`;
+    if(key==='whr'||key==='whtr') return fmtPct(d[key]);
+    if(key==='figureRead') return readFor(d)||'—';
+    if(key==='thighNote') return tagText(tagsFor(d).thighs);
+    return tagText(tagsFor(d)[key==='build'?'balance':key])||'—';
+  }
+  const best={height:'max',waist:'min',hip:'max',thigh:'max',cup:'max'};
+  const body=rowKeys.map(key=>{
+    const vals=list.map(d=>key==='cup'?(d.temporary?null:cupScore(d)):numeric(d,key));
+    // Raw winners retain the original centimetre rule. Adjusted modes share visible ties.
+    const ranked=vals.map((v,i)=>v==null?null:key==='cup'?v:key==='height'||basis==='raw'?Analysis.value(list[i],key,'raw'):Analysis.displayed(v));
+    const nums=ranked.filter(v=>v!=null), target=nums.length?(best[key]==='min'?Math.min(...nums):Math.max(...nums)):null;
+    const direction=best[key]?` <span class="cmpdir" title="${esc(t(best[key]==='min'?'smallerWins':'largerWins'))}">${best[key]==='min'?'↓':'↑'}</span>`:'';
+    return `<tr data-metric="${key}"><th scope="row">${esc(rowLabel(key))}${direction}</th>${list.map((d,i)=>{
+      let delta='';
+      if(reference && d.slug!==reference.slug && key!=='cup'){
+        const decimals=['whr','whtr'].includes(key)?3:1;
+        const a=vals[i],b=numeric(reference,key);
+        const diff=Analysis.difference(a==null?null:Number(a.toFixed(decimals)),b==null?null:Number(b.toFixed(decimals)));
+        const suffix=decimals===3?'':basis==='height'&&key!=='height'?' '+t('pp'):USUF();
+        if(diff!=null){ const rounded=Number(diff.toFixed(decimals)); delta=`<small class="cmpdelta">${rounded>0?'+':''}${fmt(rounded,decimals)}${esc(suffix)}</small>`; }
+      }
+      return `<td class="${best[key]&&ranked[i]!=null&&ranked[i]===target?'win':''}${key==='figureRead'?' cmdesc':''}">${esc(text(d,key))}${delta}</td>`;
+    }).join('')}</tr>`;
+  }).join('');
+  const selected=state.compareRows||COMPARE_ROWS, options=[...selected,...COMPARE_ROWS.filter(k=>!selected.includes(k))];
+  const rowPicker=`<details class="rowpicker" id="rowPicker"${pickerOpen?' open':''}><summary>${esc(t('rows'))}</summary><div class="rowoptions">${options.map(key=>{
+    const index=selected.indexOf(key);
+    return `<div class="rowoption"><label><input type="checkbox" id="row-${key}" data-row="${key}"${index>=0?' checked':''}>${esc(rowLabel(key))}</label><button class="btn" id="up-${key}" data-move="${key}" data-direction="-1"${index<=0?' disabled':''} aria-label="${esc(t('moveUp')+': '+rowLabel(key))}">↑</button><button class="btn" id="down-${key}" data-move="${key}" data-direction="1"${index<0||index===selected.length-1?' disabled':''} aria-label="${esc(t('moveDown')+': '+rowLabel(key))}">↓</button></div>`;
+  }).join('')}</div><button class="btn" id="restoreRows">${esc(t('restoreRows'))}</button></details>`;
+  $('#modal').innerHTML=`<button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
+    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><div class="sub2">${list.length} ${esc(t('picked'))}</div>
+      <div class="cmpcontrols"><div class="seg" role="group" aria-label="${esc(t('compareBasis'))}">${['raw','height','scaled'].map(k=>`<button id="basis-${k}" data-compare-mode="${k}" aria-pressed="${basis===k}">${esc(t(k==='raw'?'rawMeasurements':k==='height'?'heightAdjusted':'sameHeight'))}</button>`).join('')}</div>
+      ${basis==='scaled'?targetControl('compareTarget'):''}
+      <label for="compareReference">${esc(t('reference'))}<select id="compareReference"><option value="">${esc(t('noReference'))}</option>${list.map(d=>`<option value="${esc(d.slug)}"${d.slug===state.compareBase?' selected':''}>${esc(nameOf(d))}</option>`).join('')}</select></label>
+      ${basis!=='raw'?`<p class="fnote" id="compareBasisNote">${esc(t(basis==='height'?'heightAdjustedNote':'scaledNote'))}</p>`:''}${rowPicker}</div></div>
+    <div class="cmpwrap"><table class="cmptable"${basis!=='raw'?' aria-describedby="compareBasisNote"':''}><thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(nameOf(d))}${d.temporary?`<small class="cmpdelta">${esc(t('temporary'))}</small>`:''}${d.slug===state.compareBase?`<small class="cmpdelta">${esc(t('referenceMark'))}</small>`:''}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
+  if(!$('#overlay').classList.contains('open')) lastFocus=active;
+  mctx={slug:null,src:state.art,skin:false,more:null};
+  $('#toast').classList.remove('show'); $('#overlay').classList.add('open'); $('#overlay').setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open'); if('inert' in $('#main')) $('#main').inert=true;
+  const focus=focusId?document.getElementById(focusId):null;
+  (focus&&$('#modal').contains(focus)&&!focus.disabled?focus:focus?.dataset.move?document.getElementById('row-'+focus.dataset.move):focusMode?$(`#basis-${focusMode}`):$('#closeModal')).focus();
+  $('#closeModal').onclick=closeModal;
+  const update=()=>{ openCompare(); writeHash(true); };
+  $$('#modal [data-compare-mode]').forEach(b=>b.onclick=()=>{state.compareMode=b.dataset.compareMode;update();});
+  $('#compareReference').onchange=e=>{state.compareBase=e.target.value;update();};
+  if($('#compareTarget')) $('#compareTarget').onchange=e=>{if(setTarget(e.target)) update();};
+  $$('#modal [data-row]').forEach(input=>input.onchange=()=>{
+    const chosen=[...(state.compareRows||COMPARE_ROWS)];
+    if(input.checked) chosen.push(input.dataset.row);
+    else {if(chosen.length===1){input.checked=true;toast(t('keepRow'));return;} chosen.splice(chosen.indexOf(input.dataset.row),1);}
+    state.compareRows=chosen;update();
+  });
+  $$('#modal [data-move]').forEach(b=>b.onclick=()=>{
+    const chosen=[...(state.compareRows||COMPARE_ROWS)],a=chosen.indexOf(b.dataset.move),z=a+Number(b.dataset.direction);
+    if(a<0||z<0||z>=chosen.length)return;
+    [chosen[a],chosen[z]]=[chosen[z],chosen[a]];state.compareRows=chosen;update();
+  });
+  $('#restoreRows').onclick=()=>{state.compareRows=null;update();};
+}
+
+/* Filtered roster distribution; references are markers, never observations. */
+function distributionHTML(list){
+  const key=state.distMetric,basis=key==='height'?'raw':state.distBasis;
+  const measured=list.map(d=>({d,v:shownValue(d,key,basis)})).filter(x=>x.v!=null);
+  const summary=Analysis.distribution(measured.map(x=>x.v));
+  const markers=state.compare.map(comparisonRecord).filter(Boolean).map(d=>({d,v:shownValue(d,key,basis)})).filter(x=>x.v!=null);
+  let chart='';
+  if(summary.count){
+    const all=[...measured,...markers].map(x=>x.v), min=Math.min(...all),max=Math.max(...all),span=max-min||1;
+    const width=innerWidth<=700?460:920;
+    const x=v=>max===min?width/2:65+(v-min)/span*(width-130),base=290,peak=Math.max(...summary.bins.map(b=>b.count));
+    const bars=summary.bins.map(b=>{
+      const left=x(b.lo),right=x(b.hi),width=summary.bins.length===1?100:Math.max(1,right-left-3),cx=summary.bins.length===1?left+width/2:(left+right)/2;
+      const bx=summary.bins.length===1?left-50:left,h=b.count/peak*205;
+      return `<g><title>${esc(fmt(b.lo)+'–'+fmt(b.hi)+valueSuffix(key,basis)+': '+b.count)}</title><rect class="bar" x="${bx}" y="${base-h}" width="${width}" height="${h}"/><text x="${summary.bins.length===1?left:cx}" y="${base-h-8}" text-anchor="middle">${b.count}</text></g>`;
+    }).join('');
+    chart=`<svg class="histogram" viewBox="0 0 ${width} 355" role="img" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(t('distribution')+': '+t(key))}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('median')+': '+fmt(summary.median)+valueSuffix(key,basis))}</desc><line class="axis" x1="40" y1="290" x2="${width-35}" y2="290"/>${bars}<line class="median" x1="${x(summary.median)}" x2="${x(summary.median)}" y1="60" y2="300"><title>${esc(t('median'))}</title></line>${markers.map((m,i)=>`<g><line class="marker" x1="${x(m.v)}" x2="${x(m.v)}" y1="${25+i*18}" y2="300"/><text x="${x(m.v)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}<text x="${x(min)}" y="325" text-anchor="middle">${esc(fmt(min)+(min===max?valueSuffix(key,basis):''))}</text>${min===max?'':`<text x="${x(max)}" y="325" text-anchor="middle">${esc(fmt(max)+valueSuffix(key,basis))}</text>`}</svg>`;
+  }
+  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${metricOptions(key)}</select></label><label for="distBasis">${esc(t('basis'))}<select id="distBasis"${key==='height'?' disabled':''}>${basisOptions(basis,true)}</select></label>${basis==='scaled'?targetControl('distTarget'):''}</div>
+    <p class="toolnote">${esc(t('distributionNote'))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('median'))}<strong>${esc(fmt(summary.median)+valueSuffix(key,basis))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(fmt(m.v)+valueSuffix(key,basis))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}
+    <details class="tooldata"><summary>${esc(t('dataTable'))}</summary><table class="tooltable"><thead><tr><th>${esc(t('name'))}</th><th>${esc(t('value'))}</th></tr></thead><tbody>${measured.sort((a,b)=>a.v-b.v).map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>${esc(fmt(m.v)+valueSuffix(key,basis))}</td></tr>`).join('')}</tbody></table></details>`;
+}
+function toolUpdate(id,fn){
+  const focused=document.activeElement?.id; fn(); render(); if(focused===id) document.getElementById(id)?.focus();
+}
+function bindDistribution(){
+  $('#distMetric').onchange=e=>toolUpdate('distMetric',()=>{state.distMetric=e.target.value;});
+  $('#distBasis').onchange=e=>toolUpdate('distBasis',()=>{state.distBasis=e.target.value;});
+  if($('#distTarget')) $('#distTarget').onchange=e=>{if(setTarget(e.target))toolUpdate('distTarget',()=>{});};
+}
+
+/* User weights affect exploration only. Default matching preserves the original rule. */
+function matchesHTML(){
+  const source=comparisonRecord(state.matchSource)||DATA[0],weights=state.matchWeights||Analysis.weights;
+  const results=Analysis.matches(DATA,source,weights,state.matchBasis).slice(0,8);
+  return `<div class="toolform"><label for="matchSource">${esc(t('sourceFigure'))}<select id="matchSource">${figureOptions(source.slug)}</select></label><label for="matchBasis">${esc(t('basis'))}<select id="matchBasis">${basisOptions(state.matchBasis)}</select></label><button class="btn" id="resetWeights">${esc(t('resetWeights'))}</button></div>
+    <p class="toolnote">${esc(t('weightNote'))}</p><div class="weights">${METRIC_KEYS.map(key=>`<label for="weight-${key}">${esc(t(key))}<input class="toolinput" id="weight-${key}" data-weight="${key}" type="number" min="0" max="100" step="1" value="${Math.round(weights[key]*100)}"></label>`).join('')}</div>
+    <p class="toolnote" id="distanceNote">${esc(t('distanceNote'))}</p>${results.length?`<table class="tooltable" aria-describedby="distanceNote"><thead><tr><th>${esc(t('name'))}</th><th>${esc(t('distance'))}</th><th></th></tr></thead><tbody>${results.map(m=>`<tr><td><a href="${esc(charHref(m.d))}" data-tool-profile="${esc(m.d.slug)}">${esc(nameOf(m.d))}</a></td><td>${fmt(m.score,3)}</td><td><button class="btn" data-match-pair="${esc(m.d.slug)}" data-source="${esc(source.slug)}">${esc(t('comparePair'))}</button></td></tr>`).join('')}</tbody></table>`:`<p role="status">${esc(t('noMatches'))}</p>`}`;
+}
+function bindMatches(){
+  $('#matchSource').onchange=e=>toolUpdate('matchSource',()=>{state.matchSource=e.target.value;});
+  $('#matchBasis').onchange=e=>toolUpdate('matchBasis',()=>{state.matchBasis=e.target.value;});
+  $('#resetWeights').onclick=()=>toolUpdate('resetWeights',()=>{state.matchWeights=null;});
+  $$('[data-weight]').forEach(input=>input.onchange=()=>{
+    if(!input.checkValidity()){input.reportValidity();return;}
+    toolUpdate(input.id,()=>{state.matchWeights={...(state.matchWeights||Analysis.weights),[input.dataset.weight]:+input.value/100};});
+  });
+}
+
+/* Higher / Lower uses the same displayed precision as the answer. */
+function newGameRound(){
+  const key=state.gameMetric,basis=key==='height'?'raw':state.gameBasis;
+  const pool=DATA.filter(d=>shownValue(d,key,basis)!=null);
+  if(pool.length<2){gameRound=null;return;}
+  const a=Math.floor(Math.random()*pool.length),rest=pool.filter((_,i)=>i!==a),b=Math.floor(Math.random()*rest.length);
+  gameRound={left:pool[a].slug,right:rest[b].slug,key,basis,unit:state.unit,answer:null};
+}
+function gameHTML(){
+  const key=state.gameMetric,basis=key==='height'?'raw':state.gameBasis;
+  if(!gameRound||gameRound.key!==key||gameRound.basis!==basis||gameRound.unit!==state.unit)newGameRound();
+  const round=gameRound;
+  const figures=round?[bySlug.get(round.left),bySlug.get(round.right)]:[];
+  return `<div class="toolform"><label for="gameMetric">${esc(t('metric'))}<select id="gameMetric">${metricOptions(key)}</select></label><label for="gameBasis">${esc(t('basis'))}<select id="gameBasis"${key==='height'?' disabled':''}>${basisOptions(basis)}</select></label><button class="btn" id="gameReset">${esc(t('gameReset'))}</button></div>
+    <p class="toolnote">${esc(t('gameNote'))}</p><div class="toolstats"><span>${esc(t('gameScore'))}<strong>${gameScore.correct} / ${gameScore.total}</strong></span><span>${esc(t('streak'))}<strong>${gameScore.streak}</strong></span></div>
+    ${!round?`<p>${esc(t('notEnough'))}</p>`:`<div class="gamepair">${figures.map((d,i)=>`<div class="gamefigure"><img src="${THUMB}/320/${d.official}.webp" width="90" height="140" alt=""><div><h3>${esc(nameOf(d))}</h3><div class="gamevalue">${i===0||round.answer?esc(valueText(d,key,basis)):'?'}</div></div></div>`).join('')}</div>
+    <p class="gameresult" role="status">${round.answer?esc(t(round.correct?'correct':'incorrect')+' · '+t(round.outcome)):''}</p><div class="gameactions">${['higher','lower','equal'].map(k=>`<button class="btn" id="guess-${k}" data-guess="${k}"${round.answer?' disabled':''}>${esc(t(k))}</button>`).join('')}<button class="btn primary" id="nextRound"${!round.answer?' disabled':''}>${esc(t('nextRound'))}</button></div>`}`;
+}
+function bindGame(){
+  $('#gameMetric').onchange=e=>toolUpdate('gameMetric',()=>{state.gameMetric=e.target.value;gameRound=null;});
+  $('#gameBasis').onchange=e=>toolUpdate('gameBasis',()=>{state.gameBasis=e.target.value;gameRound=null;});
+  $('#gameReset').onclick=()=>toolUpdate('gameReset',()=>{gameScore={correct:0,total:0,streak:0};gameRound=null;});
+  $$('[data-guess]').forEach(b=>b.onclick=()=>{
+    if(gameRound.answer)return;
+    const left=bySlug.get(gameRound.left),right=bySlug.get(gameRound.right);
+    const result=Analysis.outcome(shownValue(left,gameRound.key,gameRound.basis),shownValue(right,gameRound.key,gameRound.basis));
+    gameRound.answer=b.dataset.guess;gameRound.outcome=result;gameRound.correct=result===b.dataset.guess;
+    gameScore.total++;if(gameRound.correct){gameScore.correct++;gameScore.streak++;}else gameScore.streak=0;
+    renderTool(filtered());$('#nextRound').focus();
+  });
+  if($('#nextRound'))$('#nextRound').onclick=()=>{newGameRound();renderTool(filtered());$('#guess-higher').focus();};
+}
+
+/* Fictional references never enter DATA, bySlug, exports or derived classifications. */
+function sandboxHTML(){
+  const s=state.sandbox||{},record=sandboxRecord();
+  return `<p class="toolnote">${esc(t('sandboxNote'))}</p><form id="sandboxForm"><div class="sandboxfields"><label class="widename" for="sandboxName">${esc(t('sandboxName'))}<input class="toolinput" id="sandboxName" name="name" maxlength="40" value="${esc(s.name||'')}"></label>${METRIC_KEYS.map(key=>`<label for="sandbox-${key}">${esc(t(key))} (cm)<input class="toolinput" id="sandbox-${key}" name="${key}" type="number" min="${key==='height'?1:.1}" max="300" step="0.1"${key==='height'?' required':''} value="${s[Analysis.fields[key]]??''}"></label>`).join('')}</div><div class="sandboxactions"><button class="btn primary" type="submit">${esc(t('saveSandbox'))}</button>${record?`<button class="btn" type="button" id="addSandbox">${esc(t('addSandbox'))}</button><button class="btn" type="button" id="sandboxMatch">${esc(t('matches'))}</button><button class="btn" type="button" id="clearSandbox">${esc(t('clearSandbox'))}</button>`:''}</div></form><p class="toolnote">${esc(t('sandboxLinkNote'))}</p><p id="sandboxStatus" role="status"></p>`;
+}
+function bindSandbox(){
+  $('#sandboxForm').onsubmit=e=>{
+    e.preventDefault();
+    const form=e.target,raw={name:form.elements.name.value};
+    for(const key of METRIC_KEYS)raw[Analysis.fields[key]]=form.elements[key].value===''?null:Number(form.elements[key].value);
+    const value=validSandbox(raw);
+    if(!value){$('#sandboxStatus').textContent=t('sandboxHeight');return;}
+    state.sandbox=value;render();$('#sandboxStatus').textContent=t('sandboxSaved');$('#addSandbox').focus();
+  };
+  if($('#addSandbox'))$('#addSandbox').onclick=()=>{if(!state.compare.includes(SANDBOX_SLUG))toggleCompare(SANDBOX_SLUG);};
+  if($('#sandboxMatch'))$('#sandboxMatch').onclick=()=>openTool('matches',SANDBOX_SLUG);
+  if($('#clearSandbox'))$('#clearSandbox').onclick=()=>{
+    state.sandbox=null;state.compare=state.compare.filter(s=>s!==SANDBOX_SLUG);
+    if(state.compareBase===SANDBOX_SLUG)state.compareBase='';if(state.matchSource===SANDBOX_SLUG)state.matchSource='';
+    render();$('#sandboxName').focus();
+  };
+}
+$('#toolsView').addEventListener('click',e=>{
+  const profile=e.target.closest('[data-tool-profile]');
+  if(profile && !(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)){e.preventDefault();openModal(profile.dataset.toolProfile);return;}
+  const pair=e.target.closest('[data-match-pair]');
+  if(pair){state.compare=[pair.dataset.source,pair.dataset.matchPair];state.compareBase=pair.dataset.source;state.compareMode=state.matchBasis;renderCompare();syncCardCompare();writeHash(true);openCompare();}
+});
+
 
 (function boot(){
   try{

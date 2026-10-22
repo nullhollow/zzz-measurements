@@ -2,6 +2,19 @@
 
 ## Unreleased — audit implementation
 
+### Comparison and exploration tools (2026-10-22)
+
+- Added comparison row selection/order, reference differences and same-height
+  circumference equivalents at a chosen height, preserving measured height.
+- Added weighted raw/height-adjusted similarity matching and a filtered-roster
+  distribution explorer with comparison markers and an accessible value table.
+- Added Higher or Lower rounds with displayed-value ties and a fictional figure
+  sandbox for temporary comparisons and matching references.
+- Kept sandbox records outside official data, classes, percentiles, rankings,
+  games and exports. Shared URLs preserve validated tool settings and inputs.
+- Finished controls and methodology in EN/JA/ZH, with shared Python/JS math,
+  regression/parity tests and regenerated CJK font subsets.
+
 ### Height-adjusted comparison (2026-10-22)
 
 - Added a comparison-only switch between raw measurements and circumferences

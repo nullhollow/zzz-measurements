@@ -185,6 +185,12 @@ def slim(d):
         out['skin'] = {k: v for k, v in out['skin'].items() if k not in JS_SKIP}
     return out
 data_js = json.dumps([slim(d) for d in DATA], ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+explorer_i18n = json.loads((ROOT / 'tools/explorer_i18n.json').read_text())
+for lang, strings in explorer_i18n.items():
+    copy = ',\n    '.join(f'{key}: {json.dumps(value, ensure_ascii=False)}' for key, value in strings.items()) + ','
+    tpl = tpl.replace(f'/*__EXPLORER_I18N_{lang.upper()}__*/', copy)
+for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.js'), ('EXPLORER_CSS', 'explorer.css')):
+    tpl = tpl.replace(f'/*__{token}__*/', (ROOT / 'tools' / source).read_text())
 html = (tpl
         .replace('/*__DATA__*/[]', data_js)
         .replace('/*__CARD_TMPL__*/""', card_tmpl_js)
@@ -202,7 +208,7 @@ html = (tpl
 (ROOT / 'index.html').write_text(html)
 print('index.html written:', round(len(html) / 1024, 1), 'KB,', N, 'entries')
 leftovers = [t for t in ('/*__DATA__*/', '/*__CARD_TMPL__*/', '/*__JSONLD__*/', '/*__NOSCRIPT__*/',
-                         '/*__CARDS__*/', '/*__COUNT__*/', '__DESC__', '__TITLE__',
+                         '/*__CARDS__*/', '/*__COUNT__*/', '/*__EXPLORER', '/*__ANALYSIS', '__DESC__', '__TITLE__',
                          '__DATA_UPDATED__', '__SCHEMA_VERSION__', '__REPO__', '__OGV__')
              if t in html]
 if leftovers:

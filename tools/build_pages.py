@@ -22,6 +22,7 @@ from pathlib import Path
 from urllib.parse import quote
 from PIL import Image
 from profile_text import profile_summary
+from analysis_math import matches
 
 ROOT = Path(__file__).resolve().parent.parent
 _WIDTH = {}
@@ -128,6 +129,10 @@ PAGE = {
 }
 
 
+for _lang, _strings in json.loads((ROOT / 'tools/explorer_i18n.json').read_text()).items():
+    PAGE[_lang].update(_strings)
+
+
 def esc(v):
     return html.escape('' if v is None else str(v), quote=True)
 
@@ -143,25 +148,8 @@ def pct(p):
     return 0 if p is None else round(p * 100)
 
 
-def similar(d, key='slug'):
-    keys = [('bust_cm', .25), ('waist_cm', .2), ('hip_cm', .2), ('thigh_cm', .15), ('stature_cm', .2)]
-    spans = {}
-    for k, _ in keys:
-        vals = [x[k] for x in DATA if x[k] is not None]
-        spans[k] = max(vals) - min(vals) or 1
-    scored = []
-    for x in DATA:
-        if x['slug'] == d['slug']:
-            continue
-        total = weight = 0.0
-        for k, w in keys:
-            if d[k] is None or x[k] is None:
-                continue
-            total += w * abs(d[k] - x[k]) / spans[k]
-            weight += w
-        scored.append((total / weight if weight else 9, x))
-    scored.sort(key=lambda kv: kv[0])
-    return [x for _, x in scored[:3]]
+def similar(d):
+    return [x['d'] for x in matches(DATA, d)[:3]]
 
 
 CSS = '''
@@ -625,6 +613,14 @@ FAQ = [
     ("Can I reuse the data?",
      "The measurements are compiled from modelmetrics.net and the character art is © HoYoverse, shown via the ZZZ Fandom wiki as fair use. Link back to the source and respect those rights."),
 ]
+
+
+for _lang in PAGE:
+    METHOD[_lang]['sections'].extend([
+        (PAGE[_lang]['sameHeight'], esc(PAGE[_lang]['comparisonMethod'])),
+        (PAGE[_lang]['matches'], esc(PAGE[_lang]['matchingMethod'])),
+        (PAGE[_lang]['tools'], esc(PAGE[_lang]['playMethod'])),
+    ])
 
 
 def methodology_page(lang='en'):

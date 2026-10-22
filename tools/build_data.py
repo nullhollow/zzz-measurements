@@ -17,6 +17,7 @@ import re
 from pathlib import Path
 
 from PIL import Image
+from analysis_math import percentage
 
 ROOT = Path(__file__).resolve().parent.parent
 META = json.loads((ROOT / 'tools/meta.json').read_text())
@@ -271,7 +272,7 @@ def add_ratios(d):
     d['bhr'] = round(d['bust_cm'] / d['stature_cm'], 3) if d['bust_cm'] and d['stature_cm'] else None
     d['hhr'] = round(d['hip_cm'] / d['stature_cm'], 3) if d['hip_cm'] and d['stature_cm'] else None
     d['height_adjusted'] = {
-        key: d[field] / d['stature_cm'] * 100 if d[field] is not None and d['stature_cm'] > 0 else None
+        key: percentage(d[field], d['stature_cm'])
         for key, field in (('bust', 'bust_cm'), ('underbust', 'band_cm'), ('waist', 'waist_cm'),
                            ('hip', 'hip_cm'), ('thigh', 'thigh_cm'))
     }

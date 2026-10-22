@@ -62,6 +62,41 @@ stay unranked. Height, bra sizes and classes retain their values. This mode is
 separate from roster rankings, filters, percentiles and podiums. The selected
 mode is included in shared URLs as `basis=height`.
 
+## Exploration tools
+
+The comparison dialog also offers **Same height**: `circumference_cm / stature_cm × reference_height_cm`
+(default 160 cm). This assumes uniform scaling and produces hypothetical equivalents,
+not new measurements. Height itself retains its measured value. Choose visible rows,
+reorder them, and select a reference character for signed differences. Adjusted
+circumferences use percentage-point differences; raw and scaled differences use the
+selected unit. Missing measurements stay unknown.
+
+The **Tools** menu contains:
+
+- **Distribution**: equal-width histograms and medians of the filtered roster, with
+  comparison selections shown as markers. Missing measurements are omitted.
+- **Find similar figures**: raw or height-adjusted matching with per-metric weights
+  from 0 to 100. Distances use the full canonical roster range for each metric,
+  skip missing pairs, and renormalize the remaining weights. Default weights and
+  static-profile matches retain the original rule. Zero shared weight gives no result.
+- **Higher or Lower**: canonical character pairs with higher, lower and equal answers,
+  judged using displayed one-decimal values in the selected unit. Scores stay in the page.
+- **Figure sandbox**: fictional cm inputs that can join a comparison or serve as the
+  matching reference. They never enter the roster, classes, percentiles, rankings,
+  game rounds or exports. Optional blank circumferences stay unknown. Shared links
+  include the fictional values and validated tool settings in the URL fragment.
+
+`tools/analysis_math.py` and `tools/analysis.js` implement the same exploration math.
+`tools/explorer.js` and `tools/explorer.css` are inlined by `build_html.py`; the shared
+EN/JA/ZH copy in `tools/explorer_i18n.json` supplies both the interactive UI and static
+methodology. The public measurement schema is unchanged.
+
+Run the regression and Python/JavaScript parity suite with Node.js available:
+
+```bash
+python3 tools/test_analysis.py
+```
+
 ## Live calculations
 
 The derived numbers used by the interactive chart are computed in the browser
@@ -104,7 +139,9 @@ Two notes:
   variable and 900 subsets. This avoids tofu while keeping the ZZZ face wherever
   it has a glyph.
 
-Rebuild the fallback font subsets with `tools/update_cjk_fonts.py`; rebuild the
+Rebuild the fallback font subsets with `tools/update_cjk_fonts.py` (requires
+`fonttools[woff]` from `requirements.txt`). It subsets full OFL source files in memory
+and preserves the existing font families and licences. Rebuild the
 primary ZZZ subset from a licensed local source with:
 
 ```bash

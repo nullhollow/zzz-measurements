@@ -697,6 +697,7 @@
     tbody td{color:#000}
     a{color:#000;text-decoration:underline}
   }
+/*__EXPLORER_CSS__*/
 </style>
 </head>
 <body>
@@ -782,6 +783,14 @@
       <button id="vTable" aria-pressed="false" data-i18n="table">TABLE</button>
       <button id="vPlot" aria-pressed="false" data-i18n="plot">PLOT</button>
     </div>
+    <div class="fgroup"><label for="toolSelect" data-i18n="tools">Tools</label>
+      <select id="toolSelect"><option value="" data-i18n="tools">Tools</option>
+        <option value="distribution" data-i18n="distribution">Distribution</option>
+        <option value="matches" data-i18n="matches">Find similar figures</option>
+        <option value="game" data-i18n="game">Higher or Lower</option>
+        <option value="sandbox" data-i18n="sandbox">Figure sandbox</option>
+      </select>
+    </div>
     <button class="btn cmpbtn" id="compareBtn" aria-pressed="false" aria-label="Compare" title="Compare"><span data-i18n="compare">COMPARE</span><span class="n" id="cmpCount">0</span></button>
     <button class="btn" id="shareBtn" data-i18n="share">SHARE</button>
     <button class="btn" id="reset" data-i18n="reset">RESET</button>
@@ -804,6 +813,7 @@
       <caption class="sr">Measurements for every agent; use the header buttons to sort.</caption>
       <thead></thead><tbody></tbody>
     </table></div></div>
+    <section id="toolsView" hidden aria-labelledby="toolTitle"></section>
     <p class="empty" id="empty" hidden data-i18n="noMatch">No characters match these filters.</p>
     <noscript>/*__NOSCRIPT__*/</noscript>
   </div>
@@ -854,8 +864,11 @@ const CARD_TMPL = /*__CARD_TMPL__*/"";
 const META = {updated:"__DATA_UPDATED__", schema:"__SCHEMA_VERSION__", repo:"__REPO__"};
 
 /* ---------------- i18n ---------------- */
+/*__ANALYSIS_JS__*/
+
 const I18N = {
   en: {
+    /*__EXPLORER_I18N_EN__*/
     compareBasis:'Comparison basis', rawMeasurements:'Raw measurements', heightAdjusted:'Height-adjusted',
     heightAdjustedNote:'Circumference ÷ height × 100', smallerWins:'Smaller value', largerWins:'Larger value',
     changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', dark:'Dark', light:'Light', schema:'Schema',
@@ -912,6 +925,7 @@ const I18N = {
     pctLong:'Roster percentile of the raw centimetre measurement; height uses head height. 0 = smallest in the cast, 100 = largest.'
   },
   ja: {
+    /*__EXPLORER_I18N_JA__*/
     compareBasis:'比較の基準', rawMeasurements:'実寸', heightAdjusted:'身長比',
     heightAdjustedNote:'周囲長 ÷ 身長 × 100', smallerWins:'小さい値', largerWins:'大きい値',
     changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', dark:'ダーク', light:'ライト', schema:'スキーマ',
@@ -968,6 +982,7 @@ const I18N = {
     pctLong:'ロスター内の実寸cm値の百分位。身長は頭頂ベース。0=最小、100=最大。'
   },
   zh: {
+    /*__EXPLORER_I18N_ZH__*/
     compareBasis:'对比方式', rawMeasurements:'实测围度', heightAdjusted:'身高占比',
     heightAdjustedNote:'围度 ÷ 身高 × 100', smallerWins:'较小值', largerWins:'较大值',
     changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', dark:'深色', light:'浅色', schema:'数据结构',
@@ -1094,7 +1109,7 @@ function computeDerived(){
     d.bhr = (d.bust_cm && d.stature_cm) ? r3(d.bust_cm/d.stature_cm) : null;
     d.hhr = (d.hip_cm && d.stature_cm) ? r3(d.hip_cm/d.stature_cm) : null;
     d.height_adjusted = Object.fromEntries(Object.entries(CIRCUMFERENCES).map(([key, field]) =>
-      [key, d[field] != null && d.stature_cm > 0 ? d[field] / d.stature_cm * 100 : null]));
+      [key, Analysis.percentage(d[field], d.stature_cm)]));
   }
   const keys = ['bust_cm','waist_cm','hip_cm','thigh_cm','whr','bhr','hhr','stature_cm'];
   const lists = {};
@@ -1152,7 +1167,9 @@ for(const m of RANGES){
 }
 const state = {q:"", cup:"all", shape:"all", balance:"all", thighs:"all", height:"all",
                sort:"cup-desc", view:"cards", unit:"cm", art:"official", lang:"en",
-               rng:{}, compare:[], compareMode:"raw", plotY:"whr"};
+               rng:{}, compare:[], compareMode:"raw", plotY:"whr", compareRows:null, compareBase:"", compareHeight:160,
+               sandbox:null, matchSource:"", matchBasis:"raw", matchWeights:null, distMetric:"waist", distBasis:"raw",
+               gameMetric:"waist", gameBasis:"raw"};
 function nameOf(d){
   if(!d) return '';
   return state.lang==='ja' ? (d.name_ja || d.display)
@@ -1248,7 +1265,8 @@ function readHash(){
     }
     out.rng = rng;
   }
-  if(p.has('c')) out.compare = p.get('c').split(',').map(s=>bySlug.get(s)).filter(Boolean).map(d=>d.slug);
+  if(p.has('c')) out.compare = [...new Set(p.get('c').split(','))];
+  out.explorer = readExplorerHash(p);
   if(p.has('lang')) out.lang = p.get('lang');
   if(p.has('th')) out.theme = p.get('th');
   if(p.has('p')) out.p = p.get('p');
@@ -1273,6 +1291,7 @@ function writeHash(replace=true){
   if(r) p.set('r', r);
   if(state.compare.length) p.set('c', state.compare.join(','));
   if(state.compareMode!=="raw") p.set('basis', state.compareMode);
+  writeExplorerHash(p);
   if(mctx.slug) p.set('p', mctx.slug);
   const hash = p.toString();
   const url = location.pathname + location.search + (hash ? '#'+hash : '');
@@ -1627,14 +1646,7 @@ function rankword(p){
   return p>=0.85?`top ${x}%`:p<=0.15?`bottom ${x}%`:'mid-pack';
 }
 function similarTo(d){
-  const keys=[['bust_cm',.25],['waist_cm',.2],['hip_cm',.2],['thigh_cm',.15],['stature_cm',.2]];
-  const ranges={};
-  for(const [k] of keys){ const v=DATA.map(x=>x[k]).filter(x=>x!=null); ranges[k]=Math.max(...v)-Math.min(...v)||1; }
-  return DATA.filter(x=>x.slug!==d.slug).map(x=>{
-    let s=0, n=0;
-    for(const [k,w] of keys){ if(d[k]==null||x[k]==null) continue; s+=w*Math.abs(d[k]-x[k])/ranges[k]; n+=w; }
-    return {d:x, score:n? s/n : 9};
-  }).sort((a,b)=>a.score-b.score).slice(0,3);
+  return Analysis.matches(DATA,d,state.matchWeights||Analysis.weights,state.matchBasis).slice(0,3);
 }
 function issueURL(d){
   const title = `[data] ${nameOf(d)}`;
@@ -1788,7 +1800,7 @@ function openModal(slug, opts){
           </div>
           ${noteFor(r)?`<div class="mnote">${esc(t('chartNote'))}: ${esc(noteFor(r))}</div>`:""}
         </div>
-        <div class="sect"><h3>${esc(t('similar'))}</h3>
+        <div class="sect"><h3>${esc(t('similar'))}</h3><button class="btn" id="customizeMatch">${esc(t('customize'))}</button>
           <div class="simrow">${similarTo(d).map(s=>`<button type="button" class="sim" data-sim="${esc(s.d.slug)}"><img src="${THUMB}/320/${s.d.official}.webp" alt="" width="22" height="34">${esc(nameOf(s.d))}</button>`).join('')}</div>
         </div>
         <div class="mfoot">
@@ -1819,6 +1831,7 @@ function openModal(slug, opts){
       openModal(slug, patch);
     });
   });
+  $("#customizeMatch").addEventListener("click", ()=>openTool("matches",d.slug));
   $("#mCompare").addEventListener("click", ()=>{ toggleCompare(d.slug); openModal(slug); });
   $$("#modal [data-sim]").forEach(b=>b.addEventListener("click", ()=>openModal(b.dataset.sim)));
   const img = $("#mimg");
@@ -1841,12 +1854,14 @@ function toggleCompare(slug){
   const i = state.compare.indexOf(slug);
   if(i>=0){
     state.compare.splice(i,1);
+    if(state.compareBase===slug) state.compareBase="";
   }else{
     if(state.compare.length>=4){ toast(t('cmpMax')); return; }
     state.compare.push(slug);
   }
   renderCompare();
   syncCardCompare();
+  if(state.view==="distribution") renderTool(filtered());
   writeHash(true);
 }
 function renderCompare(){
@@ -1860,8 +1875,8 @@ function renderCompare(){
   $("#cmpOpen").disabled = n<2;
   $("#cmpHint").textContent = n===0 ? "" : n===1 ? t('cmpAddOne') : t('cmpReady');
   chips.innerHTML = state.compare.map(slug=>{
-    const d = bySlug.get(slug); if(!d) return "";
-    return `<span class="cchip">${esc(nameOf(d))}<button type="button" data-uncmp="${esc(slug)}" aria-label="Remove ${esc(nameOf(d))}">×</button></span>`;
+    const d = comparisonRecord(slug); if(!d) return "";
+    return `<span class="cchip">${esc(nameOf(d))}<button type="button" data-uncmp="${esc(slug)}" aria-label="${esc(t('removeFromCompare'))}: ${esc(nameOf(d))}">×</button></span>`;
   }).join("");
 }
 function syncCardCompare(){
@@ -1877,79 +1892,6 @@ function syncCardCompare(){
     if(lbl) lbl.textContent = on?t('added'):t('cmpShort');
   });
 }
-function openCompare(){
-  const focusedMode = document.activeElement?.dataset.compareMode;
-  const tel = $("#toast"); if(tel) tel.classList.remove("show");
-  const list = state.compare.map(s=>bySlug.get(s)).filter(Boolean);
-  if(list.length<2){ toast(t('pickTwo')); return; }
-  const cmIn = (a,b)=>`${fmt(a)} cm\n${fmt(b)} in`;
-  const adjusted = state.compareMode === 'height';
-  const circumference = (key, best) => ({
-    key, label:t(key), best,
-    get:d=>adjusted ? (d.height_adjusted[key] == null ? null : Number(d.height_adjusted[key].toFixed(1))) : d[CIRCUMFERENCES[key]],
-    fmt:d=>adjusted
-      ? (d.height_adjusted[key] == null ? '—' : `${fmt(d.height_adjusted[key])}%`)
-      : (d[CIRCUMFERENCES[key]] == null ? '—' : cmIn(d[CIRCUMFERENCES[key]], d[CIRCUMFERENCES[key].replace('_cm','_in')])),
-  });
-  const winnerFlags = (vals, mode) => {
-    const nums = vals.filter(v=>v!=null);
-    if(!nums.length) return vals.map(()=>false);
-    const target = mode==='min' ? Math.min(...nums) : Math.max(...nums);
-    return vals.map(v=>v!=null && Math.abs(v-target)<1e-9);
-  };
-  const rows = [
-    {label:t('height'), get:d=>d.stature_cm, best:'max',
-     fmt:d=>`${fmt(d.stature_cm,1)} cm\n${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}`},
-    circumference('waist', 'min'),
-    circumference('hip', 'max'),
-    circumference('thigh', 'max'),
-    {label:t('cup'), get:cupScore, best:'max', fmt:d=>`${cupLetter(d)}\nUK ${d.uk}`},
-    circumference('bust'),
-    circumference('underbust'),
-    {label:'UK / US / EU', fmt:d=>`${d.uk} / ${d.us} / ${d.eu}`},
-    {label:t('waistHip'), fmt:d=>fmtPct(d.whr)},
-    ...(!adjusted ? [{label:t('waistHeight'), fmt:d=>fmtPct(d.whtr)}] : []),
-    {label:t('shape'), fmt:d=>tagText(tagsFor(d).shape)},
-    {label:t('build'), fmt:d=>tagText(tagsFor(d).balance)},
-    {label:t('thighNote'), fmt:d=>tagText(tagsFor(d).thighs)},
-  ];
-  const body = rows.map(r=>{
-    const vals = r.get ? list.map(r.get) : list.map(()=>null);
-    const wins = r.best ? winnerFlags(vals, r.best) : list.map(()=>false);
-    const dir = r.best ? ` <span class="dir" aria-hidden="true" title="${esc(r.best==='min'?t('smallerWins'):t('largerWins'))}">${r.best==='min'?'↓':'↑'}</span>` : '';
-    return `<tr${r.key?` data-metric="${r.key}"`:''}><th scope="row">${esc(r.label)}${dir}</th>${list.map((d,i)=>`<td class="${wins[i]?'win':''}">${esc(r.fmt(d))}</td>`).join('')}</tr>`;
-  }).join('');
-  $("#modal").innerHTML = `
-    <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
-    <div class="mhead"><h2 id="mTitle">${esc(t('compareTitle'))}</h2><div class="sub2">${list.length} ${esc(t('picked'))}</div>
-      <div class="cmpcontrols">
-        <div class="seg" role="group" aria-label="${esc(t('compareBasis'))}">
-          <button type="button" data-compare-mode="raw" aria-pressed="${!adjusted}" data-i18n="rawMeasurements">${esc(t('rawMeasurements'))}</button>
-          <button type="button" data-compare-mode="height" aria-pressed="${adjusted}" data-i18n="heightAdjusted">${esc(t('heightAdjusted'))}</button>
-        </div>
-        ${adjusted?`<span class="fnote" id="compareBasisNote" data-i18n="heightAdjustedNote">${esc(t('heightAdjustedNote'))}</span>`:''}
-      </div>
-    </div>
-    <div class="cmpwrap"><table class="cmptable"${adjusted?' aria-describedby="compareBasisNote"':''}>
-      <thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(nameOf(d))}</th>`).join('')}</tr></thead>
-      <tbody>${body}
-      <tr><th scope="row">${esc(t('figureRead'))}</th>${list.map(d=>`<td class="cmdesc">${esc(readFor(d))}</td>`).join('')}</tr>
-      </tbody></table></div>`;
-  const wasOpen = $("#overlay").classList.contains("open");
-  if(!wasOpen) lastFocus = document.activeElement;
-  $("#overlay").classList.add("open");
-  $("#overlay").setAttribute("aria-hidden","false");
-  document.body.classList.add("modal-open");
-  const main=$("#main"); if(main && 'inert' in main) main.inert=true;
-  (focusedMode ? $(`#modal [data-compare-mode="${focusedMode}"]`) : $("#closeModal")).focus();
-  $("#closeModal").addEventListener("click", closeModal);
-  $$('#modal [data-compare-mode]').forEach(button=>button.addEventListener('click', ()=>{
-    state.compareMode = button.dataset.compareMode;
-    openCompare();
-    writeHash(true);
-  }));
-}
-
 /* ---------------- toast + share ---------------- */
 let toastTimer;
 function toast(msg){
@@ -1982,7 +1924,7 @@ function render(skipHash){
   renderHighlights();
   $("#count").innerHTML = `<b>${list.length}</b> / ${DATA.length} ${esc(t('entries'))}`;
   const fcount = $("#fCount"); if(fcount) fcount.textContent = `${list.length} / ${DATA.length} ${t('entries')}`;
-  $("#empty").hidden = list.length>0;
+  $("#empty").hidden = list.length>0 || TOOL_VIEWS.includes(state.view);
   const v = state.view;
   $("#cardsView").hidden = v!=="cards";
   $("#plotView").hidden = v!=="plot";
@@ -1990,7 +1932,10 @@ function render(skipHash){
   $("#sortGroup").hidden = v!=="cards";
   if(v==="table") renderTable(list);
   else if(v==="plot") renderPlot(list);
-  else renderCards([...list].sort(SORTS[state.sort]));
+  else if(v==="cards") renderCards([...list].sort(SORTS[state.sort]));
+  $("#toolsView").hidden = !TOOL_VIEWS.includes(v);
+  $("#toolSelect").value = TOOL_VIEWS.includes(v) ? v : "";
+  if(TOOL_VIEWS.includes(v)) renderTool(list);
   $("#vCards").setAttribute("aria-pressed", v==="cards"?"true":"false");
   $("#vTable").setAttribute("aria-pressed", v==="table"?"true":"false");
   $("#vPlot").setAttribute("aria-pressed", v==="plot"?"true":"false");
@@ -2020,7 +1965,7 @@ $("#compareBtn").addEventListener("click", ()=>{
   openCompare();
 });
 $("#cmpOpen").addEventListener("click", openCompare);
-$("#cmpClear").addEventListener("click", ()=>{ state.compare=[]; renderCompare(); syncCardCompare(); writeHash(true); });
+$("#cmpClear").addEventListener("click", ()=>{ state.compare=[]; state.compareBase=""; renderCompare(); syncCardCompare(); if(state.view==="distribution") renderTool(filtered()); writeHash(true); });
 $("#cmpChips").addEventListener("click", e=>{
   const b = e.target.closest("[data-uncmp]");
   if(b){ toggleCompare(b.dataset.uncmp); }
@@ -2062,6 +2007,7 @@ function setUnit(u){
   try{ localStorage.setItem("zzz-unit", u); }catch(e){}
   renderFilterPanel(); render();
   if($("#overlay").classList.contains("open") && mctx.slug) openModal(mctx.slug, mctx);
+  else if($("#overlay").classList.contains("open") && $("#modal .cmptable")) openCompare();
 }
 $("#uCm").addEventListener("click", ()=>setUnit("cm"));
 $("#uIn").addEventListener("click", ()=>setUnit("in"));
@@ -2121,7 +2067,8 @@ $("#theme").addEventListener("change", e=>applyTheme(e.target.value));
 /* reset */
 function resetAll(){
   Object.assign(state,{q:"",cup:"all",shape:"all",balance:"all",thighs:"all",height:"all",
-    sort:"cup-desc",view:"cards",rng:{},compare:[],compareMode:"raw"});
+    sort:"cup-desc",view:"cards",rng:{},compare:[],compareMode:"raw", ...explorerDefaults()});
+  gameRound=null; gameScore={correct:0,total:0,streak:0};
   $("#q").value="";
   $$("#fPanel .chipbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v==="all"?"true":"false"));
   $("#fSort").value="cup-desc";
@@ -2213,13 +2160,15 @@ function applyHashState(){
   const sortAlias = {"bust-desc":"cup-desc", "bust-asc":"cup-asc"};
   const wantedSort = sortAlias[h.sort] || h.sort;
   state.sort = SORTS[wantedSort] ? wantedSort : "cup-desc";
-  state.view = ["cards","table","plot"].includes(h.view) ? h.view : "cards";
+  state.view = ["cards","table","plot",...TOOL_VIEWS].includes(h.view) ? h.view : "cards";
   state.unit = h.unit ? (h.unit==="in"?"in":"cm") : state.unit;
   state.art = h.art ? (h.art==="sheet"?"sheet":"official") : state.art;
   state.lang = (h.lang && I18N[h.lang]) ? h.lang : state.lang;
   state.rng = h.rng || {};
-  state.compare = Array.isArray(h.compare) ? h.compare.slice(0,4) : [];
-  state.compareMode = h.compareMode === 'height' ? 'height' : 'raw';
+  Object.assign(state, explorerDefaults(), h.explorer);
+  state.compare = Array.isArray(h.compare) ? h.compare.filter(s=>comparisonRecord(s)).slice(0,4) : [];
+  if(!state.compare.includes(state.compareBase)) state.compareBase="";
+  state.compareMode = ['height','scaled'].includes(h.compareMode) ? h.compareMode : 'raw';
   state.plotY = PLOT_METRICS.some(m=>m.k===h.plotY) ? h.plotY : state.plotY;
   if(h.theme) applyTheme(h.theme);
   applyLang(state.lang, false);
@@ -2230,6 +2179,8 @@ function applyHashState(){
   if(h.p && bySlug.has(h.p)) openModal(h.p, {src:state.art});
   else if($("#overlay").classList.contains("open")) closeModal();
 }
+
+/*__EXPLORER_JS__*/
 
 (function boot(){
   try{

@@ -18,6 +18,10 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
       - name: Install Python deps
         run: pip install -r requirements.txt
 
@@ -26,6 +30,9 @@ jobs:
 
       - name: Validate data, pages, links and structured data
         run: python3 tools/validate.py --site-url https://nullhollow.github.io/zzz-measurements/
+
+      - name: Exploration regression and Python/JS parity
+        run: python3 tools/test_analysis.py
 
       - name: Rebuild is reproducible
         run: |

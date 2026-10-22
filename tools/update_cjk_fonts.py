@@ -1,32 +1,29 @@
 #!/usr/bin/env python3
-"""Regenerate the bundled Japanese/Chinese WOFF2 subsets.
+"""Subset the existing OFL CJK faces from Google Fonts' full source files.
 
-The site is deliberately self-hosted, so the CJK fonts are subset to the
-characters that actually appear in the built pages. Run this after changing any
-Japanese or Chinese copy, then run pack_site again:
-
-    python3 tools/pack_site.py
-    python3 tools/update_cjk_fonts.py
-    python3 tools/pack_site.py
-
-Requires network access to fonts.googleapis.com / fonts.gstatic.com. The four
-OFL licence files are kept in fonts/ alongside the binaries.
+Run after building changed copy, then repack. Full sources avoid the CSS API's
+split unicode-range responses, which can silently yield an incomplete subset.
+Requires fonttools[woff]. Sources stay in memory and are never shipped.
 """
-import re
-import urllib.parse
+from io import BytesIO
 import urllib.request
 from pathlib import Path
 
+from fontTools import subset
+from fontTools.ttLib import TTFont
+from fontTools.varLib.instancer import instantiateVariableFont
+
 ROOT = Path(__file__).resolve().parent.parent
-UA = ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-      'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36')
+SOURCES = {
+    'jp': 'https://raw.githubusercontent.com/google/fonts/main/ofl/notosansjp/NotoSansJP%5Bwght%5D.ttf',
+    'zh': 'https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf',
+    'dela': 'https://raw.githubusercontent.com/google/fonts/main/ofl/delagothicone/DelaGothicOne-Regular.ttf',
+}
 
 
 def used_chars(lang):
     chars = set()
-    paths = list((ROOT / 'docs' / lang).rglob('*.html'))
-    if lang in ('ja', 'zh'):
-        paths.append(ROOT / 'docs' / 'index.html')
+    paths = [*(ROOT / 'docs' / lang).rglob('*.html'), ROOT / 'docs/index.html']
     for path in paths:
         for ch in path.read_text(errors='ignore'):
             o = ord(ch)
@@ -37,28 +34,37 @@ def used_chars(lang):
     return ''.join(sorted(chars))
 
 
-def fetch(family, text, out):
-    query = urllib.parse.quote(text)
-    css_url = f'https://fonts.googleapis.com/css2?family={family}&display=swap&text={query}'
-    req = urllib.request.Request(css_url, headers={'User-Agent': UA})
-    css = urllib.request.urlopen(req, timeout=60).read().decode()
-    match = re.search(r'url\((https://[^)]+)\)', css)
-    if not match:
-        raise RuntimeError(f'no font URL for {family}')
-    req = urllib.request.Request(match.group(1), headers={'User-Agent': UA})
-    data = urllib.request.urlopen(req, timeout=120).read()
-    dest = ROOT / 'fonts' / out
-    dest.write_bytes(data)
-    print(f'{out}: {len(data) / 1024:.0f} kB ({len(text)} source characters)')
+def write_subset(source, text, out, weight=None):
+    font = TTFont(BytesIO(source))
+    if weight is not None:
+        instantiateVariableFont(font, {'wght': weight}, inplace=True)
+    wanted = {ord(ch) for ch in text} & font.getBestCmap().keys()
+    options = subset.Options()
+    options.flavor = 'woff2'
+    sub = subset.Subsetter(options=options)
+    sub.populate(unicodes=wanted)
+    sub.subset(font)
+    font.flavor = 'woff2'
+    result = BytesIO()
+    font.save(result)
+    data = result.getvalue()
+    actual = TTFont(BytesIO(data)).getBestCmap()
+    if not wanted <= actual.keys():
+        raise RuntimeError(f'{out}: glyphs lost while subsetting')
+    (ROOT / 'fonts' / out).write_bytes(data)
+    print(f'{out}: {len(data) / 1024:.0f} kB ({len(wanted)} glyphs)')
 
 
 if __name__ == '__main__':
-    ja = used_chars('ja')
-    zh = used_chars('zh')
+    ja, zh = used_chars('ja'), used_chars('zh')
     if not ja or not zh:
         raise SystemExit('build docs/ first; no localized pages found')
-    fetch('Noto+Sans+JP:wght@400..900', ja, 'NotoSansJP-var-jp.woff2')
-    fetch('Noto+Sans+JP:wght@900', ja, 'NotoSansJP-900-jp.woff2')
-    fetch('Dela+Gothic+One', ja, 'DelaGothicOne-jp.woff2')
-    fetch('Noto+Sans+SC:wght@400..900', zh, 'NotoSansSC-var-zh.woff2')
-    fetch('Noto+Sans+SC:wght@900', zh, 'NotoSansSC-900-zh.woff2')
+    sources = {}
+    for key, url in SOURCES.items():
+        with urllib.request.urlopen(url, timeout=60) as response:
+            sources[key] = response.read()
+    write_subset(sources['jp'], ja, 'NotoSansJP-var-jp.woff2', (400, 900))
+    write_subset(sources['jp'], ja, 'NotoSansJP-900-jp.woff2', 900)
+    write_subset(sources['dela'], ja, 'DelaGothicOne-jp.woff2')
+    write_subset(sources['zh'], zh, 'NotoSansSC-var-zh.woff2', (400, 900))
+    write_subset(sources['zh'], zh, 'NotoSansSC-900-zh.woff2', 900)
