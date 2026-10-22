@@ -21,6 +21,7 @@ import json
 from pathlib import Path
 from urllib.parse import quote
 from PIL import Image
+from theme import THEME_JS, adaptive_css
 from profile_text import profile_summary
 from analysis_math import matches
 
@@ -153,16 +154,14 @@ def similar(d):
 
 
 CSS = '''
-:root{--acid:#D8FA00;--hazard:#FFDE00;--signal:#FF5E41;--ink:#0B0B0C;--panel:#17171C;
-  --line:#ffffff22;--dim:#A6A6AE;--dim2:#8A8A94;--bust:#FF5E41;--waist:#29D4FF;--hips:#D8FA00;
-  --thighs:#FFDE00;--tan:#D3BC8E;--disp:'ZZZ Hongmeng','Anton','Noto Sans JP 900','Dela Gothic One','Arial Narrow',Impact,sans-serif;
+:root{--dim2:var(--dimmer);--disp:'ZZZ Hongmeng','Anton','Noto Sans JP 900','Dela Gothic One','Arial Narrow',Impact,sans-serif;
   --body:'ZZZ Hongmeng',Inter,'Noto Sans JP 900','Noto Sans JP',system-ui,-apple-system,sans-serif;
   --num:'Chakra Petch','ZZZ Hongmeng','Noto Sans JP 900','Noto Sans JP',ui-monospace,Menlo,monospace}
 html[lang^="zh"]{--disp:'ZZZ Hongmeng','Anton','Noto Sans SC Display','Arial Narrow',Impact,sans-serif;
   --body:'ZZZ Hongmeng',Inter,'Noto Sans SC Display','Noto Sans SC',system-ui,-apple-system,sans-serif;
   --num:'Chakra Petch','ZZZ Hongmeng','Noto Sans SC Display','Noto Sans SC',ui-monospace,Menlo,monospace}
 *{box-sizing:border-box}
-body{margin:0;background:var(--ink);color:#fff;font:14px/1.6 var(--body);
+body{margin:0;background:var(--ink);color:var(--concrete);font:14px/1.6 var(--body);
   -webkit-font-smoothing:antialiased}
 a{color:var(--acid)}
 :focus-visible{outline:2px solid var(--acid);outline-offset:2px}
@@ -172,22 +171,22 @@ a{color:var(--acid)}
 .top a{text-decoration:none;color:var(--dim)}
 .top a:hover{color:var(--acid)}
 .top b{font-family:var(--num);color:var(--acid)}
-.langnav{display:flex;gap:10px;margin-left:auto}.langnav a{text-decoration:none}.langnav a[data-lang]{opacity:.55}.langnav a:hover{color:var(--acid);opacity:1}.langnav a.on{color:var(--acid);opacity:1}
+.langnav{display:flex;gap:10px;margin-left:auto}.langnav a{text-decoration:none}.langnav a[data-lang]{color:var(--dim)}.langnav a:hover{color:var(--acid);opacity:1}.langnav a.on{color:var(--acid);opacity:1}
 main{max-width:1100px;margin:0 auto;padding:22px 20px 60px}
 .hero{display:grid;grid-template-columns:min(340px,38vw) 1fr;gap:26px;align-items:center;
   border-bottom:1px solid var(--line);padding-bottom:24px}
-.hero img{width:100%;height:auto;border-radius:16px;border:1px solid var(--line);background:#101014}
+.hero img{width:100%;height:auto;border-radius:16px;border:1px solid var(--line);background:var(--panel2)}
 .hero picture{display:block}
 .eyebrow{margin:0 0 6px;font-family:var(--num);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
 h1{margin:0 0 10px;font-family:var(--disp);font-weight:400;font-size:clamp(36px,6vw,64px);line-height:.96;
   text-transform:uppercase;word-break:keep-all;line-break:strict}
 html[lang="ja"] h1{font-size:clamp(30px,5vw,54px);line-height:1.04;letter-spacing:.01em}
 @media(max-width:560px){.top{flex-wrap:nowrap;padding:14px 16px;gap:10px;font-size:10px;letter-spacing:.1em}.top>span{display:none}.top a{white-space:nowrap}.langnav{gap:8px;margin-left:auto}}
-.lead{margin:0 0 14px;color:#cfd0d6;font-size:13px}
+.lead{margin:0 0 14px;color:var(--concrete);font-size:13px}
 .altname{margin:-6px 0 10px;color:var(--dim);font-family:var(--num);font-size:11px;letter-spacing:.08em}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}
 .chip{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:9.5px;
-  letter-spacing:.13em;text-transform:uppercase;color:#e8e8ee}
+  letter-spacing:.13em;text-transform:uppercase;color:var(--concrete)}
 .chip.bust{border-color:var(--bust);color:var(--bust)}.chip.waist{border-color:var(--waist);color:var(--waist)}
 .chip.hips{border-color:var(--hips);color:var(--hips)}.chip.thighs{border-color:var(--thighs);color:var(--thighs)}
 .chip.height{border-color:var(--tan);color:var(--tan)}
@@ -201,32 +200,32 @@ tbody th{font-weight:500;color:var(--dim)}
 td{font-family:var(--num);font-weight:600}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:14px}
-.card p{margin:0;color:#cfd0d6;font-size:12.5px}
+.card p{margin:0;color:var(--concrete);font-size:12.5px}
 .bars{display:grid;gap:7px}
 .prow{display:grid;grid-template-columns:64px 1fr 36px;gap:8px;align-items:center;font-size:10px;
   letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-.pbar{height:6px;background:#ffffff1a;border-radius:99px;overflow:hidden}
+.pbar{height:6px;background:var(--track);border-radius:99px;overflow:hidden}
 .pbar i{display:block;height:100%}
-.prow b{font-family:var(--num);text-align:right;color:#e8e8ee;font-size:11px}
+.prow b{font-family:var(--num);text-align:right;color:var(--concrete);font-size:11px}
 .note{border-left:2px solid var(--hazard);padding-left:10px;color:var(--dim);font-size:12px;margin-top:12px}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
-.gallery figure{margin:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#101014}
-.gallery img{width:100%;height:auto;display:block;background:#0c0c10}
+.gallery figure{margin:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel2)}
+.gallery img{width:100%;height:auto;display:block;background:var(--panel2)}
 .gallery figcaption{padding:8px 10px;font-size:10.5px;color:var(--dim)}
-.gallery b{display:block;color:#fff;font-size:12px}
+.gallery b{display:block;color:var(--concrete);font-size:12px}
 .nav{display:flex;justify-content:space-between;gap:12px;margin-top:34px;border-top:1px solid var(--line);padding-top:16px}
 .nav a{text-decoration:none;font-family:var(--num);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
 .nav span{color:var(--dim)}
 footer{max-width:1100px;margin:0 auto;padding:0 20px 60px;color:var(--dim2);font-size:11px;line-height:1.7}
 footer a{color:var(--dim)}
 footer .rule{border-top:1px solid var(--line);padding-top:14px}
-.btn{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:8px 14px;
-  font-family:var(--num);font-size:10px;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;color:#fff}
+.btn{display:inline-block;border:1px solid var(--control-line);border-radius:999px;padding:8px 14px;
+  font-family:var(--num);font-size:10px;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;color:var(--concrete)}
 .btn:hover{border-color:var(--acid);color:var(--acid)}
-.btn.primary{background:var(--acid);border-color:var(--acid);color:#0b0b0c;font-weight:800}
+.btn.primary{background:var(--accent-fill);border-color:var(--acid);color:var(--on-accent);font-weight:800}
 .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.faq dt{font-weight:700;margin-top:14px;color:#fff}
-.faq dd{margin:4px 0 0;color:#cfd0d6}
+.faq dt{font-weight:700;margin-top:14px;color:var(--concrete)}
+.faq dd{margin:4px 0 0;color:var(--concrete)}
 .small{font-size:11px;color:var(--dim2)}
 @media(max-width:760px){.hero{grid-template-columns:1fr}.hero img{max-width:320px}
   .grid2{grid-template-columns:1fr}}
@@ -263,7 +262,9 @@ def head(title, desc, canonical, og_image, extra_ld='', prefix='../', lang='en',
 <meta name="theme-color" content="#0B0B0C">
 <link rel="icon" type="image/svg+xml" href="{prefix}favicon.svg">
 <link rel="stylesheet" href="{prefix}fonts/fonts.css">
-<style>{CSS}</style>
+<meta name="color-scheme" content="dark light">
+<script>{THEME_JS}</script>
+<style>{adaptive_css(CSS)}</style>
 {extra_ld}
 </head>
 <body>
@@ -824,12 +825,15 @@ OFFLINE = f'''<!DOCTYPE html>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="fonts/fonts.css">
-<style>
-  body{{margin:0;background:#0B0B0C;color:#fff;font-family:Inter,system-ui,sans-serif;
+<meta name="theme-color" content="#0B0B0C">
+<meta name="color-scheme" content="dark light">
+<script>{THEME_JS}</script>
+<style>{adaptive_css("")}
+  body{{margin:0;background:var(--ink);color:var(--concrete);font-family:Inter,system-ui,sans-serif;
     display:grid;place-items:center;min-height:100vh;text-align:center}}
   h1{{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:clamp(36px,9vw,80px);
-    text-transform:uppercase;margin:0 0 10px}} h1 span{{color:#D8FA00}}
-  p{{color:#9A9AA3;margin:0 0 22px}} a{{display:inline-block;background:#D8FA00;color:#0b0b0c;
+    text-transform:uppercase;margin:0 0 10px}} h1 span{{color:var(--acid)}}
+  p{{color:var(--dim);margin:0 0 22px}} a{{display:inline-block;background:#D8FA00;color:#0b0b0c;
     text-decoration:none;font-weight:800;padding:12px 22px;border-radius:999px;font-size:13px;
     letter-spacing:.08em;text-transform:uppercase}}
 </style></head>

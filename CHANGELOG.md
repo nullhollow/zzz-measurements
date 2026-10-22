@@ -2,6 +2,16 @@
 
 ## Unreleased — audit implementation
 
+### Colour contrast and browser theme (2026-10-23)
+
+- Fixed Compare/filter count badges, the skip link and outfit ribbons in light mode.
+- Separated accent fills from text colours, strengthened input boundaries, and
+  improved chart marks, focus, disabled states and light-mode shadows.
+- Added System / Light / Dark preferences with browser appearance updates,
+  shared URL support and early theme application. Static and offline pages use
+  the same palette, including a browser-based fallback without JavaScript.
+- Preserved measurement data, calculations and ranking rules.
+
 ### Tools usability and saved comparisons (2026-10-22)
 
 - Fixed low-contrast table headings, overlapping tool navigation/controls and Back

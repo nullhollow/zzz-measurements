@@ -24,6 +24,7 @@ import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
+from theme import THEME_JS, adaptive_css
 
 ROOT = Path(__file__).resolve().parent.parent
 PLACEHOLDER = 'https://nullhollow.github.io/zzz-measurements/'   # override with --site-url
@@ -71,12 +72,12 @@ NOT_FOUND = '''<!DOCTYPE html>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
-  body{margin:0; background:#0B0B0C; color:#fff; font-family:'Inter',system-ui,sans-serif;
+  body{margin:0; background:var(--ink); color:var(--concrete); font-family:'Inter',system-ui,sans-serif;
     display:grid; place-items:center; min-height:100vh; text-align:center}
   h1{font-family:'Anton','Arial Narrow',Impact,sans-serif; font-weight:400; font-size:clamp(40px,9vw,90px);
     line-height:1; margin:0 0 10px; text-transform:uppercase}
-  h1 span{color:#D8FA00}
-  p{color:#9A9AA3; margin:0 0 22px}
+  h1 span{color:var(--acid)}
+  p{color:var(--dim); margin:0 0 22px}
   a{display:inline-block; background:#D8FA00; color:#0b0b0c; text-decoration:none; font-weight:800;
     padding:12px 22px; border-radius:999px; font-size:13px; letter-spacing:.08em; text-transform:uppercase}
 </style></head>
@@ -86,6 +87,10 @@ NOT_FOUND = '''<!DOCTYPE html>
   <a href="__SITE__">Back to the measurements</a>
 </main></body></html>
 '''
+NOT_FOUND = NOT_FOUND.replace('<style>', '<meta name="theme-color" content="#0B0B0C">'
+                              '<meta name="color-scheme" content="dark light">'
+                              '<script>' + THEME_JS + '</script><style>' + adaptive_css(''))
+
 
 
 def rebuild():

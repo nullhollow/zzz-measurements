@@ -34,6 +34,9 @@ jobs:
       - name: Exploration regression and Python/JS parity
         run: python3 tools/test_analysis.py
 
+      - name: Theme preferences and palette contrast
+        run: python3 tools/test_theme.py
+
       - name: Rebuild is reproducible
         run: |
           git diff --stat

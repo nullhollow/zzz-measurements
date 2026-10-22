@@ -2,7 +2,7 @@
 
 A static, self-contained reference for the female *Zenless Zone Zero* roster: height,
 bust, under-bust, waist, hips and thigh circumference in cm and inches, plus
-proportions, silhouette reads and UK/US/EU bra sizing.
+proportions and UK/US/EU bra sizing.
 
 Live site: <https://nullhollow.github.io/zzz-measurements/>
 
@@ -56,6 +56,14 @@ cup system uses the corresponding source field without converting or inventing
 sizes. Cards, tables, podium values, descriptions, comparisons, distributions and
 the game follow that display preference. Rankings and UK cup filters keep their
 original rules. Static profiles and exports retain all source sizing systems.
+
+Theme defaults to **System**, following the browser's appearance and updating
+when it changes. Saved **Light** or **Dark** choices override that default;
+shared URLs preserve the preference as `th=system`, `th=light` or `th=dark`.
+Profiles, methodology and fallback pages use the same palette and saved choice.
+Without JavaScript, pages follow the browser through CSS. The shared palette and
+early preference script live in `tools/theme.css` and `tools/theme.js`;
+`tools/theme.py` inlines them during generation.
 
 ## Compare
 
@@ -129,12 +137,13 @@ methodology. The public measurement schema is unchanged. Old `#view=distribution
 Tool section changes create browser-history entries; field edits replace the
 current entry. A shared sticky container keeps tool navigation above its controls.
 Navigation carries filters, comparison selections, units, theme and language between
-pages. The packed site contains 49 entries, 147 profiles and 644 files (about 25.5 MB).
+pages. The packed site contains 49 entries, 147 profiles and 644 files (about 25.9 MB).
 
 Run the regression and Python/JavaScript parity suite with Node.js available:
 
 ```bash
 python3 tools/test_analysis.py
+python3 tools/test_theme.py
 ```
 
 ## Live calculations

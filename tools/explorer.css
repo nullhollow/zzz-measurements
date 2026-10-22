@@ -53,10 +53,6 @@
 .cmpcontrols select{max-width:230px}
 .cmptable td{overflow-wrap:anywhere}
 html[data-theme="light"] .toolinput{background:#fff}
-html[data-theme="light"] .toolstats strong,html[data-theme="light"] .gamevalue,html[data-theme="light"] .gameresult{color:#566000}
-html[data-theme="light"] .histogram .bar{fill:#697500}
-html[data-theme="light"] .histogram .marker{stroke:#bc3923}
-html[data-theme="light"] .histogram .median{stroke:#007b96}
 @media(max-width:700px){
   #toolsView{padding-top:24px;scroll-margin-top:160px}
   .toolform{gap:12px}.toolform label{max-width:100%}.toolform select{width:100%;font-size:12px}
@@ -97,7 +93,6 @@ body[data-page="tools"] #toolsView{padding-top:26px}
 body[data-page="tools"] .controls{position:relative;z-index:40}
 body[data-page="tools"] #toolsView{scroll-margin-top:calc(var(--tools-offset,150px) + 12px)}
 .histogram .markerlabel{fill:var(--signal)}
-html[data-theme="light"] .histogram .markerlabel{fill:#bc3923}
 .settings-dialog{width:min(440px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;border:1px solid var(--line2);border-radius:var(--radius);padding:26px;background:var(--panel);color:var(--concrete);font:inherit}
 .settings-dialog::backdrop{background:#000b}
 .settings-dialog h2{font:26px/1.2 var(--disp);margin:0 36px 26px 0}
@@ -110,7 +105,6 @@ html[data-theme="light"] .histogram .markerlabel{fill:#bc3923}
 .gamebasis{font-size:12px;color:var(--dim);margin-top:8px}
 .cuphistogram .cupcategory{font-family:var(--num);letter-spacing:0}
 .tooltabs #settingsBtn{margin-left:auto;align-self:center;min-height:40px}
-html[data-theme="light"] .settings-dialog .viewtoggle button[aria-pressed="true"]{background:var(--acid);color:#fff}
 
 /* Compact tool chrome leaves room for the active task. */
 .toolsheader{padding:12px 28px}
@@ -181,12 +175,40 @@ html[data-theme="light"] .histogram .bar{fill:#536B00}
 html[data-theme="light"] .histogram .marker{stroke:var(--signal)}
 html[data-theme="light"] .histogram .markerlabel{fill:var(--signal)}
 html[data-theme="light"] ::-webkit-scrollbar-track{background:var(--coal)}
-html[data-theme="light"] ::-webkit-scrollbar-thumb{background:#A7B1BD;border-color:var(--coal)}
+html[data-theme="light"] ::-webkit-scrollbar-thumb{background:var(--control-line);border-color:var(--coal)}
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover{background:var(--acid)}
 html[data-theme="light"] ::selection{background:#D8FA00;color:#20262E}
 html[data-theme="light"] .chip{background:var(--panel2);border-color:var(--line2)}
 .btn:disabled{opacity:.45;cursor:default}
 html[data-theme="light"] .btn:disabled,html[data-theme="light"] .comparebar .btn.primary[disabled]{background:var(--coal);color:var(--dim);border-color:var(--line);opacity:1}
 html[data-theme="light"] .sticker b span{color:var(--concrete)}
+/* Visible boundaries identify controls without giving every surface a heavy rule. */
+select,.btn,.search,.viewtoggle,.seg,.chipbtn,.ochip,.cmp,.toolinput,.matrixcell{border-color:var(--control-line)}
+.toolinput::placeholder{color:var(--dimmer);opacity:1}
+.search:focus-within{outline:2px solid var(--acid);outline-offset:2px}
+.viewtoggle button:focus-visible,.seg button:focus-visible{outline:2px solid currentColor;outline-offset:-4px}
+.prow .pbar,.irow .ibar,.hl .bar,.dual .dtr{background:var(--track)}
+.dual .dtr i{background:var(--acid)}
+.btn.primary{background:var(--accent-fill);color:var(--on-accent);border-color:var(--acid)}
+.btn.primary:hover{background:var(--accent-fill-deep);color:var(--on-accent)}
+.tablewrap{background:var(--panel2)}
+.nsTable thead th{background:var(--panel2);color:var(--dim)}
+.seg button[disabled],.btn:disabled,.comparebar .btn[disabled]{opacity:1;color:var(--dim);background:var(--coal);border-color:var(--line2);cursor:default}
+.seg button[disabled]:hover{color:var(--dim)}
+html[data-theme="light"] .card:hover{box-shadow:0 8px 20px #20262E1A}
+html[data-theme="light"] .card:has(.cmp[aria-pressed="true"]){box-shadow:0 0 0 1px var(--acid),0 6px 18px #20262E14}
+html[data-theme="light"] .fpanel{box-shadow:0 12px 32px #20262E29}
+html[data-theme="light"] .irow.outfit .isub.wide{color:var(--concrete)}
+html[data-theme="light"] .ochip[aria-pressed="true"] .mdot{background:var(--accent-fill)}
+html[data-theme="light"] .plot .axis{stroke:var(--control-line)}
+.histogram .halo,html[data-theme="light"] .histogram .halo{stroke:var(--ink);stroke-width:6px;stroke-dasharray:none}
+html[data-theme="light"] .plot .pt circle{stroke:var(--panel)}
+html[data-theme="light"] .plot .pt:hover circle,html[data-theme="light"] .plot .pt:focus-visible circle{stroke:var(--concrete)}
+html[data-theme="light"] #tbl tbody tr:hover td,html[data-theme="light"] #tbl tbody tr:focus-within td{background:#EFF3F6}
+html[data-theme="light"] #tbl thead th[aria-sort]{background:var(--accent-fill-deep)}
+html[data-theme="light"] .slot .step{color:var(--acid)}
+html[data-theme="light"] .slot.p1 .step{color:var(--on-accent)}
+html[data-theme="light"] .chip.shape{color:var(--blue)}
 @media(max-width:700px){
   .site-nav{padding:4px 12px}
   .toolsheader{padding:10px 12px}

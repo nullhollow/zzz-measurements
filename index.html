@@ -10,6 +10,36 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#0B0B0C">
 <meta name="color-scheme" content="dark light">
+<script>/* Run before styles paint. An explicit URL or saved choice overrides the browser. */
+const siteTheme = (() => {
+  const valid = value => ['system', 'light', 'dark'].includes(value);
+  const media = window.matchMedia('(prefers-color-scheme: light)');
+  let preference = 'system';
+  try {
+    const saved = localStorage.getItem('zzz-theme');
+    if (valid(saved)) preference = saved;
+  } catch (_) {}
+  const shared = new URLSearchParams(location.hash.slice(1)).get('th');
+  if (valid(shared)) preference = shared;
+  function paint() {
+    const resolved = preference === 'system' ? (media.matches ? 'light' : 'dark') : preference;
+    document.documentElement.dataset.theme = resolved;
+    document.documentElement.dataset.themePreference = preference;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = resolved === 'light' ? '#F2F4F6' : '#0B0B0C';
+  }
+  media.addEventListener('change', () => { if (preference === 'system') paint(); });
+  paint();
+  return {
+    get preference() { return preference; },
+    set(value) {
+      preference = valid(value) ? value : 'system';
+      try { localStorage.setItem('zzz-theme', preference); } catch (_) {}
+      paint();
+    }
+  };
+})();
+</script>
 <link rel="canonical" href="https://nullhollow.github.io/zzz-measurements/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
@@ -36,16 +66,25 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" href="fonts/fonts.css">
-<style>
+<style>/* Accent text and accent surfaces have separate roles in both palettes. */
+:root{
+  color-scheme:dark;
+  --acid:#D8FA00;--acid-deep:#C6E800;--accent-fill:#D8FA00;--accent-fill-deep:#C6E800;--on-accent:#0B0B0C;
+  --hazard:#FFDE00;--hazard-fill:#FFDE00;--signal:#FF7057;--holo:#29D4FF;--blue:#879BFF;
+  --brass:#DB9A45;--tan:#D3BC8E;--ink:#0B0B0C;--coal:#121214;--panel:#17171C;--panel2:#101014;
+  --concrete:#EFEFEF;--dim:#A6A6B0;--dimmer:#9696A3;--line:#ffffff1f;--line2:#ffffff33;--control-line:#73737F;
+  --bust:#FF7057;--waist:#29D4FF;--hips:#D8FA00;--thighs:#FFDE00;--track:#ffffff24;
+}
+html[data-theme="light"]{
+  color-scheme:light;
+  --ink:#F2F4F6;--coal:#E7EBEF;--panel:#FFFFFF;--panel2:#F7F9FB;
+  --line:#DCE1E6;--line2:#BAC3CD;--control-line:#77838F;--dim:#505B68;--dimmer:#606B77;
+  --concrete:#20262E;--acid:#485D00;--acid-deep:#394B00;--hazard:#7B6000;--tan:#75612E;
+  --bust:#B4402D;--waist:#006F87;--hips:#485D00;--thighs:#7B6000;
+  --signal:#B4402D;--holo:#006F87;--blue:#3659B7;--brass:#80601F;--track:#D2D9E0;
+}
+
   :root{
-    /* ---- palette sampled from zenless.hoyoverse.com ---- */
-    --acid:#D8FA00; --acid-deep:#C6E800; --hazard:#FFDE00; --signal:#FF5E41;
-    --holo:#29D4FF; --blue:#4E6FFF; --brass:#DB9A45; --tan:#D3BC8E;
-    --ink:#0B0B0C; --coal:#121214; --panel:#17171C; --panel2:#101014;
-    --line:#ffffff1f; --line2:#ffffff33; --dim:#9A9AA3; --dimmer:#8A8A94;
-    --concrete:#EFEFEF;
-    /* metric coding */
-    --bust:#FF5E41; --waist:#29D4FF; --hips:#D8FA00; --thighs:#FFDE00;
     --disp:'ZZZ Hongmeng','Anton','Noto Sans JP 900','Dela Gothic One','Arial Narrow',Impact,sans-serif;
     --num:'Chakra Petch','ZZZ Hongmeng','Noto Sans JP 900','Noto Sans JP',ui-monospace,SFMono-Regular,Menlo,monospace;
     --body:'ZZZ Hongmeng',Inter,'Noto Sans JP 900','Noto Sans JP',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
@@ -59,29 +98,21 @@
   *{box-sizing:border-box}
   [hidden]{display:none !important}
   html{scroll-behavior:smooth}
-  html[data-theme="light"]{
-    --ink:#F2F4F6; --coal:#E7EBEF; --panel:#FFFFFF; --panel2:#F7F9FB;
-    --line:#DCE1E6; --line2:#BAC3CD; --dim:#505B68; --dimmer:#626D79;
-    --concrete:#20262E; --acid:#485D00; --acid-deep:#394B00;
-    --bust:#B4402D; --waist:#006F87; --hips:#485D00; --thighs:#7B6000;
-    --signal:#B4402D; --holo:#006F87; --blue:#3659B7; --brass:#80601F;
-    color-scheme:light;
-  }
   body{
     margin:0; background:var(--ink); color:#fff;
     font:13.5px/1.55 var(--body);
     -webkit-font-smoothing:antialiased;
   }
   html[data-theme="light"] body{color:#0B0B0C}
-  ::selection{background:var(--acid); color:#0b0b0c}
+  ::selection{background:var(--accent-fill); color:#0b0b0c}
   ::-webkit-scrollbar{width:11px;height:11px}
   ::-webkit-scrollbar-track{background:#0c0c0e}
-  ::-webkit-scrollbar-thumb{background:#2a2a31;border:3px solid #0c0c0e;border-radius:99px}
-  ::-webkit-scrollbar-thumb:hover{background:var(--acid)}
+  ::-webkit-scrollbar-thumb{background:var(--control-line);border:3px solid #0c0c0e;border-radius:99px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--accent-fill)}
   a{color:var(--acid)}
   :focus-visible{outline:2px solid var(--acid); outline-offset:2px}
   .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-  .skip{position:fixed;left:12px;top:-80px;z-index:200;background:var(--acid);color:#0b0b0c;
+  .skip{position:fixed;left:12px;top:-80px;z-index:200;background:var(--accent-fill);color:#0b0b0c;
     padding:10px 16px;border-radius:999px;font-weight:800;text-decoration:none;transition:top .15s}
   .skip:focus{top:12px}
   .toast{position:fixed;left:50%;bottom:84px;z-index:300;transform:translate(-50%,12px);opacity:0;
@@ -94,7 +125,7 @@
   .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line);
     background:linear-gradient(180deg,#17171b,#0e0e10)}
   .hero:before{content:""; position:absolute; top:-45%; right:-8%; width:56%; height:165%;
-    background:var(--acid); clip-path:polygon(30% 0,100% 0,100% 100%,0 100%)}
+    background:var(--accent-fill); clip-path:polygon(30% 0,100% 0,100% 100%,0 100%)}
   .hero .dots{position:absolute; left:0; right:0; bottom:0; height:62%;
     background-image:radial-gradient(#ffffff12 1px,transparent 1.4px); background-size:7px 7px; pointer-events:none}
   .hero-side{position:absolute; right:7px; top:22px; z-index:2; writing-mode:vertical-rl; transform:rotate(180deg);
@@ -110,7 +141,8 @@
   .hero p{margin:0; max-width:660px; color:#c6c6cd; font-size:13px}
   .hero .meta{margin-top:12px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim)}
   .hero .meta b{color:var(--acid)}
-  .tape{height:12px; background:repeating-linear-gradient(45deg,var(--hazard) 0 12px,#111 12px 24px)}
+  .hero h2,.hero .meta{width:fit-content;max-width:100%;background:#0B0B0C;padding:3px 8px;margin-left:-8px}
+  .tape{height:12px; background:repeating-linear-gradient(45deg,var(--hazard-fill) 0 12px,#111 12px 24px)}
   .film{display:flex; gap:8px; align-items:center; padding:7px 10px; background:#0b0b0d; border-bottom:1px solid var(--line)}
   .film i{flex:1; height:11px; border-radius:3px; background:#fff; opacity:.88}
 
@@ -120,7 +152,7 @@
   .hl{position:relative; overflow:hidden; padding:11px 13px 12px; border:1px solid var(--line);
     border-radius:16px; background:linear-gradient(180deg,#18181d,#101014)}
   .hl:after{content:""; position:absolute; right:-34px; bottom:-34px; width:86px; height:86px;
-    background:var(--acid); opacity:.14; clip-path:polygon(100% 0,100% 100%,0 100%)}
+    background:var(--accent-fill); opacity:.14; clip-path:polygon(100% 0,100% 100%,0 100%)}
   .hl .k{font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--dim)}
   .hl .v{font-family:var(--disp); font-size:20px; text-transform:uppercase; line-height:1.05; margin-top:5px}
   .hl .n{font-family:var(--num); font-weight:700; font-size:13px; color:var(--acid); margin-top:3px}
@@ -168,11 +200,11 @@
   .viewtoggle button{background:#0f0f12; border:0; color:#fff; padding:9px 15px; font:inherit;
     font-size:11px; letter-spacing:.13em; text-transform:uppercase; cursor:pointer; transition:.12s}
   .viewtoggle button:hover{color:var(--acid)}
-  .viewtoggle button[aria-pressed="true"]{background:var(--acid); color:#0b0b0c; font-weight:800}
+  .viewtoggle button[aria-pressed="true"]{background:var(--accent-fill); color:#0b0b0c; font-weight:800}
   .count{margin-left:auto; color:var(--dim); font-size:11px; letter-spacing:.1em; white-space:nowrap}
   .count b{color:var(--acid); font-family:var(--num); font-weight:700; font-size:13px}
-  .cmpbtn .n{display:inline-block; min-width:16px; margin-left:7px; padding:1px 5px; border-radius:999px;
-    background:var(--acid); color:#0b0b0c; font-family:var(--num); font-weight:800; font-size:9px}
+  .cmpbtn .n{display:inline-block; min-width:18px; text-align:center; margin-left:7px; padding:1px 5px; border-radius:999px;
+    background:var(--accent-fill); color:#0b0b0c; font-family:var(--num); font-weight:800; font-size:10px}
   .cmpbtn:before{content:"⇄"; font-family:var(--num); margin-right:7px; font-size:12px}
   .cmpbtn[aria-pressed="true"]{border-color:var(--acid); color:var(--acid)}
 
@@ -180,7 +212,7 @@
   .fdrop{position:relative}
   .fbtn{display:inline-flex; align-items:center; gap:8px}
   .fbtn .car{font-size:8px; color:var(--dimmer)}
-  .fbadge{display:none; min-width:16px; text-align:center; background:var(--acid); color:#0b0b0c;
+  .fbadge{display:none; min-width:16px; text-align:center; background:var(--accent-fill); color:#0b0b0c;
     border-radius:999px; padding:1px 5px; font-size:9px; font-weight:800; font-family:var(--num)}
   .fpanel{display:none; position:absolute; z-index:60; top:calc(100% + 9px); left:0;
     width:min(356px,calc(100vw - 26px)); padding:13px 15px 15px; border:1px solid var(--line2);
@@ -201,13 +233,13 @@
   .rreset:hover{color:var(--acid)}
   .dual{position:relative; height:20px; margin-top:3px}
   .dual .dtr{position:absolute; left:0; right:0; top:8px; height:4px; background:#ffffff1f}
-  .dual .dtr i{position:absolute; top:0; bottom:0; background:var(--acid)}
+  .dual .dtr i{position:absolute; top:0; bottom:0; background:var(--accent-fill)}
   .dual input[type=range]{position:absolute; left:-7px; right:-7px; top:0; width:calc(100% + 14px);
     height:20px; margin:0; -webkit-appearance:none; appearance:none; background:transparent; pointer-events:none}
   .dual input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; pointer-events:auto;
-    width:11px; height:16px; background:var(--acid); border:1px solid #000; cursor:ew-resize}
+    width:11px; height:16px; background:var(--accent-fill); border:1px solid #000; cursor:ew-resize}
   .dual input[type=range]::-moz-range-thumb{pointer-events:auto; width:9px; height:14px; border-radius:0;
-    background:var(--acid); border:1px solid #000; cursor:ew-resize}
+    background:var(--accent-fill); border:1px solid #000; cursor:ew-resize}
   .dual input[type=range]::-moz-range-track{background:transparent}
   .fchips{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px}
   .fchips .fl{flex:0 0 100%; font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--dimmer); margin-top:6px}
@@ -215,7 +247,7 @@
     padding:5px 11px; font:inherit; font-size:10px; letter-spacing:.12em; text-transform:uppercase;
     cursor:pointer; transition:.12s}
   .chipbtn:hover{border-color:var(--acid); color:var(--acid)}
-  .chipbtn[aria-pressed="true"]{background:var(--acid); border-color:var(--acid); color:#0b0b0c; font-weight:800}
+  .chipbtn[aria-pressed="true"]{background:var(--accent-fill); border-color:var(--acid); color:#0b0b0c; font-weight:800}
   .fapply{display:none; width:100%; margin-top:14px}
   .fmobile{display:none}
 
@@ -230,7 +262,7 @@
   .card:hover{border-color:var(--acid); transform:translateY(-4px); box-shadow:0 16px 34px #000000a6}
   .card:focus-within{outline:2px solid var(--acid); outline-offset:2px}
   .card:hover:after{content:""; position:absolute; right:-30px; bottom:-30px; width:120px; height:120px;
-    background:var(--acid); opacity:.15; clip-path:polygon(100% 0,100% 100%,0 100%); pointer-events:none}
+    background:var(--accent-fill); opacity:.15; clip-path:polygon(100% 0,100% 100%,0 100%); pointer-events:none}
   .card .imgbox{position:relative; aspect-ratio:260/497; overflow:hidden; background:#0c0c10;
     background-image:radial-gradient(#ffffff10 1px,transparent 1.4px); background-size:7px 7px;
     border-bottom:1px solid var(--line)}
@@ -238,10 +270,10 @@
     transform:translateX(calc(-50% + var(--dx,0%)));      /* --dx = visual-centre shift, % of image width */
     height:100%; width:auto; max-width:none; display:block}
   .stick{position:absolute; right:-7px; top:13px; z-index:3; max-width:72%; overflow:hidden;
-    white-space:nowrap; text-overflow:ellipsis; background:var(--acid); color:#0b0b0c;
+    white-space:nowrap; text-overflow:ellipsis; background:var(--accent-fill); color:#0b0b0c;
     font-family:var(--disp); font-size:12px; line-height:1; letter-spacing:.05em; text-transform:uppercase;
     padding:4px 11px 3px; transform:rotate(-2deg); box-shadow:0 0 0 2px #fff,3px 3px 0 #000}
-  .stick.dark{background:#0b0b0c; color:var(--acid); box-shadow:0 0 0 2px var(--acid),3px 3px 0 #000}
+  .stick.dark{background:#0b0b0c; color:var(--accent-fill); box-shadow:0 0 0 2px var(--acid),3px 3px 0 #000}
   .cmp{position:absolute; left:9px; bottom:9px; z-index:4; height:28px; padding:0 9px;
     display:inline-flex; align-items:center; gap:5px; border-radius:999px;
     border:1px solid var(--line2); background:rgba(10,10,12,.84); color:#fff;
@@ -249,7 +281,7 @@
     cursor:pointer; opacity:.9; transition:.12s; backdrop-filter:blur(8px)}
   .cmp .cmp-ico{font-size:13px; line-height:1; font-weight:700}
   .cmp:hover,.cmp:focus-visible{border-color:var(--acid); color:var(--acid); opacity:1}
-  .cmp[aria-pressed="true"]{background:var(--acid); color:#0b0b0c; border-color:var(--acid); opacity:1}
+  .cmp[aria-pressed="true"]{background:var(--accent-fill); color:#0b0b0c; border-color:var(--acid); opacity:1}
   .card:has(.cmp[aria-pressed="true"]){border-color:var(--acid); box-shadow:0 0 0 1px var(--acid),0 10px 30px #0006}
   /* roster percentiles, moved out of the artwork into the card body */
   .pct{display:grid; gap:4px; padding:8px 9px; background:#08080a; border:1px solid var(--line); border-radius:10px}
@@ -284,7 +316,7 @@
   /* ---------- table ---------- */
   .tablewrap{border:1px solid var(--line); border-radius:14px; overflow:auto; max-height:78vh; background:#101014}
   table{width:100%; border-collapse:collapse}
-  thead th{position:sticky; top:0; z-index:2; background:var(--acid); color:#0b0b0c; text-align:left;
+  thead th{position:sticky; top:0; z-index:2; background:var(--accent-fill); color:#0b0b0c; text-align:left;
     padding:0; font-family:var(--num); font-weight:700; font-size:10px; letter-spacing:.12em;
     text-transform:uppercase; white-space:nowrap; border-right:1px solid #00000012}
   thead th button{width:100%; background:none; border:0; color:inherit; font:inherit; text-align:left;
@@ -343,7 +375,7 @@
   @keyframes pop{from{transform:translateY(10px); opacity:.3} to{transform:none; opacity:1}}
   .modal .x{position:absolute; right:12px; top:12px; z-index:3; width:36px; height:36px; cursor:pointer;
     background:#0b0b0c; color:#fff; border:1px solid var(--line2); border-radius:999px; font-size:14px; line-height:1}
-  .modal .x:hover{background:var(--acid); color:#0b0b0c; border-color:var(--acid)}
+  .modal .x:hover{background:var(--accent-fill); color:#0b0b0c; border-color:var(--acid)}
   .mhead{padding:16px 22px 12px; border-bottom:1px solid var(--line); display:flex; align-items:baseline;
     gap:10px; flex-wrap:wrap}
   .mhead h2{margin:0; font-family:var(--disp); font-weight:400; font-size:27px; line-height:1; text-transform:uppercase}
@@ -366,7 +398,7 @@
   .seg button{background:#0f0f12; border:0; color:#fff; padding:7px 13px; font:inherit; font-size:10px;
     letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:.12s}
   .seg button:hover{color:var(--acid)}
-  .seg button[aria-pressed="true"]{background:var(--acid); color:#0b0b0c; font-weight:800}
+  .seg button[aria-pressed="true"]{background:var(--accent-fill); color:#0b0b0c; font-weight:800}
   .seg button[disabled]{opacity:.32; cursor:not-allowed}
   .seg button[disabled]:hover{color:#fff}
   .moutfits{margin:0 0 9px; padding-top:2px}
@@ -376,7 +408,7 @@
   .ochip{display:inline-flex; align-items:center; gap:5px; background:#0f0f12; border:1px solid var(--line2);
     border-radius:999px; color:#fff; padding:5px 11px; font:inherit; font-size:10px; cursor:pointer; transition:.12s}
   .ochip:hover{color:var(--acid); border-color:var(--acid)}
-  .ochip[aria-pressed="true"]{background:var(--acid); border-color:var(--acid); color:#0b0b0c; font-weight:800}
+  .ochip[aria-pressed="true"]{background:var(--accent-fill); border-color:var(--acid); color:#0b0b0c; font-weight:800}
   .ochip .mdot{width:5px; height:5px; border-radius:50%; background:var(--signal)}
   .ochip[aria-pressed="true"] .mdot{background:#0b0b0c}
   .onote{margin-top:8px; font-size:10.5px; line-height:1.5; color:var(--dim)}
@@ -412,7 +444,7 @@
   .mtags{display:flex; flex-wrap:wrap; gap:5px; margin-top:11px}
   .mfoot{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:12px}
   .mfoot .btn{text-decoration:none; display:inline-block}
-  .mfoot .btn.primary{background:var(--acid); color:#0b0b0c; border-color:var(--acid); font-weight:800}
+  .mfoot .btn.primary{background:var(--accent-fill); color:#0b0b0c; border-color:var(--acid); font-weight:800}
   .simrow{display:flex; flex-wrap:wrap; gap:6px}
   .sim{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line2); border-radius:999px;
     background:#0f0f12; color:#fff; padding:4px 10px 4px 4px; font:inherit; font-size:10.5px; cursor:pointer}
@@ -428,7 +460,7 @@
     border-radius:999px; padding:5px 5px 5px 11px; font-size:10.5px; color:#fff}
   .cchip button{background:none;border:0;color:var(--dimmer);cursor:pointer;font-size:13px;line-height:1;padding:0 4px}
   .cchip button:hover{color:var(--signal)}
-  .comparebar .btn.primary{background:var(--acid); color:#0b0b0c; border-color:var(--acid); font-weight:800}
+  .comparebar .btn.primary{background:var(--accent-fill); color:#0b0b0c; border-color:var(--acid); font-weight:800}
   .comparebar .btn[disabled]{opacity:.38; cursor:not-allowed; border-color:var(--line2); color:var(--dim)}
   .comparebar .btn.primary[disabled]{background:#1a1a1e; color:#777; border-color:#2a2a2f}
   .chint{margin-left:auto; font-size:10.5px; letter-spacing:.03em; color:var(--dim); white-space:nowrap}
@@ -475,7 +507,7 @@
   .slot:hover .pimg img,.slot:focus-visible .pimg img{filter:drop-shadow(0 0 14px rgba(216,250,0,.45))}
   .slot .step{display:flex; align-items:center; justify-content:center; background:#1b1b21;
     border-top:1px solid var(--line2); font-family:var(--disp); font-size:15px; color:var(--acid)}
-  .slot.p1 .step{height:38px; background:linear-gradient(180deg,var(--acid),var(--acid-deep)); color:#0b0b0c; border-top-color:#fff}
+  .slot.p1 .step{height:38px; background:linear-gradient(180deg,var(--accent-fill),var(--accent-fill-deep)); color:#0b0b0c; border-top-color:#fff}
   .slot.p2 .step{height:24px}
   .slot.p3 .step{height:17px}
   .slot .plate{padding:8px 4px 10px; text-align:center; min-height:54px}
@@ -492,6 +524,7 @@
   html[data-theme="light"] .hero:before{background:#D8FA00}
   html[data-theme="light"] .hero .meta{color:#0b0b0c}
   html[data-theme="light"] .hero .meta b{color:#0b0b0c}
+  html[data-theme="light"] .hero h2,html[data-theme="light"] .hero .meta{background:#FFFFFF}
   html[data-theme="light"] .hero .dots{background-image:radial-gradient(#0b0b0c12 1px,transparent 1.4px)}
   html[data-theme="light"] .sticker{background:#fff;border-color:#0b0b0c26}
   html[data-theme="light"] .sticker b{color:#0b0b0c;-webkit-text-stroke:2px #0b0b0c;text-shadow:5px 5px 0 #fff}
@@ -529,11 +562,11 @@
   html[data-theme="light"] .slot.p1 .step{background:#D8FA00;color:#20262E}
   html[data-theme="light"] .chip,html[data-theme="light"] .irow .ichip,html[data-theme="light"] .prow b,
   html[data-theme="light"] .slot .plate u{color:#0b0b0c}
-  html[data-theme="light"] .chip.height{color:#7a6320}
+  html[data-theme="light"] .chip.height{color:var(--tan);border-color:var(--tan)}
   html[data-theme="light"] .chip.bust{color:#b3361f}
   html[data-theme="light"] .chip.waist{color:#0b6f8c}
   html[data-theme="light"] .chip.hips{color:var(--hips)}
-  html[data-theme="light"] .chip.thighs{color:#8a6b00}
+  html[data-theme="light"] .chip.thighs{color:var(--thighs)}
   html[data-theme="light"] .chip.shape{color:#3049c9}
   html[data-theme="light"] .viewtoggle button[aria-pressed="true"],
   html[data-theme="light"] .chipbtn[aria-pressed="true"],
@@ -750,10 +783,6 @@
 .cmpcontrols select{max-width:230px}
 .cmptable td{overflow-wrap:anywhere}
 html[data-theme="light"] .toolinput{background:#fff}
-html[data-theme="light"] .toolstats strong,html[data-theme="light"] .gamevalue,html[data-theme="light"] .gameresult{color:#566000}
-html[data-theme="light"] .histogram .bar{fill:#697500}
-html[data-theme="light"] .histogram .marker{stroke:#bc3923}
-html[data-theme="light"] .histogram .median{stroke:#007b96}
 @media(max-width:700px){
   #toolsView{padding-top:24px;scroll-margin-top:160px}
   .toolform{gap:12px}.toolform label{max-width:100%}.toolform select{width:100%;font-size:12px}
@@ -794,7 +823,6 @@ body[data-page="tools"] #toolsView{padding-top:26px}
 body[data-page="tools"] .controls{position:relative;z-index:40}
 body[data-page="tools"] #toolsView{scroll-margin-top:calc(var(--tools-offset,150px) + 12px)}
 .histogram .markerlabel{fill:var(--signal)}
-html[data-theme="light"] .histogram .markerlabel{fill:#bc3923}
 .settings-dialog{width:min(440px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;border:1px solid var(--line2);border-radius:var(--radius);padding:26px;background:var(--panel);color:var(--concrete);font:inherit}
 .settings-dialog::backdrop{background:#000b}
 .settings-dialog h2{font:26px/1.2 var(--disp);margin:0 36px 26px 0}
@@ -807,7 +835,6 @@ html[data-theme="light"] .histogram .markerlabel{fill:#bc3923}
 .gamebasis{font-size:12px;color:var(--dim);margin-top:8px}
 .cuphistogram .cupcategory{font-family:var(--num);letter-spacing:0}
 .tooltabs #settingsBtn{margin-left:auto;align-self:center;min-height:40px}
-html[data-theme="light"] .settings-dialog .viewtoggle button[aria-pressed="true"]{background:var(--acid);color:#fff}
 
 /* Compact tool chrome leaves room for the active task. */
 .toolsheader{padding:12px 28px}
@@ -878,12 +905,40 @@ html[data-theme="light"] .histogram .bar{fill:#536B00}
 html[data-theme="light"] .histogram .marker{stroke:var(--signal)}
 html[data-theme="light"] .histogram .markerlabel{fill:var(--signal)}
 html[data-theme="light"] ::-webkit-scrollbar-track{background:var(--coal)}
-html[data-theme="light"] ::-webkit-scrollbar-thumb{background:#A7B1BD;border-color:var(--coal)}
+html[data-theme="light"] ::-webkit-scrollbar-thumb{background:var(--control-line);border-color:var(--coal)}
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover{background:var(--acid)}
 html[data-theme="light"] ::selection{background:#D8FA00;color:#20262E}
 html[data-theme="light"] .chip{background:var(--panel2);border-color:var(--line2)}
 .btn:disabled{opacity:.45;cursor:default}
 html[data-theme="light"] .btn:disabled,html[data-theme="light"] .comparebar .btn.primary[disabled]{background:var(--coal);color:var(--dim);border-color:var(--line);opacity:1}
 html[data-theme="light"] .sticker b span{color:var(--concrete)}
+/* Visible boundaries identify controls without giving every surface a heavy rule. */
+select,.btn,.search,.viewtoggle,.seg,.chipbtn,.ochip,.cmp,.toolinput,.matrixcell{border-color:var(--control-line)}
+.toolinput::placeholder{color:var(--dimmer);opacity:1}
+.search:focus-within{outline:2px solid var(--acid);outline-offset:2px}
+.viewtoggle button:focus-visible,.seg button:focus-visible{outline:2px solid currentColor;outline-offset:-4px}
+.prow .pbar,.irow .ibar,.hl .bar,.dual .dtr{background:var(--track)}
+.dual .dtr i{background:var(--acid)}
+.btn.primary{background:var(--accent-fill);color:var(--on-accent);border-color:var(--acid)}
+.btn.primary:hover{background:var(--accent-fill-deep);color:var(--on-accent)}
+.tablewrap{background:var(--panel2)}
+.nsTable thead th{background:var(--panel2);color:var(--dim)}
+.seg button[disabled],.btn:disabled,.comparebar .btn[disabled]{opacity:1;color:var(--dim);background:var(--coal);border-color:var(--line2);cursor:default}
+.seg button[disabled]:hover{color:var(--dim)}
+html[data-theme="light"] .card:hover{box-shadow:0 8px 20px #20262E1A}
+html[data-theme="light"] .card:has(.cmp[aria-pressed="true"]){box-shadow:0 0 0 1px var(--acid),0 6px 18px #20262E14}
+html[data-theme="light"] .fpanel{box-shadow:0 12px 32px #20262E29}
+html[data-theme="light"] .irow.outfit .isub.wide{color:var(--concrete)}
+html[data-theme="light"] .ochip[aria-pressed="true"] .mdot{background:var(--accent-fill)}
+html[data-theme="light"] .plot .axis{stroke:var(--control-line)}
+.histogram .halo,html[data-theme="light"] .histogram .halo{stroke:var(--ink);stroke-width:6px;stroke-dasharray:none}
+html[data-theme="light"] .plot .pt circle{stroke:var(--panel)}
+html[data-theme="light"] .plot .pt:hover circle,html[data-theme="light"] .plot .pt:focus-visible circle{stroke:var(--concrete)}
+html[data-theme="light"] #tbl tbody tr:hover td,html[data-theme="light"] #tbl tbody tr:focus-within td{background:#EFF3F6}
+html[data-theme="light"] #tbl thead th[aria-sort]{background:var(--accent-fill-deep)}
+html[data-theme="light"] .slot .step{color:var(--acid)}
+html[data-theme="light"] .slot.p1 .step{color:var(--on-accent)}
+html[data-theme="light"] .chip.shape{color:var(--blue)}
 @media(max-width:700px){
   .site-nav{padding:4px 12px}
   .toolsheader{padding:10px 12px}
@@ -916,7 +971,104 @@ html[data-theme="light"] .sticker b span{color:var(--concrete)}
   .cmptable th,.cmptable td{padding:10px 7px}
 }
 
-</style>
+
+@media(prefers-color-scheme:light){
+html:not([data-theme]){
+  color-scheme:light;
+  --ink:#F2F4F6;--coal:#E7EBEF;--panel:#FFFFFF;--panel2:#F7F9FB;
+  --line:#DCE1E6;--line2:#BAC3CD;--control-line:#77838F;--dim:#505B68;--dimmer:#606B77;
+  --concrete:#20262E;--acid:#485D00;--acid-deep:#394B00;--hazard:#7B6000;--tan:#75612E;
+  --bust:#B4402D;--waist:#006F87;--hips:#485D00;--thighs:#7B6000;
+  --signal:#B4402D;--holo:#006F87;--blue:#3659B7;--brass:#80601F;--track:#D2D9E0;
+}
+html:not([data-theme]) body{color:#0B0B0C}
+html:not([data-theme]) .toast{background:#0b0b0c}
+html:not([data-theme]) .controls{background:rgba(242,244,246,.97)}
+html:not([data-theme]) .hero{background:#FFFFFF}
+html:not([data-theme]) .hero:before{background:#D8FA00}
+html:not([data-theme]) .hero .meta{color:#0b0b0c}
+html:not([data-theme]) .hero .meta b{color:#0b0b0c}
+html:not([data-theme]) .hero h2,html:not([data-theme]) .hero .meta{background:#FFFFFF}
+html:not([data-theme]) .hero .dots{background-image:radial-gradient(#0b0b0c12 1px,transparent 1.4px)}
+html:not([data-theme]) .sticker{background:#fff;border-color:#0b0b0c26}
+html:not([data-theme]) .sticker b{color:#0b0b0c;-webkit-text-stroke:2px #0b0b0c;text-shadow:5px 5px 0 #fff}
+html:not([data-theme]) .hero p{color:#3d3d45}
+html:not([data-theme]) .film{background:#0b0b0c}
+html:not([data-theme]) .hl,html:not([data-theme]) .card,html:not([data-theme]) .pod{
+    background:#FFFFFF}
+html:not([data-theme]) .card .imgbox,html:not([data-theme]) .thumb{background:#E8EDF2}
+html:not([data-theme]) .card .desc{color:#3d3d45}
+html:not([data-theme]) .pct,html:not([data-theme]) .card .stat,html:not([data-theme]) .kv,
+  html:not([data-theme]) .irow,html:not([data-theme]) .mdesc{background:#F7F9FB}
+html:not([data-theme]) .mdesc,html:not([data-theme]) .vline,html:not([data-theme]) .irow .isub{color:#333}
+html:not([data-theme]) .search,html:not([data-theme]) select,html:not([data-theme]) .btn,
+  html:not([data-theme]) .viewtoggle button,html:not([data-theme]) .chipbtn,
+  html:not([data-theme]) .seg button,html:not([data-theme]) .ochip,html:not([data-theme]) .sim,
+  html:not([data-theme]) .cchip{background:#fff;color:#0b0b0c}
+html:not([data-theme]) .search input{color:#0b0b0c}
+html:not([data-theme]) .modal{background:#FFFFFF}
+html:not([data-theme]) .mimg,html:not([data-theme]) .mimg img{background:#E8EDF2}
+html:not([data-theme]) .tname{color:#0b0b0c}
+html:not([data-theme]) .cmptable thead th,html:not([data-theme]) .cmptable td{color:#0b0b0c}
+html:not([data-theme]) .cmptable .cmdesc{color:#3d3d45}
+html:not([data-theme]) .cmptable td.win{color:#405400;background:#F0F6D9}
+html:not([data-theme]) .cmptable th:first-child,html:not([data-theme]) .cmptable td:first-child{background:#fff}
+html:not([data-theme]) #tbl tbody td:first-child{background:#fff}
+html:not([data-theme]) #tbl tbody tr:hover td:first-child{background:#EFF3F6}
+html:not([data-theme]) .cmp{background:#fff;color:#0b0b0c}
+html:not([data-theme]) .fpanel{background:#FFFFFF}
+html:not([data-theme]) .comparebar{background:rgba(242,244,246,.98)}
+html:not([data-theme]) .plotwrap{background:#fff}
+html:not([data-theme]) .plot .tick,html:not([data-theme]) .plot .alab{fill:#4C4C55}
+html:not([data-theme]) .plot .gridline{stroke:#0b0b0c14}
+html:not([data-theme]) .plot .pt text{fill:#0b0b0c}
+html:not([data-theme]) .slot .step{background:#E7EBEF;color:#5C6E00}
+html:not([data-theme]) .slot.p1 .step{background:#D8FA00;color:#20262E}
+html:not([data-theme]) .chip,html:not([data-theme]) .irow .ichip,html:not([data-theme]) .prow b,
+  html:not([data-theme]) .slot .plate u{color:#0b0b0c}
+html:not([data-theme]) .chip.height{color:var(--tan);border-color:var(--tan)}
+html:not([data-theme]) .chip.bust{color:#b3361f}
+html:not([data-theme]) .chip.waist{color:#0b6f8c}
+html:not([data-theme]) .chip.hips{color:var(--hips)}
+html:not([data-theme]) .chip.thighs{color:var(--thighs)}
+html:not([data-theme]) .chip.shape{color:#3049c9}
+html:not([data-theme]) .viewtoggle button[aria-pressed="true"],
+  html:not([data-theme]) .chipbtn[aria-pressed="true"],
+  html:not([data-theme]) .seg button[aria-pressed="true"],
+  html:not([data-theme]) .ochip[aria-pressed="true"],
+  html:not([data-theme]) .cmp[aria-pressed="true"]{background:#20262E;color:#D8FA00;border-color:#20262E}
+html:not([data-theme]) .toolinput{background:#fff}
+html:not([data-theme]) #tbl thead th{background:#D8FA00;color:#20262E}
+html:not([data-theme]) .cupmatrix th{background:var(--panel2);color:var(--concrete)}
+html:not([data-theme]) .settings-dialog .viewtoggle button[aria-pressed="true"]{background:#20262E;color:#D8FA00}
+html:not([data-theme]) .btn.primary{background:#D8FA00;color:#20262E;border-color:#A4BB26}
+html:not([data-theme]) .btn:hover,html:not([data-theme]) .viewtoggle button:hover{border-color:#485D00}
+html:not([data-theme]) .toolstats strong,html:not([data-theme]) .gamevalue,html:not([data-theme]) .gameresult{color:var(--acid)}
+html:not([data-theme]) .histogram .bar{fill:#536B00}
+html:not([data-theme]) .histogram .marker{stroke:var(--signal)}
+html:not([data-theme]) .histogram .markerlabel{fill:var(--signal)}
+html:not([data-theme]) ::-webkit-scrollbar-track{background:var(--coal)}
+html:not([data-theme]) ::-webkit-scrollbar-thumb{background:var(--control-line);border-color:var(--coal)}
+html:not([data-theme]) ::-webkit-scrollbar-thumb:hover{background:var(--acid)}
+html:not([data-theme]) ::selection{background:#D8FA00;color:#20262E}
+html:not([data-theme]) .chip{background:var(--panel2);border-color:var(--line2)}
+html:not([data-theme]) .btn:disabled,html:not([data-theme]) .comparebar .btn.primary[disabled]{background:var(--coal);color:var(--dim);border-color:var(--line);opacity:1}
+html:not([data-theme]) .sticker b span{color:var(--concrete)}
+html:not([data-theme]) .card:hover{box-shadow:0 8px 20px #20262E1A}
+html:not([data-theme]) .card:has(.cmp[aria-pressed="true"]){box-shadow:0 0 0 1px var(--acid),0 6px 18px #20262E14}
+html:not([data-theme]) .fpanel{box-shadow:0 12px 32px #20262E29}
+html:not([data-theme]) .irow.outfit .isub.wide{color:var(--concrete)}
+html:not([data-theme]) .ochip[aria-pressed="true"] .mdot{background:var(--accent-fill)}
+html:not([data-theme]) .plot .axis{stroke:var(--control-line)}
+html:not([data-theme]) .histogram .halo{stroke:var(--ink);stroke-width:6px;stroke-dasharray:none}
+html:not([data-theme]) .plot .pt circle{stroke:var(--panel)}
+html:not([data-theme]) .plot .pt:hover circle,html:not([data-theme]) .plot .pt:focus-visible circle{stroke:var(--concrete)}
+html:not([data-theme]) #tbl tbody tr:hover td,html:not([data-theme]) #tbl tbody tr:focus-within td{background:#EFF3F6}
+html:not([data-theme]) #tbl thead th[aria-sort]{background:var(--accent-fill-deep)}
+html:not([data-theme]) .slot .step{color:var(--acid)}
+html:not([data-theme]) .slot.p1 .step{color:var(--on-accent)}
+html:not([data-theme]) .chip.shape{color:var(--blue)}
+}</style>
 </head>
 <body data-page="roster">
 
@@ -1014,7 +1166,34 @@ html[data-theme="light"] .sticker b span{color:var(--concrete)}
   </div>
 
   <div class="wrap">
-    <noscript><style>#grid{display:none}.controls,#settingsBtn{display:none}</style></noscript>
+    <noscript><style>/* Accent text and accent surfaces have separate roles in both palettes. */
+:root{
+  color-scheme:dark;
+  --acid:#D8FA00;--acid-deep:#C6E800;--accent-fill:#D8FA00;--accent-fill-deep:#C6E800;--on-accent:#0B0B0C;
+  --hazard:#FFDE00;--hazard-fill:#FFDE00;--signal:#FF7057;--holo:#29D4FF;--blue:#879BFF;
+  --brass:#DB9A45;--tan:#D3BC8E;--ink:#0B0B0C;--coal:#121214;--panel:#17171C;--panel2:#101014;
+  --concrete:#EFEFEF;--dim:#A6A6B0;--dimmer:#9696A3;--line:#ffffff1f;--line2:#ffffff33;--control-line:#73737F;
+  --bust:#FF7057;--waist:#29D4FF;--hips:#D8FA00;--thighs:#FFDE00;--track:#ffffff24;
+}
+html[data-theme="light"]{
+  color-scheme:light;
+  --ink:#F2F4F6;--coal:#E7EBEF;--panel:#FFFFFF;--panel2:#F7F9FB;
+  --line:#DCE1E6;--line2:#BAC3CD;--control-line:#77838F;--dim:#505B68;--dimmer:#606B77;
+  --concrete:#20262E;--acid:#485D00;--acid-deep:#394B00;--hazard:#7B6000;--tan:#75612E;
+  --bust:#B4402D;--waist:#006F87;--hips:#485D00;--thighs:#7B6000;
+  --signal:#B4402D;--holo:#006F87;--blue:#3659B7;--brass:#80601F;--track:#D2D9E0;
+}
+#grid{display:none}.controls,#settingsBtn{display:none}
+@media(prefers-color-scheme:light){
+html:not([data-theme]){
+  color-scheme:light;
+  --ink:#F2F4F6;--coal:#E7EBEF;--panel:#FFFFFF;--panel2:#F7F9FB;
+  --line:#DCE1E6;--line2:#BAC3CD;--control-line:#77838F;--dim:#505B68;--dimmer:#606B77;
+  --concrete:#20262E;--acid:#485D00;--acid-deep:#394B00;--hazard:#7B6000;--tan:#75612E;
+  --bust:#B4402D;--waist:#006F87;--hips:#485D00;--thighs:#7B6000;
+  --signal:#B4402D;--holo:#006F87;--blue:#3659B7;--brass:#80601F;--track:#D2D9E0;
+}
+}</style></noscript>
     <div id="cardsView"><div class="grid" id="grid"><article class="card" data-name="Yidhari">
   <div class="imgbox">
     <a class="img-link" href="characters/yidhari.html" aria-hidden="true" tabindex="-1"></a>
@@ -2382,7 +2561,7 @@ html[data-theme="light"] .sticker b span{color:var(--concrete)}
   </fieldset>
   <div class="settings-selects">
     <label for="lang"><span data-i18n="language">Language</span><select id="lang"><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option></select></label>
-    <label for="theme"><span data-i18n="theme">Theme</span><select id="theme"><option value="dark" data-i18n="dark">Dark</option><option value="light" data-i18n="light">Light</option></select></label>
+    <label for="theme"><span data-i18n="theme">Theme</span><select id="theme"><option value="system" data-i18n="systemTheme">System</option><option value="dark" data-i18n="dark">Dark</option><option value="light" data-i18n="light">Light</option></select></label>
   </div>
   <button class="btn primary" id="settingsDone" type="button" data-i18n="doneSettings">Done</button>
 </dialog>
@@ -2607,7 +2786,7 @@ const I18N = {
     comparisonExportedCanonical: "Comparison exported. Temporary references are omitted.",
     compareBasis:'Comparison basis', rawMeasurements:'Raw measurements', heightAdjusted:'Height-adjusted',
     heightAdjustedNote:'Circumference ÷ height × 100', smallerWins:'Smaller value', largerWins:'Larger value',
-    changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', dark:'Dark', light:'Light', schema:'Schema',
+    changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', systemTheme:'System', dark:'Dark', light:'Light', schema:'Schema',
     sourceTitle:'Zenless Zone Zero · Female Character Measurements',
     skip:'Skip to the roster', heroSuffix:'female agents · measurements & proportions',
     source:'Source', updated:'Data updated', filters:'Filters', ranges:'Numeric ranges', resetRanges:'reset',
@@ -2760,7 +2939,7 @@ const I18N = {
     comparisonExportedCanonical: "比較をCSVに出力しました。仮の体型は出力対象に含まれません。",
     compareBasis:'比較の基準', rawMeasurements:'実寸', heightAdjusted:'身長比',
     heightAdjustedNote:'周囲長 ÷ 身長 × 100', smallerWins:'小さい値', largerWins:'大きい値',
-    changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', dark:'ダーク', light:'ライト', schema:'スキーマ',
+    changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', systemTheme:'端末に合わせる', dark:'ダーク', light:'ライト', schema:'スキーマ',
     sourceTitle:'ゼンレスゾーンゼロ · 女性キャラクター寸法',
     skip:'名簿へスキップ', heroSuffix:'人の女性エージェント · 寸法と比率',
     source:'出典', updated:'データ更新', filters:'絞り込み', ranges:'数値範囲', resetRanges:'リセット',
@@ -2913,7 +3092,7 @@ const I18N = {
     comparisonExportedCanonical: "对比已导出，临时参考体型未包含在内。",
     compareBasis:'对比方式', rawMeasurements:'实测围度', heightAdjusted:'身高占比',
     heightAdjustedNote:'围度 ÷ 身高 × 100', smallerWins:'较小值', largerWins:'较大值',
-    changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', dark:'深色', light:'浅色', schema:'数据结构',
+    changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', systemTheme:'跟随系统', dark:'深色', light:'浅色', schema:'数据结构',
     sourceTitle:'绝区零 · 女性角色测量',
     skip:'跳到名单', heroSuffix:'位女性代理人 · 尺寸与比例',
     source:'来源', updated:'数据更新', filters:'筛选', ranges:'数值范围', resetRanges:'重置',
@@ -3194,7 +3373,7 @@ function readHash(){
   if(p.has('c')) out.compare = [...new Set(p.get('c').split(','))];
   out.explorer = readExplorerHash(p);
   if(p.has('lang')) out.lang = p.get('lang');
-  if(p.has('th')) out.theme = p.get('th');
+  if(['system','light','dark'].includes(p.get('th'))) out.theme = p.get('th');
   if(p.has('p')) out.p = p.get('p');
   return out;
 }
@@ -3208,7 +3387,7 @@ function writeHash(replace=true){
   p.set('cups',state.cupSystem);
   if(state.art!=="official") p.set('art', state.art);
   p.set('lang', state.lang);
-  p.set('th',document.documentElement.dataset.theme==='light'?'light':'dark');
+  p.set('th',siteTheme.preference);
   if(state.cup!=="all") p.set('cup', state.cup);
   if(state.shape!=="all") p.set('shape', state.shape);
   if(state.balance!=="all") p.set('bal', state.balance);
@@ -3977,13 +4156,8 @@ function applyLang(lang, doRender=true){
 }
 $("#lang").addEventListener("change", e=>applyLang(e.target.value));
 function applyTheme(theme,doWrite=true){
-  const t2 = theme==="light"?"light":"dark";
-  if(t2==="light") document.documentElement.dataset.theme="light";
-  else delete document.documentElement.dataset.theme;
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if(meta) meta.content = t2==="light" ? "#F2F4F6" : "#0B0B0C";
-  $("#theme").value = t2;
-  try{ localStorage.setItem("zzz-theme", t2); }catch(e){}
+  siteTheme.set(theme);
+  $("#theme").value = siteTheme.preference;
   if(doWrite)writeHash(true);
 }
 $("#theme").addEventListener("change", e=>applyTheme(e.target.value));
@@ -4071,7 +4245,7 @@ function syncControls(){
   $("#aSheet").setAttribute("aria-pressed", state.art==="sheet"?"true":"false");
   $("#aOff").setAttribute("aria-pressed", state.art==="official"?"true":"false");
   $("#lang").value = state.lang;
-  $("#theme").value = document.documentElement.dataset.theme==="light" ? "light" : "dark";
+  $("#theme").value = siteTheme.preference;
   $("#fSort").value = state.sort;
   $("#plotY").value = state.plotY;
   syncMeasurementSettings();
@@ -4272,7 +4446,7 @@ function setTarget(input){
 function pageHref(tools,params,view){
   const p=new URLSearchParams(params);
   p.set('unit',state.unit);p.set('cups',state.cupSystem);
-  p.set('lang',state.lang);p.set('th',document.documentElement.dataset.theme==='light'?'light':'dark');
+  p.set('lang',state.lang);p.set('th',siteTheme.preference);
   if(tools){
     if(!TOOLS_PAGE && ['table','plot'].includes(state.view))p.set('from',state.view);
     p.set('view',view||'distribution');
@@ -4518,7 +4692,7 @@ function cupDistributionHTML(list){
     const cells=new Map(filteredMatrix.cells.map(c=>[c.band+':'+c.cup,c.slugs.length]));
     chart=`<div class="matrixwrap" role="region" tabindex="0" aria-label="${esc(t('bandByCup')+' ('+cupSystemName()+')')}"><table class="cupmatrix"><caption>${esc(t('bandByCup')+' ('+cupSystemName()+')')}</caption><thead><tr><th scope="col">${esc(t('sourceBand'))}</th>${matrix.cups.map(cup=>`<th scope="col">${esc(cup)}</th>`).join('')}</tr></thead><tbody>${matrix.bands.map(band=>`<tr><th scope="row">${band}</th>${matrix.cups.map(cup=>{const count=cells.get(band+':'+cup)||0,selection='size:'+band+':'+cup;return `<td>${count?`<button class="matrixcell" data-dist-select="${selection}" aria-pressed="${state.distSelection===selection}" aria-label="${esc(cupSystemName()+' '+band+cup+': '+count)}">${count}</button>`:'<span class="matrixempty">0</span>'}</td>`;}).join('')}</tr>`).join('')}</tbody></table></div>`;
   }else{
-    chart=`<svg class="histogram cuphistogram" viewBox="0 0 ${width} ${rotate?390:355}" role="group" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(cupSizeLabel())}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('mostCommon')+': '+summary.modes.join(' / '))}</desc><line class="axis" x1="30" y1="290" x2="${width-30}" y2="290"/>${bins.map(b=>{const h=b.count/peak*205;return `<g ${barAttributes('cup:'+b.cup,b.cup,b.count)}><title>${esc(b.cup+': '+b.count)}</title><rect class="hit" x="${x(b.cup)-step*.48}" y="70" width="${step*.96}" height="255"/><rect class="bar" x="${x(b.cup)-step*.4}" y="${290-h}" width="${step*.8}" height="${h}"/><text x="${x(b.cup)}" y="${282-h}" text-anchor="middle">${b.count}</text><text class="cupcategory" x="${x(b.cup)}" y="318"${rotate?` transform="rotate(-45 ${x(b.cup)} 318)"`:''} text-anchor="${rotate?'end':'middle'}">${esc(b.cup)}</text></g>`;}).join('')}${markers.map((m,i)=>`<g class="chartmarker"><line class="marker" x1="${x(m.s.cup)}" x2="${x(m.s.cup)}" y1="${25+i*18}" y2="300"/><text class="markerlabel" x="${x(m.s.cup)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}</svg>`;
+    chart=`<svg class="histogram cuphistogram" viewBox="0 0 ${width} ${rotate?390:355}" role="group" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(cupSizeLabel())}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('mostCommon')+': '+summary.modes.join(' / '))}</desc><line class="axis" x1="30" y1="290" x2="${width-30}" y2="290"/>${bins.map(b=>{const h=b.count/peak*205;return `<g ${barAttributes('cup:'+b.cup,b.cup,b.count)}><title>${esc(b.cup+': '+b.count)}</title><rect class="hit" x="${x(b.cup)-step*.48}" y="70" width="${step*.96}" height="255"/><rect class="bar" x="${x(b.cup)-step*.4}" y="${290-h}" width="${step*.8}" height="${h}"/><text x="${x(b.cup)}" y="${282-h}" text-anchor="middle">${b.count}</text><text class="cupcategory" x="${x(b.cup)}" y="318"${rotate?` transform="rotate(-45 ${x(b.cup)} 318)"`:''} text-anchor="${rotate?'end':'middle'}">${esc(b.cup)}</text></g>`;}).join('')}${markers.map((m,i)=>`<g class="chartmarker"><line class="marker halo" x1="${x(m.s.cup)}" x2="${x(m.s.cup)}" y1="${25+i*18}" y2="300"/><line class="marker" x1="${x(m.s.cup)}" x2="${x(m.s.cup)}" y1="${25+i*18}" y2="300"/><text class="markerlabel" x="${x(m.s.cup)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}</svg>`;
   }
   const parts=state.distSelection.split(':'),selected=measured.filter(m=>parts[0]==='cup'?m.s.cup===parts[1]:parts[0]==='size'?m.s.band===+parts[1]&&m.s.cup===parts[2]:true);
   const label=parts[0]==='cup'?cupSystemName()+' '+parts[1]:parts[0]==='size'?cupSystemName()+' '+parts[1]+parts[2]:cupSizeLabel();
@@ -4542,7 +4716,7 @@ function distributionHTML(list){
       const bx=summary.bins.length===1?left-50:left,h=b.count/peak*205,label=fmt(b.lo)+'–'+fmt(b.hi)+valueSuffix(key,basis);
       return `<g ${barAttributes('bin:'+i,label,b.count)}><title>${esc(label+': '+b.count)}</title><rect class="hit" x="${bx}" y="70" width="${barWidth}" height="230"/><rect class="bar" x="${bx}" y="${base-h}" width="${barWidth}" height="${h}"/><text x="${cx}" y="${base-h-8}" text-anchor="middle">${b.count}</text></g>`;
     }).join('');
-    chart=`<svg class="histogram" viewBox="0 0 ${width} 355" role="group" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(t('distribution')+': '+t(key))}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('median')+': '+fmt(summary.median)+valueSuffix(key,basis))}</desc><line class="axis" x1="40" y1="290" x2="${width-35}" y2="290"/>${bars}<line class="median chartmarker" x1="${x(summary.median)}" x2="${x(summary.median)}" y1="60" y2="300"><title>${esc(t('median'))}</title></line>${markers.map((m,i)=>`<g class="chartmarker"><line class="marker" x1="${x(m.v)}" x2="${x(m.v)}" y1="${25+i*18}" y2="300"/><text x="${x(m.v)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}<text x="${x(min)}" y="325" text-anchor="middle">${esc(fmt(min)+(min===max?valueSuffix(key,basis):''))}</text>${min===max?'':`<text x="${x(max)}" y="325" text-anchor="middle">${esc(fmt(max)+valueSuffix(key,basis))}</text>`}</svg>`;
+    chart=`<svg class="histogram" viewBox="0 0 ${width} 355" role="group" aria-labelledby="histTitle histDesc"><title id="histTitle">${esc(t('distribution')+': '+t(key))}</title><desc id="histDesc">${esc(t('population')+': '+summary.count+'. '+t('median')+': '+fmt(summary.median)+valueSuffix(key,basis))}</desc><line class="axis" x1="40" y1="290" x2="${width-35}" y2="290"/>${bars}<line class="median halo chartmarker" x1="${x(summary.median)}" x2="${x(summary.median)}" y1="60" y2="300"/><line class="median chartmarker" x1="${x(summary.median)}" x2="${x(summary.median)}" y1="60" y2="300"><title>${esc(t('median'))}</title></line>${markers.map((m,i)=>`<g class="chartmarker"><line class="marker halo" x1="${x(m.v)}" x2="${x(m.v)}" y1="${25+i*18}" y2="300"/><line class="marker" x1="${x(m.v)}" x2="${x(m.v)}" y1="${25+i*18}" y2="300"/><text x="${x(m.v)}" y="${19+i*18}" text-anchor="middle">${i+1}</text></g>`).join('')}<text x="${x(min)}" y="325" text-anchor="middle">${esc(fmt(min)+(min===max?valueSuffix(key,basis):''))}</text>${min===max?'':`<text x="${x(max)}" y="325" text-anchor="middle">${esc(fmt(max)+valueSuffix(key,basis))}</text>`}</svg>`;
   }
   const index=state.distSelection.startsWith('bin:')?+state.distSelection.split(':')[1]:-1,bin=summary.bins[index];
   const selected=bin?measured.filter(m=>Analysis.binIndex(m.v,summary.bins)===index):measured;
@@ -4661,7 +4835,6 @@ $('#toolsView').addEventListener('click',e=>{
     const c=localStorage.getItem("zzz-cup-system"); if(["uk","us","eu"].includes(c))state.cupSystem=c;
     const a=localStorage.getItem("zzz-art2"); if(a==="sheet"||a==="official") state.art=a;
     const l=localStorage.getItem("zzz-lang"); if(l && I18N[l]) state.lang=l;
-    const th=localStorage.getItem("zzz-theme"); if(th==="light") document.documentElement.dataset.theme="light";
   }catch(e){}
   if($("#agentCount"))$("#agentCount").textContent = DATA.length;
   /* the HTML already contains the 48 default cards; only rebuild when a saved

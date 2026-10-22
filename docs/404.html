@@ -6,13 +6,69 @@
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="fonts/fonts.css">
-<style>
-  body{margin:0; background:#0B0B0C; color:#fff; font-family:'Inter',system-ui,sans-serif;
+<meta name="theme-color" content="#0B0B0C"><meta name="color-scheme" content="dark light"><script>/* Run before styles paint. An explicit URL or saved choice overrides the browser. */
+const siteTheme = (() => {
+  const valid = value => ['system', 'light', 'dark'].includes(value);
+  const media = window.matchMedia('(prefers-color-scheme: light)');
+  let preference = 'system';
+  try {
+    const saved = localStorage.getItem('zzz-theme');
+    if (valid(saved)) preference = saved;
+  } catch (_) {}
+  const shared = new URLSearchParams(location.hash.slice(1)).get('th');
+  if (valid(shared)) preference = shared;
+  function paint() {
+    const resolved = preference === 'system' ? (media.matches ? 'light' : 'dark') : preference;
+    document.documentElement.dataset.theme = resolved;
+    document.documentElement.dataset.themePreference = preference;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = resolved === 'light' ? '#F2F4F6' : '#0B0B0C';
+  }
+  media.addEventListener('change', () => { if (preference === 'system') paint(); });
+  paint();
+  return {
+    get preference() { return preference; },
+    set(value) {
+      preference = valid(value) ? value : 'system';
+      try { localStorage.setItem('zzz-theme', preference); } catch (_) {}
+      paint();
+    }
+  };
+})();
+</script><style>/* Accent text and accent surfaces have separate roles in both palettes. */
+:root{
+  color-scheme:dark;
+  --acid:#D8FA00;--acid-deep:#C6E800;--accent-fill:#D8FA00;--accent-fill-deep:#C6E800;--on-accent:#0B0B0C;
+  --hazard:#FFDE00;--hazard-fill:#FFDE00;--signal:#FF7057;--holo:#29D4FF;--blue:#879BFF;
+  --brass:#DB9A45;--tan:#D3BC8E;--ink:#0B0B0C;--coal:#121214;--panel:#17171C;--panel2:#101014;
+  --concrete:#EFEFEF;--dim:#A6A6B0;--dimmer:#9696A3;--line:#ffffff1f;--line2:#ffffff33;--control-line:#73737F;
+  --bust:#FF7057;--waist:#29D4FF;--hips:#D8FA00;--thighs:#FFDE00;--track:#ffffff24;
+}
+html[data-theme="light"]{
+  color-scheme:light;
+  --ink:#F2F4F6;--coal:#E7EBEF;--panel:#FFFFFF;--panel2:#F7F9FB;
+  --line:#DCE1E6;--line2:#BAC3CD;--control-line:#77838F;--dim:#505B68;--dimmer:#606B77;
+  --concrete:#20262E;--acid:#485D00;--acid-deep:#394B00;--hazard:#7B6000;--tan:#75612E;
+  --bust:#B4402D;--waist:#006F87;--hips:#485D00;--thighs:#7B6000;
+  --signal:#B4402D;--holo:#006F87;--blue:#3659B7;--brass:#80601F;--track:#D2D9E0;
+}
+
+@media(prefers-color-scheme:light){
+html:not([data-theme]){
+  color-scheme:light;
+  --ink:#F2F4F6;--coal:#E7EBEF;--panel:#FFFFFF;--panel2:#F7F9FB;
+  --line:#DCE1E6;--line2:#BAC3CD;--control-line:#77838F;--dim:#505B68;--dimmer:#606B77;
+  --concrete:#20262E;--acid:#485D00;--acid-deep:#394B00;--hazard:#7B6000;--tan:#75612E;
+  --bust:#B4402D;--waist:#006F87;--hips:#485D00;--thighs:#7B6000;
+  --signal:#B4402D;--holo:#006F87;--blue:#3659B7;--brass:#80601F;--track:#D2D9E0;
+}
+}
+  body{margin:0; background:var(--ink); color:var(--concrete); font-family:'Inter',system-ui,sans-serif;
     display:grid; place-items:center; min-height:100vh; text-align:center}
   h1{font-family:'Anton','Arial Narrow',Impact,sans-serif; font-weight:400; font-size:clamp(40px,9vw,90px);
     line-height:1; margin:0 0 10px; text-transform:uppercase}
-  h1 span{color:#D8FA00}
-  p{color:#9A9AA3; margin:0 0 22px}
+  h1 span{color:var(--acid)}
+  p{color:var(--dim); margin:0 0 22px}
   a{display:inline-block; background:#D8FA00; color:#0b0b0c; text-decoration:none; font-weight:800;
     padding:12px 22px; border-radius:999px; font-size:13px; letter-spacing:.08em; text-transform:uppercase}
 </style></head>

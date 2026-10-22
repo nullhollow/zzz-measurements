@@ -11,6 +11,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'tools'))
 import card  # noqa: E402
+from theme import THEME_JS, adaptive_css
 from profile_text import profile_summary  # noqa: E402
 
 DATA = json.loads((ROOT / 'tools/data.json').read_text())
@@ -191,6 +192,9 @@ for lang, strings in explorer_i18n.items():
     tpl = tpl.replace(f'/*__EXPLORER_I18N_{lang.upper()}__*/', copy)
 for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.js'), ('SETTINGS_JS', 'settings.js'), ('EXPLORER_CSS', 'explorer.css')):
     tpl = tpl.replace(f'/*__{token}__*/', (ROOT / 'tools' / source).read_text())
+tpl = tpl.replace('/*__THEME_JS__*/', THEME_JS)
+tpl = re.sub(r'<style>(.*?)</style>', lambda m: '<style>' + adaptive_css(m[1]) + '</style>', tpl, flags=re.S)
+
 def render_interactive(tools=False):
     page = tpl
     title = TITLE
