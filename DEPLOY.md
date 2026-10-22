@@ -1,15 +1,15 @@
 # Deploying ZZZ Female Measurements
 
-Everything the site needs lives in **`docs/`** — the interactive page, 144 static
-character pages (48 agents × English/Japanese/Simplified Chinese), three
+Everything the site needs lives in **`docs/`** — the interactive page, 147 static
+character pages (49 agents × English/Japanese/Simplified Chinese), three
 methodology/FAQ pages, the dataset exports, WebP artwork, bundled fonts, icons, the
 service worker and the crawler files. Nothing else in the repository is served.
 
 ```
 docs/
-  index.html               interactive chart (48 cards pre-rendered)
+  index.html               interactive chart (49 cards pre-rendered)
   methodology.html         method, classes, FAQ
-  characters/*.html        48 English profiles
+  characters/*.html        49 English profiles
   ja/, zh/                 localized profiles + methodology
   data/                    measurements.json · measurements.csv · schema.json
   offline.html             service-worker fallback
@@ -19,11 +19,11 @@ docs/
   robots.txt sitemap.xml .nojekyll
   og.png favicon.* icon-*.png
   fonts/                   22 woff2 + fonts.css + OFL/licence notes (local)
-  images/                  48 sheet crops
-  character_images/        52 portraits + 24 outfit renders + responsive thumbs/
+  images/                  49 sheet crops
+  character_images/        53 portraits + 26 outfit renders + responsive thumbs/
 ```
 
-≈ **628 files / 24 MB** (the responsive thumb set adds storage but cuts transfer).
+≈ **641 files / 25 MB** (the responsive thumb set adds storage but cuts transfer).
 
 ## 1. Set the URL
 
@@ -79,7 +79,7 @@ python3 tools/validate.py             # data, assets, links, JSON-LD, crawler fi
 
 `pack_site.py` runs, in order:
 
-1. `build_data.py` — `measurements.csv` → `tools/data.json`
+1. `build_data.py` — `measurements3.3.csv` → `tools/data.json`
 2. `describe.py` — generated profile text (cm + in)
 3. `build_html.py` — `index.html` with static cards and JSON-LD
 4. `build_pages.py` — character pages, methodology, exports, offline page
@@ -116,8 +116,8 @@ So: build locally, commit `docs/`, push. If CI reports a diff, run the same
 | shipped | left out (dev only) |
 |---|---|
 | `index.html`, character pages, methodology, data exports, service worker | `tools/` (pipeline, data.json, templates) |
-| all WebP artwork + thumbs, fonts, icons, OG card | `measurements.csv` (source sheet) |
-| `robots.txt`, `sitemap.xml`, `manifest.webmanifest`, `404.html`, `offline.html`, `.nojekyll` | `zzz3.2b.webp` (4.3 MB source contact sheet), `bug/` |
+| all WebP artwork + thumbs, fonts, icons, OG card | `measurements3.3.csv` (source sheet) |
+| `robots.txt`, `sitemap.xml`, `manifest.webmanifest`, `404.html`, `offline.html`, `.nojekyll` | `zzz3.3.webp` (3.8 MB source contact sheet), `bug/` |
 | | `visual-center-demo.html` + `visual-masks.js` (alignment lab), `ui-proposal.html` |
 
 `pack_site.py` deletes everything else in `docs/` on purpose, but preserves
@@ -129,8 +129,8 @@ search-console verification files (`google*.html`, `BingSiteAuth.xml`, `yandex_*
 * JSON-LD: `WebSite`, `WebPage`, `Dataset` (with `dateModified`, `distribution`,
   `measurementTechnique`, rights), `ItemList`, `ProfilePage` + `Person`,
   `BreadcrumbList`, `FAQPage`
-* 144 static profile pages (EN/JA/ZH) plus three methodology pages in the sitemap
-* a `<noscript>` table and 48 pre-rendered cards, so crawlers and no-JS visitors get
+* 147 static profile pages (EN/JA/ZH) plus three methodology pages in the sitemap
+* a `<noscript>` table and 49 pre-rendered cards, so crawlers and no-JS visitors get
   every measurement
 * local fonts, responsive `srcset` artwork (AVIF first, WebP fallback, 320/640 px),
   full 1280 px art in character-page heroes and the detail view, one

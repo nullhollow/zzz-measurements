@@ -133,6 +133,23 @@
    }
   ]
  },
+ "phoenix.png": {
+  "name": "Phoenix",
+  "items": [
+   {
+    "label": "The Illness Called Life",
+    "type": "Paid",
+    "file": "skins/phoenix_the_illness_called_life.webp",
+    "wiki_file": "File:Agent Phoenix Reffaella The Illness Called Life In-Game.png"
+   },
+   {
+    "label": "Daydream Complex",
+    "type": "Paid",
+    "file": "skins/phoenix_daydream_complex.webp",
+    "wiki_file": "File:Agent Phoenix Reffaella Daydream Complex In-Game.png"
+   }
+  ]
+ },
  "remielle.png": {
   "name": "Remielle",
   "items": [

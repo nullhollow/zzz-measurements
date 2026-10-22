@@ -2,6 +2,22 @@
 
 ## Unreleased — audit implementation
 
+### Version 3.3 — Phoenix
+
+- Added **Phoenix** (156 cm, UK 21C) from `measurements3.3.csv`: 59.4 cm bust,
+  51.9 cm under-bust, 40.6 cm waist, 78.8 cm hips and 44.9 cm thigh.
+- Added the official HoYoverse portrait plus both paid outfit renders,
+  **The Illness Called Life** and **Daydream Complex**, as art-only outfit views.
+- Added the official Japanese and Chinese names from the HoYoverse character
+  page, and regenerated all 49 EN/JA/ZH profile pages and dataset exports.
+- Re-imported the 3.3 contact sheet (`zzz3.3.webp`); all 49 sheet crops were
+  rebuilt, including the new Phoenix crop.
+- Moved the interactive rankings onto a live derivation pass: proportions,
+  percentiles, cup/height/waist/hip/thigh classes, shape, podium, highlights and
+  comparison winners are recalculated from raw centimetres in the browser.
+- Removed the build-time 48-character warning and updated counts, docs and the
+  service-worker payload for 49 entries.
+
 ### Typography
 - Added a subset of **印品鸿蒙体 / inpin hongmengti**, the ZZZ Chinese UI face,
   for the Latin, Chinese and Japanese interface and profiles.

@@ -1,7 +1,7 @@
 """Download official character portraits from the ZZZ Fandom wiki into character_images/.
 
 Source: https://zenless-zone-zero.fandom.com (images are fair-use, (c) HoYoverse).
-One PNG per measurements.csv entry (52), named after the character (slug of display name).
+One WebP per roster entry, named after the character (slug of display name).
 """
 import json, sys, os, time, urllib.parse, urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -32,6 +32,12 @@ FILE_OVERRIDE = {
     'Jane Doe (skin)':    'File:Agent Jane Doe Nocturne of Light Portrait.png',
 }
 PAGE_OVERRIDE = {'Soldier11': 'Soldier 11'}   # page title differs from csv name
+# The wiki's Phoenix portrait carries a white-barcode upload artefact; use the
+# clean transparent render from the official character page instead.
+URL_OVERRIDE = {
+    'Phoenix': 'https://fastcdn.hoyoverse.com/content-v2/nap/166075/'
+               '93913c7d1fa97b87c146ad1467ce1d16_8934185391506393783.png',
+}
 
 
 def api(params):
@@ -93,6 +99,7 @@ def main():
         name, disp = d['name'], d['display']
         file_title, page_title = files[name]
         url, info = file_url(file_title)
+        url = URL_OVERRIDE.get(name, url)
         if not url:
             problems.append(f'{disp}: file page missing ({file_title})')
             continue

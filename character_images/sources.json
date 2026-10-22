@@ -570,5 +570,16 @@
   "width": 1544,
   "height": 2012,
   "license": "Fair use / (c) HoYoverse (Fandom wiki)"
+ },
+ {
+  "file": "phoenix.png",
+  "character": "Phoenix",
+  "csv_name": "Phoenix",
+  "wiki_page": "Phoenix Reffaella",
+  "wiki_file": "File:Agent Phoenix Reffaella Portrait.png",
+  "source": "https://fastcdn.hoyoverse.com/content-v2/nap/166075/93913c7d1fa97b87c146ad1467ce1d16_8934185391506393783.png",
+  "width": 1297,
+  "height": 1369,
+  "license": "Fair use / (c) HoYoverse (Fandom wiki)"
  }
 ]

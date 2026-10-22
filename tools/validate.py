@@ -108,8 +108,6 @@ def check_data(out):
             if not isinstance(a, str) or not a.strip():
                 err(f'{d["display"]}: empty alias')
 
-    if N != 48:
-        warn(f'roster count is {N} (was 48 when the copy was written)')
     if META.get('schema_version') != 2:
         err('meta.schema_version must be 2')
     try:

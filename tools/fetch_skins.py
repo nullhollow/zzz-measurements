@@ -23,6 +23,20 @@ SKIN_DIR = os.path.join(IMG_DIR, 'skins')
 CATEGORY = 'Category:Outfits'
 FORCE = '--force' in sys.argv
 
+# Phoenix's outfit pages currently have in-game renders but no transparent
+# portrait uploads. Keep the committed cut-outs instead of dropping the entries
+# when this scraper is rerun.
+EXTRA = {
+    'phoenix.png': {'name': 'Phoenix', 'items': [
+        {'label': 'The Illness Called Life', 'type': 'Paid',
+         'file': 'skins/phoenix_the_illness_called_life.webp',
+         'wiki_file': 'File:Agent Phoenix Reffaella The Illness Called Life In-Game.png'},
+        {'label': 'Daydream Complex', 'type': 'Paid',
+         'file': 'skins/phoenix_daydream_complex.webp',
+         'wiki_file': 'File:Agent Phoenix Reffaella Daydream Complex In-Game.png'},
+    ]},
+}
+
 
 def api(params):
     url = API + '?' + urllib.parse.urlencode({**params, 'format': 'json'})
@@ -112,6 +126,8 @@ def main():
     os.makedirs(SKIN_DIR, exist_ok=True)
     roster = build_roster()
     hits = discover(roster)
+    for key, rec in EXTRA.items():
+        hits.setdefault(key, rec)
     print('roster matches:', len(hits), '| outfits:', sum(len(v['items']) for v in hits.values()))
     out = {}
     for base, rec in sorted(hits.items()):
@@ -119,6 +135,10 @@ def main():
         for it in rec['items']:
             fname = f"{base[:-4]}_{slug(it['label'])}.png"
             dest = os.path.join(SKIN_DIR, fname)
+            if it.get('file') and os.path.exists(os.path.join(IMG_DIR, it['file'])) and not FORCE:
+                items.append({'label': it['label'], 'type': it['type'].replace('; ', ';'),
+                              'file': it['file'], 'wiki_file': it['wiki_file']})
+                continue
             if FORCE or not os.path.exists(dest):
                 url, w, h = file_url(it['wiki_file'])
                 if url:

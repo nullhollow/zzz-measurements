@@ -1023,6 +1023,100 @@ const USUF = () => isCm()? ' cm' : ' in';
 const bySlug = new Map(DATA.map(d=>[d.slug,d]));
 const byName = new Map(DATA.map(d=>[d.name,d]));
 const fmtPct = v => v==null ? '—' : v.toFixed(3);
+const r3 = v => Math.round(v*1000)/1000;
+const r1 = v => Math.round(v*10)/10;
+const r2 = v => Math.round(v*100)/100;
+
+/* ---------------- derived stats ----------------
+   Everything here is recomputed from the raw centimetres on load, so adding a
+   row to the data file changes percentiles, classes, the podium, highlights,
+   filters and comparisons without hand-editing any ranking. */
+function cupGroupOf(uk){
+  const m = String(uk || '').match(/^\d+\s*([A-Za-z]+)/);
+  const letter = m ? m[1].toUpperCase() : '';
+  if(['AA','A','B'].includes(letter)) return 'A-B';
+  if(['C','D'].includes(letter)) return 'C-D';
+  if(['DD','E'].includes(letter)) return 'DD-E';
+  if(['F','FF','G'].includes(letter)) return 'F-G';
+  return letter ? 'GG+' : '?';
+}
+function heightGroupOf(cm){
+  if(cm == null) return 'Mid';
+  if(cm < 150) return 'Petite';
+  if(cm <= 165) return 'Mid';
+  return 'Tall';
+}
+function levelOf(p){
+  if(p == null) return 'avg';
+  if(p < 0.33) return 'low';
+  if(p > 0.66) return 'high';
+  return 'avg';
+}
+function pctRank(values, v){
+  const nums = values.filter(x=>x!=null).sort((a,b)=>a-b);
+  if(!nums.length || v == null) return null;
+  let below = 0, equal = 0;
+  for(const x of nums){ if(x < v) below++; else if(x === v) equal++; }
+  return (below + 0.5*equal) / nums.length;
+}
+function computeDerived(){
+  const roster = DATA;
+  const all = DATA.concat(DATA.filter(d=>d.skin).map(d=>d.skin));
+  for(const d of all){
+    if(d.bust_cm != null && d.band_cm != null){
+      d.diff_cm = r1(d.bust_cm - d.band_cm);
+      d.diff_in = r2(d.diff_cm / 2.54);
+    }else{
+      d.diff_cm = d.diff_in = null;
+    }
+    d.whr = (d.waist_cm && d.hip_cm) ? r3(d.waist_cm/d.hip_cm) : null;
+    d.whtr = (d.waist_cm && d.stature_cm) ? r3(d.waist_cm/d.stature_cm) : null;
+    d.wtr = (d.waist_cm && d.thigh_cm) ? r3(d.waist_cm/d.thigh_cm) : null;
+    d.thr = (d.thigh_cm && d.stature_cm) ? r3(d.thigh_cm/d.stature_cm) : null;
+    d.thh = (d.thigh_cm && d.hip_cm) ? r3(d.thigh_cm/d.hip_cm) : null;
+    d.bhr = (d.bust_cm && d.stature_cm) ? r3(d.bust_cm/d.stature_cm) : null;
+    d.hhr = (d.hip_cm && d.stature_cm) ? r3(d.hip_cm/d.stature_cm) : null;
+  }
+  const keys = ['bust_cm','waist_cm','hip_cm','thigh_cm','whr','bhr','hhr','stature_cm'];
+  const lists = {};
+  for(const k of keys) lists[k] = roster.map(d=>d[k]).filter(v=>v!=null);
+  for(const d of all){
+    for(const k of keys) d['p_'+k] = d[k] == null ? null : r3(pctRank(lists[k], d[k]));
+  }
+  for(const d of all){
+    d.cup_group = cupGroupOf(d.uk);
+    d.height_group = heightGroupOf(d.stature_cm);
+    d.waist_level = levelOf(d.p_waist_cm);
+    d.hip_level = levelOf(d.p_hip_cm);
+    const bp = d.p_bust_cm, hp = d.p_hip_cm;
+    const bal = (bp != null && hp != null) ? bp - hp : 0;
+    d.balance = bal > 0.18 ? 'top' : bal < -0.18 ? 'bottom' : 'even';
+    const b = d.bust_cm, w = d.waist_cm, h = d.hip_cm;
+    if(b && w && h){
+      const flare = Math.min(b/w, h/w);
+      const pair = Math.min(b,h)/Math.max(b,h);
+      d.hourglass_score = r3(flare * pair);
+      d.shape = (flare >= 1.45 && pair >= 0.85) ? 'Hourglass'
+              : (flare < 1.30 || pair < 0.75) ? 'Straight' : 'Balanced';
+    }else{
+      d.hourglass_score = null;
+      d.shape = 'Balanced';
+    }
+    d.thigh_level = d.thigh_cm == null ? 'avg'
+                   : (d.thigh_pin ? 'high' : levelOf(d.p_thigh_cm));
+    d.tags = {
+      height: d.height_group,
+      bust: d.cup_group,
+      waist: {low:'Cinched', avg:'Average', high:'Fuller'}[d.waist_level],
+      hips: {low:'Compact', avg:'Average-width', high:'Wide'}[d.hip_level],
+      thighs: d.thigh_cm == null ? 'n/a'
+             : {low:'Slim', avg:'Average', high:'Thick'}[d.thigh_level],
+      shape: d.shape,
+      balance: {top:'Top-heavy', bottom:'Bottom-heavy', even:'Balanced'}[d.balance],
+    };
+  }
+}
+computeDerived();
 
 /* ---------------- state ---------------- */
 const RANGES = [
@@ -1062,9 +1156,8 @@ function readFor(d){
        : d.read || '';
 }
 function tagsFor(d){
-  return state.lang==='ja' ? (d.tags_ja || d.tags)
-       : state.lang==='zh' ? (d.tags_zh || d.tags)
-       : d.tags;
+  // tags are derived from the live percentiles; tagText() localizes the labels
+  return d.tags || {};
 }
 function noteFor(d){
   if(state.lang==='ja' && Object.prototype.hasOwnProperty.call(d,'notes_ja')) return d.notes_ja || '';

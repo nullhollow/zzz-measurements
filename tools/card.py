@@ -1,7 +1,7 @@
 """Shared card renderer.
 
 The card markup lives in tools/card.tmpl.html and is used twice:
-  * build_html.py renders the 48 cards into the initial HTML (works without JS,
+  * build_html.py renders the roster cards into the initial HTML (works without JS,
     paints before the script runs, keeps the roster in the crawlable document)
   * template.html embeds the same template and re-renders on filter/sort/unit
     changes
@@ -141,7 +141,7 @@ def render_card(d, unit='cm', lang='en'):
     out = TEMPLATE
     for key, value in vals.items():
         out = out.replace('{{' + key + '}}', str(value))
-    return out
+    return '\n'.join(line.rstrip() for line in out.splitlines())
 
 
 def render_cards(data, unit='cm'):

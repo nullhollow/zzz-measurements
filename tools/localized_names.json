@@ -1,33 +1,15 @@
 {
- "zhao": {
-  "ja": "照",
-  "zh": "照",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=160758",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=160758"
+ "alice": {
+  "ja": "アリス・タイムフィールド",
+  "zh": "爱丽丝·泰姆菲尔德",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=156728",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=156728"
  },
- "ju_fufu": {
-  "ja": "橘福福",
-  "zh": "橘福福",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=155659",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=155659"
- },
- "soukaku": {
-  "ja": "蒼角",
-  "zh": "苍角",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=103295",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=103295"
- },
- "sunna": {
-  "ja": "千夏",
-  "zh": "千夏",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=161791",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=161791"
- },
- "roxy": {
-  "ja": "ロクシー・イフリータ・プライス",
-  "zh": "洛克茜·伊芙莉塔·普莱斯",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=165591",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=165591"
+ "anby": {
+  "ja": "アンビー・デマラ",
+  "zh": "安比·德玛拉",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102103",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102103"
  },
  "aria": {
   "ja": "アリア",
@@ -41,83 +23,11 @@
   "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=161792",
   "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=161792"
  },
- "koleda": {
-  "ja": "クレタ・ベロボーグ",
-  "zh": "珂蕾妲·贝洛伯格",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102708",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102708"
- },
- "norma": {
-  "ja": "ノルムー・ホローウェル",
-  "zh": "诺姆·霍洛维尔",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=163786",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=163786"
- },
- "lucy": {
-  "ja": "ルーシー",
-  "zh": "露西",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124308",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124308"
- },
- "nangong_yu": {
-  "ja": "南宮羽",
-  "zh": "南宫羽",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=162652",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=162652"
- },
- "dialyn": {
-  "ja": "ダイアリン",
-  "zh": "琉音",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=160142",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=160142"
- },
- "piper": {
-  "ja": "パイパー・ウィール",
-  "zh": "派派·韦尔",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124310",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124310"
- },
- "corin": {
-  "ja": "カリン・ウィクス",
-  "zh": "可琳·威克斯",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102477",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102477"
- },
- "nekomata": {
-  "ja": "猫宮又奈",
-  "zh": "猫宫又奈",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102427",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102427"
- },
- "qingyi": {
-  "ja": "青衣",
-  "zh": "青衣",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124660",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124660"
- },
- "seed": {
-  "ja": "「シード」",
-  "zh": "「席德」",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=157829",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=157829"
- },
- "yuzuha": {
-  "ja": "浮波柚葉",
-  "zh": "浮波柚叶",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=156729",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=156729"
- },
- "miyabi": {
-  "ja": "星見雅",
-  "zh": "星见雅",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=103379",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=103379"
- },
- "vivian": {
-  "ja": "ビビアン",
-  "zh": "薇薇安",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=154605",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=154605"
+ "astra_yao": {
+  "ja": "アストラ・ヤオ",
+  "zh": "耀嘉音",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=127387",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=127387"
  },
  "belle": {
   "ja": "リン",
@@ -125,149 +35,11 @@
   "source_ja": "https://zenless-zone-zero.fandom.com/wiki/Belle",
   "source_zh": "https://zenless-zone-zero.fandom.com/wiki/Belle"
  },
- "anby": {
-  "ja": "アンビー・デマラ",
-  "zh": "安比·德玛拉",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102103",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102103"
- },
- "soldier_11": {
-  "ja": "「11号」",
-  "zh": "11号",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102292",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102292"
- },
- "lucia": {
-  "ja": "リュシア",
-  "zh": "卢西娅",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=158985",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=158985"
- },
- "promeia": {
-  "ja": "プロメイア",
-  "zh": "普罗米娅",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=163316",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=163316"
- },
- "claret": {
-  "ja": "クラレッタ・フリンツ",
-  "zh": "克拉蕾·弗林特",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=165587",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=165587"
- },
- "ellen_joe": {
-  "ja": "エレン・ジョー",
-  "zh": "艾莲·乔",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=113671",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=113671"
- },
- "alice": {
-  "ja": "アリス・タイムフィールド",
-  "zh": "爱丽丝·泰姆菲尔德",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=156728",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=156728"
- },
- "ye_shunguang": {
-  "ja": "葉瞬光",
-  "zh": "叶瞬光",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=160762",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=160762"
- },
- "orphie": {
-  "ja": "オルペウス＆「鬼火」",
-  "zh": "奥菲丝&「鬼火」",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=157833",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=157833"
- },
  "burnice": {
   "ja": "バーニス",
   "zh": "柏妮思",
   "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=125214",
   "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=125214"
- },
- "cissia": {
-  "ja": "シーシィア",
-  "zh": "希希芙",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=162680",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=162680"
- },
- "nicole": {
-  "ja": "ニコ・デマラ",
-  "zh": "妮可·德玛拉",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102183",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102183"
- },
- "trigger": {
-  "ja": "「トリガー」",
-  "zh": "「扳机」",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=129638",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=129638"
- },
- "jane_doe": {
-  "ja": "ジェーン・ドゥ",
-  "zh": "简·杜",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124675",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124675"
- },
- "zhu_yuan": {
-  "ja": "朱鳶",
-  "zh": "朱鸢",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=122782",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=122782"
- },
- "sigrid": {
-  "ja": "シグリッド・ドゥ・ラズール",
-  "zh": "希格莉德·德拉叙尔",
-  "source_ja": "https://zenless-zone-zero.fandom.com/wiki/Sigrid_de_L%27Azur",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=164897"
- },
- "astra_yao": {
-  "ja": "アストラ・ヤオ",
-  "zh": "耀嘉音",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=127387",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=127387"
- },
- "evelyn": {
-  "ja": "イヴリン・シェヴァリエ",
-  "zh": "伊芙琳·舒瓦利耶",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=127403",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=127403"
- },
- "remielle": {
-  "ja": "レミエール・ダン",
-  "zh": "蕾米埃尔·丹",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=164866",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=164866"
- },
- "pulchra": {
-  "ja": "プルクラ・フェリーニ",
-  "zh": "波可娜·费雷尼",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=129637",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=129637"
- },
- "yi_xuan": {
-  "ja": "儀玄",
-  "zh": "仪玄",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=155654",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=155654"
- },
- "yanagi": {
-  "ja": "月城柳",
-  "zh": "月城柳",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=126040",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=126040"
- },
- "grace": {
-  "ja": "グレース・ハワード",
-  "zh": "格莉丝·霍华德",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=113532",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=113532"
- },
- "velina": {
-  "ja": "ヴェリナ・エガード",
-  "zh": "维琳娜·艾嘉德",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=163785",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=163785"
  },
  "caesar": {
   "ja": "キング・シーザー",
@@ -275,16 +47,250 @@
   "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=125210",
   "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=125210"
  },
- "yidhari": {
-  "ja": "イドリー",
-  "zh": "伊德海莉",
-  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=158997",
-  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=158997"
+ "cissia": {
+  "ja": "シーシィア",
+  "zh": "希希芙",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=162680",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=162680"
+ },
+ "claret": {
+  "ja": "クラレッタ・フリンツ",
+  "zh": "克拉蕾·弗林特",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=165587",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=165587"
+ },
+ "corin": {
+  "ja": "カリン・ウィクス",
+  "zh": "可琳·威克斯",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102477",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102477"
+ },
+ "dialyn": {
+  "ja": "ダイアリン",
+  "zh": "琉音",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=160142",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=160142"
+ },
+ "ellen_joe": {
+  "ja": "エレン・ジョー",
+  "zh": "艾莲·乔",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=113671",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=113671"
+ },
+ "evelyn": {
+  "ja": "イヴリン・シェヴァリエ",
+  "zh": "伊芙琳·舒瓦利耶",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=127403",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=127403"
+ },
+ "grace": {
+  "ja": "グレース・ハワード",
+  "zh": "格莉丝·霍华德",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=113532",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=113532"
+ },
+ "jane_doe": {
+  "ja": "ジェーン・ドゥ",
+  "zh": "简·杜",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124675",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124675"
+ },
+ "ju_fufu": {
+  "ja": "橘福福",
+  "zh": "橘福福",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=155659",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=155659"
+ },
+ "koleda": {
+  "ja": "クレタ・ベロボーグ",
+  "zh": "珂蕾妲·贝洛伯格",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102708",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102708"
+ },
+ "lucia": {
+  "ja": "リュシア",
+  "zh": "卢西娅",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=158985",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=158985"
+ },
+ "lucy": {
+  "ja": "ルーシー",
+  "zh": "露西",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124308",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124308"
+ },
+ "miyabi": {
+  "ja": "星見雅",
+  "zh": "星见雅",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=103379",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=103379"
+ },
+ "nangong_yu": {
+  "ja": "南宮羽",
+  "zh": "南宫羽",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=162652",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=162652"
+ },
+ "nekomata": {
+  "ja": "猫宮又奈",
+  "zh": "猫宫又奈",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102427",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102427"
+ },
+ "nicole": {
+  "ja": "ニコ・デマラ",
+  "zh": "妮可·德玛拉",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102183",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102183"
+ },
+ "norma": {
+  "ja": "ノルムー・ホローウェル",
+  "zh": "诺姆·霍洛维尔",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=163786",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=163786"
+ },
+ "orphie": {
+  "ja": "オルペウス＆「鬼火」",
+  "zh": "奥菲丝&「鬼火」",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=157833",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=157833"
+ },
+ "phoenix": {
+  "ja": "フィオニー・レファエラ",
+  "zh": "菲欧妮·蕾法爱菈",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=166075",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=166075"
+ },
+ "piper": {
+  "ja": "パイパー・ウィール",
+  "zh": "派派·韦尔",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124310",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124310"
+ },
+ "promeia": {
+  "ja": "プロメイア",
+  "zh": "普罗米娅",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=163316",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=163316"
+ },
+ "pulchra": {
+  "ja": "プルクラ・フェリーニ",
+  "zh": "波可娜·费雷尼",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=129637",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=129637"
+ },
+ "qingyi": {
+  "ja": "青衣",
+  "zh": "青衣",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124660",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124660"
+ },
+ "remielle": {
+  "ja": "レミエール・ダン",
+  "zh": "蕾米埃尔·丹",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=164866",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=164866"
  },
  "rina": {
   "ja": "アレクサンドリナ・セバスチャン",
   "zh": "亚历山德丽娜·莎芭丝缇安",
   "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=113612",
   "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=113612"
+ },
+ "roxy": {
+  "ja": "ロクシー・イフリータ・プライス",
+  "zh": "洛克茜·伊芙莉塔·普莱斯",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=165591",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=165591"
+ },
+ "seed": {
+  "ja": "「シード」",
+  "zh": "「席德」",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=157829",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=157829"
+ },
+ "sigrid": {
+  "ja": "シグリッド・ドゥ・ラズール",
+  "zh": "希格莉德·德拉叙尔",
+  "source_ja": "https://zenless-zone-zero.fandom.com/wiki/Sigrid_de_L%27Azur",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=164897"
+ },
+ "soldier_11": {
+  "ja": "「11号」",
+  "zh": "11号",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102292",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102292"
+ },
+ "soukaku": {
+  "ja": "蒼角",
+  "zh": "苍角",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=103295",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=103295"
+ },
+ "sunna": {
+  "ja": "千夏",
+  "zh": "千夏",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=161791",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=161791"
+ },
+ "trigger": {
+  "ja": "「トリガー」",
+  "zh": "「扳机」",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=129638",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=129638"
+ },
+ "velina": {
+  "ja": "ヴェリナ・エガード",
+  "zh": "维琳娜·艾嘉德",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=163785",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=163785"
+ },
+ "vivian": {
+  "ja": "ビビアン",
+  "zh": "薇薇安",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=154605",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=154605"
+ },
+ "yanagi": {
+  "ja": "月城柳",
+  "zh": "月城柳",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=126040",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=126040"
+ },
+ "ye_shunguang": {
+  "ja": "葉瞬光",
+  "zh": "叶瞬光",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=160762",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=160762"
+ },
+ "yi_xuan": {
+  "ja": "儀玄",
+  "zh": "仪玄",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=155654",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=155654"
+ },
+ "yidhari": {
+  "ja": "イドリー",
+  "zh": "伊德海莉",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=158997",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=158997"
+ },
+ "yuzuha": {
+  "ja": "浮波柚葉",
+  "zh": "浮波柚叶",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=156729",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=156729"
+ },
+ "zhao": {
+  "ja": "照",
+  "zh": "照",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=160758",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=160758"
+ },
+ "zhu_yuan": {
+  "ja": "朱鳶",
+  "zh": "朱鸢",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/character?id=122782",
+  "source_zh": "https://zenless.hoyoverse.com/zh-cn/character?id=122782"
  }
 }

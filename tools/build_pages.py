@@ -60,7 +60,7 @@ PAGE = {
         'outfit_portrait': 'outfit portrait', 'art_only': 'art only',
         'stature_note': 'Height uses the ~{st} cm head height; the charted {cm} cm includes her ears.',
         'measured_note': 'This agent has a measured outfit ({outfit}). The numbers on this page are the <b>standard model</b>; the outfit record is kept separate in the dataset.',
-        'chart_note': 'Chart note', 'source': 'Source', 'rights': 'Official art via the ZZZ Fandom wiki, © HoYoverse (fair use). Auto-generated commentary is not in-game canon.',
+        'chart_note': 'Chart note', 'source': 'Source', 'rights': 'Official art via HoYoverse and the ZZZ Fandom wiki, © HoYoverse (fair use). Auto-generated commentary is not in-game canon.',
         'methodology': 'Methodology &amp; FAQ', 'data_updated': 'Data updated', 'back': 'Back to the chart',
         'shape': 'Shape', 'build_word': 'build', 'hand_pinned': 'hand-pinned', 'language': 'Language', 'roster_nav': 'Roster navigation',
     },
@@ -84,7 +84,7 @@ PAGE = {
         'outfit_portrait': '衣装ポートレート', 'art_only': '画像のみ',
         'stature_note': '身長は頭頂ベースの約{st}cm。公式の{cm}cmは耳を含みます。',
         'measured_note': 'このエージェントには計測済み衣装（{outfit}）があります。このページの数値は<b>標準モデル</b>で、衣装の記録はデータセット内に別途保存しています。',
-        'chart_note': 'チャート注記', 'source': '出典', 'rights': '公式画像はZZZ Fandom wiki経由、© HoYoverse（フェアユース）。自動生成の解説はゲーム内設定ではありません。',
+        'chart_note': 'チャート注記', 'source': '出典', 'rights': '公式画像はHoYoverse公式サイトおよびZZZ Fandom wiki経由、© HoYoverse（フェアユース）。自動生成の解説はゲーム内設定ではありません。',
         'methodology': '算出方法とFAQ', 'data_updated': 'データ更新', 'back': 'チャートに戻る',
         'shape': 'シルエット', 'build_word': '体型', 'hand_pinned': '手動分類', 'language': '言語', 'roster_nav': '名簿ナビゲーション',
     },
@@ -108,7 +108,7 @@ PAGE = {
         'outfit_portrait': '服装立绘', 'art_only': '仅立绘',
         'stature_note': '身高采用约 {st} 厘米的头顶高度；官方 {cm} 厘米包含耳朵。',
         'measured_note': '这位角色有一套已测量服装（{outfit}）。本页数值是<b>标准模型</b>；服装数据单独保存在数据集中。',
-        'chart_note': '榜单注记', 'source': '来源', 'rights': '官方立绘来自 ZZZ Fandom wiki，© HoYoverse（合理使用）。自动生成的解读并非游戏内设定。',
+        'chart_note': '榜单注记', 'source': '来源', 'rights': '官方立绘来自 HoYoverse 官网和 ZZZ Fandom wiki，© HoYoverse（合理使用）。自动生成的解读并非游戏内设定。',
         'methodology': '方法与常见问题', 'data_updated': '数据更新', 'back': '返回图表',
         'shape': '轮廓', 'build_word': '体型', 'hand_pinned': '人工分类', 'language': '语言', 'roster_nav': '名单导航',
     },
@@ -723,7 +723,7 @@ def export_csv(path):
             'height_class', 'cup_class', 'waist_class', 'hip_class', 'thigh_class', 'thigh_hand_pinned',
             'shape', 'build', 'confidence', 'notes', 'source_page', 'profile']
     with path.open('w', newline='', encoding='utf-8') as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator='\n')
         w.writerow(cols)
         for d in DATA:
             w.writerow([d['slug'], d['name'], d['display'], d['cm'], d['stature_cm'], d['stature_basis'],

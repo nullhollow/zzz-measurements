@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Extract per-character portrait tiles from zzz3.2b.webp.
+Extract per-character portrait tiles from zzz3.3.webp.
 
 Fixes the "broken hair" bug: the name-label bounding box previously extended
 from the text down into the character's hair (light gray hair passes the
@@ -20,11 +20,11 @@ from optimize_images import convert as convert_to_webp
 import json
 
 ROOT = Path(__file__).resolve().parent.parent
-SHEET = ROOT / 'zzz3.2b.webp'
+SHEET = ROOT / 'zzz3.3.webp'
 OUT = ROOT / 'images'
 
 NAMES = ["Zhao","Ju Fufu","Soukaku","Sunna","Roxy","Aria","Aria (construct)","Norma",
-"Koleda","Lucy","Nangong Yu","Dialyn","Piper","Corin","Nekomata","Qingyi","Seed","Yuzuha",
+"Koleda","Lucy","Nangong Yu","Dialyn","Piper","Corin","Nekomata","Qingyi","Phoenix","Seed","Yuzuha",
 "Miyabi","Vivian","Belle","Anby","Soldier 11","Lucia","Promeia","Claret","Ellen Joe","Alice",
 "Ye Shunguang","Orphie","Burnice","Cissia","Nicole","Trigger","Jane Doe","Zhu Yuan","Sigrid",
 "Astra Yao","Evelyn","Remielle","Pulchra","Yi Xuan","Yanagi","Grace","Velina","Caesar","Yidhari","Rina"]
@@ -111,7 +111,9 @@ for n, (x0, x1, y0, y1) in zip(NAMES, labels):
     left = max(0, min(center - TW // 2, W - TW))
     tile = OUT / f'{slug(n)}.png'
     Image.fromarray(a.astype(np.uint8)).crop((left, Y0, left + TW, Y1)).save(tile)
-    try: convert_to_webp(str(tile))
+    try:
+        convert_to_webp(str(tile))
+        tile.unlink(missing_ok=True)          # keep only the webp in images/
     except Exception as e: print('  webp conversion failed:', e)
     tiles[slug(n)] = {"name": n, "left": int(left), "y0": Y0, "y1": Y1, "w": TW,
                       "label": [int(x0), int(x1), int(y0), int(y1)]}

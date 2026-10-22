@@ -1,4 +1,4 @@
-"""Turn measurements.csv + the wiki manifests into tools/data.json.
+"""Turn measurements3.3.csv + the wiki manifests into tools/data.json.
 
 Design rules
   * the standard model is the canonical figure; measured outfits live under
@@ -20,7 +20,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 META = json.loads((ROOT / 'tools/meta.json').read_text())
-CSV_PATH = ROOT / 'measurements.csv'
+CSV_PATH = ROOT / 'measurements3.3.csv'
 
 # column contract — order matters because Bust/Band/Waist/Hip/Thigh repeat in
 # inches; the header is still verified so a reshuffled sheet fails loudly
@@ -32,7 +32,8 @@ COLUMNS = [
     'Waist-Hip Ratio', 'Waist-height ratio', 'Waist-thigh ratio', 'Thigh-height ratio',
     'Notes', 'Effective height (cm)',
 ]
-REQUIRED = len(COLUMNS) - 2          # notes + effective height are optional
+BASE_COLUMNS = COLUMNS[:-1]          # effective height is optional
+REQUIRED = len(BASE_COLUMNS) - 1     # notes are optional too
 
 
 def num(x):
@@ -89,21 +90,26 @@ OUTFIT = {                    # official skin names (matches character_images/ f
 }
 MERGE = list(VARIANT_OF)
 
+# The 3.3 sheet no longer carries the optional effective-height column, but
+# Miyabi's 170 cm chart value still includes her ears. Keep the head-height
+# basis in code so a new CSV row needs no extra column.
+STATURE_OVERRIDE = {'Miyabi': 152.1}
+
 # ---------------------------------------------------------------- read sheet
 with CSV_PATH.open(newline='', encoding='utf-8') as f:
     reader = csv.reader(f)
     try:
         header = next(reader)
     except StopIteration:
-        raise SystemExit('measurements.csv is empty')
-    if header[:len(COLUMNS)] != COLUMNS:
+        raise SystemExit('measurements3.3.csv is empty')
+    if header[:len(BASE_COLUMNS)] != BASE_COLUMNS:
         raise SystemExit(
-            'measurements.csv header changed.\n  expected: ' + ','.join(COLUMNS) +
-            '\n  found:    ' + ','.join(header[:len(COLUMNS)]))
+            'measurements3.3.csv header changed.\n  expected: ' + ','.join(BASE_COLUMNS) +
+            '\n  found:    ' + ','.join(header[:len(BASE_COLUMNS)]))
     rows = [r for r in reader if r and r[0].strip()]
     for i, row in enumerate(rows, start=2):
         if len(row) < REQUIRED:
-            raise SystemExit(f'measurements.csv line {i} ({row[0]}): {len(row)} columns, need {REQUIRED}')
+            raise SystemExit(f'measurements3.3.csv line {i} ({row[0]}): {len(row)} columns, need {REQUIRED}')
 
 recs = []
 for row in rows:
@@ -124,7 +130,7 @@ for row in rows:
         notes=row[22].strip() if len(row) > 22 else '',
         # stature that excludes an appendage (Miyabi's ears) when the chart value counts it;
         # every stature comparison uses this, the chart number is never overwritten
-        cm_eff=num(row[23]) if len(row) > 23 and row[23].strip() else None,
+        cm_eff=num(row[23]) if len(row) > 23 and row[23].strip() else STATURE_OVERRIDE.get(name),
     )
     d['ftin'] = ftin(d['cm'])
     d['stature_cm'] = d['cm_eff'] if d['cm_eff'] is not None else d['cm']
@@ -248,7 +254,7 @@ for d in recs:
     w, h = Image.open(ROOT / 'character_images' / (d['official'] + '.webp')).size
     d['ar'] = round(w / h, 3)
 
-roster = [d for d in recs if d['name'] not in MERGE]          # 48 displayed cards
+roster = [d for d in recs if d['name'] not in MERGE]          # displayed roster cards
 subs = [d['skin'] for d in roster if d.get('skin')]
 allrecs = roster + subs
 
@@ -275,7 +281,7 @@ def pct_rank(values, v):
 
 
 PCT_KEYS = ['bust_cm', 'waist_cm', 'hip_cm', 'thigh_cm', 'whr', 'bhr', 'hhr', 'stature_cm']
-lists = {k: [d[k] for d in roster] for k in PCT_KEYS}   # reference = the 48 displayed entries
+lists = {k: [d[k] for d in roster] for k in PCT_KEYS}   # reference = the displayed entries
 for d in allrecs:
     for k in PCT_KEYS:
         d['p_' + k] = round(pct_rank(lists[k], d[k]), 3) if d[k] is not None else None

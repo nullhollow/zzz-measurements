@@ -1,9 +1,9 @@
 {
  "schema_version": 2,
- "data_updated": "2026-10-21",
+ "data_updated": "2026-10-22",
  "title": "ZZZ Female Measurements",
  "source": "modelmetrics.net",
- "rights": "Measurements compiled from modelmetrics.net. Character artwork is © HoYoverse and shown as fair use via the ZZZ Fandom wiki.",
+ "rights": "Measurements compiled from modelmetrics.net. Character artwork is © HoYoverse and shown as fair use; portraits come from the official HoYoverse site and the ZZZ Fandom wiki.",
  "repo": "https://github.com/nullhollow/zzz-measurements",
  "wiki": "https://zenless-zone-zero.fandom.com",
  "measurement_fields": [
@@ -15,7 +15,7 @@
   "thigh_cm"
  ],
  "fields": {
-  "name": "Source roster key from measurements.csv",
+  "name": "Source roster key from measurements3.3.csv",
   "display": "Display name",
   "slug": "URL slug used by the per-character pages",
   "aliases": "Extra search terms (wiki page, outfit names)",

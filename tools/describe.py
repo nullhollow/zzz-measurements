@@ -146,7 +146,7 @@ def read_line(d):
     line = f"{frame} frame"
     if bits:
         line += " with " + ", ".join(bits)
-    line += f". {d['shape']} silhouette, {BALANCE_WORD[shape_balance(d)]} proportions."
+    line += f". {d['shape']} silhouette, {BALANCE_WORD[d['balance']]} proportions."
     return line
 
 
@@ -315,9 +315,9 @@ def describe_ja(d, unit, compare=None):
         if r <= 3:
             frame = f"{n}は{cm}cm（{ft}）で、チャートでもトップクラスの高さです。"
         elif r <= 8:
-            frame = f"{n}は{cm}cm（{ft}）。48人中{r}番目で、かなり背が高いほうです。"
+            frame = f"{n}は{cm}cm（{ft}）。{H_TOTAL}人中{r}番目で、かなり背が高いほうです。"
         else:
-            frame = f"{n}は{cm}cm（{ft}）。ロスター平均を上回る、48人中{r}番目の高さです。"
+            frame = f"{n}は{cm}cm（{ft}）。ロスター平均を上回る、{H_TOTAL}人中{r}番目の高さです。"
     elif d['height_group'] == 'Petite':
         frame = f"{n}は{cm}cm（{ft}）と小柄で、チャートでもかなりコンパクトなほうです。"
     else:
@@ -382,9 +382,9 @@ def describe_zh(d, unit, compare=None):
         if r <= 3:
             frame = f"{n}身高{cm}厘米（{ft}），在全榜里属于最高的一档。"
         elif r <= 8:
-            frame = f"{n}身高{cm}厘米（{ft}），48位角色中排第{r}，算是相当高挑。"
+            frame = f"{n}身高{cm}厘米（{ft}），{H_TOTAL}位角色中排第{r}，算是相当高挑。"
         else:
-            frame = f"{n}身高{cm}厘米（{ft}），高于全榜平均，在48位角色中排第{r}。"
+            frame = f"{n}身高{cm}厘米（{ft}），高于全榜平均，在{H_TOTAL}位角色中排第{r}。"
     elif d['height_group'] == 'Petite':
         frame = f"{n}身高{cm}厘米（{ft}），个子很小巧，在全榜里属于最紧凑的一档。"
     else:
@@ -452,7 +452,7 @@ def read_line_ja(d):
     line = frame + 'で'
     if bits:
         line += '、' + '、'.join(bits)
-    line += f"。{SHAPE_JA[d['shape']]}シルエットで、{BALANCE_JA[shape_balance(d)]}。"
+    line += f"。{SHAPE_JA[d['shape']]}シルエットで、{BALANCE_JA[d['balance']]}。"
     return line
 
 
@@ -474,7 +474,7 @@ def read_line_zh(d):
     line = f"{frame}"
     if bits:
         line += '，' + '，'.join(bits)
-    line += f"。整体是{SHAPE_ZH[d['shape']]}轮廓，{BALANCE_ZH[shape_balance(d)]}。"
+    line += f"。整体是{SHAPE_ZH[d['shape']]}轮廓，{BALANCE_ZH[d['balance']]}。"
     return line
 
 
