@@ -41,7 +41,7 @@ state.lineupOrder='faction';assert.equal(lineupRecords().length,3);
 assert.deepEqual(state.lineupSlugs,['astra_yao','miyabi','zhao']);
 assert.equal(new Set(defaultLineup()).size,3);
 '''
-        subprocess.run(['node','-e',script],check=True)
+        subprocess.run(['node','-'],input=script,text=True,check=True)
     def test_static_profiles_and_guides(self):
         for lang in ['','ja/','zh/']:
             for d in DATA:
