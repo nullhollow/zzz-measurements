@@ -1628,7 +1628,7 @@ function openModal(slug, opts){
   const same = mctx.slug === slug;
   mctx = Object.assign({slug, src:state.art, skin:false, more:null}, same?mctx:{}, opts||{});
   const hasSkin = !!d.skin;
-  const outfits = d.outfits || [];
+  const outfits = (d.outfits || []).map(o=>o.original?{...o,label:t('originalOutfit'),type:t('artOnlyLabel')}:o);
   const moreOn = (mctx.more!=null && outfits[mctx.more]) ? outfits[mctx.more] : null;
   const skinOn = hasSkin && !!mctx.skin && !moreOn;
   const r = skinOn ? d.skin : d;
@@ -1664,18 +1664,18 @@ function openModal(slug, opts){
     return parts? `<div class="irow outfit"><span class="ik">${esc(t('outfits'))}</span><span class="isub wide">${esc(rec.outfit||"variant")}</span>${parts}</div>` : "";
   };
   const cap = moreOn
-    ? `<b>${esc(t('outfitPortrait').replace('{outfit}', moreOn.label))}</b> · ${esc(t('fandomCredit'))}. <b>${esc(t('artOnlyLabel'))}:</b> ${esc(t('artOnlyNote').replace('{outfit}', moreOn.label))} ${esc(t('zoomHint'))}`
+    ? `<b>${esc(t('outfitPortrait').replace('{outfit}', moreOn.label))}</b> · ${esc(t('fandomCredit'))}. <b>${esc(t('artOnlyLabel'))}:</b> ${esc(t(moreOn.original?'originalArtNote':'artOnlyNote').replace('{outfit}', moreOn.label))} ${esc(t('zoomHint'))}`
     : official
     ? `<b>${esc(r.outfit?t('outfitPortrait').replace('{outfit}', r.outfit):t('officialPortrait'))}</b> · ${esc(t('fandomCredit'))}, via <a href="https://zenless-zone-zero.fandom.com/" target="_blank" rel="noopener">zenless-zone-zero.fandom.com</a>. ${esc(t('zoomHint'))}`
     : `${esc(t('renderCredit'))}${skinOn?' '+esc(t('noSeparateRender')):''} ${esc(t('zoomHint'))}`;
   const outfitNote = (hasSkin || outfits.length) ? `<div class="onote" style="margin:0 9px 10px">${moreOn
-            ? esc(t('artOnlyNote').replace('{outfit}', moreOn.label))
+            ? esc(t(moreOn.original?'originalArtNote':'artOnlyNote').replace('{outfit}', moreOn.label))
             : skinOn
             ? t('measuredOutfitNote').replace('{outfit}', esc(d.skin.outfit||'This outfit'))
-            : `${esc(t('standardOutfitNote'))}${hasSkin?` ${t('measuredOutfitNote').replace('{outfit}', esc(d.skin.outfit))}`:''}${outfits.length?` ${esc(t('extraOutfits').replace('{n}', outfits.length))}`:''}`}</div>` : "";
+            : `${esc(d.outfit?noteFor(d):t('standardOutfitNote'))}${hasSkin?` ${t('measuredOutfitNote').replace('{outfit}', esc(d.skin.outfit))}`:''}${outfits.length?` ${esc(t('extraOutfits').replace('{n}', outfits.length))}`:''}`}</div>` : "";
   const segBtn = (attr, val, on, label, dis) => `<button type="button" data-${attr}="${val}" aria-pressed="${on?'true':'false'}"${dis?' disabled':''}>${label}</button>`;
   const chips = [
-    {label:t('standard'), sel:!skinOn && !moreOn, attrs:'data-card="0"', type:t('standard')},
+    {label:d.outfit||t('standard'), sel:!skinOn && !moreOn, attrs:'data-card="0"', type:t('standard')},
     ...(hasSkin? [{label:d.skin.outfit||"Skin", sel:skinOn, attrs:'data-s="1"', dot:true, type:"measured"}]:[]),
     ...outfits.map((o,i)=>({label:o.label, sel:moreOn===o, attrs:`data-more="${i}"`, type:o.type})),
   ];

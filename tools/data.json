@@ -4396,7 +4396,15 @@
   "ftin_stature": "5'6.8\"",
   "diff_cm": 14.5,
   "diff_in": 5.71,
-  "outfits": [],
+  "outfits": [
+   {
+    "label": "Original outfit",
+    "type": "Default",
+    "original": true,
+    "file": "jane_doe.webp",
+    "avif": "thumbs/avif/1280/jane_doe.avif"
+   }
+  ],
   "source_page": "(explicit)",
   "source_file": "File:Agent Jane Doe Nocturne of Light Portrait.png",
   "source_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/5/53/Agent_Jane_Doe_Nocturne_of_Light_Portrait.png/revision/latest?cb=20251230075948",
@@ -4404,7 +4412,8 @@
   "name_zh": "简·杜",
   "aliases": [
    "(explicit)",
-   "Nocturne of Light"
+   "Nocturne of Light",
+   "Original outfit"
   ],
   "confidence": "charted",
   "confidence_note": "No approximation is flagged in the source note.",

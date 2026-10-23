@@ -2,6 +2,12 @@
 
 ## Unreleased — audit implementation
 
+### Jane Doe original outfit (2026-10-23)
+
+- Restore the original outfit artwork to Jane's gallery and interactive outfit
+  selector, with AVIF/WebP and EN/JA/ZH labels. Nocturne of Light remains her
+  canonical portrait and measurement record; the original outfit is art-only.
+
 ### Roster browsing and comparison editing (2026-10-23)
 
 - Keep unknown table values last and retain table sorting/columns in shared URLs

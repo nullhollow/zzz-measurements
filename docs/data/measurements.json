@@ -2970,7 +2970,8 @@
    "display": "Jane Doe",
    "aliases": [
     "(explicit)",
-    "Nocturne of Light"
+    "Nocturne of Light",
+    "Original outfit"
    ],
    "height_cm": 170.0,
    "stature_cm": 170.0,
@@ -3043,7 +3044,12 @@
     }
    },
    "measured_outfit": null,
-   "art_only_outfits": []
+   "art_only_outfits": [
+    {
+     "label": "Original outfit",
+     "type": "Default"
+    }
+   ]
   },
   {
    "slug": "zhu_yuan",

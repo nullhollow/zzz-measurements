@@ -425,8 +425,8 @@ def character_page(d, prev_d, next_d, lang='en'):
     for it in d['outfits']:
         avif = f"{prefix}character_images/{it['avif']}" if it.get('avif') else None
         gallery.append((f"{prefix}character_images/{it['file']}",
-                        f"{it['label']} — {p['outfit_portrait']}",
-                        f"{it['type']} · {p['art_only']}", avif))
+                        f"{p['originalOutfit'] if it.get('original') else it['label']} — {p['outfit_portrait']}",
+                        p['originalArtNote'] if it.get('original') else f"{it['type']} · {p['art_only']}", avif))
     def gallery_item(src, alt, cap, avif=None):
         img = f'<img loading="lazy" decoding="async" src="{esc(src)}" alt="{esc(alt)}">'
         if avif:

@@ -199,6 +199,12 @@ for d in recs:
 jane = by_name.get('Jane Doe')
 if jane and jane.get('skin'):
     skin = jane['skin']
+    # Preserve the original artwork, without restoring its discarded measurements.
+    jane['outfits'].append({
+        'label': 'Original outfit', 'type': 'Default', 'original': True,
+        'file': jane['official'] + '.webp',
+        'avif': 'thumbs/avif/1280/' + jane['official'] + '.avif',
+    })
     for key in (
         'cm', 'cm_eff', 'stature_cm', 'stature_basis', 'ftin', 'ftin_stature',
         'bust_cm', 'band_cm', 'waist_cm', 'hip_cm', 'thigh_cm',

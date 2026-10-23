@@ -109,7 +109,9 @@
     "helpCup": "Cup order follows this dataset’s UK letter-first, band-second rule, including G above GG. UK, US and EU labels are supplied by the source. Equal letters do not imply equal volume.",
     "helpRatio": "Waist/hip divides waist circumference by hip circumference. Waist/height divides waist by effective height. These ratios describe the recorded proportions.",
     "helpMissing": "A dash means no reliable measurement is available. It is not zero and is excluded from comparisons and numeric summaries.",
-    "restoreColumns": "Restore columns"
+    "restoreColumns": "Restore columns",
+    "originalOutfit": "Original outfit",
+    "originalArtNote": "Artwork only. Measurements use Nocturne of Light."
   },
   "ja": {
     "tools": "ツール",
@@ -221,7 +223,9 @@
     "helpCup": "このデータではUKのカップ文字、次にバンド値で並べます。GはGGより上です。UK・US・EUの表記は出典に従います。同じ文字でも容量が等しいとは限りません。",
     "helpRatio": "ウエスト／ヒップはウエスト周囲長をヒップ周囲長で割った値です。ウエスト／身長では頭頂までの身長を使います。いずれも計測値の比率を表します。",
     "helpMissing": "「—」は信頼できる計測値がない項目です。ゼロとは扱わず、数値の比較や集計から除外します。",
-    "restoreColumns": "標準の列に戻す"
+    "restoreColumns": "標準の列に戻す",
+    "originalOutfit": "通常衣装",
+    "originalArtNote": "画像のみ。数値は「Nocturne of Light」の計測値です。"
   },
   "zh": {
     "tools": "工具",
@@ -333,6 +337,8 @@
     "helpCup": "本数据集先按UK罩杯字母、再按下围数值排序，G排在GG之前。UK、US、EU尺码均沿用来源标注。字母相同不代表容量相同。",
     "helpRatio": "腰臀比是腰围除以臀围，腰高比是腰围除以头顶身高。这些比值用于描述已有测量数据中的比例。",
     "helpMissing": "“—”表示没有可靠测量值，不代表零，也不会参与数值比较或汇总。",
-    "restoreColumns": "恢复默认列"
+    "restoreColumns": "恢复默认列",
+    "originalOutfit": "初始服装",
+    "originalArtNote": "仅展示立绘，测量数据沿用「Nocturne of Light」。"
   }
 }
