@@ -32,7 +32,9 @@ jobs:
         run: python3 tools/validate.py --site-url https://nullhollow.github.io/zzz-measurements/
 
       - name: Exploration regression and Python/JS parity
-        run: python3 tools/test_analysis.py
+        run: |
+          python3 tools/test_analysis.py
+          python3 tools/test_roster.py
 
       - name: Theme preferences and palette contrast
         run: python3 tools/test_theme.py

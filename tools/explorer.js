@@ -170,7 +170,7 @@ function openCompare(){
     const ranked=vals.map((v,i)=>v==null?null:key==='cup'?v:key==='height'||basis==='raw'?Analysis.value(list[i],key,'raw'):Analysis.displayed(v));
     const nums=ranked.filter(v=>v!=null), target=nums.length?(best[key]==='min'?Math.min(...nums):Math.max(...nums)):null;
     const direction=best[key]?` <span class="cmpdir" title="${esc(t(best[key]==='min'?'smallerWins':'largerWins'))}">${best[key]==='min'?'↓':'↑'}</span>`:'';
-    return `<tr data-metric="${key}"><th scope="row">${esc(rowLabel(key))}${direction}</th>${list.map((d,i)=>{
+    return `<tr data-metric="${key}"><th scope="row"><button class="metric-help" data-help="${key==='cup'||key==='sizes'?'cup':['whr','whtr'].includes(key)?'ratio':'overview'}">${esc(rowLabel(key))}</button>${direction}</th>${list.map((d,i)=>{
       let delta='';
       if(reference && d.slug!==reference.slug && key!=='cup'){
         const decimals=['whr','whtr'].includes(key)?3:1;
@@ -192,7 +192,7 @@ function openCompare(){
       <div class="cmpcontrols"><div class="seg" role="group" aria-label="${esc(t('compareBasis'))}">${['raw','height','scaled'].map(k=>`<button id="basis-${k}" data-compare-mode="${k}" aria-pressed="${basis===k}">${esc(t(k==='raw'?'rawMeasurements':k==='height'?'heightAdjusted':'sameHeight'))}</button>`).join('')}</div>
       ${basis==='scaled'?targetControl('compareTarget'):''}
       ${figurePicker('compareReference',list,state.compareBase,t('reference'),true)}
-      ${basis!=='raw'?`<p class="fnote" id="compareBasisNote">${esc(t(basis==='height'?'heightAdjustedNote':'scaledNote'))}</p>`:''}${state.cupSystem!=='uk'?`<p class="fnote">${esc(t('cupRankNote'))}</p>`:''}${rowPicker}</div></div>
+      ${basis!=='raw'?`<p class="fnote" id="compareBasisNote">${esc(t(basis==='height'?'heightAdjustedNote':'scaledNote'))}</p>`:''}${state.cupSystem!=='uk'?`<p class="fnote">${esc(t('cupRankNote'))}</p>`:''}${rowPicker}<div class="compare-edit">${list.map((d,i)=>figurePicker('replaceAgent'+i,DATA.filter(x=>x.slug===d.slug||!state.compare.includes(x.slug)),d.slug,t('replaceAgent')+': '+nameOf(d))).join('')}${list.length<4?figurePicker('addAgent',DATA.filter(d=>!state.compare.includes(d.slug)),'',t('addAgent')):''}</div></div></div>
     <div class="cmpwrap"><table class="cmptable"${basis!=='raw'?' aria-describedby="compareBasisNote"':''}><thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(nameOf(d))}${d.temporary?`<small class="cmpdelta">${esc(t('temporary'))}</small>`:''}${d.slug===state.compareBase?`<small class="cmpdelta">${esc(t('referenceMark'))}</small>`:''}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
   if(!$('#overlay').classList.contains('open')) lastFocus=active;
   mctx={slug:null,src:state.art,skin:false,more:null};
@@ -204,6 +204,8 @@ function openCompare(){
   const update=()=>{ openCompare(); writeHash(true); };
   $$('#modal [data-compare-mode]').forEach(b=>b.onclick=()=>{state.compareMode=b.dataset.compareMode;update();});
   bindFigurePicker('compareReference',list,slug=>{state.compareBase=slug;update();},true);
+  list.forEach((d,i)=>bindFigurePicker('replaceAgent'+i,DATA.filter(x=>x.slug===d.slug||!state.compare.includes(x.slug)),slug=>{if(!slug||state.compare.includes(slug))return;state.compare[i]=slug;renderCompare();update();}));
+  if($('#addAgent'))bindFigurePicker('addAgent',DATA.filter(d=>!state.compare.includes(d.slug)),slug=>{if(slug&&state.compare.length<4&&!state.compare.includes(slug)){state.compare.push(slug);renderCompare();update();}});
   $('#compareSaved').onclick=openSavedComparisons;
   $('#exportCompare').onclick=exportComparison;
   if($('#compareTarget')) $('#compareTarget').onchange=e=>{if(setTarget(e.target)) update();};

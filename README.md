@@ -65,6 +65,17 @@ Without JavaScript, pages follow the browser through CSS. The shared palette and
 early preference script live in `tools/theme.css` and `tools/theme.js`;
 `tools/theme.py` inlines them during generation.
 
+## Roster browsing
+
+Search and filters appear before the collapsible Leaders section. Active filters
+can be removed individually or cleared together. The roster table offers a column
+picker, a pinned name column and one selected unit. Table sorting and columns are
+shared as `ts=column:direction` and `cols=...`, and restore on reload and Back/Forward.
+Missing values stay last in either direction. These controls live in `tools/roster.js`,
+inlined by the HTML generator. Measurement help is available from
+the toolbar and comparison row labels. Comparison dialogs can add or replace
+characters directly, keeping the four-entry limit and existing winner rules.
+
 ## Compare
 
 Every card has a labelled **Compare** pill inside its artwork. Pick 2–4 agents; the
@@ -137,12 +148,13 @@ methodology. The public measurement schema is unchanged. Old `#view=distribution
 Tool section changes create browser-history entries; field edits replace the
 current entry. A shared sticky container keeps tool navigation above its controls.
 Navigation carries filters, comparison selections, units, theme and language between
-pages. The packed site contains 49 entries, 147 profiles and 644 files (about 25.9 MB).
+pages. The packed site contains 49 entries, 147 profiles and 644 files (about 26.0 MB).
 
 Run the regression and Python/JavaScript parity suite with Node.js available:
 
 ```bash
 python3 tools/test_analysis.py
+python3 tools/test_roster.py
 python3 tools/test_theme.py
 ```
 

@@ -2,6 +2,15 @@
 
 ## Unreleased — audit implementation
 
+### Roster browsing and comparison editing (2026-10-23)
+
+- Keep unknown table values last and retain table sorting/columns in shared URLs
+  and navigation history. Show one unit and allow column selection on mobile.
+- Move roster controls before collapsible Leaders, remove repeated highlights,
+  and add removable active filters and empty-result recovery.
+- Add character replacement/addition inside comparisons and contextual measurement
+  help, with EN/JA/ZH copy, keyboard support and regenerated existing font subsets.
+
 ### Colour contrast and browser theme (2026-10-23)
 
 - Fixed Compare/filter count badges, the skip link and outfit ribbons in light mode.

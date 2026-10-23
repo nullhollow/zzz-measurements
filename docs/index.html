@@ -146,19 +146,6 @@ html[data-theme="light"]{
   .film{display:flex; gap:8px; align-items:center; padding:7px 10px; background:#0b0b0d; border-bottom:1px solid var(--line)}
   .film i{flex:1; height:11px; border-radius:3px; background:#fff; opacity:.88}
 
-  /* ---------- highlights ---------- */
-  .highlights{max-width:1400px; margin:16px auto 0; padding:0 22px; display:grid; gap:12px;
-    grid-template-columns:repeat(auto-fit,minmax(196px,1fr))}
-  .hl{position:relative; overflow:hidden; padding:11px 13px 12px; border:1px solid var(--line);
-    border-radius:16px; background:linear-gradient(180deg,#18181d,#101014)}
-  .hl:after{content:""; position:absolute; right:-34px; bottom:-34px; width:86px; height:86px;
-    background:var(--accent-fill); opacity:.14; clip-path:polygon(100% 0,100% 100%,0 100%)}
-  .hl .k{font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--dim)}
-  .hl .v{font-family:var(--disp); font-size:20px; text-transform:uppercase; line-height:1.05; margin-top:5px}
-  .hl .n{font-family:var(--num); font-weight:700; font-size:13px; color:var(--acid); margin-top:3px}
-  .hl .bar{height:6px; margin-top:9px; background:#ffffff14}
-  .hl .bar i{display:block; height:100%}
-
   /* ---------- podium strip (top of page) ---------- */
   .podstrip{max-width:1400px; margin:18px auto 0; padding:0 22px; display:grid; gap:16px;
     grid-template-columns:repeat(auto-fit,minmax(min(480px,100%),1fr))}
@@ -530,7 +517,7 @@ html[data-theme="light"]{
   html[data-theme="light"] .sticker b{color:#0b0b0c;-webkit-text-stroke:2px #0b0b0c;text-shadow:5px 5px 0 #fff}
   html[data-theme="light"] .hero p{color:#3d3d45}
   html[data-theme="light"] .film{background:#0b0b0c}
-  html[data-theme="light"] .hl,html[data-theme="light"] .card,html[data-theme="light"] .pod{
+  html[data-theme="light"] .card,html[data-theme="light"] .pod{
     background:#FFFFFF}
   html[data-theme="light"] .card .imgbox,html[data-theme="light"] .thumb{background:#E8EDF2}
   html[data-theme="light"] .card .desc{color:#3d3d45}
@@ -609,7 +596,6 @@ html[data-theme="light"]{
     .controls{padding:8px 10px; gap:6px; backdrop-filter:none}
     .search{flex:1 1 100%}
     #artToggle{display:none}
-    .highlights{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
     .hl{padding:9px 10px 10px}
     .hl .k{font-size:8px}
     .hl .v{font-size:15px}
@@ -971,6 +957,27 @@ html[data-theme="light"] .chip.shape{color:var(--blue)}
   .cmptable th,.cmptable td{padding:10px 7px}
 }
 
+/* Roster controls come first; optional detail remains close to its context. */
+.leaders,.active-filters{max-width:1400px;margin:12px auto;padding:0 22px}
+.leaders summary{cursor:pointer;padding:12px 0;color:var(--concrete);font:18px var(--disp)}
+.leaders .podstrip{padding:0;margin-top:8px}
+.active-filters{display:flex;gap:8px;flex-wrap:wrap}
+#columnOptions label{display:flex;align-items:center;gap:8px;min-height:40px}
+#columnOptions input{accent-color:var(--acid);width:18px;height:18px}
+#tbl{table-layout:auto;min-width:600px}
+#tbl th,#tbl td{min-width:95px}
+#tbl th:first-child,#tbl td:first-child{position:sticky;left:0;min-width:150px;z-index:1;background:var(--panel2)}
+#tbl thead th:first-child{z-index:4;background:var(--accent-fill)}
+#tbl th[data-k="name"]{width:auto}
+#tbl tbody td:first-child .mini{white-space:normal}
+#tbl th:is([aria-sort="ascending"],[aria-sort="descending"]){box-shadow:inset 0 -3px var(--on-accent)}
+.metric-help{font:inherit;color:inherit;border:0;background:none;text-align:left;padding:4px 0;cursor:help;text-decoration:underline dotted;text-underline-offset:4px}
+.compare-edit{display:flex;gap:12px;flex-wrap:wrap;width:100%}
+.compare-edit label{display:grid;gap:6px;font-size:12px;color:var(--dim);max-width:100%}
+.compare-edit input{max-width:210px}
+body[data-page="tools"] #leaders{display:none}
+@media(max-width:700px){.leaders,.active-filters{padding:0 12px}.compare-edit input{max-width:180px}#tbl th[data-k="name"]{width:auto}.tablewrap{max-height:70vh}}
+
 
 @media(prefers-color-scheme:light){
 html:not([data-theme]){
@@ -994,7 +1001,7 @@ html:not([data-theme]) .sticker{background:#fff;border-color:#0b0b0c26}
 html:not([data-theme]) .sticker b{color:#0b0b0c;-webkit-text-stroke:2px #0b0b0c;text-shadow:5px 5px 0 #fff}
 html:not([data-theme]) .hero p{color:#3d3d45}
 html:not([data-theme]) .film{background:#0b0b0c}
-html:not([data-theme]) .hl,html:not([data-theme]) .card,html:not([data-theme]) .pod{
+html:not([data-theme]) .card,html:not([data-theme]) .pod{
     background:#FFFFFF}
 html:not([data-theme]) .card .imgbox,html:not([data-theme]) .thumb{background:#E8EDF2}
 html:not([data-theme]) .card .desc{color:#3d3d45}
@@ -1092,8 +1099,6 @@ html:not([data-theme]) .chip.shape{color:var(--blue)}
 <div class="film" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <main id="main" tabindex="-1">
-  <section class="highlights" id="highlights" aria-label="Roster highlights"></section>
-  <section class="podstrip" id="podstrip" aria-label="Roster leaders"></section>
 
 
   <div class="controls" role="region" aria-label="Roster controls">
@@ -1160,11 +1165,14 @@ html:not([data-theme]) .chip.shape{color:var(--blue)}
     <button class="btn cmpbtn" id="compareBtn" aria-pressed="false" aria-label="Compare" title="Compare"><span data-i18n="compare">COMPARE</span><span class="n" id="cmpCount">0</span></button>
     <a class="btn" id="chooseAgents" href="index.html" hidden data-i18n="chooseAgents">Choose agents</a>
     <button class="btn" id="savedCompareBtn" data-i18n="savedComparisons">Saved comparisons</button>
+    <button class="btn" data-help="overview" data-i18n="measurementHelp">Measurement help</button>
     <button class="btn" id="shareBtn" data-i18n="share">SHARE</button>
     <button class="btn" id="reset" data-i18n="reset">RESET</button>
     <div class="count" id="count" aria-live="polite" aria-atomic="true"></div>
   </div>
 
+  <div id="activeFilters" class="active-filters"></div>
+  <details id="leaders" class="leaders"><summary data-i18n="leaders">Leaders</summary><section class="podstrip" id="podstrip" aria-label="Roster leaders"></section></details>
   <div class="wrap">
     <noscript><style>/* Accent text and accent surfaces have separate roles in both palettes. */
 :root{
@@ -2526,12 +2534,12 @@ html:not([data-theme]){
       </div>
       <div class="plotwrap"><svg class="plot" id="plot" viewBox="0 0 920 520" role="group" aria-label="Scatter plot"></svg></div>
     </section>
-    <div id="tableView" hidden><div class="tablewrap"><table id="tbl">
+    <div id="tableView" hidden><details class="rowpicker" id="columnPicker"><summary data-i18n="tableColumns">Columns</summary><div id="columnOptions" class="rowoptions"></div></details><div class="tablewrap"><table id="tbl">
       <caption class="sr">Measurements for every agent; use the header buttons to sort.</caption>
       <thead></thead><tbody></tbody>
     </table></div></div>
     <section id="toolsView" hidden aria-labelledby="toolTitle"></section>
-    <p class="empty" id="empty" hidden data-i18n="noMatch">No characters match these filters.</p>
+    <div class="empty" id="empty" hidden><p data-i18n="noMatch">No characters match these filters.</p><button class="btn" id="clearEmpty" data-i18n="clearFilters">Clear filters</button></div>
     <noscript><div class="nsTable">
 <h2>ZZZ female measurements: all 49 agents</h2>
 <p>Zenless Zone Zero female character measurements in centimetres (1 cm = 0.394 in). The interactive chart on this page also shows imperial units, UK / US / EU bra sizing and proportions for every agent. Enable JavaScript for filtering, sorting and the detail view.</p>
@@ -2784,6 +2792,18 @@ const I18N = {
     whyMatch: "Why this match?",
     contributionNote: "Right column: contribution to total distance.",
     comparisonExportedCanonical: "Comparison exported. Temporary references are omitted.",
+    leaders: "Leaders",
+    tableColumns: "Columns",
+    clearFilters: "Clear filters",
+    removeFilter: "Remove filter",
+    measurementHelp: "Measurement help",
+    replaceAgent: "Replace agent",
+    addAgent: "Add agent",
+    helpOverview: "Height uses effective head height where noted. Circumferences are source measurements. Height-adjusted values are circumference ÷ height × 100; same-height values assume uniform scaling. Missing measurements stay unknown.",
+    helpCup: "Cup order follows this dataset’s UK letter-first, band-second rule, including G above GG. UK, US and EU labels are supplied by the source. Equal letters do not imply equal volume.",
+    helpRatio: "Waist/hip divides waist circumference by hip circumference. Waist/height divides waist by effective height. These ratios describe the recorded proportions.",
+    helpMissing: "A dash means no reliable measurement is available. It is not zero and is excluded from comparisons and numeric summaries.",
+    restoreColumns: "Restore columns",
     compareBasis:'Comparison basis', rawMeasurements:'Raw measurements', heightAdjusted:'Height-adjusted',
     heightAdjustedNote:'Circumference ÷ height × 100', smallerWins:'Smaller value', largerWins:'Larger value',
     changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', systemTheme:'System', dark:'Dark', light:'Light', schema:'Schema',
@@ -2937,6 +2957,18 @@ const I18N = {
     whyMatch: "近さの内訳",
     contributionNote: "右の列は、距離の合計に占める各項目の値です。",
     comparisonExportedCanonical: "比較をCSVに出力しました。仮の体型は出力対象に含まれません。",
+    leaders: "項目別トップ",
+    tableColumns: "表示する列",
+    clearFilters: "絞り込みを解除",
+    removeFilter: "条件を外す",
+    measurementHelp: "数値の見方",
+    replaceAgent: "キャラを入れ替え",
+    addAgent: "キャラを追加",
+    helpOverview: "注記のある身長は頭頂までの高さを使います。囲み寸法は出典の計測値です。身長比は「周囲長 ÷ 身長 × 100」で求めます。同じ身長での比較は全身を均等に拡大・縮小した仮定値です。未計測の値は補完しません。",
+    helpCup: "このデータではUKのカップ文字、次にバンド値で並べます。GはGGより上です。UK・US・EUの表記は出典に従います。同じ文字でも容量が等しいとは限りません。",
+    helpRatio: "ウエスト／ヒップはウエスト周囲長をヒップ周囲長で割った値です。ウエスト／身長では頭頂までの身長を使います。いずれも計測値の比率を表します。",
+    helpMissing: "「—」は信頼できる計測値がない項目です。ゼロとは扱わず、数値の比較や集計から除外します。",
+    restoreColumns: "標準の列に戻す",
     compareBasis:'比較の基準', rawMeasurements:'実寸', heightAdjusted:'身長比',
     heightAdjustedNote:'周囲長 ÷ 身長 × 100', smallerWins:'小さい値', largerWins:'大きい値',
     changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', systemTheme:'端末に合わせる', dark:'ダーク', light:'ライト', schema:'スキーマ',
@@ -3090,6 +3122,18 @@ const I18N = {
     whyMatch: "相似原因",
     contributionNote: "右列为各项对总距离的贡献值。",
     comparisonExportedCanonical: "对比已导出，临时参考体型未包含在内。",
+    leaders: "各项前三",
+    tableColumns: "显示列",
+    clearFilters: "清除筛选",
+    removeFilter: "移除此条件",
+    measurementHelp: "如何理解数据",
+    replaceAgent: "更换角色",
+    addAgent: "添加角色",
+    helpOverview: "有注记的身高按头顶高度计算。围度采用来源中的实测数据。身高占比按“围度 ÷ 身高 × 100”计算；同身高数值是假设全身等比例缩放后的结果。缺失数据不会补算。",
+    helpCup: "本数据集先按UK罩杯字母、再按下围数值排序，G排在GG之前。UK、US、EU尺码均沿用来源标注。字母相同不代表容量相同。",
+    helpRatio: "腰臀比是腰围除以臀围，腰高比是腰围除以头顶身高。这些比值用于描述已有测量数据中的比例。",
+    helpMissing: "“—”表示没有可靠测量值，不代表零，也不会参与数值比较或汇总。",
+    restoreColumns: "恢复默认列",
     compareBasis:'对比方式', rawMeasurements:'实测围度', heightAdjusted:'身高占比',
     heightAdjustedNote:'围度 ÷ 身高 × 100', smallerWins:'较小值', largerWins:'较大值',
     changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', systemTheme:'跟随系统', dark:'深色', light:'浅色', schema:'数据结构',
@@ -3374,11 +3418,14 @@ function readHash(){
   out.explorer = readExplorerHash(p);
   if(p.has('lang')) out.lang = p.get('lang');
   if(['system','light','dark'].includes(p.get('th'))) out.theme = p.get('th');
+  out.tableSort=p.get('ts'); out.tableColumns=p.get('cols');
   if(p.has('p')) out.p = p.get('p');
   return out;
 }
 function writeHash(replace=true){
   const p = new URLSearchParams();
+  p.set('ts',tblSort.k+':'+tblSort.dir);
+  if(tableColumns)p.set('cols',tableColumns.join(','));
   if(state.q) p.set('q', state.q);
   if(state.sort!=="cup-desc") p.set('sort', state.sort);
   if(state.view!=="cards") p.set('view', state.view);
@@ -3584,69 +3631,69 @@ function renderCards(list){
 
 /* ---------------- table ---------------- */
 function columns(){
-  const u = state.unit, suf = u==='cm' ? ' cm' : ' in', osuf = u==='cm' ? ' in' : ' cm';
-  const unitCol = (key, title, dec=1, cls='') => ({
-    k:key, t:`${title} (${u})`, s:d=>d[key+'_in'], num:true, cls,
+  const u = state.unit;
+  const unitCol = (key, title, dec=1) => ({
+    k:key, t:`${title} (${u})`, s:d=>d[key+'_cm'], num:true,
     fmtv:(v,d)=>{
       const p = U(d,key); if(p==null) return "—";
-      const o = isCm()? d[key+'_in'] : d[key+'_cm'];
-      return `${fmt(p,dec)}${suf}${o==null?'':`<div class="mini">${fmt(o,dec)}${osuf}</div>`}`;
+      return `${fmt(p,dec)}`;
     }
   });
   return [
     {k:"name",   t:t('name'), s:d=>nameOf(d), num:false},
-    {k:"height", t:t('height'), s:d=>d.stature_cm, num:true, cls:'col-med',
-      fmtv:(v,d)=>`${fmt(d.stature_cm,1)}<div class="mini">${d.ftin_stature}${d.stature_basis==='head'?` · ${fmt(d.cm,0)} ${t('charted')}`:''}</div>`},
+    {k:"height", t:`${t('height')} (${u})`, s:d=>d.stature_cm, num:true,
+      fmtv:(v,d)=>`${fmt(isCm()?d.stature_cm:d.stature_cm/2.54,1)}${d.stature_basis==='head'?`<div class="mini">${fmt(d.cm,0)} cm ${esc(t('charted'))}</div>`:''}`},
     unitCol("bust",t('bust')),
-    unitCol("band",t('underbust'),1,'col-low'),
+    unitCol("band",t('underbust'),1),
     unitCol("waist",t('waist')),
     unitCol("hip",t('hip')),
-    unitCol("thigh",t('thigh'),1,'col-low'),
-    {k:"uk", t:cupSizeLabel(), s:d=>cupScore(d), num:true, cls:'col-med', sortable:state.cupSystem==='uk', fmtv:(v,d)=>esc(displayCup(d))},
-    {k:"whr",    t:t('waistHip'), s:d=>d.whr, num:true, cls:'col-med', fmtv:v=>fmtPct(v)},
-    {k:"whtr",   t:t('waistHeight'), s:d=>d.whtr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
-    {k:"thr",    t:t('thighHeight'), s:d=>d.thr, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
-    {k:"thh",    t:t('thighHip'), s:d=>d.thh, num:true, cls:'col-low', fmtv:v=>fmtPct(v)},
-    {k:"shape",  t:t('shape'), s:d=>tagsFor(d).shape, num:false, cls:'col-low', fmtv:(v,d)=>esc(tagText(tagsFor(d).shape))},
-    {k:"bal",    t:t('build'), s:d=>tagsFor(d).balance, num:false, cls:'col-low', fmtv:(v,d)=>esc(tagText(tagsFor(d).balance))},
-    {k:"note",   t:t('notes'), s:d=>noteFor(d)?1:0, num:true, cls:'col-low',
+    unitCol("thigh",t('thigh'),1),
+    {k:"uk", t:cupSizeLabel(), s:d=>cupScore(d), num:true, sortable:state.cupSystem==='uk', fmtv:(v,d)=>esc(displayCup(d))},
+    {k:"whr",    t:t('waistHip'), s:d=>d.whr, num:true, fmtv:v=>fmtPct(v)},
+    {k:"whtr",   t:t('waistHeight'), s:d=>d.whtr, num:true, fmtv:v=>fmtPct(v)},
+    {k:"thr",    t:t('thighHeight'), s:d=>d.thr, num:true, fmtv:v=>fmtPct(v)},
+    {k:"thh",    t:t('thighHip'), s:d=>d.thh, num:true, fmtv:v=>fmtPct(v)},
+    {k:"shape",  t:t('shape'), s:d=>tagsFor(d).shape, num:false, fmtv:(v,d)=>esc(tagText(tagsFor(d).shape))},
+    {k:"bal",    t:t('build'), s:d=>tagsFor(d).balance, num:false, fmtv:(v,d)=>esc(tagText(tagsFor(d).balance))},
+    {k:"note",   t:t('notes'), s:d=>noteFor(d)?1:0, num:true,
       fmtv:(v,d)=>noteFor(d)?`<span class="warn" title="${esc(noteFor(d))}">⚠</span>`:""},
   ];
 }
 let tblSort = {k:"uk", dir:-1};
+let tableColumns = null;
 
 function renderTable(list){
-  const COLS = columns();
+  const allColumns = columns();
+  const chosen = tableColumns || DEFAULT_TABLE_COLUMNS;
+  const COLS = allColumns.filter(c=>c.k==='name'||chosen.includes(c.k));
+  renderColumnPicker(allColumns, chosen);
   const thead = $("#tbl thead"), tbody = $("#tbl tbody");
   thead.innerHTML = "<tr>" + COLS.map(c=>{
-    if(c.sortable===false) return `<th scope="col" class="${esc(c.cls||'')}">${esc(c.t)}</th>`;
+    if(c.sortable===false) return `<th scope="col">${esc(c.t)}</th>`;
     const sorted = tblSort.k===c.k;
     const aria = sorted ? (tblSort.dir>0?'ascending':'descending') : 'none';
-    return `<th scope="col" data-k="${c.k}" class="${esc(c.cls||'')}" aria-sort="${aria}"><button type="button">${esc(c.t)}<span class="arr" aria-hidden="true">${sorted?(tblSort.dir>0?'▲':'▼'):'↕'}</span></button></th>`;
+    return `<th scope="col" data-k="${c.k}" aria-sort="${aria}"><button type="button">${esc(c.t)}<span class="arr" aria-hidden="true">${sorted?(tblSort.dir>0?'▲':'▼'):'↕'}</span></button></th>`;
   }).join("") + "</tr>";
   thead.querySelectorAll("th button").forEach(btn=>btn.addEventListener("click", ()=>{
     const k = btn.closest("th").dataset.k;
     if(tblSort.k===k) tblSort.dir *= -1; else tblSort = {k, dir:1};
-    renderTable(filtered());
+    renderTable(filtered()); writeHash(false);
   }));
-  const col = COLS.find(c=>c.k===tblSort.k);
+  const col = allColumns.find(c=>c.k===tblSort.k) || allColumns.find(c=>c.k==='uk');
   const rows = [...list].sort((a,b)=>{
     let va = col.s(a), vb = col.s(b);
-    if(va==null) va = col.num? Infinity : "";
-    if(vb==null) vb = col.num? Infinity : "";
-    if(col.num) return (va-vb)*tblSort.dir;
-    return String(va).localeCompare(String(vb))*tblSort.dir;
+    return compareTableValues(va,vb,tblSort.dir,col.num,state.lang);
   });
   tbody.innerHTML = rows.map(d=>{
     const tds = COLS.map(c=>{
       if(c.k==="name"){
         return `<td><div style="display:flex;align-items:center;gap:8px">
           <img class="thumb" loading="lazy" decoding="async" src="${thumbSrc(d)}" alt="" width="34" height="64">
-          <span><a class="tname" data-slug="${esc(d.slug)}" href="${charHref(d)}">${esc(nameOf(d))}</a>${d.variant_of?`<span class="badge">${esc(t('variant'))}</span>`:''}<div class="mini">${esc(`${fmt(d.stature_cm,1)} cm`)} · ${esc(cupText(d))} · ${esc(tagText(tagsFor(d).shape))}</div></span></div></td>`;
+          <span><a class="tname" data-slug="${esc(d.slug)}" href="${charHref(d)}">${esc(nameOf(d))}</a>${d.variant_of?`<span class="badge">${esc(t('variant'))}</span>`:''}</span></div></td>`;
       }
       const raw = c.s(d);
       const val = c.fmtv ? c.fmtv(raw, d) : (raw==null?"—":(c.num?fmt(raw, c.k==="diff"?0:1):esc(raw)));
-      return `<td class="${c.num?'num':''} ${esc(c.cls||'')}">${val}</td>`;
+      return `<td class="${c.num?'num':''} ">${val}</td>`;
     }).join("");
     return `<tr data-name="${esc(d.name)}">${tds}</tr>`;
   }).join("");
@@ -3685,7 +3732,7 @@ function renderPlot(list){
   svg.innerHTML = g;
 }
 
-/* ---------------- podium + highlights ---------------- */
+/* ---------------- podium ---------------- */
 const PODIUM_CATS = [
   {t:'tally', s:'byStature', pick:d=>d.stature_cm, asc:false,
     f:d=> isCm()? `${fmt(d.stature_cm,1)} cm` : d.ftin_stature,
@@ -3725,21 +3772,7 @@ function renderPodium(){
     </div>`;
   }).join("");
 }
-function renderHighlights(){
-  const byStature=[...DATA].sort((a,b)=>b.stature_cm-a.stature_cm);
-  const tallest=byStature.filter(d=>d.stature_cm===byStature[0].stature_cm);
-  const cup=[...DATA].sort((a,b)=>cupScore(b)-cupScore(a));
-  const hour=[...DATA].sort((a,b)=>(b.hourglass_score??-9)-(a.hourglass_score??-9));
-  const outfits=DATA.reduce((n,d)=>n+d.outfits.length,0);
-  const outfitChars=DATA.filter(d=>d.outfits.length).length;
-  const items=[
-    {k:t('tally'),v:tallest.map(nameOf).join(' · '),n:`${fmt(tallest[0].stature_cm,1)} cm · ${tallest[0].ftin_stature}`,bar:100},
-    {k:t('cupLargest'),v:nameOf(cup[0]),n:`${displayCupLetter(cup[0])}${t('cupUnit')} · ${cupText(cup[0])}`,bar:100},
-    {k:t('hourglassTop'),v:nameOf(hour[0]),n:`score ${hour[0].hourglass_score.toFixed(3)} · WHR ${hour[0].whr.toFixed(3)}`,bar:100},
-    {k:t('outfitsN'),v:`${outfits}`,n:`${outfitChars} ${t('entries')}`,bar:Math.round(outfits/(DATA.length*.6)*100)},
-  ];
-  $("#highlights").innerHTML=items.map(x=>`<div class="hl"><div class="k">${esc(x.k)}</div><div class="v">${esc(x.v)}</div><div class="n">${esc(x.n)}</div><div class="bar"><i style="width:${Math.max(4,Math.min(100,x.bar))}%;background:var(--acid)"></i></div></div>`).join('');
-}
+
 
 /* ---------------- modal ---------------- */
 let mctx = {slug:null, src:"official", skin:false, more:null};
@@ -4028,7 +4061,9 @@ function scheduleRender(){
 }
 function render(skipHash){
   const list = filtered();
-  if(!TOOLS_PAGE){renderPodium(); renderHighlights();}
+  if(!TOOLS_PAGE)renderPodium();
+  $('#leaders').hidden=TOOLS_PAGE;
+  renderActiveFilters();
   $("#count").innerHTML = `<b>${list.length}</b> / ${DATA.length} ${esc(t('entries'))}`;
   const fcount = $("#fCount"); if(fcount) fcount.textContent = `${list.length} / ${DATA.length} ${t('entries')}`;
   $("#empty").hidden = list.length>0 || TOOL_VIEWS.includes(state.view);
@@ -4167,6 +4202,7 @@ function resetAll(){
   Object.assign(state,{q:"",cup:"all",shape:"all",balance:"all",thighs:"all",height:"all",
     sort:"cup-desc",view:TOOLS_PAGE?"distribution":"cards",rng:{},compare:[],compareMode:"raw", ...explorerDefaults()});
   gameRound=null; gameScore={correct:0,total:0,streak:0};
+  tblSort={k:"uk",dir:-1};tableColumns=null;
   $("#q").value="";
   $$("#fPanel .chipbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v==="all"?"true":"false"));
   $("#fSort").value="cup-desc";
@@ -4178,6 +4214,7 @@ $("#fShare").addEventListener("click", share);
 
 /* keyboard + routing */
 document.addEventListener("keydown", e=>{
+  if($("#measurementHelp")?.open)return;
   if($("#savedDialog").open){trapDialogFocus($("#savedDialog"),e);return;}
   if($("#settingsDialog").open){trapSettingsFocus(e);return;}
   if(e.key==="Escape"){
@@ -4269,6 +4306,8 @@ function applyHashState(){
   state.art = h.art ? (h.art==="sheet"?"sheet":"official") : state.art;
   state.lang = (h.lang && I18N[h.lang]) ? h.lang : state.lang;
   state.rng = h.rng || {};
+  tblSort=parseTableSort(h.tableSort);
+  tableColumns=parseTableColumns(h.tableColumns);
   Object.assign(state, explorerDefaults(), h.explorer);
   state.compare = Array.isArray(h.compare) ? h.compare.filter(s=>comparisonRecord(s)).slice(0,4) : [];
   if(!state.compare.includes(state.compareBase)) state.compareBase="";
@@ -4522,7 +4561,7 @@ function openCompare(){
     const ranked=vals.map((v,i)=>v==null?null:key==='cup'?v:key==='height'||basis==='raw'?Analysis.value(list[i],key,'raw'):Analysis.displayed(v));
     const nums=ranked.filter(v=>v!=null), target=nums.length?(best[key]==='min'?Math.min(...nums):Math.max(...nums)):null;
     const direction=best[key]?` <span class="cmpdir" title="${esc(t(best[key]==='min'?'smallerWins':'largerWins'))}">${best[key]==='min'?'↓':'↑'}</span>`:'';
-    return `<tr data-metric="${key}"><th scope="row">${esc(rowLabel(key))}${direction}</th>${list.map((d,i)=>{
+    return `<tr data-metric="${key}"><th scope="row"><button class="metric-help" data-help="${key==='cup'||key==='sizes'?'cup':['whr','whtr'].includes(key)?'ratio':'overview'}">${esc(rowLabel(key))}</button>${direction}</th>${list.map((d,i)=>{
       let delta='';
       if(reference && d.slug!==reference.slug && key!=='cup'){
         const decimals=['whr','whtr'].includes(key)?3:1;
@@ -4544,7 +4583,7 @@ function openCompare(){
       <div class="cmpcontrols"><div class="seg" role="group" aria-label="${esc(t('compareBasis'))}">${['raw','height','scaled'].map(k=>`<button id="basis-${k}" data-compare-mode="${k}" aria-pressed="${basis===k}">${esc(t(k==='raw'?'rawMeasurements':k==='height'?'heightAdjusted':'sameHeight'))}</button>`).join('')}</div>
       ${basis==='scaled'?targetControl('compareTarget'):''}
       ${figurePicker('compareReference',list,state.compareBase,t('reference'),true)}
-      ${basis!=='raw'?`<p class="fnote" id="compareBasisNote">${esc(t(basis==='height'?'heightAdjustedNote':'scaledNote'))}</p>`:''}${state.cupSystem!=='uk'?`<p class="fnote">${esc(t('cupRankNote'))}</p>`:''}${rowPicker}</div></div>
+      ${basis!=='raw'?`<p class="fnote" id="compareBasisNote">${esc(t(basis==='height'?'heightAdjustedNote':'scaledNote'))}</p>`:''}${state.cupSystem!=='uk'?`<p class="fnote">${esc(t('cupRankNote'))}</p>`:''}${rowPicker}<div class="compare-edit">${list.map((d,i)=>figurePicker('replaceAgent'+i,DATA.filter(x=>x.slug===d.slug||!state.compare.includes(x.slug)),d.slug,t('replaceAgent')+': '+nameOf(d))).join('')}${list.length<4?figurePicker('addAgent',DATA.filter(d=>!state.compare.includes(d.slug)),'',t('addAgent')):''}</div></div></div>
     <div class="cmpwrap"><table class="cmptable"${basis!=='raw'?' aria-describedby="compareBasisNote"':''}><thead><tr><th scope="col"></th>${list.map(d=>`<th scope="col">${esc(nameOf(d))}${d.temporary?`<small class="cmpdelta">${esc(t('temporary'))}</small>`:''}${d.slug===state.compareBase?`<small class="cmpdelta">${esc(t('referenceMark'))}</small>`:''}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
   if(!$('#overlay').classList.contains('open')) lastFocus=active;
   mctx={slug:null,src:state.art,skin:false,more:null};
@@ -4556,6 +4595,8 @@ function openCompare(){
   const update=()=>{ openCompare(); writeHash(true); };
   $$('#modal [data-compare-mode]').forEach(b=>b.onclick=()=>{state.compareMode=b.dataset.compareMode;update();});
   bindFigurePicker('compareReference',list,slug=>{state.compareBase=slug;update();},true);
+  list.forEach((d,i)=>bindFigurePicker('replaceAgent'+i,DATA.filter(x=>x.slug===d.slug||!state.compare.includes(x.slug)),slug=>{if(!slug||state.compare.includes(slug))return;state.compare[i]=slug;renderCompare();update();}));
+  if($('#addAgent'))bindFigurePicker('addAgent',DATA.filter(d=>!state.compare.includes(d.slug)),slug=>{if(slug&&state.compare.length<4&&!state.compare.includes(slug)){state.compare.push(slug);renderCompare();update();}});
   $('#compareSaved').onclick=openSavedComparisons;
   $('#exportCompare').onclick=exportComparison;
   if($('#compareTarget')) $('#compareTarget').onchange=e=>{if(setTarget(e.target)) update();};
@@ -4827,6 +4868,74 @@ $('#toolsView').addEventListener('click',e=>{
   const pair=e.target.closest('[data-match-pair]');
   if(pair){state.compare=[pair.dataset.source,pair.dataset.matchPair];state.compareBase=pair.dataset.source;state.compareMode=state.matchBasis;renderCompare();syncCardCompare();writeHash(true);openCompare();}
 });
+
+/* Roster presentation state does not change measurements or ranking rules. */
+const TABLE_KEYS=['name','height','bust','band','waist','hip','thigh','uk','whr','whtr','thr','thh','shape','bal','note'];
+const DEFAULT_TABLE_COLUMNS=['height','bust','waist','hip','uk'];
+function compareTableValues(a,b,direction,numeric,language){
+  if(a==null)return b==null?0:1;
+  if(b==null)return -1;
+  return (numeric?a-b:String(a).localeCompare(String(b),language))*direction;
+}
+function parseTableSort(value){
+  const [key,dir]=String(value||'').split(':');
+  return TABLE_KEYS.includes(key)&&['1','-1'].includes(dir)?{k:key,dir:Number(dir)}:{k:'uk',dir:-1};
+}
+function parseTableColumns(value){
+  if(!value)return null;
+  const keys=[...new Set(value.split(','))].filter(k=>k!=='name'&&TABLE_KEYS.includes(k));
+  return keys.length?keys:null;
+}
+function renderColumnPicker(all,chosen){
+  const box=$('#columnOptions');
+  box.innerHTML=all.filter(c=>c.k!=='name').map(c=>`<label><input type="checkbox" data-column="${c.k}" ${chosen.includes(c.k)?'checked':''}>${esc(c.t)}</label>`).join('')+`<button class="btn" id="restoreColumns">${esc(t('restoreColumns'))}</button>`;
+  box.querySelectorAll('input').forEach(input=>input.onchange=()=>{
+    const next=Array.from(box.querySelectorAll('input:checked'),e=>e.dataset.column);
+    if(!next.length){input.checked=true;return;}
+    tableColumns=next;renderTable(filtered());writeHash(false);
+    box.querySelector(`[data-column="${input.dataset.column}"]`)?.focus();
+  });
+  $('#restoreColumns').onclick=()=>{tableColumns=null;renderTable(filtered());writeHash(false);$('#columnPicker summary').focus();};
+}
+function clearRosterFilters(){
+  Object.assign(state,{q:'',cup:'all',height:'all',shape:'all',balance:'all',thighs:'all',rng:{}});
+  syncControls();renderFilterPanel();render();
+}
+function renderActiveFilters(){
+  const entries=[];
+  if(state.q)entries.push({key:'q',text:state.q});
+  const labels={cup:'bustTier',height:'heightClass',shape:'shape',balance:'build',thighs:'thighClass'};
+  for(const [key,label] of Object.entries(labels))if(state[key]!=='all')entries.push({key,text:t(label)+': '+tagText(state[key])});
+  for(const [key,range] of Object.entries(state.rng)){
+    const metric=RANGES.find(m=>m.k===key);
+    if(metric)entries.push({key:'rng:'+key,text:t(metric.lk)+': '+range.map(v=>fmt(isCm()?v:v/2.54)).join('–')+USUF()});
+  }
+  const box=$('#activeFilters');box.hidden=!entries.length||(TOOLS_PAGE&&state.view!=='distribution');
+  box.innerHTML=entries.map(e=>`<button class="btn" data-remove-filter="${esc(e.key)}" aria-label="${esc(t('removeFilter')+': '+e.text)}">${esc(e.text)} ×</button>`).join('')+(entries.length?`<button class="btn" id="clearActive">${esc(t('clearFilters'))}</button>`:'');
+  box.querySelectorAll('[data-remove-filter]').forEach(b=>b.onclick=()=>{
+    const key=b.dataset.removeFilter;
+    if(key.startsWith('rng:'))delete state.rng[key.slice(4)];else state[key]=key==='q'?'':'all';
+    syncControls();renderFilterPanel();render();
+    (box.querySelector('button')||$('#q')).focus();
+  });
+  if($('#clearActive'))$('#clearActive').onclick=()=>{clearRosterFilters();$('#q').focus();};
+}
+$('#clearEmpty').onclick=()=>{clearRosterFilters();$('#q').focus();};
+let helpTrigger=null;
+const helpDialog=document.createElement('dialog');
+helpDialog.className='settings-dialog';helpDialog.id='measurementHelp';helpDialog.setAttribute('aria-labelledby','helpTitle');
+document.body.append(helpDialog);
+function closeMeasurementHelp(){helpDialog.close();if(!$('#overlay').classList.contains('open'))document.body.classList.remove('modal-open');helpTrigger?.focus();}
+document.addEventListener('click',e=>{
+  const button=e.target.closest('[data-help]');if(!button)return;
+  helpTrigger=button;
+  const key=button.dataset.help;
+  const texts=key==='cup'?['helpCup']:key==='ratio'?['helpRatio']:['helpOverview','helpCup','helpRatio','helpMissing'];
+  helpDialog.innerHTML=`<h2 id="helpTitle">${esc(t('measurementHelp'))}</h2>${texts.map(k=>`<p>${esc(t(k))}</p>`).join('')}<button class="btn" id="helpClose">${esc(t('close'))}</button>`;
+  helpDialog.showModal();document.body.classList.add('modal-open');$('#helpClose').onclick=closeMeasurementHelp;$('#helpClose').focus();
+});
+helpDialog.addEventListener('cancel',e=>{e.preventDefault();closeMeasurementHelp();});
+helpDialog.addEventListener('keydown',e=>{if(e.key==='Tab')trapDialogFocus(helpDialog,e);});
 
 
 (function boot(){

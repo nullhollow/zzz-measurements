@@ -190,7 +190,7 @@ explorer_i18n = json.loads((ROOT / 'tools/explorer_i18n.json').read_text())
 for lang, strings in explorer_i18n.items():
     copy = ',\n    '.join(f'{key}: {json.dumps(value, ensure_ascii=False)}' for key, value in strings.items()) + ','
     tpl = tpl.replace(f'/*__EXPLORER_I18N_{lang.upper()}__*/', copy)
-for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.js'), ('SETTINGS_JS', 'settings.js'), ('EXPLORER_CSS', 'explorer.css')):
+for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.js'), ('SETTINGS_JS', 'settings.js'), ('ROSTER_JS', 'roster.js'), ('EXPLORER_CSS', 'explorer.css')):
     tpl = tpl.replace(f'/*__{token}__*/', (ROOT / 'tools' / source).read_text())
 tpl = tpl.replace('/*__THEME_JS__*/', THEME_JS)
 tpl = re.sub(r'<style>(.*?)</style>', lambda m: '<style>' + adaptive_css(m[1]) + '</style>', tpl, flags=re.S)

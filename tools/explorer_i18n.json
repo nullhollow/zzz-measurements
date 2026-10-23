@@ -97,7 +97,19 @@
     "showAllValues": "Show all values",
     "whyMatch": "Why this match?",
     "contributionNote": "Right column: contribution to total distance.",
-    "comparisonExportedCanonical": "Comparison exported. Temporary references are omitted."
+    "comparisonExportedCanonical": "Comparison exported. Temporary references are omitted.",
+    "leaders": "Leaders",
+    "tableColumns": "Columns",
+    "clearFilters": "Clear filters",
+    "removeFilter": "Remove filter",
+    "measurementHelp": "Measurement help",
+    "replaceAgent": "Replace agent",
+    "addAgent": "Add agent",
+    "helpOverview": "Height uses effective head height where noted. Circumferences are source measurements. Height-adjusted values are circumference ÷ height × 100; same-height values assume uniform scaling. Missing measurements stay unknown.",
+    "helpCup": "Cup order follows this dataset’s UK letter-first, band-second rule, including G above GG. UK, US and EU labels are supplied by the source. Equal letters do not imply equal volume.",
+    "helpRatio": "Waist/hip divides waist circumference by hip circumference. Waist/height divides waist by effective height. These ratios describe the recorded proportions.",
+    "helpMissing": "A dash means no reliable measurement is available. It is not zero and is excluded from comparisons and numeric summaries.",
+    "restoreColumns": "Restore columns"
   },
   "ja": {
     "tools": "ツール",
@@ -197,7 +209,19 @@
     "showAllValues": "すべての値を見る",
     "whyMatch": "近さの内訳",
     "contributionNote": "右の列は、距離の合計に占める各項目の値です。",
-    "comparisonExportedCanonical": "比較をCSVに出力しました。仮の体型は出力対象に含まれません。"
+    "comparisonExportedCanonical": "比較をCSVに出力しました。仮の体型は出力対象に含まれません。",
+    "leaders": "項目別トップ",
+    "tableColumns": "表示する列",
+    "clearFilters": "絞り込みを解除",
+    "removeFilter": "条件を外す",
+    "measurementHelp": "数値の見方",
+    "replaceAgent": "キャラを入れ替え",
+    "addAgent": "キャラを追加",
+    "helpOverview": "注記のある身長は頭頂までの高さを使います。囲み寸法は出典の計測値です。身長比は「周囲長 ÷ 身長 × 100」で求めます。同じ身長での比較は全身を均等に拡大・縮小した仮定値です。未計測の値は補完しません。",
+    "helpCup": "このデータではUKのカップ文字、次にバンド値で並べます。GはGGより上です。UK・US・EUの表記は出典に従います。同じ文字でも容量が等しいとは限りません。",
+    "helpRatio": "ウエスト／ヒップはウエスト周囲長をヒップ周囲長で割った値です。ウエスト／身長では頭頂までの身長を使います。いずれも計測値の比率を表します。",
+    "helpMissing": "「—」は信頼できる計測値がない項目です。ゼロとは扱わず、数値の比較や集計から除外します。",
+    "restoreColumns": "標準の列に戻す"
   },
   "zh": {
     "tools": "工具",
@@ -297,6 +321,18 @@
     "showAllValues": "查看全部数值",
     "whyMatch": "相似原因",
     "contributionNote": "右列为各项对总距离的贡献值。",
-    "comparisonExportedCanonical": "对比已导出，临时参考体型未包含在内。"
+    "comparisonExportedCanonical": "对比已导出，临时参考体型未包含在内。",
+    "leaders": "各项前三",
+    "tableColumns": "显示列",
+    "clearFilters": "清除筛选",
+    "removeFilter": "移除此条件",
+    "measurementHelp": "如何理解数据",
+    "replaceAgent": "更换角色",
+    "addAgent": "添加角色",
+    "helpOverview": "有注记的身高按头顶高度计算。围度采用来源中的实测数据。身高占比按“围度 ÷ 身高 × 100”计算；同身高数值是假设全身等比例缩放后的结果。缺失数据不会补算。",
+    "helpCup": "本数据集先按UK罩杯字母、再按下围数值排序，G排在GG之前。UK、US、EU尺码均沿用来源标注。字母相同不代表容量相同。",
+    "helpRatio": "腰臀比是腰围除以臀围，腰高比是腰围除以头顶身高。这些比值用于描述已有测量数据中的比例。",
+    "helpMissing": "“—”表示没有可靠测量值，不代表零，也不会参与数值比较或汇总。",
+    "restoreColumns": "恢复默认列"
   }
 }
