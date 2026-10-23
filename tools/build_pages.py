@@ -21,6 +21,7 @@ import json
 from pathlib import Path
 from urllib.parse import quote
 from PIL import Image
+from reference import REFERENCE, VIEWER_KEYS, artwork_items, label as reference_label
 from theme import THEME_JS, adaptive_css
 from profile_text import profile_summary
 from analysis_math import matches
@@ -132,6 +133,7 @@ PAGE = {
 
 for _lang, _strings in json.loads((ROOT / 'tools/explorer_i18n.json').read_text()).items():
     PAGE[_lang].update(_strings)
+    PAGE[_lang].update(dict(zip(['close','light','dark'],{'en':['Close','Light','Dark'],'ja':['閉じる','ライト','ダーク'],'zh':['关闭','浅色','深色']}[_lang])))
 
 
 def esc(v):
@@ -153,7 +155,7 @@ def similar(d):
     return [x['d'] for x in matches(DATA, d)[:3]]
 
 
-CSS = '''
+CSS = (ROOT/'tools/visual_tools.css').read_text()+'''
 :root{--dim2:var(--dimmer);--disp:'ZZZ Hongmeng','Anton','Noto Sans JP 900','Dela Gothic One','Arial Narrow',Impact,sans-serif;
   --body:'ZZZ Hongmeng',Inter,'Noto Sans JP 900','Noto Sans JP',system-ui,-apple-system,sans-serif;
   --num:'Chakra Petch','ZZZ Hongmeng','Noto Sans JP 900','Noto Sans JP',ui-monospace,Menlo,monospace}
@@ -412,6 +414,11 @@ def character_page(d, prev_d, next_d, lang='en'):
     ]
     props_html = ''.join(f'<tr><th scope="row">{esc(k)}</th><td>{fmt(v, 3)}</td></tr>' for k, v in props)
 
+    info=REFERENCE['agents'].get(d['slug'],{})
+    facts=''.join(f'<div><dt>{esc(p[key])}</dt><dd>{esc(reference_label(info.get(field),lang,p["unknownInfo"]))}</dd></div>' for field,key in [('faction','faction'),('attribute','attribute'),('specialty','specialty'),('rank','rank'),('release','debut'),('version','debutVersion')])
+    official=info.get('official',{}).get(lang)
+    info_html=f'<h2>{esc(p["agentInfo"])}</h2><dl class="agent-facts">{facts}</dl><div class="reference-links">'+(f'<a href="{esc(official)}">{esc(p["officialProfile"])}</a>' if official else '')+f'<a href="{esc(info.get("source",""))}">{esc(p["referenceSource"])}</a></div>'
+    original_items=artwork_items(d,prefix,p,lang)
     gallery = []
     gallery.append((f"{prefix}character_images/thumbs/{d['official']}.webp",
                     f"{d.get('outfit') or nm} — {p['outfit_portrait'] if d.get('outfit') else p['official_portrait']}",
@@ -427,13 +434,15 @@ def character_page(d, prev_d, next_d, lang='en'):
         gallery.append((f"{prefix}character_images/{it['file']}",
                         f"{p['originalOutfit'] if it.get('original') else it['label']} — {p['outfit_portrait']}",
                         p['originalArtNote'] if it.get('original') else f"{it['type']} · {p['art_only']}", avif))
-    def gallery_item(src, alt, cap, avif=None):
+    def gallery_item(index,src, alt, cap, avif=None):
         img = f'<img loading="lazy" decoding="async" src="{esc(src)}" alt="{esc(alt)}">'
         if avif:
             img = f'<picture><source type="image/avif" srcset="{esc(avif)}">{img}</picture>'
         return (f'<figure>{img}<figcaption><b>{esc(alt.split(" — ")[0])}</b>'
-                f'{esc(cap)}</figcaption></figure>')
-    gallery_html = ''.join(gallery_item(*item) for item in gallery)
+                f'{esc(cap)} <a href="{esc(original_items[index]["file"])}" data-art-index="{index}">{esc(p["viewOriginal"])}</a></figcaption></figure>')
+    gallery_html = ''.join(gallery_item(i,*item) for i,item in enumerate(gallery))
+    viewer_config=json.dumps({'items':original_items,'copy':{key:p.get(key,{'light':'Light','dark':'Dark','close':'Close'}.get(key,key)) for key in VIEWER_KEYS}},ensure_ascii=False).replace('</','<\\/')
+    viewer_script=(ROOT/'tools/artwork.js').read_text()
 
     sim = similar(d)
     sim_html = ' · '.join(
@@ -441,8 +450,10 @@ def character_page(d, prev_d, next_d, lang='en'):
         for x in sim)
     report = (f"{META['repo']}/issues/new?title=" + quote(f"[data] {nm}") +
               "&body=" + quote(f"Character: {nm}\nField: \nCurrent value: \nSource: \n\nWhat looks wrong?\n"))
-    src_link = (f"<a href=\"https://zenless-zone-zero.fandom.com/wiki/{quote(d['source_page'].replace(' ', '_'))}\" rel=\"noopener\">"
-                f"{esc(d['source_page'])}</a>" if d.get('source_page') else '—')
+    source_page=d.get('source_page') or ''
+    source_label=source_page
+    if source_page.startswith('('):source_page=d.get('source_file') or '';source_label=nm
+    src_link=(f'<a href="https://zenless-zone-zero.fandom.com/wiki/{quote(source_page.replace(" ","_"))}" rel="noopener">{esc(source_label)}</a>' if source_page else '—')
     measured_note = (f"<p class=\"note\">{p['measured_note'].format(outfit=esc(d['skin']['outfit']))}</p>" if d.get('skin') else '')
     stature_note = (f"<p class=\"note\">{p['stature_note'].format(st=fmt(d['stature_cm'], 1), cm=fmt(d['cm'], 0))}</p>"
                     if d['stature_basis'] == 'head' else '')
@@ -471,6 +482,7 @@ def character_page(d, prev_d, next_d, lang='en'):
       <p class="meta">{esc(d['outfit']) + ' · ' if d.get('outfit') else ''}{esc(p['height'])} {fmt(d['stature_cm'], 1)} cm{charted} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
       <div class="btns">
         <a class="btn primary" href="{chart_link}">{esc(p['open'])}</a>
+        <a class="btn" href="{esc(original_items[0]['file'])}" data-art-index="0">{esc(p['viewOriginal'])}</a>
         <a class="btn" href="{prefix}data/measurements.json" download>{esc(p['dataset'])}</a>
         <a class="btn" href="{report}" rel="noopener">{esc(p['report'])}</a>
       </div>
@@ -479,6 +491,7 @@ def character_page(d, prev_d, next_d, lang='en'):
 
   {stature_note}{measured_note}
 
+  {info_html}
   <h2>{esc(p['measurements'])}</h2>
   <table><caption class="small" style="text-align:left;padding-bottom:6px">{esc(p['caption'])}</caption>
     <tbody>{rows_html}</tbody></table>
@@ -495,6 +508,7 @@ def character_page(d, prev_d, next_d, lang='en'):
     {chart_note}
   </div>
 
+  <script type="application/json" id="artworkConfig">{viewer_config}</script><script>{viewer_script}</script>
   <h2>{esc(p['outfits'])}</h2>
   <div class="gallery">{gallery_html}</div>
 
@@ -661,6 +675,8 @@ def methodology_page(lang='en'):
   <h1>{esc(p['methodology'])}</h1>
   <p class="lead">{esc(m['intro'])}</p>
 
+  <h2>{esc(p['guide'])}</h2><p>{esc(p['guideNote'])}</p>
+  <div class="guide-layout"><figure class="guide-figure"><img src="{prefix}images/measurement-guide.webp" alt="{esc(p['guideAlt'])}" width="1024" height="1536" loading="lazy"></figure><dl>{''.join(f'<dt>{esc(p[k])}</dt><dd>{esc(p["guide"+k[0].upper()+k[1:]])}</dd>' for k in ['height','bust','underbust','waist','hip','thigh'])}</dl></div>
   <div class="grid2">{sections}</div>
 
   <h2>{m['data_heading']}</h2>

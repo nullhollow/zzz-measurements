@@ -71,6 +71,25 @@ html[data-theme="light"]{
   --bust:#B4402D;--waist:#006F87;--hips:#485D00;--thighs:#7B6000;
   --signal:#B4402D;--holo:#006F87;--blue:#3659B7;--brass:#80601F;--track:#D2D9E0;
 }
+/* Data graphics remain separate from illustrative portraits. */
+.lineup-form{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin:18px 0}.lineup-form label{display:grid;gap:6px;color:var(--dim);font-size:12px}.lineup-form input{max-width:230px}
+.lineup-scroll{overflow:auto;border-block:1px solid var(--line);padding:24px 0 12px}.lineup-stage{display:flex;align-items:stretch;gap:18px;min-width:max-content;height:430px;padding:30px 14px 0}.lineup-person{width:120px;display:flex;flex-direction:column;min-width:0}.height-track{height:300px;position:relative;border-bottom:2px solid var(--concrete)}.height-bar{position:absolute;bottom:0;left:18px;width:7px;background:var(--acid);border-radius:3px 3px 0 0}.height-bar span{position:absolute;bottom:100%;left:0;white-space:nowrap;color:var(--concrete);font:700 14px var(--num);padding-bottom:6px}.lineup-portrait{position:absolute;bottom:8px;left:38px;width:70px;height:100px;object-fit:contain}.lineup-person>a{font:14px/1.2 var(--disp);margin-top:10px;overflow-wrap:anywhere;color:var(--concrete)}.lineup-person small{font-size:10px;color:var(--dim)}.lineup-actions{display:flex;gap:4px;margin-top:auto}.lineup-actions button{min-width:36px;min-height:40px;padding:4px}.reference-track{width:80px}.reference-track .height-bar{background:var(--waist)}.reference-track.door .height-bar{width:48px;background:none;border:3px solid var(--waist);border-bottom:0}.ruler-mark{position:absolute;left:0;width:70px;border-top:1px solid var(--line2);font:11px var(--num);color:var(--dim)}
+.guide-layout{display:grid;grid-template-columns:minmax(240px,420px) minmax(250px,1fr);gap:32px;align-items:start;margin:24px 0}.guide-figure{position:relative;margin:0;background:white;border-radius:12px;overflow:hidden}.guide-figure img{display:block;width:100%;height:auto}.guide-point{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border:2px solid #20262e;border-radius:50%;background:#fff;color:#20262e;font:700 15px var(--num);cursor:pointer}.guide-point[aria-pressed="true"]{background:#D8FA00}.guide-tabs{display:flex;flex-wrap:wrap;gap:8px}.guide-tabs button{min-height:44px}.guide-tabs button[aria-pressed="true"]{background:var(--accent-fill);color:var(--on-accent)}.guide-copy{font-size:15px;line-height:1.8}.agent-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px 20px;margin:0}.agent-facts div{border-bottom:1px solid var(--line);padding:8px 0}.agent-facts dt{font-size:11px;color:var(--dim)}.agent-facts dd{margin:4px 0;font-size:14px;color:var(--concrete)}.reference-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12px}
+.art-viewer{width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;border:0;padding:0;background:var(--panel);color:var(--concrete);font:inherit}.art-viewer[open]{display:flex;flex-direction:column}.art-viewer::backdrop{background:#000d}.art-toolbar,.art-footer{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 18px;background:var(--panel);border-block:1px solid var(--line)}.art-toolbar h2{font:22px var(--disp);margin:0}.art-toolbar label{display:flex;align-items:center;gap:8px;font-size:12px}.art-toolbar select{max-width:250px}.art-toolbar input{width:110px;accent-color:var(--acid)}.art-toolbar button{min-height:44px}.art-viewport{flex:1;min-height:100px;overflow:auto;touch-action:none;background:#aeb4bc;cursor:grab;position:relative}.art-viewport img{display:block;max-width:none;height:auto;margin:16px auto;user-select:none}.art-viewer[data-background="light"] .art-viewport{background:#f6f6f6}.art-viewer[data-background="dark"] .art-viewport{background:#15151a}.art-footer{font-size:12px}.art-footer small{flex-basis:100%;color:var(--dim)}.art-footer a{color:var(--acid)}
+@media(max-width:700px){.guide-layout{grid-template-columns:1fr;gap:18px}.guide-figure{max-width:350px;margin:auto}.guide-point{width:38px;height:38px}.lineup-stage{gap:10px}.art-toolbar,.art-footer{gap:8px;padding:8px 12px}.art-toolbar h2{font-size:18px}.art-toolbar .btn{font-size:10px;padding:8px}.art-toolbar select{max-width:170px}.art-toolbar input{width:85px}.art-footer{font-size:11px}.art-footer small{font-size:10px}.tooltabs{gap:0 16px}}
+
+body.modal-open{overflow:hidden}
+
+.height-track{flex:0 0 300px}.lineup-stage{height:auto;min-height:430px}
+
+.tool-picker{display:none}
+@media(max-width:700px){#toolsNav>a{display:none}.tool-picker{display:block;flex:1;min-width:0;min-height:44px}.tooltabs{flex-wrap:nowrap;gap:8px;padding:6px 12px}.tooltabs #settingsBtn{flex:none;margin-left:0}}
+[hidden]{display:none!important}
+.art-toolbar select{font:inherit;font-size:12px;min-height:40px;border:1px solid var(--control-line);border-radius:8px;background:var(--panel);color:var(--concrete);padding:8px}
+
+.agent-details summary{cursor:pointer;color:var(--concrete);padding:10px 0;font-weight:700}
+
+.lineup-stage{justify-content:center}.lineup-actions button{min-height:44px}
 
 :root{--dim2:var(--dimmer);--disp:'ZZZ Hongmeng','Anton','Noto Sans JP 900','Dela Gothic One','Arial Narrow',Impact,sans-serif;
   --body:'ZZZ Hongmeng',Inter,'Noto Sans JP 900','Noto Sans JP',system-ui,-apple-system,sans-serif;
@@ -192,6 +211,7 @@ html:not([data-theme]){
       <p class="meta">身長 142 cm · UK 17B / US 17B / EU 33B</p>
       <div class="btns">
         <a class="btn primary" href="../../#p=ju_fufu&amp;lang=ja">チャートで開く</a>
+        <a class="btn" href="../../originals/ju_fufu.png" data-art-index="0">原寸画像を見る</a>
         <a class="btn" href="../../data/measurements.json" download>データセット</a>
         <a class="btn" href="https://github.com/nullhollow/zzz-measurements/issues/new?title=%5Bdata%5D%20%E6%A9%98%E7%A6%8F%E7%A6%8F&body=Character%3A%20%E6%A9%98%E7%A6%8F%E7%A6%8F%0AField%3A%20%0ACurrent%20value%3A%20%0ASource%3A%20%0A%0AWhat%20looks%20wrong%3F%0A" rel="noopener">誤りを報告</a>
       </div>
@@ -200,6 +220,7 @@ html:not([data-theme]){
 
 
 
+  <h2>エージェント情報</h2><dl class="agent-facts"><div><dt>陣営</dt><dd>雲嶽山</dd></div><div><dt>属性</dt><dd>炎属性</dd></div><div><dt>特性</dt><dd>撃破</dd></div><div><dt>レアリティ</dt><dd>S</dd></div><div><dt>実装日</dt><dd>2025-06-25</dd></div><div><dt>初登場バージョン</dt><dd>2.0</dd></div></dl><div class="reference-links"><a href="https://zenless.hoyoverse.com/ja-jp/character?id=155659">公式紹介</a><a href="https://zenless-zone-zero.fandom.com/wiki/Ju_Fufu">情報出典</a></div>
   <h2>寸法</h2>
   <table><caption class="small" style="text-align:left;padding-bottom:6px">センチとインチ。ブラサイズは出典の表記のまま。</caption>
     <tbody><tr><th scope="row">身長</th><td>142 cm · 4&#x27;8&quot;</td></tr><tr><th scope="row">バスト</th><td>47.1 cm · 18.5 in</td></tr><tr><th scope="row">アンダー</th><td>42.7 cm · 16.8 in</td></tr><tr><th scope="row">ウエスト</th><td>41.1 cm · 16.2 in</td></tr><tr><th scope="row">ヒップ</th><td>70.2 cm · 27.6 in</td></tr><tr><th scope="row">太もも</th><td>42.4 cm · 16.7 in</td></tr><tr><th scope="row">バスト差</th><td>4.4 cm · 1.7 in</td></tr><tr><th scope="row">ブラサイズ</th><td>UK 17B · US 17B · EU 33B</td></tr></tbody></table>
@@ -216,8 +237,49 @@ html:not([data-theme]){
     <p class="note">チャート注記: 服装のため胸囲は概算</p>
   </div>
 
+  <script type="application/json" id="artworkConfig">{"items": [{"file": "../../originals/ju_fufu.png", "width": 1064, "height": 1712, "bytes": 780383, "sha256": "0c390dd31fc50b92f557c984a01d185a5f3aea7cec760f5c571dee5c10b22861", "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/2/2a/Agent_Ju_Fufu_Portrait.png/revision/latest?cb=20250606053607&format=original", "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Ju_Fufu_Portrait.png", "format": "PNG", "label": "橘福福 · 公式ポートレート"}], "copy": {"originalViewer": "オリジナル画像", "previousArt": "前の画像", "nextArt": "次の画像", "zoomArt": "拡大率", "fitArt": "全体を表示", "backgroundArt": "背景", "neutralArt": "グレー", "light": "ライト", "dark": "ダーク", "close": "閉じる", "loadingArt": "元画像を読み込み中…", "failedArt": "元画像を読み込めませんでした。再試行するか、出典を開いてください。", "downloadOriginal": "元のPNGを保存", "sourceOriginal": "元画像の出典", "retryArt": "再試行", "artCredit": "画像 © HoYoverse。取得した元ファイルを、リサイズ・再圧縮せずに表示しています。"}}</script><script>/* Shared by static profiles and the interactive chart. Originals load on demand. */
+window.ArtworkViewer=(()=>{
+  const dialog=document.createElement('dialog');dialog.className='art-viewer';dialog.setAttribute('aria-labelledby','artTitle');dialog.id='artViewer';document.body.append(dialog);
+  let items=[],copy={},index=0,zoom=1,fitted=true,trigger=null,pointers=new Map(),pinch=null,pan=null,bodyLocked=false;
+  const find=s=>dialog.querySelector(s);
+  function size(){const img=find('img'),box=find('.art-viewport');if(!img||!box)return;const a=items[index];if(fitted)zoom=Math.min((box.clientWidth-32)/a.width,(box.clientHeight-32)/a.height);img.style.width=Math.max(1,a.width*zoom)+'px';find('#artZoom').value=Math.round(zoom*100);}
+  function setZoom(value){const box=find('.art-viewport'),old=zoom;fitted=false;zoom=Math.max(.01,Math.min(3,value));const x=(box.scrollLeft+box.clientWidth/2)*zoom/old-box.clientWidth/2,y=(box.scrollTop+box.clientHeight/2)*zoom/old-box.clientHeight/2;size();box.scrollTo(x,y);}
+  function show(next){
+    index=(next+items.length)%items.length;zoom=1;fitted=true;pointers.clear();pinch=pan=null;
+    const a=items[index];find('#artChoice').value=index;find('#artStatus').textContent=copy.loadingArt;find('#artRetry').hidden=true;
+    find('#artMeta').textContent=`${a.width} × ${a.height} px · PNG · ${(a.bytes/1048576).toFixed(1)} MB`;
+    find('#artDownload').href=a.file;find('#artDownload').download=a.file.split('/').pop();find('#artSource').href=a.source;
+    const img=find('img');img.alt=a.label;img.onload=()=>{find('#artStatus').textContent='';size();};img.onerror=()=>{find('#artStatus').textContent=copy.failedArt;find('#artRetry').hidden=false;};img.src=a.file;size();find('.art-viewport').scrollTo(0,0);
+  }
+  function close(){if(!dialog.open)return;dialog.close();if(!bodyLocked)document.body.classList.remove('modal-open');trigger?.focus();}
+  function open(rows,strings,at=0,from=document.activeElement){
+    if(!rows.length)return;items=rows;copy=strings;trigger=from;bodyLocked=document.body.classList.contains('modal-open');document.body.classList.add('modal-open');
+    const el=(tag,text,cls)=>{const node=document.createElement(tag);node.textContent=text;if(cls)node.className=cls;return node;};
+    dialog.replaceChildren();const head=el('div','','art-toolbar'),title=el('h2',copy.originalViewer);title.id='artTitle';head.append(title);
+    const select=el('select','');select.id='artChoice';select.setAttribute('aria-label',copy.originalViewer);items.forEach((a,i)=>{const o=el('option',a.label);o.value=i;select.append(o);});select.onchange=()=>show(Number(select.value));head.append(select);
+    for(const [label,fn] of [[copy.previousArt,()=>show(index-1)],[copy.nextArt,()=>show(index+1)]]){const b=el('button',label,'btn');b.disabled=items.length<2;b.onclick=fn;head.append(b);}
+    const zlabel=el('label',copy.zoomArt),range=el('input','');range.id='artZoom';range.type='range';range.min=1;range.max=300;range.step=1;range.value=100;range.oninput=()=>setZoom(Number(range.value)/100);zlabel.append(range);head.append(zlabel);
+    const fit=el('button',copy.fitArt,'btn');fit.onclick=()=>{fitted=true;size();find('.art-viewport').scrollTo(0,0);};head.append(fit);const actual=el('button','100%','btn');actual.onclick=()=>setZoom(1);head.append(actual);
+    const bgLabel=el('label',copy.backgroundArt),bg=el('select','');['neutral','light','dark'].forEach(k=>{const o=el('option',copy[k==='neutral'?'neutralArt':k]);o.value=k;bg.append(o);});bg.onchange=()=>dialog.dataset.background=bg.value;bgLabel.append(bg);head.append(bgLabel);dialog.dataset.background='neutral';
+    const exit=el('button',copy.close,'btn');exit.onclick=close;exit.id='artClose';head.append(exit);dialog.append(head);
+    const viewport=el('div','','art-viewport');viewport.tabIndex=0;viewport.setAttribute('aria-label',copy.originalViewer);const img=el('img','');img.draggable=false;viewport.append(img);dialog.append(viewport);
+    const footer=el('div','','art-footer'),status=el('span','');status.id='artStatus';status.setAttribute('role','status');const meta=el('span','');meta.id='artMeta';footer.append(status,meta);
+    for(const [id,label] of [['artDownload',copy.downloadOriginal],['artSource',copy.sourceOriginal]]){const a=el('a',label);a.id=id;if(id==='artSource'){a.target='_blank';a.rel='noopener';}footer.append(a);}
+    const retry=el('button',copy.retryArt,'btn');retry.id='artRetry';retry.hidden=true;retry.onclick=()=>show(index);footer.append(retry,el('small',copy.artCredit));dialog.append(footer);
+    viewport.onpointerdown=e=>{if(e.button!==0)return;viewport.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});pan={x:e.clientX,y:e.clientY,left:viewport.scrollLeft,top:viewport.scrollTop};if(pointers.size===2){const [a,b]=[...pointers.values()];pinch={distance:Math.hypot(a.x-b.x,a.y-b.y),zoom};}};
+    viewport.onpointermove=e=>{if(!pointers.has(e.pointerId))return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2&&pinch){const [a,b]=[...pointers.values()];setZoom(pinch.zoom*Math.hypot(a.x-b.x,a.y-b.y)/Math.max(1,pinch.distance));}else if(pan){viewport.scrollLeft=pan.left+pan.x-e.clientX;viewport.scrollTop=pan.top+pan.y-e.clientY;}};
+    const release=e=>{pointers.delete(e.pointerId);pinch=pan=null;};viewport.onpointerup=release;viewport.onpointercancel=release;
+    dialog.showModal();show(at);exit.focus();
+  }
+  dialog.addEventListener('cancel',e=>{e.preventDefault();close();});
+  dialog.addEventListener('keydown',e=>{if(e.key==='Tab'){const buttons=[...dialog.querySelectorAll('button,select,input,a[href],[tabindex="0"]')].filter(b=>!b.disabled&&!b.hidden&&b.offsetParent!==null),first=buttons[0],last=buttons.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}if(!['INPUT','SELECT'].includes(e.target.tagName)&&fitted&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();show(index+(e.key==='ArrowLeft'?-1:1));}});
+  window.addEventListener('resize',()=>{if(dialog.open)size();});
+  document.addEventListener('click',e=>{const a=e.target.closest('[data-art-index]'),config=document.querySelector('#artworkConfig');if(a&&config){e.preventDefault();const c=JSON.parse(config.textContent);open(c.items,c.copy,Number(a.dataset.artIndex),a);}});
+  return {open,close};
+})();
+</script>
   <h2>衣装</h2>
-  <div class="gallery"><figure><img loading="lazy" decoding="async" src="../../character_images/thumbs/ju_fufu.webp" alt="橘福福 — 公式ポートレート"><figcaption><b>橘福福</b>公式ポートレート</figcaption></figure></div>
+  <div class="gallery"><figure><img loading="lazy" decoding="async" src="../../character_images/thumbs/ju_fufu.webp" alt="橘福福 — 公式ポートレート"><figcaption><b>橘福福</b>公式ポートレート <a href="../../originals/ju_fufu.png" data-art-index="0">原寸画像を見る</a></figcaption></figure></div>
 
   <h2>出典</h2>
   <table><tbody>

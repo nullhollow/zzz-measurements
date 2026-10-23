@@ -47,6 +47,43 @@ python3 tools/make_favicon.py     # SVG, ICO, PWA + maskable icons
 python3 tools/make_og.py          # social card (needs Chrome)
 ```
 
+## Visual reference tools
+
+Tools now includes a Height lineup and an illustrated Measurement guide. The lineup
+uses effective-height bars, with ruler, 200 cm doorway and personal-height
+references. Select up to eight agents and arrange them by height, faction or manual
+order. Portraits identify agents and are deliberately not calibrated by their image
+bounds. Selection, ordering and references travel in shared URL state.
+
+The guide uses a schematic illustration and numbered controls, with text alternatives
+on methodology pages. It explains measurement concepts rather than claiming to
+reproduce the source's measuring process. The guide illustration was generated for
+this site; character art remains attributed to HoYoverse.
+
+Profiles include separately sourced agent facts and official profile links. Game
+metadata lives in `tools/reference.json`; localized category names live in
+`tools/reference_labels.json`. Missing gameplay fields are left unknown. Debut
+versions are determined from the agent release date and cited version start dates.
+These facts never enter measurement calculations or rankings.
+
+The original artwork viewer works on profiles and inside the chart. It supports fit,
+true 100% pixel view, zoom/pan, keyboard navigation, background choices and downloads.
+`originals/` contains 75 unmodified source PNG downloads, approximately 110 MiB.
+They load only when the viewer opens and are not part of the service-worker install
+cache. SHA-256, dimensions, byte sizes and source URLs are recorded in the reference
+manifest. Some source PNGs include backgrounds that are absent from curated previews.
+
+To deliberately refresh the external references and originals, run
+`python3 tools/fetch_reference.py`, review the changes, rebuild CJK font subsets if
+needed, then pack and validate. The fetcher is never run by CI. It requests
+`format=original`, verifies PNG format and source dimensions, and never resizes or
+re-encodes the downloaded files. Original source quality varies; files are not
+upscaled or reconstructed from the existing previews.
+
+Shared implementation: `tools/visual_tools.js`, `tools/visual_tools.css`,
+`tools/artwork.js` and `tools/reference.py`. Run `python3 tools/test_reference.py`
+to verify original integrity, metadata coverage, static output and lineup behavior.
+
 ## Measurement settings
 
 The Settings window groups cm/inches, UK/US/EU bra sizing, language and theme on
@@ -148,7 +185,7 @@ methodology. The public measurement schema is unchanged. Old `#view=distribution
 Tool section changes create browser-history entries; field edits replace the
 current entry. A shared sticky container keeps tool navigation above its controls.
 Navigation carries filters, comparison selections, units, theme and language between
-pages. The packed site contains 49 entries, 147 profiles and 644 files (about 26.0 MB).
+pages. The packed site contains 49 entries, 147 profiles and 720 files (about 138.0 MB).
 
 Run the regression and Python/JavaScript parity suite with Node.js available:
 

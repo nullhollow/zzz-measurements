@@ -2,6 +2,19 @@
 
 ## Unreleased — audit implementation
 
+### Visual reference features (2026-10-23)
+
+- Add an effective-height lineup with ruler, doorway and personal-height references,
+  short/tall/faction/custom ordering and shareable selections.
+- Add a schematic measurement guide with numbered controls and static text alternatives.
+- Add source-linked agent faction, Attribute, Specialty, rank, release date and debut
+  version to profiles, with separate metadata and EN/JA/ZH category names.
+- Add a full-window original-art viewer on static and interactive profiles, using
+  75 genuine source PNGs without resizing/re-encoding. Include native-pixel zoom,
+  fit, pan, keyboard controls, background choices and original downloads.
+- Use a compact mobile tool selector, maintain accessible focus and error states,
+  and regenerate existing CJK subsets. Measurement exports and rankings are unchanged.
+
 ### Jane Doe original outfit (2026-10-23)
 
 - Restore the original outfit artwork to Jane's gallery and interactive outfit

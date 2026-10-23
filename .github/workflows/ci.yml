@@ -35,6 +35,7 @@ jobs:
         run: |
           python3 tools/test_analysis.py
           python3 tools/test_roster.py
+          python3 tools/test_reference.py
 
       - name: Theme preferences and palette contrast
         run: python3 tools/test_theme.py

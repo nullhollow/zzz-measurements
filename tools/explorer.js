@@ -1,12 +1,12 @@
 /* Exploration state is separate from the official roster and its derived rules. */
-const TOOL_VIEWS=['distribution','matches','game','sandbox'];
+const TOOL_VIEWS=['distribution','matches','game','sandbox','lineup','guide'];
 const METRIC_KEYS=['height','bust','underbust','waist','hip','thigh'];
 const COMPARE_ROWS=['height','waist','hip','thigh','cup','bust','underbust','sizes','whr','whtr','shape','build','thighNote','figureRead'];
 const DEFAULT_COMPARE_ROWS=['height','waist','hip','thigh','cup','bust','underbust','whr','whtr'];
 const SANDBOX_SLUG='~sandbox';
 let gameRound=null, gameScore={correct:0,total:0,streak:0};
 function explorerDefaults(){
-  return {compareRows:null,compareBase:'',compareHeight:160,sandbox:null,matchSource:'',matchBasis:'raw',matchWeights:null,
+  return {lineupSlugs:defaultLineup(),lineupOrder:'custom',lineupReference:'ruler',lineupReferenceCm:170,guideMetric:'height',compareRows:null,compareBase:'',compareHeight:160,sandbox:null,matchSource:'',matchBasis:'raw',matchWeights:null,
     distMetric:'cup',distBasis:'raw',distCupView:'letters',distSelection:'',gameMetric:'waist',gameBasis:'raw'};
 }
 function validSandbox(raw){
@@ -33,6 +33,11 @@ function readExplorerHash(params){
   try{ const text=params.get('x'); if(text && text.length<=5000) raw=JSON.parse(text); }catch(_){}
   if(!raw || typeof raw!=='object') return {};
   const out={};
+  if(Array.isArray(raw.lineupSlugs))out.lineupSlugs=[...new Set(raw.lineupSlugs.filter(s=>bySlug.has(s)))].slice(0,8);
+  if(['custom','short','tall','faction'].includes(raw.lineupOrder))out.lineupOrder=raw.lineupOrder;
+  if(['none','ruler','door','user'].includes(raw.lineupReference))out.lineupReference=raw.lineupReference;
+  if(Number.isFinite(raw.lineupReferenceCm)&&raw.lineupReferenceCm>=1&&raw.lineupReferenceCm<=300)out.lineupReferenceCm=raw.lineupReferenceCm;
+  if(['height','bust','underbust','waist','hip','thigh'].includes(raw.guideMetric))out.guideMetric=raw.guideMetric;
   out.sandbox=validSandbox(raw.sandbox);
   if(Array.isArray(raw.compareRows)){
     const rows=[...new Set(raw.compareRows.filter(k=>COMPARE_ROWS.includes(k)))];
@@ -129,11 +134,15 @@ if(TOOLS_PAGE){
   const shell=$('.tools-shell');
   new ResizeObserver(()=>document.documentElement.style.setProperty('--tools-offset',shell.offsetHeight+'px')).observe(shell);
 }
+$('#toolSelect')?.addEventListener('change',e=>openTool(e.target.value));
 function renderTool(list){
   const root=$('#toolsView');document.body.dataset.toolView=state.view;
-  const content=state.view==='distribution'?distributionHTML(list):state.view==='matches'?matchesHTML():state.view==='game'?gameHTML():sandboxHTML();
+  if($('#toolSelect')){$('#toolSelect').value=state.view;$('#toolSelect').setAttribute('aria-label',t('tools'));}
+  const content=state.view==='lineup'?lineupHTML():state.view==='guide'?guideHTML():state.view==='distribution'?distributionHTML(list):state.view==='matches'?matchesHTML():state.view==='game'?gameHTML():sandboxHTML();
   root.innerHTML=`<div class="toolhead"><h2 id="toolTitle" tabindex="-1">${esc(t(state.view))}</h2></div>${content}`;
-  if(state.view==='distribution') bindDistribution();
+  if(state.view==='lineup')bindLineup();
+  else if(state.view==='guide')bindGuide();
+  else if(state.view==='distribution') bindDistribution();
   else if(state.view==='matches') bindMatches();
   else if(state.view==='game') bindGame();
   else bindSandbox();

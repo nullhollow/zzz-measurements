@@ -8,7 +8,7 @@ service worker and the crawler files. Nothing else in the repository is served.
 ```
 docs/
   index.html               interactive chart (49 cards pre-rendered)
-  tools.html               cup distributions, matching, game and sandbox
+  tools.html               distributions, matching, game, sandbox, lineup and guide
   methodology.html         method, classes, FAQ
   characters/*.html        49 English profiles
   ja/, zh/                 localized profiles + methodology
@@ -20,11 +20,12 @@ docs/
   robots.txt sitemap.xml .nojekyll
   og.png favicon.* icon-*.png
   fonts/                   22 woff2 + fonts.css + OFL/licence notes (local)
-  images/                  49 sheet crops
+  originals/               75 source-original PNGs, loaded on demand
+  images/                  49 sheet crops + measurement guide
   character_images/        53 portraits + 26 outfit renders + responsive thumbs/
 ```
 
-≈ **644 files / 26.0 MB** (the responsive thumb set adds storage but cuts transfer).
+≈ **720 files / 138.0 MB** (the responsive thumb set adds storage but cuts transfer).
 
 ## 1. Set the URL
 

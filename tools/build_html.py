@@ -190,8 +190,9 @@ explorer_i18n = json.loads((ROOT / 'tools/explorer_i18n.json').read_text())
 for lang, strings in explorer_i18n.items():
     copy = ',\n    '.join(f'{key}: {json.dumps(value, ensure_ascii=False)}' for key, value in strings.items()) + ','
     tpl = tpl.replace(f'/*__EXPLORER_I18N_{lang.upper()}__*/', copy)
-for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.js'), ('SETTINGS_JS', 'settings.js'), ('ROSTER_JS', 'roster.js'), ('EXPLORER_CSS', 'explorer.css')):
+for token, source in (('ANALYSIS_JS', 'analysis.js'), ('EXPLORER_JS', 'explorer.js'), ('SETTINGS_JS', 'settings.js'), ('ROSTER_JS', 'roster.js'), ('VISUAL_JS','visual_tools.js'), ('ARTWORK_JS','artwork.js'), ('VISUAL_CSS','visual_tools.css'), ('EXPLORER_CSS', 'explorer.css')):
     tpl = tpl.replace(f'/*__{token}__*/', (ROOT / 'tools' / source).read_text())
+tpl=tpl.replace('/*__REFERENCE__*/{}',json.dumps(json.loads((ROOT/'tools/reference.json').read_text()),ensure_ascii=False).replace('</','<\\/')).replace('/*__REFERENCE_LABELS__*/{}',json.dumps(json.loads((ROOT/'tools/reference_labels.json').read_text()),ensure_ascii=False).replace('</','<\\/'))
 tpl = tpl.replace('/*__THEME_JS__*/', THEME_JS)
 tpl = re.sub(r'<style>(.*?)</style>', lambda m: '<style>' + adaptive_css(m[1]) + '</style>', tpl, flags=re.S)
 
@@ -212,7 +213,9 @@ def render_interactive(tools=False):
         page = page.replace('data-i18n="skip">Skip to the roster', 'data-i18n="skipTools">Skip to the tools')
         nav = '<div class="tools-shell"><nav class="tooltabs" id="toolsNav" aria-label="Tools">' + ''.join(
             f'<a href="tools.html#view={key}" data-tool-link="{key}" data-i18n="{key}">{_html.escape(explorer_i18n["en"][key])}</a>'
-            for key in ('distribution', 'matches', 'game', 'sandbox')) + settings_button + '</nav>'
+            for key in ('distribution', 'matches', 'game', 'sandbox', 'lineup', 'guide')) + settings_button + '</nav>'
+        picker='<select id="toolSelect" class="tool-picker" aria-label="Tools">'+''.join(f'<option value="{key}" data-i18n="{key}">{_html.escape(explorer_i18n["en"][key])}</option>' for key in ('distribution','matches','game','sandbox','lineup','guide'))+'</select>'
+        nav=nav.replace('aria-label="Tools">','aria-label="Tools">'+picker,1)
         page = page.replace('  <div class="wrap">', '</div>\n  <div class="wrap">', 1)
     fallback = ('<p data-i18n="toolsNoScript">' + _html.escape(explorer_i18n['en']['toolsNoScript']) +
                 '</p><a href="index.html">Measurements</a>') if tools else noscript

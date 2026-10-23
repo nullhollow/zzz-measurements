@@ -669,6 +669,7 @@
     a{color:#000;text-decoration:underline}
   }
 /*__EXPLORER_CSS__*/
+/*__VISUAL_CSS__*/
 </style>
 </head>
 <body data-page="__PAGE__">
@@ -1685,7 +1686,8 @@ function openModal(slug, opts){
           <div class="ochips">${chips.map(c=>`<button type="button" class="ochip${c.sel?' on':''}" ${c.attrs} aria-pressed="${c.sel?'true':'false'}" title="${esc(c.type)}">${esc(c.label)}${c.dot?'<i class="mdot" aria-hidden="true"></i>':''}</button>`).join("")}</div>
         </div>` : "";
   const cmpOn = state.compare.includes(d.slug);
-  const srcLink = r.source_page ? `<a href="https://zenless-zone-zero.fandom.com/wiki/${encodeURIComponent(r.source_page.replace(/ /g,'_'))}" target="_blank" rel="noopener">${esc(r.source_page)}</a>` : '—';
+  const sourcePage=r.source_page?.startsWith('(')?r.source_file:r.source_page;
+  const srcLink = sourcePage ? `<a href="https://zenless-zone-zero.fandom.com/wiki/${encodeURIComponent(sourcePage.replace(/ /g,'_'))}" target="_blank" rel="noopener">${esc(r.source_page?.startsWith('(')?nameOf(d):sourcePage)}</a>` : '—';
   const artSrc = moreOn ? `character_images/${moreOn.file}` : official ? officialSrc(r) : imgSrc(d);
   const artAvif = moreOn && moreOn.avif ? `character_images/${moreOn.avif}` : null;
   const artTag = artAvif
@@ -1703,12 +1705,14 @@ function openModal(slug, opts){
           <div class="seg" role="group" aria-label="Portrait">${segBtn('v','sheet',!official && !moreOn,t('sheet'),!!moreOn)}${segBtn('v','official',official,t('official'))}</div>
         </div>
         ${outfitStrip}
+        <button class="btn" id="viewOriginal" ${official?'':'hidden'}>${esc(t('viewOriginal'))}</button>
         ${artTag}
         <div class="scale">${cap}</div>
         ${outfitNote}
         ${d.merged?`<div class="mnote" style="margin:0 9px 10px">${t('mergedNote').replace('{outfit}', esc(d.skin.outfit))}</div>`:''}
       </div>
       <div class="mdata">
+        ${agentInfoHTML(d)}
         <div class="sect"><h3>${esc(t('measurements'))}</h3><div class="kgrid">
           ${meas(t('bust'),"bust")}
           ${meas(t('underbust'),"band")}
@@ -1778,6 +1782,7 @@ function openModal(slug, opts){
         </div>
       </div>
     </div>`;
+  $('#viewOriginal').onclick=()=>ArtworkViewer.open(artworkItems(d),I18N[state.lang],moreOn?(hasSkin?2:1)+mctx.more:skinOn?1:0,$('#viewOriginal'));
   const mimg = $("#mimg");
   if(mimg) mimg.onerror = () => { mimg.onerror = null; mimg.src = officialSrc(r); };
   if(!wasOpen) lastFocus = document.activeElement;
@@ -2042,6 +2047,7 @@ $("#fShare").addEventListener("click", share);
 
 /* keyboard + routing */
 document.addEventListener("keydown", e=>{
+  if($("#artViewer")?.open)return;
   if($("#measurementHelp")?.open)return;
   if($("#savedDialog").open){trapDialogFocus($("#savedDialog"),e);return;}
   if($("#settingsDialog").open){trapSettingsFocus(e);return;}
@@ -2156,6 +2162,8 @@ function applyHashState(){
 
 /*__EXPLORER_JS__*/
 /*__ROSTER_JS__*/
+/*__VISUAL_JS__*/
+/*__ARTWORK_JS__*/
 
 (function boot(){
   try{

@@ -1,0 +1,182 @@
+{
+  "Anomaly": {
+    "en": "Anomaly",
+    "ja": "異常",
+    "zh": "异常"
+  },
+  "Armorer": {
+    "en": "Armorer",
+    "ja": "鋭御",
+    "zh": "锋御"
+  },
+  "Attack": {
+    "en": "Attack",
+    "ja": "強攻",
+    "zh": "强攻"
+  },
+  "Defense": {
+    "en": "Defense",
+    "ja": "防護",
+    "zh": "防护"
+  },
+  "Electric": {
+    "en": "Electric",
+    "ja": "電気属性",
+    "zh": "电属性"
+  },
+  "Ether": {
+    "en": "Ether",
+    "ja": "エーテル",
+    "zh": "以太"
+  },
+  "Fire": {
+    "en": "Fire",
+    "ja": "炎属性",
+    "zh": "火属性"
+  },
+  "Ice": {
+    "en": "Ice",
+    "ja": "氷属性",
+    "zh": "冰属性"
+  },
+  "Lumiflux": {
+    "en": "Lumiflux",
+    "ja": "流明",
+    "zh": "流明"
+  },
+  "Physical": {
+    "en": "Physical",
+    "ja": "物理",
+    "zh": "物理"
+  },
+  "Rupture": {
+    "en": "Rupture",
+    "ja": "命破",
+    "zh": "命破"
+  },
+  "Stun": {
+    "en": "Stun",
+    "ja": "撃破",
+    "zh": "击破"
+  },
+  "Support": {
+    "en": "Support",
+    "ja": "支援",
+    "zh": "支援"
+  },
+  "Wind": {
+    "en": "Wind",
+    "ja": "風",
+    "zh": "风"
+  },
+  "Airspace Patrol Department": {
+    "en": "Airspace Patrol Department",
+    "ja": "空域巡警局",
+    "zh": "空域巡戍局"
+  },
+  "Angels of Delusion": {
+    "en": "Angels of Delusion",
+    "ja": "「妄想エンジェル」",
+    "zh": "「妄想天使」"
+  },
+  "Belobog Heavy Industries": {
+    "en": "Belobog Heavy Industries",
+    "ja": "白祇重工",
+    "zh": "白祇重工"
+  },
+  "Covenant of Dayat": {
+    "en": "Covenant of Dayat",
+    "ja": "ダアト結社",
+    "zh": "达识结社"
+  },
+  "Criminal Investigation Special Response Team": {
+    "en": "Criminal Investigation Special Response Team",
+    "ja": "特務捜査班",
+    "zh": "刑侦特勤组"
+  },
+  "Cunning Hares": {
+    "en": "Cunning Hares",
+    "ja": "邪兎屋",
+    "zh": "狡兔屋"
+  },
+  "External Strategy Department": {
+    "en": "External Strategy Department",
+    "ja": "外務計策局",
+    "zh": "外务筹策局"
+  },
+  "Flint Workshop": {
+    "en": "Flint Workshop",
+    "ja": "フリンツ工房",
+    "zh": "弗林特工坊"
+  },
+  "Hollow Special Operations Section 6": {
+    "en": "Hollow Special Operations Section 6",
+    "ja": "対ホロウ特別行動部第六課",
+    "zh": "对空洞特别行动部第六课"
+  },
+  "Krampus Compliance Authority": {
+    "en": "Krampus Compliance Authority",
+    "ja": "「クランプスの黒枝」",
+    "zh": "「坎卜斯黑枝」"
+  },
+  "Metropolitan Order Division": {
+    "en": "Metropolitan Order Division",
+    "ja": "都市秩序部",
+    "zh": "都市秩序部"
+  },
+  "Mockingbird": {
+    "en": "Mockingbird",
+    "ja": "「モッキンバード」",
+    "zh": "「反舌鸟」"
+  },
+  "Obol Squad": {
+    "en": "Obol Squad",
+    "ja": "オボルス小隊",
+    "zh": "奥波勒斯小队"
+  },
+  "Phaethon": {
+    "en": "Phaethon",
+    "ja": "「パエトーン」",
+    "zh": "「法厄同」"
+  },
+  "Sons of Calydon": {
+    "en": "Sons of Calydon",
+    "ja": "カリュドーンの子",
+    "zh": "卡吕冬之子"
+  },
+  "Spook Shack": {
+    "en": "Spook Shack",
+    "ja": "怪啖屋",
+    "zh": "怪啖屋"
+  },
+  "Stars of Lyra": {
+    "en": "Stars of Lyra",
+    "ja": "スターズ・オブ・リラ",
+    "zh": "天琴座"
+  },
+  "Victoria Housekeeping Co.": {
+    "en": "Victoria Housekeeping Co.",
+    "ja": "ヴィクトリア家政",
+    "zh": "维多利亚家政"
+  },
+  "Yunkui Summit": {
+    "en": "Yunkui Summit",
+    "ja": "雲嶽山",
+    "zh": "云岿山"
+  },
+  "Auric Ink": {
+    "en": "Auric Ink",
+    "ja": "玄墨",
+    "zh": "玄墨"
+  },
+  "Frost": {
+    "en": "Frost",
+    "ja": "霜烈",
+    "zh": "烈霜"
+  },
+  "Honed Edge": {
+    "en": "Honed Edge",
+    "ja": "凛刃",
+    "zh": "凛刃"
+  }
+}

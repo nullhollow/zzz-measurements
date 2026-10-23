@@ -1,0 +1,1540 @@
+{
+  "agents": {
+    "zhao": {
+      "faction": "Krampus Compliance Authority",
+      "rank": "S",
+      "attribute": "Ice",
+      "specialty": "Defense",
+      "release": "2025-12-30",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Zhao",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=160758",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=160758",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=160758"
+      },
+      "checked": "2026-10-23",
+      "version": "2.5",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.5"
+    },
+    "ju_fufu": {
+      "faction": "Yunkui Summit",
+      "rank": "S",
+      "attribute": "Fire",
+      "specialty": "Stun",
+      "release": "2025-06-25",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Ju_Fufu",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=155659",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=155659",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=155659"
+      },
+      "checked": "2026-10-23",
+      "version": "2.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.0"
+    },
+    "soukaku": {
+      "faction": "Hollow Special Operations Section 6",
+      "rank": "A",
+      "attribute": "Ice",
+      "specialty": "Support",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Soukaku",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=103295",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=103295",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=103295"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "sunna": {
+      "faction": "Angels of Delusion",
+      "rank": "S",
+      "attribute": "Physical",
+      "specialty": "Support",
+      "release": "2026-02-06",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Sunna",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=161791",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=161791",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=161791"
+      },
+      "checked": "2026-10-23",
+      "version": "2.6",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.6"
+    },
+    "roxy": {
+      "faction": "Flint Workshop",
+      "rank": "S",
+      "attribute": "Wind",
+      "specialty": "Stun",
+      "release": "2026-09-30",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Roxy_Ifrita_Pryce",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=165591",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=165591",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=165591"
+      },
+      "checked": "2026-10-23",
+      "version": "3.2",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/3.2"
+    },
+    "aria": {
+      "faction": "Angels of Delusion",
+      "rank": "S",
+      "attribute": "Ether",
+      "specialty": "Anomaly",
+      "release": "2026-03-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Aria",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=161792",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=161792",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=161792"
+      },
+      "checked": "2026-10-23",
+      "version": "2.6",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.6"
+    },
+    "aria_construct": {
+      "faction": "Angels of Delusion",
+      "rank": "S",
+      "attribute": "Ether",
+      "specialty": "Anomaly",
+      "release": "2026-03-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Aria",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=161792",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=161792",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=161792"
+      },
+      "checked": "2026-10-23",
+      "version": "2.6",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.6"
+    },
+    "koleda": {
+      "faction": "Belobog Heavy Industries",
+      "rank": "S",
+      "attribute": "Fire",
+      "specialty": "Stun",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Koleda_Belobog",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102708",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102708",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=102708"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "norma": {
+      "faction": "External Strategy Department",
+      "rank": "S",
+      "attribute": "Fire",
+      "specialty": "Stun",
+      "release": "2026-07-08",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Norma_Hollowell",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=163786",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=163786",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=163786"
+      },
+      "checked": "2026-10-23",
+      "version": "3.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/3.0"
+    },
+    "lucy": {
+      "faction": "Sons of Calydon",
+      "rank": "A",
+      "attribute": "Fire",
+      "specialty": "Support",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Luciana_de_Montefio",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124308",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124308",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=124308"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "nangong_yu": {
+      "faction": "Angels of Delusion",
+      "rank": "S",
+      "attribute": "Ether",
+      "specialty": "Stun",
+      "release": "2026-03-24",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Nangong_Yu",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=162652",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=162652",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=162652"
+      },
+      "checked": "2026-10-23",
+      "version": "2.7",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.7"
+    },
+    "dialyn": {
+      "faction": "Krampus Compliance Authority",
+      "rank": "S",
+      "attribute": "Physical",
+      "specialty": "Stun",
+      "release": "2025-11-26",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Dialyn",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=160142",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=160142",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=160142"
+      },
+      "checked": "2026-10-23",
+      "version": "2.4",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.4"
+    },
+    "piper": {
+      "faction": "Sons of Calydon",
+      "rank": "A",
+      "attribute": "Physical",
+      "specialty": "Anomaly",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Piper_Wheel",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124310",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124310",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=124310"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "corin": {
+      "faction": "Victoria Housekeeping Co.",
+      "rank": "A",
+      "attribute": "Physical",
+      "specialty": "Attack",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Corin_Wickes",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102477",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102477",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=102477"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "nekomata": {
+      "faction": "Cunning Hares",
+      "rank": "S",
+      "attribute": "Physical",
+      "specialty": "Attack",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Nekomiya_Mana",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102427",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102427",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=102427"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "qingyi": {
+      "faction": "Criminal Investigation Special Response Team",
+      "rank": "S",
+      "attribute": "Electric",
+      "specialty": "Stun",
+      "release": "2024-08-14",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Qingyi",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124660",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124660",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=124660"
+      },
+      "checked": "2026-10-23",
+      "version": "1.1",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.1"
+    },
+    "phoenix": {
+      "faction": "Krampus Compliance Authority",
+      "rank": "S",
+      "attribute": "Fire",
+      "specialty": "Anomaly",
+      "release": "2026-10-21",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Phoenix_Reffaella",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=166075",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=166075",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=166075"
+      },
+      "checked": "2026-10-23",
+      "version": "3.3",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/3.3"
+    },
+    "seed": {
+      "faction": "Obol Squad",
+      "rank": "S",
+      "attribute": "Electric",
+      "specialty": "Attack",
+      "release": "2025-09-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Seed",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=157829",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=157829",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=157829"
+      },
+      "checked": "2026-10-23",
+      "version": "2.2",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.2"
+    },
+    "yuzuha": {
+      "faction": "Spook Shack",
+      "rank": "S",
+      "attribute": "Physical",
+      "specialty": "Support",
+      "release": "2025-07-16",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Ukinami_Yuzuha",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=156729",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=156729",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=156729"
+      },
+      "checked": "2026-10-23",
+      "version": "2.1",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.1"
+    },
+    "miyabi": {
+      "faction": "Hollow Special Operations Section 6",
+      "rank": "S",
+      "attribute": "Frost",
+      "specialty": "Anomaly",
+      "release": "2024-12-18",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Hoshimi_Miyabi",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=103379",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=103379",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=103379"
+      },
+      "checked": "2026-10-23",
+      "version": "1.4",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.4"
+    },
+    "vivian": {
+      "faction": "Mockingbird",
+      "rank": "S",
+      "attribute": "Ether",
+      "specialty": "Anomaly",
+      "release": "2025-04-23",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Vivian_Banshee",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=154605",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=154605",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=154605"
+      },
+      "checked": "2026-10-23",
+      "version": "1.7",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.7"
+    },
+    "belle": {
+      "faction": "Phaethon",
+      "rank": null,
+      "attribute": null,
+      "specialty": null,
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Belle",
+      "official": {
+        "ja": "https://zenless-zone-zero.fandom.com/wiki/Belle",
+        "zh": "https://zenless-zone-zero.fandom.com/wiki/Belle",
+        "en": "https://zenless-zone-zero.fandom.com/wiki/Belle"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "anby": {
+      "faction": "Cunning Hares",
+      "rank": "A",
+      "attribute": "Electric",
+      "specialty": "Stun",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Anby_Demara",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102103",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102103",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=102103"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "soldier_11": {
+      "faction": "Obol Squad",
+      "rank": "S",
+      "attribute": "Fire",
+      "specialty": "Attack",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Soldier_11",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102292",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102292",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=102292"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "lucia": {
+      "faction": "Spook Shack",
+      "rank": "S",
+      "attribute": "Ether",
+      "specialty": "Support",
+      "release": "2025-10-15",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Lucia_Elowen",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=158985",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=158985",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=158985"
+      },
+      "checked": "2026-10-23",
+      "version": "2.3",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.3"
+    },
+    "promeia": {
+      "faction": "Krampus Compliance Authority",
+      "rank": "S",
+      "attribute": "Ice",
+      "specialty": "Anomaly",
+      "release": "2026-05-06",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Promeia",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=163316",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=163316",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=163316"
+      },
+      "checked": "2026-10-23",
+      "version": "2.8",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.8"
+    },
+    "claret": {
+      "faction": "Flint Workshop",
+      "rank": "S",
+      "attribute": "Electric",
+      "specialty": "Armorer",
+      "release": "2026-09-09",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Claret_Flint",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=165587",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=165587",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=165587"
+      },
+      "checked": "2026-10-23",
+      "version": "3.2",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/3.2"
+    },
+    "ellen_joe": {
+      "faction": "Victoria Housekeeping Co.",
+      "rank": "S",
+      "attribute": "Ice",
+      "specialty": "Attack",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Ellen_Joe",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=113671",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=113671",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=113671"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "alice": {
+      "faction": "Spook Shack",
+      "rank": "S",
+      "attribute": "Physical",
+      "specialty": "Anomaly",
+      "release": "2025-08-06",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Alice_Thymefield",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=156728",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=156728",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=156728"
+      },
+      "checked": "2026-10-23",
+      "version": "2.1",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.1"
+    },
+    "ye_shunguang": {
+      "faction": "Yunkui Summit",
+      "rank": "S",
+      "attribute": "Honed Edge",
+      "specialty": "Attack",
+      "release": "2025-12-30",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Ye_Shunguang",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=160762",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=160762",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=160762"
+      },
+      "checked": "2026-10-23",
+      "version": "2.5",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.5"
+    },
+    "orphie": {
+      "faction": "Obol Squad",
+      "rank": "S",
+      "attribute": "Fire",
+      "specialty": "Attack",
+      "release": "2025-09-24",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Orphie_Magnusson_%26_Magus",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=157833",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=157833",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=157833"
+      },
+      "checked": "2026-10-23",
+      "version": "2.2",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.2"
+    },
+    "burnice": {
+      "faction": "Sons of Calydon",
+      "rank": "S",
+      "attribute": "Fire",
+      "specialty": "Anomaly",
+      "release": "2024-10-16",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Burnice_White",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=125214",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=125214",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=125214"
+      },
+      "checked": "2026-10-23",
+      "version": "1.2",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.2"
+    },
+    "cissia": {
+      "faction": "Metropolitan Order Division",
+      "rank": "S",
+      "attribute": "Electric",
+      "specialty": "Attack",
+      "release": "2026-04-15",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Cissia",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=162680",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=162680",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=162680"
+      },
+      "checked": "2026-10-23",
+      "version": "2.7",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.7"
+    },
+    "nicole": {
+      "faction": "Cunning Hares",
+      "rank": "A",
+      "attribute": "Ether",
+      "specialty": "Support",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Nicole_Demara",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=102183",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=102183",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=102183"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "trigger": {
+      "faction": "Obol Squad",
+      "rank": "S",
+      "attribute": "Electric",
+      "specialty": "Stun",
+      "release": "2025-04-02",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Trigger",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=129638",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=129638",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=129638"
+      },
+      "checked": "2026-10-23",
+      "version": "1.6",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.6"
+    },
+    "jane_doe": {
+      "faction": "Criminal Investigation Special Response Team",
+      "rank": "S",
+      "attribute": "Physical",
+      "specialty": "Anomaly",
+      "release": "2024-09-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Jane_Doe",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=124675",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=124675",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=124675"
+      },
+      "checked": "2026-10-23",
+      "version": "1.1",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.1"
+    },
+    "zhu_yuan": {
+      "faction": "Criminal Investigation Special Response Team",
+      "rank": "S",
+      "attribute": "Ether",
+      "specialty": "Attack",
+      "release": "2024-07-24",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Zhu_Yuan",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=122782",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=122782",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=122782"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "sigrid": {
+      "faction": "Airspace Patrol Department",
+      "rank": "S",
+      "attribute": "Ice",
+      "specialty": "Attack",
+      "release": "2026-08-19",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Sigrid_de_L%27Azur",
+      "official": {
+        "ja": "https://zenless-zone-zero.fandom.com/wiki/Sigrid_de_L%27Azur",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=164897",
+        "en": "https://zenless-zone-zero.fandom.com/wiki/Sigrid_de_L%27Azur"
+      },
+      "checked": "2026-10-23",
+      "version": "3.1",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/3.1"
+    },
+    "astra_yao": {
+      "faction": "Stars of Lyra",
+      "rank": "S",
+      "attribute": "Ether",
+      "specialty": "Support",
+      "release": "2025-01-22",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Astra_Yao",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=127387",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=127387",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=127387"
+      },
+      "checked": "2026-10-23",
+      "version": "1.5",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.5"
+    },
+    "evelyn": {
+      "faction": "Stars of Lyra",
+      "rank": "S",
+      "attribute": "Fire",
+      "specialty": "Attack",
+      "release": "2025-02-12",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Evelyn_Chevalier",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=127403",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=127403",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=127403"
+      },
+      "checked": "2026-10-23",
+      "version": "1.5",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.5"
+    },
+    "remielle": {
+      "faction": "Covenant of Dayat",
+      "rank": "S",
+      "attribute": "Lumiflux",
+      "specialty": "Anomaly",
+      "release": "2026-07-29",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Remielle_Dan",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=164866",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=164866",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=164866"
+      },
+      "checked": "2026-10-23",
+      "version": "3.1",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/3.1"
+    },
+    "pulchra": {
+      "faction": "Sons of Calydon",
+      "rank": "A",
+      "attribute": "Physical",
+      "specialty": "Stun",
+      "release": "2025-03-12",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Pulchra_Fellini",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=129637",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=129637",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=129637"
+      },
+      "checked": "2026-10-23",
+      "version": "1.6",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.6"
+    },
+    "yi_xuan": {
+      "faction": "Yunkui Summit",
+      "rank": "S",
+      "attribute": "Auric Ink",
+      "specialty": "Rupture",
+      "release": "2025-06-06",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Yixuan",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=155654",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=155654",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=155654"
+      },
+      "checked": "2026-10-23",
+      "version": "2.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.0"
+    },
+    "yanagi": {
+      "faction": "Hollow Special Operations Section 6",
+      "rank": "S",
+      "attribute": "Electric",
+      "specialty": "Anomaly",
+      "release": "2024-11-06",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Tsukishiro_Yanagi",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=126040",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=126040",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=126040"
+      },
+      "checked": "2026-10-23",
+      "version": "1.3",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.3"
+    },
+    "grace": {
+      "faction": "Belobog Heavy Industries",
+      "rank": "S",
+      "attribute": "Electric",
+      "specialty": "Anomaly",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Grace_Howard",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=113532",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=113532",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=113532"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "velina": {
+      "faction": "External Strategy Department",
+      "rank": "S",
+      "attribute": "Wind",
+      "specialty": "Anomaly",
+      "release": "2026-06-17",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Velina_Airgid",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=163785",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=163785",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=163785"
+      },
+      "checked": "2026-10-23",
+      "version": "3.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/3.0"
+    },
+    "caesar": {
+      "faction": "Sons of Calydon",
+      "rank": "S",
+      "attribute": "Physical",
+      "specialty": "Defense",
+      "release": "2024-09-25",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Caesar_King",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=125210",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=125210",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=125210"
+      },
+      "checked": "2026-10-23",
+      "version": "1.2",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.2"
+    },
+    "yidhari": {
+      "faction": "Spook Shack",
+      "rank": "S",
+      "attribute": "Ice",
+      "specialty": "Rupture",
+      "release": "2025-11-05",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Yidhari_Murphy",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=158997",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=158997",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=158997"
+      },
+      "checked": "2026-10-23",
+      "version": "2.3",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/2.3"
+    },
+    "rina": {
+      "faction": "Victoria Housekeeping Co.",
+      "rank": "S",
+      "attribute": "Electric",
+      "specialty": "Support",
+      "release": "2024-07-04",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Alexandrina_Sebastiane",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/character?id=113612",
+        "zh": "https://zenless.hoyoverse.com/zh-cn/character?id=113612",
+        "en": "https://zenless.hoyoverse.com/en-us/character?id=113612"
+      },
+      "checked": "2026-10-23",
+      "version": "1.0",
+      "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    }
+  },
+  "art": {
+    "zhao.webp": {
+      "file": "originals/zhao.png",
+      "width": 1444,
+      "height": 1516,
+      "bytes": 1336584,
+      "sha256": "cffe9608e0d40578853b0f99191e35f777304ba9a273c869087cecec5b89ee97",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/a6/Agent_Zhao_Portrait.png/revision/latest?cb=20251230033840&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Zhao_Portrait.png",
+      "format": "PNG"
+    },
+    "ju_fufu.webp": {
+      "file": "originals/ju_fufu.png",
+      "width": 1064,
+      "height": 1712,
+      "bytes": 780383,
+      "sha256": "0c390dd31fc50b92f557c984a01d185a5f3aea7cec760f5c571dee5c10b22861",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/2/2a/Agent_Ju_Fufu_Portrait.png/revision/latest?cb=20250606053607&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Ju_Fufu_Portrait.png",
+      "format": "PNG"
+    },
+    "soukaku.webp": {
+      "file": "originals/soukaku.png",
+      "width": 1332,
+      "height": 1776,
+      "bytes": 828949,
+      "sha256": "f4d6f1ae2a2ee5de4dbbb11f69d63c9c8481e52962b01659b74f808bca190383",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/3/35/Agent_Soukaku_Portrait.png/revision/latest?cb=20240707011630&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Soukaku_Portrait.png",
+      "format": "PNG"
+    },
+    "sunna.webp": {
+      "file": "originals/sunna.png",
+      "width": 808,
+      "height": 1800,
+      "bytes": 990824,
+      "sha256": "30fbde333f13e20b9bb425c3f303fd39c7316fd2231c8e104431917874ff8049",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/3/39/Agent_Sunna_Portrait.png/revision/latest?cb=20260207011806&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Sunna_Portrait.png",
+      "format": "PNG"
+    },
+    "roxy.webp": {
+      "file": "originals/roxy.png",
+      "width": 1072,
+      "height": 1916,
+      "bytes": 1503549,
+      "sha256": "50cf911bcce47a4e0c7a05eb70628a83bf1b7500d4163660e5b17131fb00c883",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/e/e8/Agent_Roxy_Ifrita_Pryce_Portrait.png/revision/latest?cb=20260910144945&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Roxy_Ifrita_Pryce_Portrait.png",
+      "format": "PNG"
+    },
+    "aria.webp": {
+      "file": "originals/aria.png",
+      "width": 1052,
+      "height": 2020,
+      "bytes": 1273793,
+      "sha256": "a84a70f66fb997493684b39d166da4dbecd9e6979dbe251fdbf61b8c574365bc",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/f/ff/Agent_Aria_Human_Portrait.png/revision/latest?cb=20260206215945&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Aria_Human_Portrait.png",
+      "format": "PNG"
+    },
+    "aria_construct.webp": {
+      "file": "originals/aria_construct.png",
+      "width": 776,
+      "height": 1856,
+      "bytes": 733744,
+      "sha256": "1a409f42b8cbbbc6486062e9a5c5ee509b4442995afd8e1df3c4de51a567f8ee",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/1/12/Agent_Aria_Robot_Portrait.png/revision/latest?cb=20260206220126&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Aria_Robot_Portrait.png",
+      "format": "PNG"
+    },
+    "koleda.webp": {
+      "file": "originals/koleda.png",
+      "width": 1472,
+      "height": 1712,
+      "bytes": 1252684,
+      "sha256": "a351cf6fc4bc52a975bd4e8100da7818f9b724d89787ed0f5354acdfef5fbaa4",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/d/d6/Agent_Koleda_Belobog_Portrait.png/revision/latest?cb=20240706234545&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Koleda_Belobog_Portrait.png",
+      "format": "PNG"
+    },
+    "norma.webp": {
+      "file": "originals/norma.png",
+      "width": 1431,
+      "height": 2074,
+      "bytes": 3459144,
+      "sha256": "7d84a4bfd8a6a153139e0dc4749fad3f70f0f6905be16e34bbf1b6701b8b5215",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/1/10/Agent_Norma_Hollowell_Portrait.png/revision/latest?cb=20260618004923&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Norma_Hollowell_Portrait.png",
+      "format": "PNG"
+    },
+    "lucy.webp": {
+      "file": "originals/lucy.png",
+      "width": 1356,
+      "height": 1560,
+      "bytes": 1079654,
+      "sha256": "bfca62aa9a28dbb42197fb7b192f84bbf8196db27d4ac9a3052941c0bc3a73b6",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/9/9f/Agent_Luciana_de_Montefio_Portrait.png/revision/latest?cb=20240707002258&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Luciana_de_Montefio_Portrait.png",
+      "format": "PNG"
+    },
+    "lucy_swimsuit.webp": {
+      "file": "originals/lucy_swimsuit.png",
+      "width": 1428,
+      "height": 2216,
+      "bytes": 2090205,
+      "sha256": "e5136e1c37dee64c526d78740f3fd55b31d2033cc379a81613dfeefa23cb6d1d",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/a3/Agent_Luciana_de_Montefio_Princess_on_Holiday_Portrait.png/revision/latest?cb=20260729203024&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Luciana_de_Montefio_Princess_on_Holiday_Portrait.png",
+      "format": "PNG"
+    },
+    "nangong_yu.webp": {
+      "file": "originals/nangong_yu.png",
+      "width": 1384,
+      "height": 2052,
+      "bytes": 1670774,
+      "sha256": "14b54c296be1e23514f574eecb200127e7c28842f4accd217152f2cce719c870",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/2/27/Agent_Nangong_Yu_Portrait.png/revision/latest?cb=20260306125628&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Nangong_Yu_Portrait.png",
+      "format": "PNG"
+    },
+    "dialyn.webp": {
+      "file": "originals/dialyn.png",
+      "width": 1284,
+      "height": 2300,
+      "bytes": 1734292,
+      "sha256": "7d501dcf969bc958eed4b7836a1888607dfb339b87011956e1f95f42227257a8",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/9/9f/Agent_Dialyn_Portrait.png/revision/latest?cb=20251126105302&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Dialyn_Portrait.png",
+      "format": "PNG"
+    },
+    "piper.webp": {
+      "file": "originals/piper.png",
+      "width": 880,
+      "height": 1824,
+      "bytes": 739548,
+      "sha256": "8183c355d3f09338a6448812f70ae710c332c68947f69d5bb7a52f04f63c9d49",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/a9/Agent_Piper_Wheel_Portrait.png/revision/latest?cb=20240707002233&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Piper_Wheel_Portrait.png",
+      "format": "PNG"
+    },
+    "corin.webp": {
+      "file": "originals/corin.png",
+      "width": 1344,
+      "height": 1752,
+      "bytes": 1572476,
+      "sha256": "6d03eddf40e57d3a6f05344a48c31f94770363d8bcb63e056215cc31f5120c59",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/c/cf/Agent_Corin_Wickes_Portrait.png/revision/latest?cb=20240706234305&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Corin_Wickes_Portrait.png",
+      "format": "PNG"
+    },
+    "nekomata.webp": {
+      "file": "originals/nekomata.png",
+      "width": 932,
+      "height": 1480,
+      "bytes": 792930,
+      "sha256": "0232e316b201a7ed7ec6258bc9879b13f6eadaca12948313dc5bdb2de82783af",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/b/bc/Agent_Nekomiya_Mana_Portrait.png/revision/latest?cb=20240706234603&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Nekomiya_Mana_Portrait.png",
+      "format": "PNG"
+    },
+    "qingyi.webp": {
+      "file": "originals/qingyi.png",
+      "width": 984,
+      "height": 1712,
+      "bytes": 620062,
+      "sha256": "15ee8783ac1b186c79439eb2527a7714a770bb0094aaef75bfbeb65db896d01b",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/d/d3/Agent_Qingyi_Portrait.png/revision/latest?cb=20251022204525&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Qingyi_Portrait.png",
+      "format": "PNG"
+    },
+    "seed.webp": {
+      "file": "originals/seed.png",
+      "width": 891,
+      "height": 1999,
+      "bytes": 1202607,
+      "sha256": "49652b894c9e5259b80d27e89421006d6933f6a88d2bda4f789d0d88a7e19a80",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/6/68/Agent_Seed_Portrait.png/revision/latest?cb=20250904042745&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Seed_Portrait.png",
+      "format": "PNG"
+    },
+    "yuzuha.webp": {
+      "file": "originals/yuzuha.png",
+      "width": 1264,
+      "height": 2440,
+      "bytes": 1263642,
+      "sha256": "04ff3b2b822b512a42fe7ba726e03e28c6b66f7ded2fddfa30c050a4b04d6f41",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/6/6d/Agent_Ukinami_Yuzuha_Portrait.png/revision/latest?cb=20250716024914&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Ukinami_Yuzuha_Portrait.png",
+      "format": "PNG"
+    },
+    "miyabi.webp": {
+      "file": "originals/miyabi.png",
+      "width": 2749,
+      "height": 4338,
+      "bytes": 8279954,
+      "sha256": "fb385b5754a902fed5b73f803334567373b687149ec3775ea42afb4c30f24ddb",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/d/da/Agent_Hoshimi_Miyabi_Portrait.png/revision/latest?cb=20250329051641&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Hoshimi_Miyabi_Portrait.png",
+      "format": "PNG"
+    },
+    "vivian.webp": {
+      "file": "originals/vivian.png",
+      "width": 1468,
+      "height": 2680,
+      "bytes": 1385283,
+      "sha256": "52ac860f7e51d1e83f991e8ea1495128e14a0a255017c9b52d46044bc5539211",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/f/f5/Agent_Vivian_Banshee_Portrait.png/revision/latest?cb=20250423003356&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Vivian_Banshee_Portrait.png",
+      "format": "PNG"
+    },
+    "vivian_swimsuit.webp": {
+      "file": "originals/vivian_swimsuit.png",
+      "width": 1280,
+      "height": 2704,
+      "bytes": 1177314,
+      "sha256": "aabeb39f59c28c8845781fc58fca87201204e5fb9e400ff9c486335e9edbd0b4",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/a3/Agent_Vivian_Banshee_Iris_of_the_Shore_Portrait.png/revision/latest?cb=20251015180206&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Vivian_Banshee_Iris_of_the_Shore_Portrait.png",
+      "format": "PNG"
+    },
+    "belle.webp": {
+      "file": "originals/belle.png",
+      "width": 652,
+      "height": 2000,
+      "bytes": 972628,
+      "sha256": "e29cd8f794ddb89df11f2c52d0e608c3a135e15fd78cb35cd1bedc686a366243",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/6/6e/Agent_Belle_Portrait.png/revision/latest?cb=20240707002545&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Belle_Portrait.png",
+      "format": "PNG"
+    },
+    "belle_summer.webp": {
+      "file": "originals/belle_summer.png",
+      "width": 1920,
+      "height": 5790,
+      "bytes": 9764535,
+      "sha256": "d9db72ab635f346a9e35f09e39582405f7b080690fa40e254644673f37d85e93",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/2/2a/Agent_Belle_Summer_Skies_Portrait.png/revision/latest?cb=20250905093339&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Belle_Summer_Skies_Portrait.png",
+      "format": "PNG"
+    },
+    "anby.webp": {
+      "file": "originals/anby.png",
+      "width": 1268,
+      "height": 1716,
+      "bytes": 592429,
+      "sha256": "511c689d3726958d2bd495724546b4ba420937bab071b753191ff948c5588576",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/b/bd/Agent_Anby_Demara_Portrait.png/revision/latest?cb=20240706234414&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Anby_Demara_Portrait.png",
+      "format": "PNG"
+    },
+    "soldier_11.webp": {
+      "file": "originals/soldier_11.png",
+      "width": 892,
+      "height": 1936,
+      "bytes": 950567,
+      "sha256": "d666de2dd4985ccb01a07365accfbf26b0346a2f13a76e1eb83ecbafe6e9da03",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/3/36/Agent_Soldier_11_Portrait.png/revision/latest?cb=20240713020308&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Soldier_11_Portrait.png",
+      "format": "PNG"
+    },
+    "lucia.webp": {
+      "file": "originals/lucia.png",
+      "width": 1176,
+      "height": 2164,
+      "bytes": 861092,
+      "sha256": "6f85aa3c235c1a91ad3d20c7e660140ef9d5958874baf33e9564e81aa010c35b",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/4/49/Agent_Lucia_Elowen_Portrait.png/revision/latest?cb=20251015180230&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Lucia_Elowen_Portrait.png",
+      "format": "PNG"
+    },
+    "promeia.webp": {
+      "file": "originals/promeia.png",
+      "width": 1656,
+      "height": 2700,
+      "bytes": 2131759,
+      "sha256": "2b9e7eb67a293d6bb6e5eec2d427ae5e0a22a2a4b1134f066228f1787390a777",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/3/34/Agent_Promeia_Portrait.png/revision/latest?cb=20260506055217&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Promeia_Portrait.png",
+      "format": "PNG"
+    },
+    "claret.webp": {
+      "file": "originals/claret.png",
+      "width": 1952,
+      "height": 2776,
+      "bytes": 3009847,
+      "sha256": "b2c3d566ee37f6b3e590ffd2891f43d4cd9a63e205ecd183affda2160ebb7924",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/7/7c/Agent_Claret_Flint_Portrait.png/revision/latest?cb=20260909031926&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Claret_Flint_Portrait.png",
+      "format": "PNG"
+    },
+    "ellen_joe.webp": {
+      "file": "originals/ellen_joe.png",
+      "width": 1644,
+      "height": 1932,
+      "bytes": 1540968,
+      "sha256": "4f8fa5e688d92b9d0fb9752716b03d528bf156feb2216a9e13e4f78045579faf",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/e/e3/Agent_Ellen_Joe_Portrait.png/revision/latest?cb=20241007222138&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Ellen_Joe_Portrait.png",
+      "format": "PNG"
+    },
+    "alice.webp": {
+      "file": "originals/alice.png",
+      "width": 1128,
+      "height": 2028,
+      "bytes": 893658,
+      "sha256": "d78b530bb33afa927beaf639996acc4d6b261cd9fd0d930bde1598f8a5f9abee",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/2/2d/Agent_Alice_Thymefield_Portrait.png/revision/latest?cb=20250716175906&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Alice_Thymefield_Portrait.png",
+      "format": "PNG"
+    },
+    "ye_shunguang.webp": {
+      "file": "originals/ye_shunguang.png",
+      "width": 1792,
+      "height": 2556,
+      "bytes": 2684777,
+      "sha256": "764dc0df5c706bc4c387e33195d697ccee94121daacee09b9322d5ef7b4e5d48",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/b/bb/Agent_Ye_Shunguang_Portrait.png/revision/latest?cb=20251230034458&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Ye_Shunguang_Portrait.png",
+      "format": "PNG"
+    },
+    "orphie.webp": {
+      "file": "originals/orphie.png",
+      "width": 1196,
+      "height": 2032,
+      "bytes": 989632,
+      "sha256": "809fe7c82ebaa5008af950f9dfbfedeec467b24677db9c57bb72cfb62391a912",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/c/cf/Agent_Orphie_Magnusson_%26_Magus_Portrait.png/revision/latest?cb=20250907125720&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Orphie_Magnusson_%26_Magus_Portrait.png",
+      "format": "PNG"
+    },
+    "burnice.webp": {
+      "file": "originals/burnice.png",
+      "width": 1329,
+      "height": 2048,
+      "bytes": 1116066,
+      "sha256": "ca92cfd06c71d172c56470b83ce8d76c80b7c33def6dff7c3372846aaad3f8e4",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/d/d1/Agent_Burnice_White_Portrait.png/revision/latest?cb=20241016140944&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Burnice_White_Portrait.png",
+      "format": "PNG"
+    },
+    "cissia.webp": {
+      "file": "originals/cissia.png",
+      "width": 1532,
+      "height": 2108,
+      "bytes": 1827391,
+      "sha256": "8f076bc441dfc6e3df0679d79b7a243929b47e1f3e961b7a216ccac4ce32f50e",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/8/83/Agent_Cissia_Portrait.png/revision/latest?cb=20260306125558&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Cissia_Portrait.png",
+      "format": "PNG"
+    },
+    "nicole.webp": {
+      "file": "originals/nicole.png",
+      "width": 1078,
+      "height": 1904,
+      "bytes": 2098376,
+      "sha256": "5fc99c9f5b345bbdd8dbd24f7f57c909b5d5b68b8d8c7c21998be2b7703751ab",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/7/7a/Agent_Nicole_Demara_Portrait.png/revision/latest?cb=20240707011646&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Nicole_Demara_Portrait.png",
+      "format": "PNG"
+    },
+    "trigger.webp": {
+      "file": "originals/trigger.png",
+      "width": 1392,
+      "height": 2364,
+      "bytes": 1035330,
+      "sha256": "b4c3f2f3c6da38b29b0739d74fb1b18eab52f88ae29753c65826db08c5465bbc",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/a4/Agent_Trigger_Portrait.png/revision/latest?cb=20250402114449&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Trigger_Portrait.png",
+      "format": "PNG"
+    },
+    "jane_doe.webp": {
+      "file": "originals/jane_doe.png",
+      "width": 1094,
+      "height": 2048,
+      "bytes": 1863616,
+      "sha256": "1220ebb098874d392bc32d504bcf9b4d51d1aa0618ed5cc8e8ea0e37cbaacb97",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/1/11/Agent_Jane_Doe_Portrait.png/revision/latest?cb=20240904165715&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Jane_Doe_Portrait.png",
+      "format": "PNG"
+    },
+    "jane_doe_skin.webp": {
+      "file": "originals/jane_doe_skin.png",
+      "width": 776,
+      "height": 2088,
+      "bytes": 959630,
+      "sha256": "876e761d311990bc5f63589ebd66c0f4792fe5f31568935112169584a9dcbf44",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/5/53/Agent_Jane_Doe_Nocturne_of_Light_Portrait.png/revision/latest?cb=20251230075948&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Jane_Doe_Nocturne_of_Light_Portrait.png",
+      "format": "PNG"
+    },
+    "zhu_yuan.webp": {
+      "file": "originals/zhu_yuan.png",
+      "width": 905,
+      "height": 2048,
+      "bytes": 424370,
+      "sha256": "347b57b28403579c18a57d45ee93c841b25388b3167ab939ae804f9fd79f9f60",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/07/Agent_Zhu_Yuan_Portrait.png/revision/latest?cb=20240708205906&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Zhu_Yuan_Portrait.png",
+      "format": "PNG"
+    },
+    "sigrid.webp": {
+      "file": "originals/sigrid.png",
+      "width": 1816,
+      "height": 2524,
+      "bytes": 1937076,
+      "sha256": "206bebfd954c716ca0250ecc4d4fe6f910de219586e245a045dae791e5929e40",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/d/d4/Agent_Sigrid_de_L%27Azur_Portrait.png/revision/latest?cb=20260729034505&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Sigrid_de_L%27Azur_Portrait.png",
+      "format": "PNG"
+    },
+    "astra_yao.webp": {
+      "file": "originals/astra_yao.png",
+      "width": 1186,
+      "height": 2048,
+      "bytes": 1305430,
+      "sha256": "a1e4111e38066f755c216c997a72d86ad61fb3db981daa97f7a2637ce553e582",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/4/44/Agent_Astra_Yao_Portrait.png/revision/latest?cb=20250122022513&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Astra_Yao_Portrait.png",
+      "format": "PNG"
+    },
+    "evelyn.webp": {
+      "file": "originals/evelyn.png",
+      "width": 1430,
+      "height": 2048,
+      "bytes": 1035697,
+      "sha256": "4f636b11b801361a1801701eeba97e570c51548e3eb998551f9b0dc0322d8a2c",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/d/d2/Agent_Evelyn_Chevalier_Portrait.png/revision/latest?cb=20250212182125&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Evelyn_Chevalier_Portrait.png",
+      "format": "PNG"
+    },
+    "remielle.webp": {
+      "file": "originals/remielle.png",
+      "width": 2128,
+      "height": 1324,
+      "bytes": 1343078,
+      "sha256": "36c76f4fe9967a2b4bfb5b44c18df160d83ef5f7749aa6bbf8c0b71aa59474c2",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/b/b1/Agent_Remielle_Dan_Portrait.png/revision/latest?cb=20260729034304&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Remielle_Dan_Portrait.png",
+      "format": "PNG"
+    },
+    "pulchra.webp": {
+      "file": "originals/pulchra.png",
+      "width": 1205,
+      "height": 2048,
+      "bytes": 1415254,
+      "sha256": "003c2e6ac92e2c86a96396c00885165edeb47d56d2a93c8b88e998bef14d2f63",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/7/77/Agent_Pulchra_Fellini_Portrait.png/revision/latest?cb=20250312030231&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Pulchra_Fellini_Portrait.png",
+      "format": "PNG"
+    },
+    "yi_xuan.webp": {
+      "file": "originals/yi_xuan.png",
+      "width": 1484,
+      "height": 2048,
+      "bytes": 1053959,
+      "sha256": "c0f738ca21f556b687291f842e946ec535d6bf9d24bce22e4a9c9601464346d7",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/8/89/Agent_Yixuan_Portrait.png/revision/latest?cb=20250606025206&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Yixuan_Portrait.png",
+      "format": "PNG"
+    },
+    "yanagi.webp": {
+      "file": "originals/yanagi.png",
+      "width": 1441,
+      "height": 2048,
+      "bytes": 1080056,
+      "sha256": "2a17ecc7e9fd9b3a7e9efc0aaac2138d4bfaddd63f28a55be529ab31e266ec40",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/c/cb/Agent_Tsukishiro_Yanagi_Portrait.png/revision/latest?cb=20241106030347&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Tsukishiro_Yanagi_Portrait.png",
+      "format": "PNG"
+    },
+    "grace.webp": {
+      "file": "originals/grace.png",
+      "width": 780,
+      "height": 2008,
+      "bytes": 1263073,
+      "sha256": "daa0734059937e6f822df5efaad2e2274ea759f0d4874b78669244da0c614ac1",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/9/9a/Agent_Grace_Howard_Portrait.png/revision/latest?cb=20240707002436&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Grace_Howard_Portrait.png",
+      "format": "PNG"
+    },
+    "velina.webp": {
+      "file": "originals/velina.png",
+      "width": 1520,
+      "height": 1896,
+      "bytes": 1977603,
+      "sha256": "7d4bd21d221b9cf3a12fe433d6dfb02d92257e5d580a3e2f651ea0808985e10f",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/c/cf/Agent_Velina_Airgid_Portrait.png/revision/latest?cb=20260617071555&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Velina_Airgid_Portrait.png",
+      "format": "PNG"
+    },
+    "caesar.webp": {
+      "file": "originals/caesar.png",
+      "width": 1416,
+      "height": 1908,
+      "bytes": 882977,
+      "sha256": "bcd9d6482c32c2be3a7301346658328c037b8179a2e889dabd4c896b332207ed",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/b/b8/Agent_Caesar_King_Portrait.png/revision/latest?cb=20240925031439&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Caesar_King_Portrait.png",
+      "format": "PNG"
+    },
+    "yidhari.webp": {
+      "file": "originals/yidhari.png",
+      "width": 1252,
+      "height": 2260,
+      "bytes": 1152612,
+      "sha256": "66eb62b46dc72f48631c2246e5d868f186de3142c73f43b5857f179177fbc7b8",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/03/Agent_Yidhari_Murphy_Portrait.png/revision/latest?cb=20251015180526&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Yidhari_Murphy_Portrait.png",
+      "format": "PNG"
+    },
+    "rina.webp": {
+      "file": "originals/rina.png",
+      "width": 1544,
+      "height": 2012,
+      "bytes": 1247265,
+      "sha256": "b4784f0463e99cb78e12c0c1646a32716c190534397d754b80a308913f7204b4",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/4/40/Agent_Alexandrina_Sebastiane_Portrait.png/revision/latest?cb=20240707002357&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Alexandrina_Sebastiane_Portrait.png",
+      "format": "PNG"
+    },
+    "phoenix.webp": {
+      "file": "originals/phoenix.png",
+      "width": 1692,
+      "height": 2076,
+      "bytes": 2011794,
+      "sha256": "42f643a4553afacec697051de4ed2db160169e32c62a777b8f7aa8e259c12422",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/03/Agent_Phoenix_Reffaella_Portrait.png/revision/latest?cb=20261021040520&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Phoenix_Reffaella_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/alice_sea_of_thyme.webp": {
+      "file": "originals/skins_alice_sea_of_thyme.png",
+      "width": 1216,
+      "height": 2028,
+      "bytes": 803263,
+      "sha256": "0c54b7b0876ac10245a85c0c79561a8f70059fbf4c1a5c397dfc4e2bc92d4c1c",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/f/f7/Agent_Alice_Thymefield_Sea_of_Thyme_Portrait.png/revision/latest?cb=20250717205336&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Alice_Thymefield_Sea_of_Thyme_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/aria_cuteness_loading.webp": {
+      "file": "originals/skins_aria_cuteness_loading.png",
+      "width": 1048,
+      "height": 1972,
+      "bytes": 995728,
+      "sha256": "ebae9b26494969cbdd86733c1580c5f66817d76173159f62ed473935e2243cd1",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/5/5c/Agent_Aria_Cuteness_Loading_Portrait.png/revision/latest?cb=20260914134002&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Aria_Cuteness_Loading_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/aria_discordant_note.webp": {
+      "file": "originals/skins_aria_discordant_note.png",
+      "width": 1002,
+      "height": 1991,
+      "bytes": 2217642,
+      "sha256": "cb5224055e6b9d454b598ec794b9832e651d43d2174e85b6a83bd2b38879a104",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/8/83/Agent_Aria_Discordant_Note_Portrait.png/revision/latest?cb=20260206213808&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Aria_Discordant_Note_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/astra_yao_chandelier.webp": {
+      "file": "originals/skins_astra_yao_chandelier.png",
+      "width": 1098,
+      "height": 2048,
+      "bytes": 1324931,
+      "sha256": "38123c59d009317dea109ac6e278d871a940951e96dea56f16897298661ef9c6",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/1/15/Agent_Astra_Yao_Chandelier_Portrait.png/revision/latest?cb=20250425232347&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Astra_Yao_Chandelier_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/belle_brilliance_of_stars.webp": {
+      "file": "originals/skins_belle_brilliance_of_stars.png",
+      "width": 724,
+      "height": 2216,
+      "bytes": 991807,
+      "sha256": "2da115b1721601e4a607f8e83f5809c58bcda7c34814bdfd790e109db91b98e7",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/7/75/Agent_Belle_Brilliance_of_Stars_Portrait.png/revision/latest?cb=20260617080726&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Belle_Brilliance_of_Stars_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/belle_delicate_sunlight.webp": {
+      "file": "originals/skins_belle_delicate_sunlight.png",
+      "width": 840,
+      "height": 2028,
+      "bytes": 620391,
+      "sha256": "00bfbacc25fc33c138cfe08ed3dbada5f5b999ec7fd5da74909f734b9f7d6245",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/c/ce/Agent_Belle_Delicate_Sunlight_Portrait.png/revision/latest?cb=20250606130037&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Belle_Delicate_Sunlight_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/ellen_joe_on_campus.webp": {
+      "file": "originals/skins_ellen_joe_on_campus.png",
+      "width": 1434,
+      "height": 1890,
+      "bytes": 2026519,
+      "sha256": "831f3dd3fa5cfdcde9aba0b98c195fa9b4d5c06ff97f39f8d1614f026fc3cc2b",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/9/97/Agent_Ellen_Joe_On_Campus_Portrait.png/revision/latest?cb=20250122220814&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Ellen_Joe_On_Campus_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/miyabi_dignified_blossom.webp": {
+      "file": "originals/skins_miyabi_dignified_blossom.png",
+      "width": 1536,
+      "height": 2224,
+      "bytes": 1628179,
+      "sha256": "8a47c89d3359e32ca335177c54d791b58a27d5ed99dce5767c3607f33b6db04a",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/d/d3/Agent_Hoshimi_Miyabi_Dignified_Blossom_Portrait.png/revision/latest?cb=20260506082652&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Hoshimi_Miyabi_Dignified_Blossom_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/nangong_yu_heartfelt_support.webp": {
+      "file": "originals/skins_nangong_yu_heartfelt_support.png",
+      "width": 820,
+      "height": 2184,
+      "bytes": 1052662,
+      "sha256": "5d26d35d9fdcc60a4ac12047f0b2426a030f257aa75d17a1d0b8d3b44f848401",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/e/e5/Agent_Nangong_Yu_Heartfelt_Support_Portrait.png/revision/latest?cb=20260914134209&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Nangong_Yu_Heartfelt_Support_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/nangong_yu_rhapsody_s_muse.webp": {
+      "file": "originals/skins_nangong_yu_rhapsody_s_muse.png",
+      "width": 1260,
+      "height": 2212,
+      "bytes": 1691367,
+      "sha256": "2b99d561c54704c5f068cb44ce4b7f72496c7b85cc16d2d56a4f9f69e9f6c575",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/0e/Agent_Nangong_Yu_Rhapsody%27s_Muse_Portrait.png/revision/latest?cb=20260324141945&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Nangong_Yu_Rhapsody%27s_Muse_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/nicole_cunning_cutie.webp": {
+      "file": "originals/skins_nicole_cunning_cutie.png",
+      "width": 1180,
+      "height": 2048,
+      "bytes": 984784,
+      "sha256": "49f6b69b219870580247cca5f4c734593565c8fc5c4a5c81dcf3344648432b47",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/7/7f/Agent_Nicole_Demara_Cunning_Cutie_Portrait.png/revision/latest?cb=20250124021147&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Nicole_Demara_Cunning_Cutie_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/phoenix_the_illness_called_life.webp": {
+      "file": "originals/skins_phoenix_the_illness_called_life.png",
+      "width": 1000,
+      "height": 1200,
+      "bytes": 1006469,
+      "sha256": "b74dfedf4847d7eae047c6c93b479eb150a03b41c4856e21799319bb3f77406e",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/ae/Agent_Phoenix_Reffaella_The_Illness_Called_Life_In-Game.png/revision/latest?cb=20261021054512&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Phoenix_Reffaella_The_Illness_Called_Life_In-Game.png",
+      "format": "PNG"
+    },
+    "skins/phoenix_daydream_complex.webp": {
+      "file": "originals/skins_phoenix_daydream_complex.png",
+      "width": 1000,
+      "height": 1200,
+      "bytes": 1024538,
+      "sha256": "137b0fb62fc4ecd7cf94305266e9feaba3930a2b6ebbc077bc00e1ced8a61128",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/ab/Agent_Phoenix_Reffaella_Daydream_Complex_In-Game.png/revision/latest?cb=20261021054517&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Phoenix_Reffaella_Daydream_Complex_In-Game.png",
+      "format": "PNG"
+    },
+    "skins/remielle_moonlight_whispers.webp": {
+      "file": "originals/skins_remielle_moonlight_whispers.png",
+      "width": 2128,
+      "height": 1332,
+      "bytes": 1011515,
+      "sha256": "a1fbe9ae7383aec9f171138b39126fd1a8b58d33537c94207e9f5449b133dd3b",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/6/6f/Agent_Remielle_Dan_Moonlight_Whispers_Portrait.png/revision/latest?cb=20260729061408&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Remielle_Dan_Moonlight_Whispers_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/remielle_seashade_pas_seul.webp": {
+      "file": "originals/skins_remielle_seashade_pas_seul.png",
+      "width": 1580,
+      "height": 2028,
+      "bytes": 1311057,
+      "sha256": "3ede0bd872e9d5d3c8a70e07ad94fadb30744d68bb0d92fc59499ebb0880f267",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/c/c9/Agent_Remielle_Dan_Seashade_Pas_Seul_Portrait.png/revision/latest?cb=20260730004126&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Remielle_Dan_Seashade_Pas_Seul_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/sigrid_majestic_wavechaser.webp": {
+      "file": "originals/skins_sigrid_majestic_wavechaser.png",
+      "width": 1000,
+      "height": 2700,
+      "bytes": 1350444,
+      "sha256": "552ab25a0128eb759d45e45864ac3a98b0eae5169d35f66486f5de4c23d7192c",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/a8/Agent_Sigrid_de_L%27Azur_Majestic_Wavechaser_Portrait.png/revision/latest?cb=20260729202956&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Sigrid_de_L%27Azur_Majestic_Wavechaser_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/sunna_afternoon_tea_break.webp": {
+      "file": "originals/skins_sunna_afternoon_tea_break.png",
+      "width": 856,
+      "height": 1956,
+      "bytes": 1075146,
+      "sha256": "9d0a7542a8a23b05355dc5ac17c45e6a4c459fee18f0912f2c583f99a6cd2e6e",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/2/22/Agent_Sunna_Afternoon_Tea_Break_Portrait.png/revision/latest?cb=20260206213318&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Sunna_Afternoon_Tea_Break_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/sunna_delusions_in_business.webp": {
+      "file": "originals/skins_sunna_delusions_in_business.png",
+      "width": 756,
+      "height": 1956,
+      "bytes": 1015780,
+      "sha256": "508ddf48bb5c79fa76060fd285e6bda61f737fb4bab0679d79640cb6e244a087",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/9/94/Agent_Sunna_Delusions_in_Business_Portrait.png/revision/latest?cb=20260914134047&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Sunna_Delusions_in_Business_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/velina_shade_of_leisure.webp": {
+      "file": "originals/skins_velina_shade_of_leisure.png",
+      "width": 1272,
+      "height": 2036,
+      "bytes": 2268957,
+      "sha256": "40e0eab9ba14600ac3fa874a737be542699dfffa2649475a396fc4017928da86",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/4/47/Agent_Velina_Airgid_Shade_of_Leisure_Portrait.png/revision/latest?cb=20260617071454&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Velina_Airgid_Shade_of_Leisure_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/ye_shunguang_touch_of_dawnlight.webp": {
+      "file": "originals/skins_ye_shunguang_touch_of_dawnlight.png",
+      "width": 1636,
+      "height": 2376,
+      "bytes": 2019085,
+      "sha256": "39f27e694dd119cd401c33d45bd958fada7d886d615135850fdd32d885efc3a9",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/06/Agent_Ye_Shunguang_Touch_of_Dawnlight_Portrait.png/revision/latest?cb=20251230064529&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Ye_Shunguang_Touch_of_Dawnlight_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/yi_xuan_trails_of_ink.webp": {
+      "file": "originals/skins_yi_xuan_trails_of_ink.png",
+      "width": 1056,
+      "height": 2048,
+      "bytes": 723236,
+      "sha256": "fb76ce8b2590c1af4ee26609ea8db908eee1ee82e38df9a663aaa6348057ff1e",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/b/b2/Agent_Yixuan_Trails_of_Ink_Portrait.png/revision/latest?cb=20250606125902&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Yixuan_Trails_of_Ink_Portrait.png",
+      "format": "PNG"
+    },
+    "skins/yuzuha_tanuki_in_broad_daylight.webp": {
+      "file": "originals/skins_yuzuha_tanuki_in_broad_daylight.png",
+      "width": 1176,
+      "height": 1812,
+      "bytes": 787555,
+      "sha256": "ffd1193a7888788b558e5f02fb7ec2d359bcc9195dfa7e4e03a2b22193e2cbb3",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/b/b4/Agent_Ukinami_Yuzuha_Tanuki_in_Broad_Daylight_Portrait.png/revision/latest?cb=20250716042730&format=original",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Ukinami_Yuzuha_Tanuki_in_Broad_Daylight_Portrait.png",
+      "format": "PNG"
+    }
+  }
+}

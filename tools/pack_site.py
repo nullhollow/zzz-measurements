@@ -31,7 +31,7 @@ PLACEHOLDER = 'https://nullhollow.github.io/zzz-measurements/'   # override with
 META = json.loads((ROOT / 'tools/meta.json').read_text())
 DATA = json.loads((ROOT / 'tools/data.json').read_text())
 
-ASSET_DIRS = ['images', 'character_images', 'fonts']
+ASSET_DIRS = ['images', 'character_images', 'fonts', 'originals']
 ASSET_FILES = ['favicon.svg', 'favicon.ico', 'icon-192.png', 'icon-512.png',
                'icon-maskable-512.png', 'og.png']
 IGNORE_NAMES = {'.DS_Store', 'sources.json', 'skins.json'}
