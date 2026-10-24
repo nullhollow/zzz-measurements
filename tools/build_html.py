@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import card  # noqa: E402
 from theme import THEME_JS, adaptive_css
 from profile_text import profile_summary  # noqa: E402
+from analysis_math import cup_size
 
 DATA = json.loads((ROOT / 'tools/data.json').read_text())
 META = json.loads((ROOT / 'tools/meta.json').read_text())
@@ -159,18 +160,9 @@ og = ROOT / 'og.png'
 ogv = hashlib.md5(og.read_bytes()).hexdigest()[:8] if og.exists() else '1'
 
 # initial card order mirrors SORTS["cup-desc"] in template.html
-CUP_BASE = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8,
-            'J': 9, 'K': 10, 'L': 11, 'M': 12, 'N': 13}
 def cup_score(d):
-    m = re.match(r'^(\d+)\s*([A-Za-z]+)$', d.get('uk') or '')
-    if not m:
-        return -1
-    cup = m.group(2).upper()
-    base = CUP_BASE.get(cup[0], 0)
-    if not base:
-        return -1
-    single = 1 if len(cup) == 1 else 0
-    return base * 10000 + single * 1000 + int(m.group(1))
+    size = cup_size(d.get('uk'))
+    return size['score'] if size else -1
 initial = sorted(DATA, key=cup_score, reverse=True)
 cards_html = card.render_cards(initial)
 

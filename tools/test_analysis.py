@@ -19,8 +19,50 @@ ROSTER = json.loads((ROOT / 'tools/data.json').read_text())
 
 
 class AnalysisTests(unittest.TestCase):
+    def test_uk_cup_steps_match_all_ranking_implementations(self):
+        letters = 'AA A B C D DD E F FF G GG H HH J JJ K KK L LL M MM N NN'.split()
+        sizes = [f'{band}{cup}' for cup in letters for band in (0, 19, 23, 99)]
+        scores = [cup_size(size)['score'] for size in sizes]
+        self.assertEqual(scores, sorted(set(scores)))
+        self.assertGreater(cup_size('23HH')['score'], cup_size('22H')['score'])
+        source = (ROOT / 'tools/template.html').read_text()
+        score_fn = re.search(r'function cupScore\(d\)\{.*?\n\}', source, re.S)[0]
+        sorts = re.search(r'const SORTS = \{.*?\n\};', source, re.S)[0]
+        podium = re.search(r'const PODIUM_CATS = \[.*?\n\];', source, re.S)[0]
+        script = (ROOT / 'tools/analysis.js').read_text() + score_fn + sorts + podium + '''
+const sizes=JSON.parse(require('fs').readFileSync(0,'utf8')),records=sizes.map(uk=>({uk}));
+process.stdout.write(JSON.stringify({scores:records.map(cupScore),
+ascending:[...records].sort(SORTS['cup-asc']).map(d=>d.uk),
+descending:[...records].sort(SORTS['cup-desc']).map(d=>d.uk),
+podium:records.map(PODIUM_CATS.find(c=>c.t==='cupLargest').pick)}));
+'''
+        actual = json.loads(subprocess.run(['node', '-e', script], input=json.dumps(sizes),
+                            text=True, check=True, capture_output=True).stdout)
+        self.assertEqual(actual, {'scores': scores, 'ascending': sizes,
+                                 'descending': list(reversed(sizes)), 'podium': scores})
+        module = ast.parse((ROOT / 'tools/build_html.py').read_text())
+        fn = next(n for n in module.body if isinstance(n, ast.FunctionDef) and n.name == 'cup_score')
+        namespace = {'cup_size': cup_size}
+        exec(compile(ast.Module(body=[fn], type_ignores=[]), '<cup_score>', 'exec'), namespace)
+        self.assertEqual([namespace['cup_score']({'uk': size}) for size in sizes], scores)
+
+    def test_generated_card_order_uses_uk_cup_steps(self):
+        class Cards(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.names = []
+
+            def handle_starttag(self, tag, attrs):
+                a = dict(attrs)
+                if tag == 'article' and a.get('class') == 'card':
+                    self.names.append(a['data-name'])
+        cards = Cards()
+        cards.feed((ROOT / 'index.html').read_text())
+        expected = sorted(ROSTER, key=lambda d: cup_size(d['uk'])['score'], reverse=True)
+        self.assertEqual(cards.names, [d['name'] for d in expected])
+
     def test_cup_categories_preserve_band_context_and_order(self):
-        self.assertGreater(cup_size('19G')['score'], cup_size('24GG')['score'])
+        self.assertGreater(cup_size('24GG')['score'], cup_size('19G')['score'])
         self.assertGreater(cup_size('22E')['score'], cup_size('19E')['score'])
         self.assertEqual(cup_size('22E')['cup'], cup_size('19E')['cup'])
         self.assertNotEqual(cup_size('22E')['band'], cup_size('19E')['band'])
@@ -30,11 +72,11 @@ class AnalysisTests(unittest.TestCase):
     def test_cup_distribution_missing_values_and_modes(self):
         data = [{'uk': '23G'}, {'uk': '19GG'}, {'uk': '20DD'}, {'uk': '21D'}, {'uk': ''}, {}]
         result = cup_distribution(data)
-        self.assertEqual([b['cup'] for b in result['bins']], ['DD', 'D', 'GG', 'G'])
+        self.assertEqual([b['cup'] for b in result['bins']], ['D', 'DD', 'G', 'GG'])
         self.assertEqual(result['count'], 4)
-        self.assertEqual(result['modes'], ['DD', 'D', 'GG', 'G'])
+        self.assertEqual(result['modes'], ['D', 'DD', 'G', 'GG'])
         self.assertEqual(cup_distribution([]), {'count': 0, 'bins': [], 'modes': []})
-        for value in (None, '', '??', '32I', 'E', '32'):
+        for value in (None, '', '??', '32I', '32EE', '32AAA', 'E', '32'):
             self.assertIsNone(cup_size(value))
 
     def test_display_systems_use_source_values_without_conversion(self):
@@ -53,7 +95,8 @@ class AnalysisTests(unittest.TestCase):
     def test_cup_game_uses_uk_letter_then_band(self):
         for unit in ('cm', 'in'):
             for basis in ('raw', 'height', 'scaled'):
-                self.assertEqual(game_outcome({'uk': '24GG'}, {'uk': '19G'}, 'cup', basis, unit), 'higher')
+                self.assertEqual(game_outcome({'uk': '24GG'}, {'uk': '19G'}, 'cup', basis, unit), 'lower')
+                self.assertEqual(game_outcome({'uk': '22H'}, {'uk': '23HH'}, 'cup', basis, unit), 'higher')
                 self.assertEqual(game_outcome({'uk': '19E'}, {'uk': '22E'}, 'cup', basis, unit), 'higher')
                 self.assertEqual(game_outcome({'uk': '22E'}, {'uk': '19E'}, 'cup', basis, unit), 'lower')
                 self.assertEqual(game_outcome({'uk': '19E'}, {'uk': '19E'}, 'cup', basis, unit), 'equal')

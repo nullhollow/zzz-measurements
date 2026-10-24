@@ -1,4 +1,4 @@
-"""Exploration calculations, mirrored in analysis.js. Roster rules stay separate."""
+"""Shared UK cup ordering and exploration math, mirrored in analysis.js."""
 import math
 import re
 from decimal import Decimal, ROUND_HALF_UP
@@ -6,8 +6,7 @@ from decimal import Decimal, ROUND_HALF_UP
 FIELDS = {'bust': 'bust_cm', 'waist': 'waist_cm', 'hip': 'hip_cm',
           'thigh': 'thigh_cm', 'height': 'stature_cm', 'underbust': 'band_cm'}
 WEIGHTS = {'bust': .25, 'waist': .2, 'hip': .2, 'thigh': .15, 'height': .2, 'underbust': 0}
-CUP_BASE = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7,
-            'H': 8, 'J': 9, 'K': 10, 'L': 11, 'M': 12, 'N': 13}
+UK_CUPS = 'AA A B C D DD E F FF G GG H HH J JJ K KK L LL M MM N NN'.split()
 
 
 def size_parts(size):
@@ -20,10 +19,9 @@ def size_parts(size):
 def cup_size(size):
     if (size or '').startswith('≈'):return None
     parts = size_parts(size)
-    if not parts or parts['cup'][0] not in CUP_BASE:
+    if not parts or parts['cup'] not in UK_CUPS:
         return None
-    cup = parts['cup']
-    return {**parts, 'score': CUP_BASE[cup[0]] * 10000 + (1000 if len(cup) == 1 else 0) + parts['band']}
+    return {**parts, 'score': UK_CUPS.index(parts['cup']) * 10000 + parts['band']}
 
 
 def cup_distribution(roster, system='uk'):

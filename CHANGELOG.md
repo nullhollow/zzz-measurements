@@ -2,6 +2,16 @@
 
 ## Unreleased — audit implementation
 
+### UK cup-order correction (2026-10-25)
+
+- Correct UK progression to D < DD < E < F < FF < G < GG < H < HH < J < JJ,
+  with band deciding only within the same cup. Eldreda's 23HH now outranks 22H.
+- Use shared Python/JavaScript scoring for initial/live sorting, table order,
+  podiums, comparison winners, cup charts and Higher or Lower. Update EN/JA/ZH
+  guidance and regression tests, including full-roster game parity.
+- Keep supplied sizes, raw measurements, filters and category counts intact.
+  Cup summaries remain categorical; numeric measurement summaries are unchanged.
+
 ### Eldreda Sunbringer (2026-10-25)
 
 - Add the supplied measurements, using 180.37 cm excluding horns for comparisons
@@ -230,9 +240,10 @@
 - Jane Doe now uses the Nocturne of Light measurements as her canonical record; the
   standard-model values are discarded for that entry.
 - Miyabi's head height is corrected to **152.1 cm** (charted 170 cm still shown as a note).
-- The default sort, table UK sort, podium and highlight now rank by **UK cup size**:
-  single-letter cups outrank doubled forms (G > GG), then the band number decides
-  (22E > 19E, 23GG > 21GG). Bust diff is kept as a measurement, not a ranking metric.
+- The default sort, table UK sort, podium and highlight now rank by **UK cup size**.
+  The original single/doubled-letter rule was corrected in the UK cup-order update
+  above. Band decides within a cup (22E > 19E, 23GG > 21GG). Bust diff remains a
+  measurement, not a ranking metric.
 - Cup groups and the filter now follow the UK cup letter (A-B, C-D, DD-E, F-G, GG+).
 - Shape now uses bust, waist and hips: Hourglass requires bust/waist and hip/waist ≥1.45
   plus bust–hip balance within 15%; Straight is flare <1.30 or mismatch >25%; the rest is

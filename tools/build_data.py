@@ -17,7 +17,7 @@ import re
 from pathlib import Path
 
 from PIL import Image
-from analysis_math import percentage
+from analysis_math import cup_size, percentage
 
 ROOT = Path(__file__).resolve().parent.parent
 META = json.loads((ROOT / 'tools/meta.json').read_text())
@@ -309,7 +309,8 @@ for d in allrecs:
 
 def cup_group(uk):
     """Group by the UK cup letter, the same ordering used for ranking."""
-    letter = re.sub(r'^\d+', '', (uk or '')).upper()
+    size = cup_size(uk)
+    letter = size['cup'] if size else ''
     if letter in ('AA', 'A', 'B'):
         return 'A-B'
     if letter in ('C', 'D'):

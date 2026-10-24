@@ -1,8 +1,8 @@
-/* Pure exploration math. Keep in step with analysis_math.py. */
+/* Shared UK cup ordering and exploration math. Keep in step with analysis_math.py. */
 const Analysis = (() => {
   const fields = {bust:'bust_cm', waist:'waist_cm', hip:'hip_cm', thigh:'thigh_cm', height:'stature_cm', underbust:'band_cm'};
   const weights = {bust:.25, waist:.2, hip:.2, thigh:.15, height:.2, underbust:0};
-  const cupBase={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,J:9,K:10,L:11,M:12,N:13};
+  const ukCups='AA A B C D DD E F FF G GG H HH J JJ K KK L LL M MM N NN'.split(' ');
   function sizeParts(size){
     const m=/^≈?(\d+)\s*([A-Za-z]+)$/.exec(size||'');
     return m?{cup:m[2].toUpperCase(),band:Number(m[1])}:null;
@@ -10,8 +10,9 @@ const Analysis = (() => {
   function cupSize(size){
     if(String(size||'').startsWith('≈'))return null;
     const parts=sizeParts(size);
-    if(!parts||!cupBase[parts.cup[0]])return null;
-    return {...parts,score:cupBase[parts.cup[0]]*10000+(parts.cup.length===1?1000:0)+parts.band};
+    const rank=parts?ukCups.indexOf(parts.cup):-1;
+    if(rank<0)return null;
+    return {...parts,score:rank*10000+parts.band};
   }
   function cupDistribution(roster,system='uk'){
     if(!['uk','us','eu'].includes(system))system='uk';

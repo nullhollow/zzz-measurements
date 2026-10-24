@@ -288,8 +288,11 @@ metadata. Exports preserve the labels and identify the estimated sizing systems.
 * **Shape** uses bust, waist and hips: Hourglass needs bust/waist and hip/waist ≥1.45
   with bust and hips within 15%; Straight is flare <1.30 or a bust–hip mismatch >25%;
   the rest is Balanced. The sharpest-hourglass score is flare × bust–hip balance.
-* **Cup ranking** follows the UK cup letter first (single letters outrank doubled forms,
-  so G > GG) and then the band number.
+* **Cup ranking** follows UK cup progression: D < DD < E < F < FF < G < GG < H < HH < J < JJ.
+  Band breaks ties within the same cup. Shared Python/JavaScript scoring in
+  `analysis_math.py` / `analysis.js` supplies the roster, podium, comparisons,
+  distributions and game. Cup summaries use counts and the most common category;
+  numerical averages and medians apply only to measurement values.
 * **Localized names and profiles** are stored as `name_ja`, `name_zh`, `desc_ja_cm`,
   `desc_ja_in`, `desc_zh_cm`, `desc_zh_in`, `read_ja`, `read_zh`, `tags_ja`, `tags_zh`
   and `notes_ja`/`notes_zh`. The names come from `tools/localized_names.json`, which

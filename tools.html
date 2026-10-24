@@ -1290,11 +1290,11 @@ const TOOLS_PAGE = document.body.dataset.page === "tools";
 const META = {updated:"2026-10-25", schema:"2", repo:"https://github.com/nullhollow/zzz-measurements"};
 
 /* ---------------- i18n ---------------- */
-/* Pure exploration math. Keep in step with analysis_math.py. */
+/* Shared UK cup ordering and exploration math. Keep in step with analysis_math.py. */
 const Analysis = (() => {
   const fields = {bust:'bust_cm', waist:'waist_cm', hip:'hip_cm', thigh:'thigh_cm', height:'stature_cm', underbust:'band_cm'};
   const weights = {bust:.25, waist:.2, hip:.2, thigh:.15, height:.2, underbust:0};
-  const cupBase={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,J:9,K:10,L:11,M:12,N:13};
+  const ukCups='AA A B C D DD E F FF G GG H HH J JJ K KK L LL M MM N NN'.split(' ');
   function sizeParts(size){
     const m=/^≈?(\d+)\s*([A-Za-z]+)$/.exec(size||'');
     return m?{cup:m[2].toUpperCase(),band:Number(m[1])}:null;
@@ -1302,8 +1302,9 @@ const Analysis = (() => {
   function cupSize(size){
     if(String(size||'').startsWith('≈'))return null;
     const parts=sizeParts(size);
-    if(!parts||!cupBase[parts.cup[0]])return null;
-    return {...parts,score:cupBase[parts.cup[0]]*10000+(parts.cup.length===1?1000:0)+parts.band};
+    const rank=parts?ukCups.indexOf(parts.cup):-1;
+    if(rank<0)return null;
+    return {...parts,score:rank*10000+parts.band};
   }
   function cupDistribution(roster,system='uk'){
     if(!['uk','us','eu'].includes(system))system='uk';
@@ -1437,7 +1438,7 @@ const I18N = {
     gameScore: "Correct answers",
     comparisonMethod: "Choose which rows to show and move them into your preferred order. A reference column adds signed differences: cm or inches for raw and same-height values, percentage points for height-adjusted circumferences. Same-height values use circumference ÷ effective height × reference height, assuming uniform scaling. They are hypothetical equivalents, not new measurements or anatomical predictions. Height itself always keeps its measured value. Rounded equal values share the highlight; missing values have no difference. Save named comparison sets on this device or export the visible rows and reference differences as CSV.",
     matchingMethod: "The default weights remain bust 25, waist 20, hip 20, thigh 15 and height 20, with under-bust excluded. Custom weights range from 0 to 100. Each absolute difference is divided by that metric’s range across the full canonical roster, then averaged using the chosen weights. Missing pairs are skipped and the remaining weights are renormalized. Zero total shared weight produces no match. Height-adjusted matching uses circumference ÷ effective height × 100; selecting height still compares measured heights. Expand a result to see the differences and each metric’s contribution to its distance.",
-    playMethod: "Distributions use the current filtered roster and omit missing values. Equal-width bins include the maximum in the final bin; identical values form one bin. Comparison selections appear as markers, not extra observations. Higher or Lower uses canonical measured records and judges one-decimal displayed values, including equal answers. Sandbox references are fictional, temporary and excluded from roster counts, classes, percentiles, rankings, game rounds and exports. Shared links include the sandbox inputs and tool settings. Official rankings and cup rules remain unchanged. Cup distributions group source labels in the selected UK/US/EU system, retaining full band sizes. These categories have no centimetre scaling or numeric median. UK categories keep the existing order; other labels are grouped in letter order, with repeated D forms together. Select a bar or band-by-cup cell to view its agents and add them to comparison. Band labels come from the selected source system and do not estimate volume.",
+    playMethod: "Distributions use the current filtered roster and omit missing values. Equal-width bins include the maximum in the final bin; identical values form one bin. Comparison selections appear as markers, not extra observations. Higher or Lower uses canonical measured records and judges one-decimal displayed values, including equal answers. Sandbox references are fictional, temporary and excluded from roster counts, classes, percentiles, rankings, game rounds and exports. Shared links include the sandbox inputs and tool settings. Cup distributions group source labels in the selected UK/US/EU system, retaining full band sizes. These categories have no centimetre scaling, numeric mean or numeric median. UK categories follow D < DD < E < F < FF < G < GG < H < HH < J < JJ; other labels are grouped in letter order, with repeated D forms together. Select a bar or band-by-cup cell to view its agents and add them to comparison. Band labels come from the selected source system and do not estimate volume.",
     toolsTitle: "Comparison tools",
     toolsDescription: "Compare UK cup-size distributions, measurements and proportions, find similar figures, play Higher or Lower and try fictional references.",
     skipTools: "Skip to the tools",
@@ -1451,9 +1452,9 @@ const I18N = {
     lengthUnit: "Length units",
     cupSystem: "Cup sizing system",
     doneSettings: "Done",
-    cupRankNote: "Ranking uses UK cup letter first, then band (G > GG). Displayed sizes come directly from the selected source system.",
-    cupGameNote: "Judge the right-hand size by UK cup letter, then band (G > GG).",
-    settingsMethod: "Measurement settings select cm/inches and the source UK/US/EU bra sizes across the interactive pages. Preferences are saved locally and included in shared links. These are supplied source labels, with no inferred conversions. Rankings, filters and game answers retain the UK cup rule: letter first, then band, with single letters above doubled forms. Cup game rounds use full UK scores, including equal scores, and reveal UK references when another display system is selected. Language and theme are available in the same Settings window.",
+    cupRankNote: "Ranking uses UK cup order (G < GG < H < HH < J < JJ), then band within the same cup. Displayed sizes use the selected source system.",
+    cupGameNote: "Compare the right-hand size using UK cup order (G < GG < H < HH < J < JJ), then band within the same cup.",
+    settingsMethod: "Measurement settings select cm/inches and the source UK/US/EU bra sizes across the interactive pages. Preferences are saved locally and included in shared links. These are supplied source labels, with no inferred conversions. Rankings, filters and game answers retain the UK cup rule: UK cup order first (G < GG < H < HH < J < JJ), then band within the same cup. Cup game rounds use full UK scores, including equal scores, and reveal UK references when another display system is selected. Language and theme are available in the same Settings window.",
     chooseAgents: "Choose agents",
     savedComparisons: "Saved comparisons",
     comparisonName: "Comparison name",
@@ -1486,7 +1487,7 @@ const I18N = {
     replaceAgent: "Replace agent",
     addAgent: "Add agent",
     helpOverview: "Height uses effective head height where noted. Circumferences are source measurements. Height-adjusted values are circumference ÷ height × 100; same-height values assume uniform scaling. Missing measurements stay unknown.",
-    helpCup: "Cup order follows this dataset’s UK letter-first, band-second rule, including G above GG. UK, US and EU labels are supplied by the source. Equal letters do not imply equal volume.",
+    helpCup: "UK cups progress D < DD < E < F < FF < G < GG < H < HH < J < JJ. Band breaks ties within the same cup letter. UK, US and EU labels are supplied by the source. Equal letters do not imply equal volume.",
     helpRatio: "Waist/hip divides waist circumference by hip circumference. Waist/height divides waist by effective height. These ratios describe the recorded proportions.",
     helpMissing: "A dash means no reliable measurement is available. It is not zero and is excluded from comparisons and numeric summaries.",
     restoreColumns: "Restore columns",
@@ -1659,7 +1660,7 @@ const I18N = {
     gameScore: "正解数",
     comparisonMethod: "比較に表示する項目を選び、順番を入れ替えられます。差の基準を指定すると、実寸と同じ身長への換算値はcmまたはインチ、身長比はポイントで差を表示します。同じ身長への換算式は「周囲長 ÷ 比較用の身長 × 換算先の身長」です。全体を同じ倍率で拡大・縮小した仮の数値であり、新たな計測値や人体の変化を予測する値ではありません。身長の欄は実測値を保ちます。丸めた表示値が同じ場合は両方を強調し、未計測の値には差を付けません。 比較セットに名前を付けてこの端末に保存したり、表示中の項目と基準との差をCSVに出力したりできます。",
     matchingMethod: "初期設定の重みはバスト25、ウエスト20、ヒップ20、太もも15、身長20で、アンダーは使いません。各項目を0〜100の範囲で変更できます。差の絶対値を全メンバーのその項目の最大値と最小値の差で割り、重み付き平均を取ります。どちらかが未計測の項目は外し、残った重みで平均を計算し直します。共通する計測項目の重みがすべて0なら結果は表示しません。身長比で探す場合は「周囲長 ÷ 比較用の身長 × 100」を使います。身長の項目そのものは、どちらの方法でも実測値で比べます。 各結果を開くと、項目ごとの差と距離への寄与を確認できます。",
-    playMethod: "分布は現在の絞り込み結果から未計測値を除いて集計します。区間の幅は均等で、最大値は最後の区間に含めます。全員同じ値なら区間は1つです。比較で選んだ体型は位置を示すだけで、人数には加えません。「どちらが大きい？」は正式な計測記録を使い、小数第1位までの表示値で大小と同値を判定します。シミュレーターの体型は仮の参照用で、名簿の人数・分類・パーセンタイル・ランキング・クイズ・書き出しには含みません。共有リンクには仮の計測値とツールの設定も入ります。既存のランキングとカップの順位規則は変わりません。 カップの分布は選んだUK・US・EUの出典記号で集計し、アンダーを含むサイズを残します。記号による分類のためcm換算や数値の中央値は使いません。UKは従来の順序で、ほかの表記は記号順に並べ、Dの重複形をまとめます。 棒やバンド別のマスを選ぶと、該当するキャラクターを表示して比較に追加できます。バンドは選択した元データの表記を使い、容積の推定は行いません。",
+    playMethod: "分布は現在の絞り込み結果から未計測値を除いて集計します。区間の幅は均等で、最大値は最後の区間に含めます。全員同じ値なら区間は1つです。比較で選んだ体型は位置を示すだけで、人数には加えません。「どちらが大きい？」は正式な計測記録を使い、小数第1位までの表示値で大小と同値を判定します。シミュレーターの体型は仮の参照用で、名簿の人数・分類・パーセンタイル・ランキング・クイズ・書き出しには含みません。共有リンクには仮の計測値とツールの設定も入ります。 カップの分布は選んだUK・US・EUの出典記号で集計し、アンダーを含むサイズを残します。記号による分類のためcm換算や数値の平均・中央値は使いません。UKは D < DD < E < F < FF < G < GG < H < HH < J < JJ の順で、ほかの表記は記号順に並べ、Dの重複形をまとめます。 棒やバンド別のマスを選ぶと、該当するキャラクターを表示して比較に追加できます。バンドは選択した元データの表記を使い、容積の推定は行いません。",
     toolsTitle: "比較・分析ツール",
     toolsDescription: "UKカップの分布や寸法・比率を比較し、近い体型を探せます。大小当てクイズや架空の体型シミュレーターも使えます。",
     skipTools: "ツールへ移動",
@@ -1673,9 +1674,9 @@ const I18N = {
     lengthUnit: "長さの単位",
     cupSystem: "ブラサイズの表記",
     doneSettings: "完了",
-    cupRankNote: "順位はUKのカップ記号を優先し、同じ記号ならアンダーで決めます（G > GG）。表示には選んだ方式の出典値を使います。",
-    cupGameNote: "右のサイズをUKのカップ、次にバンドの順で比べます（G > GG）。",
-    settingsMethod: "表示設定で長さの単位とUK・US・EUのブラサイズ表記を選べます。設定はブラウザーに保存し、共有リンクにも含めます。各方式の値は出典の記録をそのまま使い、換算で補いません。順位・絞り込み・大小当ての判定はUKのカップ記号を優先し、同じ記号ならアンダーで決めます。1文字の記号は同じ文字の重複形より上位です。カップのクイズでは同順位も正解に含め、ほかの表記を選んでいる場合は解答後にUKの値も表示します。 言語とテーマも同じ設定画面で切り替えられます。",
+    cupRankNote: "順位はUKのカップ順（G < GG < H < HH < J < JJ）で決め、同じカップならバンド値を比べます。表示には選んだ方式の出典値を使います。",
+    cupGameNote: "右のサイズをUKのカップ順（G < GG < H < HH < J < JJ）で比べ、同じカップならバンド値で判定します。",
+    settingsMethod: "表示設定で長さの単位とUK・US・EUのブラサイズ表記を選べます。設定はブラウザーに保存し、共有リンクにも含めます。各方式の値は出典の記録をそのまま使い、換算で補いません。順位・絞り込み・大小当ての判定にはUKのカップ順（G < GG < H < HH < J < JJ）を使い、同じカップならバンド値を比べます。カップのクイズでは同順位も正解に含め、ほかの表記を選んでいる場合は解答後にUKの値も表示します。 言語とテーマも同じ設定画面で切り替えられます。",
     chooseAgents: "比較するキャラを選ぶ",
     savedComparisons: "保存した比較",
     comparisonName: "比較セット名",
@@ -1708,7 +1709,7 @@ const I18N = {
     replaceAgent: "キャラを入れ替え",
     addAgent: "キャラを追加",
     helpOverview: "注記のある身長は頭頂までの高さを使います。囲み寸法は出典の計測値です。身長比は「周囲長 ÷ 身長 × 100」で求めます。同じ身長での比較は全身を均等に拡大・縮小した仮定値です。未計測の値は補完しません。",
-    helpCup: "このデータではUKのカップ文字、次にバンド値で並べます。GはGGより上です。UK・US・EUの表記は出典に従います。同じ文字でも容量が等しいとは限りません。",
+    helpCup: "UKカップは D < DD < E < F < FF < G < GG < H < HH < J < JJ の順で大きくなります。同じカップの場合のみバンド値を比べます。UK・US・EUのサイズは出典のままです。同じ記号でも容量が等しいとは限りません。",
     helpRatio: "ウエスト／ヒップはウエスト周囲長をヒップ周囲長で割った値です。ウエスト／身長では頭頂までの身長を使います。いずれも計測値の比率を表します。",
     helpMissing: "「—」は信頼できる計測値がない項目です。ゼロとは扱わず、数値の比較や集計から除外します。",
     restoreColumns: "標準の列に戻す",
@@ -1881,7 +1882,7 @@ const I18N = {
     gameScore: "答对题数",
     comparisonMethod: "可以选择对比项目并调整顺序。指定差值基准后，实测值及同身高换算值的差以厘米或英寸表示，身高占比的差以百分点表示。同身高换算采用「围度 ÷ 对比用身高 × 换算身高」，假定体型整体等比缩放。这是虚构的等效数值，并非新的测量结果，也不预测人体变化。身高一栏始终保留实测值。四舍五入后的显示值相同就同时高亮，缺失数据不计算差值。 可为对比命名并保存在此设备上，或将当前显示的项目与基准差值导出为 CSV。",
     matchingMethod: "默认权重保持为胸围25、腰围20、臀围20、大腿围15、身高20，下胸围不参与。各项权重可在0至100之间调整。每项取绝对差值，除以全体正式角色该项的最大值与最小值之差，再按所选权重求平均。任一方缺少的数据均跳过，并按剩余权重重新计算平均值；共同有效项目的权重总和为0时不显示匹配结果。选择身高占比时，围度按「围度 ÷ 对比用身高 × 100」计算；身高项目本身仍按实测值比较。 展开结果可查看各项差值及其对总距离的贡献。",
-    playMethod: "分布图统计当前筛选结果，排除缺失值。各区间等宽，最大值计入最后一个区间；所有值相同时只设一个区间。对比中选中的体型只标示位置，不会重复计入人数。「比一比大小」使用正式测量记录，按显示的一位小数判断大小或相同。沙盒体型仅作临时虚构参照，不计入名单人数、分类、百分位、排名、游戏题目或导出数据。分享链接包含沙盒输入值和工具设置。正式排名及罩杯排序规则保持不变。 罩杯分布按所选UK、US或EU体系的来源字母分组，并保留完整下围尺码。分类数据不做厘米缩放或数值中位数计算。UK沿用原顺序；其他体系按字母顺序排列，重复的D字母形式归在一起。 选择柱形或底围尺码与罩杯交叉的单元格，可查看对应角色并加入对比。底围尺码沿用所选来源体系的标注，不用于推算容积。",
+    playMethod: "分布图统计当前筛选结果，排除缺失值。各区间等宽，最大值计入最后一个区间；所有值相同时只设一个区间。对比中选中的体型只标示位置，不会重复计入人数。「比一比大小」使用正式测量记录，按显示的一位小数判断大小或相同。沙盒体型仅作临时虚构参照，不计入名单人数、分类、百分位、排名、游戏题目或导出数据。分享链接包含沙盒输入值和工具设置。 罩杯分布按所选UK、US或EU体系的来源字母分组，并保留完整下围尺码。分类数据不做厘米缩放，也不计算数值平均或中位数。UK按 D < DD < E < F < FF < G < GG < H < HH < J < JJ 排列；其他体系按字母顺序排列，重复的D字母形式归在一起。 选择柱形或底围尺码与罩杯交叉的单元格，可查看对应角色并加入对比。底围尺码沿用所选来源体系的标注，不用于推算容积。",
     toolsTitle: "对比与分析工具",
     toolsDescription: "查看UK罩杯分布、对比尺寸与比例、查找相近体型，还可以玩大小竞猜或尝试虚构体型。",
     skipTools: "跳转至工具",
@@ -1895,9 +1896,9 @@ const I18N = {
     lengthUnit: "长度单位",
     cupSystem: "内衣尺码体系",
     doneSettings: "完成",
-    cupRankNote: "排名先比较UK罩杯字母，再比较下围（G > GG）。显示值直接采用所选体系的来源记录。",
-    cupGameNote: "按 UK 罩杯字母、再按底围尺码判断右侧大小（G > GG）。",
-    settingsMethod: "在测量显示设置中选择厘米或英寸，以及UK、US、EU内衣尺码。偏好会保存在浏览器中，并写入分享链接。各体系均使用来源记录，不通过换算补值。排名、筛选和大小竞猜仍按UK规则：先比罩杯字母，再比下围，单字母排在对应的双字母之前。罩杯题按完整UK分数判断，支持相同答案；选择其他显示体系时，答题后也会列出UK尺码。 语言和主题也可在同一设置窗口中切换。",
+    cupRankNote: "排名采用UK罩杯顺序（G < GG < H < HH < J < JJ），只有罩杯相同时才比较下围。显示值沿用所选体系的来源记录。",
+    cupGameNote: "按UK罩杯顺序（G < GG < H < HH < J < JJ）判断右侧大小，罩杯相同时再比较下围。",
+    settingsMethod: "在测量显示设置中选择厘米或英寸，以及UK、US、EU内衣尺码。偏好会保存在浏览器中，并写入分享链接。各体系均使用来源记录，不通过换算补值。排名、筛选和大小竞猜采用UK罩杯顺序（G < GG < H < HH < J < JJ），罩杯相同时再比下围。罩杯题按完整UK分数判断，支持相同答案；选择其他显示体系时，答题后也会列出UK尺码。 语言和主题也可在同一设置窗口中切换。",
     chooseAgents: "选择对比角色",
     savedComparisons: "已保存的对比",
     comparisonName: "对比名称",
@@ -1930,7 +1931,7 @@ const I18N = {
     replaceAgent: "更换角色",
     addAgent: "添加角色",
     helpOverview: "有注记的身高按头顶高度计算。围度采用来源中的实测数据。身高占比按“围度 ÷ 身高 × 100”计算；同身高数值是假设全身等比例缩放后的结果。缺失数据不会补算。",
-    helpCup: "本数据集先按UK罩杯字母、再按下围数值排序，G排在GG之前。UK、US、EU尺码均沿用来源标注。字母相同不代表容量相同。",
+    helpCup: "UK罩杯依次增大：D < DD < E < F < FF < G < GG < H < HH < J < JJ。只有罩杯相同时才用下围决定顺序。UK、US、EU尺码均沿用来源标注，相同字母不代表相同容积。",
     helpRatio: "腰臀比是腰围除以臀围，腰高比是腰围除以头顶身高。这些比值用于描述已有测量数据中的比例。",
     helpMissing: "“—”表示没有可靠测量值，不代表零，也不会参与数值比较或汇总。",
     restoreColumns: "恢复默认列",
@@ -2070,8 +2071,7 @@ const r2 = v => Math.round(v*100)/100;
    row to the data file changes percentiles, classes, the podium, highlights,
    filters and comparisons without hand-editing any ranking. */
 function cupGroupOf(uk){
-  const m = String(uk || '').match(/^\d+\s*([A-Za-z]+)/);
-  const letter = m ? m[1].toUpperCase() : '';
+  const letter = Analysis.cupSize(uk)?.cup || '';
   if(['AA','A','B'].includes(letter)) return 'A-B';
   if(['C','D'].includes(letter)) return 'C-D';
   if(['DD','E'].includes(letter)) return 'DD-E';
@@ -2211,18 +2211,8 @@ function tagText(v){
   if(state.lang==='zh') return ({Petite:'娇小',Mid:'中等',Tall:'高挑',Cinched:'纤细',Average:'适中',Fuller:'丰满',Compact:'窄胯','Average-width':'适中',Wide:'宽胯',Slim:'纤细',Thick:'丰满',Hourglass:'沙漏型',Balanced:'匀称型',Straight:'直线型','Top-heavy':'上围偏重','Bottom-heavy':'下围偏重','n/a':'无数据'})[v] || v;
   return v;
 }
-const CUP_BASE = {A:1, B:2, C:3, D:4, E:5, F:6, G:7, H:8, J:9, K:10, L:11, M:12, N:13};
-function cupParts(d){
-  const m = String(d && d.uk || '').match(/^(\d+)\s*([A-Za-z]+)$/);
-  return {band: m ? +m[1] : 0, cup: m ? m[2].toUpperCase() : ''};
-}
 function cupScore(d){
-  const p = cupParts(d), base = CUP_BASE[p.cup[0]] || 0;
-  if(!base) return -1;
-  // As specified: single-letter cups outrank their doubled form (G > GG),
-  // then the band number decides larger sizes (22E > 19E, 23GG > 21GG).
-  const single = p.cup.length === 1 ? 1 : 0;
-  return base * 10000 + single * 1000 + p.band;
+  return Analysis.cupSize(d?.uk)?.score ?? -1;
 }
 const SORTS = {
   "name":        (a,b)=>nameOf(a).localeCompare(nameOf(b), state.lang==='ja'?'ja':state.lang==='zh'?'zh-Hans':'en'),

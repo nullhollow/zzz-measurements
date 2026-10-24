@@ -1043,8 +1043,7 @@ const r2 = v => Math.round(v*100)/100;
    row to the data file changes percentiles, classes, the podium, highlights,
    filters and comparisons without hand-editing any ranking. */
 function cupGroupOf(uk){
-  const m = String(uk || '').match(/^\d+\s*([A-Za-z]+)/);
-  const letter = m ? m[1].toUpperCase() : '';
+  const letter = Analysis.cupSize(uk)?.cup || '';
   if(['AA','A','B'].includes(letter)) return 'A-B';
   if(['C','D'].includes(letter)) return 'C-D';
   if(['DD','E'].includes(letter)) return 'DD-E';
@@ -1184,18 +1183,8 @@ function tagText(v){
   if(state.lang==='zh') return ({Petite:'娇小',Mid:'中等',Tall:'高挑',Cinched:'纤细',Average:'适中',Fuller:'丰满',Compact:'窄胯','Average-width':'适中',Wide:'宽胯',Slim:'纤细',Thick:'丰满',Hourglass:'沙漏型',Balanced:'匀称型',Straight:'直线型','Top-heavy':'上围偏重','Bottom-heavy':'下围偏重','n/a':'无数据'})[v] || v;
   return v;
 }
-const CUP_BASE = {A:1, B:2, C:3, D:4, E:5, F:6, G:7, H:8, J:9, K:10, L:11, M:12, N:13};
-function cupParts(d){
-  const m = String(d && d.uk || '').match(/^(\d+)\s*([A-Za-z]+)$/);
-  return {band: m ? +m[1] : 0, cup: m ? m[2].toUpperCase() : ''};
-}
 function cupScore(d){
-  const p = cupParts(d), base = CUP_BASE[p.cup[0]] || 0;
-  if(!base) return -1;
-  // As specified: single-letter cups outrank their doubled form (G > GG),
-  // then the band number decides larger sizes (22E > 19E, 23GG > 21GG).
-  const single = p.cup.length === 1 ? 1 : 0;
-  return base * 10000 + single * 1000 + p.band;
+  return Analysis.cupSize(d?.uk)?.score ?? -1;
 }
 const SORTS = {
   "name":        (a,b)=>nameOf(a).localeCompare(nameOf(b), state.lang==='ja'?'ja':state.lang==='zh'?'zh-Hans':'en'),

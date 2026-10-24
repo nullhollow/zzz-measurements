@@ -635,6 +635,10 @@ FAQ = [
 
 
 for _lang in PAGE:
+    _title, _body = METHOD[_lang]['sections'][4]
+    _reference = {'en': 'UK cup-order reference', 'ja': 'UKカップ順の出典', 'zh': 'UK罩杯顺序来源'}[_lang]
+    METHOD[_lang]['sections'][4] = (_title, _body + ' ' + esc(PAGE[_lang]['helpCup']) +
+        f' <a href="https://katherinehamilton.com/pages/international-bra-size-chart" rel="noopener">{_reference}</a>' + ('.' if _lang == 'en' else '。'))
     METHOD[_lang]['intro'] += ' ' + PAGE[_lang]['additionalDataNote']
     for _i in (0, 6):
         _q, _a = METHOD[_lang]['faq'][_i]
