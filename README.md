@@ -12,7 +12,7 @@ Live site: <https://nullhollow.github.io/zzz-measurements/>
 index.html                 generated roster page
 tools.html                 generated comparison/exploration page
 measurements3.3.csv        source sheet (the only hand-edited data)
-character_images/          53 official portraits + 26 outfit renders + thumbs/
+character_images/          54 official portraits + 26 outfit renders + thumbs/
 images/                    49 sheet crops
 fonts/                     ZZZ Hongmeng subset + Anton / Chakra / Inter / Noto fallbacks
 tools/                     build pipeline, scrapers and the alignment lab
@@ -35,7 +35,7 @@ python3 tools/validate.py  --site-url https://<user>.github.io/<repo>/
 1. `build_data.py` — CSV → `tools/data.json` (ratios, classes, percentiles, provenance)
 2. `describe.py` — generated profile text in English, Japanese and Simplified Chinese (cm + inches)
 3. `build_html.py` — `index.html` and `tools.html`, localized data and JSON-LD
-4. `build_pages.py` — 49 character pages × 3 languages, 3 methodology/FAQ pages, dataset exports, offline page
+4. `build_pages.py` — 50 character pages × 3 languages, 3 methodology/FAQ pages, dataset exports, offline page
 5. crawler files, PWA manifest, service worker, link check
 
 Optional asset steps (already committed):
@@ -68,7 +68,7 @@ These facts never enter measurement calculations or rankings.
 
 The original artwork viewer works on profiles and inside the chart. It supports fit,
 true 100% pixel view, zoom/pan, keyboard navigation, background choices and downloads.
-`originals/` contains 75 unmodified source PNG downloads, approximately 110 MiB.
+`originals/` contains 76 unmodified source PNGs, approximately 112 MiB.
 They load only when the viewer opens and are not part of the service-worker install
 cache. SHA-256, dimensions, byte sizes and source URLs are recorded in the reference
 manifest. Some source PNGs include backgrounds that are absent from curated previews.
@@ -79,6 +79,11 @@ needed, then pack and validate. The fetcher is never run by CI. It requests
 `format=original`, verifies PNG format and source dimensions, and never resizes or
 re-encodes the downloaded files. Original source quality varies; files are not
 upscaled or reconstructed from the existing previews.
+
+Owner-supplied originals retain their uploaded bytes and an `owner-upload` manifest
+entry; the fetcher verifies their hashes and preserves them during a refresh.
+Eldreda Sunbringer currently has official artwork only. Her `sheet_available: false`
+record uses that optimized artwork even when Sheet mode is selected.
 
 Shared implementation: `tools/visual_tools.js`, `tools/visual_tools.css`,
 `tools/artwork.js` and `tools/reference.py`. Run `python3 tools/test_reference.py`
@@ -185,7 +190,7 @@ methodology. The public measurement schema is unchanged. Old `#view=distribution
 Tool section changes create browser-history entries; field edits replace the
 current entry. A shared sticky container keeps tool navigation above its controls.
 Navigation carries filters, comparison selections, units, theme and language between
-pages. The packed site contains 49 entries, 147 profiles and 720 files (about 138.0 MB).
+pages. The packed site contains 50 entries, 150 profiles and 731 files (about 140.8 MB).
 
 Run the regression and Python/JavaScript parity suite with Node.js available:
 
@@ -257,13 +262,21 @@ upscaling the 640 thumb. A 2x phone loads ~430 KB of artwork for the first scree
 (podium plus visible cards), and the rest lazy-loads. Character-page heroes use a 1280 px AVIF/source set, the gallery uses 640 px
 thumbs and the detail view uses the 1280 px source render. Outfit art with an
 AVIF source serves AVIF first and WebP as the fallback. The HTML is ~84 KB
-gzipped locally (GitHub Pages serves it compressed), and the page keeps its 49
+gzipped locally (GitHub Pages serves it compressed), and the page keeps its 50
 static cards.
 
 ## Data model
 
 One row per character in `measurements3.3.csv`. `tools/meta.json` documents every
 derived field, carries the schema version and the data date.
+
+Eldreda Sunbringer is a separate project estimate based on the owner's assumptions
+and other sources, not modelmetrics.net. Her effective height is 180.37 cm;
+193.37 cm includes horns. UK 23HH is the supplied source label. US ≈23L and EU
+≈50L are estimates: the nonstandard UK band prevents an exact standard conversion,
+and the EU estimate rounds the theoretical band upward. `record_sources` in
+`tools/meta.json` supplies per-record provenance, source precision and missing-sheet
+metadata. Exports preserve the labels and identify the estimated sizing systems.
 
 * **Standard model is canonical**, except **Jane Doe**: her canonical entry uses the
   measured Nocturne of Light outfit. Other measured outfits are separate `skin`

@@ -1,9 +1,9 @@
 {
  "schema_version": 2,
- "data_updated": "2026-10-22",
+ "data_updated": "2026-10-25",
  "title": "ZZZ Female Measurements",
  "source": "modelmetrics.net",
- "rights": "Measurements compiled from modelmetrics.net. Character artwork is © HoYoverse and shown as fair use; portraits come from the official HoYoverse site and the ZZZ Fandom wiki.",
+ "rights": "Most measurements are compiled from modelmetrics.net. Eldreda Sunbringer is a project estimate based on owner assumptions and other sources, not modelmetrics.net. Character artwork is © HoYoverse and shown as fair use; portraits come from official HoYoverse sources, the ZZZ Fandom wiki and owner-supplied official artwork.",
  "repo": "https://github.com/nullhollow/zzz-measurements",
  "wiki": "https://zenless-zone-zero.fandom.com",
  "measurement_fields": [
@@ -44,6 +44,21 @@
   "tags_ja": "Japanese display labels for the computed classes",
   "tags_zh": "Simplified Chinese display labels for the computed classes",
   "shape": "Hourglass / Balanced / Straight from bust, waist and hips",
-  "hourglass_score": "flare × bust–hip balance; higher is a sharper hourglass"
+  "hourglass_score": "flare × bust–hip balance; higher is a sharper hourglass",
+  "measurement_source": "modelmetrics.net or project_estimate; see record notes for provenance",
+  "estimated_cup_systems": "Sizing systems whose supplied labels are estimates, also marked with ≈",
+  "sheet_available": "Whether a source sheet crop is available"
+ },
+ "record_sources": {
+  "Eldreda Sunbringer": {
+   "measurement_source": "project_estimate",
+   "sheet_available": false,
+   "precision_cm": 2,
+   "height_appendage": "horns",
+   "estimated_cup_systems": [
+    "us",
+    "eu"
+   ]
+  }
  }
 }

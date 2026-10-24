@@ -11,13 +11,14 @@ CUP_BASE = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7,
 
 
 def size_parts(size):
-    match = re.fullmatch(r'(\d+)\s*([A-Za-z]+)', size or '')
+    match = re.fullmatch(r'≈?(\d+)\s*([A-Za-z]+)', size or '')
     if not match:
         return None
     return {'cup': match[2].upper(), 'band': int(match[1])}
 
 
 def cup_size(size):
+    if (size or '').startswith('≈'):return None
     parts = size_parts(size)
     if not parts or parts['cup'][0] not in CUP_BASE:
         return None

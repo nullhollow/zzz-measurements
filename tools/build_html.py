@@ -23,9 +23,9 @@ MISSING = []
 THUMBS = ('', '320/', 'avif/', 'avif/320/', 'avif/1024/', 'avif/1280/')
 for d in DATA:
     checks = {
-        'sheet crop': ROOT / f"images/{d['img']}.webp",
         'official render': ROOT / f"character_images/{d['official']}.webp",
     }
+    if d.get('sheet_available', True):checks['sheet crop']=ROOT / f"images/{d['img']}.webp"
     for prefix in THUMBS:
         ext = 'avif' if 'avif' in prefix else 'webp'
         checks[f'thumb {prefix or "640"}'] = ROOT / f"character_images/thumbs/{prefix}{d['official']}.{ext}"
@@ -93,7 +93,7 @@ jsonld = {
             "name": f"Zenless Zone Zero female character measurements ({N} agents)",
             "description": DESC,
             "url": "__SITE_URL__",
-            "creator": {"@type": "Organization", "name": META['source']},
+            "creator": [{"@type": "Organization", "name": META['source']}, {"@type": "Organization", "name": "ZZZ Measurements project"}],
             "inLanguage": "en",
             "isAccessibleForFree": True,
             "dateModified": META['data_updated'],
@@ -104,11 +104,11 @@ jsonld = {
                 for name in META['measurement_fields']
             ],
             "measurementTechnique": ("Curves measured around the official 3D models; charted heights "
-                                     "come from official listings and may include ears, footwear or accessories."),
+                                     "come from official listings and may include ears, footwear or accessories. Eldreda Sunbringer is a project estimate from owner assumptions and other sources, not modelmetrics.net; her US/EU sizes are estimates."),
             "size": {"@type": "QuantitativeValue", "value": N, "unitText": "characters"},
             "about": {"@type": "VideoGame", "name": "Zenless Zone Zero",
                       "publisher": {"@type": "Organization", "name": "HoYoverse"}},
-            "isBasedOn": "https://modelmetrics.net",
+            "isBasedOn": ["https://modelmetrics.net", META["repo"]+"/blob/main/measurements3.3.csv"],
             "citation": META['source'],
             "copyrightNotice": META['rights'],
             "distribution": [
@@ -140,10 +140,10 @@ rows = []
 for d in sorted(DATA, key=lambda x: x['display']):
     def v(k, dec=1):
         x = d.get(k)
-        return '—' if x is None else f"{x:.{dec}f}"
+        return '—' if x is None else f"{x:.{max(dec,d.get('precision_cm',1))}f}"
     height = f"{v('stature_cm', 1)} cm · {d['ftin_stature']}"
     if d['stature_basis'] == 'head':
-        height += f" ({v('cm', 0)} charted)"
+        height += f" ({v('cm', 2 if d.get('height_appendage')=='horns' else 0)} cm {'including horns' if d.get('height_appendage')=='horns' else 'charted'})"
     rows.append("<tr><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td></tr>".format(
         _html.escape(d['display']), _html.escape(height), v('bust_cm'), v('band_cm'),
         v('waist_cm'), v('hip_cm'), v('thigh_cm')))

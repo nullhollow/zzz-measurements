@@ -32,10 +32,10 @@ def pct(p):
 
 
 def height_line(d, unit='cm'):
-    head = f" · {fmt(d['cm'], 0)} charted" if d['stature_basis'] == 'head' else ''
+    head = (f" · {fmt(d['cm'], 2)} cm including horns" if d.get('height_appendage') == 'horns' else f" · {fmt(d['cm'], 0)} charted") if d['stature_basis'] == 'head' else ''
     if unit == 'cm':
-        return f"{fmt(d['stature_cm'], 1)} cm · {d['ftin_stature']}{head}"
-    return f"{d['ftin_stature']} · {fmt(d['stature_cm'], 1)} cm{head}"
+        return f"{fmt(d['stature_cm'], d.get('precision_cm',1))} cm · {d['ftin_stature']}{head}"
+    return f"{d['ftin_stature']} · {fmt(d['stature_cm'], d.get('precision_cm',1))} cm{head}"
 
 
 def thumb(d, size=None):
@@ -59,7 +59,7 @@ def card_sizes(d):
 
 def media(d, sizes, art='official', lazy=True, priority=None):
     """AVIF + WebP <picture> for official art; a plain crop for sheet mode."""
-    if art == 'sheet':
+    if art == 'sheet' and d.get('sheet_available',True):
         return (f'<img loading="lazy" decoding="async" src="images/{d["img"]}.webp" '
                 f'data-fallback="character_images/{d["official"]}.webp" '
                 f'onerror="this.onerror=null;this.src=this.dataset.fallback" alt="">')
@@ -108,7 +108,7 @@ def values(d, unit='cm', lang='en'):
     note = f'<div class="note">{esc(d["notes"])}</div>' if d['notes'] else ''
     stick = f'<span class="stick">{esc(d["outfit"] or "variant")}</span>' if d.get('outfit') or d['variant_of'] else ''
     suffix = '_cm' if unit == 'cm' else '_in'
-    val = lambda k: fmt(d[k + suffix])  # noqa: E731
+    val = lambda k: fmt(d[k + suffix], d.get('precision_cm',1) if unit=='cm' else 1)  # noqa: E731
     return {
         'name': esc(d['name']),
         'cmpAria': esc(f"Add {d['display']} to comparison"),

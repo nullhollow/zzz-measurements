@@ -1,7 +1,7 @@
 """Complete, localized measurement summaries for search and structured data."""
 
 
-def profile_summary(d, lang='en'):
+def _profile_summary(d, lang='en'):
     name = d.get(f'name_{lang}') or d['display']
     height, bust, waist, hip = (f'{d[k]:g}' for k in
                                ('stature_cm', 'bust_cm', 'waist_cm', 'hip_cm'))
@@ -14,3 +14,10 @@ def profile_summary(d, lang='en'):
                 f"臀围{hip}厘米。UK {d['uk']}，{shape}轮廓。")
     return (f"{name}: height {height} cm, bust {bust} cm, waist {waist} cm, "
             f"hips {hip} cm; UK {d['uk']}. {shape} silhouette.")
+
+
+def profile_summary(d, lang='en'):
+    text=_profile_summary(d,lang)
+    if d.get('measurement_source')=='project_estimate':
+        text+=' '+{'en':'Project estimate from owner assumptions and other sources, not modelmetrics.net. US/EU sizes are estimates.', 'ja':'サイト所有者の仮定と他の資料による独自の推定値で、modelmetrics.net出典ではありません。US・EUサイズも推定です。', 'zh':'本站根据站主假设和其他资料估算，并非来自modelmetrics.net，US、EU尺码仅为估计。'}[lang]
+    return text

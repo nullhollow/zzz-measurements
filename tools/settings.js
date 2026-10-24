@@ -2,7 +2,7 @@
 function cupSystemName(){ return state.cupSystem.toUpperCase(); }
 function displayCup(d){ return d[state.cupSystem]||'—'; }
 function cupText(d){ return `${cupSystemName()} ${displayCup(d)}`; }
-function displayCupLetter(d){ return Analysis.sizeParts(d[state.cupSystem])?.cup||'—'; }
+function displayCupLetter(d){ return (d[state.cupSystem]?.startsWith('≈')?'≈':'')+(Analysis.sizeParts(d[state.cupSystem])?.cup||'—'); }
 function cupSizeLabel(){ return `${t('cupSize')} (${cupSystemName()})`; }
 function syncMeasurementSettings(){
   $('#uCm').setAttribute('aria-pressed',state.unit==='cm');

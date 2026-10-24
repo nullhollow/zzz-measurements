@@ -4,10 +4,11 @@ const Analysis = (() => {
   const weights = {bust:.25, waist:.2, hip:.2, thigh:.15, height:.2, underbust:0};
   const cupBase={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,J:9,K:10,L:11,M:12,N:13};
   function sizeParts(size){
-    const m=/^(\d+)\s*([A-Za-z]+)$/.exec(size||'');
+    const m=/^≈?(\d+)\s*([A-Za-z]+)$/.exec(size||'');
     return m?{cup:m[2].toUpperCase(),band:Number(m[1])}:null;
   }
   function cupSize(size){
+    if(String(size||'').startsWith('≈'))return null;
     const parts=sizeParts(size);
     if(!parts||!cupBase[parts.cup[0]])return null;
     return {...parts,score:cupBase[parts.cup[0]]*10000+(parts.cup.length===1?1000:0)+parts.band};

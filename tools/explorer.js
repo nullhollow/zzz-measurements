@@ -88,7 +88,7 @@ function shownValue(record,key,basis='raw'){
   return v==null?null:(basis==='height'&&key!=='height'?v:toDisp(v));
 }
 function valueSuffix(key,basis){ return basis==='height'&&key!=='height'?'%':USUF(); }
-function valueText(d,key,basis){ const v=shownValue(d,key,basis); return v==null?'—':fmt(v)+valueSuffix(key,basis); }
+function valueText(d,key,basis){ const v=shownValue(d,key,basis); return v==null?'—':fmt(v,isCm()&&(basis==='raw'||key==='height')?(d.precision_cm||1):1)+valueSuffix(key,basis); }
 function targetControl(id){
   return `<label for="${id}">${esc(t('targetHeight'))}<input class="toolinput" id="${id}" type="number" min="1" max="300" step="0.1" value="${state.compareHeight}" required></label>`;
 }
@@ -153,7 +153,7 @@ function rowLabel(key){ return key==='sizes'?'UK / US / EU':t(key==='whr'?'waist
 function comparisonText(d,key,basis){
   if(METRIC_KEYS.includes(key)){
     const text=valueText(d,key,basis);
-    return key==='height'&&d.stature_basis==='head'?text+` · ${fmt(d.cm,0)} cm ${t('charted')}`:text;
+    return key==='height'?text+heightNote(d):text;
   }
   if(key==='cup')return d.temporary?'—':cupText(d);
   if(key==='sizes')return d.temporary?'—':`${d.uk} / ${d.us} / ${d.eu}`;
@@ -182,7 +182,7 @@ function openCompare(){
     return `<tr data-metric="${key}"><th scope="row"><button class="metric-help" data-help="${key==='cup'||key==='sizes'?'cup':['whr','whtr'].includes(key)?'ratio':'overview'}">${esc(rowLabel(key))}</button>${direction}</th>${list.map((d,i)=>{
       let delta='';
       if(reference && d.slug!==reference.slug && key!=='cup'){
-        const decimals=['whr','whtr'].includes(key)?3:1;
+        const decimals=['whr','whtr'].includes(key)?3:isCm()&&(basis==='raw'||key==='height')?Math.max(...list.map(d=>d.precision_cm||1)):1;
         const a=vals[i],b=numeric(reference,key);
         const diff=Analysis.difference(a==null?null:Number(a.toFixed(decimals)),b==null?null:Number(b.toFixed(decimals)));
         const suffix=decimals===3?'':basis==='height'&&key!=='height'?' '+t('pp'):USUF();
@@ -355,7 +355,7 @@ function cupDistributionHTML(list){
   }
   const parts=state.distSelection.split(':'),selected=measured.filter(m=>parts[0]==='cup'?m.s.cup===parts[1]:parts[0]==='size'?m.s.band===+parts[1]&&m.s.cup===parts[2]:true);
   const label=parts[0]==='cup'?cupSystemName()+' '+parts[1]:parts[0]==='size'?cupSystemName()+' '+parts[1]+parts[2]:cupSizeLabel();
-  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label><label for="distCupView">${esc(t('chartView'))}<select id="distCupView"><option value="letters"${state.distCupView==='letters'?' selected':''}>${esc(t('cupLetters'))}</option><option value="matrix"${state.distCupView==='matrix'?' selected':''}>${esc(t('bandByCup'))}</option></select></label></div><p class="toolnote">${esc(t('cupDistributionNote').replace('{system}',cupSystemName()))}</p>${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(cupText(m.d))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}${distributionResults(selected.map(m=>m.d),label,cupText)}`;
+  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label><label for="distCupView">${esc(t('chartView'))}<select id="distCupView"><option value="letters"${state.distCupView==='letters'?' selected':''}>${esc(t('cupLetters'))}</option><option value="matrix"${state.distCupView==='matrix'?' selected':''}>${esc(t('bandByCup'))}</option></select></label></div><p class="toolnote">${esc(t('cupDistributionNote').replace('{system}',cupSystemName()))}</p>${measured.some(m=>m.d[system]?.startsWith('≈'))?`<p class="toolnote">${esc(t('estimatedSizesNote'))}</p>`:''}${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(cupText(m.d))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}${distributionResults(selected.map(m=>m.d),label,cupText)}`;
 }
 
 /* Filtered roster distribution; references are markers, never observations. */

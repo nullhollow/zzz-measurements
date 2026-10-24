@@ -246,6 +246,7 @@ def link_check(out, site):
 
 
 def main():
+    global DATA, META
     ap = argparse.ArgumentParser()
     ap.add_argument('--site-url', default=PLACEHOLDER,
                     help='absolute URL of the deployed site (trailing slash)')
@@ -259,6 +260,8 @@ def main():
     if not a.no_rebuild:
         print('rebuilding:')
         rebuild()
+    DATA=json.loads((ROOT/'tools/data.json').read_text())
+    META=json.loads((ROOT/'tools/meta.json').read_text())
 
     kept = {}
     if out.exists():

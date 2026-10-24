@@ -317,7 +317,7 @@
   .modal .x{position:absolute; right:12px; top:12px; z-index:3; width:36px; height:36px; cursor:pointer;
     background:#0b0b0c; color:#fff; border:1px solid var(--line2); border-radius:999px; font-size:14px; line-height:1}
   .modal .x:hover{background:var(--accent-fill); color:#0b0b0c; border-color:var(--acid)}
-  .mhead{padding:16px 22px 12px; border-bottom:1px solid var(--line); display:flex; align-items:baseline;
+  .mhead{padding:16px 60px 12px 22px; border-bottom:1px solid var(--line); display:flex; align-items:baseline;
     gap:10px; flex-wrap:wrap}
   .mhead h2{margin:0; font-family:var(--disp); font-weight:400; font-size:27px; line-height:1; text-transform:uppercase}
   html[lang="ja"] .mhead h2{font-size:23px}
@@ -687,7 +687,7 @@
   <div class="hero-inner">
     <h1 style="margin:0"><span class="sticker"><b>ZZZ <span>MEASUREMENTS</span></b></span></h1>
     <h2><span id="agentCount">/*__COUNT__*/</span> <span data-i18n="heroSuffix">female agents · measurements &amp; proportions</span></h2>
-    <div class="meta"><span data-i18n="source">Source</span>: <b>modelmetrics.net</b> · <span data-i18n="updated">Data updated</span> <time datetime="__DATA_UPDATED__">__DATA_UPDATED__</time></div>
+    <div class="meta"><span data-i18n="mainSource">Main source</span>: <b>modelmetrics.net</b> · <span data-i18n="updated">Data updated</span> <time datetime="__DATA_UPDATED__">__DATA_UPDATED__</time></div>
   </div>
   <div class="tape"></div>
 </header>
@@ -826,12 +826,13 @@
       <a href="__REPO__/blob/main/CHANGELOG.md" rel="noopener" data-i18n="changelog">Changelog</a>
       <a href="__REPO__" rel="noopener" data-i18n="sourceRepository">Source repository</a>
     </div>
-    <b data-i18n="source">Source</b>: modelmetrics.net · <i data-i18n="sourceTitle">Zenless Zone Zero · Female Character Measurements</i>. <span data-i18n="schema">Schema</span> v__SCHEMA_VERSION__ · <span data-i18n="updated">Data updated</span> <time datetime="__DATA_UPDATED__">__DATA_UPDATED__</time>.<br>
+    <b data-i18n="mainSource">Main source</b>: modelmetrics.net · <i data-i18n="sourceTitle">Zenless Zone Zero · Female Character Measurements</i>. <span data-i18n="schema">Schema</span> v__SCHEMA_VERSION__ · <span data-i18n="updated">Data updated</span> <time datetime="__DATA_UPDATED__">__DATA_UPDATED__</time>.<br>
     <span data-i18n="footHeight"><b>Height:</b> the charted figure may include ears, footwear or accessories. Height uses head height where the chart notes an appendage (Miyabi: 170 cm charted, 152.1 cm used); the charted figure stays visible as a note.</span><br>
     <span data-i18n="footBasis"><b>Basis:</b> cards, filters and rankings use the <b>standard model</b>, except Jane Doe, whose canonical record is Nocturne of Light. Other measured outfits are separate records with their own deltas; art-only outfits never touch a number.</span><br>
     <span data-i18n="footClasses"><b>Classes:</b> waist (Cinched / Average / Fuller), hips (Compact / Average-width / Wide) and thighs (Slim / Average / Thick) are roster terciles of the raw circumference in cm. Build compares raw bust and hip percentiles; the cup group follows the source UK cup letter. Thirteen agents are hand-pinned to Thick by curator read. Shape uses bust, waist and hips: Hourglass needs bust/waist and hip/waist ≥1.45 and a bust–hip balance within 15%; Straight is a flare below 1.30 or a mismatch over 25%; the rest is Balanced.</span><br>
     <span data-i18n="footPercentiles"><b>Percentile bars:</b> roster percentiles of the raw cm measurement; height percentiles use head height. 0 = smallest, 100 = largest.</span><br>
     <span data-i18n="footBustDiff"><b>Bust diff:</b> recomputed as bust minus under-bust so it keeps one decimal (the sheet's own diff column is whole-number rounded).</span><br>
+    <p data-i18n="additionalDataNote"></p>
     <span data-i18n="footImages"><b>Images:</b> scale renders from modelmetrics.net; official art from the ZZZ Fandom wiki, © HoYoverse. Auto-comments are generated from the measurements; treat them as figure-chart commentary, not in-game canon.</span>
   </div>
 </footer>
@@ -1162,7 +1163,7 @@ function charHref(d){
 function descFor(d){
   const u = state.unit==='cm' ? 'cm' : 'in';
   const text=state.lang==='ja'?(d[`desc_ja_${u}`]||d[`desc_${u}`]||''):state.lang==='zh'?(d[`desc_zh_${u}`]||d[`desc_${u}`]||''):(d[`desc_${u}`]||'');
-  return text.replaceAll('UK '+d.uk,cupText(d));
+  return text.replace('UK '+d.uk,cupText(d));
 }
 function readFor(d){
   return state.lang==='ja' ? (d.read_ja || d.read)
@@ -1376,13 +1377,13 @@ function filtered(){
 /* ---------------- cards (shared template) ---------------- */
 const THUMB = 'character_images/thumbs';
 const officialSrc = r => `character_images/${r.official}.webp`;
-const imgSrc = d => `images/${d.img}.webp`;
-const thumbSrc = d => state.art==="official" ? `${THUMB}/320/${d.official}.webp` : `images/${d.img}.webp`;
+const imgSrc = d => d.sheet_available===false?officialSrc(d):`images/${d.img}.webp`;
+const thumbSrc = d => state.art==="official"||d.sheet_available===false ? `${THUMB}/320/${d.official}.webp` : `images/${d.img}.webp`;
 function mediaFor(d, sizes, opts={}){
   const lazy = opts.lazy !== false;
   const load = lazy ? ' loading="lazy"' : '';
   const prio = opts.priority ? ` fetchpriority="${opts.priority}"` : '';
-  if(state.art==="sheet") return `<img${load}${prio} decoding="async" src="images/${d.img}.webp" data-fallback="character_images/${d.official}.webp" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="">`;
+  if(state.art==="sheet"&&d.sheet_available!==false) return `<img${load}${prio} decoding="async" src="images/${d.img}.webp" data-fallback="character_images/${d.official}.webp" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="">`;
   const s = d.official;
   const dx = d.dx!=null ? ` style="--dx:${d.dx}%"` : '';
   const w320=d.w320||320, w640=d.w640||640, w1024=d.w1024||1024, wfull=d.wfull||w1024;
@@ -1399,11 +1400,12 @@ function podiumSizes(d){
   const ar=d.ar||0.6;
   return `(max-width:640px) ${Math.max(100,Math.round(ar*150))}px, ${Math.max(150,Math.round(ar*300))}px`;
 }
+function heightNote(d){return d.stature_basis==='head'?` · ${fmt(d.cm,d.height_appendage==='horns'?2:0)} cm ${t(d.height_appendage==='horns'?'includingHorns':'charted')}`:'';}
 function heightLine(d){
-  const head = d.stature_basis==='head' ? ` · ${fmt(d.cm,0)} ${t('charted')}` : '';
+  const head=heightNote(d);
   return isCm()
-    ? `${fmt(d.stature_cm,1)} cm · ${d.ftin_stature}${head}`
-    : `${d.ftin_stature} · ${fmt(d.stature_cm,1)} cm${head}`;
+    ? `${fmt(d.stature_cm,d.precision_cm||1)} cm · ${d.ftin_stature}${head}`
+    : `${d.ftin_stature} · ${fmt(d.stature_cm,d.precision_cm||1)} cm${head}`;
 }
 function chipsHTML(d){
   const tags = tagsFor(d);
@@ -1438,7 +1440,7 @@ function cardValues(d){
     pctTitle: esc(t('pctLong')),
     bustWord: t('bust'), waistWord: t('waist'), hipWord: t('hip'),
     pBust: pct(d.p_bust_cm), pWaist: pct(d.p_waist_cm), pHip: pct(d.p_hip_cm),
-    bust: fmt(d['bust_'+u]), waist: fmt(d['waist_'+u]), hip: fmt(d['hip_'+u]),
+    bust: fmt(d['bust_'+u],isCm()?(d.precision_cm||1):1), waist: fmt(d['waist_'+u],isCm()?(d.precision_cm||1):1), hip: fmt(d['hip_'+u],isCm()?(d.precision_cm||1):1),
     bustLabel: `${t('bust')} ${u}`, waistLabel: `${t('waist')} ${u}`, hipLabel: `${t('hip')} ${u}`,
     cupValue: esc(displayCup(d)), cupLabel: cupSystemName(),
     chips: chipsHTML(d),
@@ -1465,13 +1467,13 @@ function columns(){
     k:key, t:`${title} (${u})`, s:d=>d[key+'_cm'], num:true,
     fmtv:(v,d)=>{
       const p = U(d,key); if(p==null) return "—";
-      return `${fmt(p,dec)}`;
+      return `${fmt(p,isCm()?(d.precision_cm||dec):dec)}`;
     }
   });
   return [
     {k:"name",   t:t('name'), s:d=>nameOf(d), num:false},
     {k:"height", t:`${t('height')} (${u})`, s:d=>d.stature_cm, num:true,
-      fmtv:(v,d)=>`${fmt(isCm()?d.stature_cm:d.stature_cm/2.54,1)}${d.stature_basis==='head'?`<div class="mini">${fmt(d.cm,0)} cm ${esc(t('charted'))}</div>`:''}`},
+      fmtv:(v,d)=>`${fmt(isCm()?d.stature_cm:d.stature_cm/2.54,isCm()?(d.precision_cm||1):1)}${d.stature_basis==='head'?`<div class="mini">${fmt(d.cm,d.height_appendage==='horns'?2:0)} cm ${esc(t(d.height_appendage==='horns'?'includingHorns':'charted'))}</div>`:''}`},
     unitCol("bust",t('bust')),
     unitCol("band",t('underbust'),1),
     unitCol("waist",t('waist')),
@@ -1554,7 +1556,7 @@ function renderPlot(list){
     const cx=sx(d.stature_cm), cy=sy(d[m.k]);
     g+=`<g class="pt" data-slug="${esc(d.slug)}" tabindex="0" role="button" aria-label="${esc(nameOf(d))}: ${esc(fmt(d[m.k], m.dec))}">
       <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5" fill="${shapeColor[d.shape]||'var(--acid)'}"/>
-      <title>${esc(nameOf(d))} — ${esc(fmt(d.stature_cm,1))} cm · ${esc(t(m.lk))} ${esc(fmt(d[m.k], m.dec))}</title>
+      <title>${esc(nameOf(d))} — ${esc(fmt(d.stature_cm,d.precision_cm||1))} cm · ${esc(t(m.lk))} ${esc(fmt(d[m.k], m.dec))}</title>
       <text x="${(cx+8).toFixed(1)}" y="${(cy-8).toFixed(1)}">${esc(nameOf(d))}</text></g>`;
   }
   svg.setAttribute('aria-label', `${t('height')} × ${t(m.lk)} scatter plot, ${pts.length} agents`);
@@ -1564,8 +1566,8 @@ function renderPlot(list){
 /* ---------------- podium ---------------- */
 const PODIUM_CATS = [
   {t:'tally', s:'byStature', pick:d=>d.stature_cm, asc:false,
-    f:d=> isCm()? `${fmt(d.stature_cm,1)} cm` : d.ftin_stature,
-    x:d=> d.stature_basis==='head' ? `${fmt(d.cm,0)} cm ${t('charted')}` : (isCm()? d.ftin : `${fmt(d.cm,0)} cm`)},
+    f:d=> isCm()? `${fmt(d.stature_cm,d.precision_cm||1)} cm` : d.ftin_stature,
+    x:d=> d.stature_basis==='head' ? heightNote(d).slice(3) : (isCm()? d.ftin : `${fmt(d.cm,0)} cm`)},
   {t:'cupLargest', s:'byCup', pick:d=>cupScore(d), asc:false,
     f:d=> `${displayCupLetter(d)}${t('cupUnit')}`, x:d=>cupText(d)},
   {t:'thickest', s:'byThigh', pick:d=>d.thigh_cm, asc:false,
@@ -1634,9 +1636,9 @@ function openModal(slug, opts){
   const skinOn = hasSkin && !!mctx.skin && !moreOn;
   const r = skinOn ? d.skin : d;
   const tags = tagsFor(r);
-  const official = mctx.src === "official" || !!moreOn;
+  const official = mctx.src === "official" || !!moreOn || d.sheet_available===false;
   const kv = (k,v) => `<div class="kv"><div class="k">${k}</div><div class="v">${v}</div></div>`;
-  const meas = (label, key, dec=1)=>{
+  const meas = (label, key, dec=isCm()?(r.precision_cm||1):1)=>{
     const p = isCm()? r[key+'_cm'] : r[key+'_in'];
     if(p==null) return kv(label, "—");
     const o = isCm()? r[key+'_in'] : r[key+'_cm'];
@@ -1667,7 +1669,7 @@ function openModal(slug, opts){
   const cap = moreOn
     ? `<b>${esc(t('outfitPortrait').replace('{outfit}', moreOn.label))}</b> · ${esc(t('fandomCredit'))}. <b>${esc(t('artOnlyLabel'))}:</b> ${esc(t(moreOn.original?'originalArtNote':'artOnlyNote').replace('{outfit}', moreOn.label))} ${esc(t('zoomHint'))}`
     : official
-    ? `<b>${esc(r.outfit?t('outfitPortrait').replace('{outfit}', r.outfit):t('officialPortrait'))}</b> · ${esc(t('fandomCredit'))}, via <a href="https://zenless-zone-zero.fandom.com/" target="_blank" rel="noopener">zenless-zone-zero.fandom.com</a>. ${esc(t('zoomHint'))}`
+    ? `<b>${esc(r.outfit?t('outfitPortrait').replace('{outfit}', r.outfit):t('officialPortrait'))}</b> · ${r.art_source_type==='owner-upload'?esc(t('ownerArtworkCredit')):`${esc(t('fandomCredit'))}, via <a href="https://zenless-zone-zero.fandom.com/" target="_blank" rel="noopener">zenless-zone-zero.fandom.com</a>.`} ${esc(t('zoomHint'))}`
     : `${esc(t('renderCredit'))}${skinOn?' '+esc(t('noSeparateRender')):''} ${esc(t('zoomHint'))}`;
   const outfitNote = (hasSkin || outfits.length) ? `<div class="onote" style="margin:0 9px 10px">${moreOn
             ? esc(t(moreOn.original?'originalArtNote':'artOnlyNote').replace('{outfit}', moreOn.label))
@@ -1687,7 +1689,7 @@ function openModal(slug, opts){
         </div>` : "";
   const cmpOn = state.compare.includes(d.slug);
   const sourcePage=r.source_page?.startsWith('(')?r.source_file:r.source_page;
-  const srcLink = sourcePage ? `<a href="https://zenless-zone-zero.fandom.com/wiki/${encodeURIComponent(sourcePage.replace(/ /g,'_'))}" target="_blank" rel="noopener">${esc(r.source_page?.startsWith('(')?nameOf(d):sourcePage)}</a>` : '—';
+  const srcLink = r.art_source_type==='owner-upload' ? `<a href="${esc(REFERENCE.art[r.official+'.webp'].source)}" target="_blank" rel="noopener">${esc(t('sourceOriginal'))}</a>` : sourcePage ? `<a href="https://zenless-zone-zero.fandom.com/wiki/${encodeURIComponent(sourcePage.replace(/ /g,'_'))}" target="_blank" rel="noopener">${esc(r.source_page?.startsWith('(')?nameOf(d):sourcePage)}</a>` : '—';
   const artSrc = moreOn ? `character_images/${moreOn.file}` : official ? officialSrc(r) : imgSrc(d);
   const artAvif = moreOn && moreOn.avif ? `character_images/${moreOn.avif}` : null;
   const artTag = artAvif
@@ -1697,12 +1699,12 @@ function openModal(slug, opts){
     <button class="x" id="closeModal" aria-label="${esc(t('close'))}">✕</button>
     <div class="mhead">
       <h2 id="mTitle">${esc(nameOf(d))}</h2><button class="btn" id="modalSettings" data-open-settings>${esc(t('settingsButton'))}</button>
-      <div class="sub2">${r.outfit?`${esc(t('outfits'))}: ${esc(r.outfit)} · `:(r.variant_of?`${esc(t('variantOf'))} ${esc(r.variant_of)} · `:"")}${isCm()? `${fmt(r.stature_cm,1)} cm (${r.ftin_stature})` : `${r.ftin_stature} (${fmt(r.stature_cm,1)} cm)`}${r.stature_basis==='head'?` · ${fmt(r.cm,0)} cm ${esc(t('charted'))}`:''} · ${esc(cupText(r))}</div>
+      <div class="sub2">${r.outfit?`${esc(t('outfits'))}: ${esc(r.outfit)} · `:(r.variant_of?`${esc(t('variantOf'))} ${esc(r.variant_of)} · `:"")}${isCm()? `${fmt(r.stature_cm,r.precision_cm||1)} cm (${r.ftin_stature})` : `${r.ftin_stature} (${fmt(r.stature_cm,r.precision_cm||1)} cm)`}${esc(heightNote(r))} · ${esc(cupText(r))}</div>
     </div>
     <div class="mbody">
       <div class="mimg">
         <div class="mtools">
-          <div class="seg" role="group" aria-label="Portrait">${segBtn('v','sheet',!official && !moreOn,t('sheet'),!!moreOn)}${segBtn('v','official',official,t('official'))}</div>
+          <div class="seg" role="group" aria-label="Portrait">${segBtn('v','sheet',!official && !moreOn,t('sheet'),!!moreOn||d.sheet_available===false)}${segBtn('v','official',official,t('official'))}</div>
         </div>
         ${outfitStrip}
         <button class="btn" id="viewOriginal" ${official?'':'hidden'}>${esc(t('viewOriginal'))}</button>
@@ -1748,13 +1750,13 @@ function openModal(slug, opts){
         <div class="sect"><h3>${esc(t('figureRead'))}</h3>
           <div class="vline">${esc(readFor(r))}</div>
           <div class="infog">
-            ${readRow(t('height'), isCm()? `${fmt(r.stature_cm,1)} cm` : r.ftin_stature,
-                      (isCm()? r.ftin_stature : `${fmt(r.stature_cm,1)} cm`) + (r.stature_basis==='head'? ` · ${fmt(r.cm,0)} ${t('charted')}` : ``),
+            ${readRow(t('height'), isCm()? `${fmt(r.stature_cm,r.precision_cm||1)} cm` : r.ftin_stature,
+                      (isCm()? r.ftin_stature : `${fmt(r.stature_cm,r.precision_cm||1)} cm`) + esc(heightNote(r)),
                       pct(r.p_stature_cm), tagText(tags.height), "var(--tan)")}
-            ${readRow(t('bust'), fmt(U(r,'bust'))+USUF(), esc(cupText(r)), pct(r.p_bust_cm), rankword(r.p_bust_cm), "var(--bust)")}
-            ${readRow(t('waist'), fmt(U(r,'waist'))+USUF(), `${esc(t('waistHeight'))} ${r.whtr.toFixed(3)}`, pct(r.p_waist_cm), rankword(r.p_waist_cm), "var(--waist)")}
-            ${readRow(t('hip'), fmt(U(r,'hip'))+USUF(), `${esc(t('hipHeight'))} ${r.hhr.toFixed(3)}`, pct(r.p_hip_cm), rankword(r.p_hip_cm), "var(--hips)")}
-            ${r.thigh_cm!=null?readRow(t('thigh'), fmt(U(r,'thigh'))+USUF(), `${esc(t('thighHeight'))} ${r.thr.toFixed(3)} · ${esc(t('thighHip'))} ${r.thh.toFixed(3)}`,
+            ${readRow(t('bust'), fmt(U(r,'bust'),isCm()?(r.precision_cm||1):1)+USUF(), esc(cupText(r)), pct(r.p_bust_cm), rankword(r.p_bust_cm), "var(--bust)")}
+            ${readRow(t('waist'), fmt(U(r,'waist'),isCm()?(r.precision_cm||1):1)+USUF(), `${esc(t('waistHeight'))} ${r.whtr.toFixed(3)}`, pct(r.p_waist_cm), rankword(r.p_waist_cm), "var(--waist)")}
+            ${readRow(t('hip'), fmt(U(r,'hip'),isCm()?(r.precision_cm||1):1)+USUF(), `${esc(t('hipHeight'))} ${r.hhr.toFixed(3)}`, pct(r.p_hip_cm), rankword(r.p_hip_cm), "var(--hips)")}
+            ${r.thigh_cm!=null?readRow(t('thigh'), fmt(U(r,'thigh'),isCm()?(r.precision_cm||1):1)+USUF(), `${esc(t('thighHeight'))} ${r.thr.toFixed(3)} · ${esc(t('thighHip'))} ${r.thh.toFixed(3)}`,
                       pct(r.p_thigh_cm), tagText(tags.thighs), "var(--thighs)"):""}
             ${readRow(t('silhouette'), tagText(tags.shape),
                       `${esc(t('bust'))}/${esc(t('waist'))} ${(r.bust_cm/r.waist_cm).toFixed(2)} · ${esc(t('hip'))}/${esc(t('waist'))} ${(r.hip_cm/r.waist_cm).toFixed(2)}`,

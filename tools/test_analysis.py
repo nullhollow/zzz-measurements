@@ -40,12 +40,14 @@ class AnalysisTests(unittest.TestCase):
     def test_display_systems_use_source_values_without_conversion(self):
         self.assertEqual(size_parts('23DDDD'), {'band': 23, 'cup': 'DDDD'})
         self.assertEqual(size_parts('47I'), {'band': 47, 'cup': 'I'})
+        self.assertEqual(size_parts('≈23L'), {'band':23,'cup':'L'})
+        self.assertIsNone(cup_size('≈23HH'))
         records = [{'uk': '19E', 'eu': '37G'}, {'uk': '21E', 'eu': '42F', 'us': '21DDD'}]
         self.assertEqual(cup_distribution(records, 'us')['count'], 1)
         self.assertEqual(cup_distribution(records, 'eu')['bins'], [{'cup': 'F', 'count': 1}, {'cup': 'G', 'count': 1}])
         for system in ('uk', 'us', 'eu'):
             self.assertEqual(cup_distribution(ROSTER, system)['count'], len(ROSTER))
-        self.assertEqual([b['cup'] for b in cup_distribution(ROSTER, 'us')['bins']],
+        self.assertEqual([b['cup'] for b in cup_distribution([{'us':v} for v in ['23K','23J','23I','23H','23DDDD','23DDD','23DD','23D','23C','23B','23A']], 'us')['bins']],
                          ['A', 'B', 'C', 'D', 'DD', 'DDD', 'DDDD', 'H', 'I', 'J', 'K'])
 
     def test_cup_game_uses_uk_letter_then_band(self):

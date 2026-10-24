@@ -581,5 +581,17 @@
   "width": 1297,
   "height": 1369,
   "license": "Fair use / (c) HoYoverse (Fandom wiki)"
+ },
+ {
+  "file": "eldreda_sunbringer.png",
+  "character": "Eldreda Sunbringer",
+  "csv_name": "Eldreda Sunbringer",
+  "wiki_page": "Eldreda Sunbringer",
+  "wiki_file": null,
+  "source": "https://github.com/nullhollow/zzz-measurements/blob/main/originals/eldreda_sunbringer.png",
+  "source_type": "owner-upload",
+  "width": 1920,
+  "height": 2588,
+  "license": "Official artwork supplied by the project owner; © HoYoverse (fair use)"
  }
 ]

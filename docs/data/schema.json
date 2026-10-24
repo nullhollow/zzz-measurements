@@ -230,6 +230,26 @@
      "notes": {
       "type": "string"
      },
+     "measurement_source": {
+      "enum": [
+       "modelmetrics.net",
+       "project_estimate"
+      ]
+     },
+     "estimated_cup_systems": {
+      "type": "array",
+      "items": {
+       "enum": [
+        "uk",
+        "us",
+        "eu"
+       ]
+      },
+      "uniqueItems": true
+     },
+     "sheet_available": {
+      "type": "boolean"
+     },
      "source_page": {
       "type": [
        "string",

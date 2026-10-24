@@ -44,11 +44,11 @@ def num(x):
         return None
 
 
-def ftin(cm):
+def ftin(cm, step=0.4):
     """Imperial height rounded to the nearest 0.4 inch (= 1 cm)."""
     if cm is None:
         return None
-    ti = round(cm / 2.54 / 0.4) * 0.4
+    ti = round(cm / 2.54 / step) * step
     ft = int(ti // 12)
     inch = ti - ft * 12
     if abs(inch - 12) < 0.05:
@@ -92,9 +92,9 @@ OUTFIT = {                    # official skin names (matches character_images/ f
 MERGE = list(VARIANT_OF)
 
 # The 3.3 sheet no longer carries the optional effective-height column, but
-# Miyabi's 170 cm chart value still includes her ears. Keep the head-height
-# basis in code so a new CSV row needs no extra column.
-STATURE_OVERRIDE = {'Miyabi': 152.1}
+# Miyabi's 170 cm chart value includes ears; Eldreda's 193.37 cm includes horns.
+# Keep the effective head heights without changing the existing CSV columns.
+STATURE_OVERRIDE = {'Miyabi': 152.1, 'Eldreda Sunbringer': 180.37}
 
 # ---------------------------------------------------------------- read sheet
 with CSV_PATH.open(newline='', encoding='utf-8') as f:
@@ -133,10 +133,11 @@ for row in rows:
         # every stature comparison uses this, the chart number is never overwritten
         cm_eff=num(row[23]) if len(row) > 23 and row[23].strip() else STATURE_OVERRIDE.get(name),
     )
-    d['ftin'] = ftin(d['cm'])
+    d.update(META.get('record_sources', {}).get(name, {}))
+    d['ftin'] = ftin(d['cm'], 0.1 if d.get('precision_cm') else 0.4)
     d['stature_cm'] = d['cm_eff'] if d['cm_eff'] is not None else d['cm']
     d['stature_basis'] = 'head' if d['cm_eff'] is not None else 'charted'
-    d['ftin_stature'] = ftin(d['stature_cm'])
+    d['ftin_stature'] = ftin(d['stature_cm'], 0.1 if d.get('precision_cm') else 0.4)
     # recompute bust diff from bust - under-bust so it keeps 1 dp (the sheet's
     # own diff columns are whole-number rounded)
     if d['bust_cm'] is not None and d['band_cm'] is not None:
@@ -184,6 +185,7 @@ for d in recs:
 # ---------------------------------------------------------------- provenance
 for d in recs:
     src = SRC_BY_FILE.get(d['official'] + '.png')
+    if src and src.get('source_type'):d['art_source_type']=src['source_type']
     d['source_page'] = src['wiki_page'] if src else None
     d['source_file'] = src['wiki_file'] if src else None
     d['source_url'] = src['source'] if src else None
@@ -249,7 +251,10 @@ for d in recs:
 for d in recs:
     note = d['notes'].lower()
     missing = d['thigh_cm'] is None
-    if 'impossible' in note or missing:
+    if d.get('measurement_source') == 'project_estimate':
+        d['confidence'] = 'estimated'
+        d['confidence_note'] = "Project estimate based on the owner's assumptions and other sources; not modelmetrics.net."
+    elif 'impossible' in note or missing:
         d['confidence'] = 'partial'
         d['confidence_note'] = 'At least one measurement is missing or unreadable.'
     elif 'approximat' in note or 'tbc' in note:

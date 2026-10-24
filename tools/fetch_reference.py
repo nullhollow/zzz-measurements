@@ -19,6 +19,8 @@ def pages(titles):
 
 def main():
     data=json.loads((ROOT/'tools/data.json').read_text());sources=json.loads((ROOT/'character_images/sources.json').read_text());skins=json.loads((ROOT/'character_images/skins.json').read_text());names=json.loads((ROOT/'tools/localized_names.json').read_text())
+    previous=json.loads((ROOT/'tools/reference.json').read_text())
+    uploads={k:v for k,v in previous['art'].items() if v.get('origin')=='owner-upload'}
     source_by={s['file'].replace('.png',''):s for s in sources}
     aliases={'aria_construct':'Aria','jane_doe':'Jane Doe','yi_xuan':'Yixuan'}
     titles={d['slug']:aliases.get(d['slug'],source_by.get(d['official'],{}).get('wiki_page',d['display'])) for d in data}
@@ -41,7 +43,8 @@ def main():
             if len(values)!=3 or any('<' in v or '{' in v for v in values):raise ValueError((title,values))
         loc=names.get(d['slug'],{})
         agents[d['slug']]={'faction':f.get('baseFaction') or f.get('faction') or None,'rank':values[0] if values else None,'attribute':values[1] if values else None,'specialty':values[2] if values else None,'release':f.get('releaseDate','')[:10] or None,'source':'https://zenless-zone-zero.fandom.com/wiki/'+urllib.parse.quote(title.replace(' ','_')),'official':{lang:loc.get('source_'+lang) for lang in ['ja','zh']},'checked':datetime.datetime.now(datetime.timezone.utc).date().isoformat()}
-        if loc.get('source_ja'):agents[d['slug']]['official']['en']=loc['source_ja'].replace('/ja-jp/','/en-us/')
+        if loc.get('source_en'):agents[d['slug']]['official']['en']=loc['source_en']
+        elif '/ja-jp/' in loc.get('source_ja',''):agents[d['slug']]['official']['en']=loc['source_ja'].replace('/ja-jp/','/en-us/')
         print('Agent:',d['slug'],flush=True)
     version_text=api(action='expandtemplates',text='{{Versions|1}}{{Versions|2}}{{Versions|3}}',prop='wikitext')['expandtemplates']['wikitext']
     versions=[]
@@ -66,7 +69,7 @@ def main():
             if 'ja' in group and 'zhs' in group:
                 labels[key]={'en':key,'ja':group['ja'],'zh':group['zhs'],'source':'https://zenless-zone-zero.fandom.com/wiki/'+urllib.parse.quote(title.replace(' ','_'))}
     (ROOT/'tools/reference_labels.json').write_text(json.dumps(labels,ensure_ascii=False,indent=2)+'\n')
-    requested={s['file'].replace('.png','.webp'):s['wiki_file'] for s in sources}
+    requested={s['file'].replace('.png','.webp'):s['wiki_file'] for s in sources if s.get('wiki_file') and s['file'].replace('.png','.webp') not in uploads}
     for rec in skins.values():
         for item in rec['items']:requested[item['file'].replace('.png','.webp')]=item['wiki_file']
     used=set()
@@ -96,6 +99,11 @@ def main():
         target.write_bytes(content)
         return key,{'file':'originals/'+filename,'width':image.width,'height':image.height,'bytes':len(content),'sha256':hashlib.sha256(content).hexdigest(),'source':ii['url'],'page':ii['descriptionurl'],'format':'PNG'}
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:art=dict(pool.map(archive,requested.items()))
+    for key,entry in uploads.items():
+        if key in used:
+            content=(ROOT/entry['file']).read_bytes()
+            if hashlib.sha256(content).hexdigest()!=entry['sha256']:raise ValueError('Owner original changed: '+key)
+            art[key]=entry
     (ROOT/'tools/reference.json').write_text(json.dumps({'agents':agents,'art':art},ensure_ascii=False,indent=2)+'\n')
     print('Originals:',len(art),sum(a['bytes'] for a in art.values())/1e6,'MB')
 if __name__=='__main__':main()

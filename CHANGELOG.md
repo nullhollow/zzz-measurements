@@ -2,6 +2,17 @@
 
 ## Unreleased — audit implementation
 
+### Eldreda Sunbringer (2026-10-25)
+
+- Add the supplied measurements, using 180.37 cm excluding horns for comparisons
+  and preserving 193.37 cm including horns. Existing calculation and ranking rules
+  are unchanged; roster-derived values now include 50 entries.
+- Preserve UK 23HH and label US ≈23L / EU ≈50L as estimates. Explain the
+  nonstandard band and independent project provenance in EN/JA/ZH and exports.
+- Add optimized official artwork and the unchanged original PNG, with an official
+  portrait fallback until a sheet crop is available. Preserve uploaded originals
+  during reference refreshes and include new profiles in the first-build sitemap.
+
 ### Visual reference features (2026-10-23)
 
 - Add an effective-height lineup with ruler, doorway and personal-height references,

@@ -159,7 +159,14 @@
     "retryArt": "Retry",
     "sourceOriginal": "Source original",
     "artCredit": "Artwork © HoYoverse. Original source file, without resizing or re-encoding.",
-    "debutVersion": "Debut version"
+    "debutVersion": "Debut version",
+    "additionalDataNote": "Eldreda Sunbringer's data is a project estimate based on the owner's assumptions and other sources, not modelmetrics.net. Her US/EU sizes are estimates.",
+    "includingHorns": "including horns",
+    "hornHeightNote": "Height excludes horns: {st} cm. Including horns: {cm} cm.",
+    "ownerArtworkCredit": "Official artwork supplied by the project owner, © HoYoverse.",
+    "projectSource": "Project estimate; not modelmetrics.net",
+    "estimatedSizesNote": "≈ marks an estimated size. The supplied UK 23HH uses a nonstandard band, so US/EU conversions are not exact; the EU estimate rounds the theoretical band upward.",
+    "mainSource": "Main source"
   },
   "ja": {
     "tools": "ツール",
@@ -321,7 +328,14 @@
     "retryArt": "再試行",
     "sourceOriginal": "元画像の出典",
     "artCredit": "画像 © HoYoverse。取得した元ファイルを、リサイズ・再圧縮せずに表示しています。",
-    "debutVersion": "初登場バージョン"
+    "debutVersion": "初登場バージョン",
+    "additionalDataNote": "エルダ・サンブリンガーの数値は、サイト所有者の仮定と他の資料に基づく独自の推定値です。modelmetrics.netのデータではありません。US・EUサイズも推定です。",
+    "includingHorns": "角を含む",
+    "hornHeightNote": "角を除く身長は{st}cm。角を含めると{cm}cmです。",
+    "ownerArtworkCredit": "サイト所有者から提供された公式画像。© HoYoverse。",
+    "projectSource": "独自の推定値（modelmetrics.net出典ではありません）",
+    "estimatedSizesNote": "≈は推定サイズです。出典のUK 23HHはバンド値が規格外のため、US・EUへ正確には換算できません。EUの推定では計算上のバンド値を切り上げています。",
+    "mainSource": "主な出典"
   },
   "zh": {
     "tools": "工具",
@@ -483,6 +497,13 @@
     "retryArt": "重试",
     "sourceOriginal": "原图来源",
     "artCredit": "立绘 © HoYoverse。展示下载的原始文件，未经缩放或重新编码。",
-    "debutVersion": "首次登场版本"
+    "debutVersion": "首次登场版本",
+    "additionalDataNote": "艾尔妲·挽昼的数据为站主根据个人假设和其他资料作出的估算，并非来自modelmetrics.net。US、EU尺码也仅为估计。",
+    "includingHorns": "含角",
+    "hornHeightNote": "不含角身高为{st}厘米，含角为{cm}厘米。",
+    "ownerArtworkCredit": "站主提供的官方立绘，© HoYoverse。",
+    "projectSource": "本站估算，并非来自modelmetrics.net",
+    "estimatedSizesNote": "≈表示估计尺码。来源提供的UK 23HH下围并非标准尺码，无法精确转换为US或EU；EU估值将理论下围向上取整。",
+    "mainSource": "主要来源"
   }
 }

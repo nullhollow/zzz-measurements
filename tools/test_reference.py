@@ -16,7 +16,8 @@ class ReferenceTests(unittest.TestCase):
                 with Image.open(path) as image:
                     self.assertEqual(image.format,'PNG');self.assertEqual(image.size,(art['width'],art['height']))
                 self.assertEqual(content,(ROOT/'docs'/art['file']).read_bytes())
-                self.assertIn('format=original',art['source'])
+                if art.get('origin')=='owner-upload':self.assertTrue(art['source'].startswith('https://github.com/nullhollow/zzz-measurements/blob/main/originals/'))
+                else:self.assertIn('format=original',art['source'])
     def test_every_displayed_outfit_has_an_original(self):
         self.assertEqual(set(REF['agents']),{d['slug'] for d in DATA})
         for d in DATA:

@@ -52,6 +52,7 @@ def describe(d, unit, compare=None):
     word = 'cm' if cmu else 'in'
 
     def v(in_key, cm_key, dec=1):
+        if cmu:dec=max(dec,d.get('precision_cm',1))
         raw = d[cm_key] if cmu else d[in_key]
         if raw is None: return '—'
         s = f"{raw:.{dec}f}".rstrip('0').rstrip('.')
@@ -59,7 +60,9 @@ def describe(d, unit, compare=None):
 
     n = d['display']; cmv = d['cm']; ft = d.get('ftin')
     hg = d['height_group']
-    if d['stature_basis'] == 'head':
+    if d.get('height_appendage') == 'horns':
+        frame = f"{n}'s height estimate is {d['stature_cm']:g} cm excluding horns ({cmv:g} cm including horns); comparisons use the horn-excluding height."
+    elif d['stature_basis'] == 'head':
         gap = d['stature_cm'] - ROSTER_AVG
         where = 'just under' if gap < -2 else ('above' if gap > 2 else 'right around')
         frame = (f"{n} is charted at {cmv:g} cm ({ft}), but that figure counts her ears: at head height "
@@ -201,6 +204,8 @@ NOTE_ZH = {
         '采用「Nocturne of Light」服装的数据，未使用标准模型数值',
     'TBC': '待确认',
 }
+NOTE_JA["Project estimate based on the owner's assumptions and other sources; not from modelmetrics.net. Height including horns is 193.37 cm; comparisons use 180.37 cm excluding horns. UK 23HH is the supplied source size. US and EU sizes are estimates only: the nonstandard UK band prevents exact standard conversion, and the EU estimate rounds the theoretical band upward."] = 'この数値はサイト所有者の仮定と他の資料に基づく独自の推定値で、modelmetrics.netのデータではありません。角を含む身長は193.37cm、比較には角を除いた180.37cmを使います。UK 23HHは出典で示されたサイズです。バンド値が規格外のためUS・EUへ正確には換算できず、いずれも推定値です。EUは計算上のバンド値を切り上げています。'
+NOTE_ZH["Project estimate based on the owner's assumptions and other sources; not from modelmetrics.net. Height including horns is 193.37 cm; comparisons use 180.37 cm excluding horns. UK 23HH is the supplied source size. US and EU sizes are estimates only: the nonstandard UK band prevents exact standard conversion, and the EU estimate rounds the theoretical band upward."] = '这些数值为站主根据个人假设与其他资料作出的估算，并非来自modelmetrics.net。含角身高为193.37厘米，比较采用不含角的180.37厘米。UK 23HH沿用提供的来源尺码；其下围并非标准尺码，无法精确转换，US和EU均仅为估计。EU估值将理论下围向上取整。'
 REL_BUST_JA = (
     (0.85, 'チャートでもトップクラスのボリューム'),
     (0.66, 'ロスター平均よりはっきり大きめ'),
@@ -262,7 +267,7 @@ def lv(d, unit, lang, in_key, cm_key, dec=1):
     raw = d[cm_key] if unit == 'cm' else d[in_key]
     if raw is None:
         return '—'
-    s = lnum(raw, dec)
+    s = lnum(raw, max(dec,d.get('precision_cm',1)) if unit=='cm' else dec)
     if unit == 'cm':
         return f'{s}cm' if lang == 'ja' else f'{s}厘米'
     return f'{s}インチ' if lang == 'ja' else f'{s}英寸'
@@ -301,7 +306,9 @@ def describe_ja(d, unit, compare=None):
     cm = f"{d['cm']:g}"
     ft = d.get('ftin') or ''
     r = H_RANK.get(d.get('variant_of') or d['name'], H_TOTAL)
-    if d['stature_basis'] == 'head':
+    if d.get('height_appendage') == 'horns':
+        frame = f"{n}の推定身長は角を除いて{d['stature_cm']:g}cm、角を含めると{cm}cmです。比較には角を除いた身長を使います。"
+    elif d['stature_basis'] == 'head':
         gap = d['stature_cm'] - ROSTER_AVG
         where = ('より少し低めです' if gap < -2 else
                  ('より少し高めです' if gap > 2 else 'とほぼ同じです'))
@@ -368,7 +375,9 @@ def describe_zh(d, unit, compare=None):
     cm = f"{d['cm']:g}"
     ft = d.get('ftin') or ''
     r = H_RANK.get(d.get('variant_of') or d['name'], H_TOTAL)
-    if d['stature_basis'] == 'head':
+    if d.get('height_appendage') == 'horns':
+        frame = f"{n}的估算身高为不含角{d['stature_cm']:g}厘米、含角{cm}厘米。比较时采用不含角的身高。"
+    elif d['stature_basis'] == 'head':
         gap = d['stature_cm'] - ROSTER_AVG
         where = ('比全榜平均略低' if gap < -2 else
                  ('比全榜平均略高' if gap > 2 else '和全榜平均差不多'))

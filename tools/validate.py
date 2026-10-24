@@ -179,6 +179,7 @@ def check_assets(out):
                     f"character_images/thumbs/avif/320/{d['official']}.avif",
                     f"character_images/thumbs/avif/1024/{d['official']}.avif",
                     f"character_images/thumbs/avif/1280/{d['official']}.avif"):
+            if rel.startswith('images/') and d.get('sheet_available') is False:continue
             if not (ROOT / rel).exists():
                 err(f'missing source asset {rel}')
         if d.get('skin'):
@@ -333,7 +334,7 @@ def check_html(out, site):
     else:
         err('index.html: missing I18N translations')
     footer = idx.split('<footer>', 1)[-1].split('</footer>', 1)[0]
-    for key in ('changelog', 'sourceRepository', 'source', 'sourceTitle', 'schema', 'updated'):
+    for key in ('changelog', 'sourceRepository', 'mainSource', 'sourceTitle', 'schema', 'updated'):
         if f'data-i18n="{key}"' not in footer:
             err(f'index.html: footer {key} is not localizable')
     for filename, content in (('index.html', idx), ('tools.html', tools)):

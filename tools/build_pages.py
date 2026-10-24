@@ -286,8 +286,9 @@ def footer(updated, prefix='../', lang='en', methodology=None):
     p = PAGE[lang]
     methodology = methodology or (prefix + ('methodology.html' if lang == 'en' else f'{lang}/methodology.html'))
     return f'''<footer><div class="rule">
-<b>{p['source']}:</b> modelmetrics.net · <i>{p['source_title']}</i>. {p['data_updated']} <time datetime="{updated}">{updated}</time>.<br>
+<b>{p['mainSource']}:</b> modelmetrics.net · <i>{p['source_title']}</i>. {p['data_updated']} <time datetime="{updated}">{updated}</time>.<br>
 {p['rights']}<br>
+{p['additionalDataNote']}<br>
 <a href="{methodology}">{p['methodology']}</a> · <a href="{prefix}data/measurements.json" download>{esc(p["dataset"])} (JSON)</a> ·
 <a href="{prefix}data/measurements.csv" download>CSV</a> · <a href="{META['repo']}" rel="noopener">{p['source_repository']}</a>
 </div></footer>
@@ -394,14 +395,15 @@ def character_page(d, prev_d, next_d, lang='en'):
     }
     ld_tag = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>'
 
-    charted = f" · {fmt(d['cm'], 0)} cm {p['charted']}" if d['stature_basis'] == 'head' else ''
+    cmfmt=lambda value:fmt(value,d.get('precision_cm',1))
+    charted = (f" · {fmt(d['cm'],2)} cm {p['includingHorns']}" if d.get('height_appendage')=='horns' else f" · {fmt(d['cm'],0)} cm {p['charted']}") if d['stature_basis'] == 'head' else ''
     rows = [
-        (p['height'], f"{fmt(d['stature_cm'], 1)} cm · {d['ftin_stature']}" + charted),
-        (p['bust'], f"{fmt(d['bust_cm'])} cm · {fmt(d['bust_in'])} in"),
-        (p['underbust'], f"{fmt(d['band_cm'])} cm · {fmt(d['band_in'])} in"),
-        (p['waist'], f"{fmt(d['waist_cm'])} cm · {fmt(d['waist_in'])} in"),
-        (p['hip'], f"{fmt(d['hip_cm'])} cm · {fmt(d['hip_in'])} in"),
-        (p['thigh'], f"{fmt(d['thigh_cm'])} cm · {fmt(d['thigh_in'])} in" if d['thigh_cm'] is not None else p['no_thigh']),
+        (p['height'], f"{cmfmt(d['stature_cm'])} cm · {d['ftin_stature']}" + charted),
+        (p['bust'], f"{cmfmt(d['bust_cm'])} cm · {fmt(d['bust_in'])} in"),
+        (p['underbust'], f"{cmfmt(d['band_cm'])} cm · {fmt(d['band_in'])} in"),
+        (p['waist'], f"{cmfmt(d['waist_cm'])} cm · {fmt(d['waist_in'])} in"),
+        (p['hip'], f"{cmfmt(d['hip_cm'])} cm · {fmt(d['hip_in'])} in"),
+        (p['thigh'], f"{cmfmt(d['thigh_cm'])} cm · {fmt(d['thigh_in'])} in" if d['thigh_cm'] is not None else p['no_thigh']),
         (p['bust_diff'], f"{fmt(d['diff_cm'])} cm · {fmt(d['diff_in'])} in" if d['diff_cm'] is not None else '—'),
         (p['bra'], f"UK {d['uk']} · US {d['us']} · EU {d['eu']}"),
     ]
@@ -454,11 +456,13 @@ def character_page(d, prev_d, next_d, lang='en'):
     source_label=source_page
     if source_page.startswith('('):source_page=d.get('source_file') or '';source_label=nm
     src_link=(f'<a href="https://zenless-zone-zero.fandom.com/wiki/{quote(source_page.replace(" ","_"))}" rel="noopener">{esc(source_label)}</a>' if source_page else '—')
+    if d.get('art_source_type')=='owner-upload':src_link=f'<a href="{esc(d["source_url"])}">{esc(p["ownerArtworkCredit"])}</a>'
     measured_note = (f"<p class=\"note\">{p['measured_note'].format(outfit=esc(d['skin']['outfit']))}</p>" if d.get('skin') else '')
-    stature_note = (f"<p class=\"note\">{p['stature_note'].format(st=fmt(d['stature_cm'], 1), cm=fmt(d['cm'], 0))}</p>"
+    stature_text=p['hornHeightNote'].format(st=cmfmt(d['stature_cm']),cm=fmt(d['cm'],2)) if d.get('height_appendage')=='horns' else p['stature_note'].format(st=cmfmt(d['stature_cm']),cm=fmt(d['cm'],0))
+    stature_note = (f"<p class=\"note\">{stature_text}</p>"
                     if d['stature_basis'] == 'head' else '')
     chart_note = ''
-    if note and not (d['stature_basis'] == 'head' and d['notes'].lower().startswith('height includes ears')):
+    if note and note.rstrip('.。') not in profile_cm and not (d['stature_basis'] == 'head' and d['notes'].lower().startswith('height includes ears')):
         chart_note = f'<p class="note">{esc(p["chart_note"])}: {esc(note)}</p>'
     chart_link = f"{prefix}#p={quote(d['slug'])}&amp;lang={lang}"
 
@@ -479,7 +483,7 @@ def character_page(d, prev_d, next_d, lang='en'):
         <li class="chip hips">{esc(p['hip'])} {esc(tags['hips'])}</li>
         <li class="chip thighs">{esc(p['thigh'])} {esc(tags['thighs'])}</li>
       </ul>
-      <p class="meta">{esc(d['outfit']) + ' · ' if d.get('outfit') else ''}{esc(p['height'])} {fmt(d['stature_cm'], 1)} cm{charted} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
+      <p class="meta">{esc(d['outfit']) + ' · ' if d.get('outfit') else ''}{esc(p['height'])} {cmfmt(d['stature_cm'])} cm{charted} · UK {esc(d['uk'])} / US {esc(d['us'])} / EU {esc(d['eu'])}</p>
       <div class="btns">
         <a class="btn primary" href="{chart_link}">{esc(p['open'])}</a>
         <a class="btn" href="{esc(original_items[0]['file'])}" data-art-index="0">{esc(p['viewOriginal'])}</a>
@@ -631,6 +635,10 @@ FAQ = [
 
 
 for _lang in PAGE:
+    METHOD[_lang]['intro'] += ' ' + PAGE[_lang]['additionalDataNote']
+    for _i in (0, 6):
+        _q, _a = METHOD[_lang]['faq'][_i]
+        METHOD[_lang]['faq'][_i] = (_q, _a + ' ' + PAGE[_lang]['additionalDataNote'])
     METHOD[_lang]['sections'].extend([
         (PAGE[_lang]['sameHeight'], esc(PAGE[_lang]['comparisonMethod'])),
         (PAGE[_lang]['matches'], esc(PAGE[_lang]['matchingMethod'])),
@@ -727,6 +735,9 @@ def export_json():
                         "shape": d['shape'], "build": d['balance']},
             "confidence": d['confidence'], "confidence_note": d['confidence_note'],
             "notes": d['notes'], "source_page": d['source_page'],
+            "measurement_source": d.get("measurement_source", "modelmetrics.net"),
+            "estimated_cup_systems": d.get("estimated_cup_systems", []),
+            "sheet_available": d.get("sheet_available", True),
             "display_ja": d.get('name_ja'), "display_zh": d.get('name_zh'),
             "profile": SITE + f"characters/{d['slug']}.html",
             "profile_ja": SITE + f"ja/characters/{d['slug']}.html",
@@ -756,7 +767,7 @@ def export_csv(path):
             'underbust_cm', 'waist_cm', 'hip_cm', 'thigh_cm', 'bust_diff_cm', 'uk', 'us', 'eu',
             'waist_hip_ratio', 'waist_stature_ratio', 'thigh_stature_ratio', 'thigh_hip_ratio',
             'height_class', 'cup_class', 'waist_class', 'hip_class', 'thigh_class', 'thigh_hand_pinned',
-            'shape', 'build', 'confidence', 'notes', 'source_page', 'profile']
+            'shape', 'build', 'confidence', 'notes', 'source_page', 'profile', 'measurement_source', 'estimated_cup_systems', 'sheet_available']
     with path.open('w', newline='', encoding='utf-8') as f:
         w = csv.writer(f, lineterminator='\n')
         w.writerow(cols)
@@ -766,7 +777,7 @@ def export_csv(path):
                         d['uk'], d['us'], d['eu'], d['whr'], d['whtr'], d['thr'], d['thh'],
                         d['height_group'], d['cup_group'], d['waist_level'], d['hip_level'], d['thigh_level'],
                         d['thigh_pin'], d['shape'], d['balance'], d['confidence'], d['notes'], d['source_page'],
-                        SITE + f"characters/{d['slug']}.html"])
+                        SITE + f"characters/{d['slug']}.html", d.get("measurement_source","modelmetrics.net"), ";".join(d.get("estimated_cup_systems",[])), d.get("sheet_available",True)])
 
 
 def schema_doc():
@@ -819,6 +830,9 @@ def schema_doc():
                         "confidence": {"enum": ["charted", "estimated", "partial"]},
                         "confidence_note": {"type": "string"},
                         "notes": {"type": "string"},
+                        "measurement_source": {"enum": ["modelmetrics.net", "project_estimate"]},
+                        "estimated_cup_systems": {"type": "array", "items": {"enum": ["uk", "us", "eu"]}, "uniqueItems": True},
+                        "sheet_available": {"type": "boolean"},
                         "source_page": {"type": ["string", "null"]},
                         "display_ja": {"type": ["string", "null"]}, "display_zh": {"type": ["string", "null"]},
                         "profile": {"type": "string", "format": "uri"},

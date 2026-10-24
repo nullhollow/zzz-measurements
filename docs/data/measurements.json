@@ -1,10 +1,10 @@
 {
  "meta": {
   "schema_version": 2,
-  "data_updated": "2026-10-22",
+  "data_updated": "2026-10-25",
   "source": "modelmetrics.net",
-  "rights": "Measurements compiled from modelmetrics.net. Character artwork is © HoYoverse and shown as fair use; portraits come from the official HoYoverse site and the ZZZ Fandom wiki.",
-  "count": 49,
+  "rights": "Most measurements are compiled from modelmetrics.net. Eldreda Sunbringer is a project estimate based on owner assumptions and other sources, not modelmetrics.net. Character artwork is © HoYoverse and shown as fair use; portraits come from official HoYoverse sources, the ZZZ Fandom wiki and owner-supplied official artwork.",
+  "count": 50,
   "fields": {
    "name": "Source roster key from measurements3.3.csv",
    "display": "Display name",
@@ -35,7 +35,10 @@
    "tags_ja": "Japanese display labels for the computed classes",
    "tags_zh": "Simplified Chinese display labels for the computed classes",
    "shape": "Hourglass / Balanced / Straight from bust, waist and hips",
-   "hourglass_score": "flare × bust–hip balance; higher is a sharper hourglass"
+   "hourglass_score": "flare × bust–hip balance; higher is a sharper hourglass",
+   "measurement_source": "modelmetrics.net or project_estimate; see record notes for provenance",
+   "estimated_cup_systems": "Sizing systems whose supplied labels are estimates, also marked with ≈",
+   "sheet_available": "Whether a source sheet crop is available"
   },
   "urls": {
    "site": "https://nullhollow.github.io/zzz-measurements/",
@@ -81,7 +84,7 @@
     "bust": 0.01,
     "waist": 0.01,
     "hip": 0.01,
-    "thigh": 0.24,
+    "thigh": 0.235,
     "stature": 0.01
    },
    "classes": {
@@ -98,6 +101,9 @@
    "confidence_note": "The sheet marks at least one value as approximated or pending.",
    "notes": "Torso measurements approximated due to clothing and a lack of data on rabbit thiren physiology",
    "source_page": "Zhao",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "照",
    "display_zh": "照",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/zhao.html",
@@ -156,11 +162,11 @@
     "hip_stature": 0.494
    },
    "percentiles": {
-    "bust": 0.031,
-    "waist": 0.296,
-    "hip": 0.194,
-    "thigh": 0.208,
-    "stature": 0.082
+    "bust": 0.03,
+    "waist": 0.29,
+    "hip": 0.19,
+    "thigh": 0.204,
+    "stature": 0.08
    },
    "classes": {
     "height": "Petite",
@@ -176,6 +182,9 @@
    "confidence_note": "The sheet marks at least one value as approximated or pending.",
    "notes": "Chest approximated due to clothing",
    "source_page": "Ju Fufu",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "橘福福",
    "display_zh": "橘福福",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/ju_fufu.html",
@@ -234,11 +243,11 @@
     "hip_stature": 0.472
    },
    "percentiles": {
-    "bust": 0.051,
-    "waist": 0.214,
-    "hip": 0.092,
+    "bust": 0.05,
+    "waist": 0.21,
+    "hip": 0.09,
     "thigh": 0.01,
-    "stature": 0.143
+    "stature": 0.14
    },
    "classes": {
     "height": "Petite",
@@ -254,6 +263,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Soukaku",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "蒼角",
    "display_zh": "苍角",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/soukaku.html",
@@ -315,11 +327,11 @@
     "hip_stature": 0.449
    },
    "percentiles": {
-    "bust": 0.071,
-    "waist": 0.245,
-    "hip": 0.133,
-    "thigh": 0.146,
-    "stature": 0.337
+    "bust": 0.07,
+    "waist": 0.24,
+    "hip": 0.13,
+    "thigh": 0.143,
+    "stature": 0.33
    },
    "classes": {
     "height": "Mid",
@@ -335,6 +347,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Sunna",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "千夏",
    "display_zh": "千夏",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/sunna.html",
@@ -342,18 +357,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/sunna.html",
    "profile_text": {
     "en": {
-     "cm": "Sunna measures 154 cm (5'0.8\"), right around the roster average. Her 48.1 cm bust (UK 18B) is among the smallest bust measurements here. The waist comes in at 40.6 cm (waist-to-height 0.26), one of the trimmer midsections in the set. Below that, compact hips (69.1 cm) pair with slim 41.6 cm thighs (bottom 15% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.18, hip/waist 1.70, bust–hip balance 70%): bust and hip percentile ranks are close.",
-     "in": "Sunna measures 154 cm (5'0.8\"), right around the roster average. Her 18.9 in bust (UK 18B) is among the smallest bust measurements here. The waist comes in at 16 in (waist-to-height 0.26), one of the trimmer midsections in the set. Below that, compact hips (27.2 in) pair with slim 16.4 in thighs (bottom 15% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.18, hip/waist 1.70, bust–hip balance 70%): bust and hip percentile ranks are close.",
+     "cm": "Sunna measures 154 cm (5'0.8\"), right around the roster average. Her 48.1 cm bust (UK 18B) is among the smallest bust measurements here. The waist comes in at 40.6 cm (waist-to-height 0.26), one of the trimmer midsections in the set. Below that, compact hips (69.1 cm) pair with slim 41.6 cm thighs (bottom 14% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.18, hip/waist 1.70, bust–hip balance 70%): bust and hip percentile ranks are close.",
+     "in": "Sunna measures 154 cm (5'0.8\"), right around the roster average. Her 18.9 in bust (UK 18B) is among the smallest bust measurements here. The waist comes in at 16 in (waist-to-height 0.26), one of the trimmer midsections in the set. Below that, compact hips (27.2 in) pair with slim 16.4 in thighs (bottom 14% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.18, hip/waist 1.70, bust–hip balance 70%): bust and hip percentile ranks are close.",
      "read": "mid-height frame with modest bust, trim waist, narrow hips, slim thighs. Straight silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "千夏は154cm（5'0.8\"）で、ロスター平均とほぼ同じくらいです。バストは48.1cm（UK 18B）で、チャートでも小さいほうです。ウエストは40.6cm（ウエスト対身長0.26）で、ロスターでも細めです。そこからコンパクトなヒップ（69.1cm）に、細めの太もも（41.6cm）が続きます。太もも周囲はロスター下位15%です。バスト/ウエスト1.18、ヒップ/ウエスト1.70、バストとヒップのバランスは70%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "千夏は154cm（5'0.8\"）で、ロスター平均とほぼ同じくらいです。バストは18.9インチ（UK 18B）で、チャートでも小さいほうです。ウエストは16インチ（ウエスト対身長0.26）で、ロスターでも細めです。そこからコンパクトなヒップ（27.2インチ）に、細めの太もも（16.4インチ）が続きます。太もも周囲はロスター下位15%です。バスト/ウエスト1.18、ヒップ/ウエスト1.70、バストとヒップのバランスは70%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "千夏は154cm（5'0.8\"）で、ロスター平均とほぼ同じくらいです。バストは48.1cm（UK 18B）で、チャートでも小さいほうです。ウエストは40.6cm（ウエスト対身長0.26）で、ロスターでも細めです。そこからコンパクトなヒップ（69.1cm）に、細めの太もも（41.6cm）が続きます。太もも周囲はロスター下位14%です。バスト/ウエスト1.18、ヒップ/ウエスト1.70、バストとヒップのバランスは70%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "千夏は154cm（5'0.8\"）で、ロスター平均とほぼ同じくらいです。バストは18.9インチ（UK 18B）で、チャートでも小さいほうです。ウエストは16インチ（ウエスト対身長0.26）で、ロスターでも細めです。そこからコンパクトなヒップ（27.2インチ）に、細めの太もも（16.4インチ）が続きます。太もも周囲はロスター下位14%です。バスト/ウエスト1.18、ヒップ/ウエスト1.70、バストとヒップのバランスは70%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "中背、胸は控えめ、ウエストは細め、ヒップはコンパクト、太ももは細め。直線型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "千夏身高154厘米（5'0.8\"），和全榜平均差不多。胸围48.1厘米（UK 18B），在全榜里属于偏小的一档。腰围40.6厘米（腰高比0.26），在全榜里算很细的腰。往下是较窄的臀围（69.1厘米），配上纤细的大腿（41.6厘米）；大腿围排在全榜后15%。胸腰比1.18、臀腰比1.70，胸胯平衡度70%。整体是直线型，胸围与臀围在全榜中的排名接近。",
-     "in": "千夏身高154厘米（5'0.8\"），和全榜平均差不多。胸围18.9英寸（UK 18B），在全榜里属于偏小的一档。腰围16英寸（腰高比0.26），在全榜里算很细的腰。往下是较窄的臀围（27.2英寸），配上纤细的大腿（16.4英寸）；大腿围排在全榜后15%。胸腰比1.18、臀腰比1.70，胸胯平衡度70%。整体是直线型，胸围与臀围在全榜中的排名接近。",
+     "cm": "千夏身高154厘米（5'0.8\"），和全榜平均差不多。胸围48.1厘米（UK 18B），在全榜里属于偏小的一档。腰围40.6厘米（腰高比0.26），在全榜里算很细的腰。往下是较窄的臀围（69.1厘米），配上纤细的大腿（41.6厘米）；大腿围排在全榜后14%。胸腰比1.18、臀腰比1.70，胸胯平衡度70%。整体是直线型，胸围与臀围在全榜中的排名接近。",
+     "in": "千夏身高154厘米（5'0.8\"），和全榜平均差不多。胸围18.9英寸（UK 18B），在全榜里属于偏小的一档。腰围16英寸（腰高比0.26），在全榜里算很细的腰。往下是较窄的臀围（27.2英寸），配上纤细的大腿（16.4英寸）；大腿围排在全榜后14%。胸腰比1.18、臀腰比1.70，胸胯平衡度70%。整体是直线型，胸围与臀围在全榜中的排名接近。",
      "read": "中等身高，胸部偏含蓄，腰很细，胯部较窄，大腿偏细。整体是直线型轮廓，上下比较均衡。"
     }
    },
@@ -404,11 +419,11 @@
     "hip_stature": 0.49
    },
    "percentiles": {
-    "bust": 0.092,
-    "waist": 0.071,
-    "hip": 0.214,
-    "thigh": 0.177,
-    "stature": 0.112
+    "bust": 0.09,
+    "waist": 0.07,
+    "hip": 0.21,
+    "thigh": 0.173,
+    "stature": 0.11
    },
    "classes": {
     "height": "Petite",
@@ -424,6 +439,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Roxy Ifrita Pryce",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "ロクシー・イフリータ・プライス",
    "display_zh": "洛克茜·伊芙莉塔·普莱斯",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/roxy.html",
@@ -486,11 +504,11 @@
     "hip_stature": 0.484
    },
    "percentiles": {
-    "bust": 0.112,
-    "waist": 0.031,
-    "hip": 0.276,
-    "thigh": 0.115,
-    "stature": 0.214
+    "bust": 0.11,
+    "waist": 0.03,
+    "hip": 0.27,
+    "thigh": 0.112,
+    "stature": 0.21
    },
    "classes": {
     "height": "Mid",
@@ -506,6 +524,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "(explicit)",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "アリア",
    "display_zh": "爱芮",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/aria.html",
@@ -513,18 +534,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/aria.html",
    "profile_text": {
     "en": {
-     "cm": "Aria measures 150 cm (4'11.2\"), right around the roster average. Her 49.8 cm bust (UK 18C) is among the smallest bust measurements here. The waist comes in at 37.1 cm (waist-to-height 0.25), one of the trimmer midsections in the set. Below that, compact hips (72.6 cm) pair with slim 41.4 cm thighs (bottom 12% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.34, hip/waist 1.96, bust–hip balance 69%): bust and hip percentile ranks are close.",
-     "in": "Aria measures 150 cm (4'11.2\"), right around the roster average. Her 19.6 in bust (UK 18C) is among the smallest bust measurements here. The waist comes in at 14.6 in (waist-to-height 0.25), one of the trimmer midsections in the set. Below that, compact hips (28.6 in) pair with slim 16.3 in thighs (bottom 12% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.34, hip/waist 1.96, bust–hip balance 69%): bust and hip percentile ranks are close.",
+     "cm": "Aria measures 150 cm (4'11.2\"), right around the roster average. Her 49.8 cm bust (UK 18C) is among the smallest bust measurements here. The waist comes in at 37.1 cm (waist-to-height 0.25), one of the trimmer midsections in the set. Below that, compact hips (72.6 cm) pair with slim 41.4 cm thighs (bottom 11% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.34, hip/waist 1.96, bust–hip balance 69%): bust and hip percentile ranks are close.",
+     "in": "Aria measures 150 cm (4'11.2\"), right around the roster average. Her 19.6 in bust (UK 18C) is among the smallest bust measurements here. The waist comes in at 14.6 in (waist-to-height 0.25), one of the trimmer midsections in the set. Below that, compact hips (28.6 in) pair with slim 16.3 in thighs (bottom 11% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.34, hip/waist 1.96, bust–hip balance 69%): bust and hip percentile ranks are close.",
      "read": "mid-height frame with modest bust, trim waist, narrow hips, slim thighs. Straight silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "アリアは150cm（4'11.2\"）で、ロスター平均とほぼ同じくらいです。バストは49.8cm（UK 18C）で、チャートでも小さいほうです。ウエストは37.1cm（ウエスト対身長0.25）で、ロスターでも細めです。そこからコンパクトなヒップ（72.6cm）に、細めの太もも（41.4cm）が続きます。太もも周囲はロスター下位12%です。バスト/ウエスト1.34、ヒップ/ウエスト1.96、バストとヒップのバランスは69%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "アリアは150cm（4'11.2\"）で、ロスター平均とほぼ同じくらいです。バストは19.6インチ（UK 18C）で、チャートでも小さいほうです。ウエストは14.6インチ（ウエスト対身長0.25）で、ロスターでも細めです。そこからコンパクトなヒップ（28.6インチ）に、細めの太もも（16.3インチ）が続きます。太もも周囲はロスター下位12%です。バスト/ウエスト1.34、ヒップ/ウエスト1.96、バストとヒップのバランスは69%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "アリアは150cm（4'11.2\"）で、ロスター平均とほぼ同じくらいです。バストは49.8cm（UK 18C）で、チャートでも小さいほうです。ウエストは37.1cm（ウエスト対身長0.25）で、ロスターでも細めです。そこからコンパクトなヒップ（72.6cm）に、細めの太もも（41.4cm）が続きます。太もも周囲はロスター下位11%です。バスト/ウエスト1.34、ヒップ/ウエスト1.96、バストとヒップのバランスは69%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "アリアは150cm（4'11.2\"）で、ロスター平均とほぼ同じくらいです。バストは19.6インチ（UK 18C）で、チャートでも小さいほうです。ウエストは14.6インチ（ウエスト対身長0.25）で、ロスターでも細めです。そこからコンパクトなヒップ（28.6インチ）に、細めの太もも（16.3インチ）が続きます。太もも周囲はロスター下位11%です。バスト/ウエスト1.34、ヒップ/ウエスト1.96、バストとヒップのバランスは69%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "中背、胸は控えめ、ウエストは細め、ヒップはコンパクト、太ももは細め。直線型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "爱芮身高150厘米（4'11.2\"），和全榜平均差不多。胸围49.8厘米（UK 18C），在全榜里属于偏小的一档。腰围37.1厘米（腰高比0.25），在全榜里算很细的腰。往下是较窄的臀围（72.6厘米），配上纤细的大腿（41.4厘米）；大腿围排在全榜后12%。胸腰比1.34、臀腰比1.96，胸胯平衡度69%。整体是直线型，胸围与臀围在全榜中的排名接近。",
-     "in": "爱芮身高150厘米（4'11.2\"），和全榜平均差不多。胸围19.6英寸（UK 18C），在全榜里属于偏小的一档。腰围14.6英寸（腰高比0.25），在全榜里算很细的腰。往下是较窄的臀围（28.6英寸），配上纤细的大腿（16.3英寸）；大腿围排在全榜后12%。胸腰比1.34、臀腰比1.96，胸胯平衡度69%。整体是直线型，胸围与臀围在全榜中的排名接近。",
+     "cm": "爱芮身高150厘米（4'11.2\"），和全榜平均差不多。胸围49.8厘米（UK 18C），在全榜里属于偏小的一档。腰围37.1厘米（腰高比0.25），在全榜里算很细的腰。往下是较窄的臀围（72.6厘米），配上纤细的大腿（41.4厘米）；大腿围排在全榜后11%。胸腰比1.34、臀腰比1.96，胸胯平衡度69%。整体是直线型，胸围与臀围在全榜中的排名接近。",
+     "in": "爱芮身高150厘米（4'11.2\"），和全榜平均差不多。胸围19.6英寸（UK 18C），在全榜里属于偏小的一档。腰围14.6英寸（腰高比0.25），在全榜里算很细的腰。往下是较窄的臀围（28.6英寸），配上纤细的大腿（16.3英寸）；大腿围排在全榜后11%。胸腰比1.34、臀腰比1.96，胸胯平衡度69%。整体是直线型，胸围与臀围在全榜中的排名接近。",
      "read": "中等身高，胸部偏含蓄，腰很细，胯部较窄，大腿偏细。整体是直线型轮廓，上下比较均衡。"
     }
    },
@@ -577,11 +598,11 @@
     "hip_stature": 0.574
    },
    "percentiles": {
-    "bust": 0.214,
-    "waist": 0.357,
-    "hip": 0.582,
-    "thigh": 0.927,
-    "stature": 0.031
+    "bust": 0.21,
+    "waist": 0.35,
+    "hip": 0.57,
+    "thigh": 0.908,
+    "stature": 0.03
    },
    "classes": {
     "height": "Petite",
@@ -597,6 +618,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "(explicit)",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "アリア",
    "display_zh": "爱芮",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/aria_construct.html",
@@ -604,18 +628,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/aria_construct.html",
    "profile_text": {
     "en": {
-     "cm": "Aria (Construct) measures just 140 cm (4'7.2\"), one of the most compact frames on the chart. Her 51.6 cm bust (UK 19C) is on the modest side for the chart. The waist comes in at 41.3 cm (waist-to-height 0.29), a middling midsection by this set's standards. Below that, average-width hips (80.4 cm) pair with thick 53.2 cm thighs (top 7% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.25, hip/waist 1.95, bust–hip balance 64%): the hips rank higher in the roster than the bust.",
-     "in": "Aria (Construct) measures just 140 cm (4'7.2\"), one of the most compact frames on the chart. Her 20.3 in bust (UK 19C) is on the modest side for the chart. The waist comes in at 16.3 in (waist-to-height 0.29), a middling midsection by this set's standards. Below that, average-width hips (31.7 in) pair with thick 20.9 in thighs (top 7% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.25, hip/waist 1.95, bust–hip balance 64%): the hips rank higher in the roster than the bust.",
+     "cm": "Aria (Construct) measures just 140 cm (4'7.2\"), one of the most compact frames on the chart. Her 51.6 cm bust (UK 19C) is on the modest side for the chart. The waist comes in at 41.3 cm (waist-to-height 0.29), a middling midsection by this set's standards. Below that, average-width hips (80.4 cm) pair with thick 53.2 cm thighs (top 9% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.25, hip/waist 1.95, bust–hip balance 64%): the hips rank higher in the roster than the bust.",
+     "in": "Aria (Construct) measures just 140 cm (4'7.2\"), one of the most compact frames on the chart. Her 20.3 in bust (UK 19C) is on the modest side for the chart. The waist comes in at 16.3 in (waist-to-height 0.29), a middling midsection by this set's standards. Below that, average-width hips (31.7 in) pair with thick 20.9 in thighs (top 9% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.25, hip/waist 1.95, bust–hip balance 64%): the hips rank higher in the roster than the bust.",
      "read": "compact frame with modest bust, thick thighs. Straight silhouette, bottom-heavy proportions."
     },
     "ja": {
-     "cm": "アリアは140cm（4'7.2\"）と小柄で、チャートでもかなりコンパクトなほうです。バストは51.6cm（UK 19C）で、チャートでは控えめなほうです。ウエストは41.3cm（ウエスト対身長0.29）で、このメンバーでは平均的です。そこから平均的なヒップ（80.4cm）に、太めの太もも（53.2cm）が続きます。太もも周囲はロスター上位7%です。バスト/ウエスト1.25、ヒップ/ウエスト1.95、バストとヒップのバランスは64%。全体は直線型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
-     "in": "アリアは140cm（4'7.2\"）と小柄で、チャートでもかなりコンパクトなほうです。バストは20.3インチ（UK 19C）で、チャートでは控えめなほうです。ウエストは16.3インチ（ウエスト対身長0.29）で、このメンバーでは平均的です。そこから平均的なヒップ（31.7インチ）に、太めの太もも（20.9インチ）が続きます。太もも周囲はロスター上位7%です。バスト/ウエスト1.25、ヒップ/ウエスト1.95、バストとヒップのバランスは64%。全体は直線型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
+     "cm": "アリアは140cm（4'7.2\"）と小柄で、チャートでもかなりコンパクトなほうです。バストは51.6cm（UK 19C）で、チャートでは控えめなほうです。ウエストは41.3cm（ウエスト対身長0.29）で、このメンバーでは平均的です。そこから平均的なヒップ（80.4cm）に、太めの太もも（53.2cm）が続きます。太もも周囲はロスター上位9%です。バスト/ウエスト1.25、ヒップ/ウエスト1.95、バストとヒップのバランスは64%。全体は直線型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
+     "in": "アリアは140cm（4'7.2\"）と小柄で、チャートでもかなりコンパクトなほうです。バストは20.3インチ（UK 19C）で、チャートでは控えめなほうです。ウエストは16.3インチ（ウエスト対身長0.29）で、このメンバーでは平均的です。そこから平均的なヒップ（31.7インチ）に、太めの太もも（20.9インチ）が続きます。太もも周囲はロスター上位9%です。バスト/ウエスト1.25、ヒップ/ウエスト1.95、バストとヒップのバランスは64%。全体は直線型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
      "read": "小柄な体格、胸は控えめ、太ももは太め。直線型シルエットで、やや下半身寄り。"
     },
     "zh": {
-     "cm": "爱芮身高140厘米（4'7.2\"），个子很小巧，在全榜里属于最紧凑的一档。胸围51.6厘米（UK 19C），在全榜里偏含蓄。腰围41.3厘米（腰高比0.29），在这批角色里属于中等。往下是中等宽度的臀围（80.4厘米），配上丰满的大腿（53.2厘米）；大腿围排在全榜前7%。胸腰比1.25、臀腰比1.95，胸胯平衡度64%。整体是直线型，臀围在全榜中的排名高于胸围。",
-     "in": "爱芮身高140厘米（4'7.2\"），个子很小巧，在全榜里属于最紧凑的一档。胸围20.3英寸（UK 19C），在全榜里偏含蓄。腰围16.3英寸（腰高比0.29），在这批角色里属于中等。往下是中等宽度的臀围（31.7英寸），配上丰满的大腿（20.9英寸）；大腿围排在全榜前7%。胸腰比1.25、臀腰比1.95，胸胯平衡度64%。整体是直线型，臀围在全榜中的排名高于胸围。",
+     "cm": "爱芮身高140厘米（4'7.2\"），个子很小巧，在全榜里属于最紧凑的一档。胸围51.6厘米（UK 19C），在全榜里偏含蓄。腰围41.3厘米（腰高比0.29），在这批角色里属于中等。往下是中等宽度的臀围（80.4厘米），配上丰满的大腿（53.2厘米）；大腿围排在全榜前9%。胸腰比1.25、臀腰比1.95，胸胯平衡度64%。整体是直线型，臀围在全榜中的排名高于胸围。",
+     "in": "爱芮身高140厘米（4'7.2\"），个子很小巧，在全榜里属于最紧凑的一档。胸围20.3英寸（UK 19C），在全榜里偏含蓄。腰围16.3英寸（腰高比0.29），在这批角色里属于中等。往下是中等宽度的臀围（31.7英寸），配上丰满的大腿（20.9英寸）；大腿围排在全榜前9%。胸腰比1.25、臀腰比1.95，胸胯平衡度64%。整体是直线型，臀围在全榜中的排名高于胸围。",
      "read": "个子娇小，胸部偏含蓄，大腿偏丰满。整体是直线型轮廓，下半身更有分量。"
     }
    },
@@ -657,11 +681,11 @@
     "hip_stature": 0.441
    },
    "percentiles": {
-    "bust": 0.133,
-    "waist": 0.173,
-    "hip": 0.031,
+    "bust": 0.13,
+    "waist": 0.17,
+    "hip": 0.03,
     "thigh": null,
-    "stature": 0.214
+    "stature": 0.21
    },
    "classes": {
     "height": "Mid",
@@ -677,6 +701,9 @@
    "confidence_note": "At least one measurement is missing or unreadable.",
    "notes": "Hip approximated, thigh impossible to measure",
    "source_page": "Koleda Belobog",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "クレタ・ベロボーグ",
    "display_zh": "珂蕾妲·贝洛伯格",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/koleda.html",
@@ -737,11 +764,11 @@
     "hip_stature": 0.462
    },
    "percentiles": {
-    "bust": 0.153,
-    "waist": 0.092,
-    "hip": 0.153,
-    "thigh": 0.146,
-    "stature": 0.214
+    "bust": 0.15,
+    "waist": 0.09,
+    "hip": 0.15,
+    "thigh": 0.143,
+    "stature": 0.21
    },
    "classes": {
     "height": "Mid",
@@ -757,6 +784,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Norma Hollowell",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "ノルムー・ホローウェル",
    "display_zh": "诺姆·霍洛维尔",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/norma.html",
@@ -764,18 +794,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/norma.html",
    "profile_text": {
     "en": {
-     "cm": "Norma measures 150 cm (4'11.2\"), right around the roster average. Her 50.3 cm bust (UK 18C) is on the modest side for the chart. The waist comes in at 38.4 cm (waist-to-height 0.26), one of the trimmer midsections in the set. Below that, compact hips (69.3 cm) pair with slim 41.6 cm thighs (bottom 15% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.31, hip/waist 1.80, bust–hip balance 73%): bust and hip percentile ranks are close.",
-     "in": "Norma measures 150 cm (4'11.2\"), right around the roster average. Her 19.8 in bust (UK 18C) is on the modest side for the chart. The waist comes in at 15.1 in (waist-to-height 0.26), one of the trimmer midsections in the set. Below that, compact hips (27.3 in) pair with slim 16.4 in thighs (bottom 15% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.31, hip/waist 1.80, bust–hip balance 73%): bust and hip percentile ranks are close.",
+     "cm": "Norma measures 150 cm (4'11.2\"), right around the roster average. Her 50.3 cm bust (UK 18C) is on the modest side for the chart. The waist comes in at 38.4 cm (waist-to-height 0.26), one of the trimmer midsections in the set. Below that, compact hips (69.3 cm) pair with slim 41.6 cm thighs (bottom 14% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.31, hip/waist 1.80, bust–hip balance 73%): bust and hip percentile ranks are close.",
+     "in": "Norma measures 150 cm (4'11.2\"), right around the roster average. Her 19.8 in bust (UK 18C) is on the modest side for the chart. The waist comes in at 15.1 in (waist-to-height 0.26), one of the trimmer midsections in the set. Below that, compact hips (27.3 in) pair with slim 16.4 in thighs (bottom 14% of the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.31, hip/waist 1.80, bust–hip balance 73%): bust and hip percentile ranks are close.",
      "read": "mid-height frame with modest bust, trim waist, narrow hips, slim thighs. Straight silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "ノルムー・ホローウェルは150cm（4'11.2\"）で、ロスター平均とほぼ同じくらいです。バストは50.3cm（UK 18C）で、チャートでは控えめなほうです。ウエストは38.4cm（ウエスト対身長0.26）で、ロスターでも細めです。そこからコンパクトなヒップ（69.3cm）に、細めの太もも（41.6cm）が続きます。太もも周囲はロスター下位15%です。バスト/ウエスト1.31、ヒップ/ウエスト1.80、バストとヒップのバランスは73%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "ノルムー・ホローウェルは150cm（4'11.2\"）で、ロスター平均とほぼ同じくらいです。バストは19.8インチ（UK 18C）で、チャートでは控えめなほうです。ウエストは15.1インチ（ウエスト対身長0.26）で、ロスターでも細めです。そこからコンパクトなヒップ（27.3インチ）に、細めの太もも（16.4インチ）が続きます。太もも周囲はロスター下位15%です。バスト/ウエスト1.31、ヒップ/ウエスト1.80、バストとヒップのバランスは73%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "ノルムー・ホローウェルは150cm（4'11.2\"）で、ロスター平均とほぼ同じくらいです。バストは50.3cm（UK 18C）で、チャートでは控えめなほうです。ウエストは38.4cm（ウエスト対身長0.26）で、ロスターでも細めです。そこからコンパクトなヒップ（69.3cm）に、細めの太もも（41.6cm）が続きます。太もも周囲はロスター下位14%です。バスト/ウエスト1.31、ヒップ/ウエスト1.80、バストとヒップのバランスは73%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "ノルムー・ホローウェルは150cm（4'11.2\"）で、ロスター平均とほぼ同じくらいです。バストは19.8インチ（UK 18C）で、チャートでは控えめなほうです。ウエストは15.1インチ（ウエスト対身長0.26）で、ロスターでも細めです。そこからコンパクトなヒップ（27.3インチ）に、細めの太もも（16.4インチ）が続きます。太もも周囲はロスター下位14%です。バスト/ウエスト1.31、ヒップ/ウエスト1.80、バストとヒップのバランスは73%。全体は直線型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "中背、胸は控えめ、ウエストは細め、ヒップはコンパクト、太ももは細め。直線型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "诺姆·霍洛维尔身高150厘米（4'11.2\"），和全榜平均差不多。胸围50.3厘米（UK 18C），在全榜里偏含蓄。腰围38.4厘米（腰高比0.26），在全榜里算很细的腰。往下是较窄的臀围（69.3厘米），配上纤细的大腿（41.6厘米）；大腿围排在全榜后15%。胸腰比1.31、臀腰比1.80，胸胯平衡度73%。整体是直线型，胸围与臀围在全榜中的排名接近。",
-     "in": "诺姆·霍洛维尔身高150厘米（4'11.2\"），和全榜平均差不多。胸围19.8英寸（UK 18C），在全榜里偏含蓄。腰围15.1英寸（腰高比0.26），在全榜里算很细的腰。往下是较窄的臀围（27.3英寸），配上纤细的大腿（16.4英寸）；大腿围排在全榜后15%。胸腰比1.31、臀腰比1.80，胸胯平衡度73%。整体是直线型，胸围与臀围在全榜中的排名接近。",
+     "cm": "诺姆·霍洛维尔身高150厘米（4'11.2\"），和全榜平均差不多。胸围50.3厘米（UK 18C），在全榜里偏含蓄。腰围38.4厘米（腰高比0.26），在全榜里算很细的腰。往下是较窄的臀围（69.3厘米），配上纤细的大腿（41.6厘米）；大腿围排在全榜后14%。胸腰比1.31、臀腰比1.80，胸胯平衡度73%。整体是直线型，胸围与臀围在全榜中的排名接近。",
+     "in": "诺姆·霍洛维尔身高150厘米（4'11.2\"），和全榜平均差不多。胸围19.8英寸（UK 18C），在全榜里偏含蓄。腰围15.1英寸（腰高比0.26），在全榜里算很细的腰。往下是较窄的臀围（27.3英寸），配上纤细的大腿（16.4英寸）；大腿围排在全榜后14%。胸腰比1.31、臀腰比1.80，胸胯平衡度73%。整体是直线型，胸围与臀围在全榜中的排名接近。",
      "read": "中等身高，胸部偏含蓄，腰很细，胯部较窄，大腿偏细。整体是直线型轮廓，上下比较均衡。"
     }
    },
@@ -818,11 +848,11 @@
     "hip_stature": 0.454
    },
    "percentiles": {
-    "bust": 0.316,
-    "waist": 0.153,
-    "hip": 0.112,
-    "thigh": 0.094,
-    "stature": 0.276
+    "bust": 0.31,
+    "waist": 0.15,
+    "hip": 0.11,
+    "thigh": 0.092,
+    "stature": 0.27
    },
    "classes": {
     "height": "Mid",
@@ -838,6 +868,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Luciana de Montefio",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "ルーシー",
    "display_zh": "露西",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/lucy.html",
@@ -914,11 +947,11 @@
     "hip_stature": 0.454
    },
    "percentiles": {
-    "bust": 0.173,
-    "waist": 0.133,
-    "hip": 0.235,
-    "thigh": 0.208,
-    "stature": 0.388
+    "bust": 0.17,
+    "waist": 0.13,
+    "hip": 0.23,
+    "thigh": 0.204,
+    "stature": 0.38
    },
    "classes": {
     "height": "Mid",
@@ -934,6 +967,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Nangong Yu",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "南宮羽",
    "display_zh": "南宫羽",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/nangong_yu.html",
@@ -1001,11 +1037,11 @@
     "hip_stature": 0.494
    },
    "percentiles": {
-    "bust": 0.194,
-    "waist": 0.051,
-    "hip": 0.255,
-    "thigh": 0.281,
-    "stature": 0.143
+    "bust": 0.19,
+    "waist": 0.05,
+    "hip": 0.25,
+    "thigh": 0.276,
+    "stature": 0.14
    },
    "classes": {
     "height": "Petite",
@@ -1021,6 +1057,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Dialyn",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "ダイアリン",
    "display_zh": "琉音",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/dialyn.html",
@@ -1081,11 +1120,11 @@
     "hip_stature": 0.499
    },
    "percentiles": {
-    "bust": 0.276,
-    "waist": 0.398,
-    "hip": 0.316,
-    "thigh": 0.344,
-    "stature": 0.255
+    "bust": 0.27,
+    "waist": 0.39,
+    "hip": 0.31,
+    "thigh": 0.337,
+    "stature": 0.25
    },
    "classes": {
     "height": "Mid",
@@ -1101,6 +1140,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Piper Wheel",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "パイパー・ウィール",
    "display_zh": "派派·韦尔",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/piper.html",
@@ -1161,11 +1203,11 @@
     "hip_stature": 0.492
    },
    "percentiles": {
-    "bust": 0.296,
-    "waist": 0.327,
-    "hip": 0.173,
-    "thigh": 0.042,
-    "stature": 0.051
+    "bust": 0.29,
+    "waist": 0.32,
+    "hip": 0.17,
+    "thigh": 0.041,
+    "stature": 0.05
    },
    "classes": {
     "height": "Petite",
@@ -1181,6 +1223,9 @@
    "confidence_note": "The sheet marks at least one value as approximated or pending.",
    "notes": "Waist and hip approximated",
    "source_page": "Corin Wickes",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "カリン・ウィクス",
    "display_zh": "可琳·威克斯",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/corin.html",
@@ -1241,11 +1286,11 @@
     "hip_stature": 0.455
    },
    "percentiles": {
-    "bust": 0.235,
-    "waist": 0.194,
-    "hip": 0.071,
-    "thigh": 0.042,
-    "stature": 0.173
+    "bust": 0.23,
+    "waist": 0.19,
+    "hip": 0.07,
+    "thigh": 0.041,
+    "stature": 0.17
    },
    "classes": {
     "height": "Petite",
@@ -1261,6 +1306,9 @@
    "confidence_note": "The sheet marks at least one value as approximated or pending.",
    "notes": "Hip approximated, clothing too baggy for accurate reading",
    "source_page": "Nekomiya Mana",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "猫宮又奈",
    "display_zh": "猫宫又奈",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/nekomata.html",
@@ -1319,11 +1367,11 @@
     "hip_stature": 0.514
    },
    "percentiles": {
-    "bust": 0.255,
-    "waist": 0.112,
-    "hip": 0.296,
-    "thigh": 0.26,
-    "stature": 0.082
+    "bust": 0.25,
+    "waist": 0.11,
+    "hip": 0.29,
+    "thigh": 0.255,
+    "stature": 0.08
    },
    "classes": {
     "height": "Petite",
@@ -1339,6 +1387,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Qingyi",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "青衣",
    "display_zh": "青衣",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/qingyi.html",
@@ -1401,11 +1452,11 @@
     "hip_stature": 0.505
    },
    "percentiles": {
-    "bust": 0.357,
-    "waist": 0.245,
-    "hip": 0.52,
-    "thigh": 0.385,
-    "stature": 0.388
+    "bust": 0.35,
+    "waist": 0.24,
+    "hip": 0.51,
+    "thigh": 0.378,
+    "stature": 0.38
    },
    "classes": {
     "height": "Mid",
@@ -1421,6 +1472,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Phoenix Reffaella",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "フィオニー・レファエラ",
    "display_zh": "菲欧妮·蕾法爱菈",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/phoenix.html",
@@ -1488,11 +1542,11 @@
     "hip_stature": 0.503
    },
    "percentiles": {
-    "bust": 0.378,
-    "waist": 0.48,
-    "hip": 0.378,
-    "thigh": 0.427,
-    "stature": 0.316
+    "bust": 0.37,
+    "waist": 0.47,
+    "hip": 0.37,
+    "thigh": 0.418,
+    "stature": 0.31
    },
    "classes": {
     "height": "Mid",
@@ -1508,6 +1562,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Seed",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "「シード」",
    "display_zh": "「席德」",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/seed.html",
@@ -1569,11 +1626,11 @@
     "hip_stature": 0.493
    },
    "percentiles": {
-    "bust": 0.408,
-    "waist": 0.276,
-    "hip": 0.561,
-    "thigh": 0.594,
-    "stature": 0.582
+    "bust": 0.4,
+    "waist": 0.27,
+    "hip": 0.55,
+    "thigh": 0.582,
+    "stature": 0.57
    },
    "classes": {
     "height": "Mid",
@@ -1589,6 +1646,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Ukinami Yuzuha",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "浮波柚葉",
    "display_zh": "浮波柚叶",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/yuzuha.html",
@@ -1655,11 +1715,11 @@
     "hip_stature": 0.436
    },
    "percentiles": {
-    "bust": 0.408,
-    "waist": 0.724,
-    "hip": 0.051,
-    "thigh": 0.073,
-    "stature": 0.296
+    "bust": 0.4,
+    "waist": 0.71,
+    "hip": 0.05,
+    "thigh": 0.071,
+    "stature": 0.29
    },
    "classes": {
     "height": "Mid",
@@ -1675,6 +1735,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "Height includes ears",
    "source_page": "Hoshimi Miyabi",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "星見雅",
    "display_zh": "星见雅",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/miyabi.html",
@@ -1741,11 +1804,11 @@
     "hip_stature": 0.48
    },
    "percentiles": {
-    "bust": 0.337,
-    "waist": 0.5,
-    "hip": 0.459,
-    "thigh": 0.385,
-    "stature": 0.582
+    "bust": 0.33,
+    "waist": 0.49,
+    "hip": 0.45,
+    "thigh": 0.378,
+    "stature": 0.57
    },
    "classes": {
     "height": "Mid",
@@ -1761,6 +1824,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Vivian Banshee",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "ビビアン",
    "display_zh": "薇薇安",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/vivian.html",
@@ -1838,11 +1904,11 @@
     "hip_stature": 0.478
    },
    "percentiles": {
-    "bust": 0.439,
-    "waist": 0.327,
-    "hip": 0.337,
-    "thigh": 0.312,
-    "stature": 0.449
+    "bust": 0.43,
+    "waist": 0.32,
+    "hip": 0.33,
+    "thigh": 0.306,
+    "stature": 0.44
    },
    "classes": {
     "height": "Mid",
@@ -1858,6 +1924,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Belle",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "リン",
    "display_zh": "铃",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/belle.html",
@@ -1942,11 +2011,11 @@
     "hip_stature": 0.503
    },
    "percentiles": {
-    "bust": 0.49,
-    "waist": 0.52,
-    "hip": 0.5,
-    "thigh": 0.448,
-    "stature": 0.388
+    "bust": 0.48,
+    "waist": 0.51,
+    "hip": 0.49,
+    "thigh": 0.439,
+    "stature": 0.38
    },
    "classes": {
     "height": "Mid",
@@ -1962,6 +2031,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "SAnby used for measurements, more visible geometry available",
    "source_page": "Anby Demara",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "アンビー・デマラ",
    "display_zh": "安比·德玛拉",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/anby.html",
@@ -2023,11 +2095,11 @@
     "hip_stature": 0.509
    },
    "percentiles": {
-    "bust": 0.459,
-    "waist": 0.765,
-    "hip": 0.643,
-    "thigh": 0.542,
-    "stature": 0.5
+    "bust": 0.45,
+    "waist": 0.75,
+    "hip": 0.63,
+    "thigh": 0.531,
+    "stature": 0.49
    },
    "classes": {
     "height": "Mid",
@@ -2037,12 +2109,15 @@
     "thigh": "avg",
     "thigh_hand_pinned": false,
     "shape": "Balanced",
-    "build": "bottom"
+    "build": "even"
    },
    "confidence": "charted",
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "(explicit)",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "「11号」",
    "display_zh": "11号",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/soldier_11.html",
@@ -2050,19 +2125,19 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/soldier_11.html",
    "profile_text": {
     "en": {
-     "cm": "Soldier 11 measures 160 cm (5'2.8\"), right around the roster average. Her 62.9 cm bust (UK 20E) is close to the roster average. The waist comes in at 47.1 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, average-width hips (81.5 cm) pair with average 46.1 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.34, hip/waist 1.73, bust–hip balance 77%): the hips rank higher in the roster than the bust.",
-     "in": "Soldier 11 measures 160 cm (5'2.8\"), right around the roster average. Her 24.8 in bust (UK 20E) is close to the roster average. The waist comes in at 18.5 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, average-width hips (32.1 in) pair with average 18.1 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.34, hip/waist 1.73, bust–hip balance 77%): the hips rank higher in the roster than the bust.",
-     "read": "mid-height frame with full waist. Balanced silhouette, bottom-heavy proportions."
+     "cm": "Soldier 11 measures 160 cm (5'2.8\"), right around the roster average. Her 62.9 cm bust (UK 20E) is close to the roster average. The waist comes in at 47.1 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, average-width hips (81.5 cm) pair with average 46.1 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.34, hip/waist 1.73, bust–hip balance 77%): bust and hip percentile ranks are close.",
+     "in": "Soldier 11 measures 160 cm (5'2.8\"), right around the roster average. Her 24.8 in bust (UK 20E) is close to the roster average. The waist comes in at 18.5 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, average-width hips (32.1 in) pair with average 18.1 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.34, hip/waist 1.73, bust–hip balance 77%): bust and hip percentile ranks are close.",
+     "read": "mid-height frame with full waist. Balanced silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "「11号」は160cm（5'2.8\"）で、ロスター平均とほぼ同じくらいです。バストは62.9cm（UK 20E）で、ロスター平均とほぼ同じです。ウエストは47.1cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから平均的なヒップ（81.5cm）に、平均的な太もも（46.1cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.34、ヒップ/ウエスト1.73、バストとヒップのバランスは77%。全体はバランス型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
-     "in": "「11号」は160cm（5'2.8\"）で、ロスター平均とほぼ同じくらいです。バストは24.8インチ（UK 20E）で、ロスター平均とほぼ同じです。ウエストは18.5インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから平均的なヒップ（32.1インチ）に、平均的な太もも（18.1インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.34、ヒップ/ウエスト1.73、バストとヒップのバランスは77%。全体はバランス型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
-     "read": "中背、ウエストはしっかりめ。バランス型シルエットで、やや下半身寄り。"
+     "cm": "「11号」は160cm（5'2.8\"）で、ロスター平均とほぼ同じくらいです。バストは62.9cm（UK 20E）で、ロスター平均とほぼ同じです。ウエストは47.1cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから平均的なヒップ（81.5cm）に、平均的な太もも（46.1cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.34、ヒップ/ウエスト1.73、バストとヒップのバランスは77%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "「11号」は160cm（5'2.8\"）で、ロスター平均とほぼ同じくらいです。バストは24.8インチ（UK 20E）で、ロスター平均とほぼ同じです。ウエストは18.5インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから平均的なヒップ（32.1インチ）に、平均的な太もも（18.1インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.34、ヒップ/ウエスト1.73、バストとヒップのバランスは77%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "read": "中背、ウエストはしっかりめ。バランス型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "11号身高160厘米（5'2.8\"），和全榜平均差不多。胸围62.9厘米（UK 20E），和全榜平均差不多。腰围47.1厘米（腰高比0.29），比大多数角色更有肉感。往下是中等宽度的臀围（81.5厘米），配上中等大腿（46.1厘米）；大腿围排在全榜中段。胸腰比1.34、臀腰比1.73，胸胯平衡度77%。整体是匀称型，臀围在全榜中的排名高于胸围。",
-     "in": "11号身高160厘米（5'2.8\"），和全榜平均差不多。胸围24.8英寸（UK 20E），和全榜平均差不多。腰围18.5英寸（腰高比0.29），比大多数角色更有肉感。往下是中等宽度的臀围（32.1英寸），配上中等大腿（18.1英寸）；大腿围排在全榜中段。胸腰比1.34、臀腰比1.73，胸胯平衡度77%。整体是匀称型，臀围在全榜中的排名高于胸围。",
-     "read": "中等身高，腰比较有肉。整体是匀称型轮廓，下半身更有分量。"
+     "cm": "11号身高160厘米（5'2.8\"），和全榜平均差不多。胸围62.9厘米（UK 20E），和全榜平均差不多。腰围47.1厘米（腰高比0.29），比大多数角色更有肉感。往下是中等宽度的臀围（81.5厘米），配上中等大腿（46.1厘米）；大腿围排在全榜中段。胸腰比1.34、臀腰比1.73，胸胯平衡度77%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "in": "11号身高160厘米（5'2.8\"），和全榜平均差不多。胸围24.8英寸（UK 20E），和全榜平均差不多。腰围18.5英寸（腰高比0.29），比大多数角色更有肉感。往下是中等宽度的臀围（32.1英寸），配上中等大腿（18.1英寸）；大腿围排在全榜中段。胸腰比1.34、臀腰比1.73，胸胯平衡度77%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "read": "中等身高，腰比较有肉。整体是匀称型轮廓，上下比较均衡。"
     }
    },
    "measured_outfit": null,
@@ -2103,17 +2178,17 @@
     "hip_stature": 0.512
    },
    "percentiles": {
-    "bust": 0.52,
-    "waist": 0.633,
-    "hip": 0.663,
-    "thigh": 0.656,
-    "stature": 0.5
+    "bust": 0.51,
+    "waist": 0.62,
+    "hip": 0.65,
+    "thigh": 0.643,
+    "stature": 0.49
    },
    "classes": {
     "height": "Mid",
     "cup": "DD-E",
     "waist": "avg",
-    "hip": "high",
+    "hip": "avg",
     "thigh": "avg",
     "thigh_hand_pinned": false,
     "shape": "Balanced",
@@ -2123,6 +2198,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Lucia Elowen",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "リュシア",
    "display_zh": "卢西娅",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/lucia.html",
@@ -2130,18 +2208,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/lucia.html",
    "profile_text": {
     "en": {
-     "cm": "Lucia measures 160 cm (5'2.8\"), right around the roster average. Her 64.6 cm bust (UK 21E) is close to the roster average. The waist comes in at 44.9 cm (waist-to-height 0.28), a middling midsection by this set's standards. Below that, wide hips (81.9 cm) pair with average 49 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.44, hip/waist 1.82, bust–hip balance 79%): bust and hip percentile ranks are close.",
-     "in": "Lucia measures 160 cm (5'2.8\"), right around the roster average. Her 25.4 in bust (UK 21E) is close to the roster average. The waist comes in at 17.7 in (waist-to-height 0.28), a middling midsection by this set's standards. Below that, wide hips (32.2 in) pair with average 19.3 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.44, hip/waist 1.82, bust–hip balance 79%): bust and hip percentile ranks are close.",
+     "cm": "Lucia measures 160 cm (5'2.8\"), right around the roster average. Her 64.6 cm bust (UK 21E) is close to the roster average. The waist comes in at 44.9 cm (waist-to-height 0.28), a middling midsection by this set's standards. Below that, average-width hips (81.9 cm) pair with average 49 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.44, hip/waist 1.82, bust–hip balance 79%): bust and hip percentile ranks are close.",
+     "in": "Lucia measures 160 cm (5'2.8\"), right around the roster average. Her 25.4 in bust (UK 21E) is close to the roster average. The waist comes in at 17.7 in (waist-to-height 0.28), a middling midsection by this set's standards. Below that, average-width hips (32.2 in) pair with average 19.3 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.44, hip/waist 1.82, bust–hip balance 79%): bust and hip percentile ranks are close.",
      "read": "mid-height frame. Balanced silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "リュシアは160cm（5'2.8\"）で、ロスター平均とほぼ同じくらいです。バストは64.6cm（UK 21E）で、ロスター平均とほぼ同じです。ウエストは44.9cm（ウエスト対身長0.28）で、このメンバーでは平均的です。そこから広めのヒップ（81.9cm）に、平均的な太もも（49cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.44、ヒップ/ウエスト1.82、バストとヒップのバランスは79%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "リュシアは160cm（5'2.8\"）で、ロスター平均とほぼ同じくらいです。バストは25.4インチ（UK 21E）で、ロスター平均とほぼ同じです。ウエストは17.7インチ（ウエスト対身長0.28）で、このメンバーでは平均的です。そこから広めのヒップ（32.2インチ）に、平均的な太もも（19.3インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.44、ヒップ/ウエスト1.82、バストとヒップのバランスは79%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "リュシアは160cm（5'2.8\"）で、ロスター平均とほぼ同じくらいです。バストは64.6cm（UK 21E）で、ロスター平均とほぼ同じです。ウエストは44.9cm（ウエスト対身長0.28）で、このメンバーでは平均的です。そこから平均的なヒップ（81.9cm）に、平均的な太もも（49cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.44、ヒップ/ウエスト1.82、バストとヒップのバランスは79%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "リュシアは160cm（5'2.8\"）で、ロスター平均とほぼ同じくらいです。バストは25.4インチ（UK 21E）で、ロスター平均とほぼ同じです。ウエストは17.7インチ（ウエスト対身長0.28）で、このメンバーでは平均的です。そこから平均的なヒップ（32.2インチ）に、平均的な太もも（19.3インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.44、ヒップ/ウエスト1.82、バストとヒップのバランスは79%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "中背。バランス型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "卢西娅身高160厘米（5'2.8\"），和全榜平均差不多。胸围64.6厘米（UK 21E），和全榜平均差不多。腰围44.9厘米（腰高比0.28），在这批角色里属于中等。往下是较宽的臀围（81.9厘米），配上中等大腿（49厘米）；大腿围排在全榜中段。胸腰比1.44、臀腰比1.82，胸胯平衡度79%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
-     "in": "卢西娅身高160厘米（5'2.8\"），和全榜平均差不多。胸围25.4英寸（UK 21E），和全榜平均差不多。腰围17.7英寸（腰高比0.28），在这批角色里属于中等。往下是较宽的臀围（32.2英寸），配上中等大腿（19.3英寸）；大腿围排在全榜中段。胸腰比1.44、臀腰比1.82，胸胯平衡度79%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "cm": "卢西娅身高160厘米（5'2.8\"），和全榜平均差不多。胸围64.6厘米（UK 21E），和全榜平均差不多。腰围44.9厘米（腰高比0.28），在这批角色里属于中等。往下是中等宽度的臀围（81.9厘米），配上中等大腿（49厘米）；大腿围排在全榜中段。胸腰比1.44、臀腰比1.82，胸胯平衡度79%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "in": "卢西娅身高160厘米（5'2.8\"），和全榜平均差不多。胸围25.4英寸（UK 21E），和全榜平均差不多。腰围17.7英寸（腰高比0.28），在这批角色里属于中等。往下是中等宽度的臀围（32.2英寸），配上中等大腿（19.3英寸）；大腿围排在全榜中段。胸腰比1.44、臀腰比1.82，胸胯平衡度79%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
      "read": "中等身高。整体是匀称型轮廓，上下比较均衡。"
     }
    },
@@ -2181,11 +2259,11 @@
     "hip_stature": 0.513
    },
    "percentiles": {
-    "bust": 0.582,
-    "waist": 0.745,
-    "hip": 0.827,
-    "thigh": 0.635,
-    "stature": 0.908
+    "bust": 0.57,
+    "waist": 0.73,
+    "hip": 0.81,
+    "thigh": 0.622,
+    "stature": 0.89
    },
    "classes": {
     "height": "Tall",
@@ -2201,6 +2279,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Promeia",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "プロメイア",
    "display_zh": "普罗米娅",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/promeia.html",
@@ -2208,18 +2289,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/promeia.html",
    "profile_text": {
     "en": {
-     "cm": "Promeia is one of the taller figures here, 5th tallest of 49, at 174 cm (5'8.4\"). Her 66.8 cm bust (UK 22E) is close to the roster average. The waist comes in at 46.8 cm (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (89.3 cm) pair with average 48.1 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.43, hip/waist 1.91, bust–hip balance 75%): the hips rank higher in the roster than the bust.",
-     "in": "Promeia is one of the taller figures here, 5th tallest of 49, at 174 cm (5'8.4\"). Her 26.3 in bust (UK 22E) is close to the roster average. The waist comes in at 18.4 in (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (35.2 in) pair with average 18.9 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.43, hip/waist 1.91, bust–hip balance 75%): the hips rank higher in the roster than the bust.",
+     "cm": "Promeia is one of the taller figures here, 6th tallest of 50, at 174 cm (5'8.4\"). Her 66.8 cm bust (UK 22E) is close to the roster average. The waist comes in at 46.8 cm (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (89.3 cm) pair with average 48.1 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.43, hip/waist 1.91, bust–hip balance 75%): the hips rank higher in the roster than the bust.",
+     "in": "Promeia is one of the taller figures here, 6th tallest of 50, at 174 cm (5'8.4\"). Her 26.3 in bust (UK 22E) is close to the roster average. The waist comes in at 18.4 in (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (35.2 in) pair with average 18.9 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a straight silhouette (bust/waist 1.43, hip/waist 1.91, bust–hip balance 75%): the hips rank higher in the roster than the bust.",
      "read": "tall frame with full waist, wide hips. Straight silhouette, bottom-heavy proportions."
     },
     "ja": {
-     "cm": "プロメイアは174cm（5'8.4\"）。49人中5番目で、かなり背が高いほうです。バストは66.8cm（UK 22E）で、ロスター平均とほぼ同じです。ウエストは46.8cm（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（89.3cm）に、平均的な太もも（48.1cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.43、ヒップ/ウエスト1.91、バストとヒップのバランスは75%。全体は直線型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
-     "in": "プロメイアは174cm（5'8.4\"）。49人中5番目で、かなり背が高いほうです。バストは26.3インチ（UK 22E）で、ロスター平均とほぼ同じです。ウエストは18.4インチ（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35.2インチ）に、平均的な太もも（18.9インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.43、ヒップ/ウエスト1.91、バストとヒップのバランスは75%。全体は直線型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
+     "cm": "プロメイアは174cm（5'8.4\"）。50人中6番目で、かなり背が高いほうです。バストは66.8cm（UK 22E）で、ロスター平均とほぼ同じです。ウエストは46.8cm（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（89.3cm）に、平均的な太もも（48.1cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.43、ヒップ/ウエスト1.91、バストとヒップのバランスは75%。全体は直線型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
+     "in": "プロメイアは174cm（5'8.4\"）。50人中6番目で、かなり背が高いほうです。バストは26.3インチ（UK 22E）で、ロスター平均とほぼ同じです。ウエストは18.4インチ（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35.2インチ）に、平均的な太もも（18.9インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.43、ヒップ/ウエスト1.91、バストとヒップのバランスは75%。全体は直線型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
      "read": "高身長、ウエストはしっかりめ、ヒップは広め。直線型シルエットで、やや下半身寄り。"
     },
     "zh": {
-     "cm": "普罗米娅身高174厘米（5'8.4\"），49位角色中排第5，算是相当高挑。胸围66.8厘米（UK 22E），和全榜平均差不多。腰围46.8厘米（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（89.3厘米），配上中等大腿（48.1厘米）；大腿围排在全榜中段。胸腰比1.43、臀腰比1.91，胸胯平衡度75%。整体是直线型，臀围在全榜中的排名高于胸围。",
-     "in": "普罗米娅身高174厘米（5'8.4\"），49位角色中排第5，算是相当高挑。胸围26.3英寸（UK 22E），和全榜平均差不多。腰围18.4英寸（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（35.2英寸），配上中等大腿（18.9英寸）；大腿围排在全榜中段。胸腰比1.43、臀腰比1.91，胸胯平衡度75%。整体是直线型，臀围在全榜中的排名高于胸围。",
+     "cm": "普罗米娅身高174厘米（5'8.4\"），50位角色中排第6，算是相当高挑。胸围66.8厘米（UK 22E），和全榜平均差不多。腰围46.8厘米（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（89.3厘米），配上中等大腿（48.1厘米）；大腿围排在全榜中段。胸腰比1.43、臀腰比1.91，胸胯平衡度75%。整体是直线型，臀围在全榜中的排名高于胸围。",
+     "in": "普罗米娅身高174厘米（5'8.4\"），50位角色中排第6，算是相当高挑。胸围26.3英寸（UK 22E），和全榜平均差不多。腰围18.4英寸（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（35.2英寸），配上中等大腿（18.9英寸）；大腿围排在全榜中段。胸腰比1.43、臀腰比1.91，胸胯平衡度75%。整体是直线型，臀围在全榜中的排名高于胸围。",
      "read": "身材高挑，腰比较有肉，胯部较宽。整体是直线型轮廓，下半身更有分量。"
     }
    },
@@ -2261,11 +2342,11 @@
     "hip_stature": 0.464
    },
    "percentiles": {
-    "bust": 0.653,
-    "waist": 0.551,
-    "hip": 0.408,
-    "thigh": 0.49,
-    "stature": 0.663
+    "bust": 0.64,
+    "waist": 0.54,
+    "hip": 0.4,
+    "thigh": 0.48,
+    "stature": 0.65
    },
    "classes": {
     "height": "Tall",
@@ -2281,6 +2362,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Claret Flint",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "クラレッタ・フリンツ",
    "display_zh": "克拉蕾·弗林特",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/claret.html",
@@ -2288,18 +2372,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/claret.html",
    "profile_text": {
     "en": {
-     "cm": "Claret measures 166 cm (5'5.2\"), above the roster average at 17th tallest of 49. Her 67.4 cm bust (UK 21E) is close to the roster average. The waist comes in at 43.8 cm (waist-to-height 0.26), a middling midsection by this set's standards. Below that, average-width hips (77.1 cm) pair with average 45.8 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.54, hip/waist 1.76, bust–hip balance 87%): the bust ranks higher in the roster than the hips.",
-     "in": "Claret measures 166 cm (5'5.2\"), above the roster average at 17th tallest of 49. Her 26.5 in bust (UK 21E) is close to the roster average. The waist comes in at 17.2 in (waist-to-height 0.26), a middling midsection by this set's standards. Below that, average-width hips (30.4 in) pair with average 18 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.54, hip/waist 1.76, bust–hip balance 87%): the bust ranks higher in the roster than the hips.",
+     "cm": "Claret measures 166 cm (5'5.2\"), above the roster average at 18th tallest of 50. Her 67.4 cm bust (UK 21E) is close to the roster average. The waist comes in at 43.8 cm (waist-to-height 0.26), a middling midsection by this set's standards. Below that, average-width hips (77.1 cm) pair with average 45.8 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.54, hip/waist 1.76, bust–hip balance 87%): the bust ranks higher in the roster than the hips.",
+     "in": "Claret measures 166 cm (5'5.2\"), above the roster average at 18th tallest of 50. Her 26.5 in bust (UK 21E) is close to the roster average. The waist comes in at 17.2 in (waist-to-height 0.26), a middling midsection by this set's standards. Below that, average-width hips (30.4 in) pair with average 18 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.54, hip/waist 1.76, bust–hip balance 87%): the bust ranks higher in the roster than the hips.",
      "read": "tall frame. Hourglass silhouette, top-heavy proportions."
     },
     "ja": {
-     "cm": "クラレッタ・フリンツは166cm（5'5.2\"）で、ロスター平均より高めです。身長順では49人中17番目です。バストは67.4cm（UK 21E）で、ロスター平均とほぼ同じです。ウエストは43.8cm（ウエスト対身長0.26）で、このメンバーでは平均的です。そこから平均的なヒップ（77.1cm）に、平均的な太もも（45.8cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.54、ヒップ/ウエスト1.76、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。ロスター内の順位では、バストがヒップより上位です。",
-     "in": "クラレッタ・フリンツは166cm（5'5.2\"）で、ロスター平均より高めです。身長順では49人中17番目です。バストは26.5インチ（UK 21E）で、ロスター平均とほぼ同じです。ウエストは17.2インチ（ウエスト対身長0.26）で、このメンバーでは平均的です。そこから平均的なヒップ（30.4インチ）に、平均的な太もも（18インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.54、ヒップ/ウエスト1.76、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。ロスター内の順位では、バストがヒップより上位です。",
+     "cm": "クラレッタ・フリンツは166cm（5'5.2\"）で、ロスター平均より高めです。身長順では50人中18番目です。バストは67.4cm（UK 21E）で、ロスター平均とほぼ同じです。ウエストは43.8cm（ウエスト対身長0.26）で、このメンバーでは平均的です。そこから平均的なヒップ（77.1cm）に、平均的な太もも（45.8cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.54、ヒップ/ウエスト1.76、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。ロスター内の順位では、バストがヒップより上位です。",
+     "in": "クラレッタ・フリンツは166cm（5'5.2\"）で、ロスター平均より高めです。身長順では50人中18番目です。バストは26.5インチ（UK 21E）で、ロスター平均とほぼ同じです。ウエストは17.2インチ（ウエスト対身長0.26）で、このメンバーでは平均的です。そこから平均的なヒップ（30.4インチ）に、平均的な太もも（18インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.54、ヒップ/ウエスト1.76、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。ロスター内の順位では、バストがヒップより上位です。",
      "read": "高身長。砂時計型シルエットで、やや上半身寄り。"
     },
     "zh": {
-     "cm": "克拉蕾·弗林特身高166厘米（5'5.2\"），高于全榜平均，在49位角色中排第17。胸围67.4厘米（UK 21E），和全榜平均差不多。腰围43.8厘米（腰高比0.26），在这批角色里属于中等。往下是中等宽度的臀围（77.1厘米），配上中等大腿（45.8厘米）；大腿围排在全榜中段。胸腰比1.54、臀腰比1.76，胸胯平衡度87%。整体是沙漏型，胸围在全榜中的排名高于臀围。",
-     "in": "克拉蕾·弗林特身高166厘米（5'5.2\"），高于全榜平均，在49位角色中排第17。胸围26.5英寸（UK 21E），和全榜平均差不多。腰围17.2英寸（腰高比0.26），在这批角色里属于中等。往下是中等宽度的臀围（30.4英寸），配上中等大腿（18英寸）；大腿围排在全榜中段。胸腰比1.54、臀腰比1.76，胸胯平衡度87%。整体是沙漏型，胸围在全榜中的排名高于臀围。",
+     "cm": "克拉蕾·弗林特身高166厘米（5'5.2\"），高于全榜平均，在50位角色中排第18。胸围67.4厘米（UK 21E），和全榜平均差不多。腰围43.8厘米（腰高比0.26），在这批角色里属于中等。往下是中等宽度的臀围（77.1厘米），配上中等大腿（45.8厘米）；大腿围排在全榜中段。胸腰比1.54、臀腰比1.76，胸胯平衡度87%。整体是沙漏型，胸围在全榜中的排名高于臀围。",
+     "in": "克拉蕾·弗林特身高166厘米（5'5.2\"），高于全榜平均，在50位角色中排第18。胸围26.5英寸（UK 21E），和全榜平均差不多。腰围17.2英寸（腰高比0.26），在这批角色里属于中等。往下是中等宽度的臀围（30.4英寸），配上中等大腿（18英寸）；大腿围排在全榜中段。胸腰比1.54、臀腰比1.76，胸胯平衡度87%。整体是沙漏型，胸围在全榜中的排名高于臀围。",
      "read": "身材高挑。整体是沙漏型轮廓，上半身更有分量。"
     }
    },
@@ -2341,11 +2425,11 @@
     "hip_stature": 0.501
    },
    "percentiles": {
-    "bust": 0.49,
-    "waist": 0.582,
-    "hip": 0.602,
-    "thigh": 0.51,
-    "stature": 0.541
+    "bust": 0.48,
+    "waist": 0.57,
+    "hip": 0.59,
+    "thigh": 0.5,
+    "stature": 0.53
    },
    "classes": {
     "height": "Mid",
@@ -2361,6 +2445,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Ellen Joe",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "エレン・ジョー",
    "display_zh": "艾莲·乔",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/ellen_joe.html",
@@ -2427,11 +2514,11 @@
     "hip_stature": 0.479
    },
    "percentiles": {
-    "bust": 0.541,
-    "waist": 0.418,
-    "hip": 0.48,
-    "thigh": 0.469,
-    "stature": 0.622
+    "bust": 0.53,
+    "waist": 0.41,
+    "hip": 0.47,
+    "thigh": 0.459,
+    "stature": 0.61
    },
    "classes": {
     "height": "Mid",
@@ -2447,6 +2534,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Alice Thymefield",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "アリス・タイムフィールド",
    "display_zh": "爱丽丝·泰姆菲尔德",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/alice.html",
@@ -2512,11 +2602,11 @@
     "hip_stature": 0.475
    },
    "percentiles": {
-    "bust": 0.561,
-    "waist": 0.459,
-    "hip": 0.357,
-    "thigh": 0.312,
-    "stature": 0.582
+    "bust": 0.55,
+    "waist": 0.45,
+    "hip": 0.35,
+    "thigh": 0.306,
+    "stature": 0.57
    },
    "classes": {
     "height": "Mid",
@@ -2532,6 +2622,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Ye Shunguang",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "葉瞬光",
    "display_zh": "叶瞬光",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/ye_shunguang.html",
@@ -2597,11 +2690,11 @@
     "hip_stature": 0.491
    },
    "percentiles": {
-    "bust": 0.602,
-    "waist": 0.602,
-    "hip": 0.439,
-    "thigh": 0.615,
-    "stature": 0.449
+    "bust": 0.59,
+    "waist": 0.59,
+    "hip": 0.43,
+    "thigh": 0.602,
+    "stature": 0.44
    },
    "classes": {
     "height": "Mid",
@@ -2617,6 +2710,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Orphie Magnusson & Magus",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "オルペウス＆「鬼火」",
    "display_zh": "奥菲丝&「鬼火」",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/orphie.html",
@@ -2677,11 +2773,11 @@
     "hip_stature": 0.497
    },
    "percentiles": {
-    "bust": 0.653,
-    "waist": 0.551,
-    "hip": 0.541,
-    "thigh": 0.542,
-    "stature": 0.5
+    "bust": 0.64,
+    "waist": 0.54,
+    "hip": 0.53,
+    "thigh": 0.531,
+    "stature": 0.49
    },
    "classes": {
     "height": "Mid",
@@ -2697,6 +2793,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Burnice White",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "バーニス",
    "display_zh": "柏妮思",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/burnice.html",
@@ -2755,11 +2854,11 @@
     "hip_stature": 0.494
    },
    "percentiles": {
-    "bust": 0.622,
-    "waist": 0.439,
-    "hip": 0.408,
-    "thigh": 0.385,
-    "stature": 0.388
+    "bust": 0.61,
+    "waist": 0.43,
+    "hip": 0.4,
+    "thigh": 0.378,
+    "stature": 0.38
    },
    "classes": {
     "height": "Mid",
@@ -2775,6 +2874,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Cissia",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "シーシィア",
    "display_zh": "希希芙",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/cissia.html",
@@ -2836,11 +2938,11 @@
     "hip_stature": 0.493
    },
    "percentiles": {
-    "bust": 0.684,
-    "waist": 0.633,
-    "hip": 0.622,
-    "thigh": 0.573,
-    "stature": 0.643
+    "bust": 0.67,
+    "waist": 0.62,
+    "hip": 0.61,
+    "thigh": 0.561,
+    "stature": 0.63
    },
    "classes": {
     "height": "Mid",
@@ -2856,6 +2958,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Nicole Demara",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "ニコ・デマラ",
    "display_zh": "妮可·德玛拉",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/nicole.html",
@@ -2919,11 +3024,11 @@
     "hip_stature": 0.514
    },
    "percentiles": {
-    "bust": 0.704,
-    "waist": 0.857,
-    "hip": 0.806,
-    "thigh": 0.781,
-    "stature": 0.857
+    "bust": 0.69,
+    "waist": 0.84,
+    "hip": 0.79,
+    "thigh": 0.765,
+    "stature": 0.84
    },
    "classes": {
     "height": "Tall",
@@ -2939,6 +3044,9 @@
    "confidence_note": "The sheet marks at least one value as approximated or pending.",
    "notes": "Chest approximated due to armor",
    "source_page": "Trigger",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "「トリガー」",
    "display_zh": "「扳机」",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/trigger.html",
@@ -2946,19 +3054,19 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/trigger.html",
    "profile_text": {
     "en": {
-     "cm": "Trigger is one of the taller figures here, 6th tallest of 49, at 173 cm (5'8\"). Her 69.6 cm bust (UK 23E) is clearly above the roster average. The waist comes in at 49.3 cm (waist-to-height 0.28), a fuller midsection than most of the roster. Below that, wide hips (89 cm) pair with thick 52.4 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.41, hip/waist 1.81, bust–hip balance 78%): bust and hip percentile ranks are close. Chart note: Chest approximated due to armor.",
-     "in": "Trigger is one of the taller figures here, 6th tallest of 49, at 173 cm (5'8\"). Her 27.4 in bust (UK 23E) is clearly above the roster average. The waist comes in at 19.4 in (waist-to-height 0.28), a fuller midsection than most of the roster. Below that, wide hips (35 in) pair with thick 20.6 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.41, hip/waist 1.81, bust–hip balance 78%): bust and hip percentile ranks are close. Chart note: Chest approximated due to armor.",
-     "read": "tall frame with full bust, full waist, wide hips, thick thighs. Balanced silhouette, balanced proportions."
+     "cm": "Trigger is one of the taller figures here, 7th tallest of 50, at 173 cm (5'8\"). Her 69.6 cm bust (UK 23E) is clearly above the roster average. The waist comes in at 49.3 cm (waist-to-height 0.28), a fuller midsection than most of the roster. Below that, wide hips (89 cm) pair with thick 52.4 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.41, hip/waist 1.81, bust–hip balance 78%): bust and hip percentile ranks are close. Chart note: Chest approximated due to armor.",
+     "in": "Trigger is one of the taller figures here, 7th tallest of 50, at 173 cm (5'8\"). Her 27.4 in bust (UK 23E) is clearly above the roster average. The waist comes in at 19.4 in (waist-to-height 0.28), a fuller midsection than most of the roster. Below that, wide hips (35 in) pair with thick 20.6 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.41, hip/waist 1.81, bust–hip balance 78%): bust and hip percentile ranks are close. Chart note: Chest approximated due to armor.",
+     "read": "tall frame with full waist, wide hips, thick thighs. Balanced silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "「トリガー」は173cm（5'8\"）。49人中6番目で、かなり背が高いほうです。バストは69.6cm（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは49.3cm（ウエスト対身長0.28）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（89cm）に、太めの太もも（52.4cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.41、ヒップ/ウエスト1.81、バストとヒップのバランスは78%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：鎧のため胸囲は概算。",
-     "in": "「トリガー」は173cm（5'8\"）。49人中6番目で、かなり背が高いほうです。バストは27.4インチ（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは19.4インチ（ウエスト対身長0.28）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35インチ）に、太めの太もも（20.6インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.41、ヒップ/ウエスト1.81、バストとヒップのバランスは78%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：鎧のため胸囲は概算。",
-     "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。バランス型シルエットで、上下のバランスが取れています。"
+     "cm": "「トリガー」は173cm（5'8\"）。50人中7番目で、かなり背が高いほうです。バストは69.6cm（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは49.3cm（ウエスト対身長0.28）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（89cm）に、太めの太もも（52.4cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.41、ヒップ/ウエスト1.81、バストとヒップのバランスは78%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：鎧のため胸囲は概算。",
+     "in": "「トリガー」は173cm（5'8\"）。50人中7番目で、かなり背が高いほうです。バストは27.4インチ（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは19.4インチ（ウエスト対身長0.28）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35インチ）に、太めの太もも（20.6インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.41、ヒップ/ウエスト1.81、バストとヒップのバランスは78%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：鎧のため胸囲は概算。",
+     "read": "高身長、ウエストはしっかりめ、ヒップは広め、太ももは太め。バランス型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "「扳机」身高173厘米（5'8\"），49位角色中排第6，算是相当高挑。胸围69.6厘米（UK 23E），明显高于全榜平均。腰围49.3厘米（腰高比0.28），比大多数角色更有肉感。往下是较宽的臀围（89厘米），配上丰满的大腿（52.4厘米）；大腿围排在全榜中段。胸腰比1.41、臀腰比1.81，胸胯平衡度78%。整体是匀称型，胸围与臀围在全榜中的排名接近。榜单注记：受铠甲影响，胸围为估算。",
-     "in": "「扳机」身高173厘米（5'8\"），49位角色中排第6，算是相当高挑。胸围27.4英寸（UK 23E），明显高于全榜平均。腰围19.4英寸（腰高比0.28），比大多数角色更有肉感。往下是较宽的臀围（35英寸），配上丰满的大腿（20.6英寸）；大腿围排在全榜中段。胸腰比1.41、臀腰比1.81，胸胯平衡度78%。整体是匀称型，胸围与臀围在全榜中的排名接近。榜单注记：受铠甲影响，胸围为估算。",
-     "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是匀称型轮廓，上下比较均衡。"
+     "cm": "「扳机」身高173厘米（5'8\"），50位角色中排第7，算是相当高挑。胸围69.6厘米（UK 23E），明显高于全榜平均。腰围49.3厘米（腰高比0.28），比大多数角色更有肉感。往下是较宽的臀围（89厘米），配上丰满的大腿（52.4厘米）；大腿围排在全榜中段。胸腰比1.41、臀腰比1.81，胸胯平衡度78%。整体是匀称型，胸围与臀围在全榜中的排名接近。榜单注记：受铠甲影响，胸围为估算。",
+     "in": "「扳机」身高173厘米（5'8\"），50位角色中排第7，算是相当高挑。胸围27.4英寸（UK 23E），明显高于全榜平均。腰围19.4英寸（腰高比0.28），比大多数角色更有肉感。往下是较宽的臀围（35英寸），配上丰满的大腿（20.6英寸）；大腿围排在全榜中段。胸腰比1.41、臀腰比1.81，胸胯平衡度78%。整体是匀称型，胸围与臀围在全榜中的排名接近。榜单注记：受铠甲影响，胸围为估算。",
+     "read": "身材高挑，腰比较有肉，胯部较宽，大腿偏丰满。整体是匀称型轮廓，上下比较均衡。"
     }
    },
    "measured_outfit": null,
@@ -3001,11 +3109,11 @@
     "hip_stature": 0.527
    },
    "percentiles": {
-    "bust": 0.745,
-    "waist": 0.827,
-    "hip": 0.857,
-    "thigh": 0.854,
-    "stature": 0.735
+    "bust": 0.73,
+    "waist": 0.81,
+    "hip": 0.84,
+    "thigh": 0.837,
+    "stature": 0.72
    },
    "classes": {
     "height": "Tall",
@@ -3021,6 +3129,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "Measurements use the Nocturne of Light outfit; standard-model values are not used.",
    "source_page": "(explicit)",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "ジェーン・ドゥ",
    "display_zh": "简·杜",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/jane_doe.html",
@@ -3028,18 +3139,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/jane_doe.html",
    "profile_text": {
     "en": {
-     "cm": "Jane Doe measures 170 cm (5'6.8\"), above the roster average at 13th tallest of 49. Her 71.3 cm bust (UK 23E) is clearly above the roster average. The waist comes in at 49.1 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (89.6 cm) pair with thick 52.9 cm thighs (top 15% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.45, hip/waist 1.82, bust–hip balance 80%): bust and hip percentile ranks are close. Chart note: Measurements use the Nocturne of Light outfit; standard-model values are not used.",
-     "in": "Jane Doe measures 170 cm (5'6.8\"), above the roster average at 13th tallest of 49. Her 28.1 in bust (UK 23E) is clearly above the roster average. The waist comes in at 19.3 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (35.3 in) pair with thick 20.8 in thighs (top 15% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.45, hip/waist 1.82, bust–hip balance 80%): bust and hip percentile ranks are close. Chart note: Measurements use the Nocturne of Light outfit; standard-model values are not used.",
+     "cm": "Jane Doe measures 170 cm (5'6.8\"), above the roster average at 14th tallest of 50. Her 71.3 cm bust (UK 23E) is clearly above the roster average. The waist comes in at 49.1 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (89.6 cm) pair with thick 52.9 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.45, hip/waist 1.82, bust–hip balance 80%): bust and hip percentile ranks are close. Chart note: Measurements use the Nocturne of Light outfit; standard-model values are not used.",
+     "in": "Jane Doe measures 170 cm (5'6.8\"), above the roster average at 14th tallest of 50. Her 28.1 in bust (UK 23E) is clearly above the roster average. The waist comes in at 19.3 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (35.3 in) pair with thick 20.8 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.45, hip/waist 1.82, bust–hip balance 80%): bust and hip percentile ranks are close. Chart note: Measurements use the Nocturne of Light outfit; standard-model values are not used.",
      "read": "tall frame with full bust, full waist, wide hips, thick thighs. Balanced silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "ジェーン・ドゥは170cm（5'6.8\"）で、ロスター平均より高めです。身長順では49人中13番目です。バストは71.3cm（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは49.1cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（89.6cm）に、太めの太もも（52.9cm）が続きます。太もも周囲はロスター上位15%です。バスト/ウエスト1.45、ヒップ/ウエスト1.82、バストとヒップのバランスは80%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：「Nocturne of Light」の衣装で計測。標準モデルの数値は使用していない。",
-     "in": "ジェーン・ドゥは170cm（5'6.8\"）で、ロスター平均より高めです。身長順では49人中13番目です。バストは28.1インチ（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは19.3インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35.3インチ）に、太めの太もも（20.8インチ）が続きます。太もも周囲はロスター上位15%です。バスト/ウエスト1.45、ヒップ/ウエスト1.82、バストとヒップのバランスは80%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：「Nocturne of Light」の衣装で計測。標準モデルの数値は使用していない。",
+     "cm": "ジェーン・ドゥは170cm（5'6.8\"）で、ロスター平均より高めです。身長順では50人中14番目です。バストは71.3cm（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは49.1cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（89.6cm）に、太めの太もも（52.9cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.45、ヒップ/ウエスト1.82、バストとヒップのバランスは80%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：「Nocturne of Light」の衣装で計測。標準モデルの数値は使用していない。",
+     "in": "ジェーン・ドゥは170cm（5'6.8\"）で、ロスター平均より高めです。身長順では50人中14番目です。バストは28.1インチ（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは19.3インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35.3インチ）に、太めの太もも（20.8インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.45、ヒップ/ウエスト1.82、バストとヒップのバランスは80%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：「Nocturne of Light」の衣装で計測。標準モデルの数値は使用していない。",
      "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。バランス型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "简·杜身高170厘米（5'6.8\"），高于全榜平均，在49位角色中排第13。胸围71.3厘米（UK 23E），明显高于全榜平均。腰围49.1厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（89.6厘米），配上丰满的大腿（52.9厘米）；大腿围排在全榜前15%。胸腰比1.45、臀腰比1.82，胸胯平衡度80%。整体是匀称型，胸围与臀围在全榜中的排名接近。榜单注记：采用「Nocturne of Light」服装的数据，未使用标准模型数值。",
-     "in": "简·杜身高170厘米（5'6.8\"），高于全榜平均，在49位角色中排第13。胸围28.1英寸（UK 23E），明显高于全榜平均。腰围19.3英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（35.3英寸），配上丰满的大腿（20.8英寸）；大腿围排在全榜前15%。胸腰比1.45、臀腰比1.82，胸胯平衡度80%。整体是匀称型，胸围与臀围在全榜中的排名接近。榜单注记：采用「Nocturne of Light」服装的数据，未使用标准模型数值。",
+     "cm": "简·杜身高170厘米（5'6.8\"），高于全榜平均，在50位角色中排第14。胸围71.3厘米（UK 23E），明显高于全榜平均。腰围49.1厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（89.6厘米），配上丰满的大腿（52.9厘米）；大腿围排在全榜中段。胸腰比1.45、臀腰比1.82，胸胯平衡度80%。整体是匀称型，胸围与臀围在全榜中的排名接近。榜单注记：采用「Nocturne of Light」服装的数据，未使用标准模型数值。",
+     "in": "简·杜身高170厘米（5'6.8\"），高于全榜平均，在50位角色中排第14。胸围28.1英寸（UK 23E），明显高于全榜平均。腰围19.3英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（35.3英寸），配上丰满的大腿（20.8英寸）；大腿围排在全榜中段。胸腰比1.45、臀腰比1.82，胸胯平衡度80%。整体是匀称型，胸围与臀围在全榜中的排名接近。榜单注记：采用「Nocturne of Light」服装的数据，未使用标准模型数值。",
      "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是匀称型轮廓，上下比较均衡。"
     }
    },
@@ -3084,11 +3195,11 @@
     "hip_stature": 0.538
    },
    "percentiles": {
-    "bust": 0.724,
-    "waist": 0.949,
+    "bust": 0.71,
+    "waist": 0.93,
     "hip": 0.99,
-    "thigh": 0.99,
-    "stature": 0.939
+    "thigh": 0.969,
+    "stature": 0.92
    },
    "classes": {
     "height": "Tall",
@@ -3104,6 +3215,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Zhu Yuan",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "朱鳶",
    "display_zh": "朱鸢",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/zhu_yuan.html",
@@ -3111,18 +3225,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/zhu_yuan.html",
    "profile_text": {
     "en": {
-     "cm": "Zhu Yuan is among the tallest figures on the chart at 175 cm (5'8.8\"). Her 71.1 cm bust (UK 23E) is clearly above the roster average. The waist comes in at 51.2 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (94.1 cm) pair with thick 55.3 cm thighs (top 1% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.39, hip/waist 1.84, bust–hip balance 76%): the hips rank higher in the roster than the bust.",
-     "in": "Zhu Yuan is among the tallest figures on the chart at 175 cm (5'8.8\"). Her 28 in bust (UK 23E) is clearly above the roster average. The waist comes in at 20.2 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (37 in) pair with thick 21.8 in thighs (top 1% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.39, hip/waist 1.84, bust–hip balance 76%): the hips rank higher in the roster than the bust.",
+     "cm": "Zhu Yuan is one of the taller figures here, 4th tallest of 50, at 175 cm (5'8.8\"). Her 71.1 cm bust (UK 23E) is clearly above the roster average. The waist comes in at 51.2 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (94.1 cm) pair with thick 55.3 cm thighs (top 3% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.39, hip/waist 1.84, bust–hip balance 76%): the hips rank higher in the roster than the bust.",
+     "in": "Zhu Yuan is one of the taller figures here, 4th tallest of 50, at 175 cm (5'8.8\"). Her 28 in bust (UK 23E) is clearly above the roster average. The waist comes in at 20.2 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (37 in) pair with thick 21.8 in thighs (top 3% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.39, hip/waist 1.84, bust–hip balance 76%): the hips rank higher in the roster than the bust.",
      "read": "tall frame with full bust, full waist, wide hips, thick thighs. Balanced silhouette, bottom-heavy proportions."
     },
     "ja": {
-     "cm": "朱鳶は175cm（5'8.8\"）で、チャートでもトップクラスの高さです。バストは71.1cm（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは51.2cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（94.1cm）に、太めの太もも（55.3cm）が続きます。太もも周囲はロスター上位1%です。バスト/ウエスト1.39、ヒップ/ウエスト1.84、バストとヒップのバランスは76%。全体はバランス型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
-     "in": "朱鳶は175cm（5'8.8\"）で、チャートでもトップクラスの高さです。バストは28インチ（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは20.2インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（37インチ）に、太めの太もも（21.8インチ）が続きます。太もも周囲はロスター上位1%です。バスト/ウエスト1.39、ヒップ/ウエスト1.84、バストとヒップのバランスは76%。全体はバランス型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
+     "cm": "朱鳶は175cm（5'8.8\"）。50人中4番目で、かなり背が高いほうです。バストは71.1cm（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは51.2cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（94.1cm）に、太めの太もも（55.3cm）が続きます。太もも周囲はロスター上位3%です。バスト/ウエスト1.39、ヒップ/ウエスト1.84、バストとヒップのバランスは76%。全体はバランス型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
+     "in": "朱鳶は175cm（5'8.8\"）。50人中4番目で、かなり背が高いほうです。バストは28インチ（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは20.2インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（37インチ）に、太めの太もも（21.8インチ）が続きます。太もも周囲はロスター上位3%です。バスト/ウエスト1.39、ヒップ/ウエスト1.84、バストとヒップのバランスは76%。全体はバランス型のシルエットです。ロスター内の順位では、ヒップがバストより上位です。",
      "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。バランス型シルエットで、やや下半身寄り。"
     },
     "zh": {
-     "cm": "朱鸢身高175厘米（5'8.8\"），在全榜里属于最高的一档。胸围71.1厘米（UK 23E），明显高于全榜平均。腰围51.2厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（94.1厘米），配上丰满的大腿（55.3厘米）；大腿围排在全榜前1%。胸腰比1.39、臀腰比1.84，胸胯平衡度76%。整体是匀称型，臀围在全榜中的排名高于胸围。",
-     "in": "朱鸢身高175厘米（5'8.8\"），在全榜里属于最高的一档。胸围28英寸（UK 23E），明显高于全榜平均。腰围20.2英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（37英寸），配上丰满的大腿（21.8英寸）；大腿围排在全榜前1%。胸腰比1.39、臀腰比1.84，胸胯平衡度76%。整体是匀称型，臀围在全榜中的排名高于胸围。",
+     "cm": "朱鸢身高175厘米（5'8.8\"），50位角色中排第4，算是相当高挑。胸围71.1厘米（UK 23E），明显高于全榜平均。腰围51.2厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（94.1厘米），配上丰满的大腿（55.3厘米）；大腿围排在全榜前3%。胸腰比1.39、臀腰比1.84，胸胯平衡度76%。整体是匀称型，臀围在全榜中的排名高于胸围。",
+     "in": "朱鸢身高175厘米（5'8.8\"），50位角色中排第4，算是相当高挑。胸围28英寸（UK 23E），明显高于全榜平均。腰围20.2英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（37英寸），配上丰满的大腿（21.8英寸）；大腿围排在全榜前3%。胸腰比1.39、臀腰比1.84，胸胯平衡度76%。整体是匀称型，臀围在全榜中的排名高于胸围。",
      "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是匀称型轮廓，下半身更有分量。"
     }
    },
@@ -3165,11 +3279,11 @@
     "hip_stature": 0.512
    },
    "percentiles": {
-    "bust": 0.806,
-    "waist": 0.806,
-    "hip": 0.857,
-    "thigh": 0.896,
-    "stature": 0.939
+    "bust": 0.79,
+    "waist": 0.79,
+    "hip": 0.84,
+    "thigh": 0.878,
+    "stature": 0.92
    },
    "classes": {
     "height": "Tall",
@@ -3185,6 +3299,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Sigrid de L'Azur",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "シグリッド・ドゥ・ラズール",
    "display_zh": "希格莉德·德拉叙尔",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/sigrid.html",
@@ -3192,18 +3309,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/sigrid.html",
    "profile_text": {
     "en": {
-     "cm": "Sigrid is among the tallest figures on the chart at 175 cm (5'8.8\"). Her 72.3 cm bust (UK 23E) is clearly above the roster average. The waist comes in at 48 cm (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (89.6 cm) pair with thick 53.1 cm thighs (top 10% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.51, hip/waist 1.87, bust–hip balance 81%): bust and hip percentile ranks are close.",
-     "in": "Sigrid is among the tallest figures on the chart at 175 cm (5'8.8\"). Her 28.5 in bust (UK 23E) is clearly above the roster average. The waist comes in at 18.9 in (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (35.3 in) pair with thick 20.9 in thighs (top 10% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.51, hip/waist 1.87, bust–hip balance 81%): bust and hip percentile ranks are close.",
+     "cm": "Sigrid is one of the taller figures here, 4th tallest of 50, at 175 cm (5'8.8\"). Her 72.3 cm bust (UK 23E) is clearly above the roster average. The waist comes in at 48 cm (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (89.6 cm) pair with thick 53.1 cm thighs (top 12% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.51, hip/waist 1.87, bust–hip balance 81%): bust and hip percentile ranks are close.",
+     "in": "Sigrid is one of the taller figures here, 4th tallest of 50, at 175 cm (5'8.8\"). Her 28.5 in bust (UK 23E) is clearly above the roster average. The waist comes in at 18.9 in (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (35.3 in) pair with thick 20.9 in thighs (top 12% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.51, hip/waist 1.87, bust–hip balance 81%): bust and hip percentile ranks are close.",
      "read": "tall frame with full bust, full waist, wide hips, thick thighs. Balanced silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "シグリッド・ドゥ・ラズールは175cm（5'8.8\"）で、チャートでもトップクラスの高さです。バストは72.3cm（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは48cm（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（89.6cm）に、太めの太もも（53.1cm）が続きます。太もも周囲はロスター上位10%です。バスト/ウエスト1.51、ヒップ/ウエスト1.87、バストとヒップのバランスは81%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "シグリッド・ドゥ・ラズールは175cm（5'8.8\"）で、チャートでもトップクラスの高さです。バストは28.5インチ（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは18.9インチ（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35.3インチ）に、太めの太もも（20.9インチ）が続きます。太もも周囲はロスター上位10%です。バスト/ウエスト1.51、ヒップ/ウエスト1.87、バストとヒップのバランスは81%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "シグリッド・ドゥ・ラズールは175cm（5'8.8\"）。50人中4番目で、かなり背が高いほうです。バストは72.3cm（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは48cm（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（89.6cm）に、太めの太もも（53.1cm）が続きます。太もも周囲はロスター上位12%です。バスト/ウエスト1.51、ヒップ/ウエスト1.87、バストとヒップのバランスは81%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "シグリッド・ドゥ・ラズールは175cm（5'8.8\"）。50人中4番目で、かなり背が高いほうです。バストは28.5インチ（UK 23E）で、ロスター平均よりはっきり大きめです。ウエストは18.9インチ（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35.3インチ）に、太めの太もも（20.9インチ）が続きます。太もも周囲はロスター上位12%です。バスト/ウエスト1.51、ヒップ/ウエスト1.87、バストとヒップのバランスは81%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。バランス型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "希格莉德·德拉叙尔身高175厘米（5'8.8\"），在全榜里属于最高的一档。胸围72.3厘米（UK 23E），明显高于全榜平均。腰围48厘米（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（89.6厘米），配上丰满的大腿（53.1厘米）；大腿围排在全榜前10%。胸腰比1.51、臀腰比1.87，胸胯平衡度81%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
-     "in": "希格莉德·德拉叙尔身高175厘米（5'8.8\"），在全榜里属于最高的一档。胸围28.5英寸（UK 23E），明显高于全榜平均。腰围18.9英寸（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（35.3英寸），配上丰满的大腿（20.9英寸）；大腿围排在全榜前10%。胸腰比1.51、臀腰比1.87，胸胯平衡度81%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "cm": "希格莉德·德拉叙尔身高175厘米（5'8.8\"），50位角色中排第4，算是相当高挑。胸围72.3厘米（UK 23E），明显高于全榜平均。腰围48厘米（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（89.6厘米），配上丰满的大腿（53.1厘米）；大腿围排在全榜前12%。胸腰比1.51、臀腰比1.87，胸胯平衡度81%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "in": "希格莉德·德拉叙尔身高175厘米（5'8.8\"），50位角色中排第4，算是相当高挑。胸围28.5英寸（UK 23E），明显高于全榜平均。腰围18.9英寸（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（35.3英寸），配上丰满的大腿（20.9英寸）；大腿围排在全榜前12%。胸腰比1.51、臀腰比1.87，胸胯平衡度81%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
      "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是匀称型轮廓，上下比较均衡。"
     }
    },
@@ -3250,11 +3367,11 @@
     "hip_stature": 0.499
    },
    "percentiles": {
-    "bust": 0.765,
-    "waist": 0.684,
-    "hip": 0.765,
-    "thigh": 0.698,
-    "stature": 0.98
+    "bust": 0.75,
+    "waist": 0.67,
+    "hip": 0.75,
+    "thigh": 0.684,
+    "stature": 0.96
    },
    "classes": {
     "height": "Tall",
@@ -3270,6 +3387,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Astra Yao",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "アストラ・ヤオ",
    "display_zh": "耀嘉音",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/astra_yao.html",
@@ -3335,11 +3455,11 @@
     "hip_stature": 0.499
    },
    "percentiles": {
-    "bust": 0.847,
-    "waist": 0.908,
-    "hip": 0.704,
-    "thigh": 0.823,
-    "stature": 0.857
+    "bust": 0.83,
+    "waist": 0.89,
+    "hip": 0.69,
+    "thigh": 0.806,
+    "stature": 0.84
    },
    "classes": {
     "height": "Tall",
@@ -3355,6 +3475,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Evelyn Chevalier",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "イヴリン・シェヴァリエ",
    "display_zh": "伊芙琳·舒瓦利耶",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/evelyn.html",
@@ -3362,19 +3485,19 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/evelyn.html",
    "profile_text": {
     "en": {
-     "cm": "Evelyn is one of the taller figures here, 6th tallest of 49, at 173 cm (5'8\"). Her 74.6 cm bust (UK 23F) is clearly above the roster average. The waist comes in at 49.9 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (86.3 cm) pair with thick 52.8 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.49, hip/waist 1.73, bust–hip balance 86%): bust and hip percentile ranks are close.",
-     "in": "Evelyn is one of the taller figures here, 6th tallest of 49, at 173 cm (5'8\"). Her 29.4 in bust (UK 23F) is clearly above the roster average. The waist comes in at 19.6 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (34 in) pair with thick 20.8 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.49, hip/waist 1.73, bust–hip balance 86%): bust and hip percentile ranks are close.",
-     "read": "tall frame with full bust, full waist, wide hips, thick thighs. Hourglass silhouette, balanced proportions."
+     "cm": "Evelyn is one of the taller figures here, 7th tallest of 50, at 173 cm (5'8\"). Her 74.6 cm bust (UK 23F) is clearly above the roster average. The waist comes in at 49.9 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (86.3 cm) pair with thick 52.8 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.49, hip/waist 1.73, bust–hip balance 86%): bust and hip percentile ranks are close.",
+     "in": "Evelyn is one of the taller figures here, 7th tallest of 50, at 173 cm (5'8\"). Her 29.4 in bust (UK 23F) is clearly above the roster average. The waist comes in at 19.6 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (34 in) pair with thick 20.8 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.49, hip/waist 1.73, bust–hip balance 86%): bust and hip percentile ranks are close.",
+     "read": "tall frame with full bust, full waist, thick thighs. Hourglass silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "イヴリン・シェヴァリエは173cm（5'8\"）。49人中6番目で、かなり背が高いほうです。バストは74.6cm（UK 23F）で、ロスター平均よりはっきり大きめです。ウエストは49.9cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（86.3cm）に、太めの太もも（52.8cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.49、ヒップ/ウエスト1.73、バストとヒップのバランスは86%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "イヴリン・シェヴァリエは173cm（5'8\"）。49人中6番目で、かなり背が高いほうです。バストは29.4インチ（UK 23F）で、ロスター平均よりはっきり大きめです。ウエストは19.6インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（34インチ）に、太めの太もも（20.8インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.49、ヒップ/ウエスト1.73、バストとヒップのバランスは86%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。砂時計型シルエットで、上下のバランスが取れています。"
+     "cm": "イヴリン・シェヴァリエは173cm（5'8\"）。50人中7番目で、かなり背が高いほうです。バストは74.6cm（UK 23F）で、ロスター平均よりはっきり大きめです。ウエストは49.9cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（86.3cm）に、太めの太もも（52.8cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.49、ヒップ/ウエスト1.73、バストとヒップのバランスは86%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "イヴリン・シェヴァリエは173cm（5'8\"）。50人中7番目で、かなり背が高いほうです。バストは29.4インチ（UK 23F）で、ロスター平均よりはっきり大きめです。ウエストは19.6インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（34インチ）に、太めの太もも（20.8インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.49、ヒップ/ウエスト1.73、バストとヒップのバランスは86%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、太ももは太め。砂時計型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "伊芙琳·舒瓦利耶身高173厘米（5'8\"），49位角色中排第6，算是相当高挑。胸围74.6厘米（UK 23F），明显高于全榜平均。腰围49.9厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（86.3厘米），配上丰满的大腿（52.8厘米）；大腿围排在全榜中段。胸腰比1.49、臀腰比1.73，胸胯平衡度86%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
-     "in": "伊芙琳·舒瓦利耶身高173厘米（5'8\"），49位角色中排第6，算是相当高挑。胸围29.4英寸（UK 23F），明显高于全榜平均。腰围19.6英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（34英寸），配上丰满的大腿（20.8英寸）；大腿围排在全榜中段。胸腰比1.49、臀腰比1.73，胸胯平衡度86%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
-     "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是沙漏型轮廓，上下比较均衡。"
+     "cm": "伊芙琳·舒瓦利耶身高173厘米（5'8\"），50位角色中排第7，算是相当高挑。胸围74.6厘米（UK 23F），明显高于全榜平均。腰围49.9厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（86.3厘米），配上丰满的大腿（52.8厘米）；大腿围排在全榜中段。胸腰比1.49、臀腰比1.73，胸胯平衡度86%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "in": "伊芙琳·舒瓦利耶身高173厘米（5'8\"），50位角色中排第7，算是相当高挑。胸围29.4英寸（UK 23F），明显高于全榜平均。腰围19.6英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（34英寸），配上丰满的大腿（20.8英寸）；大腿围排在全榜中段。胸腰比1.49、臀腰比1.73，胸胯平衡度86%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "read": "身材高挑，胸部偏丰满，腰比较有肉，大腿偏丰满。整体是沙漏型轮廓，上下比较均衡。"
     }
    },
    "measured_outfit": null,
@@ -3417,11 +3540,11 @@
     "hip_stature": 0.502
    },
    "percentiles": {
-    "bust": 0.786,
-    "waist": 0.378,
-    "hip": 0.684,
-    "thigh": 0.74,
-    "stature": 0.684
+    "bust": 0.77,
+    "waist": 0.37,
+    "hip": 0.67,
+    "thigh": 0.724,
+    "stature": 0.67
    },
    "classes": {
     "height": "Tall",
@@ -3437,6 +3560,9 @@
    "confidence_note": "The sheet marks at least one value as approximated or pending.",
    "notes": "TBC",
    "source_page": "Remielle Dan",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "レミエール・ダン",
    "display_zh": "蕾米埃尔·丹",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/remielle.html",
@@ -3444,18 +3570,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/remielle.html",
    "profile_text": {
     "en": {
-     "cm": "Remielle measures 167 cm (5'5.6\"), above the roster average at 16th tallest of 49. Her 72.1 cm bust (UK 21G) is clearly above the roster average. The waist comes in at 42 cm (waist-to-height 0.25), a middling midsection by this set's standards. Below that, wide hips (83.8 cm) pair with thick 51.9 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.72, hip/waist 2.00, bust–hip balance 86%): bust and hip percentile ranks are close. Chart note: TBC.",
-     "in": "Remielle measures 167 cm (5'5.6\"), above the roster average at 16th tallest of 49. Her 28.4 in bust (UK 21G) is clearly above the roster average. The waist comes in at 16.5 in (waist-to-height 0.25), a middling midsection by this set's standards. Below that, wide hips (33 in) pair with thick 20.4 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.72, hip/waist 2.00, bust–hip balance 86%): bust and hip percentile ranks are close. Chart note: TBC.",
+     "cm": "Remielle measures 167 cm (5'5.6\"), above the roster average at 17th tallest of 50. Her 72.1 cm bust (UK 21G) is clearly above the roster average. The waist comes in at 42 cm (waist-to-height 0.25), a middling midsection by this set's standards. Below that, wide hips (83.8 cm) pair with thick 51.9 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.72, hip/waist 2.00, bust–hip balance 86%): bust and hip percentile ranks are close. Chart note: TBC.",
+     "in": "Remielle measures 167 cm (5'5.6\"), above the roster average at 17th tallest of 50. Her 28.4 in bust (UK 21G) is clearly above the roster average. The waist comes in at 16.5 in (waist-to-height 0.25), a middling midsection by this set's standards. Below that, wide hips (33 in) pair with thick 20.4 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.72, hip/waist 2.00, bust–hip balance 86%): bust and hip percentile ranks are close. Chart note: TBC.",
      "read": "tall frame with full bust, thick thighs. Hourglass silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "レミエール・ダンは167cm（5'5.6\"）で、ロスター平均より高めです。身長順では49人中16番目です。バストは72.1cm（UK 21G）で、ロスター平均よりはっきり大きめです。ウエストは42cm（ウエスト対身長0.25）で、このメンバーでは平均的です。そこから広めのヒップ（83.8cm）に、太めの太もも（51.9cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.72、ヒップ/ウエスト2.00、バストとヒップのバランスは86%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：未確定。",
-     "in": "レミエール・ダンは167cm（5'5.6\"）で、ロスター平均より高めです。身長順では49人中16番目です。バストは28.4インチ（UK 21G）で、ロスター平均よりはっきり大きめです。ウエストは16.5インチ（ウエスト対身長0.25）で、このメンバーでは平均的です。そこから広めのヒップ（33インチ）に、太めの太もも（20.4インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.72、ヒップ/ウエスト2.00、バストとヒップのバランスは86%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：未確定。",
+     "cm": "レミエール・ダンは167cm（5'5.6\"）で、ロスター平均より高めです。身長順では50人中17番目です。バストは72.1cm（UK 21G）で、ロスター平均よりはっきり大きめです。ウエストは42cm（ウエスト対身長0.25）で、このメンバーでは平均的です。そこから広めのヒップ（83.8cm）に、太めの太もも（51.9cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.72、ヒップ/ウエスト2.00、バストとヒップのバランスは86%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：未確定。",
+     "in": "レミエール・ダンは167cm（5'5.6\"）で、ロスター平均より高めです。身長順では50人中17番目です。バストは28.4インチ（UK 21G）で、ロスター平均よりはっきり大きめです。ウエストは16.5インチ（ウエスト対身長0.25）で、このメンバーでは平均的です。そこから広めのヒップ（33インチ）に、太めの太もも（20.4インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.72、ヒップ/ウエスト2.00、バストとヒップのバランスは86%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：未確定。",
      "read": "高身長、胸はしっかりめ、太ももは太め。砂時計型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "蕾米埃尔·丹身高167厘米（5'5.6\"），高于全榜平均，在49位角色中排第16。胸围72.1厘米（UK 21G），明显高于全榜平均。腰围42厘米（腰高比0.25），在这批角色里属于中等。往下是较宽的臀围（83.8厘米），配上丰满的大腿（51.9厘米）；大腿围排在全榜中段。胸腰比1.72、臀腰比2.00，胸胯平衡度86%。整体是沙漏型，胸围与臀围在全榜中的排名接近。榜单注记：待确认。",
-     "in": "蕾米埃尔·丹身高167厘米（5'5.6\"），高于全榜平均，在49位角色中排第16。胸围28.4英寸（UK 21G），明显高于全榜平均。腰围16.5英寸（腰高比0.25），在这批角色里属于中等。往下是较宽的臀围（33英寸），配上丰满的大腿（20.4英寸）；大腿围排在全榜中段。胸腰比1.72、臀腰比2.00，胸胯平衡度86%。整体是沙漏型，胸围与臀围在全榜中的排名接近。榜单注记：待确认。",
+     "cm": "蕾米埃尔·丹身高167厘米（5'5.6\"），高于全榜平均，在50位角色中排第17。胸围72.1厘米（UK 21G），明显高于全榜平均。腰围42厘米（腰高比0.25），在这批角色里属于中等。往下是较宽的臀围（83.8厘米），配上丰满的大腿（51.9厘米）；大腿围排在全榜中段。胸腰比1.72、臀腰比2.00，胸胯平衡度86%。整体是沙漏型，胸围与臀围在全榜中的排名接近。榜单注记：待确认。",
+     "in": "蕾米埃尔·丹身高167厘米（5'5.6\"），高于全榜平均，在50位角色中排第17。胸围28.4英寸（UK 21G），明显高于全榜平均。腰围16.5英寸（腰高比0.25），在这批角色里属于中等。往下是较宽的臀围（33英寸），配上丰满的大腿（20.4英寸）；大腿围排在全榜中段。胸腰比1.72、臀腰比2.00，胸胯平衡度86%。整体是沙漏型，胸围与臀围在全榜中的排名接近。榜单注记：待确认。",
      "read": "身材高挑，胸部偏丰满，大腿偏丰满。整体是沙漏型轮廓，上下比较均衡。"
     }
    },
@@ -3506,11 +3632,11 @@
     "hip_stature": 0.542
    },
    "percentiles": {
-    "bust": 0.827,
-    "waist": 0.786,
-    "hip": 0.969,
-    "thigh": 0.896,
-    "stature": 0.857
+    "bust": 0.81,
+    "waist": 0.77,
+    "hip": 0.97,
+    "thigh": 0.878,
+    "stature": 0.84
    },
    "classes": {
     "height": "Tall",
@@ -3526,6 +3652,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Pulchra Fellini",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "プルクラ・フェリーニ",
    "display_zh": "波可娜·费雷尼",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/pulchra.html",
@@ -3533,18 +3662,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/pulchra.html",
    "profile_text": {
     "en": {
-     "cm": "Pulchra is one of the taller figures here, 6th tallest of 49, at 173 cm (5'8\"). Her 73.8 cm bust (UK 22FF) is clearly above the roster average. The waist comes in at 47.4 cm (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (93.8 cm) pair with thick 53.1 cm thighs (top 10% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.56, hip/waist 1.98, bust–hip balance 79%): bust and hip percentile ranks are close.",
-     "in": "Pulchra is one of the taller figures here, 6th tallest of 49, at 173 cm (5'8\"). Her 29.1 in bust (UK 22FF) is clearly above the roster average. The waist comes in at 18.7 in (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (36.9 in) pair with thick 20.9 in thighs (top 10% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.56, hip/waist 1.98, bust–hip balance 79%): bust and hip percentile ranks are close.",
+     "cm": "Pulchra is one of the taller figures here, 7th tallest of 50, at 173 cm (5'8\"). Her 73.8 cm bust (UK 22FF) is clearly above the roster average. The waist comes in at 47.4 cm (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (93.8 cm) pair with thick 53.1 cm thighs (top 12% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.56, hip/waist 1.98, bust–hip balance 79%): bust and hip percentile ranks are close.",
+     "in": "Pulchra is one of the taller figures here, 7th tallest of 50, at 173 cm (5'8\"). Her 29.1 in bust (UK 22FF) is clearly above the roster average. The waist comes in at 18.7 in (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (36.9 in) pair with thick 20.9 in thighs (top 12% of the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.56, hip/waist 1.98, bust–hip balance 79%): bust and hip percentile ranks are close.",
      "read": "tall frame with full bust, full waist, wide hips, thick thighs. Balanced silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "プルクラ・フェリーニは173cm（5'8\"）。49人中6番目で、かなり背が高いほうです。バストは73.8cm（UK 22FF）で、ロスター平均よりはっきり大きめです。ウエストは47.4cm（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（93.8cm）に、太めの太もも（53.1cm）が続きます。太もも周囲はロスター上位10%です。バスト/ウエスト1.56、ヒップ/ウエスト1.98、バストとヒップのバランスは79%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "プルクラ・フェリーニは173cm（5'8\"）。49人中6番目で、かなり背が高いほうです。バストは29.1インチ（UK 22FF）で、ロスター平均よりはっきり大きめです。ウエストは18.7インチ（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（36.9インチ）に、太めの太もも（20.9インチ）が続きます。太もも周囲はロスター上位10%です。バスト/ウエスト1.56、ヒップ/ウエスト1.98、バストとヒップのバランスは79%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "プルクラ・フェリーニは173cm（5'8\"）。50人中7番目で、かなり背が高いほうです。バストは73.8cm（UK 22FF）で、ロスター平均よりはっきり大きめです。ウエストは47.4cm（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（93.8cm）に、太めの太もも（53.1cm）が続きます。太もも周囲はロスター上位12%です。バスト/ウエスト1.56、ヒップ/ウエスト1.98、バストとヒップのバランスは79%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "プルクラ・フェリーニは173cm（5'8\"）。50人中7番目で、かなり背が高いほうです。バストは29.1インチ（UK 22FF）で、ロスター平均よりはっきり大きめです。ウエストは18.7インチ（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（36.9インチ）に、太めの太もも（20.9インチ）が続きます。太もも周囲はロスター上位12%です。バスト/ウエスト1.56、ヒップ/ウエスト1.98、バストとヒップのバランスは79%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。バランス型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "波可娜·费雷尼身高173厘米（5'8\"），49位角色中排第6，算是相当高挑。胸围73.8厘米（UK 22FF），明显高于全榜平均。腰围47.4厘米（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（93.8厘米），配上丰满的大腿（53.1厘米）；大腿围排在全榜前10%。胸腰比1.56、臀腰比1.98，胸胯平衡度79%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
-     "in": "波可娜·费雷尼身高173厘米（5'8\"），49位角色中排第6，算是相当高挑。胸围29.1英寸（UK 22FF），明显高于全榜平均。腰围18.7英寸（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（36.9英寸），配上丰满的大腿（20.9英寸）；大腿围排在全榜前10%。胸腰比1.56、臀腰比1.98，胸胯平衡度79%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "cm": "波可娜·费雷尼身高173厘米（5'8\"），50位角色中排第7，算是相当高挑。胸围73.8厘米（UK 22FF），明显高于全榜平均。腰围47.4厘米（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（93.8厘米），配上丰满的大腿（53.1厘米）；大腿围排在全榜前12%。胸腰比1.56、臀腰比1.98，胸胯平衡度79%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "in": "波可娜·费雷尼身高173厘米（5'8\"），50位角色中排第7，算是相当高挑。胸围29.1英寸（UK 22FF），明显高于全榜平均。腰围18.7英寸（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（36.9英寸），配上丰满的大腿（20.9英寸）；大腿围排在全榜前12%。胸腰比1.56、臀腰比1.98，胸胯平衡度79%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
      "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是匀称型轮廓，上下比较均衡。"
     }
    },
@@ -3587,11 +3716,11 @@
     "hip_stature": 0.511
    },
    "percentiles": {
-    "bust": 0.867,
-    "waist": 0.888,
-    "hip": 0.765,
-    "thigh": 0.854,
-    "stature": 0.796
+    "bust": 0.85,
+    "waist": 0.87,
+    "hip": 0.75,
+    "thigh": 0.837,
+    "stature": 0.78
    },
    "classes": {
     "height": "Tall",
@@ -3607,6 +3736,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Yixuan",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "儀玄",
    "display_zh": "仪玄",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/yi_xuan.html",
@@ -3614,18 +3746,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/yi_xuan.html",
    "profile_text": {
     "en": {
-     "cm": "Yi Xuan measures 172 cm (5'7.6\"), above the roster average at 10th tallest of 49. Her 75.1 cm bust (UK 22G) is among the largest bust measurements on the chart. The waist comes in at 49.5 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (87.9 cm) pair with thick 52.9 cm thighs (top 15% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.52, hip/waist 1.78, bust–hip balance 85%): bust and hip percentile ranks are close.",
-     "in": "Yi Xuan measures 172 cm (5'7.6\"), above the roster average at 10th tallest of 49. Her 29.6 in bust (UK 22G) is among the largest bust measurements on the chart. The waist comes in at 19.5 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (34.6 in) pair with thick 20.8 in thighs (top 15% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.52, hip/waist 1.78, bust–hip balance 85%): bust and hip percentile ranks are close.",
+     "cm": "Yi Xuan measures 172 cm (5'7.6\"), above the roster average at 11th tallest of 50. Her 75.1 cm bust (UK 22G) is among the largest bust measurements on the chart. The waist comes in at 49.5 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (87.9 cm) pair with thick 52.9 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.52, hip/waist 1.78, bust–hip balance 85%): bust and hip percentile ranks are close.",
+     "in": "Yi Xuan measures 172 cm (5'7.6\"), above the roster average at 11th tallest of 50. Her 29.6 in bust (UK 22G) is among the largest bust measurements on the chart. The waist comes in at 19.5 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (34.6 in) pair with thick 20.8 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.52, hip/waist 1.78, bust–hip balance 85%): bust and hip percentile ranks are close.",
      "read": "tall frame with full bust, full waist, wide hips, thick thighs. Hourglass silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "儀玄は172cm（5'7.6\"）で、ロスター平均より高めです。身長順では49人中10番目です。バストは75.1cm（UK 22G）で、チャートでもトップクラスのボリュームです。ウエストは49.5cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（87.9cm）に、太めの太もも（52.9cm）が続きます。太もも周囲はロスター上位15%です。バスト/ウエスト1.52、ヒップ/ウエスト1.78、バストとヒップのバランスは85%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "儀玄は172cm（5'7.6\"）で、ロスター平均より高めです。身長順では49人中10番目です。バストは29.6インチ（UK 22G）で、チャートでもトップクラスのボリュームです。ウエストは19.5インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（34.6インチ）に、太めの太もも（20.8インチ）が続きます。太もも周囲はロスター上位15%です。バスト/ウエスト1.52、ヒップ/ウエスト1.78、バストとヒップのバランスは85%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "儀玄は172cm（5'7.6\"）で、ロスター平均より高めです。身長順では50人中11番目です。バストは75.1cm（UK 22G）で、チャートでもトップクラスのボリュームです。ウエストは49.5cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（87.9cm）に、太めの太もも（52.9cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.52、ヒップ/ウエスト1.78、バストとヒップのバランスは85%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "儀玄は172cm（5'7.6\"）で、ロスター平均より高めです。身長順では50人中11番目です。バストは29.6インチ（UK 22G）で、チャートでもトップクラスのボリュームです。ウエストは19.5インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（34.6インチ）に、太めの太もも（20.8インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.52、ヒップ/ウエスト1.78、バストとヒップのバランスは85%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。砂時計型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "仪玄身高172厘米（5'7.6\"），高于全榜平均，在49位角色中排第10。胸围75.1厘米（UK 22G），在全榜里属于非常抢眼的尺寸。腰围49.5厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（87.9厘米），配上丰满的大腿（52.9厘米）；大腿围排在全榜前15%。胸腰比1.52、臀腰比1.78，胸胯平衡度85%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
-     "in": "仪玄身高172厘米（5'7.6\"），高于全榜平均，在49位角色中排第10。胸围29.6英寸（UK 22G），在全榜里属于非常抢眼的尺寸。腰围19.5英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（34.6英寸），配上丰满的大腿（20.8英寸）；大腿围排在全榜前15%。胸腰比1.52、臀腰比1.78，胸胯平衡度85%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "cm": "仪玄身高172厘米（5'7.6\"），高于全榜平均，在50位角色中排第11。胸围75.1厘米（UK 22G），在全榜里属于非常抢眼的尺寸。腰围49.5厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（87.9厘米），配上丰满的大腿（52.9厘米）；大腿围排在全榜中段。胸腰比1.52、臀腰比1.78，胸胯平衡度85%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "in": "仪玄身高172厘米（5'7.6\"），高于全榜平均，在50位角色中排第11。胸围29.6英寸（UK 22G），在全榜里属于非常抢眼的尺寸。腰围19.5英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（34.6英寸），配上丰满的大腿（20.8英寸）；大腿围排在全榜中段。胸腰比1.52、臀腰比1.78，胸胯平衡度85%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
      "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是沙漏型轮廓，上下比较均衡。"
     }
    },
@@ -3672,11 +3804,11 @@
     "hip_stature": 0.54
    },
    "percentiles": {
-    "bust": 0.949,
-    "waist": 0.929,
-    "hip": 0.888,
-    "thigh": 0.677,
-    "stature": 0.704
+    "bust": 0.93,
+    "waist": 0.91,
+    "hip": 0.87,
+    "thigh": 0.663,
+    "stature": 0.69
    },
    "classes": {
     "height": "Tall",
@@ -3692,6 +3824,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Tsukishiro Yanagi",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "月城柳",
    "display_zh": "月城柳",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/yanagi.html",
@@ -3699,18 +3834,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/yanagi.html",
    "profile_text": {
     "en": {
-     "cm": "Yanagi measures 169 cm (5'6.4\"), above the roster average at 15th tallest of 49. Her 79 cm bust (UK 23G) is among the largest bust measurements on the chart. The waist comes in at 50.5 cm (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (91.2 cm) pair with thick 51.2 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.56, hip/waist 1.81, bust–hip balance 87%): bust and hip percentile ranks are close.",
-     "in": "Yanagi measures 169 cm (5'6.4\"), above the roster average at 15th tallest of 49. Her 31.1 in bust (UK 23G) is among the largest bust measurements on the chart. The waist comes in at 19.9 in (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (35.9 in) pair with thick 20.2 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.56, hip/waist 1.81, bust–hip balance 87%): bust and hip percentile ranks are close.",
+     "cm": "Yanagi measures 169 cm (5'6.4\"), above the roster average at 16th tallest of 50. Her 79 cm bust (UK 23G) is among the largest bust measurements on the chart. The waist comes in at 50.5 cm (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (91.2 cm) pair with thick 51.2 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.56, hip/waist 1.81, bust–hip balance 87%): bust and hip percentile ranks are close.",
+     "in": "Yanagi measures 169 cm (5'6.4\"), above the roster average at 16th tallest of 50. Her 31.1 in bust (UK 23G) is among the largest bust measurements on the chart. The waist comes in at 19.9 in (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (35.9 in) pair with thick 20.2 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.56, hip/waist 1.81, bust–hip balance 87%): bust and hip percentile ranks are close.",
      "read": "tall frame with full bust, full waist, wide hips, thick thighs. Hourglass silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "月城柳は169cm（5'6.4\"）で、ロスター平均より高めです。身長順では49人中15番目です。バストは79cm（UK 23G）で、チャートでもトップクラスのボリュームです。ウエストは50.5cm（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（91.2cm）に、太めの太もも（51.2cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.56、ヒップ/ウエスト1.81、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "月城柳は169cm（5'6.4\"）で、ロスター平均より高めです。身長順では49人中15番目です。バストは31.1インチ（UK 23G）で、チャートでもトップクラスのボリュームです。ウエストは19.9インチ（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35.9インチ）に、太めの太もも（20.2インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.56、ヒップ/ウエスト1.81、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "月城柳は169cm（5'6.4\"）で、ロスター平均より高めです。身長順では50人中16番目です。バストは79cm（UK 23G）で、チャートでもトップクラスのボリュームです。ウエストは50.5cm（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（91.2cm）に、太めの太もも（51.2cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.56、ヒップ/ウエスト1.81、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "月城柳は169cm（5'6.4\"）で、ロスター平均より高めです。身長順では50人中16番目です。バストは31.1インチ（UK 23G）で、チャートでもトップクラスのボリュームです。ウエストは19.9インチ（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（35.9インチ）に、太めの太もも（20.2インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.56、ヒップ/ウエスト1.81、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。砂時計型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "月城柳身高169厘米（5'6.4\"），高于全榜平均，在49位角色中排第15。胸围79厘米（UK 23G），在全榜里属于非常抢眼的尺寸。腰围50.5厘米（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（91.2厘米），配上丰满的大腿（51.2厘米）；大腿围排在全榜中段。胸腰比1.56、臀腰比1.81，胸胯平衡度87%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
-     "in": "月城柳身高169厘米（5'6.4\"），高于全榜平均，在49位角色中排第15。胸围31.1英寸（UK 23G），在全榜里属于非常抢眼的尺寸。腰围19.9英寸（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（35.9英寸），配上丰满的大腿（20.2英寸）；大腿围排在全榜中段。胸腰比1.56、臀腰比1.81，胸胯平衡度87%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "cm": "月城柳身高169厘米（5'6.4\"），高于全榜平均，在50位角色中排第16。胸围79厘米（UK 23G），在全榜里属于非常抢眼的尺寸。腰围50.5厘米（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（91.2厘米），配上丰满的大腿（51.2厘米）；大腿围排在全榜中段。胸腰比1.56、臀腰比1.81，胸胯平衡度87%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "in": "月城柳身高169厘米（5'6.4\"），高于全榜平均，在50位角色中排第16。胸围31.1英寸（UK 23G），在全榜里属于非常抢眼的尺寸。腰围19.9英寸（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（35.9英寸），配上丰满的大腿（20.2英寸）；大腿围排在全榜中段。胸腰比1.56、臀腰比1.81，胸胯平衡度87%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
      "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是沙漏型轮廓，上下比较均衡。"
     }
    },
@@ -3752,11 +3887,11 @@
     "hip_stature": 0.538
    },
    "percentiles": {
-    "bust": 0.888,
-    "waist": 0.857,
-    "hip": 0.908,
-    "thigh": 0.802,
-    "stature": 0.735
+    "bust": 0.87,
+    "waist": 0.84,
+    "hip": 0.89,
+    "thigh": 0.786,
+    "stature": 0.72
    },
    "classes": {
     "height": "Tall",
@@ -3772,6 +3907,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Grace Howard",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "グレース・ハワード",
    "display_zh": "格莉丝·霍华德",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/grace.html",
@@ -3779,18 +3917,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/grace.html",
    "profile_text": {
     "en": {
-     "cm": "Grace measures 170 cm (5'6.8\"), above the roster average at 13th tallest of 49. Her 76.4 cm bust (UK 21GG) is among the largest bust measurements on the chart. The waist comes in at 49.3 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (91.4 cm) pair with thick 52.5 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.55, hip/waist 1.85, bust–hip balance 84%): bust and hip percentile ranks are close.",
-     "in": "Grace measures 170 cm (5'6.8\"), above the roster average at 13th tallest of 49. Her 30.1 in bust (UK 21GG) is among the largest bust measurements on the chart. The waist comes in at 19.4 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (36 in) pair with thick 20.7 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.55, hip/waist 1.85, bust–hip balance 84%): bust and hip percentile ranks are close.",
+     "cm": "Grace measures 170 cm (5'6.8\"), above the roster average at 14th tallest of 50. Her 76.4 cm bust (UK 21GG) is among the largest bust measurements on the chart. The waist comes in at 49.3 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (91.4 cm) pair with thick 52.5 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.55, hip/waist 1.85, bust–hip balance 84%): bust and hip percentile ranks are close.",
+     "in": "Grace measures 170 cm (5'6.8\"), above the roster average at 14th tallest of 50. Her 30.1 in bust (UK 21GG) is among the largest bust measurements on the chart. The waist comes in at 19.4 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (36 in) pair with thick 20.7 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as a balanced silhouette (bust/waist 1.55, hip/waist 1.85, bust–hip balance 84%): bust and hip percentile ranks are close.",
      "read": "tall frame with full bust, full waist, wide hips, thick thighs. Balanced silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "グレース・ハワードは170cm（5'6.8\"）で、ロスター平均より高めです。身長順では49人中13番目です。バストは76.4cm（UK 21GG）で、チャートでもトップクラスのボリュームです。ウエストは49.3cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（91.4cm）に、太めの太もも（52.5cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.55、ヒップ/ウエスト1.85、バストとヒップのバランスは84%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "グレース・ハワードは170cm（5'6.8\"）で、ロスター平均より高めです。身長順では49人中13番目です。バストは30.1インチ（UK 21GG）で、チャートでもトップクラスのボリュームです。ウエストは19.4インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（36インチ）に、太めの太もも（20.7インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.55、ヒップ/ウエスト1.85、バストとヒップのバランスは84%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "グレース・ハワードは170cm（5'6.8\"）で、ロスター平均より高めです。身長順では50人中14番目です。バストは76.4cm（UK 21GG）で、チャートでもトップクラスのボリュームです。ウエストは49.3cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（91.4cm）に、太めの太もも（52.5cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.55、ヒップ/ウエスト1.85、バストとヒップのバランスは84%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "グレース・ハワードは170cm（5'6.8\"）で、ロスター平均より高めです。身長順では50人中14番目です。バストは30.1インチ（UK 21GG）で、チャートでもトップクラスのボリュームです。ウエストは19.4インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（36インチ）に、太めの太もも（20.7インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.55、ヒップ/ウエスト1.85、バストとヒップのバランスは84%。全体はバランス型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。バランス型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "格莉丝·霍华德身高170厘米（5'6.8\"），高于全榜平均，在49位角色中排第13。胸围76.4厘米（UK 21GG），在全榜里属于非常抢眼的尺寸。腰围49.3厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（91.4厘米），配上丰满的大腿（52.5厘米）；大腿围排在全榜中段。胸腰比1.55、臀腰比1.85，胸胯平衡度84%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
-     "in": "格莉丝·霍华德身高170厘米（5'6.8\"），高于全榜平均，在49位角色中排第13。胸围30.1英寸（UK 21GG），在全榜里属于非常抢眼的尺寸。腰围19.4英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（36英寸），配上丰满的大腿（20.7英寸）；大腿围排在全榜中段。胸腰比1.55、臀腰比1.85，胸胯平衡度84%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "cm": "格莉丝·霍华德身高170厘米（5'6.8\"），高于全榜平均，在50位角色中排第14。胸围76.4厘米（UK 21GG），在全榜里属于非常抢眼的尺寸。腰围49.3厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（91.4厘米），配上丰满的大腿（52.5厘米）；大腿围排在全榜中段。胸腰比1.55、臀腰比1.85，胸胯平衡度84%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
+     "in": "格莉丝·霍华德身高170厘米（5'6.8\"），高于全榜平均，在50位角色中排第14。胸围30.1英寸（UK 21GG），在全榜里属于非常抢眼的尺寸。腰围19.4英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（36英寸），配上丰满的大腿（20.7英寸）；大腿围排在全榜中段。胸腰比1.55、臀腰比1.85，胸胯平衡度84%。整体是匀称型，胸围与臀围在全榜中的排名接近。",
      "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是匀称型轮廓，上下比较均衡。"
     }
    },
@@ -3833,16 +3971,16 @@
     "hip_stature": 0.511
    },
    "percentiles": {
-    "bust": 0.908,
-    "waist": 0.663,
-    "hip": 0.765,
-    "thigh": 0.76,
-    "stature": 0.796
+    "bust": 0.89,
+    "waist": 0.65,
+    "hip": 0.75,
+    "thigh": 0.745,
+    "stature": 0.78
    },
    "classes": {
     "height": "Tall",
     "cup": "GG+",
-    "waist": "high",
+    "waist": "avg",
     "hip": "high",
     "thigh": "high",
     "thigh_hand_pinned": true,
@@ -3853,6 +3991,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Velina Airgid",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "ヴェリナ・エガード",
    "display_zh": "维琳娜·艾嘉德",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/velina.html",
@@ -3860,18 +4001,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/velina.html",
    "profile_text": {
     "en": {
-     "cm": "Velina measures 172 cm (5'7.6\"), above the roster average at 10th tallest of 49. Her 77.5 cm bust (UK 21H) is among the largest bust measurements on the chart. The waist comes in at 45.7 cm (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (87.9 cm) pair with thick 52.1 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.70, hip/waist 1.92, bust–hip balance 88%): bust and hip percentile ranks are close.",
-     "in": "Velina measures 172 cm (5'7.6\"), above the roster average at 10th tallest of 49. Her 30.5 in bust (UK 21H) is among the largest bust measurements on the chart. The waist comes in at 18 in (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (34.6 in) pair with thick 20.5 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.70, hip/waist 1.92, bust–hip balance 88%): bust and hip percentile ranks are close.",
+     "cm": "Velina measures 172 cm (5'7.6\"), above the roster average at 11th tallest of 50. Her 77.5 cm bust (UK 21H) is among the largest bust measurements on the chart. The waist comes in at 45.7 cm (waist-to-height 0.27), a middling midsection by this set's standards. Below that, wide hips (87.9 cm) pair with thick 52.1 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.70, hip/waist 1.92, bust–hip balance 88%): bust and hip percentile ranks are close.",
+     "in": "Velina measures 172 cm (5'7.6\"), above the roster average at 11th tallest of 50. Her 30.5 in bust (UK 21H) is among the largest bust measurements on the chart. The waist comes in at 18 in (waist-to-height 0.27), a middling midsection by this set's standards. Below that, wide hips (34.6 in) pair with thick 20.5 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.70, hip/waist 1.92, bust–hip balance 88%): bust and hip percentile ranks are close.",
      "read": "tall frame with full bust, wide hips, thick thighs. Hourglass silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "ヴェリナ・エガードは172cm（5'7.6\"）で、ロスター平均より高めです。身長順では49人中10番目です。バストは77.5cm（UK 21H）で、チャートでもトップクラスのボリュームです。ウエストは45.7cm（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（87.9cm）に、太めの太もも（52.1cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.70、ヒップ/ウエスト1.92、バストとヒップのバランスは88%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "ヴェリナ・エガードは172cm（5'7.6\"）で、ロスター平均より高めです。身長順では49人中10番目です。バストは30.5インチ（UK 21H）で、チャートでもトップクラスのボリュームです。ウエストは18インチ（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（34.6インチ）に、太めの太もも（20.5インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.70、ヒップ/ウエスト1.92、バストとヒップのバランスは88%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "ヴェリナ・エガードは172cm（5'7.6\"）で、ロスター平均より高めです。身長順では50人中11番目です。バストは77.5cm（UK 21H）で、チャートでもトップクラスのボリュームです。ウエストは45.7cm（ウエスト対身長0.27）で、このメンバーでは平均的です。そこから広めのヒップ（87.9cm）に、太めの太もも（52.1cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.70、ヒップ/ウエスト1.92、バストとヒップのバランスは88%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "ヴェリナ・エガードは172cm（5'7.6\"）で、ロスター平均より高めです。身長順では50人中11番目です。バストは30.5インチ（UK 21H）で、チャートでもトップクラスのボリュームです。ウエストは18インチ（ウエスト対身長0.27）で、このメンバーでは平均的です。そこから広めのヒップ（34.6インチ）に、太めの太もも（20.5インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.70、ヒップ/ウエスト1.92、バストとヒップのバランスは88%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "高身長、胸はしっかりめ、ヒップは広め、太ももは太め。砂時計型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "维琳娜·艾嘉德身高172厘米（5'7.6\"），高于全榜平均，在49位角色中排第10。胸围77.5厘米（UK 21H），在全榜里属于非常抢眼的尺寸。腰围45.7厘米（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（87.9厘米），配上丰满的大腿（52.1厘米）；大腿围排在全榜中段。胸腰比1.70、臀腰比1.92，胸胯平衡度88%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
-     "in": "维琳娜·艾嘉德身高172厘米（5'7.6\"），高于全榜平均，在49位角色中排第10。胸围30.5英寸（UK 21H），在全榜里属于非常抢眼的尺寸。腰围18英寸（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（34.6英寸），配上丰满的大腿（20.5英寸）；大腿围排在全榜中段。胸腰比1.70、臀腰比1.92，胸胯平衡度88%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "cm": "维琳娜·艾嘉德身高172厘米（5'7.6\"），高于全榜平均，在50位角色中排第11。胸围77.5厘米（UK 21H），在全榜里属于非常抢眼的尺寸。腰围45.7厘米（腰高比0.27），在这批角色里属于中等。往下是较宽的臀围（87.9厘米），配上丰满的大腿（52.1厘米）；大腿围排在全榜中段。胸腰比1.70、臀腰比1.92，胸胯平衡度88%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "in": "维琳娜·艾嘉德身高172厘米（5'7.6\"），高于全榜平均，在50位角色中排第11。胸围30.5英寸（UK 21H），在全榜里属于非常抢眼的尺寸。腰围18英寸（腰高比0.27），在这批角色里属于中等。往下是较宽的臀围（34.6英寸），配上丰满的大腿（20.5英寸）；大腿围排在全榜中段。胸腰比1.70、臀腰比1.92，胸胯平衡度88%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
      "read": "身材高挑，胸部偏丰满，胯部较宽，大腿偏丰满。整体是沙漏型轮廓，上下比较均衡。"
     }
    },
@@ -3918,11 +4059,11 @@
     "hip_stature": 0.521
    },
    "percentiles": {
-    "bust": 0.929,
-    "waist": 0.99,
-    "hip": 0.929,
-    "thigh": 0.948,
-    "stature": 0.98
+    "bust": 0.91,
+    "waist": 0.97,
+    "hip": 0.91,
+    "thigh": 0.929,
+    "stature": 0.96
    },
    "classes": {
     "height": "Tall",
@@ -3938,6 +4079,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Caesar King",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "キング・シーザー",
    "display_zh": "凯撒·金",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/caesar.html",
@@ -3945,18 +4089,18 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/caesar.html",
    "profile_text": {
     "en": {
-     "cm": "Caesar is among the tallest figures on the chart at 176 cm (5'9.2\"). Her 78.3 cm bust (UK 23G) is among the largest bust measurements on the chart. The waist comes in at 51.9 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (91.7 cm) pair with thick 53.8 cm thighs (top 5% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.51, hip/waist 1.77, bust–hip balance 85%): bust and hip percentile ranks are close.",
-     "in": "Caesar is among the tallest figures on the chart at 176 cm (5'9.2\"). Her 30.8 in bust (UK 23G) is among the largest bust measurements on the chart. The waist comes in at 20.4 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (36.1 in) pair with thick 21.2 in thighs (top 5% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.51, hip/waist 1.77, bust–hip balance 85%): bust and hip percentile ranks are close.",
+     "cm": "Caesar is among the tallest figures on the chart at 176 cm (5'9.2\"). Her 78.3 cm bust (UK 23G) is among the largest bust measurements on the chart. The waist comes in at 51.9 cm (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (91.7 cm) pair with thick 53.8 cm thighs (top 7% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.51, hip/waist 1.77, bust–hip balance 85%): bust and hip percentile ranks are close.",
+     "in": "Caesar is among the tallest figures on the chart at 176 cm (5'9.2\"). Her 30.8 in bust (UK 23G) is among the largest bust measurements on the chart. The waist comes in at 20.4 in (waist-to-height 0.29), a fuller midsection than most of the roster. Below that, wide hips (36.1 in) pair with thick 21.2 in thighs (top 7% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.51, hip/waist 1.77, bust–hip balance 85%): bust and hip percentile ranks are close.",
      "read": "tall frame with full bust, full waist, wide hips, thick thighs. Hourglass silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "キング・シーザーは176cm（5'9.2\"）で、チャートでもトップクラスの高さです。バストは78.3cm（UK 23G）で、チャートでもトップクラスのボリュームです。ウエストは51.9cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（91.7cm）に、太めの太もも（53.8cm）が続きます。太もも周囲はロスター上位5%です。バスト/ウエスト1.51、ヒップ/ウエスト1.77、バストとヒップのバランスは85%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "キング・シーザーは176cm（5'9.2\"）で、チャートでもトップクラスの高さです。バストは30.8インチ（UK 23G）で、チャートでもトップクラスのボリュームです。ウエストは20.4インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（36.1インチ）に、太めの太もも（21.2インチ）が続きます。太もも周囲はロスター上位5%です。バスト/ウエスト1.51、ヒップ/ウエスト1.77、バストとヒップのバランスは85%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "キング・シーザーは176cm（5'9.2\"）で、チャートでもトップクラスの高さです。バストは78.3cm（UK 23G）で、チャートでもトップクラスのボリュームです。ウエストは51.9cm（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（91.7cm）に、太めの太もも（53.8cm）が続きます。太もも周囲はロスター上位7%です。バスト/ウエスト1.51、ヒップ/ウエスト1.77、バストとヒップのバランスは85%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "キング・シーザーは176cm（5'9.2\"）で、チャートでもトップクラスの高さです。バストは30.8インチ（UK 23G）で、チャートでもトップクラスのボリュームです。ウエストは20.4インチ（ウエスト対身長0.29）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（36.1インチ）に、太めの太もも（21.2インチ）が続きます。太もも周囲はロスター上位7%です。バスト/ウエスト1.51、ヒップ/ウエスト1.77、バストとヒップのバランスは85%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。砂時計型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "凯撒·金身高176厘米（5'9.2\"），在全榜里属于最高的一档。胸围78.3厘米（UK 23G），在全榜里属于非常抢眼的尺寸。腰围51.9厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（91.7厘米），配上丰满的大腿（53.8厘米）；大腿围排在全榜前5%。胸腰比1.51、臀腰比1.77，胸胯平衡度85%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
-     "in": "凯撒·金身高176厘米（5'9.2\"），在全榜里属于最高的一档。胸围30.8英寸（UK 23G），在全榜里属于非常抢眼的尺寸。腰围20.4英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（36.1英寸），配上丰满的大腿（21.2英寸）；大腿围排在全榜前5%。胸腰比1.51、臀腰比1.77，胸胯平衡度85%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "cm": "凯撒·金身高176厘米（5'9.2\"），在全榜里属于最高的一档。胸围78.3厘米（UK 23G），在全榜里属于非常抢眼的尺寸。腰围51.9厘米（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（91.7厘米），配上丰满的大腿（53.8厘米）；大腿围排在全榜前7%。胸腰比1.51、臀腰比1.77，胸胯平衡度85%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "in": "凯撒·金身高176厘米（5'9.2\"），在全榜里属于最高的一档。胸围30.8英寸（UK 23G），在全榜里属于非常抢眼的尺寸。腰围20.4英寸（腰高比0.29），比大多数角色更有肉感。往下是较宽的臀围（36.1英寸），配上丰满的大腿（21.2英寸）；大腿围排在全榜前7%。胸腰比1.51、臀腰比1.77，胸胯平衡度85%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
      "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是沙漏型轮廓，上下比较均衡。"
     }
    },
@@ -3998,11 +4142,11 @@
     "hip_stature": 0.511
    },
    "percentiles": {
-    "bust": 0.969,
-    "waist": 0.704,
-    "hip": 0.724,
-    "thigh": 0.719,
-    "stature": 0.765
+    "bust": 0.95,
+    "waist": 0.69,
+    "hip": 0.71,
+    "thigh": 0.704,
+    "stature": 0.75
    },
    "classes": {
     "height": "Tall",
@@ -4018,6 +4162,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Yidhari Murphy",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "イドリー",
    "display_zh": "伊德海莉",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/yidhari.html",
@@ -4025,19 +4172,19 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/yidhari.html",
    "profile_text": {
     "en": {
-     "cm": "Yidhari measures 171 cm (5'7.2\"), above the roster average at 12th tallest of 49. Her 79.3 cm bust (UK 22H) is among the largest bust measurements on the chart. The waist comes in at 46 cm (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (87.3 cm) pair with thick 51.5 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.72, hip/waist 1.90, bust–hip balance 91%): the bust ranks higher in the roster than the hips.",
-     "in": "Yidhari measures 171 cm (5'7.2\"), above the roster average at 12th tallest of 49. Her 31.2 in bust (UK 22H) is among the largest bust measurements on the chart. The waist comes in at 18.1 in (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (34.4 in) pair with thick 20.3 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.72, hip/waist 1.90, bust–hip balance 91%): the bust ranks higher in the roster than the hips.",
-     "read": "tall frame with full bust, full waist, wide hips, thick thighs. Hourglass silhouette, top-heavy proportions."
+     "cm": "Yidhari measures 171 cm (5'7.2\"), above the roster average at 13th tallest of 50. Her 79.3 cm bust (UK 22H) is among the largest bust measurements on the chart. The waist comes in at 46 cm (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (87.3 cm) pair with thick 51.5 cm thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.72, hip/waist 1.90, bust–hip balance 91%): the bust ranks higher in the roster than the hips.",
+     "in": "Yidhari measures 171 cm (5'7.2\"), above the roster average at 13th tallest of 50. Her 31.2 in bust (UK 22H) is among the largest bust measurements on the chart. The waist comes in at 18.1 in (waist-to-height 0.27), a fuller midsection than most of the roster. Below that, wide hips (34.4 in) pair with thick 20.3 in thighs (mid-pack for the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.72, hip/waist 1.90, bust–hip balance 91%): the bust ranks higher in the roster than the hips.",
+     "read": "tall frame with full bust, wide hips, thick thighs. Hourglass silhouette, top-heavy proportions."
     },
     "ja": {
-     "cm": "イドリーは171cm（5'7.2\"）で、ロスター平均より高めです。身長順では49人中12番目です。バストは79.3cm（UK 22H）で、チャートでもトップクラスのボリュームです。ウエストは46cm（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（87.3cm）に、太めの太もも（51.5cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.72、ヒップ/ウエスト1.90、バストとヒップのバランスは91%。全体は砂時計型のシルエットです。ロスター内の順位では、バストがヒップより上位です。",
-     "in": "イドリーは171cm（5'7.2\"）で、ロスター平均より高めです。身長順では49人中12番目です。バストは31.2インチ（UK 22H）で、チャートでもトップクラスのボリュームです。ウエストは18.1インチ（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（34.4インチ）に、太めの太もも（20.3インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.72、ヒップ/ウエスト1.90、バストとヒップのバランスは91%。全体は砂時計型のシルエットです。ロスター内の順位では、バストがヒップより上位です。",
-     "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。砂時計型シルエットで、やや上半身寄り。"
+     "cm": "イドリーは171cm（5'7.2\"）で、ロスター平均より高めです。身長順では50人中13番目です。バストは79.3cm（UK 22H）で、チャートでもトップクラスのボリュームです。ウエストは46cm（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（87.3cm）に、太めの太もも（51.5cm）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.72、ヒップ/ウエスト1.90、バストとヒップのバランスは91%。全体は砂時計型のシルエットです。ロスター内の順位では、バストがヒップより上位です。",
+     "in": "イドリーは171cm（5'7.2\"）で、ロスター平均より高めです。身長順では50人中13番目です。バストは31.2インチ（UK 22H）で、チャートでもトップクラスのボリュームです。ウエストは18.1インチ（ウエスト対身長0.27）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（34.4インチ）に、太めの太もも（20.3インチ）が続きます。太もも周囲はロスター中位です。バスト/ウエスト1.72、ヒップ/ウエスト1.90、バストとヒップのバランスは91%。全体は砂時計型のシルエットです。ロスター内の順位では、バストがヒップより上位です。",
+     "read": "高身長、胸はしっかりめ、ヒップは広め、太ももは太め。砂時計型シルエットで、やや上半身寄り。"
     },
     "zh": {
-     "cm": "伊德海莉身高171厘米（5'7.2\"），高于全榜平均，在49位角色中排第12。胸围79.3厘米（UK 22H），在全榜里属于非常抢眼的尺寸。腰围46厘米（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（87.3厘米），配上丰满的大腿（51.5厘米）；大腿围排在全榜中段。胸腰比1.72、臀腰比1.90，胸胯平衡度91%。整体是沙漏型，胸围在全榜中的排名高于臀围。",
-     "in": "伊德海莉身高171厘米（5'7.2\"），高于全榜平均，在49位角色中排第12。胸围31.2英寸（UK 22H），在全榜里属于非常抢眼的尺寸。腰围18.1英寸（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（34.4英寸），配上丰满的大腿（20.3英寸）；大腿围排在全榜中段。胸腰比1.72、臀腰比1.90，胸胯平衡度91%。整体是沙漏型，胸围在全榜中的排名高于臀围。",
-     "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是沙漏型轮廓，上半身更有分量。"
+     "cm": "伊德海莉身高171厘米（5'7.2\"），高于全榜平均，在50位角色中排第13。胸围79.3厘米（UK 22H），在全榜里属于非常抢眼的尺寸。腰围46厘米（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（87.3厘米），配上丰满的大腿（51.5厘米）；大腿围排在全榜中段。胸腰比1.72、臀腰比1.90，胸胯平衡度91%。整体是沙漏型，胸围在全榜中的排名高于臀围。",
+     "in": "伊德海莉身高171厘米（5'7.2\"），高于全榜平均，在50位角色中排第13。胸围31.2英寸（UK 22H），在全榜里属于非常抢眼的尺寸。腰围18.1英寸（腰高比0.27），比大多数角色更有肉感。往下是较宽的臀围（34.4英寸），配上丰满的大腿（20.3英寸）；大腿围排在全榜中段。胸腰比1.72、臀腰比1.90，胸胯平衡度91%。整体是沙漏型，胸围在全榜中的排名高于臀围。",
+     "read": "身材高挑，胸部偏丰满，胯部较宽，大腿偏丰满。整体是沙漏型轮廓，上半身更有分量。"
     }
    },
    "measured_outfit": null,
@@ -4078,11 +4225,11 @@
     "hip_stature": 0.535
    },
    "percentiles": {
-    "bust": 0.99,
-    "waist": 0.969,
-    "hip": 0.949,
-    "thigh": 0.969,
-    "stature": 0.857
+    "bust": 0.97,
+    "waist": 0.95,
+    "hip": 0.94,
+    "thigh": 0.949,
+    "stature": 0.84
    },
    "classes": {
     "height": "Tall",
@@ -4098,6 +4245,9 @@
    "confidence_note": "No approximation is flagged in the source note.",
    "notes": "",
    "source_page": "Alexandrina Sebastiane",
+   "measurement_source": "modelmetrics.net",
+   "estimated_cup_systems": [],
+   "sheet_available": true,
    "display_ja": "アレクサンドリナ・セバスチャン",
    "display_zh": "亚历山德丽娜·莎芭丝缇安",
    "profile": "https://nullhollow.github.io/zzz-measurements/characters/rina.html",
@@ -4105,18 +4255,102 @@
    "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/rina.html",
    "profile_text": {
     "en": {
-     "cm": "Rina is one of the taller figures here, 6th tallest of 49, at 173 cm (5'8\"). Her 80.5 cm bust (UK 23GG) is among the largest bust measurements on the chart. The waist comes in at 51.3 cm (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (92.5 cm) pair with thick 54.3 cm thighs (top 3% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.57, hip/waist 1.80, bust–hip balance 87%): bust and hip percentile ranks are close.",
-     "in": "Rina is one of the taller figures here, 6th tallest of 49, at 173 cm (5'8\"). Her 31.7 in bust (UK 23GG) is among the largest bust measurements on the chart. The waist comes in at 20.2 in (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (36.4 in) pair with thick 21.4 in thighs (top 3% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.57, hip/waist 1.80, bust–hip balance 87%): bust and hip percentile ranks are close.",
+     "cm": "Rina is one of the taller figures here, 7th tallest of 50, at 173 cm (5'8\"). Her 80.5 cm bust (UK 23GG) is among the largest bust measurements on the chart. The waist comes in at 51.3 cm (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (92.5 cm) pair with thick 54.3 cm thighs (top 5% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.57, hip/waist 1.80, bust–hip balance 87%): bust and hip percentile ranks are close.",
+     "in": "Rina is one of the taller figures here, 7th tallest of 50, at 173 cm (5'8\"). Her 31.7 in bust (UK 23GG) is among the largest bust measurements on the chart. The waist comes in at 20.2 in (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (36.4 in) pair with thick 21.4 in thighs (top 5% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.57, hip/waist 1.80, bust–hip balance 87%): bust and hip percentile ranks are close.",
      "read": "tall frame with full bust, full waist, wide hips, thick thighs. Hourglass silhouette, balanced proportions."
     },
     "ja": {
-     "cm": "アレクサンドリナ・セバスチャンは173cm（5'8\"）。49人中6番目で、かなり背が高いほうです。バストは80.5cm（UK 23GG）で、チャートでもトップクラスのボリュームです。ウエストは51.3cm（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（92.5cm）に、太めの太もも（54.3cm）が続きます。太もも周囲はロスター上位3%です。バスト/ウエスト1.57、ヒップ/ウエスト1.80、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
-     "in": "アレクサンドリナ・セバスチャンは173cm（5'8\"）。49人中6番目で、かなり背が高いほうです。バストは31.7インチ（UK 23GG）で、チャートでもトップクラスのボリュームです。ウエストは20.2インチ（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（36.4インチ）に、太めの太もも（21.4インチ）が続きます。太もも周囲はロスター上位3%です。バスト/ウエスト1.57、ヒップ/ウエスト1.80、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "cm": "アレクサンドリナ・セバスチャンは173cm（5'8\"）。50人中7番目で、かなり背が高いほうです。バストは80.5cm（UK 23GG）で、チャートでもトップクラスのボリュームです。ウエストは51.3cm（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（92.5cm）に、太めの太もも（54.3cm）が続きます。太もも周囲はロスター上位5%です。バスト/ウエスト1.57、ヒップ/ウエスト1.80、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
+     "in": "アレクサンドリナ・セバスチャンは173cm（5'8\"）。50人中7番目で、かなり背が高いほうです。バストは31.7インチ（UK 23GG）で、チャートでもトップクラスのボリュームです。ウエストは20.2インチ（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（36.4インチ）に、太めの太もも（21.4インチ）が続きます。太もも周囲はロスター上位5%です。バスト/ウエスト1.57、ヒップ/ウエスト1.80、バストとヒップのバランスは87%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。",
      "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。砂時計型シルエットで、上下のバランスが取れています。"
     },
     "zh": {
-     "cm": "亚历山德丽娜·莎芭丝缇安身高173厘米（5'8\"），49位角色中排第6，算是相当高挑。胸围80.5厘米（UK 23GG），在全榜里属于非常抢眼的尺寸。腰围51.3厘米（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（92.5厘米），配上丰满的大腿（54.3厘米）；大腿围排在全榜前3%。胸腰比1.57、臀腰比1.80，胸胯平衡度87%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
-     "in": "亚历山德丽娜·莎芭丝缇安身高173厘米（5'8\"），49位角色中排第6，算是相当高挑。胸围31.7英寸（UK 23GG），在全榜里属于非常抢眼的尺寸。腰围20.2英寸（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（36.4英寸），配上丰满的大腿（21.4英寸）；大腿围排在全榜前3%。胸腰比1.57、臀腰比1.80，胸胯平衡度87%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "cm": "亚历山德丽娜·莎芭丝缇安身高173厘米（5'8\"），50位角色中排第7，算是相当高挑。胸围80.5厘米（UK 23GG），在全榜里属于非常抢眼的尺寸。腰围51.3厘米（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（92.5厘米），配上丰满的大腿（54.3厘米）；大腿围排在全榜前5%。胸腰比1.57、臀腰比1.80，胸胯平衡度87%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "in": "亚历山德丽娜·莎芭丝缇安身高173厘米（5'8\"），50位角色中排第7，算是相当高挑。胸围31.7英寸（UK 23GG），在全榜里属于非常抢眼的尺寸。腰围20.2英寸（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（36.4英寸），配上丰满的大腿（21.4英寸）；大腿围排在全榜前5%。胸腰比1.57、臀腰比1.80，胸胯平衡度87%。整体是沙漏型，胸围与臀围在全榜中的排名接近。",
+     "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是沙漏型轮廓，上下比较均衡。"
+    }
+   },
+   "measured_outfit": null,
+   "art_only_outfits": []
+  },
+  {
+   "slug": "eldreda_sunbringer",
+   "name": "Eldreda Sunbringer",
+   "display": "Eldreda Sunbringer",
+   "aliases": [],
+   "height_cm": 193.37,
+   "stature_cm": 180.37,
+   "stature_basis": "head",
+   "bust_cm": 86.52,
+   "underbust_cm": 57.0,
+   "waist_cm": 54.14,
+   "hip_cm": 92.5,
+   "thigh_cm": 56.82,
+   "bust_in": 34.062992,
+   "underbust_in": 22.440945,
+   "waist_in": 21.314961,
+   "hip_in": 36.417323,
+   "thigh_in": 22.370079,
+   "bust_diff_cm": 29.5,
+   "bust_diff_in": 11.61,
+   "uk": "23HH",
+   "us": "≈23L",
+   "eu": "≈50L",
+   "ratios": {
+    "waist_hip": 0.585,
+    "waist_stature": 0.3,
+    "waist_thigh": 0.953,
+    "thigh_stature": 0.315,
+    "thigh_hip": 0.614,
+    "bust_stature": 0.48,
+    "hip_stature": 0.513
+   },
+   "percentiles": {
+    "bust": 0.99,
+    "waist": 0.99,
+    "hip": 0.94,
+    "thigh": 0.99,
+    "stature": 0.99
+   },
+   "classes": {
+    "height": "Tall",
+    "cup": "GG+",
+    "waist": "high",
+    "hip": "high",
+    "thigh": "high",
+    "thigh_hand_pinned": false,
+    "shape": "Hourglass",
+    "build": "even"
+   },
+   "confidence": "estimated",
+   "confidence_note": "Project estimate based on the owner's assumptions and other sources; not modelmetrics.net.",
+   "notes": "Project estimate based on the owner's assumptions and other sources; not from modelmetrics.net. Height including horns is 193.37 cm; comparisons use 180.37 cm excluding horns. UK 23HH is the supplied source size. US and EU sizes are estimates only: the nonstandard UK band prevents exact standard conversion, and the EU estimate rounds the theoretical band upward.",
+   "source_page": "Eldreda Sunbringer",
+   "measurement_source": "project_estimate",
+   "estimated_cup_systems": [
+    "us",
+    "eu"
+   ],
+   "sheet_available": false,
+   "display_ja": "エルダ・サンブリンガー",
+   "display_zh": "艾尔妲·挽昼",
+   "profile": "https://nullhollow.github.io/zzz-measurements/characters/eldreda_sunbringer.html",
+   "profile_ja": "https://nullhollow.github.io/zzz-measurements/ja/characters/eldreda_sunbringer.html",
+   "profile_zh": "https://nullhollow.github.io/zzz-measurements/zh/characters/eldreda_sunbringer.html",
+   "profile_text": {
+    "en": {
+     "cm": "Eldreda Sunbringer's height estimate is 180.37 cm excluding horns (193.37 cm including horns); comparisons use the horn-excluding height. Her 86.52 cm bust (UK 23HH) is among the largest bust measurements on the chart. The waist comes in at 54.14 cm (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (92.5 cm) pair with thick 56.82 cm thighs (top 1% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.60, hip/waist 1.71, bust–hip balance 94%): bust and hip percentile ranks are close. Chart note: Project estimate based on the owner's assumptions and other sources; not from modelmetrics.net. Height including horns is 193.37 cm; comparisons use 180.37 cm excluding horns. UK 23HH is the supplied source size. US and EU sizes are estimates only: the nonstandard UK band prevents exact standard conversion, and the EU estimate rounds the theoretical band upward.",
+     "in": "Eldreda Sunbringer's height estimate is 180.37 cm excluding horns (193.37 cm including horns); comparisons use the horn-excluding height. Her 34.1 in bust (UK 23HH) is among the largest bust measurements on the chart. The waist comes in at 21.3 in (waist-to-height 0.30), a fuller midsection than most of the roster. Below that, wide hips (36.4 in) pair with thick 22.4 in thighs (top 1% of the roster by thigh circumference). Put together, she reads as an hourglass silhouette (bust/waist 1.60, hip/waist 1.71, bust–hip balance 94%): bust and hip percentile ranks are close. Chart note: Project estimate based on the owner's assumptions and other sources; not from modelmetrics.net. Height including horns is 193.37 cm; comparisons use 180.37 cm excluding horns. UK 23HH is the supplied source size. US and EU sizes are estimates only: the nonstandard UK band prevents exact standard conversion, and the EU estimate rounds the theoretical band upward.",
+     "read": "tall frame with full bust, full waist, wide hips, thick thighs. Hourglass silhouette, balanced proportions."
+    },
+    "ja": {
+     "cm": "エルダ・サンブリンガーの推定身長は角を除いて180.37cm、角を含めると193.37cmです。比較には角を除いた身長を使います。バストは86.52cm（UK 23HH）で、チャートでもトップクラスのボリュームです。ウエストは54.14cm（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（92.5cm）に、太めの太もも（56.82cm）が続きます。太もも周囲はロスター上位1%です。バスト/ウエスト1.60、ヒップ/ウエスト1.71、バストとヒップのバランスは94%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：この数値はサイト所有者の仮定と他の資料に基づく独自の推定値で、modelmetrics.netのデータではありません。角を含む身長は193.37cm、比較には角を除いた180.37cmを使います。UK 23HHは出典で示されたサイズです。バンド値が規格外のためUS・EUへ正確には換算できず、いずれも推定値です。EUは計算上のバンド値を切り上げています。",
+     "in": "エルダ・サンブリンガーの推定身長は角を除いて180.37cm、角を含めると193.37cmです。比較には角を除いた身長を使います。バストは34.1インチ（UK 23HH）で、チャートでもトップクラスのボリュームです。ウエストは21.3インチ（ウエスト対身長0.30）で、ロスターの多くよりもしっかりめです。そこから広めのヒップ（36.4インチ）に、太めの太もも（22.4インチ）が続きます。太もも周囲はロスター上位1%です。バスト/ウエスト1.60、ヒップ/ウエスト1.71、バストとヒップのバランスは94%。全体は砂時計型のシルエットです。バストとヒップのロスター内の順位は近い位置にあります。チャート注記：この数値はサイト所有者の仮定と他の資料に基づく独自の推定値で、modelmetrics.netのデータではありません。角を含む身長は193.37cm、比較には角を除いた180.37cmを使います。UK 23HHは出典で示されたサイズです。バンド値が規格外のためUS・EUへ正確には換算できず、いずれも推定値です。EUは計算上のバンド値を切り上げています。",
+     "read": "高身長、胸はしっかりめ、ウエストはしっかりめ、ヒップは広め、太ももは太め。砂時計型シルエットで、上下のバランスが取れています。"
+    },
+    "zh": {
+     "cm": "艾尔妲·挽昼的估算身高为不含角180.37厘米、含角193.37厘米。比较时采用不含角的身高。胸围86.52厘米（UK 23HH），在全榜里属于非常抢眼的尺寸。腰围54.14厘米（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（92.5厘米），配上丰满的大腿（56.82厘米）；大腿围排在全榜前1%。胸腰比1.60、臀腰比1.71，胸胯平衡度94%。整体是沙漏型，胸围与臀围在全榜中的排名接近。榜单注记：这些数值为站主根据个人假设与其他资料作出的估算，并非来自modelmetrics.net。含角身高为193.37厘米，比较采用不含角的180.37厘米。UK 23HH沿用提供的来源尺码；其下围并非标准尺码，无法精确转换，US和EU均仅为估计。EU估值将理论下围向上取整。",
+     "in": "艾尔妲·挽昼的估算身高为不含角180.37厘米、含角193.37厘米。比较时采用不含角的身高。胸围34.1英寸（UK 23HH），在全榜里属于非常抢眼的尺寸。腰围21.3英寸（腰高比0.30），比大多数角色更有肉感。往下是较宽的臀围（36.4英寸），配上丰满的大腿（22.4英寸）；大腿围排在全榜前1%。胸腰比1.60、臀腰比1.71，胸胯平衡度94%。整体是沙漏型，胸围与臀围在全榜中的排名接近。榜单注记：这些数值为站主根据个人假设与其他资料作出的估算，并非来自modelmetrics.net。含角身高为193.37厘米，比较采用不含角的180.37厘米。UK 23HH沿用提供的来源尺码；其下围并非标准尺码，无法精确转换，US和EU均仅为估计。EU估值将理论下围向上取整。",
      "read": "身材高挑，胸部偏丰满，腰比较有肉，胯部较宽，大腿偏丰满。整体是沙漏型轮廓，上下比较均衡。"
     }
    },

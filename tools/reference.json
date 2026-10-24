@@ -783,6 +783,22 @@
       "checked": "2026-10-23",
       "version": "1.0",
       "version_source": "https://zenless-zone-zero.fandom.com/wiki/Version/1.0"
+    },
+    "eldreda_sunbringer": {
+      "faction": null,
+      "rank": null,
+      "attribute": null,
+      "specialty": null,
+      "release": null,
+      "version": null,
+      "version_source": null,
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Eldreda_Sunbringer",
+      "official": {
+        "en": "https://x.com/ZZZ_EN/status/2062838088066359500",
+        "ja": "https://x.com/ZZZ_JP/status/2113481791285710863",
+        "zh": "https://t.bilibili.com/1196948116998193184"
+      },
+      "checked": "2026-10-25"
     }
   },
   "art": {
@@ -1535,6 +1551,18 @@
       "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/b/b4/Agent_Ukinami_Yuzuha_Tanuki_in_Broad_Daylight_Portrait.png/revision/latest?cb=20250716042730&format=original",
       "page": "https://zenless-zone-zero.fandom.com/wiki/File:Agent_Ukinami_Yuzuha_Tanuki_in_Broad_Daylight_Portrait.png",
       "format": "PNG"
+    },
+    "eldreda_sunbringer.webp": {
+      "file": "originals/eldreda_sunbringer.png",
+      "width": 1920,
+      "height": 2588,
+      "bytes": 2352065,
+      "sha256": "452a79ee94e8cd7eabeac8fe79c2aee6479acb97e5c11aaf70a6879fe2298341",
+      "source": "https://github.com/nullhollow/zzz-measurements/blob/main/originals/eldreda_sunbringer.png",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/Eldreda_Sunbringer",
+      "format": "PNG",
+      "origin": "owner-upload",
+      "supplied_filename": "Eldreda Sunbringer.png"
     }
   }
 }
