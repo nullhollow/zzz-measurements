@@ -2,6 +2,16 @@
 
 ## Unreleased — audit implementation
 
+### Top-ten favourites summary (2026-10-28)
+
+- Summarize the first ten placed agents using existing measurement tags, with
+  selected/roster counts, missing-data denominators and hand-pinned thigh notes.
+- Include bust-circumference medians and UK cup-group distributions as separate
+  facts. Highlight up to three tags with a 60% selected share and a 15-point
+  increase over the roster, with at least five known picks.
+- Add native EN/JA/ZH copy, a full tag breakdown and optional JPG summary. Keep
+  the export choice in local drafts, saved boards and shared URLs.
+
 ### Favourites page (2026-10-28)
 
 - Switch export to JPG at 90% quality for smaller downloads, retaining the

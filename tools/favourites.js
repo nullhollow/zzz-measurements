@@ -1,13 +1,14 @@
 const FavouriteBoard = (() => {
   const tiers=['SSS','S','A','B','C','D','E'];
   const colours=['#F2A621','#FFD500','#AC61F2','#3686F5','#C4C8CE','#92969E','#50545C'];
-  function empty(){return {v:1,title:'',author:'',numbering:'overall',tiers:tiers.map(()=>[])};}
+  function empty(){return {v:1,title:'',author:'',numbering:'overall',includeSummary:false,tiers:tiers.map(()=>[])};}
   function parse(raw,slugs){
     if(!raw||raw.v!==1||!Array.isArray(raw.tiers)||raw.tiers.length!==tiers.length)return null;
     const valid=new Set(slugs),seen=new Set(),board=empty();
     board.title=typeof raw.title==='string'?raw.title.slice(0,80):'';
     board.author=typeof raw.author==='string'?raw.author.slice(0,40):'';
     board.numbering=raw.numbering==='tier'?'tier':'overall';
+    board.includeSummary=raw.includeSummary===true;
     for(const [i,row] of raw.tiers.entries()){
       if(!Array.isArray(row))return null;
       board.tiers[i]=row.filter(slug=>valid.has(slug)&&!seen.has(slug)&&seen.add(slug));
@@ -22,7 +23,7 @@ const FavouriteBoard = (() => {
   function ranks(board){
     let n=0;return board.tiers.map(row=>row.map((slug,i)=>({slug,rank:board.numbering==='tier'?i+1:++n})));
   }
-  function wrapText(text,measure,width,maxLines,hyphenate=false){
+  function wrapText(text,measure,width,maxLines,hyphenate=false,wordWrap=false){
     const chars=Array.from(text),lines=[];
     const latin=ch=>/[A-Za-z]/.test(ch||'');
     let start=0;
@@ -35,6 +36,9 @@ const FavouriteBoard = (() => {
         lines.push(chars.slice(start,end).join('').trimEnd()+'…');break;
       }
       let suffix='';
+      if(wordWrap&&end<chars.length&&latin(chars[end-1])&&latin(chars[end])){
+        const space=chars.slice(start,end).lastIndexOf(' ');if(space>0)end=start+space;
+      }
       if(hyphenate&&end<chars.length&&latin(chars[end-1])&&latin(chars[end])){
         while(end>start+1&&measure(chars.slice(start,end).join('')+'-')>width)end--;
         if(latin(chars[end-1])&&latin(chars[end]))suffix='-';
@@ -44,7 +48,24 @@ const FavouriteBoard = (() => {
     }
     return lines;
   }
-  return {tiers,colours,empty,parse,move,ranks,wrapText};
+  function summary(board,roster){
+    const bySlug=new Map(roster.map(d=>[d.slug,d]));
+    const selected=board.tiers.flat().slice(0,10).map(slug=>bySlug.get(slug));
+    const groups=['height','bust','waist','hips','thighs','shape','balance'].map(field=>{
+      const valid=records=>records.filter(d=>d.tags[field]&& !['n/a','?'].includes(d.tags[field]));
+      const all=valid(roster),top=valid(selected);
+      const counts=records=>records.reduce((out,d)=>{const tag=d.tags[field];out.set(tag,(out.get(tag)||0)+1);return out;},new Map());
+      const baseline=counts(all),chosen=counts(top);
+      const categories=[...baseline].map(([tag,count])=>({tag,count:chosen.get(tag)||0,rosterCount:count}));
+      return {field,count:top.length,rosterCount:all.length,categories};
+    });
+    const findings=groups.flatMap(group=>group.categories.filter(c=>group.count>=5&&c.count/group.count>=.6&&c.count/group.count-c.rosterCount/group.rosterCount>=.15-1e-9)
+      .map(c=>({...c,field:group.field,total:group.count,rosterTotal:group.rosterCount,gap:c.count/group.count-c.rosterCount/group.rosterCount})))
+      .sort((a,b)=>b.gap-a.gap).slice(0,3);
+    const median=records=>{const values=records.map(d=>d.bust_cm).filter(v=>v!=null).sort((a,b)=>a-b),n=values.length;return {count:n,median:n?(values[Math.floor((n-1)/2)]+values[Math.floor(n/2)])/2:null};};
+    return {count:selected.length,groups,findings,bust:median(selected),rosterBust:median(roster),thighPins:selected.filter(d=>d.thigh_pin).length};
+  }
+  return {tiers,colours,empty,parse,move,ranks,wrapText,summary};
 })();
 if(typeof module!=='undefined')module.exports=FavouriteBoard;
 
@@ -124,6 +145,7 @@ if(typeof document!=='undefined')(() => {
     const previous=$('#favSaved').value;$('#favSaved').replaceChildren(new Option(t('favNone'),''));
     savedBoards.forEach((b,i)=>$('#favSaved').add(new Option(b.title||t('favDefaultTitle'),String(i))));$('#favSaved').value=previous;
     syncSavedButtons();
+    renderSummary();
     if(focusSlug)$$('.fav-agent').find(el=>el.dataset.slug===focusSlug)?.focus({preventScroll:true});
     else if(focusId)document.getElementById(focusId)?.focus({preventScroll:true});
   }
@@ -136,6 +158,31 @@ if(typeof document!=='undefined')(() => {
     render();syncLinks();
   }
   function syncSavedButtons(){const disabled=$('#favSaved').value==='';$('#favLoad').disabled=disabled;$('#favDelete').disabled=disabled;}
+  function tagLabel(field,tag){const record=data.find(d=>d.tags[field]===tag);return lang==='en'?tag:record['tags_'+lang][field];}
+  function summaryCopy(result){
+    const number=value=>new Intl.NumberFormat(lang,{minimumFractionDigits:1,maximumFractionDigits:1}).format(value);
+    const traits=result.findings.map(f=>t('favTrait_'+f.field+'_'+f.tag));
+    const intro=result.count<5?t('favSummarySmall'):traits.length?t('favSummaryIntro',{n:result.count,traits:new Intl.ListFormat(lang).format(traits)}):t('favSummaryMixed',{n:result.count});
+    const bust=result.bust.count?t('favSummaryBust',{n:result.bust.count,total:result.count,value:number(result.bust.median),roster:number(result.rosterBust.median)}):t('favSummaryNoBust');
+    const cups=result.groups.find(g=>g.field==='bust');
+    const cupLine=t('favSummaryCups',{values:cups.categories.filter(c=>c.count).map(c=>`${c.tag} ${c.count}/${cups.count}`).join(' · ')||'—'});
+    const evidence=result.findings.map(f=>t('favSummaryEvidence',{field:t('favSummary_'+f.field),tag:tagLabel(f.field,f.tag),n:f.count,total:f.total,base:f.rosterCount,roster:f.rosterTotal}));
+    return {intro,bust,cupLine,evidence};
+  }
+  function renderSummary(){
+    const result=FavouriteBoard.summary(board,data),copy=summaryCopy(result);
+    $('#favSummary').hidden=!result.count;$('#favSummaryTitle').textContent=t('favSummaryTitle',{n:result.count});
+    $('#favSummaryIntro').textContent=copy.intro;$('#favSummaryBust').textContent=copy.bust;$('#favSummaryCups').textContent=copy.cupLine;
+    $('#favSummaryFindings').replaceChildren(...copy.evidence.map((text,i)=>{const item=document.createElement('li');item.dataset.field=result.findings[i].field;item.textContent=text;return item;}));
+    $('#favIncludeSummary').checked=board.includeSummary;
+    $('#favSummaryBreakdown').replaceChildren(...result.groups.map(group=>{
+      const row=document.createElement('tr'),heading=document.createElement('th');heading.scope='row';heading.textContent=t('favSummary_'+group.field);row.append(heading);
+      for(const [key,total] of [['count',group.count],['rosterCount',group.rosterCount]]){
+        const cell=document.createElement('td');cell.textContent=total?group.categories.map(c=>`${tagLabel(group.field,c.tag)} ${c[key]}/${total}`).join(' · '):'—';row.append(cell);
+      }return row;
+    }));
+    const thighs=result.groups.find(g=>g.field==='thighs');$('#favSummaryPins').hidden=!thighs.count;$('#favSummaryPins').textContent=t('favSummaryPins',{n:result.thighPins,total:thighs.count});
+  }
   function boot(){
     const p=new URLSearchParams(location.hash.slice(1));let invalid=false;
     try{lang=localStorage.getItem('zzz-lang')||'en';board=FavouriteBoard.parse(JSON.parse(localStorage.getItem(DRAFT)),slugs)||FavouriteBoard.empty();const raw=JSON.parse(localStorage.getItem(SAVED));if(Array.isArray(raw))savedBoards=raw.map(b=>FavouriteBoard.parse(b,slugs)).filter(Boolean);}catch(_){}
@@ -155,6 +202,7 @@ if(typeof document!=='undefined')(() => {
     $('#'+id).oninput=e=>{if(!editing){snapshot();editing=true;}board={...board,[key]:e.target.value};commit();};
   }
   $('#favNumbering').onchange=e=>{snapshot();board={...board,numbering:e.target.value};commit();};
+  $('#favIncludeSummary').onchange=e=>{snapshot();board={...board,includeSummary:e.target.checked};commit();};
   $('#favUndo').onclick=()=>{const prior=undo.pop();if(!prior)return;board=prior.board;savedBoards=prior.saved;store(SAVED,savedBoards);commit();status('');};
   $('#favReset').onclick=()=>{snapshot();board=FavouriteBoard.empty();selected='';commit();status('');};
   $('#lang').onchange=e=>{lang=e.target.value;try{localStorage.setItem('zzz-lang',lang);}catch(_){}applyLanguage();const p=params();history.replaceState(null,'','#'+p);};
@@ -178,15 +226,20 @@ if(typeof document!=='undefined')(() => {
   };
   async function exportImage(){
     const exportBoard=structuredClone(board),rows=FavouriteBoard.ranks(exportBoard),names=exportBoard.tiers.flat().map(s=>name(bySlug.get(s)));
+    const result=FavouriteBoard.summary(exportBoard,data),copy=summaryCopy(result);
     const style=getComputedStyle(document.body),display=style.getPropertyValue('--disp'),body=style.getPropertyValue('--body');
-    await Promise.all([document.fonts.load(`22px ${body}`,names.join('')),document.fonts.load(`40px ${display}`,exportBoard.title||t('favDefaultTitle'))]);await document.fonts.ready;
+    await Promise.all([document.fonts.load(`22px ${body}`,names.join('')+copy.intro+copy.bust+copy.cupLine+copy.evidence.join('')),document.fonts.load(`40px ${display}`,(exportBoard.title||t('favDefaultTitle'))+t('favSummaryTitle',{n:result.count}))]);await document.fonts.ready;
     const images=new Map(await Promise.all(exportBoard.tiers.flat().map(async slug=>{
       const img=new Image();img.src=`character_images/${bySlug.get(slug).official}.webp`;await img.decode();return [slug,img];
     })));
     const rowHeight=row=>Math.ceil(row.length/6)*216+24;
-    const width=1080,height=220+rows.filter(row=>row.length).reduce((h,row)=>h+rowHeight(row),0),scale=2;
-    const canvas=document.createElement('canvas');canvas.width=width*scale;canvas.height=height*scale;
-    const ctx=canvas.getContext('2d'),colour=key=>style.getPropertyValue('--'+key).trim();
+    const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');ctx.font=`22px ${body}`;
+    const notes=result.thighPins?[t('favSummaryPins',{n:result.thighPins,total:result.groups.find(g=>g.field==='thighs').count})]:[];
+    const summaryLines=exportBoard.includeSummary?[copy.intro,copy.bust,copy.cupLine,...copy.evidence,...notes].flatMap(text=>FavouriteBoard.wrapText(text,s=>ctx.measureText(s).width,1000,3,false,lang==='en')):[];
+    const summaryHeight=summaryLines.length?80+summaryLines.length*28:0;
+    const width=1080,height=220+rows.filter(row=>row.length).reduce((h,row)=>h+rowHeight(row),0)+summaryHeight,scale=2;
+    canvas.width=width*scale;canvas.height=height*scale;
+    const colour=key=>style.getPropertyValue('--'+key).trim();
     ctx.scale(scale,scale);ctx.imageSmoothingQuality='high';
     ctx.fillStyle=colour('ink');ctx.fillRect(0,0,width,height);
     ctx.fillStyle=colour('concrete');ctx.font=`40px ${display}`;
@@ -207,6 +260,10 @@ if(typeof document!=='undefined')(() => {
       });
       ctx.fillStyle=colour('line2');ctx.fillRect(128,y+height-2,912,1);y+=height;
     });
+    if(summaryLines.length){
+      y+=38;ctx.fillStyle=colour('concrete');ctx.font=`30px ${display}`;ctx.fillText(t('favSummaryTitle',{n:result.count}),40,y);
+      ctx.font=`22px ${body}`;summaryLines.forEach(line=>{y+=28;ctx.fillText(line,40,y);});
+    }
     ctx.fillStyle=colour('dim');ctx.font=`15px ${body}`;ctx.fillText('ZZZ Measurements · Art © HoYoverse',40,height-18);
     return canvas;
   }

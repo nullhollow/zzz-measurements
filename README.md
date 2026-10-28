@@ -219,6 +219,18 @@ Sources: `tools/favourites.tmpl.html`, `tools/favourites.js`,
 the site's head, navigation and hero. Run `python3 tools/test_favourites.py` for
 state transitions, URL round trips, locale coverage and build integration.
 
+The **Your top 10** section counts canonical measurement tags from the first ten
+placed entries, regardless of displayed numbering mode. Each pick counts equally.
+It shows the selected bust-circumference median against the roster median and UK
+cup-group counts separately. Cup groups remain categorical; bust difference is
+excluded. The tag breakdown covers height, cup group, waist, hips, thighs,
+silhouette and build with per-field denominators and hand-pinned thigh counts.
+Headline findings require at least five known observations, a 60% selected share
+and 15 percentage points above the roster share. Up to three findings are ordered
+by that difference. Partial boards show their actual sample size; below five picks,
+only counts and bust statistics are reported. **Include summary in JPG** adds the
+same findings and bust/cup facts to the image and is saved with the board and URL.
+
 Run the regression and Python/JavaScript parity suite with Node.js available:
 
 ```bash

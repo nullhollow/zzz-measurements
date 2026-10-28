@@ -267,7 +267,7 @@ hero = re.search(r'<header class="hero">.*?<div class="film".*?</div>', base, re
 hero = hero.replace('MEASUREMENTS', 'FAVOURITES')
 hero = re.sub(r'<h2>.*?</h2>', '<h2 data-i18n="favSubtitle">Your agents. Your order.</h2>', hero, flags=re.S)
 hero = re.sub(r'    <div class="meta">.*?</div>', '', hero, flags=re.S)
-favourite_data = [{k: d[k] for k in ('slug', 'display', 'name_ja', 'name_zh', 'official')} for d in DATA]
+favourite_data = [{k: d[k] for k in ('slug', 'display', 'name_ja', 'name_zh', 'official', 'tags', 'tags_ja', 'tags_zh', 'bust_cm', 'thigh_pin')} for d in DATA]
 page = (ROOT / 'tools/favourites.tmpl.html').read_text()
 for token, value in {
     'HEAD': head, 'NAV': nav, 'HERO': hero, 'REPO': PERMALINK,

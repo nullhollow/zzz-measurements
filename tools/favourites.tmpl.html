@@ -35,6 +35,17 @@
       <div id="favPoolItems" class="fav-pool-items"></div>
     </section>
   </div>
+  <section id="favSummary" class="fav-summary" hidden>
+    <div class="fav-summary-heading"><h2 id="favSummaryTitle"></h2><label><input type="checkbox" id="favIncludeSummary"><span data-i18n="favSummaryInclude">Include summary in JPG</span></label></div>
+    <p id="favSummaryIntro"></p>
+    <p id="favSummaryBust" class="fav-summary-bust"></p>
+    <p id="favSummaryCups"></p>
+    <ul id="favSummaryFindings"></ul>
+    <details><summary data-i18n="favSummaryDetails">Tag breakdown</summary>
+      <table class="fav-summary-table"><thead><tr><th data-i18n="favSummaryTag">Tag</th><th data-i18n="favSummaryPicks">Top picks</th><th data-i18n="favSummaryRoster">Roster</th></tr></thead><tbody id="favSummaryBreakdown"></tbody></table>
+      <p class="fav-hint" id="favSummaryPins"></p><p class="fav-hint" data-i18n="favSummaryRules">Each top pick counts equally. Waist and hip tags use raw circumferences; cup groups use UK labels. Missing values are omitted.</p>
+    </details>
+  </section>
   <p id="favStatus" role="status" aria-live="polite"></p>
   <div class="fav-saved">
     <span data-i18n="favLocal">Drafts are saved on this device.</span>
