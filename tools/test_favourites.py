@@ -9,29 +9,27 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class FavouriteTests(unittest.TestCase):
-    def test_pass_fail_summary(self):
+    def test_top_ten_summary(self):
         subprocess.run(['node', '-e', r"""
 const assert=require('node:assert/strict');
 const B=require('./tools/favourites.js'),A=require('./tools/analysis.js'),roster=require('./tools/data.json');
-const pass=['remielle','eldreda_sunbringer','yi_xuan','velina','astra_yao','evelyn','yanagi','jane_doe','sigrid','yidhari'];
-const fail=['corin','qingyi','piper','norma','dialyn','koleda','soukaku','zhao','nekomata'];
-let board=B.empty();board.tiers[0]=pass.slice(0,2);board.tiers[3]=pass.slice(2);board.tiers[4]=fail.slice(0,4);board.tiers[6]=fail.slice(4);
+const top=['remielle','eldreda_sunbringer','yi_xuan','velina','astra_yao','evelyn','yanagi','jane_doe','sigrid','yidhari'];
+let board=B.empty();board.tiers[0]=top.slice(0,2);board.tiers[3]=top.slice(2);board.tiers[6]=['koleda'];
 const before=JSON.stringify(roster),result=B.summary(board,roster);
-assert.equal(result.count,19);assert.equal(result.pass.count,10);assert.equal(result.fail.count,9);
-assert.equal(result.metrics.length,5);assert.equal(result.metrics[0].pass.median,74.85);assert.equal(result.metrics[0].fail.median,51.4);
-assert.equal(result.metrics.find(m=>m.field==='thighs').fail.count,8);
-assert(result.metrics.every(m=>m.direction==='higher'));
-assert.equal(result.pass.cups.meanIndex,8.7);assert.equal(result.pass.cups.meanLabel,'G');assert.deepEqual(result.pass.cups.modes,['G']);assert.equal(result.pass.cups.modeCount,3);
-assert.equal(B.summary(board,roster,'us').pass.cups.meanLabel,'I');
-const eu=B.summary(board,roster,'eu');assert.equal(eu.pass.cups.meanLabel,'J');assert.deepEqual(eu.pass.cups.modes,['G','H','J','M']);assert.equal(eu.pass.cups.estimatedCount,1);
-assert.equal(result.pass.thighPins,6);assert.equal(result.fail.thighPins,0);
+assert.equal(result.count,10);assert(!Object.hasOwn(result,'pass'));assert(!Object.hasOwn(result,'fail'));
+assert.equal(result.metrics.length,5);assert.equal(result.metrics[0].median,74.85);
+assert.equal(result.cups.meanIndex,8.7);assert.equal(result.cups.meanLabel,'G');assert.deepEqual(result.cups.modes,['G']);assert.equal(result.cups.modeCount,3);
+assert.equal(B.summary(board,roster,'us').cups.meanLabel,'I');
+const eu=B.summary(board,roster,'eu');assert.equal(eu.cups.meanLabel,'J');assert.deepEqual(eu.cups.modes,['G','H','J','M']);assert.equal(eu.cups.estimatedCount,1);
+assert.equal(result.thighPins,6);
 board.numbering='tier';board.tiers[0].reverse();assert.deepEqual(B.summary(board,roster),result);
-board=B.move(board,'vivian',3);assert.equal(B.summary(board,roster).pass.count,11);
-board=B.move(board,'vivian',4);assert.equal(B.summary(board,roster).fail.count,10);
-const small=B.empty();small.tiers[0]=pass.slice(0,4);small.tiers[6]=fail;assert(B.summary(small,roster).metrics.every(m=>m.direction===null));
-const onlyKoleda=B.empty();onlyKoleda.tiers[4]=['koleda'];assert.equal(B.summary(onlyKoleda,roster).metrics.find(m=>m.field==='thighs').fail.count,0);
-assert.equal(B.summary(B.empty(),roster).pass.cups.meanLabel,null);
-const equal=roster.map(d=>({...d,bust_cm:50}));assert.equal(B.summary(board,equal).metrics[0].direction,'same');
+board=B.move(board,'vivian',6);assert.deepEqual(B.summary(board,roster),result);
+board=B.move(board,'koleda',0,board.tiers[0][0]);const changed=B.summary(board,roster);
+assert.equal(changed.count,10);assert.equal(changed.metrics.find(m=>m.field==='thighs').count,9);assert.notEqual(changed.metrics[0].median,result.metrics[0].median);
+const small=B.empty();small.tiers[6]=['koleda','eldreda_sunbringer','miyabi','jane_doe'];
+assert.equal(B.summary(small,roster).count,4);assert.equal(B.summary(small,roster).metrics.find(m=>m.field==='thighs').count,3);
+const onlyKoleda=B.empty();onlyKoleda.tiers[0]=['koleda'];assert.equal(B.summary(onlyKoleda,roster).metrics.find(m=>m.field==='thighs').count,0);
+assert.equal(B.summary(B.empty(),roster).cups.meanLabel,null);
 assert.equal(A.cupLabelSummary([{uk:'28D'},{uk:'40DD'}]).meanLabel,'DD');
 assert.equal(A.cupLabelSummary([{uk:'28AA'},{uk:'28A'}]).meanLabel,'A');
 assert.equal(A.cupLabelSummary([{uk:'28H'},{uk:'28HH'}]).meanLabel,'HH');

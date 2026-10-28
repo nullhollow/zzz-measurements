@@ -51,25 +51,18 @@ const FavouriteBoard = (() => {
   }
   function summary(board,roster,system='uk'){
     const bySlug=new Map(roster.map(d=>[d.slug,d]));
-    const passed=board.tiers.slice(0,4).flat().map(slug=>bySlug.get(slug));
-    const failed=board.tiers.slice(4).flat().map(slug=>bySlug.get(slug));
-    const describe=records=>({count:records.length,cups:math.cupLabelSummary(records,system),thighPins:records.filter(d=>d.thigh_pin).length});
-    const metrics=[['bust','bust_cm'],['waist','waist_cm'],['hips','hip_cm'],['thighs','thigh_cm'],['height','stature_cm']].map(([field,key])=>{
-      const pass=math.numericSummary(passed.map(d=>d[key])),fail=math.numericSummary(failed.map(d=>d[key]));
-      const baseline=math.numericSummary(roster.map(d=>d[key]));
-      let direction=null;
-      if(pass.count>=5&&fail.count>=5){const delta=pass.median-fail.median;direction=Math.abs(delta)<=(baseline.q3-baseline.q1)/4?'same':delta>0?'higher':'lower';}
-      return {field,pass,fail,direction};
-    });
+    const selected=board.tiers.flat().slice(0,10).map(slug=>bySlug.get(slug));
+    const metrics=[['bust','bust_cm'],['waist','waist_cm'],['hips','hip_cm'],['thighs','thigh_cm'],['height','stature_cm']]
+      .map(([field,key])=>({field,...math.numericSummary(selected.map(d=>d[key]))}));
     const groups=['height','bust','waist','hips','thighs','shape','balance'].map(field=>{
-      const valid=records=>records.filter(d=>d.tags[field]&& !['n/a','?'].includes(d.tags[field]));
-      const counts=records=>records.reduce((out,d)=>{const tag=d.tags[field];out.set(tag,(out.get(tag)||0)+1);return out;},new Map());
-      const pass=valid(passed),fail=valid(failed),passCounts=counts(pass),failCounts=counts(fail);
-      const categories=[...new Set(valid(roster).map(d=>d.tags[field]))].map(tag=>({tag,pass:passCounts.get(tag)||0,fail:failCounts.get(tag)||0}));
-      return {field,passCount:pass.length,failCount:fail.length,categories};
+      const known=selected.filter(d=>d.tags[field]&&!['n/a','?'].includes(d.tags[field]));
+      const counts=new Map();known.forEach(d=>counts.set(d.tags[field],(counts.get(d.tags[field])||0)+1));
+      const categories=[...new Set(roster.map(d=>d.tags[field]).filter(tag=>tag&&!['n/a','?'].includes(tag)))].map(tag=>({tag,count:counts.get(tag)||0}));
+      return {field,count:known.length,categories};
     });
-    return {count:passed.length+failed.length,system,pass:describe(passed),fail:describe(failed),metrics,groups};
+    return {count:selected.length,system,cups:math.cupLabelSummary(selected,system),thighPins:selected.filter(d=>d.thigh_pin).length,metrics,groups};
   }
+
   return {tiers,colours,empty,parse,move,ranks,wrapText,summary};
 })();
 if(typeof module!=='undefined')module.exports=FavouriteBoard;
@@ -167,13 +160,12 @@ if(typeof document!=='undefined')(() => {
   function tagLabel(field,tag){const record=data.find(d=>d.tags[field]===tag);return lang==='en'?tag:record['tags_'+lang][field];}
   const number=value=>value==null?'—':new Intl.NumberFormat(lang,{minimumFractionDigits:1,maximumFractionDigits:1}).format(value);
   function summaryDisplay(result){
-    const mode=group=>group.cups.count?`${group.cups.modes.map(cup=>(group.cups.bins.find(b=>b.cup===cup).estimated?'≈':'')+cup).join(' / ')} · ${group.cups.modeCount}/${group.cups.count}`:'—';
-    const mean=group=>group.cups.meanLabel?'≈'+group.cups.meanLabel:'—';
+    const cups=result.cups;
+    const mode=cups.count?`${cups.modes.map(cup=>(cups.bins.find(b=>b.cup===cup).estimated?'≈':'')+cup).join(' / ')} · ${cups.modeCount}/${cups.count}`:'—';
     return {
-      metrics:result.metrics.map(metric=>({...metric,label:(metric.field==='height'?'↕ ':'↔ ')+t('favMeasure_'+metric.field),passValue:number(metric.pass.median),failValue:number(metric.fail.median),
-        trend:metric.direction?({higher:'↑ ',lower:'↓ ',same:'≈ '}[metric.direction]+t(metric.direction==='same'?'favSimilar':'favTrend_'+metric.field+'_'+metric.direction)):''})),
-      cups:[{label:t('favCommonCup')+' · '+result.system.toUpperCase(),passValue:mode(result.pass),failValue:mode(result.fail)},
-        {label:t('favMeanCup')+' · '+result.system.toUpperCase(),passValue:mean(result.pass),failValue:mean(result.fail)}]
+      metrics:result.metrics.map(metric=>({...metric,label:(metric.field==='height'?'↕ ':'↔ ')+t('favMeasure_'+metric.field),value:number(metric.median)})),
+      cups:[{label:t('favCommonCup')+' · '+result.system.toUpperCase(),value:mode},
+        {label:t('favMeanCup')+' · '+result.system.toUpperCase(),value:cups.meanLabel?'≈'+cups.meanLabel:'—'}]
     };
   }
   function tableRow(label,values){
@@ -183,25 +175,18 @@ if(typeof document!=='undefined')(() => {
   function renderSummary(){
     const result=FavouriteBoard.summary(board,data,cupSystem),display=summaryDisplay(result);
     $('#favSummary').hidden=!result.count;$('#favCupSystem').value=cupSystem;
-    $('#favPassCount').textContent=t('favPassCount',{n:result.pass.count});$('#favFailCount').textContent=t('favFailCount',{n:result.fail.count});
+    $('#favSummaryCount').textContent=t('favTopCount',{n:result.count});
     $('#favIncludeSummary').checked=board.includeSummary;
-    $('#favSummaryHint').hidden=result.pass.count>=5&&result.fail.count>=5;
     $('#favPreferenceRows').replaceChildren(...display.metrics.map(metric=>{
-      const {row,cells}=tableRow(metric.label,[metric.passValue,metric.failValue]);row.dataset.field=metric.field;
-      [metric.pass,metric.fail].forEach((stats,i)=>{
-        if(stats.count<result[i===0?'pass':'fail'].count){const note=document.createElement('small');note.textContent=t('favMeasured',{n:stats.count,total:result[i===0?'pass':'fail'].count});cells[i].append(note);}
-      });
-      if(metric.trend){const trend=document.createElement('small');trend.className='fav-direction';trend.textContent=metric.trend;cells[0].append(trend);}return row;
+      const {row,cells}=tableRow(metric.label,[metric.value]);row.dataset.field=metric.field;
+      if(metric.count<result.count){const note=document.createElement('small');note.textContent=t('favMeasured',{n:metric.count,total:result.count});cells[0].append(note);}return row;
     }));
-    $('#favCupRows').replaceChildren(...display.cups.map(cup=>tableRow(cup.label,[cup.passValue,cup.failValue]).row));
+    $('#favCupRows').replaceChildren(...display.cups.map(cup=>tableRow(cup.label,[cup.value]).row));
     const range=stats=>stats.count?t('favRange',{low:number(stats.q1),high:number(stats.q3),n:stats.count}):'—';
-    $('#favSummaryRanges').replaceChildren(...display.metrics.map(metric=>tableRow(t('favMeasure_'+metric.field),[range(metric.pass),range(metric.fail)]).row));
-    $('#favSummaryBreakdown').replaceChildren(...result.groups.map(group=>{
-      return tableRow(t('favSummary_'+group.field),['pass','fail'].map(key=>group[key+'Count']?group.categories.map(c=>`${tagLabel(group.field,c.tag)} ${c[key]}/${group[key+'Count']}`).join(' · '):'—')).row;
-    }));
-    $('#favSummaryPins').textContent=t('favPinCounts',{pass:result.pass.thighPins,fail:result.fail.thighPins});
-    const known=group=>group.count?`${group.cups.count}/${group.count}`:'—';
-    $('#favCupNotes').textContent=t('favCupCounts',{pass:known(result.pass),fail:known(result.fail)})+' '+t('favCupMethod')+((result.pass.cups.estimatedCount||result.fail.cups.estimatedCount)?' '+t('favCupEstimates',{pass:result.pass.cups.estimatedCount,fail:result.fail.cups.estimatedCount}):'');
+    $('#favSummaryRanges').replaceChildren(...display.metrics.map(metric=>tableRow(t('favMeasure_'+metric.field),[range(metric)]).row));
+    $('#favSummaryBreakdown').replaceChildren(...result.groups.map(group=>tableRow(t('favSummary_'+group.field),[group.count?group.categories.map(c=>`${tagLabel(group.field,c.tag)} ${c.count}/${group.count}`).join(' · '):'—']).row));
+    $('#favSummaryPins').textContent=t('favTopPins',{n:result.thighPins});
+    $('#favCupNotes').textContent=t('favTopCupCounts',{n:result.cups.count,total:result.count})+' '+t('favCupMethod')+(result.cups.estimatedCount?' '+t('favTopEstimates',{n:result.cups.estimatedCount}):'');
   }
   function boot(){
     const p=new URLSearchParams(location.hash.slice(1));let invalid=false;
@@ -283,15 +268,12 @@ if(typeof document!=='undefined')(() => {
     });
     if(exportBoard.includeSummary){
       const start=y;ctx.fillStyle=colour('concrete');ctx.font=`30px ${display}`;ctx.fillText(t('favPreferences'),40,start+38);
-      ctx.font=`20px ${body}`;ctx.fillStyle=colour('dim');ctx.fillText(t('favMetric'),40,start+68);ctx.fillStyle=colour('acid');ctx.fillText(t('favPass')+' '+result.pass.count,500,start+68);ctx.fillStyle=colour('signal');ctx.fillText(t('favFail')+' '+result.fail.count,790,start+68);
+      ctx.font=`20px ${body}`;ctx.fillStyle=colour('dim');ctx.fillText(t('favMetric'),40,start+68);ctx.fillStyle=colour('concrete');ctx.fillText(t('favTopCount',{n:result.count}),650,start+68);
       displayRows.metrics.forEach((metric,i)=>{
-        const top=start+105+i*44;ctx.font=`22px ${body}`;ctx.fillStyle=colour({bust:'bust',waist:'waist',hips:'hips',thighs:'thighs',height:'brass'}[metric.field]);ctx.fillText(metric.label,40,top);ctx.fillStyle=colour('concrete');ctx.fillText(metric.passValue,500,top);ctx.fillText(metric.failValue,790,top);
-        ctx.font=`16px ${body}`;ctx.fillStyle=colour('dim');
-        const hint=[metric.trend,metric.pass.count<result.pass.count?`${metric.pass.count}/${result.pass.count}`:''].filter(Boolean).join(' · ');
-        if(hint)ctx.fillText(hint,500,top+20);
-        if(metric.fail.count<result.fail.count)ctx.fillText(t('favMeasured',{n:metric.fail.count,total:result.fail.count}),790,top+20);
+        const top=start+105+i*44;ctx.font=`22px ${body}`;ctx.fillStyle=colour({bust:'bust',waist:'waist',hips:'hips',thighs:'thighs',height:'brass'}[metric.field]);ctx.fillText(metric.label,40,top);ctx.fillStyle=colour('concrete');ctx.fillText(metric.value,650,top);
+        if(metric.count<result.count){ctx.font=`16px ${body}`;ctx.fillStyle=colour('dim');ctx.fillText(t('favMeasured',{n:metric.count,total:result.count}),650,top+20);}
       });
-      displayRows.cups.forEach((cup,i)=>{const top=start+325+i*44;ctx.fillStyle=colour('concrete');ctx.font=`20px ${body}`;ctx.fillText(cup.label,40,top);ctx.font=`18px ${body}`;drawText(ctx,cup.passValue,500,top,270,20,2);drawText(ctx,cup.failValue,790,top,250,20,2);});
+      displayRows.cups.forEach((cup,i)=>{const top=start+325+i*44;ctx.fillStyle=colour('concrete');ctx.font=`20px ${body}`;ctx.fillText(cup.label,40,top);ctx.font=`18px ${body}`;drawText(ctx,cup.value,650,top,390,20,2);});
       ctx.fillStyle=colour('dim');ctx.font=`16px ${body}`;drawText(ctx,t('favCupApproxNote'),40,start+405,1000,18,2);
     }
     ctx.fillStyle=colour('dim');ctx.font=`15px ${body}`;ctx.fillText('ZZZ Measurements · Art © HoYoverse',40,height-18);

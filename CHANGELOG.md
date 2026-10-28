@@ -2,6 +2,14 @@
 
 ## Unreleased — audit implementation
 
+### Top-ten Preferences correction (2026-10-29)
+
+- Calculate Preferences exclusively from the overall top ten, using the actual
+  sample size below ten. Remove Pass/Fail columns, comparison arrows and group
+  rules from the page and JPG summary.
+- Retain the compact five measurement rows, ranges, missing-data counts and
+  UK/US/EU common and approximate mean cup labels for those selected agents.
+
 ### Compact Pass/Fail preferences (2026-10-29)
 
 - Replace the top-ten prose with five measurement rows comparing all SSS–B

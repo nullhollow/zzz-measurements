@@ -219,13 +219,13 @@ Sources: `tools/favourites.tmpl.html`, `tools/favourites.js`,
 the site's head, navigation and hero. Run `python3 tools/test_favourites.py` for
 state transitions, URL round trips, locale coverage and build integration.
 
-The **Preferences** summary uses all ranked entries: **Pass** is SSS/S/A/B and
-**Fail** is C/D/E. Unranked entries stay outside both groups. Five compact rows
-show the group medians for chest, waist, hips, thighs and effective height.
-Directions compare against Fail after five known measurements per group; a gap
-larger than one quarter of the roster's interquartile range produces an arrow.
-Otherwise the result is Similar. Details show the middle-50% ranges, measured
-counts, existing tags and hand-pinned thigh provenance.
+The **Preferences** summary uses only the first ten ranked agents in overall
+tier/position order, independent of displayed numbering mode. With fewer than ten,
+it uses all ranked agents and shows the actual sample size. Five compact rows
+show medians for chest, waist, hips, thighs and effective height. Details show
+middle-50% ranges, measured counts, existing tags and hand-pinned thigh provenance.
+There is no Pass/Fail grouping or comparison, and entries below the top ten have
+no effect on Preferences.
 
 Cup statistics use the selected UK/US/EU source labels independently. Common cup
 shows every tied mode with its count. Approximate mean cup averages cup-step
@@ -238,7 +238,7 @@ estimates remain marked. The chosen system is saved in the existing site-wide
 cup preference and the shared URL, so switching named boards keeps that display
 preference. Length medians remain centimetres.
 
-**Include summary in JPG** exports the same compact comparison and cup statistics.
+**Include summary in JPG** exports the same compact top-ten statistics.
 The mirrored algorithms are in `tools/analysis_math.py` and `tools/analysis.js`;
 measurement data, existing cup rankings, distributions and export schemas retain
 their definitions.

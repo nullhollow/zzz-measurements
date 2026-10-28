@@ -37,14 +37,12 @@
   </div>
   <section id="favSummary" class="fav-summary" hidden>
     <div class="fav-summary-heading"><h2 data-i18n="favPreferences">Preferences</h2><div class="fav-summary-options"><label><span data-i18n="favCupSystem">Cups</span><select id="favCupSystem" aria-label="Cup system"><option value="uk">UK</option><option value="us">US</option><option value="eu">EU</option></select></label><label><input type="checkbox" id="favIncludeSummary"><span data-i18n="favSummaryInclude">Include summary in JPG</span></label></div></div>
-    <div class="fav-summary-counts"><span id="favPassCount"></span><span id="favFailCount"></span></div>
-    <table class="fav-preferences"><caption class="sr" data-i18n="favPreferences">Preferences</caption><thead><tr><th data-i18n="favMetric">Median · cm</th><th data-i18n="favPass">✓ Pass</th><th data-i18n="favFail">× Fail</th></tr></thead><tbody id="favPreferenceRows"></tbody><tbody id="favCupRows"></tbody></table>
-    <p id="favSummaryHint" class="fav-hint" data-i18n="favCompareHint">Place at least five agents in each group to compare.</p>
+    <table class="fav-preferences"><caption class="sr" data-i18n="favPreferences">Preferences</caption><thead><tr><th data-i18n="favMetric">Median · cm</th><th id="favSummaryCount">Top 10</th></tr></thead><tbody id="favPreferenceRows"></tbody><tbody id="favCupRows"></tbody></table>
     <details><summary data-i18n="favSummaryDetails">Details</summary>
       <h3 data-i18n="favTypicalRange">Typical range · middle 50%</h3>
-      <table class="fav-summary-table"><thead><tr><th data-i18n="favMetricName">Measurement</th><th data-i18n="favPass">✓ Pass</th><th data-i18n="favFail">× Fail</th></tr></thead><tbody id="favSummaryRanges"></tbody></table>
+      <table class="fav-summary-table"><thead><tr><th data-i18n="favMetricName">Measurement</th><th data-i18n="favTopPicks">Top picks</th></tr></thead><tbody id="favSummaryRanges"></tbody></table>
       <h3 data-i18n="favTags">Tags</h3>
-      <table class="fav-summary-table"><thead><tr><th data-i18n="favSummaryTag">Category</th><th data-i18n="favPass">✓ Pass</th><th data-i18n="favFail">× Fail</th></tr></thead><tbody id="favSummaryBreakdown"></tbody></table>
+      <table class="fav-summary-table"><thead><tr><th data-i18n="favSummaryTag">Category</th><th data-i18n="favTopPicks">Top picks</th></tr></thead><tbody id="favSummaryBreakdown"></tbody></table>
       <p class="fav-hint" id="favSummaryPins"></p><p class="fav-hint" data-i18n="favSummaryRules">Each ranked agent counts equally.</p>
       <p class="fav-hint" id="favCupNotes"></p>
     </details>
