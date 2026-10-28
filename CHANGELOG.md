@@ -2,6 +2,17 @@
 
 ## Unreleased — audit implementation
 
+### Compact Pass/Fail preferences (2026-10-29)
+
+- Replace the top-ten prose with five measurement rows comparing all SSS–B
+  agents against C–E. Add clear counts, direction symbols, typical ranges and
+  missing-data details; unranked agents stay outside both groups.
+- Show common cup labels with tied modes and approximate mean cup labels in
+  UK/US/EU. Average the selected system's supplied label-step indices, round
+  halfway values upward, retain source estimates and recognize US aliases.
+- Preserve cup-system preferences in storage and shared URLs, mirror the new
+  numerical helpers in Python/JavaScript and export the compact summary in JPGs.
+
 ### Top-ten favourites summary (2026-10-28)
 
 - Summarize the first ten placed agents using existing measurement tags, with

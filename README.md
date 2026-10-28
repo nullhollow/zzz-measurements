@@ -219,17 +219,29 @@ Sources: `tools/favourites.tmpl.html`, `tools/favourites.js`,
 the site's head, navigation and hero. Run `python3 tools/test_favourites.py` for
 state transitions, URL round trips, locale coverage and build integration.
 
-The **Your top 10** section counts canonical measurement tags from the first ten
-placed entries, regardless of displayed numbering mode. Each pick counts equally.
-It shows the selected bust-circumference median against the roster median and UK
-cup-group counts separately. Cup groups remain categorical; bust difference is
-excluded. The tag breakdown covers height, cup group, waist, hips, thighs,
-silhouette and build with per-field denominators and hand-pinned thigh counts.
-Headline findings require at least five known observations, a 60% selected share
-and 15 percentage points above the roster share. Up to three findings are ordered
-by that difference. Partial boards show their actual sample size; below five picks,
-only counts and bust statistics are reported. **Include summary in JPG** adds the
-same findings and bust/cup facts to the image and is saved with the board and URL.
+The **Preferences** summary uses all ranked entries: **Pass** is SSS/S/A/B and
+**Fail** is C/D/E. Unranked entries stay outside both groups. Five compact rows
+show the group medians for chest, waist, hips, thighs and effective height.
+Directions compare against Fail after five known measurements per group; a gap
+larger than one quarter of the roster's interquartile range produces an arrow.
+Otherwise the result is Similar. Details show the middle-50% ranges, measured
+counts, existing tags and hand-pinned thigh provenance.
+
+Cup statistics use the selected UK/US/EU source labels independently. Common cup
+shows every tied mode with its count. Approximate mean cup averages cup-step
+indices and rounds halfway values upward, ignoring band size. It is a mean of
+label positions, not physical cup volume. UK uses the shared AA/A/B/C/D/DD/E/F/FF/
+G/GG/H/HH progression. The US display follows this dataset's D/DD/DDD/DDDD/H/I/...
+labels, accepting E/F/G as aliases for DD/DDD/DDDD; EU uses single-letter steps.
+Missing or unsupported labels are excluded from the denominator; supplied
+estimates remain marked. The chosen system is saved in the existing site-wide
+cup preference and the shared URL, so switching named boards keeps that display
+preference. Length medians remain centimetres.
+
+**Include summary in JPG** exports the same compact comparison and cup statistics.
+The mirrored algorithms are in `tools/analysis_math.py` and `tools/analysis.js`;
+measurement data, existing cup rankings, distributions and export schemas retain
+their definitions.
 
 Run the regression and Python/JavaScript parity suite with Node.js available:
 

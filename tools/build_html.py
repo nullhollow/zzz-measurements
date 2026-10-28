@@ -267,11 +267,12 @@ hero = re.search(r'<header class="hero">.*?<div class="film".*?</div>', base, re
 hero = hero.replace('MEASUREMENTS', 'FAVOURITES')
 hero = re.sub(r'<h2>.*?</h2>', '<h2 data-i18n="favSubtitle">Your agents. Your order.</h2>', hero, flags=re.S)
 hero = re.sub(r'    <div class="meta">.*?</div>', '', hero, flags=re.S)
-favourite_data = [{k: d[k] for k in ('slug', 'display', 'name_ja', 'name_zh', 'official', 'tags', 'tags_ja', 'tags_zh', 'bust_cm', 'thigh_pin')} for d in DATA]
+favourite_data = [{k: d[k] for k in ('slug', 'display', 'name_ja', 'name_zh', 'official', 'tags', 'tags_ja', 'tags_zh', 'bust_cm', 'waist_cm', 'hip_cm', 'thigh_cm', 'stature_cm', 'uk', 'us', 'eu', 'thigh_pin')} for d in DATA]
 page = (ROOT / 'tools/favourites.tmpl.html').read_text()
 for token, value in {
     'HEAD': head, 'NAV': nav, 'HERO': hero, 'REPO': PERMALINK,
     'FAVOURITES_CSS': (ROOT / 'tools/favourites.css').read_text(),
+    'ANALYSIS_JS': (ROOT / 'tools/analysis.js').read_text(),
     'FAVOURITES_JS': (ROOT / 'tools/favourites.js').read_text(),
     'FAVOURITES_DATA': json.dumps(favourite_data, ensure_ascii=False).replace('</', '<\\/'),
     'FAVOURITES_I18N': json.dumps(favourite_copy, ensure_ascii=False).replace('</', '<\\/'),

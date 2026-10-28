@@ -1296,6 +1296,7 @@ const Analysis = (() => {
   const fields = {bust:'bust_cm', waist:'waist_cm', hip:'hip_cm', thigh:'thigh_cm', height:'stature_cm', underbust:'band_cm'};
   const weights = {bust:.25, waist:.2, hip:.2, thigh:.15, height:.2, underbust:0};
   const ukCups='AA A B C D DD E F FF G GG H HH J JJ K KK L LL M MM N NN'.split(' ');
+  const cupOrders={uk:ukCups,us:'AA A B C D DD DDD DDDD H I J K L M N O P Q R S T U V'.split(' '),eu:'AA A B C D E F G H I J K L M N O P Q R S T U V'.split(' ')};
   function sizeParts(size){
     const m=/^≈?(\d+)\s*([A-Za-z]+)$/.exec(size||'');
     return m?{cup:m[2].toUpperCase(),band:Number(m[1])}:null;
@@ -1315,6 +1316,24 @@ const Analysis = (() => {
     const bins=[...groups].map(([cup,count])=>({cup,count})).sort((a,b)=>order(a.cup)-order(b.cup));
     const peak=Math.max(0,...groups.values());
     return {count:[...groups.values()].reduce((a,b)=>a+b,0),bins,modes:bins.filter(b=>b.count===peak).map(b=>b.cup)};
+  }
+  function cupLabelSummary(roster,system='uk'){
+    if(!['uk','us','eu'].includes(system))system='uk';
+    const order=cupOrders[system],counts=new Map(),estimated=new Set();let total=0,count=0,estimatedCount=0;
+    for(const d of roster){
+      const raw=d[system],parts=sizeParts(raw);if(!parts)continue;
+      const cup=system==='us'?({E:'DD',F:'DDD',G:'DDDD'}[parts.cup]||parts.cup):parts.cup,index=order.indexOf(cup);
+      if(index<0)continue;total+=index;count++;if(raw.startsWith('≈')){estimatedCount++;estimated.add(cup);}
+      counts.set(cup,(counts.get(cup)||0)+1);
+    }
+    const bins=[...counts].map(([cup,count])=>({cup,count,estimated:estimated.has(cup)})).sort((a,b)=>order.indexOf(a.cup)-order.indexOf(b.cup));
+    const peak=Math.max(0,...bins.map(b=>b.count)),meanIndex=count?total/count:null;
+    return {count,estimatedCount,bins,modes:bins.filter(b=>b.count===peak).map(b=>b.cup),modeCount:peak,meanIndex,meanLabel:count?order[Math.round(meanIndex)]:null};
+  }
+  function numericSummary(values){
+    const sorted=values.filter(v=>v!=null).sort((a,b)=>a-b),n=sorted.length;
+    function quantile(p){if(!n)return null;const i=(n-1)*p,lo=Math.floor(i),hi=Math.ceil(i);return sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo);}
+    return {count:n,median:quantile(.5),q1:quantile(.25),q3:quantile(.75)};
   }
   function cupMatrix(roster,system='uk'){
     if(!['uk','us','eu'].includes(system))system='uk';
@@ -1376,8 +1395,9 @@ const Analysis = (() => {
     if(value<lo||value>hi)return -1;
     return hi===lo?0:Math.min(bins.length-1,Math.floor((value-lo)/((hi-lo)/bins.length)));
   }
-  return {fields,weights,sizeParts,cupSize,cupDistribution,cupMatrix,percentage,value,displayed,difference,outcome,gameOutcome,matches,distribution,binIndex};
+  return {fields,weights,sizeParts,cupSize,cupLabelSummary,numericSummary,cupDistribution,cupMatrix,percentage,value,displayed,difference,outcome,gameOutcome,matches,distribution,binIndex};
 })();
+if(typeof module!=='undefined')module.exports=Analysis;
 
 
 const I18N = {

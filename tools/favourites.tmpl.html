@@ -36,14 +36,17 @@
     </section>
   </div>
   <section id="favSummary" class="fav-summary" hidden>
-    <div class="fav-summary-heading"><h2 id="favSummaryTitle"></h2><label><input type="checkbox" id="favIncludeSummary"><span data-i18n="favSummaryInclude">Include summary in JPG</span></label></div>
-    <p id="favSummaryIntro"></p>
-    <p id="favSummaryBust" class="fav-summary-bust"></p>
-    <p id="favSummaryCups"></p>
-    <ul id="favSummaryFindings"></ul>
-    <details><summary data-i18n="favSummaryDetails">Tag breakdown</summary>
-      <table class="fav-summary-table"><thead><tr><th data-i18n="favSummaryTag">Tag</th><th data-i18n="favSummaryPicks">Top picks</th><th data-i18n="favSummaryRoster">Roster</th></tr></thead><tbody id="favSummaryBreakdown"></tbody></table>
-      <p class="fav-hint" id="favSummaryPins"></p><p class="fav-hint" data-i18n="favSummaryRules">Each top pick counts equally. Waist and hip tags use raw circumferences; cup groups use UK labels. Missing values are omitted.</p>
+    <div class="fav-summary-heading"><h2 data-i18n="favPreferences">Preferences</h2><div class="fav-summary-options"><label><span data-i18n="favCupSystem">Cups</span><select id="favCupSystem" aria-label="Cup system"><option value="uk">UK</option><option value="us">US</option><option value="eu">EU</option></select></label><label><input type="checkbox" id="favIncludeSummary"><span data-i18n="favSummaryInclude">Include summary in JPG</span></label></div></div>
+    <div class="fav-summary-counts"><span id="favPassCount"></span><span id="favFailCount"></span></div>
+    <table class="fav-preferences"><caption class="sr" data-i18n="favPreferences">Preferences</caption><thead><tr><th data-i18n="favMetric">Median · cm</th><th data-i18n="favPass">✓ Pass</th><th data-i18n="favFail">× Fail</th></tr></thead><tbody id="favPreferenceRows"></tbody><tbody id="favCupRows"></tbody></table>
+    <p id="favSummaryHint" class="fav-hint" data-i18n="favCompareHint">Place at least five agents in each group to compare.</p>
+    <details><summary data-i18n="favSummaryDetails">Details</summary>
+      <h3 data-i18n="favTypicalRange">Typical range · middle 50%</h3>
+      <table class="fav-summary-table"><thead><tr><th data-i18n="favMetricName">Measurement</th><th data-i18n="favPass">✓ Pass</th><th data-i18n="favFail">× Fail</th></tr></thead><tbody id="favSummaryRanges"></tbody></table>
+      <h3 data-i18n="favTags">Tags</h3>
+      <table class="fav-summary-table"><thead><tr><th data-i18n="favSummaryTag">Category</th><th data-i18n="favPass">✓ Pass</th><th data-i18n="favFail">× Fail</th></tr></thead><tbody id="favSummaryBreakdown"></tbody></table>
+      <p class="fav-hint" id="favSummaryPins"></p><p class="fav-hint" data-i18n="favSummaryRules">Each ranked agent counts equally.</p>
+      <p class="fav-hint" id="favCupNotes"></p>
     </details>
   </section>
   <p id="favStatus" role="status" aria-live="polite"></p>
@@ -65,6 +68,7 @@
 'use strict';
 const FAVOURITES_DATA = /*__FAVOURITES_DATA__*/;
 const FAVOURITES_I18N = /*__FAVOURITES_I18N__*/;
+/*__ANALYSIS_JS__*/
 /*__FAVOURITES_JS__*/
 </script>
 </body></html>

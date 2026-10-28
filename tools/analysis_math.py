@@ -7,6 +7,11 @@ FIELDS = {'bust': 'bust_cm', 'waist': 'waist_cm', 'hip': 'hip_cm',
           'thigh': 'thigh_cm', 'height': 'stature_cm', 'underbust': 'band_cm'}
 WEIGHTS = {'bust': .25, 'waist': .2, 'hip': .2, 'thigh': .15, 'height': .2, 'underbust': 0}
 UK_CUPS = 'AA A B C D DD E F FF G GG H HH J JJ K KK L LL M MM N NN'.split()
+CUP_ORDERS = {
+    'uk': UK_CUPS,
+    'us': 'AA A B C D DD DDD DDDD H I J K L M N O P Q R S T U V'.split(),
+    'eu': 'AA A B C D E F G H I J K L M N O P Q R S T U V'.split(),
+}
 
 
 def size_parts(size):
@@ -22,6 +27,44 @@ def cup_size(size):
     if not parts or parts['cup'] not in UK_CUPS:
         return None
     return {**parts, 'score': UK_CUPS.index(parts['cup']) * 10000 + parts['band']}
+
+
+def cup_label_summary(roster, system='uk'):
+    system = system if system in CUP_ORDERS else 'uk'
+    order = CUP_ORDERS[system]
+    counts, total, count, estimated_count = {}, 0, 0, 0
+    estimated = set()
+    for record in roster:
+        raw = record.get(system)
+        parts = size_parts(raw)
+        if not parts:
+            continue
+        cup = {'E': 'DD', 'F': 'DDD', 'G': 'DDDD'}.get(parts['cup'], parts['cup']) if system == 'us' else parts['cup']
+        if cup not in order:
+            continue
+        total += order.index(cup)
+        count += 1
+        estimated_count += int(raw.startswith('≈'))
+        if raw.startswith('≈'):
+            estimated.add(cup)
+        counts[cup] = counts.get(cup, 0) + 1
+    bins = [{'cup': cup, 'count': counts[cup], 'estimated': cup in estimated} for cup in sorted(counts, key=order.index)]
+    peak = max(counts.values(), default=0)
+    mean = total / count if count else None
+    return {'count': count, 'estimatedCount': estimated_count, 'bins': bins,
+            'modes': [b['cup'] for b in bins if b['count'] == peak], 'modeCount': peak,
+            'meanIndex': mean, 'meanLabel': order[math.floor(mean + .5)] if count else None}
+
+
+def numeric_summary(values):
+    values = sorted(v for v in values if v is not None)
+    def quantile(p):
+        if not values:
+            return None
+        index = (len(values) - 1) * p
+        lo, hi = math.floor(index), math.ceil(index)
+        return values[lo] + (values[hi] - values[lo]) * (index - lo)
+    return {'count': len(values), 'median': quantile(.5), 'q1': quantile(.25), 'q3': quantile(.75)}
 
 
 def cup_distribution(roster, system='uk'):

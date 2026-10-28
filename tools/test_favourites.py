@@ -9,40 +9,61 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class FavouriteTests(unittest.TestCase):
-    def test_top_ten_summary(self):
-        subprocess.run(['node', '-e', r'''
+    def test_pass_fail_summary(self):
+        subprocess.run(['node', '-e', r"""
 const assert=require('node:assert/strict');
-const B=require('./tools/favourites.js'),roster=require('./tools/data.json');
-const top=['remielle','eldreda_sunbringer','yi_xuan','velina','astra_yao','evelyn','yanagi','jane_doe','sigrid','yidhari'];
-let board=B.empty();board.tiers[0]=top.slice(0,2);board.tiers[1]=top.slice(2);board.tiers[6]=['koleda'];
+const B=require('./tools/favourites.js'),A=require('./tools/analysis.js'),roster=require('./tools/data.json');
+const pass=['remielle','eldreda_sunbringer','yi_xuan','velina','astra_yao','evelyn','yanagi','jane_doe','sigrid','yidhari'];
+const fail=['corin','qingyi','piper','norma','dialyn','koleda','soukaku','zhao','nekomata'];
+let board=B.empty();board.tiers[0]=pass.slice(0,2);board.tiers[3]=pass.slice(2);board.tiers[4]=fail.slice(0,4);board.tiers[6]=fail.slice(4);
 const before=JSON.stringify(roster),result=B.summary(board,roster);
-assert.equal(result.count,10);assert.equal(result.bust.median,74.85);assert.equal(result.rosterBust.median,64.05);
-assert.deepEqual(result.findings.map(f=>[f.field,f.tag]),[['hips','Wide'],['height','Tall'],['thighs','Thick']]);
-assert.equal(result.thighPins,6);
-const cups=result.groups.find(g=>g.field==='bust');
-assert.deepEqual(cups.categories.filter(c=>c.count).map(c=>[c.tag,c.count]),[['DD-E',2],['F-G',5],['GG+',3]]);
-const build=result.groups.find(g=>g.field==='balance');assert.equal(build.categories.find(c=>c.tag==='Balanced').count,9);
-assert(!result.findings.some(f=>f.field==='balance'));
-board.numbering='tier';assert.deepEqual(B.summary(board,roster),result);
-board.tiers[0].reverse();assert.deepEqual(B.summary(board,roster),result);
-board=B.move(board,'koleda',0,board.tiers[0][0]);const changed=B.summary(board,roster);
-assert.equal(changed.groups.find(g=>g.field==='thighs').count,9);
-assert.equal(changed.groups.find(g=>g.field==='thighs').rosterCount,49);
-assert.notEqual(changed.bust.median,result.bust.median);
-const small=B.empty();small.tiers[0]=top.slice(0,4);assert.equal(B.summary(small,roster).findings.length,0);
-small.tiers[0].push('koleda');assert(!B.summary(small,roster).findings.some(f=>f.field==='thighs'));
-assert.equal(B.summary(B.empty(),roster).bust.median,null);
-const onlyKoleda=B.empty();onlyKoleda.tiers[0]=['koleda'];assert.equal(B.summary(onlyKoleda,roster).groups.find(g=>g.field==='thighs').count,0);
-const tied=B.empty();tied.tiers[0]=['miyabi','vivian','belle','anby','burnice',...top.slice(0,5)];
-const tieResult=B.summary(tied,roster),heights=tieResult.groups.find(g=>g.field==='height');
-assert.equal(heights.categories.find(c=>c.tag==='Mid').count,5);assert.equal(heights.categories.find(c=>c.tag==='Tall').count,5);
-assert(!tieResult.findings.some(f=>f.field==='height'));
-const missing=structuredClone(roster);missing.find(d=>d.slug==='miyabi').bust_cm=null;
-assert.equal(B.summary(tied,missing).bust.count,9);
+assert.equal(result.count,19);assert.equal(result.pass.count,10);assert.equal(result.fail.count,9);
+assert.equal(result.metrics.length,5);assert.equal(result.metrics[0].pass.median,74.85);assert.equal(result.metrics[0].fail.median,51.4);
+assert.equal(result.metrics.find(m=>m.field==='thighs').fail.count,8);
+assert(result.metrics.every(m=>m.direction==='higher'));
+assert.equal(result.pass.cups.meanIndex,8.7);assert.equal(result.pass.cups.meanLabel,'G');assert.deepEqual(result.pass.cups.modes,['G']);assert.equal(result.pass.cups.modeCount,3);
+assert.equal(B.summary(board,roster,'us').pass.cups.meanLabel,'I');
+const eu=B.summary(board,roster,'eu');assert.equal(eu.pass.cups.meanLabel,'J');assert.deepEqual(eu.pass.cups.modes,['G','H','J','M']);assert.equal(eu.pass.cups.estimatedCount,1);
+assert.equal(result.pass.thighPins,6);assert.equal(result.fail.thighPins,0);
+board.numbering='tier';board.tiers[0].reverse();assert.deepEqual(B.summary(board,roster),result);
+board=B.move(board,'vivian',3);assert.equal(B.summary(board,roster).pass.count,11);
+board=B.move(board,'vivian',4);assert.equal(B.summary(board,roster).fail.count,10);
+const small=B.empty();small.tiers[0]=pass.slice(0,4);small.tiers[6]=fail;assert(B.summary(small,roster).metrics.every(m=>m.direction===null));
+const onlyKoleda=B.empty();onlyKoleda.tiers[4]=['koleda'];assert.equal(B.summary(onlyKoleda,roster).metrics.find(m=>m.field==='thighs').fail.count,0);
+assert.equal(B.summary(B.empty(),roster).pass.cups.meanLabel,null);
+const equal=roster.map(d=>({...d,bust_cm:50}));assert.equal(B.summary(board,equal).metrics[0].direction,'same');
+assert.equal(A.cupLabelSummary([{uk:'28D'},{uk:'40DD'}]).meanLabel,'DD');
+assert.equal(A.cupLabelSummary([{uk:'28AA'},{uk:'28A'}]).meanLabel,'A');
+assert.equal(A.cupLabelSummary([{uk:'28H'},{uk:'28HH'}]).meanLabel,'HH');
+assert.equal(A.cupLabelSummary([{eu:'60D'},{eu:'60E'}],'eu').meanLabel,'E');
+const aliases=A.cupLabelSummary(['30E','30DD','30F','30DDD','30G','30DDDD','30BB'].map(us=>({us})),'us');
+assert.equal(aliases.count,6);assert.equal(aliases.meanLabel,'DDD');assert.deepEqual(aliases.modes,['DD','DDD','DDDD']);
+const estimated=A.cupLabelSummary([{us:'≈23L'}],'us');assert.equal(estimated.count,1);assert.equal(estimated.estimatedCount,1);assert(estimated.bins[0].estimated);
+assert.equal(A.cupLabelSummary([{uk:'23BB'},{}]).count,0);
+assert.deepEqual(A.numericSummary([1,2,3,4,null]),{count:4,median:2.5,q1:1.75,q3:3.25});
 board.includeSummary=true;assert.equal(B.parse(JSON.parse(JSON.stringify(board)),roster.map(d=>d.slug)).includeSummary,true);
 assert.equal(B.parse({v:1,title:'old',tiers:B.empty().tiers},roster.map(d=>d.slug)).includeSummary,false);
 assert.equal(JSON.stringify(roster),before);
-'''], cwd=ROOT, check=True)
+"""], cwd=ROOT, check=True)
+
+    def test_cup_and_numeric_python_javascript_parity(self):
+        from analysis_math import cup_label_summary, numeric_summary
+        roster = json.loads((ROOT / 'tools/data.json').read_text())
+        cases = [roster, roster[:10], [], [
+            {'uk': '23HH', 'us': '≈23L', 'eu': '≈50L'},
+            {'uk': '30D', 'us': '30E', 'eu': '65D'},
+            {'uk': '30DD', 'us': '30G', 'eu': '65E'},
+            {'uk': '30BB', 'us': '30BB', 'eu': '65DD'}, {},
+        ]]
+        numbers = [[], [None], [2], [1, 2, 3, 4, None], [d['bust_cm'] for d in roster]]
+        payload = {'cases': cases, 'numbers': numbers}
+        output = subprocess.check_output(['node', '-e', r"""
+const A=require('./tools/analysis.js'),p=JSON.parse(require('node:fs').readFileSync(0,'utf8'));
+console.log(JSON.stringify({cups:p.cases.map(rows=>['uk','us','eu'].map(s=>A.cupLabelSummary(rows,s))),numbers:p.numbers.map(A.numericSummary)}));
+"""], cwd=ROOT, input=json.dumps(payload), text=True)
+        actual = json.loads(output)
+        self.assertEqual(actual['cups'], [[cup_label_summary(rows, system) for system in ('uk', 'us', 'eu')] for rows in cases])
+        self.assertEqual(actual['numbers'], [numeric_summary(values) for values in numbers])
 
     def test_export_name_wrapping(self):
         subprocess.run(['node', '-e', r'''
@@ -101,10 +122,8 @@ assert.deepEqual(B.parse(JSON.parse(new URLSearchParams(url.hash.slice(1)).get('
         for lang in copy:
             self.assertEqual(set(copy[lang]), set(copy['en']))
             self.assertTrue(all(copy[lang].values()))
-            for record in json.loads((ROOT / 'tools/data.json').read_text()):
-                for field, tag in record['tags'].items():
-                    if tag not in ('n/a', '?'):
-                        self.assertIn(f'favTrait_{field}_{tag}', copy[lang])
+            for field in ('bust', 'waist', 'hips', 'thighs', 'height'):
+                self.assertIn(f'favMeasure_{field}', copy[lang])
         page = (ROOT / 'docs/favourites.html').read_text()
         for marker in ('data-page="favourites"', 'id="favBoard"', 'id="favDownload"',
                        'id="favPreview"', 'const siteTheme', "'image/jpeg',0.9", 'download="zzz-favourites.jpg"', 'const FAVOURITES_DATA'):
@@ -113,7 +132,7 @@ assert.deepEqual(B.parse(JSON.parse(new URLSearchParams(url.hash.slice(1)).get('
         source = {d['slug']: d for d in json.loads((ROOT / 'tools/data.json').read_text())}
         self.assertEqual(set(d['slug'] for d in payload), set(source))
         for record in payload:
-            for field in ('tags', 'tags_ja', 'tags_zh', 'bust_cm', 'thigh_pin'):
+            for field in ('tags', 'tags_ja', 'tags_zh', 'bust_cm', 'waist_cm', 'hip_cm', 'thigh_cm', 'stature_cm', 'uk', 'us', 'eu', 'thigh_pin'):
                 self.assertEqual(record[field], source[record['slug']][field])
         for path in ('index.html', 'tools.html'):
             self.assertIn('id="favouritesLink"', (ROOT / 'docs' / path).read_text())
