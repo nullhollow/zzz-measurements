@@ -4,6 +4,9 @@
 
 ### Favourites page (2026-10-28)
 
+- Increase PNG exports to 2160 px wide with vector text rendered at double
+  resolution. Hyphenate English names when a word continues onto the next line.
+
 - Add ordered SSS/S/A/B/C/D/E tiers with matching number badges, stronger purple
   for A and blue for B, using the site's existing ZZZ artwork, typography and hero.
 - Support dragging, tap placement, earlier/later ordering, undo, device-local

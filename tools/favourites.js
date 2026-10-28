@@ -22,7 +22,29 @@ const FavouriteBoard = (() => {
   function ranks(board){
     let n=0;return board.tiers.map(row=>row.map((slug,i)=>({slug,rank:board.numbering==='tier'?i+1:++n})));
   }
-  return {tiers,colours,empty,parse,move,ranks};
+  function wrapText(text,measure,width,maxLines,hyphenate=false){
+    const chars=Array.from(text),lines=[];
+    const latin=ch=>/[A-Za-z]/.test(ch||'');
+    let start=0;
+    while(start<chars.length&&lines.length<maxLines){
+      let end=start;
+      while(end<chars.length&&measure(chars.slice(start,end+1).join(''))<=width)end++;
+      if(end===start)end++;
+      if(end<chars.length&&lines.length===maxLines-1){
+        while(end>start&&measure(chars.slice(start,end).join('')+'…')>width)end--;
+        lines.push(chars.slice(start,end).join('').trimEnd()+'…');break;
+      }
+      let suffix='';
+      if(hyphenate&&end<chars.length&&latin(chars[end-1])&&latin(chars[end])){
+        while(end>start+1&&measure(chars.slice(start,end).join('')+'-')>width)end--;
+        if(latin(chars[end-1])&&latin(chars[end]))suffix='-';
+      }
+      lines.push(chars.slice(start,end).join('').trimEnd()+suffix);start=end;
+      while(chars[start]===' ')start++;
+    }
+    return lines;
+  }
+  return {tiers,colours,empty,parse,move,ranks,wrapText};
 })();
 if(typeof module!=='undefined')module.exports=FavouriteBoard;
 
@@ -162,9 +184,11 @@ if(typeof document!=='undefined')(() => {
       const img=new Image();img.src=`character_images/${bySlug.get(slug).official}.webp`;await img.decode();return [slug,img];
     })));
     const rowHeight=row=>Math.ceil(row.length/6)*216+24;
-    const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=220+rows.filter(row=>row.length).reduce((h,row)=>h+rowHeight(row),0);
+    const width=1080,height=220+rows.filter(row=>row.length).reduce((h,row)=>h+rowHeight(row),0),scale=2;
+    const canvas=document.createElement('canvas');canvas.width=width*scale;canvas.height=height*scale;
     const ctx=canvas.getContext('2d'),colour=key=>style.getPropertyValue('--'+key).trim();
-    ctx.fillStyle=colour('ink');ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.scale(scale,scale);ctx.imageSmoothingQuality='high';
+    ctx.fillStyle=colour('ink');ctx.fillRect(0,0,width,height);
     ctx.fillStyle=colour('concrete');ctx.font=`40px ${display}`;
     drawText(ctx,exportBoard.title||t('favDefaultTitle'),40,65,1000,46,2);
     ctx.font=`18px ${body}`;ctx.fillStyle=colour('dim');ctx.fillText('ZENLESS ZONE ZERO'+(exportBoard.author?' · '+exportBoard.author:''),40,145);
@@ -179,21 +203,16 @@ if(typeof document!=='undefined')(() => {
         ctx.save();ctx.beginPath();ctx.rect(x,top,130,140);ctx.clip();ctx.drawImage(img,x+(130-img.naturalWidth*scale)/2,top,img.naturalWidth*scale,img.naturalHeight*scale);ctx.restore();
         ctx.font='bold 19px '+body;const badge=ctx.measureText('#'+rank).width+14;
         ctx.fillStyle=FavouriteBoard.colours[i];ctx.fillRect(x,top,badge,28);ctx.fillStyle=i===6?'#FFFFFF':'#17171C';ctx.fillText('#'+rank,x+7,top+21);
-        ctx.fillStyle=colour('concrete');ctx.font=`19px ${body}`;drawText(ctx,name(bySlug.get(slug)),x,top+163,130,22,3);
+        ctx.fillStyle=colour('concrete');ctx.font=`19px ${body}`;drawText(ctx,name(bySlug.get(slug)),x,top+163,130,22,3,lang==='en');
       });
       ctx.fillStyle=colour('line2');ctx.fillRect(128,y+height-2,912,1);y+=height;
     });
-    ctx.fillStyle=colour('dim');ctx.font=`15px ${body}`;ctx.fillText('ZZZ Measurements · Art © HoYoverse',40,canvas.height-18);
+    ctx.fillStyle=colour('dim');ctx.font=`15px ${body}`;ctx.fillText('ZZZ Measurements · Art © HoYoverse',40,height-18);
     return canvas;
   }
-  function drawText(ctx,text,x,y,width,lineHeight,maxLines){
-    let line='',n=0;const chars=Array.from(text);
-    for(let i=0;i<chars.length;i++){
-      if(ctx.measureText(line+chars[i]).width>width&&line){
-        if(n===maxLines-1){while(line&&ctx.measureText(line+'…').width>width)line=line.slice(0,-1);ctx.fillText(line+'…',x,y+n*lineHeight);return;}
-        ctx.fillText(line,x,y+n*lineHeight);n++;line='';
-      }line+=chars[i];
-    }ctx.fillText(line,x,y+n*lineHeight);
+  function drawText(ctx,text,x,y,width,lineHeight,maxLines,hyphenate=false){
+    FavouriteBoard.wrapText(text,s=>ctx.measureText(s).width,width,maxLines,hyphenate)
+      .forEach((line,i)=>ctx.fillText(line,x,y+i*lineHeight));
   }
   window.addEventListener('hashchange',boot);boot();
   if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});

@@ -207,10 +207,12 @@ changes and removed saved boards. Copy link includes the title, author, ordered
 slugs and numbering mode; a shared board takes precedence over the local draft.
 Personal rankings never change measurement data or comparison state.
 
-Export image creates a 1080 px wide PNG with content-driven height, localized
+Export image creates a 2160 px wide PNG with content-driven height, localized
 names, the optional title/author, tier colours and artwork credit. Preview and
 Save PNG use the same generated image. Empty tiers and unranked entries are
-omitted. Export uses the existing optimized official portraits and bundled fonts.
+omitted. English names split within a word receive a hyphen. The canvas renders
+at twice the layout resolution, using the existing optimized official
+portraits and bundled fonts.
 
 Sources: `tools/favourites.tmpl.html`, `tools/favourites.js`,
 `tools/favourites.css` and `tools/favourites_i18n.json`. The HTML generator reuses

@@ -8,6 +8,24 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class FavouriteTests(unittest.TestCase):
+    def test_export_name_wrapping(self):
+        subprocess.run(['node', '-e', r'''
+const assert=require('node:assert/strict');
+const {wrapText}=require('./tools/favourites.js');
+const measure=s=>Array.from(s).length*10;
+assert.deepEqual(wrapText('Eldreda Sunbringer',measure,110,3,true),['Eldreda Su-','nbringer']);
+assert.deepEqual(wrapText('Jane Doe',measure,80,3,true),['Jane Doe']);
+assert.deepEqual(wrapText('Astra Yao',measure,60,3,true),['Astra','Yao']);
+assert.deepEqual(wrapText('Aria (Construct)',measure,100,3,true),['Aria (Con-','struct)']);
+assert.deepEqual(wrapText('エルダ・サンブリンガー',measure,60,3),['エルダ・サン','ブリンガー']);
+assert.deepEqual(wrapText('Long title text',measure,60,1),['Long…']);
+for(const d of require('./tools/data.json')){
+  const lines=wrapText(d.display,measure,110,3,true);
+  assert(lines.every(line=>measure(line)<=110));
+  assert.equal(lines.join('').replaceAll('-','').replaceAll(' ',''),d.display.replaceAll('-','').replaceAll(' ',''));
+}
+'''], cwd=ROOT, check=True)
+
     def test_real_board_operations(self):
         subprocess.run(['node', '-e', r'''
 const assert=require('node:assert/strict');
