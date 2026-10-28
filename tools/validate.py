@@ -217,7 +217,7 @@ def check_assets(out):
                     if f"/{d['official']}.webp" not in section or d['outfit'] not in section:
                         err(f'{d["slug"]} ({lang}): canonical outfit missing from {label}')
     # exports & crawler files
-    for rel in ('index.html', 'tools.html', 'methodology.html', 'offline.html', 'sw.js', '404.html',
+    for rel in ('index.html', 'tools.html', 'favourites.html', 'methodology.html', 'offline.html', 'sw.js', '404.html',
                 'robots.txt', 'sitemap.xml', 'manifest.webmanifest', '.nojekyll',
                 'ja/methodology.html', 'zh/methodology.html',
                 'data/measurements.json', 'data/measurements.csv', 'data/schema.json'):
@@ -286,6 +286,11 @@ def check_html(out, site):
             err(f'{rel}: missing lang attribute')
     idx = (out / 'index.html').read_text()
     tools = (out / 'tools.html').read_text()
+    favourites = (out / 'favourites.html').read_text()
+    for needle in ('data-page="favourites"', 'id="favBoard"', 'id="favDownload"',
+                   f'rel="canonical" href="{site}favourites.html"'):
+        if needle not in favourites:
+            err(f'favourites.html: missing {needle}')
     for rel, page in (('index.html', idx), ('tools.html', tools)):
         settings = re.search(r'<dialog\b[^>]*id="settingsDialog".*?</dialog>', page, re.S)
         if not settings or 'id="unitToggle"' not in settings[0] or 'id="cupSystemToggle"' not in settings[0]:
@@ -353,6 +358,8 @@ def check_html(out, site):
     sm = (out / 'sitemap.xml').read_text()
     if f'{site}tools.html' not in sm:
         err('sitemap missing tools.html')
+    if f'{site}favourites.html' not in sm:
+        err('sitemap missing favourites.html')
     for d in DATA:
         if f"characters/{d['slug']}.html" not in sm:
             err(f'sitemap missing {d["slug"]}')
@@ -360,7 +367,7 @@ def check_html(out, site):
     if '<base href=' not in notfound:
         err('404.html needs a <base href> so nested URLs resolve assets')
     sw = (out / 'sw.js').read_text()
-    for needle in ('offline.html', 'tools.html', 'cache', 'fetch'):
+    for needle in ('offline.html', 'tools.html', 'favourites.html', 'cache', 'fetch'):
         if needle not in sw:
             err(f'sw.js missing {needle}')
     # generated copy must agree with the roster size

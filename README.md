@@ -11,6 +11,7 @@ Live site: <https://nullhollow.github.io/zzz-measurements/>
 ```
 index.html                 generated roster page
 tools.html                 generated comparison/exploration page
+favourites.html            generated personal tier-ranking page and PNG export
 measurements3.3.csv        source sheet (the only hand-edited data)
 character_images/          54 official portraits + 26 outfit renders + thumbs/
 images/                    49 sheet crops
@@ -34,7 +35,7 @@ python3 tools/validate.py  --site-url https://<user>.github.io/<repo>/
 
 1. `build_data.py` — CSV → `tools/data.json` (ratios, classes, percentiles, provenance)
 2. `describe.py` — generated profile text in English, Japanese and Simplified Chinese (cm + inches)
-3. `build_html.py` — `index.html` and `tools.html`, localized data and JSON-LD
+3. `build_html.py` — `index.html`, `tools.html` and `favourites.html`, localized data and JSON-LD
 4. `build_pages.py` — 50 character pages × 3 languages, 3 methodology/FAQ pages, dataset exports, offline page
 5. crawler files, PWA manifest, service worker, link check
 
@@ -190,7 +191,31 @@ methodology. The public measurement schema is unchanged. Old `#view=distribution
 Tool section changes create browser-history entries; field edits replace the
 current entry. A shared sticky container keeps tool navigation above its controls.
 Navigation carries filters, comparison selections, units, theme and language between
-pages. The packed site contains 50 entries, 150 profiles and 731 files (about 140.8 MB).
+pages. The packed site contains 50 entries, 150 profiles and 732 files (about 141.0 MB).
+
+## Favourites
+
+`favourites.html` ranks the current roster in ordered SSS, S, A, B, C, D and E
+tiers. Tier labels and number badges share the same colours: amber-gold, gold,
+purple, blue, silver, grey and dark grey. Numbers can run across the board or
+restart within each tier. Drag agents to insert before another portrait or append
+to a tier; tapping an agent and selecting its tier works on phones. Earlier/later
+controls adjust its position. Empty tiers remain available while editing.
+
+Drafts and named boards are saved on the current device. Undo restores board
+changes and removed saved boards. Copy link includes the title, author, ordered
+slugs and numbering mode; a shared board takes precedence over the local draft.
+Personal rankings never change measurement data or comparison state.
+
+Export image creates a 1080 px wide PNG with content-driven height, localized
+names, the optional title/author, tier colours and artwork credit. Preview and
+Save PNG use the same generated image. Empty tiers and unranked entries are
+omitted. Export uses the existing optimized official portraits and bundled fonts.
+
+Sources: `tools/favourites.tmpl.html`, `tools/favourites.js`,
+`tools/favourites.css` and `tools/favourites_i18n.json`. The HTML generator reuses
+the site's head, navigation and hero. Run `python3 tools/test_favourites.py` for
+state transitions, URL round trips, locale coverage and build integration.
 
 Run the regression and Python/JavaScript parity suite with Node.js available:
 

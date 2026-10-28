@@ -113,6 +113,8 @@ function syncPageLinks(params){
   $('#measurementsLink').href=pageHref(false,params);
   $('#chooseAgents').href=pageHref(false,params);
   $('#toolsLink').href=pageHref(true,params,TOOL_VIEWS.includes(state.view)?state.view:'distribution');
+  const favouriteParams=new URLSearchParams(params);favouriteParams.set('lang',state.lang);favouriteParams.set('th',siteTheme.preference);
+  $('#favouritesLink').href='favourites.html#'+favouriteParams;
   $$('#toolsNav [data-tool-link]').forEach(a=>a.href=pageHref(true,params,a.dataset.toolLink));
 }
 function openTool(view,source){

@@ -2,6 +2,17 @@
 
 ## Unreleased — audit implementation
 
+### Favourites page (2026-10-28)
+
+- Add ordered SSS/S/A/B/C/D/E tiers with matching number badges, stronger purple
+  for A and blue for B, using the site's existing ZZZ artwork, typography and hero.
+- Support dragging, tap placement, earlier/later ordering, undo, device-local
+  drafts and named boards, shared links and overall/per-tier numbering.
+- Export a 1080 px wide PNG with localized names, title, optional author and art
+  credit. Reuse the exact PNG in preview and download; omit unranked/empty tiers.
+- Add EN/JA/ZH copy, responsive picker placement, cache/sitemap/PWA integration
+  and regression coverage. Keep personal rankings separate from measurements.
+
 ### UK cup-order correction (2026-10-25)
 
 - Correct UK progression to D < DD < E < F < FF < G < GG < H < HH < J < JJ,

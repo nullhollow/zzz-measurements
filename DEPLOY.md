@@ -9,6 +9,7 @@ service worker and the crawler files. Nothing else in the repository is served.
 docs/
   index.html               interactive chart (50 cards pre-rendered)
   tools.html               distributions, matching, game, sandbox, lineup and guide
+  favourites.html          personal tier rankings and shareable PNG export
   methodology.html         method, classes, FAQ
   characters/*.html        50 English profiles
   ja/, zh/                 localized profiles + methodology
@@ -25,7 +26,7 @@ docs/
   character_images/        54 portraits + 26 outfit renders + responsive thumbs/
 ```
 
-≈ **731 files / 140.8 MB** (the responsive thumb set adds storage but cuts transfer).
+≈ **732 files / 141.0 MB** (the responsive thumb set adds storage but cuts transfer).
 
 ## 1. Set the URL
 

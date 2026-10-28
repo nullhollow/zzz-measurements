@@ -37,6 +37,7 @@ jobs:
           python3 tools/test_roster.py
           python3 tools/test_reference.py
           python3 tools/test_eldreda.py
+          python3 tools/test_favourites.py
 
       - name: Theme preferences and palette contrast
         run: python3 tools/test_theme.py
@@ -44,7 +45,7 @@ jobs:
       - name: Rebuild is reproducible
         run: |
           git diff --stat
-          git diff --exit-code -- docs index.html tools.html tools/data.json
+          git diff --exit-code -- docs index.html tools.html favourites.html tools/data.json
 
       - name: Upload packed site
         uses: actions/upload-artifact@v4

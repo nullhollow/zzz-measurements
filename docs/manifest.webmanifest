@@ -51,6 +51,11 @@
    "url": "./tools.html"
   },
   {
+   "name": "Favourites",
+   "short_name": "Favourites",
+   "url": "./favourites.html"
+  },
+  {
    "name": "Methodology",
    "short_name": "Method",
    "url": "./methodology.html"

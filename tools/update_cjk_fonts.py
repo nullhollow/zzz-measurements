@@ -23,7 +23,7 @@ SOURCES = {
 
 def used_chars(lang):
     chars = set()
-    paths = [*(ROOT / 'docs' / lang).rglob('*.html'), ROOT / 'docs/index.html', ROOT / 'docs/tools.html']
+    paths = [*(ROOT / 'docs' / lang).rglob('*.html'), ROOT / 'docs/index.html', ROOT / 'docs/tools.html', ROOT / 'docs/favourites.html']
     for path in paths:
         for ch in path.read_text(errors='ignore'):
             o = ord(ch)

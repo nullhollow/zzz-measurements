@@ -1,0 +1,59 @@
+/*__HEAD__*/
+<style>/*__FAVOURITES_CSS__*/</style>
+</head>
+<body data-page="favourites">
+<a class="skip" href="#main" data-i18n="favSkip">Skip to favourites</a>
+/*__NAV__*/
+/*__HERO__*/
+<main id="main" class="wrap favourites" tabindex="-1">
+  <div class="fav-toolbar">
+    <label><span data-i18n="favTitle">Title</span><input id="favTitle" maxlength="80" autocomplete="off"></label>
+    <label><span data-i18n="favAuthor">Author (optional)</span><input id="favAuthor" maxlength="40" autocomplete="off"></label>
+    <label><span data-i18n="favNumbering">Numbers</span><select id="favNumbering"><option value="overall" data-i18n="favOverall">Overall ranking</option><option value="tier" data-i18n="favPerTier">Within each tier</option></select></label>
+    <label><span data-i18n="language">Language</span><select id="lang"><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option></select></label>
+    <label><span data-i18n="theme">Theme</span><select id="theme"><option value="system" data-i18n="systemTheme">System</option><option value="dark" data-i18n="dark">Dark</option><option value="light" data-i18n="light">Light</option></select></label>
+  </div>
+  <div class="fav-actions">
+    <button class="btn" id="favUndo" data-i18n="favUndo" disabled>Undo</button>
+    <button class="btn" id="favReset" data-i18n="favReset">Clear board</button>
+    <button class="btn" id="favShare" data-i18n="favShare">Copy link</button>
+    <button class="btn primary" id="favExport" data-i18n="favExport" disabled>Export image</button>
+    <span id="favCount" class="fav-count"></span>
+  </div>
+  <div class="fav-selection" id="favSelection">
+    <strong id="favSelected" data-i18n="favSelect">Select an agent</strong>
+    <label><span data-i18n="favTier">Tier</span><select id="favTier" disabled></select></label>
+    <button class="btn" id="favEarlier" data-i18n="favEarlier" disabled>Move earlier</button>
+    <button class="btn" id="favLater" data-i18n="favLater" disabled>Move later</button>
+  </div>
+  <p class="fav-hint" data-i18n="favHint">Drag to arrange, or select an agent and choose a tier. Tap a tier label to place the selected agent.</p>
+  <div class="fav-layout">
+    <div id="favBoard" class="fav-board"></div>
+    <section class="fav-pool" id="favPool">
+      <h2><button type="button" id="favUnrank" data-i18n="favUnranked">Unranked</button><span id="favPoolCount"></span></h2>
+      <input type="search" id="favSearch" autocomplete="off" data-placeholder="favSearch" aria-label="Search agents" placeholder="Search agents">
+      <div id="favPoolItems" class="fav-pool-items"></div>
+    </section>
+  </div>
+  <p id="favStatus" role="status" aria-live="polite"></p>
+  <div class="fav-saved">
+    <span data-i18n="favLocal">Drafts are saved on this device.</span>
+    <button class="btn" id="favSave" data-i18n="favSave">Save named board</button>
+    <label><span class="sr" data-i18n="favSaved">Saved boards</span><select id="favSaved"></select></label>
+    <button class="btn" id="favLoad" data-i18n="favLoad" disabled>Load</button>
+    <button class="btn" id="favDelete" data-i18n="favDelete" disabled>Delete</button>
+  </div>
+  <noscript><p data-i18n="favNoScript">Enable JavaScript to arrange favourites and export an image.</p><a href="index.html">Measurements</a></noscript>
+</main>
+<dialog id="favPreview" class="settings-dialog fav-preview" aria-labelledby="favPreviewTitle">
+  <div class="fav-preview-actions"><h2 id="favPreviewTitle" data-i18n="favPreview">Image preview</h2><button class="btn" id="favPreviewClose" data-i18n="favClose">Close</button><a class="btn primary" id="favDownload" download="zzz-favourites.png" data-i18n="favDownload">Save PNG</a></div>
+  <img id="favPreviewImage" alt="Favourite agents in ranked tiers">
+</dialog>
+<footer><div class="fbox"><div class="mark"><span>ZZZ MEASUREMENTS</span></div><div class="flinks"><a href="methodology.html" id="methodologyLink" data-i18n="methodology">Methodology &amp; FAQ</a><a href="/*__REPO__*/" data-i18n="sourceRepository">Source repository</a></div><span data-i18n="favCredits">Character artwork © HoYoverse. Personal rankings are saved separately from measurements.</span></div></footer>
+<script>
+'use strict';
+const FAVOURITES_DATA = /*__FAVOURITES_DATA__*/;
+const FAVOURITES_I18N = /*__FAVOURITES_I18N__*/;
+/*__FAVOURITES_JS__*/
+</script>
+</body></html>

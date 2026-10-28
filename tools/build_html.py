@@ -244,3 +244,38 @@ for filename, is_tools in (('index.html', False), ('tools.html', True)):
     html = render_interactive(is_tools)
     (ROOT / filename).write_text(html)
     print(filename + ' written:', round(len(html) / 1024, 1), 'KB,', N, 'entries')
+
+# Share the site's actual head, navigation and hero rather than a second design system.
+favourite_copy = json.loads((ROOT / 'tools/favourites_i18n.json').read_text())
+base = render_interactive(False)
+head = base.split('</head>', 1)[0]
+head = head.replace('<title>ZZZ Measurements</title>', '<title>Favourites · ZZZ Measurements</title>')
+head = head.replace(_html.escape(DESC, quote=True), _html.escape(favourite_copy['en']['favDescription'], quote=True))
+head = head.replace('content="ZZZ Female Measurements"', 'content="Favourites · ZZZ Measurements"')
+head = head.replace('content="modelmetrics.net"', 'content="ZZZ Measurements"')
+head = head.replace('href="https://nullhollow.github.io/zzz-measurements/"', 'href="https://nullhollow.github.io/zzz-measurements/favourites.html"')
+head = head.replace('property="og:url" content="https://nullhollow.github.io/zzz-measurements/"', 'property="og:url" content="https://nullhollow.github.io/zzz-measurements/favourites.html"')
+head = re.sub(r'<script type="application/ld\+json">.*?</script>', '<script type="application/ld+json">' + json.dumps({
+    '@context': 'https://schema.org', '@type': 'WebPage', 'name': 'Favourites · ZZZ Measurements',
+    'url': 'https://nullhollow.github.io/zzz-measurements/favourites.html',
+    'description': favourite_copy['en']['favDescription'], 'inLanguage': ['en', 'ja', 'zh'],
+    'isPartOf': {'@id': 'https://nullhollow.github.io/zzz-measurements/#website'},
+}, ensure_ascii=False) + '</script>', head, flags=re.S)
+nav = re.search(r'<nav class="site-nav".*?</nav>', base, re.S)[0].replace(' aria-current="page"', '')
+nav = nav.replace('id="favouritesLink"', 'id="favouritesLink" aria-current="page"')
+hero = re.search(r'<header class="hero">.*?<div class="film".*?</div>', base, re.S)[0]
+hero = hero.replace('MEASUREMENTS', 'FAVOURITES')
+hero = re.sub(r'<h2>.*?</h2>', '<h2 data-i18n="favSubtitle">Your agents. Your order.</h2>', hero, flags=re.S)
+hero = re.sub(r'    <div class="meta">.*?</div>', '', hero, flags=re.S)
+favourite_data = [{k: d[k] for k in ('slug', 'display', 'name_ja', 'name_zh', 'official')} for d in DATA]
+page = (ROOT / 'tools/favourites.tmpl.html').read_text()
+for token, value in {
+    'HEAD': head, 'NAV': nav, 'HERO': hero, 'REPO': PERMALINK,
+    'FAVOURITES_CSS': (ROOT / 'tools/favourites.css').read_text(),
+    'FAVOURITES_JS': (ROOT / 'tools/favourites.js').read_text(),
+    'FAVOURITES_DATA': json.dumps(favourite_data, ensure_ascii=False).replace('</', '<\\/'),
+    'FAVOURITES_I18N': json.dumps(favourite_copy, ensure_ascii=False).replace('</', '<\\/'),
+}.items():
+    page = page.replace(f'/*__{token}__*/', value)
+(ROOT / 'favourites.html').write_text(page)
+print('favourites.html written:', round(len(page) / 1024, 1), 'KB,', N, 'entries')

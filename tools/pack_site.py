@@ -59,6 +59,7 @@ MANIFEST = {
     'shortcuts': [
         {'name': 'Measurements table', 'short_name': 'Table', 'url': './#view=table'},
         {'name': 'Comparison tools', 'short_name': 'Tools', 'url': './tools.html'},
+        {'name': 'Favourites', 'short_name': 'Favourites', 'url': './favourites.html'},
         {'name': 'Methodology', 'short_name': 'Method', 'url': './methodology.html'},
     ],
 }
@@ -118,10 +119,10 @@ def copy_tree(src, dst):
     return n
 
 
-def service_worker(html, site, tools_html=''):
-    version = hashlib.sha256((html + tools_html).encode()).hexdigest()[:10]
+def service_worker(html, site, tools_html='', favourites_html=''):
+    version = hashlib.sha256((html + tools_html + favourites_html).encode()).hexdigest()[:10]
     fonts = sorted(p.name for p in (ROOT / 'fonts').glob('*.woff2'))
-    shell = ['./', 'index.html', 'tools.html', 'methodology.html', 'offline.html', 'manifest.webmanifest',
+    shell = ['./', 'index.html', 'tools.html', 'favourites.html', 'methodology.html', 'offline.html', 'manifest.webmanifest',
              'favicon.svg', 'favicon.ico', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png',
              'fonts/fonts.css', 'data/measurements.json'] + [f'fonts/{f}' for f in fonts]
     shell_js = json.dumps(shell, indent=1)
@@ -184,7 +185,7 @@ self.addEventListener('fetch', event => {{
 
 
 def sitemap(site):
-    pages = ['', 'tools.html', 'methodology.html'] + [f"characters/{d['slug']}.html" for d in DATA]
+    pages = ['', 'tools.html', 'favourites.html', 'methodology.html'] + [f"characters/{d['slug']}.html" for d in DATA]
     for lang in ('ja', 'zh'):
         pages += [f'{lang}/methodology.html'] + [f"{lang}/characters/{d['slug']}.html" for d in DATA]
     items = '\n'.join(
@@ -278,7 +279,9 @@ def main():
     (out / 'index.html').write_text(html)
     tools_html = (ROOT / 'tools.html').read_text().replace('__SITE_URL__', site).replace(PLACEHOLDER, site)
     (out / 'tools.html').write_text(tools_html)
-    files = 2
+    favourites_html = (ROOT / 'favourites.html').read_text().replace('__SITE_URL__', site).replace(PLACEHOLDER, site)
+    (out / 'favourites.html').write_text(favourites_html)
+    files = 3
     for f in ASSET_FILES:
         shutil.copy2(ROOT / f, out / f)
         files += 1
@@ -303,7 +306,7 @@ def main():
     files += sum(1 for _ in (out / 'characters').glob('*.html')) + sum(1 for _ in (out / 'ja' / 'characters').glob('*.html')) + sum(1 for _ in (out / 'zh' / 'characters').glob('*.html')) + 8
 
     # service worker + crawler files
-    (out / 'sw.js').write_text(service_worker(html, site, tools_html))
+    (out / 'sw.js').write_text(service_worker(html, site, tools_html, favourites_html))
     (out / 'robots.txt').write_text(
         'User-agent: *\nAllow: /\n\nSitemap: ' + site + 'sitemap.xml\n')
     (out / 'sitemap.xml').write_text(sitemap(site))

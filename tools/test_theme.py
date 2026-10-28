@@ -74,7 +74,7 @@ assert.equal(a.root.dataset.theme,'light');
         css = adaptive_css('html[data-theme="light"] .label{color:#000}')
         self.assertIn('@media(prefers-color-scheme:light)', css)
         self.assertIn('html:not([data-theme]) .label{color:#000}', css)
-        for path in ('index.html', 'tools.html', 'characters/jane_doe.html', 'ja/characters/miyabi.html',
+        for path in ('index.html', 'tools.html', 'favourites.html', 'characters/jane_doe.html', 'ja/characters/miyabi.html',
                      'zh/methodology.html', 'offline.html', '404.html'):
             text = (ROOT / 'docs' / path).read_text()
             with self.subTest(path=path):

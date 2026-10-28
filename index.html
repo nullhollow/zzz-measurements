@@ -1104,6 +1104,7 @@ html:not([data-theme]) .chip.shape{color:var(--blue)}
 <nav class="site-nav" aria-label="ZZZ">
   <a href="index.html" id="measurementsLink" data-i18n="measurementsNav" aria-current="page">Measurements</a>
   <a href="tools.html" id="toolsLink" data-i18n="tools" >Tools</a>
+  <a href="favourites.html" id="favouritesLink" data-i18n="favouritesNav">Favourites</a>
 </nav>
 
 <header class="hero">
@@ -2911,6 +2912,7 @@ const I18N = {
     projectSource: "Project estimate; not modelmetrics.net",
     estimatedSizesNote: "≈ marks an estimated size. The supplied UK 23HH uses a nonstandard band, so US/EU conversions are not exact; the EU estimate rounds the theoretical band upward.",
     mainSource: "Main source",
+    favouritesNav: "Favourites",
     compareBasis:'Comparison basis', rawMeasurements:'Raw measurements', heightAdjusted:'Height-adjusted',
     heightAdjustedNote:'Circumference ÷ height × 100', smallerWins:'Smaller value', largerWins:'Larger value',
     changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', systemTheme:'System', dark:'Dark', light:'Light', schema:'Schema',
@@ -3133,6 +3135,7 @@ const I18N = {
     projectSource: "独自の推定値（modelmetrics.net出典ではありません）",
     estimatedSizesNote: "≈は推定サイズです。出典のUK 23HHはバンド値が規格外のため、US・EUへ正確には換算できません。EUの推定では計算上のバンド値を切り上げています。",
     mainSource: "主な出典",
+    favouritesNav: "推しランキング",
     compareBasis:'比較の基準', rawMeasurements:'実寸', heightAdjusted:'身長比',
     heightAdjustedNote:'周囲長 ÷ 身長 × 100', smallerWins:'小さい値', largerWins:'大きい値',
     changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', systemTheme:'端末に合わせる', dark:'ダーク', light:'ライト', schema:'スキーマ',
@@ -3355,6 +3358,7 @@ const I18N = {
     projectSource: "本站估算，并非来自modelmetrics.net",
     estimatedSizesNote: "≈表示估计尺码。来源提供的UK 23HH下围并非标准尺码，无法精确转换为US或EU；EU估值将理论下围向上取整。",
     mainSource: "主要来源",
+    favouritesNav: "喜爱榜",
     compareBasis:'对比方式', rawMeasurements:'实测围度', heightAdjusted:'身高占比',
     heightAdjustedNote:'围度 ÷ 身高 × 100', smallerWins:'较小值', largerWins:'较大值',
     changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', systemTheme:'跟随系统', dark:'深色', light:'浅色', schema:'数据结构',
@@ -4720,6 +4724,8 @@ function syncPageLinks(params){
   $('#measurementsLink').href=pageHref(false,params);
   $('#chooseAgents').href=pageHref(false,params);
   $('#toolsLink').href=pageHref(true,params,TOOL_VIEWS.includes(state.view)?state.view:'distribution');
+  const favouriteParams=new URLSearchParams(params);favouriteParams.set('lang',state.lang);favouriteParams.set('th',siteTheme.preference);
+  $('#favouritesLink').href='favourites.html#'+favouriteParams;
   $$('#toolsNav [data-tool-link]').forEach(a=>a.href=pageHref(true,params,a.dataset.toolLink));
 }
 function openTool(view,source){

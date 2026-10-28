@@ -339,9 +339,10 @@ process.stdout.write(JSON.stringify(context.results));
                     self.parts.append(text)
 
         strings = json.loads((ROOT / 'tools/explorer_i18n.json').read_text())
+        favourites = json.loads((ROOT / 'tools/favourites_i18n.json').read_text())
         primary = set(TTFont(ROOT / 'fonts/ZZZ-Hongmeng-web.woff2').getBestCmap())
         for lang, face in (('ja', 'NotoSansJP'), ('zh', 'NotoSansSC')):
-            content = ''.join(strings[lang].values())
+            content = ''.join(strings[lang].values()) + ''.join(favourites[lang].values())
             for path in (ROOT / 'docs' / lang).rglob('*.html'):
                 parser = Text()
                 parser.feed(path.read_text())
