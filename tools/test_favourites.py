@@ -66,7 +66,7 @@ assert.deepEqual(B.parse(JSON.parse(new URLSearchParams(url.hash.slice(1)).get('
             self.assertTrue(all(copy[lang].values()))
         page = (ROOT / 'docs/favourites.html').read_text()
         for marker in ('data-page="favourites"', 'id="favBoard"', 'id="favDownload"',
-                       'id="favPreview"', 'const siteTheme', 'image/png', 'const FAVOURITES_DATA'):
+                       'id="favPreview"', 'const siteTheme', "'image/jpeg',0.9", 'download="zzz-favourites.jpg"', 'const FAVOURITES_DATA'):
             self.assertIn(marker, page)
         for path in ('index.html', 'tools.html'):
             self.assertIn('id="favouritesLink"', (ROOT / 'docs' / path).read_text())

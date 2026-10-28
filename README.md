@@ -11,7 +11,7 @@ Live site: <https://nullhollow.github.io/zzz-measurements/>
 ```
 index.html                 generated roster page
 tools.html                 generated comparison/exploration page
-favourites.html            generated personal tier-ranking page and PNG export
+favourites.html            generated personal tier-ranking page and JPG export
 measurements3.3.csv        source sheet (the only hand-edited data)
 character_images/          54 official portraits + 26 outfit renders + thumbs/
 images/                    49 sheet crops
@@ -207,9 +207,9 @@ changes and removed saved boards. Copy link includes the title, author, ordered
 slugs and numbering mode; a shared board takes precedence over the local draft.
 Personal rankings never change measurement data or comparison state.
 
-Export image creates a 2160 px wide PNG with content-driven height, localized
+Export image creates a 2160 px wide JPG (90% quality) with content-driven height, localized
 names, the optional title/author, tier colours and artwork credit. Preview and
-Save PNG use the same generated image. Empty tiers and unranked entries are
+Save JPG use the same generated image. Empty tiers and unranked entries are
 omitted. English names split within a word receive a hyphen. The canvas renders
 at twice the layout resolution, using the existing optimized official
 portraits and bundled fonts.

@@ -4,6 +4,9 @@
 
 ### Favourites page (2026-10-28)
 
+- Switch export to JPG at 90% quality for smaller downloads, retaining the
+  2160 px width, hyphenated names, tier colours and shared preview/download image.
+
 - Increase PNG exports to 2160 px wide with vector text rendered at double
   resolution. Hyphenate English names when a word continues onto the next line.
 

@@ -9,7 +9,7 @@ service worker and the crawler files. Nothing else in the repository is served.
 docs/
   index.html               interactive chart (50 cards pre-rendered)
   tools.html               distributions, matching, game, sandbox, lineup and guide
-  favourites.html          personal tier rankings and shareable PNG export
+  favourites.html          personal tier rankings and shareable JPG export
   methodology.html         method, classes, FAQ
   characters/*.html        50 English profiles
   ja/, zh/                 localized profiles + methodology

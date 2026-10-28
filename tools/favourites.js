@@ -171,7 +171,7 @@ if(typeof document!=='undefined')(() => {
   $('#favExport').onclick=async()=>{
     const button=$('#favExport');button.disabled=true;status(t('favExporting'));
     try{
-      const canvas=await exportImage(),blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('PNG export failed')),'image/png'));
+      const canvas=await exportImage(),blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('JPG export failed')),'image/jpeg',0.9));
       if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl=URL.createObjectURL(blob);
       $('#favPreviewImage').src=previewUrl;$('#favDownload').href=previewUrl;$('#favPreview').showModal();status('');
     }catch(error){status(t('favExportError'));}finally{button.disabled=!board.tiers.flat().length;}
