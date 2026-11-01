@@ -58,13 +58,16 @@ def cup_label_summary(roster, system='uk'):
 
 def numeric_summary(values):
     values = sorted(v for v in values if v is not None)
-    def quantile(p):
-        if not values:
-            return None
-        index = (len(values) - 1) * p
-        lo, hi = math.floor(index), math.ceil(index)
-        return values[lo] + (values[hi] - values[lo]) * (index - lo)
-    return {'count': len(values), 'median': quantile(.5), 'q1': quantile(.25), 'q3': quantile(.75)}
+    return {'count': len(values), 'median': _quantile(values, .5),
+            'q1': _quantile(values, .25), 'q3': _quantile(values, .75)}
+
+
+def _quantile(values, p):
+    if not values:
+        return None
+    index = (len(values) - 1) * p
+    lo, hi = math.floor(index), math.ceil(index)
+    return values[lo] + (values[hi] - values[lo]) * (index - lo)
 
 
 def cup_distribution(roster, system='uk'):
@@ -186,3 +189,68 @@ def bin_index(value, bins):
     if value < lo or value > hi:
         return -1
     return 0 if hi == lo else min(len(bins) - 1, int((value - lo) / ((hi - lo) / len(bins))))
+
+
+def ratio(record, numerator, denominator):
+    a, b = metric_value(record, numerator), metric_value(record, denominator)
+    return a / b if a is not None and b is not None and b > 0 else None
+
+
+def relationship(pairs):
+    points = [(x, y) for x, y in pairs if x is not None and y is not None]
+    n = len(points)
+    empty = {'count': n, 'r': None, 'slope': None, 'intercept': None}
+    if n < 3:
+        return empty
+    mx, my = sum(x for x, _ in points) / n, sum(y for _, y in points) / n
+    xx = sum((x - mx) ** 2 for x, _ in points)
+    yy = sum((y - my) ** 2 for _, y in points)
+    xy = sum((x - mx) * (y - my) for x, y in points)
+    if not xx or not yy:
+        return empty
+    return {'count': n, 'r': max(-1, min(1, xy / math.sqrt(xx * yy))),
+            'slope': xy / xx, 'intercept': my - xy / xx * mx}
+
+
+def range_failures(record, ranges):
+    failures = []
+    for field, (lo, hi) in ranges.items():
+        v = record.get(field)
+        if v is None or v < lo - 1e-6 or v > hi + 1e-6:
+            failures.append({'field': field, 'value': v,
+                             'limit': None if v is None else lo if v < lo else hi})
+    return failures
+
+
+def percentile(value, values):
+    known = [v for v in values if v is not None]
+    if value is None or not known:
+        return None
+    if len(known) == 1:
+        return .5
+    below = sum(v < value for v in known)
+    equal = sum(v == value for v in known)
+    return (below + (equal - 1) / 2) / (len(known) - 1)
+
+
+def percentile_at(value, values):
+    values = sorted(v for v in values if v is not None)
+    n = len(values)
+    if not n:
+        return None
+    if n == 1:
+        return .5
+    if value <= values[0]:
+        return 0
+    if value >= values[-1]:
+        return 1
+    if value in values:
+        return percentile(value, values)
+    hi = next(i for i, v in enumerate(values) if v > value)
+    lo = hi - 1
+    return (lo + (value - values[lo]) / (values[hi] - values[lo])) / (n - 1)
+
+
+def percentile_range(values, lo, hi):
+    values = sorted(v for v in values if v is not None)
+    return [_quantile(values, lo), _quantile(values, hi)] if values else None

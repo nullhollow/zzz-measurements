@@ -423,7 +423,7 @@
   footer b{color:var(--dim)}
   footer a{color:var(--dim)}
   footer a:hover{color:var(--acid)}
-  footer .mark{display:flex; align-items:center; gap:10px; margin-bottom:14px}
+  footer .mark{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:14px}
   footer .mark span{font-family:var(--disp); font-size:15px; color:var(--acid); letter-spacing:.04em}
   footer .mark i{flex:1; height:1px; background:var(--line)}
   .flinks{display:flex; flex-wrap:wrap; gap:14px; margin:0 0 14px}
@@ -669,6 +669,7 @@
     a{color:#000;text-decoration:underline}
   }
 /*__EXPLORER_CSS__*/
+/*__MEASUREMENT_CSS__*/
 /*__VISUAL_CSS__*/
 </style>
 </head>
@@ -1136,6 +1137,7 @@ computeDerived();
 const RANGES = [
   {k:'stature_cm', lk:'height'},
   {k:'bust_cm',  lk:'bust'},
+  {k:'band_cm', lk:'underbust'},
   {k:'waist_cm', lk:'waist'},
   {k:'hip_cm',   lk:'hip'},
   {k:'thigh_cm', lk:'thigh'},
@@ -1229,7 +1231,7 @@ function readHash(){
       const [k,a,b] = part.split(':');
       if(BOUNDS[k] && isFinite(a) && isFinite(b)){
         const lo = Math.max(BOUNDS[k][0], +a), hi = Math.min(BOUNDS[k][1], +b);
-        if(lo > BOUNDS[k][0] || hi < BOUNDS[k][1]) rng[k] = [lo, hi];
+        if(lo <= hi && (lo > BOUNDS[k][0] || hi < BOUNDS[k][1])) rng[k] = [lo, hi];
       }
     }
     out.rng = rng;
@@ -1350,11 +1352,11 @@ function renderFilterPanel(){
 }
 
 /* ---------------- filtering + sorting ---------------- */
-function filtered(){
+function filtered(ignoreRanges=false){
   const q = norm(state.q.trim());
   return DATA.filter(d=>{
     if(q && !(norm(nameOf(d)).includes(q) || norm(d.name_ja||'').includes(q) || norm(d.name_zh||'').includes(q) || norm(d.display).includes(q) || d.aliases.some(a=>norm(a).includes(q)))) return false;
-    for(const m of RANGES) if(!inRange(d, m.k)) return false;
+    if(!ignoreRanges)for(const m of RANGES) if(!inRange(d, m.k)) return false;
     if(state.cup!=="all" && d.cup_group!==state.cup) return false;
     if(state.shape!=="all" && d.shape!==state.shape) return false;
     if(state.balance!=="all" && d.tags.balance!==state.balance) return false;
@@ -1825,7 +1827,7 @@ function toggleCompare(slug){
   }
   renderCompare();
   syncCardCompare();
-  if(state.view==="distribution") renderTool(filtered());
+  if(["distribution","analysis"].includes(state.view)) renderTool(filtered());
   writeHash(true);
 }
 function renderCompare(){
@@ -1902,8 +1904,8 @@ function render(skipHash){
   else if(v==="cards") renderCards([...list].sort(SORTS[state.sort]));
   $("#toolsView").hidden = !TOOL_VIEWS.includes(v);
   if(TOOLS_PAGE){
-    $('.search').hidden = v!=="distribution"; $('#fDrop').hidden = v!=="distribution";
-    $('#count').hidden = v!=="distribution";
+    $('.search').hidden = !["distribution","analysis"].includes(v); $('#fDrop').hidden = !["distribution","analysis"].includes(v);
+    $('#count').hidden = !["distribution","analysis"].includes(v);
     $$('#toolsNav [data-tool-link]').forEach(a=>{if(a.dataset.toolLink===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   }
   if(TOOL_VIEWS.includes(v)) renderTool(list);
@@ -1936,7 +1938,7 @@ $("#compareBtn").addEventListener("click", ()=>{
   openCompare();
 });
 $("#cmpOpen").addEventListener("click", openCompare);
-$("#cmpClear").addEventListener("click", ()=>{ state.compare=[]; state.compareBase=""; renderCompare(); syncCardCompare(); if(state.view==="distribution") renderTool(filtered()); writeHash(true); });
+$("#cmpClear").addEventListener("click", ()=>{ state.compare=[]; state.compareBase=""; renderCompare(); syncCardCompare(); if(["distribution","analysis"].includes(state.view)) renderTool(filtered()); writeHash(true); });
 $("#cmpChips").addEventListener("click", e=>{
   const b = e.target.closest("[data-uncmp]");
   if(b){ toggleCompare(b.dataset.uncmp); }
@@ -2153,6 +2155,7 @@ function applyHashState(){
 /*__SETTINGS_JS__*/
 
 /*__EXPLORER_JS__*/
+/*__MEASUREMENT_JS__*/
 /*__ROSTER_JS__*/
 /*__VISUAL_JS__*/
 /*__ARTWORK_JS__*/

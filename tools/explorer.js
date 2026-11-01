@@ -1,12 +1,12 @@
 /* Exploration state is separate from the official roster and its derived rules. */
-const TOOL_VIEWS=['distribution','matches','game','sandbox','lineup','guide'];
+const TOOL_VIEWS=['analysis','distribution','matches','game','sandbox','lineup','guide'];
 const METRIC_KEYS=['height','bust','underbust','waist','hip','thigh'];
 const COMPARE_ROWS=['height','waist','hip','thigh','cup','bust','underbust','sizes','whr','whtr','shape','build','thighNote','figureRead'];
 const DEFAULT_COMPARE_ROWS=['height','waist','hip','thigh','cup','bust','underbust','whr','whtr'];
 const SANDBOX_SLUG='~sandbox';
 let gameRound=null, gameScore={correct:0,total:0,streak:0};
 function explorerDefaults(){
-  return {lineupSlugs:defaultLineup(),lineupOrder:'custom',lineupReference:'ruler',lineupReferenceCm:170,guideMetric:'height',compareRows:null,compareBase:'',compareHeight:160,sandbox:null,matchSource:'',matchBasis:'raw',matchWeights:null,
+  return {...measurementDefaults(),lineupSlugs:defaultLineup(),lineupOrder:'custom',lineupReference:'ruler',lineupReferenceCm:170,guideMetric:'height',compareRows:null,compareBase:'',compareHeight:160,sandbox:null,matchSource:'',matchBasis:'raw',matchWeights:null,
     distMetric:'cup',distBasis:'raw',distCupView:'letters',distSelection:'',gameMetric:'waist',gameBasis:'raw'};
 }
 function validSandbox(raw){
@@ -54,6 +54,7 @@ function readExplorerHash(params){
   if(raw.matchWeights && typeof raw.matchWeights==='object'){
     out.matchWeights=Object.fromEntries(Object.keys(Analysis.fields).map(k=>[k,Number.isFinite(raw.matchWeights[k])?Math.round(Math.max(0,Math.min(1,raw.matchWeights[k]))*100)/100:0]));
   }
+  readMeasurementHash(raw,out,params.has('cups')?(['uk','us','eu'].includes(params.get('cups'))?params.get('cups'):'uk'):state.cupSystem);
   return out;
 }
 function writeExplorerHash(params){
@@ -131,7 +132,7 @@ $('#toolsNav')?.addEventListener('click',e=>{
   const a=e.target.closest('[data-tool-link]');
   if(a && !(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)){e.preventDefault();openTool(a.dataset.toolLink);}
 });
-window.addEventListener('resize',debounce(()=>{if(state.view==='distribution')renderTool(filtered());},150));
+window.addEventListener('resize',debounce(()=>{if(['distribution','analysis'].includes(state.view))renderTool(filtered());},150));
 if(TOOLS_PAGE){
   const shell=$('.tools-shell');
   new ResizeObserver(()=>document.documentElement.style.setProperty('--tools-offset',shell.offsetHeight+'px')).observe(shell);
@@ -140,9 +141,10 @@ $('#toolSelect')?.addEventListener('change',e=>openTool(e.target.value));
 function renderTool(list){
   const root=$('#toolsView');document.body.dataset.toolView=state.view;
   if($('#toolSelect')){$('#toolSelect').value=state.view;$('#toolSelect').setAttribute('aria-label',t('tools'));}
-  const content=state.view==='lineup'?lineupHTML():state.view==='guide'?guideHTML():state.view==='distribution'?distributionHTML(list):state.view==='matches'?matchesHTML():state.view==='game'?gameHTML():sandboxHTML();
+  const content=state.view==='analysis'?measurementHTML(list):state.view==='lineup'?lineupHTML():state.view==='guide'?guideHTML():state.view==='distribution'?distributionHTML(list):state.view==='matches'?matchesHTML():state.view==='game'?gameHTML():sandboxHTML();
   root.innerHTML=`<div class="toolhead"><h2 id="toolTitle" tabindex="-1">${esc(t(state.view))}</h2></div>${content}`;
-  if(state.view==='lineup')bindLineup();
+  if(state.view==='analysis')bindMeasurement();
+  else if(state.view==='lineup')bindLineup();
   else if(state.view==='guide')bindGuide();
   else if(state.view==='distribution') bindDistribution();
   else if(state.view==='matches') bindMatches();
@@ -357,7 +359,7 @@ function cupDistributionHTML(list){
   }
   const parts=state.distSelection.split(':'),selected=measured.filter(m=>parts[0]==='cup'?m.s.cup===parts[1]:parts[0]==='size'?m.s.band===+parts[1]&&m.s.cup===parts[2]:true);
   const label=parts[0]==='cup'?cupSystemName()+' '+parts[1]:parts[0]==='size'?cupSystemName()+' '+parts[1]+parts[2]:cupSizeLabel();
-  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label><label for="distCupView">${esc(t('chartView'))}<select id="distCupView"><option value="letters"${state.distCupView==='letters'?' selected':''}>${esc(t('cupLetters'))}</option><option value="matrix"${state.distCupView==='matrix'?' selected':''}>${esc(t('bandByCup'))}</option></select></label></div><p class="toolnote">${esc(t('cupDistributionNote').replace('{system}',cupSystemName()))}</p>${measured.some(m=>m.d[system]?.startsWith('≈'))?`<p class="toolnote">${esc(t('estimatedSizesNote'))}</p>`:''}${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(cupText(m.d))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}${distributionResults(selected.map(m=>m.d),label,cupText)}`;
+  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label><label for="distCupView">${esc(t('chartView'))}<select id="distCupView"><option value="letters"${state.distCupView==='letters'?' selected':''}>${esc(t('cupLetters'))}</option><option value="matrix"${state.distCupView==='matrix'?' selected':''}>${esc(t('bandByCup'))}</option></select></label></div><p class="toolnote">${esc(t('cupDistributionNote').replace('{system}',cupSystemName()))}</p>${measured.some(m=>m.d[system]?.startsWith('≈'))?`<p class="toolnote">${esc(t('estimatedSizesNote'))}</p>`:''}${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(cupText(m.d))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}<button class="btn" id="openCupProfiles">${esc(t('cupProfiles'))}</button>${distributionResults(selected.map(m=>m.d),label,cupText)}`;
 }
 
 /* Filtered roster distribution; references are markers, never observations. */
@@ -393,6 +395,7 @@ function bindDistribution(){
   if($('#distCupView'))$('#distCupView').onchange=e=>toolUpdate('distCupView',()=>{state.distCupView=e.target.value;state.distSelection='';});
   if($('#distBasis'))$('#distBasis').onchange=e=>toolUpdate('distBasis',()=>{state.distBasis=e.target.value;state.distSelection='';});
   if($('#distTarget'))$('#distTarget').onchange=e=>{if(setTarget(e.target))toolUpdate('distTarget',()=>{state.distSelection='';});};
+  if($('#openCupProfiles'))$('#openCupProfiles').onclick=()=>{const parts=state.distSelection.split(':');state.analysisView='cupProfiles';state.analysisCup=parts[0]==='cup'?parts[1]:parts[0]==='size'?parts[2]:'all';state.analysisBand=parts[0]==='size'?parts[1]:'all';openTool('analysis');};
   if($('#clearDistribution'))$('#clearDistribution').onclick=()=>{state.distSelection='';render();$('#distMetric').focus();};
   $$('[data-dist-select]').forEach(b=>{
     const select=()=>{state.distSelection=b.dataset.distSelect;render();$('#distResultTitle').focus();$('#distResults').scrollIntoView({block:'start'});};

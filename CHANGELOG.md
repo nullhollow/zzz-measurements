@@ -2,6 +2,21 @@
 
 ## Unreleased — audit implementation
 
+### Five measurement analysis views (2026-11-01)
+
+- Add Relationships, Range finder, Proportions, Cup profiles and Figure patterns
+  within the existing Tools page, using the shared ZZZ typography and palettes.
+- Add Pearson correlation and trend lines, precise inclusive ranges and explained
+  near matches, four ratio distributions, regional cup-group measurement summaries
+  and interactive fixed-percentile axes with raw-range brushing.
+- Preserve search, ranges, units, source cup systems, comparison selections and
+  analysis controls in shared URLs. Add under-bust to the shared range controls.
+- Localize all views and methodology in EN/JA/ZH, expand existing CJK fallbacks,
+  and fix narrow-screen table-header and footer overflow.
+- Mirror new mathematics in Python/JavaScript with parity and boundary tests.
+  Canonical measurements, measurement rankings and top-ten Preferences retain
+  their existing rules.
+
 ### Top-ten Preferences correction (2026-10-29)
 
 - Calculate Preferences exclusively from the overall top ten, using the actual

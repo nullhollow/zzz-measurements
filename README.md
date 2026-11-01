@@ -191,7 +191,42 @@ methodology. The public measurement schema is unchanged. Old `#view=distribution
 Tool section changes create browser-history entries; field edits replace the
 current entry. A shared sticky container keeps tool navigation above its controls.
 Navigation carries filters, comparison selections, units, theme and language between
-pages. The packed site contains 50 entries, 150 profiles and 732 files (about 141.0 MB).
+pages. The packed site contains 50 entries, 150 profiles and 732 files (about 141.1 MB).
+
+## Measurement analysis
+
+Tools → Analysis contains five connected views, with the same search, filters,
+units and comparison selections. The view and its controls restore from shared
+URLs. Measurement records, published rankings and Favourites Preferences keep
+their existing definitions.
+
+- **Relationships:** choose either axis from height, bust, under-bust, waist,
+  hips and thighs, using raw or height-adjusted values. Pearson r and the optional
+  least-squares line require three complete pairs and variance on both axes.
+  Tap a point to inspect canonical values and add the agent to comparison.
+- **Range finder:** six pairs of sliders and precise numeric limits use the
+  existing raw-centimetre range filters, displayed in cm or inches. Bounds are
+  inclusive. Missing required measurements do not match. Up to eight near
+  matches show unmet requirements, ordered by their number and then normalized
+  total shortfall. Search and categorical filters still apply.
+- **Proportions:** bust/waist, hip/waist, thigh/hip and waist/height presets show
+  unrounded-ratio distributions, medians, middle-50% ranges and ordered values
+  alongside their component measurements.
+- **Cup profiles:** source UK/US/EU cup letters and optional band labels select
+  a group. Six rows show measurement medians, quartiles and valid counts. Full
+  source sizes and estimate markers stay in the values table. Cup profiles are
+  also linked from the existing cup-letter and band-by-cup distributions.
+- **Figure patterns:** one line per agent across six fixed full-roster midrank
+  percentile axes. Missing measurements break the line. Drag an axis vertically
+  to set the shared raw range using interpolated quantiles; tap to clear it.
+  Comparison picks and the inspected agent remain highlighted. On phones only
+  the chart and wide data tables scroll horizontally.
+
+The view sources are `tools/measurement_tools.js` and `.css`, inlined by the
+HTML generator. Mathematics lives in the existing Python/JavaScript analysis
+helpers. `python3 tools/test_analysis.py` covers paired statistics, ratio and
+percentile parity, missing values, range boundaries and URL validation. All five
+views and the methodology are localized in English, Japanese and Chinese.
 
 ## Favourites
 

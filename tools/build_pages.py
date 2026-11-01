@@ -648,6 +648,7 @@ for _lang in PAGE:
         (PAGE[_lang]['matches'], esc(PAGE[_lang]['matchingMethod'])),
         (PAGE[_lang]['tools'], esc(PAGE[_lang]['playMethod'])),
         (PAGE[_lang]['measurementSettings'], esc(PAGE[_lang]['settingsMethod'])),
+        (PAGE[_lang]['analysis'], esc(PAGE[_lang]['analysisMethod'])),
     ])
 
 

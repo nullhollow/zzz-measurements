@@ -302,6 +302,87 @@ process.stdout.write(JSON.stringify(context.results));
         self.assertEqual(parsed[2], rows[2])
         self.assertEqual(parsed[3], ["'  +formula", ''])
 
+    def test_measurement_workspace_math_and_parity(self):
+        from analysis_math import ratio, relationship, range_failures, percentile, percentile_at, percentile_range
+        self.assertEqual(relationship([(1, 2), (2, 4), (3, 6)]),
+                         {'count': 3, 'r': 1, 'slope': 2, 'intercept': 0})
+        self.assertEqual(relationship([(1, 3), (2, 2), (3, 1)])['r'], -1)
+        for pairs in ([], [(1, 2), (2, 4)], [(1, 2), (1, 3), (1, 4)], [(1, 2), (2, 2), (3, 2)]):
+            self.assertIsNone(relationship(pairs)['r'])
+        self.assertIsNone(ratio({'hip_cm': 80}, 'hip', 'waist'))
+        self.assertIsNone(ratio({'hip_cm': 80, 'waist_cm': 0}, 'hip', 'waist'))
+        self.assertEqual(percentile(2, [1, 2, 2, 3]), .5)
+        self.assertEqual(percentile_range([0, 10, 20], .25, .75), [5, 15])
+        self.assertIsNone(percentile(None, [1, 2]))
+        self.assertIsNone(percentile_range([], 0, 1))
+        ranges = {'stature_cm': [150, 175], 'thigh_cm': [40, 50]}
+        self.assertEqual(range_failures({'stature_cm': 150, 'thigh_cm': 50}, ranges), [])
+        self.assertEqual(range_failures({'stature_cm': 149, 'thigh_cm': None}, ranges),
+                         [{'field': 'stature_cm', 'value': 149, 'limit': 150},
+                          {'field': 'thigh_cm', 'value': None, 'limit': None}])
+        bases = ('raw', 'height')
+        ratios = [('bust', 'waist'), ('hip', 'waist'), ('thigh', 'hip'), ('waist', 'height')]
+        expected = {
+            'ratios': [[ratio(d, a, b) for a, b in ratios] for d in ROSTER],
+            'relationships': [relationship([(metric_value(d, a, basis), metric_value(d, b, basis)) for d in ROSTER])
+                              for basis in bases for a in FIELDS for b in FIELDS],
+            'failures': [range_failures(d, ranges) for d in ROSTER],
+            'percentiles': [[percentile(d.get(field), [r.get(field) for r in ROSTER]) for field in FIELDS.values()] for d in ROSTER],
+            'brush': [percentile_range([d.get(field) for d in ROSTER], .2, .8) for field in FIELDS.values()],
+            'positions': [[percentile_at(v, [d.get(field) for d in ROSTER]) for v in (0, 40, 49.5, 200)] for field in FIELDS.values()],
+        }
+        script = """
+const a=require('./tools/analysis.js'),p=JSON.parse(require('fs').readFileSync(0,'utf8')),r=p.roster;
+process.stdout.write(JSON.stringify({
+ratios:r.map(d=>p.ratios.map(([x,y])=>a.ratio(d,x,y))),
+relationships:['raw','height'].flatMap(b=>Object.keys(a.fields).flatMap(x=>Object.keys(a.fields).map(y=>a.relationship(r.map(d=>[a.value(d,x,b),a.value(d,y,b)]))))),
+failures:r.map(d=>a.rangeFailures(d,p.ranges)),
+percentiles:r.map(d=>Object.values(a.fields).map(f=>a.percentile(d[f],r.map(d=>d[f])))),
+brush:Object.values(a.fields).map(f=>a.percentileRange(r.map(d=>d[f]),.2,.8)),
+positions:Object.values(a.fields).map(f=>[0,40,49.5,200].map(v=>a.percentileAt(v,r.map(d=>d[f]))))
+}));
+"""
+        result = subprocess.run(['node', '-e', script], input=json.dumps({'roster': ROSTER, 'ranges': ranges, 'ratios': ratios}),
+                                text=True, capture_output=True, check=True, cwd=ROOT)
+        actual = json.loads(result.stdout)
+        def compare(a, b):
+            if isinstance(a, dict):
+                self.assertEqual(a.keys(), b.keys())
+                for k in a: compare(a[k], b[k])
+            elif isinstance(a, list):
+                self.assertEqual(len(a), len(b))
+                for x, y in zip(a, b): compare(x, y)
+            elif isinstance(a, (int, float)):
+                self.assertTrue(math.isclose(a, b, rel_tol=1e-12, abs_tol=1e-12), (a, b))
+            else: self.assertEqual(a, b)
+        compare(expected, actual)
+        miyabi = next(d for d in ROSTER if d['slug'] == 'miyabi')
+        self.assertAlmostEqual(ratio(miyabi, 'waist', 'height'), miyabi['waist_cm'] / 152.1)
+
+    def test_measurement_url_boundary_and_shared_ranges(self):
+        script = r"""
+const fs=require('fs'),vm=require('vm'),roster=JSON.parse(fs.readFileSync('tools/data.json'));
+const s=fs.readFileSync('tools/template.html','utf8'),workspace=fs.readFileSync('tools/measurement_tools.js','utf8');
+const context=vm.createContext({DATA:roster,bySlug:new Map(roster.map(d=>[d.slug,d])),METRIC_KEYS:['height','bust','underbust','waist','hip','thigh'],Analysis:require('./tools/analysis.js')});
+vm.runInContext(workspace+`;this.parse=raw=>{const out={};readMeasurementHash(raw,out,'uk');return {...measurementDefaults(),...out};}`,context);
+const good={analysisView:'figurePatterns',analysisX:'height',analysisY:'underbust',analysisRatio:'thigh:hip',analysisCup:'HH',analysisBand:'23',analysisPick:'miyabi',analysisTrend:false,analysisBasis:'height'};
+const bad={analysisView:'<script>',analysisX:'bust_diff_cm',analysisY:'uk',analysisRatio:'hip:unknown',analysisCup:'ZZZ',analysisBand:'999',analysisPick:'~sandbox',analysisTrend:'false',analysisBasis:'volume'};
+const ranges=s.slice(s.indexOf('const RANGES ='),s.indexOf('const state ='));
+const filtering=s.slice(s.indexOf('function rangeFull('),s.indexOf('function activeFilterCount('));
+const start=s.indexOf('function filtered('),end=s.indexOf('\n}',start)+2;
+vm.runInContext(ranges+filtering+s.slice(start,end)+`;this.state={q:'',rng:{thigh_cm:[40,50]},cup:'all',shape:'all',balance:'all',thighs:'all',height:'all'};this.norm=v=>v;this.nameOf=d=>d.display;this.out={exact:filtered().map(d=>d.slug),base:filtered(true).length};`,context);
+process.stdout.write(JSON.stringify({good:context.parse(good),bad:context.parse(bad),out:context.out}));
+"""
+        actual = json.loads(subprocess.run(['node', '-e', script], text=True, cwd=ROOT, check=True, capture_output=True).stdout)
+        self.assertEqual(actual['good']['analysisView'], 'figurePatterns')
+        self.assertEqual(actual['good']['analysisCup'], 'HH')
+        self.assertFalse(actual['good']['analysisTrend'])
+        self.assertEqual(actual['bad']['analysisView'], 'relationships')
+        self.assertEqual(actual['bad']['analysisCup'], 'all')
+        self.assertEqual(actual['bad']['analysisPick'], '')
+        self.assertEqual(actual['out']['base'], len(ROSTER))
+        self.assertCountEqual(actual['out']['exact'], [d['slug'] for d in ROSTER if d['thigh_cm'] is not None and 40 <= d['thigh_cm'] <= 50])
+
     def test_locale_key_parity(self):
         strings = json.loads((ROOT / 'tools/explorer_i18n.json').read_text())
         self.assertEqual(set(strings), {'en', 'ja', 'zh'})

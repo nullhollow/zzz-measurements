@@ -39,8 +39,12 @@ const Analysis = (() => {
   }
   function numericSummary(values){
     const sorted=values.filter(v=>v!=null).sort((a,b)=>a-b),n=sorted.length;
-    function quantile(p){if(!n)return null;const i=(n-1)*p,lo=Math.floor(i),hi=Math.ceil(i);return sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo);}
-    return {count:n,median:quantile(.5),q1:quantile(.25),q3:quantile(.75)};
+    return {count:n,median:quantile(sorted,.5),q1:quantile(sorted,.25),q3:quantile(sorted,.75)};
+  }
+  function quantile(sorted,p){
+    if(!sorted.length)return null;
+    const i=(sorted.length-1)*p,lo=Math.floor(i),hi=Math.ceil(i);
+    return sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo);
   }
   function cupMatrix(roster,system='uk'){
     if(!['uk','us','eu'].includes(system))system='uk';
@@ -102,6 +106,44 @@ const Analysis = (() => {
     if(value<lo||value>hi)return -1;
     return hi===lo?0:Math.min(bins.length-1,Math.floor((value-lo)/((hi-lo)/bins.length)));
   }
-  return {fields,weights,sizeParts,cupSize,cupLabelSummary,numericSummary,cupDistribution,cupMatrix,percentage,value,displayed,difference,outcome,gameOutcome,matches,distribution,binIndex};
+  function ratio(d,numerator,denominator){
+    const a=value(d,numerator),b=value(d,denominator);
+    return a!=null&&b>0?a/b:null;
+  }
+  function relationship(pairs){
+    const points=pairs.filter(p=>p[0]!=null&&p[1]!=null),n=points.length;
+    if(n<3)return {count:n,r:null,slope:null,intercept:null};
+    const mx=points.reduce((s,p)=>s+p[0],0)/n,my=points.reduce((s,p)=>s+p[1],0)/n;
+    let xx=0,yy=0,xy=0;
+    for(const [x,y] of points){xx+=(x-mx)**2;yy+=(y-my)**2;xy+=(x-mx)*(y-my);}
+    if(!xx||!yy)return {count:n,r:null,slope:null,intercept:null};
+    return {count:n,r:Math.max(-1,Math.min(1,xy/Math.sqrt(xx*yy))),slope:xy/xx,intercept:my-xy/xx*mx};
+  }
+  function rangeFailures(d,ranges){
+    return Object.entries(ranges).flatMap(([field,[lo,hi]])=>{
+      const v=d[field];
+      return v==null?[{field,value:null,limit:null}]:v<lo-1e-6?[{field,value:v,limit:lo}]:v>hi+1e-6?[{field,value:v,limit:hi}]:[];
+    });
+  }
+  function percentile(v,values){
+    const known=values.filter(x=>x!=null);
+    if(v==null||!known.length)return null;
+    if(known.length===1)return .5;
+    const below=known.filter(x=>x<v).length,equal=known.filter(x=>x===v).length;
+    return (below+(equal-1)/2)/(known.length-1);
+  }
+  function percentileAt(v,values){
+    const sorted=values.filter(x=>x!=null).sort((a,b)=>a-b),n=sorted.length;
+    if(!n)return null;if(n===1)return .5;
+    if(v<=sorted[0])return 0;if(v>=sorted[n-1])return 1;
+    if(sorted.includes(v))return percentile(v,sorted);
+    const hi=sorted.findIndex(x=>x>v),lo=hi-1;
+    return (lo+(v-sorted[lo])/(sorted[hi]-sorted[lo]))/(n-1);
+  }
+  function percentileRange(values,lo,hi){
+    const sorted=values.filter(v=>v!=null).sort((a,b)=>a-b);
+    return sorted.length?[quantile(sorted,lo),quantile(sorted,hi)]:null;
+  }
+  return {fields,weights,sizeParts,cupSize,cupLabelSummary,numericSummary,cupDistribution,cupMatrix,percentage,value,displayed,difference,outcome,gameOutcome,matches,distribution,binIndex,ratio,relationship,rangeFailures,percentile,percentileAt,percentileRange};
 })();
 if(typeof module!=='undefined')module.exports=Analysis;

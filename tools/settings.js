@@ -28,6 +28,7 @@ function setCupSystem(system){
   if(!['uk','us','eu'].includes(system))return;
   state.cupSystem=system;
   state.distSelection='';
+  state.analysisCup='all';state.analysisBand='all';
   try{localStorage.setItem('zzz-cup-system',system);}catch(_){}
   refreshMeasurements();
 }

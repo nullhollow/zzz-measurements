@@ -469,7 +469,7 @@ html[data-theme="light"]{
   footer b{color:var(--dim)}
   footer a{color:var(--dim)}
   footer a:hover{color:var(--acid)}
-  footer .mark{display:flex; align-items:center; gap:10px; margin-bottom:14px}
+  footer .mark{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:14px}
   footer .mark span{font-family:var(--disp); font-size:15px; color:var(--acid); letter-spacing:.04em}
   footer .mark i{flex:1; height:1px; background:var(--line)}
   .flinks{display:flex; flex-wrap:wrap; gap:14px; margin:0 0 14px}
@@ -978,6 +978,80 @@ html[data-theme="light"] .chip.shape{color:var(--blue)}
 body[data-page="tools"] #leaders{display:none}
 @media(max-width:700px){.leaders,.active-filters{padding:0 12px}.compare-edit input{max-width:180px}#tbl th[data-k="name"]{width:auto}.tablewrap{max-height:70vh}}
 
+.analysis-switch{justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+.analysis-switch select{min-width:220px}
+.analysis-switch label{color:var(--concrete)}
+.analysis-check{flex-direction:row!important;align-items:center;min-height:42px;color:var(--concrete)!important}
+.analysis-check input{width:18px;height:18px;accent-color:var(--accent-fill)}
+.analysis-chart{border-block:1px solid var(--line);padding:14px 0;margin:18px 0}
+.analysis-scatter,.analysis-ratio-chart{display:block;width:100%;font:13px var(--num);overflow:visible}
+.analysis-chart text,.analysis-pattern-wrap text{fill:var(--dim)}
+.analysis-chart .gridline,.analysis-pattern-wrap .gridline{stroke:var(--line);stroke-width:1}
+.analysis-trend{stroke:var(--waist);stroke-width:2;stroke-dasharray:7 5}
+.analysis-point{cursor:pointer;outline:none}
+.analysis-point circle{fill:var(--acid);stroke:var(--ink);stroke-width:1.5}
+.analysis-point .point-hit{fill:transparent;stroke:none}
+.analysis-point.compared circle:not(.point-hit){fill:var(--signal);r:7}
+.analysis-point.picked circle:not(.point-hit),.analysis-point:hover circle:not(.point-hit),.analysis-point:focus circle:not(.point-hit){stroke:var(--concrete);stroke-width:3;r:8}
+.analysis-inspect{display:flex;align-items:center;gap:20px;padding:16px 0;border-bottom:2px solid var(--signal);margin:10px 0 24px}
+.analysis-inspect img{object-fit:contain;width:75px;height:112px}
+.analysis-inspect>div{flex:1;min-width:0}
+.analysis-name{font:22px/1.2 var(--disp);color:var(--concrete)}
+.analysis-inspect dl{display:flex;flex-wrap:wrap;gap:10px 24px;margin:14px 0 0}
+.analysis-inspect dt{font-size:11px;color:var(--dim);margin-bottom:4px}
+.analysis-inspect dd{margin:0;font:16px var(--num);color:var(--concrete)}
+.analysis-tablewrap{position:relative;max-width:100%;overflow:auto}
+.analysis-table{min-width:440px}
+.analysis-table th:first-child,.analysis-table td:first-child{min-width:120px}
+.analysis-table a{color:var(--concrete)}
+.analysis-current{background:var(--panel)}
+.analysis-ranges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 28px;margin:24px 0}
+.analysis-ranges fieldset{border:0;border-top:2px solid var(--line2);padding:12px 0 0;min-width:0;margin:0}
+.analysis-ranges legend{padding:0 8px 0 0;font-size:15px}
+.analysis-ranges legend span{font:11px var(--num);color:var(--dim)}
+.analysis-range-numbers{display:flex;align-items:center;gap:8px;margin:4px 0 18px}
+.analysis-range-numbers label{display:grid;gap:6px;font-size:11px;color:var(--dim);flex:1;min-width:0}
+.analysis-range-numbers .toolinput{width:100%;padding:8px 6px;font:15px var(--num)}
+.analysis-range-numbers>span{padding-top:16px;color:var(--dim)}
+.analysis-range-numbers .lnk{margin-top:16px;min-width:26px;min-height:40px;background:transparent;color:var(--dim);border:1px solid var(--line2);border-radius:5px;font:inherit;cursor:pointer}.analysis-range-numbers .lnk:hover{color:var(--acid);border-color:var(--acid)}
+.analysis-ranges .dual{margin-inline:8px}
+#analysisRangeResults{margin-top:32px}
+#analysisRangeResults .analysis-table th:first-child{min-width:130px}
+#analysisRangeResults .tooldata .analysis-table{min-width:0}
+#analysisRangeResults .tooldata td{line-height:1.7}
+.analysis-formula{font:clamp(24px,4vw,38px)/1.3 var(--disp);padding-block:16px}
+.analysis-formula span{color:var(--dim);padding:0 18px}
+.ratio-bar{fill:var(--acid)}
+.analysis-median{stroke:var(--signal);stroke-width:2;stroke-dasharray:5 3}
+.analysis-cup-stats{min-width:360px}
+.analysis-cup-stats td{font:17px var(--num)}
+.analysis-cup-stats td:last-child{font-size:13px;color:var(--dim)}
+.analysis-pattern-wrap{max-width:100%;overflow-x:auto;border-block:1px solid var(--line);padding:14px 0;overscroll-behavior-x:contain}
+#analysisPatterns{display:block;width:100%;min-width:850px;font:13px var(--num)}
+.analysis-pattern-line{fill:none;stroke:var(--line2);stroke-width:1;cursor:pointer;pointer-events:stroke}
+.analysis-pattern-line.matches{stroke:var(--acid);opacity:.4;stroke-width:1.5}
+.analysis-pattern-line.compared,.analysis-pattern-line.picked,.analysis-pattern-line:hover,.analysis-pattern-line:focus{stroke:var(--signal);stroke-width:3;opacity:1;outline:none}
+.pattern-axis{stroke:var(--metric);stroke-width:2}
+.brush-fill{fill:var(--metric);opacity:.3}
+.brush-hit{fill:transparent;cursor:crosshair;touch-action:none}
+@media(max-width:1000px){.analysis-ranges{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+  .analysis-switch{align-items:end;gap:10px;margin-bottom:18px}
+  .analysis-switch select{min-width:0;max-width:100%}
+  .analysis-switch label{flex:1;min-width:0}
+  .analysis-switch .btn{font-size:11px;max-width:110px;white-space:normal}
+  .analysis-ranges{gap:22px 16px;margin-top:18px}
+  .analysis-range-numbers{gap:5px}.analysis-range-numbers .toolinput{font-size:13px}
+  .analysis-ranges legend{font-size:13px}
+  .analysis-inspect{gap:12px;flex-wrap:wrap}.analysis-inspect img{width:52px;height:90px}
+  .analysis-inspect .btn{margin-left:64px}.analysis-name{font-size:18px}
+  .analysis-inspect dl{gap:10px 16px}.analysis-inspect dd{font-size:14px}
+  .analysis-scatter,.analysis-ratio-chart{font-size:16px}
+  .analysis-cup-stats td{font-size:14px}
+  .analysis-formula span{padding-inline:10px}
+}
+@media(max-width:360px){.analysis-ranges{grid-template-columns:1fr}}
+
 /* Data graphics remain separate from illustrative portraits. */
 .lineup-form{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin:18px 0}.lineup-form label{display:grid;gap:6px;color:var(--dim);font-size:12px}.lineup-form input{max-width:230px}
 .lineup-scroll{overflow:auto;border-block:1px solid var(--line);padding:24px 0 12px}.lineup-stage{display:flex;align-items:stretch;gap:18px;min-width:max-content;height:430px;padding:30px 14px 0}.lineup-person{width:120px;display:flex;flex-direction:column;min-width:0}.height-track{height:300px;position:relative;border-bottom:2px solid var(--concrete)}.height-bar{position:absolute;bottom:0;left:18px;width:7px;background:var(--acid);border-radius:3px 3px 0 0}.height-bar span{position:absolute;bottom:100%;left:0;white-space:nowrap;color:var(--concrete);font:700 14px var(--num);padding-bottom:6px}.lineup-portrait{position:absolute;bottom:8px;left:38px;width:70px;height:100px;object-fit:contain}.lineup-person>a{font:14px/1.2 var(--disp);margin-top:10px;overflow-wrap:anywhere;color:var(--concrete)}.lineup-person small{font-size:10px;color:var(--dim)}.lineup-actions{display:flex;gap:4px;margin-top:auto}.lineup-actions button{min-width:36px;min-height:40px;padding:4px}.reference-track{width:80px}.reference-track .height-bar{background:var(--waist)}.reference-track.door .height-bar{width:48px;background:none;border:3px solid var(--waist);border-bottom:0}.ruler-mark{position:absolute;left:0;width:70px;border-top:1px solid var(--line2);font:11px var(--num);color:var(--dim)}
@@ -1111,7 +1185,7 @@ html:not([data-theme]) .chip.shape{color:var(--blue)}
 
 <main id="main" tabindex="-1">
 
-<div class="tools-shell"><nav class="tooltabs" id="toolsNav" aria-label="Tools"><select id="toolSelect" class="tool-picker" aria-label="Tools"><option value="distribution" data-i18n="distribution">Distribution</option><option value="matches" data-i18n="matches">Find similar figures</option><option value="game" data-i18n="game">Higher or Lower</option><option value="sandbox" data-i18n="sandbox">Figure sandbox</option><option value="lineup" data-i18n="lineup">Height lineup</option><option value="guide" data-i18n="guide">Measurement guide</option></select><a href="tools.html#view=distribution" data-tool-link="distribution" data-i18n="distribution">Distribution</a><a href="tools.html#view=matches" data-tool-link="matches" data-i18n="matches">Find similar figures</a><a href="tools.html#view=game" data-tool-link="game" data-i18n="game">Higher or Lower</a><a href="tools.html#view=sandbox" data-tool-link="sandbox" data-i18n="sandbox">Figure sandbox</a><a href="tools.html#view=lineup" data-tool-link="lineup" data-i18n="lineup">Height lineup</a><a href="tools.html#view=guide" data-tool-link="guide" data-i18n="guide">Measurement guide</a><button class="btn" id="settingsBtn" data-open-settings data-i18n="settingsButton">Settings</button></nav>
+<div class="tools-shell"><nav class="tooltabs" id="toolsNav" aria-label="Tools"><select id="toolSelect" class="tool-picker" aria-label="Tools"><option value="distribution" data-i18n="distribution">Distribution</option><option value="analysis" data-i18n="analysis">Analysis</option><option value="matches" data-i18n="matches">Find similar figures</option><option value="game" data-i18n="game">Higher or Lower</option><option value="sandbox" data-i18n="sandbox">Figure sandbox</option><option value="lineup" data-i18n="lineup">Height lineup</option><option value="guide" data-i18n="guide">Measurement guide</option></select><a href="tools.html#view=distribution" data-tool-link="distribution" data-i18n="distribution">Distribution</a><a href="tools.html#view=analysis" data-tool-link="analysis" data-i18n="analysis">Analysis</a><a href="tools.html#view=matches" data-tool-link="matches" data-i18n="matches">Find similar figures</a><a href="tools.html#view=game" data-tool-link="game" data-i18n="game">Higher or Lower</a><a href="tools.html#view=sandbox" data-tool-link="sandbox" data-i18n="sandbox">Figure sandbox</a><a href="tools.html#view=lineup" data-tool-link="lineup" data-i18n="lineup">Height lineup</a><a href="tools.html#view=guide" data-tool-link="guide" data-i18n="guide">Measurement guide</a><button class="btn" id="settingsBtn" data-open-settings data-i18n="settingsButton">Settings</button></nav>
   <div class="controls" role="region" aria-label="Roster controls">
     <div class="search">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -1332,8 +1406,12 @@ const Analysis = (() => {
   }
   function numericSummary(values){
     const sorted=values.filter(v=>v!=null).sort((a,b)=>a-b),n=sorted.length;
-    function quantile(p){if(!n)return null;const i=(n-1)*p,lo=Math.floor(i),hi=Math.ceil(i);return sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo);}
-    return {count:n,median:quantile(.5),q1:quantile(.25),q3:quantile(.75)};
+    return {count:n,median:quantile(sorted,.5),q1:quantile(sorted,.25),q3:quantile(sorted,.75)};
+  }
+  function quantile(sorted,p){
+    if(!sorted.length)return null;
+    const i=(sorted.length-1)*p,lo=Math.floor(i),hi=Math.ceil(i);
+    return sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo);
   }
   function cupMatrix(roster,system='uk'){
     if(!['uk','us','eu'].includes(system))system='uk';
@@ -1395,7 +1473,45 @@ const Analysis = (() => {
     if(value<lo||value>hi)return -1;
     return hi===lo?0:Math.min(bins.length-1,Math.floor((value-lo)/((hi-lo)/bins.length)));
   }
-  return {fields,weights,sizeParts,cupSize,cupLabelSummary,numericSummary,cupDistribution,cupMatrix,percentage,value,displayed,difference,outcome,gameOutcome,matches,distribution,binIndex};
+  function ratio(d,numerator,denominator){
+    const a=value(d,numerator),b=value(d,denominator);
+    return a!=null&&b>0?a/b:null;
+  }
+  function relationship(pairs){
+    const points=pairs.filter(p=>p[0]!=null&&p[1]!=null),n=points.length;
+    if(n<3)return {count:n,r:null,slope:null,intercept:null};
+    const mx=points.reduce((s,p)=>s+p[0],0)/n,my=points.reduce((s,p)=>s+p[1],0)/n;
+    let xx=0,yy=0,xy=0;
+    for(const [x,y] of points){xx+=(x-mx)**2;yy+=(y-my)**2;xy+=(x-mx)*(y-my);}
+    if(!xx||!yy)return {count:n,r:null,slope:null,intercept:null};
+    return {count:n,r:Math.max(-1,Math.min(1,xy/Math.sqrt(xx*yy))),slope:xy/xx,intercept:my-xy/xx*mx};
+  }
+  function rangeFailures(d,ranges){
+    return Object.entries(ranges).flatMap(([field,[lo,hi]])=>{
+      const v=d[field];
+      return v==null?[{field,value:null,limit:null}]:v<lo-1e-6?[{field,value:v,limit:lo}]:v>hi+1e-6?[{field,value:v,limit:hi}]:[];
+    });
+  }
+  function percentile(v,values){
+    const known=values.filter(x=>x!=null);
+    if(v==null||!known.length)return null;
+    if(known.length===1)return .5;
+    const below=known.filter(x=>x<v).length,equal=known.filter(x=>x===v).length;
+    return (below+(equal-1)/2)/(known.length-1);
+  }
+  function percentileAt(v,values){
+    const sorted=values.filter(x=>x!=null).sort((a,b)=>a-b),n=sorted.length;
+    if(!n)return null;if(n===1)return .5;
+    if(v<=sorted[0])return 0;if(v>=sorted[n-1])return 1;
+    if(sorted.includes(v))return percentile(v,sorted);
+    const hi=sorted.findIndex(x=>x>v),lo=hi-1;
+    return (lo+(v-sorted[lo])/(sorted[hi]-sorted[lo]))/(n-1);
+  }
+  function percentileRange(values,lo,hi){
+    const sorted=values.filter(v=>v!=null).sort((a,b)=>a-b);
+    return sorted.length?[quantile(sorted,lo),quantile(sorted,hi)]:null;
+  }
+  return {fields,weights,sizeParts,cupSize,cupLabelSummary,numericSummary,cupDistribution,cupMatrix,percentage,value,displayed,difference,outcome,gameOutcome,matches,distribution,binIndex,ratio,relationship,rangeFailures,percentile,percentileAt,percentileRange};
 })();
 if(typeof module!=='undefined')module.exports=Analysis;
 
@@ -1570,6 +1686,35 @@ const I18N = {
     estimatedSizesNote: "≈ marks an estimated size. The supplied UK 23HH uses a nonstandard band, so US/EU conversions are not exact; the EU estimate rounds the theoretical band upward.",
     mainSource: "Main source",
     favouritesNav: "Favourites",
+    analysis: "Analysis",
+    analysisViewLabel: "View",
+    relationships: "Relationships",
+    rangeFinder: "Range finder",
+    ratioLab: "Proportions",
+    cupProfiles: "Cup profiles",
+    figurePatterns: "Figure patterns",
+    analysisShare: "Share view",
+    analysisXAxis: "X axis",
+    analysisYAxis: "Y axis",
+    analysisTrendLabel: "Trend line",
+    analysisPairs: "Measured pairs",
+    analysisCorrelation: "Pearson r",
+    analysisRelationshipNote: "Tap a point to inspect its measurements. Correlation uses paired values; fewer than three pairs or a constant axis gives no coefficient.",
+    analysisMinimum: "Minimum",
+    analysisMaximum: "Maximum",
+    analysisExactMatches: "Matches",
+    analysisNearMatches: "Near matches",
+    analysisOutsideRange: "Outside your ranges",
+    analysisMissing: "Not measured",
+    analysisRangeOrder: "Minimum must not exceed maximum.",
+    analysisMiddle50: "Middle 50%",
+    analysisRatioValue: "Ratio",
+    analysisAllCups: "All cups",
+    analysisAllBands: "All bands",
+    analysisGroupCount: "Group entries",
+    analysisCupNote: "Groups use the selected source labels. Band sizes remain visible; the same cup letter does not imply the same volume. Ranges describe measured circumferences and height.",
+    analysisPatternNote: "Each line is one character; axes use fixed full-roster percentiles (0–100). Drag vertically on an axis to filter, or tap it to clear that range. Gaps indicate missing measurements. Scroll the chart sideways on phones.",
+    analysisMethod: "Analysis uses only canonical roster records after the shared filters. Relationships use Pearson correlation and an ordinary least-squares line with at least three complete pairs and nonzero variance on both axes. Height-adjusted circumferences are circumference ÷ effective height × 100. Ratio presets divide unrounded measurements; their medians and quartiles use linear interpolation. Range bounds are inclusive; missing required values cannot match. Near matches are ordered by the number of unmet ranges, then total shortfall normalized by full-roster ranges. Figure patterns use unrounded midrank percentiles across the full canonical roster, fixed while filtering; missing values break the line. Axis brushing sets the same raw-centimetre range filters using interpolated quantiles. Cup profiles group the supplied UK/US/EU labels and show measurement medians, quartiles and per-field counts, retaining estimated size labels. No cup-letter mean or inferred cup volume is calculated.",
     compareBasis:'Comparison basis', rawMeasurements:'Raw measurements', heightAdjusted:'Height-adjusted',
     heightAdjustedNote:'Circumference ÷ height × 100', smallerWins:'Smaller value', largerWins:'Larger value',
     changelog:'Changelog', sourceRepository:'Source repository', language:'Language', theme:'Theme', systemTheme:'System', dark:'Dark', light:'Light', schema:'Schema',
@@ -1793,6 +1938,35 @@ const I18N = {
     estimatedSizesNote: "≈は推定サイズです。出典のUK 23HHはバンド値が規格外のため、US・EUへ正確には換算できません。EUの推定では計算上のバンド値を切り上げています。",
     mainSource: "主な出典",
     favouritesNav: "推しランキング",
+    analysis: "分析",
+    analysisViewLabel: "表示",
+    relationships: "相関",
+    rangeFinder: "範囲で検索",
+    ratioLab: "比率",
+    cupProfiles: "カップ別の寸法",
+    figurePatterns: "体型パターン",
+    analysisShare: "表示を共有",
+    analysisXAxis: "横軸",
+    analysisYAxis: "縦軸",
+    analysisTrendLabel: "回帰直線",
+    analysisPairs: "両方の寸法あり",
+    analysisCorrelation: "相関係数 r",
+    analysisRelationshipNote: "点を選ぶと寸法を確認できます。両軸の値がそろうデータで相関を計算します。3件未満、または一方の値がすべて同じ場合は算出しません。",
+    analysisMinimum: "下限",
+    analysisMaximum: "上限",
+    analysisExactMatches: "該当するキャラクター",
+    analysisNearMatches: "条件に近いキャラクター",
+    analysisOutsideRange: "条件から外れる寸法",
+    analysisMissing: "計測値なし",
+    analysisRangeOrder: "下限は上限以下にしてください。",
+    analysisMiddle50: "中央50%の範囲",
+    analysisRatioValue: "比率",
+    analysisAllCups: "すべてのカップ",
+    analysisAllBands: "すべてのアンダーサイズ",
+    analysisGroupCount: "該当件数",
+    analysisCupNote: "選択したサイズ体系の出典表記で分類します。同じカップ記号でも、アンダーサイズによって容量は異なります。表の範囲は実測の周囲寸法と身長です。",
+    analysisPatternNote: "線1本が1人のキャラクターです。軸は全キャラクター共通のパーセンタイル（0〜100）で固定しています。軸上を縦にドラッグして絞り込み、タップして解除できます。未計測の箇所は線が途切れます。スマートフォンでは図を横にスクロールできます。",
+    analysisMethod: "分析には、共通フィルター適用後の標準レコードのみを使用します。相関は3件以上の完全な組からPearsonの相関係数と最小二乗回帰直線を求め、両軸に分散がある場合に表示します。身長比は周囲寸法÷有効身長×100です。比率は丸め前の寸法から計算し、中央値と四分位数は線形補間で求めます。範囲は上下限を含み、必要な計測値がない場合は該当しません。近い候補は未達条件の数、次に全体の計測範囲で正規化した不足量の合計で並べます。体型パターンの軸は全標準レコードの同順位を平均したパーセンタイルで固定し、未計測箇所は接続しません。軸のドラッグは補間した分位点を用いて共通の実寸フィルターに反映します。カップ別表示は出典のUK・US・EU表記を使い、推定表記を保ったまま各寸法の中央値・四分位数・件数を示します。カップ記号の平均や容量の推定は行いません。",
     compareBasis:'比較の基準', rawMeasurements:'実寸', heightAdjusted:'身長比',
     heightAdjustedNote:'周囲長 ÷ 身長 × 100', smallerWins:'小さい値', largerWins:'大きい値',
     changelog:'更新履歴', sourceRepository:'ソースリポジトリ', language:'言語', theme:'テーマ', systemTheme:'端末に合わせる', dark:'ダーク', light:'ライト', schema:'スキーマ',
@@ -2016,6 +2190,35 @@ const I18N = {
     estimatedSizesNote: "≈表示估计尺码。来源提供的UK 23HH下围并非标准尺码，无法精确转换为US或EU；EU估值将理论下围向上取整。",
     mainSource: "主要来源",
     favouritesNav: "喜爱榜",
+    analysis: "分析",
+    analysisViewLabel: "视图",
+    relationships: "测量关系",
+    rangeFinder: "范围查找",
+    ratioLab: "比例分析",
+    cupProfiles: "罩杯组分析",
+    figurePatterns: "体型特征",
+    analysisShare: "分享视图",
+    analysisXAxis: "横轴",
+    analysisYAxis: "纵轴",
+    analysisTrendLabel: "趋势线",
+    analysisPairs: "有效数据对",
+    analysisCorrelation: "相关系数 r",
+    analysisRelationshipNote: "点击数据点查看尺寸。相关系数只使用两项测量均完整的数据；不足三组或任一轴数值完全相同时不计算。",
+    analysisMinimum: "最小值",
+    analysisMaximum: "最大值",
+    analysisExactMatches: "符合条件",
+    analysisNearMatches: "接近条件",
+    analysisOutsideRange: "未满足的条件",
+    analysisMissing: "缺少测量",
+    analysisRangeOrder: "最小值不能大于最大值。",
+    analysisMiddle50: "中间50%范围",
+    analysisRatioValue: "比值",
+    analysisAllCups: "全部罩杯",
+    analysisAllBands: "全部底围尺码",
+    analysisGroupCount: "组内角色",
+    analysisCupNote: "按所选体系的来源尺码分组，并保留底围尺码。同一罩杯字母不代表相同容量。表中范围来自围度和身高的测量数据。",
+    analysisPatternNote: "每条线代表一位角色，各轴使用固定的全名单百分位（0–100）。在轴上纵向拖动可筛选，点击可清除该轴范围。缺失测量处会断线；手机上可横向滚动图表。",
+    analysisMethod: "分析仅使用共用筛选条件下的标准角色记录。测量关系采用Pearson相关系数与最小二乘回归线，需至少三组完整数据且两轴均有数值差异。身高占比为围度÷有效身高×100。比例使用未舍入尺寸计算，中位数与四分位数采用线性插值。范围包含上下限，缺少所需测量时不符合条件。接近条件的角色先按未满足条件数排序，再比较按全名单测量极差归一化后的偏差总和。体型图采用全标准名单的平均秩百分位，筛选时保持固定；缺失值处断线。轴上拖选通过插值分位点设置共用的原始厘米范围。罩杯组沿用UK、US、EU来源尺码，保留估算标记，并展示各项测量的中位数、四分位数和有效数量；不计算罩杯字母平均值或推断容量。",
     compareBasis:'对比方式', rawMeasurements:'实测围度', heightAdjusted:'身高占比',
     heightAdjustedNote:'围度 ÷ 身高 × 100', smallerWins:'较小值', largerWins:'较大值',
     changelog:'更新记录', sourceRepository:'源码仓库', language:'语言', theme:'主题', systemTheme:'跟随系统', dark:'深色', light:'浅色', schema:'数据结构',
@@ -2187,6 +2390,7 @@ computeDerived();
 const RANGES = [
   {k:'stature_cm', lk:'height'},
   {k:'bust_cm',  lk:'bust'},
+  {k:'band_cm', lk:'underbust'},
   {k:'waist_cm', lk:'waist'},
   {k:'hip_cm',   lk:'hip'},
   {k:'thigh_cm', lk:'thigh'},
@@ -2280,7 +2484,7 @@ function readHash(){
       const [k,a,b] = part.split(':');
       if(BOUNDS[k] && isFinite(a) && isFinite(b)){
         const lo = Math.max(BOUNDS[k][0], +a), hi = Math.min(BOUNDS[k][1], +b);
-        if(lo > BOUNDS[k][0] || hi < BOUNDS[k][1]) rng[k] = [lo, hi];
+        if(lo <= hi && (lo > BOUNDS[k][0] || hi < BOUNDS[k][1])) rng[k] = [lo, hi];
       }
     }
     out.rng = rng;
@@ -2401,11 +2605,11 @@ function renderFilterPanel(){
 }
 
 /* ---------------- filtering + sorting ---------------- */
-function filtered(){
+function filtered(ignoreRanges=false){
   const q = norm(state.q.trim());
   return DATA.filter(d=>{
     if(q && !(norm(nameOf(d)).includes(q) || norm(d.name_ja||'').includes(q) || norm(d.name_zh||'').includes(q) || norm(d.display).includes(q) || d.aliases.some(a=>norm(a).includes(q)))) return false;
-    for(const m of RANGES) if(!inRange(d, m.k)) return false;
+    if(!ignoreRanges)for(const m of RANGES) if(!inRange(d, m.k)) return false;
     if(state.cup!=="all" && d.cup_group!==state.cup) return false;
     if(state.shape!=="all" && d.shape!==state.shape) return false;
     if(state.balance!=="all" && d.tags.balance!==state.balance) return false;
@@ -2876,7 +3080,7 @@ function toggleCompare(slug){
   }
   renderCompare();
   syncCardCompare();
-  if(state.view==="distribution") renderTool(filtered());
+  if(["distribution","analysis"].includes(state.view)) renderTool(filtered());
   writeHash(true);
 }
 function renderCompare(){
@@ -2953,8 +3157,8 @@ function render(skipHash){
   else if(v==="cards") renderCards([...list].sort(SORTS[state.sort]));
   $("#toolsView").hidden = !TOOL_VIEWS.includes(v);
   if(TOOLS_PAGE){
-    $('.search').hidden = v!=="distribution"; $('#fDrop').hidden = v!=="distribution";
-    $('#count').hidden = v!=="distribution";
+    $('.search').hidden = !["distribution","analysis"].includes(v); $('#fDrop').hidden = !["distribution","analysis"].includes(v);
+    $('#count').hidden = !["distribution","analysis"].includes(v);
     $$('#toolsNav [data-tool-link]').forEach(a=>{if(a.dataset.toolLink===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   }
   if(TOOL_VIEWS.includes(v)) renderTool(list);
@@ -2987,7 +3191,7 @@ $("#compareBtn").addEventListener("click", ()=>{
   openCompare();
 });
 $("#cmpOpen").addEventListener("click", openCompare);
-$("#cmpClear").addEventListener("click", ()=>{ state.compare=[]; state.compareBase=""; renderCompare(); syncCardCompare(); if(state.view==="distribution") renderTool(filtered()); writeHash(true); });
+$("#cmpClear").addEventListener("click", ()=>{ state.compare=[]; state.compareBase=""; renderCompare(); syncCardCompare(); if(["distribution","analysis"].includes(state.view)) renderTool(filtered()); writeHash(true); });
 $("#cmpChips").addEventListener("click", e=>{
   const b = e.target.closest("[data-uncmp]");
   if(b){ toggleCompare(b.dataset.uncmp); }
@@ -3231,6 +3435,7 @@ function setCupSystem(system){
   if(!['uk','us','eu'].includes(system))return;
   state.cupSystem=system;
   state.distSelection='';
+  state.analysisCup='all';state.analysisBand='all';
   try{localStorage.setItem('zzz-cup-system',system);}catch(_){}
   refreshMeasurements();
 }
@@ -3267,14 +3472,14 @@ $('#settingsClose').onclick=closeSettings;$('#settingsDone').onclick=closeSettin
 
 
 /* Exploration state is separate from the official roster and its derived rules. */
-const TOOL_VIEWS=['distribution','matches','game','sandbox','lineup','guide'];
+const TOOL_VIEWS=['analysis','distribution','matches','game','sandbox','lineup','guide'];
 const METRIC_KEYS=['height','bust','underbust','waist','hip','thigh'];
 const COMPARE_ROWS=['height','waist','hip','thigh','cup','bust','underbust','sizes','whr','whtr','shape','build','thighNote','figureRead'];
 const DEFAULT_COMPARE_ROWS=['height','waist','hip','thigh','cup','bust','underbust','whr','whtr'];
 const SANDBOX_SLUG='~sandbox';
 let gameRound=null, gameScore={correct:0,total:0,streak:0};
 function explorerDefaults(){
-  return {lineupSlugs:defaultLineup(),lineupOrder:'custom',lineupReference:'ruler',lineupReferenceCm:170,guideMetric:'height',compareRows:null,compareBase:'',compareHeight:160,sandbox:null,matchSource:'',matchBasis:'raw',matchWeights:null,
+  return {...measurementDefaults(),lineupSlugs:defaultLineup(),lineupOrder:'custom',lineupReference:'ruler',lineupReferenceCm:170,guideMetric:'height',compareRows:null,compareBase:'',compareHeight:160,sandbox:null,matchSource:'',matchBasis:'raw',matchWeights:null,
     distMetric:'cup',distBasis:'raw',distCupView:'letters',distSelection:'',gameMetric:'waist',gameBasis:'raw'};
 }
 function validSandbox(raw){
@@ -3322,6 +3527,7 @@ function readExplorerHash(params){
   if(raw.matchWeights && typeof raw.matchWeights==='object'){
     out.matchWeights=Object.fromEntries(Object.keys(Analysis.fields).map(k=>[k,Number.isFinite(raw.matchWeights[k])?Math.round(Math.max(0,Math.min(1,raw.matchWeights[k]))*100)/100:0]));
   }
+  readMeasurementHash(raw,out,params.has('cups')?(['uk','us','eu'].includes(params.get('cups'))?params.get('cups'):'uk'):state.cupSystem);
   return out;
 }
 function writeExplorerHash(params){
@@ -3399,7 +3605,7 @@ $('#toolsNav')?.addEventListener('click',e=>{
   const a=e.target.closest('[data-tool-link]');
   if(a && !(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)){e.preventDefault();openTool(a.dataset.toolLink);}
 });
-window.addEventListener('resize',debounce(()=>{if(state.view==='distribution')renderTool(filtered());},150));
+window.addEventListener('resize',debounce(()=>{if(['distribution','analysis'].includes(state.view))renderTool(filtered());},150));
 if(TOOLS_PAGE){
   const shell=$('.tools-shell');
   new ResizeObserver(()=>document.documentElement.style.setProperty('--tools-offset',shell.offsetHeight+'px')).observe(shell);
@@ -3408,9 +3614,10 @@ $('#toolSelect')?.addEventListener('change',e=>openTool(e.target.value));
 function renderTool(list){
   const root=$('#toolsView');document.body.dataset.toolView=state.view;
   if($('#toolSelect')){$('#toolSelect').value=state.view;$('#toolSelect').setAttribute('aria-label',t('tools'));}
-  const content=state.view==='lineup'?lineupHTML():state.view==='guide'?guideHTML():state.view==='distribution'?distributionHTML(list):state.view==='matches'?matchesHTML():state.view==='game'?gameHTML():sandboxHTML();
+  const content=state.view==='analysis'?measurementHTML(list):state.view==='lineup'?lineupHTML():state.view==='guide'?guideHTML():state.view==='distribution'?distributionHTML(list):state.view==='matches'?matchesHTML():state.view==='game'?gameHTML():sandboxHTML();
   root.innerHTML=`<div class="toolhead"><h2 id="toolTitle" tabindex="-1">${esc(t(state.view))}</h2></div>${content}`;
-  if(state.view==='lineup')bindLineup();
+  if(state.view==='analysis')bindMeasurement();
+  else if(state.view==='lineup')bindLineup();
   else if(state.view==='guide')bindGuide();
   else if(state.view==='distribution') bindDistribution();
   else if(state.view==='matches') bindMatches();
@@ -3625,7 +3832,7 @@ function cupDistributionHTML(list){
   }
   const parts=state.distSelection.split(':'),selected=measured.filter(m=>parts[0]==='cup'?m.s.cup===parts[1]:parts[0]==='size'?m.s.band===+parts[1]&&m.s.cup===parts[2]:true);
   const label=parts[0]==='cup'?cupSystemName()+' '+parts[1]:parts[0]==='size'?cupSystemName()+' '+parts[1]+parts[2]:cupSizeLabel();
-  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label><label for="distCupView">${esc(t('chartView'))}<select id="distCupView"><option value="letters"${state.distCupView==='letters'?' selected':''}>${esc(t('cupLetters'))}</option><option value="matrix"${state.distCupView==='matrix'?' selected':''}>${esc(t('bandByCup'))}</option></select></label></div><p class="toolnote">${esc(t('cupDistributionNote').replace('{system}',cupSystemName()))}</p>${measured.some(m=>m.d[system]?.startsWith('≈'))?`<p class="toolnote">${esc(t('estimatedSizesNote'))}</p>`:''}${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(cupText(m.d))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}${distributionResults(selected.map(m=>m.d),label,cupText)}`;
+  return `<div class="toolform"><label for="distMetric">${esc(t('metric'))}<select id="distMetric">${distributionOptions('cup')}</select></label><label for="distCupView">${esc(t('chartView'))}<select id="distCupView"><option value="letters"${state.distCupView==='letters'?' selected':''}>${esc(t('cupLetters'))}</option><option value="matrix"${state.distCupView==='matrix'?' selected':''}>${esc(t('bandByCup'))}</option></select></label></div><p class="toolnote">${esc(t('cupDistributionNote').replace('{system}',cupSystemName()))}</p>${measured.some(m=>m.d[system]?.startsWith('≈'))?`<p class="toolnote">${esc(t('estimatedSizesNote'))}</p>`:''}${summary.count?`<div class="toolstats"><span>${esc(t('population'))}<strong>${summary.count}</strong></span><span>${esc(t('mostCommon'))}<strong>${esc(summary.modes.join(' / '))}</strong></span></div>${chart}<div class="markerlist">${markers.map((m,i)=>`<span>${i+1}. ${esc(nameOf(m.d))}: ${esc(cupText(m.d))}</span>`).join('')}</div>`:`<p>${esc(t('noValues'))}</p>`}<button class="btn" id="openCupProfiles">${esc(t('cupProfiles'))}</button>${distributionResults(selected.map(m=>m.d),label,cupText)}`;
 }
 
 /* Filtered roster distribution; references are markers, never observations. */
@@ -3661,6 +3868,7 @@ function bindDistribution(){
   if($('#distCupView'))$('#distCupView').onchange=e=>toolUpdate('distCupView',()=>{state.distCupView=e.target.value;state.distSelection='';});
   if($('#distBasis'))$('#distBasis').onchange=e=>toolUpdate('distBasis',()=>{state.distBasis=e.target.value;state.distSelection='';});
   if($('#distTarget'))$('#distTarget').onchange=e=>{if(setTarget(e.target))toolUpdate('distTarget',()=>{state.distSelection='';});};
+  if($('#openCupProfiles'))$('#openCupProfiles').onclick=()=>{const parts=state.distSelection.split(':');state.analysisView='cupProfiles';state.analysisCup=parts[0]==='cup'?parts[1]:parts[0]==='size'?parts[2]:'all';state.analysisBand=parts[0]==='size'?parts[1]:'all';openTool('analysis');};
   if($('#clearDistribution'))$('#clearDistribution').onclick=()=>{state.distSelection='';render();$('#distMetric').focus();};
   $$('[data-dist-select]').forEach(b=>{
     const select=()=>{state.distSelection=b.dataset.distSelect;render();$('#distResultTitle').focus();$('#distResults').scrollIntoView({block:'start'});};
@@ -3757,6 +3965,151 @@ $('#toolsView').addEventListener('click',e=>{
   if(pair){state.compare=[pair.dataset.source,pair.dataset.matchPair];state.compareBase=pair.dataset.source;state.compareMode=state.matchBasis;renderCompare();syncCardCompare();writeHash(true);openCompare();}
 });
 
+/* Measurement workspaces use canonical records and the shared roster filters. */
+const MEASUREMENT_VIEWS=['relationships','rangeFinder','ratioLab','cupProfiles','figurePatterns'];
+const RATIO_PRESETS=[['bust','waist'],['hip','waist'],['thigh','hip'],['waist','height']];
+const MEASUREMENT_COLOURS={height:'var(--tan)',bust:'var(--bust)',underbust:'var(--brass)',waist:'var(--waist)',hip:'var(--hips)',thigh:'var(--thighs)'};
+function measurementDefaults(){
+  return {analysisView:'relationships',analysisX:'hip',analysisY:'thigh',analysisBasis:'raw',analysisTrend:true,
+    analysisRatio:'hip:waist',analysisCup:'all',analysisBand:'all',analysisPick:''};
+}
+function readMeasurementHash(raw,out,system){
+  if(MEASUREMENT_VIEWS.includes(raw.analysisView))out.analysisView=raw.analysisView;
+  for(const key of ['analysisX','analysisY'])if(METRIC_KEYS.includes(raw[key]))out[key]=raw[key];
+  if(['raw','height'].includes(raw.analysisBasis))out.analysisBasis=raw.analysisBasis;
+  if(typeof raw.analysisTrend==='boolean')out.analysisTrend=raw.analysisTrend;
+  if(RATIO_PRESETS.some(p=>p.join(':')===raw.analysisRatio))out.analysisRatio=raw.analysisRatio;
+  const sizes=DATA.map(d=>Analysis.sizeParts(d[system])).filter(Boolean);
+  if(raw.analysisCup==='all'||sizes.some(s=>s.cup===raw.analysisCup))out.analysisCup=raw.analysisCup;
+  if(raw.analysisBand==='all'||typeof raw.analysisBand==='string'&&sizes.some(s=>(!out.analysisCup||out.analysisCup==='all'||s.cup===out.analysisCup)&&String(s.band)===raw.analysisBand))out.analysisBand=raw.analysisBand;
+  if(bySlug.has(raw.analysisPick))out.analysisPick=raw.analysisPick;
+}
+function measurementHTML(list){
+  const mode=state.analysisView;
+  return `<div class="toolform analysis-switch"><label for="analysisView">${esc(t('analysisViewLabel'))}<select id="analysisView">${MEASUREMENT_VIEWS.map(k=>`<option value="${k}"${mode===k?' selected':''}>${esc(t(k))}</option>`).join('')}</select></label><button class="btn" id="shareAnalysis">${esc(t('analysisShare'))}</button></div>`+
+    (mode==='relationships'?relationshipHTML(list):mode==='rangeFinder'?rangeFinderHTML():mode==='ratioLab'?ratioLabHTML(list):mode==='cupProfiles'?cupProfilesHTML(list):figurePatternsHTML(list));
+}
+function analysisNumber(value,suffix='',decimals=1){return value==null?'—':fmt(value,decimals)+suffix;}
+function analysisTable(records,columns,expanded=false){
+  const table=`<div class="analysis-tablewrap"><table class="tooltable analysis-table"><thead><tr><th scope="col">${esc(t('name'))}</th>${columns.map(c=>`<th scope="col">${esc(c.label)}</th>`).join('')}<th scope="col"><span class="sr">${esc(t('compare'))}</span></th></tr></thead><tbody>${records.map(d=>`<tr${d.slug===state.analysisPick?' class="analysis-current"':''}><td><a href="${esc(charHref(d))}" data-tool-profile="${esc(d.slug)}">${esc(nameOf(d))}</a></td>${columns.map(c=>`<td>${esc(c.text(d))}</td>`).join('')}<td>${analysisCompareButton(d)}</td></tr>`).join('')||`<tr><td colspan="${columns.length+2}">${esc(t('noValues'))}</td></tr>`}</tbody></table></div>`;
+  return expanded?table:`<details class="tooldata"><summary>${esc(t('dataTable'))} · ${records.length}</summary>${table}</details>`;
+}
+function analysisCompareButton(d){
+  return `<button class="btn" data-analysis-add="${esc(d.slug)}" aria-pressed="${state.compare.includes(d.slug)}" aria-label="${esc((state.compare.includes(d.slug)?t('removeFromCompare'):t('addCompare'))+': '+nameOf(d))}">${esc(t(state.compare.includes(d.slug)?'added':'cmpShort'))}</button>`;
+}
+function analysisInspection(list){
+  const d=list.find(d=>d.slug===state.analysisPick);if(!d)return '';
+  return `<section class="analysis-inspect" id="analysisInspection" aria-label="${esc(nameOf(d))}"><img src="character_images/${esc(d.official.replace(/\.png$/,'.webp'))}" alt="" width="75" height="112"><div><a href="${esc(charHref(d))}" data-tool-profile="${esc(d.slug)}" class="analysis-name">${esc(nameOf(d))}</a><dl>${METRIC_KEYS.map(k=>`<div><dt>${esc(t(k))}</dt><dd>${esc(valueText(d,k,'raw'))}</dd></div>`).join('')}</dl></div>${analysisCompareButton(d)}</section>`;
+}
+function analysisStat(label,value){return `<span>${esc(label)}<strong>${esc(value)}</strong></span>`;}
+function relationshipHTML(list){
+  const x=state.analysisX,y=state.analysisY,b=state.analysisBasis;
+  const points=list.map(d=>({d,x:shownValue(d,x,b),y:shownValue(d,y,b)})).filter(p=>p.x!=null&&p.y!=null);
+  const summary=Analysis.relationship(points.map(p=>[p.x,p.y]));
+  return `<div class="toolform"><label for="analysisX">${esc(t('analysisXAxis'))}<select id="analysisX">${metricOptions(x)}</select></label><label for="analysisY">${esc(t('analysisYAxis'))}<select id="analysisY">${metricOptions(y)}</select></label><label for="analysisBasis">${esc(t('basis'))}<select id="analysisBasis">${basisOptions(b)}</select></label><label class="analysis-check"><input type="checkbox" id="analysisTrend"${state.analysisTrend?' checked':''}>${esc(t('analysisTrendLabel'))}</label></div><div class="toolstats">${analysisStat(t('analysisPairs'),summary.count)}${analysisStat(t('analysisCorrelation'),analysisNumber(summary.r,'',3))}</div><p class="toolnote">${esc(t('analysisRelationshipNote'))}</p>${points.length?relationshipChart(points,summary):`<p>${esc(t('noValues'))}</p>`}${analysisInspection(list)}${analysisTable(points.map(p=>p.d),[{label:t(x)+' ('+valueSuffix(x,b)+')',text:d=>valueText(d,x,b)},{label:t(y)+' ('+valueSuffix(y,b)+')',text:d=>valueText(d,y,b)}])}`;
+}
+function relationshipChart(points,summary){
+  const w=innerWidth<=700?500:1000,h=440,l=70,r=w-28,top=20,bottom=365;
+  const extent=key=>{const v=points.map(p=>p[key]),lo=Math.min(...v),hi=Math.max(...v),pad=(hi-lo||Math.abs(lo)*.1||1)*.07;return [lo-pad,hi+pad];};
+  const [xmin,xmax]=extent('x'),[ymin,ymax]=extent('y');
+  const sx=v=>l+(v-xmin)/(xmax-xmin)*(r-l),sy=v=>bottom-(v-ymin)/(ymax-ymin)*(bottom-top);
+  const ticks=Array.from({length:5},(_,i)=>i/4);
+  const axis=ticks.map(p=>{const x=xmin+(xmax-xmin)*p,y=ymin+(ymax-ymin)*p;return `<line class="gridline" x1="${sx(x)}" x2="${sx(x)}" y1="${top}" y2="${bottom}"/><line class="gridline" x1="${l}" x2="${r}" y1="${sy(y)}" y2="${sy(y)}"/><text x="${sx(x)}" y="${bottom+25}" text-anchor="middle">${esc(fmt(x))}</text><text x="${l-10}" y="${sy(y)+5}" text-anchor="end">${esc(fmt(y))}</text>`;}).join('');
+  const trend=state.analysisTrend&&summary.slope!=null?`<line class="analysis-trend" x1="${l}" x2="${r}" y1="${sy(summary.intercept+summary.slope*xmin)}" y2="${sy(summary.intercept+summary.slope*xmax)}"/>`:'';
+  return `<div class="analysis-chart"><svg viewBox="0 0 ${w} ${h}" class="analysis-scatter" role="group" aria-label="${esc(t('relationships'))}"><defs><clipPath id="analysisPlotClip"><rect x="${l}" y="${top}" width="${r-l}" height="${bottom-top}"/></clipPath></defs>${axis}<g clip-path="url(#analysisPlotClip)">${trend}${[...points].sort((a,b)=>Number(state.compare.includes(a.d.slug)||a.d.slug===state.analysisPick)-Number(state.compare.includes(b.d.slug)||b.d.slug===state.analysisPick)).map(p=>`<g class="analysis-point${p.d.slug===state.analysisPick?' picked':''}${state.compare.includes(p.d.slug)?' compared':''}" data-analysis-pick="${esc(p.d.slug)}" tabindex="0" role="button" aria-label="${esc(nameOf(p.d)+': '+valueText(p.d,state.analysisX,state.analysisBasis)+' / '+valueText(p.d,state.analysisY,state.analysisBasis))}"><title>${esc(nameOf(p.d)+': '+fmt(p.x)+' / '+fmt(p.y))}</title><circle class="point-hit" cx="${sx(p.x)}" cy="${sy(p.y)}" r="13"/><circle cx="${sx(p.x)}" cy="${sy(p.y)}" r="5"/></g>`).join('')}</g><text x="${(l+r)/2}" y="425" text-anchor="middle">${esc(t(state.analysisX)+' ('+valueSuffix(state.analysisX,state.analysisBasis).trim()+')')}</text><text transform="translate(18 ${(top+bottom)/2}) rotate(-90)" text-anchor="middle">${esc(t(state.analysisY)+' ('+valueSuffix(state.analysisY,state.analysisBasis).trim()+')')}</text></svg></div>`;
+}
+function activeAnalysisRanges(){return Object.fromEntries(Object.entries(state.rng).filter(([k])=>!rangeFull(k)));}
+function rangeControlsHTML(){
+  return `<div class="analysis-ranges">${RANGES.map(m=>{const [lo,hi]=dispBounds(m.k),values=state.rng[m.k]||BOUNDS[m.k];return `<fieldset data-analysis-range="${m.k}"><legend style="color:${MEASUREMENT_COLOURS[m.lk]}">${esc(t(m.lk))} <span>(${esc(USUF().trim())})</span></legend><div class="analysis-range-numbers"><label>${esc(t('analysisMinimum'))}<input class="toolinput" data-range-number="lo" type="number" step="any" min="${lo}" max="${hi}" value="${Number(toDisp(values[0]).toFixed(3))}"></label><span>–</span><label>${esc(t('analysisMaximum'))}<input class="toolinput" data-range-number="hi" type="number" step="any" min="${lo}" max="${hi}" value="${Number(toDisp(values[1]).toFixed(3))}"></label><button class="lnk" type="button" data-analysis-reset="${m.k}" aria-label="${esc(t('resetRanges')+': '+t(m.lk))}">↺</button></div><div class="dual"><div class="dtr"><i></i></div><input data-range-slider="lo" type="range" min="${lo}" max="${hi}" step="0.1" value="${toDisp(values[0])}" aria-label="${esc(t(m.lk)+' '+t('analysisMinimum'))}"><input data-range-slider="hi" type="range" min="${lo}" max="${hi}" step="0.1" value="${toDisp(values[1])}" aria-label="${esc(t(m.lk)+' '+t('analysisMaximum'))}"></div></fieldset>`;}).join('')}</div><button class="btn" id="analysisResetRanges">${esc(t('resetRanges'))}</button>`;
+}
+function rangeFinderHTML(){
+  return `${rangeControlsHTML()}<div id="analysisRangeResults" aria-live="polite">${rangeResultsHTML()}</div>`;
+}
+function rangeResultsHTML(){
+  const ranges=activeAnalysisRanges(),base=filtered(true),ranked=base.map(d=>({d,failures:Analysis.rangeFailures(d,ranges)}));
+  const exact=ranked.filter(r=>!r.failures.length).map(r=>r.d),near=ranked.filter(r=>r.failures.length).sort((a,b)=>a.failures.length-b.failures.length||gap(a)-gap(b)).slice(0,8);
+  function gap(r){return r.failures.reduce((s,f)=>s+(f.value==null?1:Math.abs(f.value-f.limit)/(BOUNDS[f.field][1]-BOUNDS[f.field][0]||1)),0);}
+  const columns=METRIC_KEYS.map(k=>({label:t(k),text:d=>valueText(d,k,'raw')}));
+  return `<div class="selectionhead"><h3>${esc(t('analysisExactMatches'))} · ${exact.length}</h3></div>${analysisTable(exact,columns,true)}${near.length?`<details class="tooldata" open><summary>${esc(t('analysisNearMatches'))} · ${near.length}</summary>${analysisTable(near.map(r=>r.d),[{label:t('analysisOutsideRange'),text:d=>near.find(r=>r.d===d).failures.map(f=>{const m=RANGES.find(m=>m.k===f.field);return t(m.lk)+': '+(f.value==null?t('analysisMissing'):fmt(toDisp(f.value))+USUF()+' ('+(f.value<f.limit?'↑':'↓')+fmt(toDisp(Math.abs(f.value-f.limit)))+USUF()+')');}).join(' · ')}],true)}</details>`:''}`;
+}
+function ratioLabHTML(list){
+  const [a,b]=state.analysisRatio.split(':'),ratio=d=>Analysis.ratio(d,a,b);
+  const records=list.filter(d=>ratio(d)!=null).sort((x,y)=>ratio(y)-ratio(x)),summary=Analysis.numericSummary(records.map(ratio));
+  return `<div class="toolform"><label for="analysisRatio">${esc(t('ratioLab'))}<select id="analysisRatio">${RATIO_PRESETS.map(([x,y])=>`<option value="${x}:${y}"${state.analysisRatio===x+':'+y?' selected':''}>${esc(t(x)+' ÷ '+t(y))}</option>`).join('')}</select></label></div><div class="analysis-formula">${esc(t(a))}<span>÷</span>${esc(t(b))}</div><div class="toolstats">${analysisStat(t('population'),summary.count)}${analysisStat(t('median'),analysisNumber(summary.median,'',3))}${analysisStat(t('analysisMiddle50'),summary.count?analysisNumber(summary.q1,'',3)+'–'+analysisNumber(summary.q3,'',3):'—')}</div>${ratioHistogram(records,ratio)}${analysisTable(records,[{label:t('analysisRatioValue'),text:d=>fmt(ratio(d),3)},{label:t(a),text:d=>valueText(d,a,'raw')},{label:t(b),text:d=>valueText(d,b,'raw')}],true)}`;
+}
+function ratioHistogram(records,ratio){
+  const dist=Analysis.distribution(records.map(ratio));if(!dist.count)return `<p>${esc(t('noValues'))}</p>`;
+  const w=innerWidth<=700?500:1000,left=50,right=w-30,base=180,lo=dist.bins[0].lo,hi=dist.bins.at(-1).hi;
+  const sx=v=>lo===hi?(left+right)/2:left+(v-lo)/(hi-lo)*(right-left),peak=Math.max(...dist.bins.map(b=>b.count));
+  return `<div class="analysis-chart"><svg class="analysis-ratio-chart" viewBox="0 0 ${w} 245" role="img" aria-label="${esc(t('ratioLab'))}">${dist.bins.map(b=>{const bw=lo===hi?80:(right-left)/dist.bins.length-4,x=lo===hi?sx(lo)-40:sx(b.lo),h=b.count/peak*140;return `<rect class="ratio-bar" x="${x}" y="${base-h}" width="${bw}" height="${h}"/><text x="${x+bw/2}" y="${base-h-8}" text-anchor="middle">${b.count}</text>`;}).join('')}<line class="analysis-median" x1="${sx(dist.median)}" x2="${sx(dist.median)}" y1="15" y2="190"/>${[...new Set([lo,hi])].map(v=>`<text x="${sx(v)}" y="215" text-anchor="middle">${fmt(v,3)}</text>`).join('')}</svg></div>`;
+}
+function cupProfilesHTML(list){
+  const system=state.cupSystem,parts=d=>Analysis.sizeParts(d[system]),cups=Analysis.cupDistribution(DATA,system).bins.map(b=>b.cup);
+  const bands=[...new Set(DATA.map(parts).filter(p=>p&&(state.analysisCup==='all'||p.cup===state.analysisCup)).map(p=>p.band))].sort((a,b)=>a-b);
+  const records=list.filter(d=>{const p=parts(d);return p&&(state.analysisCup==='all'||p.cup===state.analysisCup)&&(state.analysisBand==='all'||p.band===+state.analysisBand);});
+  const stats=METRIC_KEYS.map(k=>({key:k,...Analysis.numericSummary(records.map(d=>Analysis.value(d,k)))}));
+  return `<div class="toolform"><label for="analysisSystem">${esc(t('cupSystem'))}<select id="analysisSystem">${['uk','us','eu'].map(s=>`<option value="${s}"${s===system?' selected':''}>${s.toUpperCase()}</option>`).join('')}</select></label><label for="analysisCup">${esc(t('cupLetters'))}<select id="analysisCup"><option value="all">${esc(t('analysisAllCups'))}</option>${cups.map(c=>`<option value="${c}"${state.analysisCup===c?' selected':''}>${c}</option>`).join('')}</select></label><label for="analysisBand">${esc(t('sourceBand'))}<select id="analysisBand"><option value="all">${esc(t('analysisAllBands'))}</option>${bands.map(b=>`<option value="${b}"${state.analysisBand===String(b)?' selected':''}>${b}</option>`).join('')}</select></label></div><p class="toolnote">${esc(t('analysisCupNote'))}</p><div class="toolstats">${analysisStat(t('analysisGroupCount'),records.length)}</div>${records.some(d=>d[system].startsWith('≈'))?`<p class="toolnote">${esc(t('estimatedSizesNote'))}</p>`:''}<div class="analysis-tablewrap"><table class="tooltable analysis-cup-stats"><thead><tr><th>${esc(t('metric'))}</th><th>${esc(t('median'))}</th><th>${esc(t('analysisMiddle50'))}</th><th>${esc(t('population'))}</th></tr></thead><tbody>${stats.map(s=>`<tr><th scope="row" style="color:${MEASUREMENT_COLOURS[s.key]}">${esc(t(s.key))}</th><td>${esc(analysisNumber(s.median==null?null:toDisp(s.median),USUF()))}</td><td>${s.count?`${esc(fmt(toDisp(s.q1)))}–${esc(fmt(toDisp(s.q3))+USUF())}`:'—'}</td><td>${s.count}${records.length?' / '+records.length:''}</td></tr>`).join('')}</tbody></table></div>${analysisTable(records,[{label:cupSizeLabel(),text:d=>cupText(d)},...METRIC_KEYS.map(k=>({label:t(k),text:d=>valueText(d,k,'raw')}))])}`;
+}
+function figurePatternsHTML(list){
+  return `<p class="toolnote">${esc(t('analysisPatternNote'))}</p><div id="analysisPatternResults">${patternResultsHTML(list)}</div><details class="tooldata"><summary>${esc(t('ranges'))}</summary>${rangeControlsHTML()}</details>`;
+}
+function patternResultsHTML(list){
+  return `<div class="analysis-pattern-wrap" tabindex="0" aria-label="${esc(t('figurePatterns'))}">${figurePatternsChart(list)}</div>${analysisInspection(list)}<div class="toolstats">${analysisStat(t('analysisExactMatches'),list.length+' / '+filtered(true).length)}</div>${analysisTable(list,METRIC_KEYS.map(k=>({label:t(k),text:d=>valueText(d,k,'raw')})))}`;
+}
+function figurePatternsChart(list){
+  const keys=['height','bust','underbust','waist','hip','thigh'],w=1000,top=65,bottom=385;
+  const xx=i=>65+i*174,yy=p=>bottom-p*(bottom-top),matching=new Set(list.map(d=>d.slug)),ranges=activeAnalysisRanges();
+  const all=filtered(true),populations=Object.fromEntries(keys.map(k=>[k,DATA.map(d=>Analysis.value(d,k))]));
+  const percentile=(d,k)=>Analysis.percentile(Analysis.value(d,k),populations[k]);
+  const lines=[...all].sort((a,b)=>Number(matching.has(a.slug))*2+Number(state.compare.includes(a.slug))-Number(matching.has(b.slug))*2-Number(state.compare.includes(b.slug)));
+  return `<svg id="analysisPatterns" viewBox="0 0 ${w} 445" role="group" aria-label="${esc(t('figurePatterns'))}">${[0,.25,.5,.75,1].map(p=>`<line class="gridline" x1="45" x2="950" y1="${yy(p)}" y2="${yy(p)}"/><text x="25" y="${yy(p)+4}" text-anchor="end">${Math.round(p*100)}</text>`).join('')}${lines.map(d=>{let pen=false;const path=keys.map((k,i)=>{const p=percentile(d,k);if(p==null){pen=false;return '';}const segment=(pen?'L':'M')+xx(i)+','+yy(p);pen=true;return segment;}).join('');return `<path d="${path}" class="analysis-pattern-line${matching.has(d.slug)?' matches':''}${state.compare.includes(d.slug)?' compared':''}${state.analysisPick===d.slug?' picked':''}" data-analysis-pick="${esc(d.slug)}" tabindex="0" role="button" aria-label="${esc(nameOf(d))}"><title>${esc(nameOf(d))}</title></path>`;}).join('')}${keys.map((k,i)=>{const field=Analysis.fields[k],range=ranges[field],values=populations[k].filter(v=>v!=null),low=range?Analysis.percentileAt(range[0],values):0,high=range?Analysis.percentileAt(range[1],values):1;return `<g class="analysis-brush" data-brush-key="${k}" data-brush-index="${i}" style="--metric:${MEASUREMENT_COLOURS[k]}"><text x="${xx(i)}" y="30" text-anchor="middle">${esc(t(k))}</text><line class="pattern-axis" x1="${xx(i)}" x2="${xx(i)}" y1="${top}" y2="${bottom}"/><rect class="brush-fill" x="${xx(i)-9}" y="${yy(high)}" width="18" height="${Math.max(2,yy(low)-yy(high))}"${range?'':' visibility="hidden"'}/><rect class="brush-hit" x="${xx(i)-18}" y="${top}" width="36" height="${bottom-top}"/><text x="${xx(i)}" y="422" text-anchor="middle">${esc(fmt(toDisp(Math.min(...values))))}–${esc(fmt(toDisp(Math.max(...values)))+USUF())}</text></g>`;}).join('')}</svg>`;
+}
+function bindMeasurement(){
+  $('#analysisView').onchange=e=>toolUpdate('analysisView',()=>{state.analysisView=e.target.value;});
+  $('#shareAnalysis').onclick=()=>share();
+  for(const id of ['analysisX','analysisY','analysisBasis','analysisRatio','analysisCup','analysisBand'])if($('#'+id))$('#'+id).onchange=e=>toolUpdate(id,()=>{state[id]=e.target.value;if(id==='analysisCup')state.analysisBand='all';});
+  if($('#analysisTrend'))$('#analysisTrend').onchange=e=>toolUpdate('analysisTrend',()=>{state.analysisTrend=e.target.checked;});
+  if($('#analysisSystem'))$('#analysisSystem').onchange=e=>toolUpdate('analysisSystem',()=>{state.cupSystem=e.target.value;state.analysisCup='all';state.analysisBand='all';try{localStorage.setItem('zzz-cup-system',state.cupSystem);}catch(_){}syncControls();});
+  bindAnalysisSelection();bindAnalysisRanges();bindPatternBrush();
+}
+function bindAnalysisSelection(){
+  $$('[data-analysis-pick]').forEach(el=>{const select=()=>{state.analysisPick=el.dataset.analysisPick;render();};el.onclick=select;el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select();}};});
+  $$('[data-analysis-add]').forEach(el=>el.onclick=()=>toggleCompare(el.dataset.analysisAdd));
+}
+function bindAnalysisRanges(){
+  $$('[data-analysis-range]').forEach(row=>{
+    const key=row.dataset.analysisRange,lo=row.querySelector('[data-range-number="lo"]'),hi=row.querySelector('[data-range-number="hi"]');
+    const sl=row.querySelector('[data-range-slider="lo"]'),sh=row.querySelector('[data-range-slider="hi"]');
+    const paint=()=>{const a=(+sl.value-sl.min)/(sl.max-sl.min)*100,b=(+sh.value-sh.min)/(sh.max-sh.min)*100,fill=row.querySelector('.dtr i');fill.style.left=a+'%';fill.style.width=(b-a)+'%';};
+    const apply=(input,slider=false)=>{
+      if(!slider&&(!input.checkValidity()||+lo.value>+hi.value)){input.setCustomValidity(+lo.value>+hi.value?t('analysisRangeOrder'):'');input.reportValidity();return;}
+      const [min,max]=dispBounds(key),low=+lo.value,high=+hi.value;
+      // Editing one endpoint preserves the other endpoint's raw precision.
+      const previous=state.rng[key]||BOUNDS[key];
+      state.rng[key]=[low,high].map((v,i)=>v===Number(toDisp(previous[i]).toFixed(3))?previous[i]:i===0&&v<=min?BOUNDS[key][0]:i===1&&v>=max?BOUNDS[key][1]:toCmOf(v));
+      sl.value=low;sh.value=high;paint();updateFilterBadge();renderActiveFilters();renderFilterPanel();writeHash(true);
+      if($('#analysisRangeResults')){$('#analysisRangeResults').innerHTML=rangeResultsHTML();bindAnalysisSelection();$('#count').innerHTML=`<b>${filtered().length}</b> / ${DATA.length} ${esc(t('entries'))}`;}
+      else if($('#analysisPatternResults')){$('#analysisPatternResults').innerHTML=patternResultsHTML(filtered());bindAnalysisSelection();bindPatternBrush();}
+    };
+    for(const input of [lo,hi]){input.oninput=()=>{lo.setCustomValidity('');hi.setCustomValidity('');if(lo.validity.valid&&hi.validity.valid&&+lo.value<=+hi.value)apply(input);};input.onchange=()=>apply(input);}
+    sl.oninput=()=>{lo.value=sl.value;if(+sl.value>+sh.value)hi.value=sh.value=sl.value;apply(sl,true);};
+    sh.oninput=()=>{hi.value=sh.value;if(+sh.value<+sl.value)lo.value=sl.value=sh.value;apply(sh,true);};paint();
+  });
+  $$('[data-analysis-reset]').forEach(el=>el.onclick=()=>{delete state.rng[el.dataset.analysisReset];renderFilterPanel();render();});
+  if($('#analysisResetRanges'))$('#analysisResetRanges').onclick=()=>{state.rng={};renderFilterPanel();render();};
+}
+function bindPatternBrush(){
+  const svg=$('#analysisPatterns');if(!svg)return;
+  $$('.analysis-brush').forEach(axis=>{
+    const hit=axis.querySelector('.brush-hit'),fill=axis.querySelector('.brush-fill'),key=axis.dataset.brushKey,field=Analysis.fields[key];let start=null;
+    const y=e=>Math.max(65,Math.min(385,(e.clientY-svg.getBoundingClientRect().top)/svg.getBoundingClientRect().height*445));
+    hit.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();start=y(e);hit.setPointerCapture(e.pointerId);fill.removeAttribute('visibility');fill.setAttribute('y',start);fill.setAttribute('height',2);};
+    hit.onpointermove=e=>{if(start==null)return;const end=y(e);fill.setAttribute('y',Math.min(start,end));fill.setAttribute('height',Math.max(2,Math.abs(end-start)));};
+    hit.onpointerup=e=>{if(start==null)return;const end=y(e);if(Math.abs(end-start)<4)delete state.rng[field];else state.rng[field]=Analysis.percentileRange(DATA.map(d=>d[field]),1-(Math.max(start,end)-65)/320,1-(Math.min(start,end)-65)/320);start=null;renderFilterPanel();render();};
+    hit.onpointercancel=()=>{start=null;render();};
+  });
+}
+
 /* Roster presentation state does not change measurements or ranking rules. */
 const TABLE_KEYS=['name','height','bust','band','waist','hip','thigh','uk','whr','whtr','thr','thh','shape','bal','note'];
 const DEFAULT_TABLE_COLUMNS=['height','bust','waist','hip','uk'];
@@ -3798,7 +4151,7 @@ function renderActiveFilters(){
     const metric=RANGES.find(m=>m.k===key);
     if(metric)entries.push({key:'rng:'+key,text:t(metric.lk)+': '+range.map(v=>fmt(isCm()?v:v/2.54)).join('–')+USUF()});
   }
-  const box=$('#activeFilters');box.hidden=!entries.length||(TOOLS_PAGE&&state.view!=='distribution');
+  const box=$('#activeFilters');box.hidden=!entries.length||(TOOLS_PAGE&&!['distribution','analysis'].includes(state.view));
   box.innerHTML=entries.map(e=>`<button class="btn" data-remove-filter="${esc(e.key)}" aria-label="${esc(t('removeFilter')+': '+e.text)}">${esc(e.text)} ×</button>`).join('')+(entries.length?`<button class="btn" id="clearActive">${esc(t('clearFilters'))}</button>`:'');
   box.querySelectorAll('[data-remove-filter]').forEach(b=>b.onclick=()=>{
     const key=b.dataset.removeFilter;

@@ -39,7 +39,7 @@ function renderActiveFilters(){
     const metric=RANGES.find(m=>m.k===key);
     if(metric)entries.push({key:'rng:'+key,text:t(metric.lk)+': '+range.map(v=>fmt(isCm()?v:v/2.54)).join('–')+USUF()});
   }
-  const box=$('#activeFilters');box.hidden=!entries.length||(TOOLS_PAGE&&state.view!=='distribution');
+  const box=$('#activeFilters');box.hidden=!entries.length||(TOOLS_PAGE&&!['distribution','analysis'].includes(state.view));
   box.innerHTML=entries.map(e=>`<button class="btn" data-remove-filter="${esc(e.key)}" aria-label="${esc(t('removeFilter')+': '+e.text)}">${esc(e.text)} ×</button>`).join('')+(entries.length?`<button class="btn" id="clearActive">${esc(t('clearFilters'))}</button>`:'');
   box.querySelectorAll('[data-remove-filter]').forEach(b=>b.onclick=()=>{
     const key=b.dataset.removeFilter;
