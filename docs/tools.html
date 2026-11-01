@@ -3999,7 +3999,7 @@ function analysisCompareButton(d){
 }
 function analysisInspection(list){
   const d=list.find(d=>d.slug===state.analysisPick);if(!d)return '';
-  return `<section class="analysis-inspect" id="analysisInspection" aria-label="${esc(nameOf(d))}"><img src="character_images/${esc(d.official.replace(/\.png$/,'.webp'))}" alt="" width="75" height="112"><div><a href="${esc(charHref(d))}" data-tool-profile="${esc(d.slug)}" class="analysis-name">${esc(nameOf(d))}</a><dl>${METRIC_KEYS.map(k=>`<div><dt>${esc(t(k))}</dt><dd>${esc(valueText(d,k,'raw'))}</dd></div>`).join('')}</dl></div>${analysisCompareButton(d)}</section>`;
+  return `<section class="analysis-inspect" id="analysisInspection" aria-label="${esc(nameOf(d))}"><img src="character_images/${esc(d.official)}.webp" alt="" width="75" height="112"><div><a href="${esc(charHref(d))}" data-tool-profile="${esc(d.slug)}" class="analysis-name">${esc(nameOf(d))}</a><dl>${METRIC_KEYS.map(k=>`<div><dt>${esc(t(k))}</dt><dd>${esc(valueText(d,k,'raw'))}</dd></div>`).join('')}</dl></div>${analysisCompareButton(d)}</section>`;
 }
 function analysisStat(label,value){return `<span>${esc(label)}<strong>${esc(value)}</strong></span>`;}
 function relationshipHTML(list){

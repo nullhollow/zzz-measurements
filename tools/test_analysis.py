@@ -383,6 +383,26 @@ process.stdout.write(JSON.stringify({good:context.parse(good),bad:context.parse(
         self.assertEqual(actual['out']['base'], len(ROSTER))
         self.assertCountEqual(actual['out']['exact'], [d['slug'] for d in ROSTER if d['thigh_cm'] is not None and 40 <= d['thigh_cm'] <= 50])
 
+    def test_analysis_portraits_resolve_for_every_character(self):
+        script = r"""
+const fs=require('fs'),vm=require('vm'),roster=JSON.parse(fs.readFileSync('tools/data.json'));
+const context=vm.createContext({state:{compare:[]},METRIC_KEYS:[],t:s=>s,esc:s=>String(s),nameOf:d=>d.display,charHref:d=>'characters/'+d.slug+'.html'});
+vm.runInContext(fs.readFileSync('tools/measurement_tools.js','utf8')+`;this.html=roster=>roster.map(d=>{state.analysisPick=d.slug;return analysisInspection(roster);});`,context);
+process.stdout.write(JSON.stringify(context.html(roster)));
+"""
+        html = json.loads(subprocess.run(['node', '-e', script], cwd=ROOT, check=True, capture_output=True, text=True).stdout)
+        class Images(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.paths = []
+            def handle_starttag(self, tag, attrs):
+                if tag == 'img': self.paths.append(dict(attrs)['src'])
+        for record, markup in zip(ROSTER, html):
+            parser = Images()
+            parser.feed(markup)
+            self.assertEqual(len(parser.paths), 1, record['slug'])
+            self.assertTrue((ROOT / 'docs' / parser.paths[0]).is_file(), (record['slug'], parser.paths[0]))
+
     def test_locale_key_parity(self):
         strings = json.loads((ROOT / 'tools/explorer_i18n.json').read_text())
         self.assertEqual(set(strings), {'en', 'ja', 'zh'})

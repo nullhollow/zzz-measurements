@@ -2,6 +2,11 @@
 
 ## Unreleased — audit implementation
 
+### Analysis portrait paths (2026-11-02)
+
+- Fix missing WebP extensions in Analysis inspection portraits. Check the rendered
+  portrait path for every roster entry, including Jane's canonical outfit.
+
 ### Five measurement analysis views (2026-11-01)
 
 - Add Relationships, Range finder, Proportions, Cup profiles and Figure patterns
