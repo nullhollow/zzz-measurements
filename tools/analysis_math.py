@@ -22,7 +22,6 @@ def size_parts(size):
 
 
 def cup_size(size):
-    if (size or '').startswith('≈'):return None
     parts = size_parts(size)
     if not parts or parts['cup'] not in UK_CUPS:
         return None

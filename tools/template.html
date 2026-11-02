@@ -1187,14 +1187,14 @@ function tagText(v){
   return v;
 }
 function cupScore(d){
-  return Analysis.cupSize(d?.uk)?.score ?? -1;
+  return Analysis.cupSize(d?.uk)?.score ?? null;
 }
 const SORTS = {
   "name":        (a,b)=>nameOf(a).localeCompare(nameOf(b), state.lang==='ja'?'ja':state.lang==='zh'?'zh-Hans':'en'),
   "height-desc": (a,b)=>b.stature_cm-a.stature_cm,
   "height-asc":  (a,b)=>a.stature_cm-b.stature_cm,
-  "cup-desc":    (a,b)=>cupScore(b)-cupScore(a),
-  "cup-asc":     (a,b)=>cupScore(a)-cupScore(b),
+  "cup-desc":    (a,b)=>(cupScore(a)==null)-(cupScore(b)==null)||cupScore(b)-cupScore(a),
+  "cup-asc":     (a,b)=>(cupScore(a)==null)-(cupScore(b)==null)||cupScore(a)-cupScore(b),
   "waist-asc":   (a,b)=>(a.waist_cm??99)-(b.waist_cm??99),
   "hip-desc":    (a,b)=>(b.hip_cm??-99)-(a.hip_cm??-99),
   "thigh-desc":  (a,b)=>(b.thigh_cm??-99)-(a.thigh_cm??-99),

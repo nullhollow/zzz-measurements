@@ -46,6 +46,29 @@ podium:records.map(PODIUM_CATS.find(c=>c.t==='cupLargest').pick)}));
         exec(compile(ast.Module(body=[fn], type_ignores=[]), '<cup_score>', 'exec'), namespace)
         self.assertEqual([namespace['cup_score']({'uk': size}) for size in sizes], scores)
 
+    def test_approved_estimates_participate_in_cup_charts(self):
+        kafka = next(d for d in ROSTER if d['slug']=='kafka')
+        rina = next(d for d in ROSTER if d['slug']=='rina')
+        grace = next(d for d in ROSTER if d['slug']=='grace')
+        self.assertEqual(cup_size(kafka['uk']),cup_size(rina['uk']))
+        self.assertGreater(cup_size(kafka['uk'])['score'],cup_size(grace['uk'])['score'])
+        self.assertEqual(cup_distribution([kafka])['bins'],[{'cup':'GG','count':1}])
+        self.assertEqual(cup_matrix([kafka])['cells'][0]['slugs'],['kafka'])
+        self.assertEqual(kafka['uk'],'≈23GG')
+
+    def test_unknown_cup_stays_unranked(self):
+        source = (ROOT / 'tools/template.html').read_text()
+        score_fn = re.search(r'function cupScore\(d\)\{.*?\n\}', source, re.S)[0]
+        sorts = re.search(r'const SORTS = \{.*?\n\};', source, re.S)[0]
+        script = (ROOT / 'tools/analysis.js').read_text() + score_fn + sorts + """
+const assert=require('node:assert/strict');
+const records=[{uk:'—'},{uk:'23HH'},{uk:'19E'}];
+assert.equal(cupScore(records[0]),null);
+for(const sort of ['cup-asc','cup-desc'])assert.equal([...records].sort(SORTS[sort]).at(-1).uk,'—');
+assert.equal(Analysis.gameOutcome(records[0],records[1],'cup'),null);
+"""
+        subprocess.run(['node','-e',script], cwd=ROOT, check=True)
+
     def test_generated_card_order_uses_uk_cup_steps(self):
         class Cards(HTMLParser):
             def __init__(self):
@@ -58,7 +81,7 @@ podium:records.map(PODIUM_CATS.find(c=>c.t==='cupLargest').pick)}));
                     self.names.append(a['data-name'])
         cards = Cards()
         cards.feed((ROOT / 'index.html').read_text())
-        expected = sorted(ROSTER, key=lambda d: cup_size(d['uk'])['score'], reverse=True)
+        expected = sorted(ROSTER, key=lambda d: (cup_size(d['uk']) or {'score': -1})['score'], reverse=True)
         self.assertEqual(cards.names, [d['name'] for d in expected])
 
     def test_cup_categories_preserve_band_context_and_order(self):
@@ -66,7 +89,7 @@ podium:records.map(PODIUM_CATS.find(c=>c.t==='cupLargest').pick)}));
         self.assertGreater(cup_size('22E')['score'], cup_size('19E')['score'])
         self.assertEqual(cup_size('22E')['cup'], cup_size('19E')['cup'])
         self.assertNotEqual(cup_size('22E')['band'], cup_size('19E')['band'])
-        self.assertEqual(cup_distribution(ROSTER)['count'], len(ROSTER))
+        self.assertEqual(cup_distribution(ROSTER)['count'], sum(cup_size(d['uk']) is not None for d in ROSTER))
         self.assertEqual(cup_distribution(ROSTER)['modes'], ['C'])
 
     def test_cup_distribution_missing_values_and_modes(self):
@@ -83,12 +106,12 @@ podium:records.map(PODIUM_CATS.find(c=>c.t==='cupLargest').pick)}));
         self.assertEqual(size_parts('23DDDD'), {'band': 23, 'cup': 'DDDD'})
         self.assertEqual(size_parts('47I'), {'band': 47, 'cup': 'I'})
         self.assertEqual(size_parts('≈23L'), {'band':23,'cup':'L'})
-        self.assertIsNone(cup_size('≈23HH'))
+        self.assertEqual(cup_size('≈23HH'),cup_size('23HH'))
         records = [{'uk': '19E', 'eu': '37G'}, {'uk': '21E', 'eu': '42F', 'us': '21DDD'}]
         self.assertEqual(cup_distribution(records, 'us')['count'], 1)
         self.assertEqual(cup_distribution(records, 'eu')['bins'], [{'cup': 'F', 'count': 1}, {'cup': 'G', 'count': 1}])
         for system in ('uk', 'us', 'eu'):
-            self.assertEqual(cup_distribution(ROSTER, system)['count'], len(ROSTER))
+            self.assertEqual(cup_distribution(ROSTER, system)['count'], sum((cup_size(d[system]) if system=='uk' else size_parts(d[system])) is not None for d in ROSTER))
         self.assertEqual([b['cup'] for b in cup_distribution([{'us':v} for v in ['23K','23J','23I','23H','23DDDD','23DDD','23DD','23D','23C','23B','23A']], 'us')['bins']],
                          ['A', 'B', 'C', 'D', 'DD', 'DDD', 'DDDD', 'H', 'I', 'J', 'K'])
 
@@ -238,7 +261,7 @@ process.stdout.write(JSON.stringify({values,match,dist,binIndices,rounds,cups,cu
             self.assertEqual(matrix['bands'], sorted(matrix['bands']))
             self.assertEqual(matrix['cups'], [b['cup'] for b in cup_distribution(ROSTER, system)['bins']])
             slugs = [slug for cell in matrix['cells'] for slug in cell['slugs']]
-            self.assertCountEqual(slugs, [d['slug'] for d in ROSTER])
+            self.assertCountEqual(slugs, [d['slug'] for d in ROSTER if (cup_size(d[system]) if system=='uk' else size_parts(d[system]))])
             for cell in matrix['cells']:
                 for slug in cell['slugs']:
                     d = next(d for d in ROSTER if d['slug'] == slug)

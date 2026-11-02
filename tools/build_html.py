@@ -105,7 +105,7 @@ jsonld = {
                 for name in META['measurement_fields']
             ],
             "measurementTechnique": ("Curves measured around the official 3D models; charted heights "
-                                     "come from official listings and may include ears, footwear or accessories. Eldreda Sunbringer is a project estimate from owner assumptions and other sources, not modelmetrics.net; her US/EU sizes are estimates."),
+                                     "come from official listings and may include ears, footwear or accessories. Eldreda Sunbringer is a project estimate from owner assumptions and other sources, not modelmetrics.net; her US/EU sizes are estimates. Kafka was measured by the owner with AI assistance using a 3D model provided by hiragara; her UK/US/EU bra sizes are dataset-based estimates."),
             "size": {"@type": "QuantitativeValue", "value": N, "unitText": "characters"},
             "about": {"@type": "VideoGame", "name": "Zenless Zone Zero",
                       "publisher": {"@type": "Organization", "name": "HoYoverse"}},

@@ -14,8 +14,8 @@ class EldredaTests(unittest.TestCase):
    for value in ['180.37','193.37','86.52','54.14','56.82','≈23L','≈50L','modelmetrics.net']:self.assertIn(value,html)
    self.assertNotIn('/images/eldreda_sunbringer.webp',html)
    self.assertIn(lang+'characters/eldreda_sunbringer.html',(ROOT/'docs/sitemap.xml').read_text())
- def test_estimates_group_separately_from_uk_rank(self):
-  self.assertEqual(size_parts('≈50L'),{'band':50,'cup':'L'});self.assertIsNone(cup_size('≈23HH'))
+ def test_estimated_labels_keep_uk_order(self):
+  self.assertEqual(size_parts('≈50L'),{'band':50,'cup':'L'});self.assertEqual(cup_size('≈23HH'),cup_size('23HH'))
   self.assertGreater(cup_size('23HH')['score'],cup_size('22H')['score'])
   records=[{'slug':'estimate','uk':'23HH','us':'≈23L','eu':'≈50L'}]
   for system in ['uk','us','eu']:

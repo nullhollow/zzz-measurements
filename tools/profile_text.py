@@ -18,6 +18,8 @@ def _profile_summary(d, lang='en'):
 
 def profile_summary(d, lang='en'):
     text=_profile_summary(d,lang)
+    if d.get('model_provider')=='hiragara':
+        return text+' '+{'en':'Measurements calculated by the project owner with AI assistance using a 3D model provided by hiragara; not modelmetrics.net.', 'ja':'サイト所有者がAIの補助を受け、hiragara提供の3Dモデルから算出。modelmetrics.net出典ではありません。', 'zh':'由站主在AI辅助下，依据hiragara提供的3D模型计算，并非来自modelmetrics.net。'}[lang]
     if d.get('measurement_source')=='project_estimate':
         text+=' '+{'en':'Project estimate from owner assumptions and other sources, not modelmetrics.net. US/EU sizes are estimates.', 'ja':'サイト所有者の仮定と他の資料による独自の推定値で、modelmetrics.net出典ではありません。US・EUサイズも推定です。', 'zh':'本站根据站主假设和其他资料估算，并非来自modelmetrics.net，US、EU尺码仅为估计。'}[lang]
     return text

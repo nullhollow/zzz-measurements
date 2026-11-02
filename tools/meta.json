@@ -1,9 +1,9 @@
 {
  "schema_version": 2,
- "data_updated": "2026-10-25",
+ "data_updated": "2026-11-02",
  "title": "ZZZ Female Measurements",
  "source": "modelmetrics.net",
- "rights": "Most measurements are compiled from modelmetrics.net. Eldreda Sunbringer is a project estimate based on owner assumptions and other sources, not modelmetrics.net. Character artwork is © HoYoverse and shown as fair use; portraits come from official HoYoverse sources, the ZZZ Fandom wiki and owner-supplied official artwork.",
+ "rights": "Most measurements are compiled from modelmetrics.net. Eldreda Sunbringer is a project estimate based on owner assumptions and other sources, not modelmetrics.net. Kafka's measurements were calculated by the project owner with AI assistance using a 3D model provided by hiragara, not modelmetrics.net. Character artwork is © HoYoverse and shown as fair use; portraits come from official HoYoverse sources, the ZZZ Fandom wiki and owner-supplied official artwork.",
  "repo": "https://github.com/nullhollow/zzz-measurements",
  "wiki": "https://zenless-zone-zero.fandom.com",
  "measurement_fields": [
@@ -59,6 +59,20 @@
     "us",
     "eu"
    ]
+  },
+  "Kafka": {
+   "measurement_source": "project_estimate",
+   "sheet_available": true,
+   "precision_cm": 1,
+   "estimated_cup_systems": [
+    "uk",
+    "us",
+    "eu"
+   ],
+   "measurement_author": "Project owner, with AI assistance",
+   "model_provider": "hiragara",
+   "model_height_cm": 181.1,
+   "footwear_cm": 7.0
   }
  }
 }

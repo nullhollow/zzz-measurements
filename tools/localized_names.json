@@ -299,5 +299,11 @@
   "source_ja": "https://x.com/ZZZ_JP/status/2113481791285710863",
   "source_zh": "https://t.bilibili.com/1196948116998193184",
   "source_en": "https://x.com/ZZZ_EN/status/2062838088066359500"
+ },
+ "kafka": {
+  "ja": "カフカ",
+  "zh": "卡芙卡",
+  "source_ja": "https://zenless.hoyoverse.com/ja-jp/main?catchSpider=1&page=news",
+  "source_zh": "https://zzz.mihoyo.com/m/character"
  }
 }

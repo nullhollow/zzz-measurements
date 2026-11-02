@@ -127,7 +127,7 @@ for row in rows:
         thigh_cm=num(row[7]),
         bust_in=num(row[8]), band_in=num(row[9]), waist_in=num(row[10]), hip_in=num(row[11]),
         thigh_in=num(row[12]),
-        uk=row[15].strip(), us=row[16].strip(), eu=row[17].strip(),
+        uk=row[15].strip() or '—', us=row[16].strip() or '—', eu=row[17].strip() or '—',
         notes=row[22].strip() if len(row) > 22 else '',
         # stature that excludes an appendage (Miyabi's ears) when the chart value counts it;
         # every stature comparison uses this, the chart number is never overwritten

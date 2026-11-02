@@ -593,5 +593,17 @@
   "width": 1920,
   "height": 2588,
   "license": "Official artwork supplied by the project owner; © HoYoverse (fair use)"
+ },
+ {
+  "file": "kafka.png",
+  "character": "Kafka",
+  "csv_name": "Kafka",
+  "wiki_page": "Kafka",
+  "wiki_file": null,
+  "source": "https://github.com/nullhollow/zzz-measurements/blob/main/originals/kafka.png",
+  "source_type": "owner-upload",
+  "width": 1297,
+  "height": 1369,
+  "license": "Character artwork supplied by the project owner; © HoYoverse (fair use)"
  }
 ]

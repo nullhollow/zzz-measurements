@@ -28,6 +28,29 @@ class ReferenceTests(unittest.TestCase):
                 if a[field]:
                     for lang in ['en','ja','zh']:self.assertTrue(LABELS[a[field]].get(lang),(d['slug'],field,lang))
             self.assertTrue(a['source'].startswith('https://zenless-zone-zero.fandom.com/wiki/'))
+    def test_kafka_owner_measurements_and_artwork(self):
+        from analysis_math import cup_size, cup_distribution
+        d = next(d for d in DATA if d['slug'] == 'kafka')
+        for field, value in {'stature_cm':174.1, 'bust_cm':81.0, 'band_cm':57.7,
+                             'waist_cm':53.5, 'hip_cm':92.8, 'thigh_cm':53.9}.items():
+            self.assertEqual(d[field], value, field)
+        self.assertEqual(d['measurement_source'], 'project_estimate')
+        self.assertEqual(d['model_provider'], 'hiragara')
+        self.assertTrue(d['sheet_available'])
+        self.assertEqual(d['confidence'], 'estimated')
+        self.assertEqual(cup_size(d['uk']),cup_size('23GG'))
+        self.assertEqual(d['estimated_cup_systems'], ['uk','us','eu'])
+        for system, size in [('uk','≈23GG'),('us','≈23J'),('eu','≈48L')]:
+            self.assertEqual(d[system], size)
+            self.assertEqual(cup_distribution([d], system)['count'], 1)
+        self.assertIn('AI assistance', d['notes'])
+        for lang in ('','ja/','zh/'):
+            html=(ROOT/'docs'/lang/'characters/kafka.html').read_text()
+            self.assertIn('hiragara',html)
+            self.assertIn('174.1',html)
+            for size in ('≈23GG','≈23J','≈48L'): self.assertIn(size,html)
+            self.assertIn('images/kafka.webp',html)
+
     def test_lineup_uses_effective_height_and_preserves_order(self):
         source=(ROOT/'tools/visual_tools.js').read_text().replace('/*__REFERENCE__*/{}',json.dumps(REF)).replace('/*__REFERENCE_LABELS__*/{}',json.dumps(LABELS))
         script='const DATA='+json.dumps(DATA)+''';const bySlug=new Map(DATA.map(d=>[d.slug,d]));

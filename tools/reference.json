@@ -799,6 +799,22 @@
         "zh": "https://t.bilibili.com/1196948116998193184"
       },
       "checked": "2026-10-25"
+    },
+    "kafka": {
+      "faction": null,
+      "rank": null,
+      "attribute": null,
+      "specialty": null,
+      "release": null,
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Kafka",
+      "official": {
+        "ja": "https://zenless.hoyoverse.com/ja-jp/main?catchSpider=1&page=news",
+        "zh": "https://zzz.mihoyo.com/m/character",
+        "en": "https://www.hoyoverse.com/en-us/news/166759"
+      },
+      "checked": "2026-11-02",
+      "version": null,
+      "version_source": null
     }
   },
   "art": {
@@ -1563,6 +1579,18 @@
       "format": "PNG",
       "origin": "owner-upload",
       "supplied_filename": "Eldreda Sunbringer.png"
+    },
+    "kafka.webp": {
+      "file": "originals/kafka.png",
+      "width": 1297,
+      "height": 1369,
+      "bytes": 1118807,
+      "sha256": "0c5939aa68e97fabf188d5902beb0e6b5ef425f9459549399981fe2800402eb9",
+      "source": "https://github.com/nullhollow/zzz-measurements/blob/main/originals/kafka.png",
+      "page": "https://zenless-zone-zero.fandom.com/wiki/Kafka",
+      "format": "PNG",
+      "origin": "owner-upload",
+      "supplied_filename": "kafka_fullbody.png"
     }
   }
 }

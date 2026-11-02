@@ -9,7 +9,6 @@ const Analysis = (() => {
     return m?{cup:m[2].toUpperCase(),band:Number(m[1])}:null;
   }
   function cupSize(size){
-    if(String(size||'').startsWith('≈'))return null;
     const parts=sizeParts(size);
     const rank=parts?ukCups.indexOf(parts.cup):-1;
     if(rank<0)return null;

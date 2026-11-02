@@ -2,6 +2,24 @@
 
 ## Unreleased — audit implementation
 
+### Estimated UK labels in charts (2026-11-02)
+
+- Parse approved approximate UK labels for cup ordering, filters, distributions
+  and comparisons, preserving the visible approximation marker and provenance.
+  Kafka now groups as GG+ and sorts alongside the same 23GG label as Rina.
+
+### Kafka measurements (2026-11-02)
+
+- Add Kafka, with owner-calculated, AI-assisted measurements from a 3D model
+  provided by hiragara. Height is 174.1 cm after deducting 7.0 cm of footwear
+  from the model's 181.1 cm; circumferences are 81.0 / 57.7 / 53.5 / 92.8 / 53.9 cm
+  for bust, under-bust, waist, hips and thighs. Owner-approved sizes are UK
+  ≈23GG / US ≈23J / EU ≈48L, marked as dataset-based estimates.
+- Use the supplied full-body Kafka portrait and measurement sheet, preserve the original PNG,
+  generate responsive artwork and publish EN/JA/ZH profiles in the local build.
+- Keep unknown cups out of cup comparisons, games and distributions, and last
+  in both sorting directions. All measurement positions recalculate from the CSV.
+
 ### Analysis portrait paths (2026-11-02)
 
 - Fix missing WebP extensions in Analysis inspection portraits. Check the rendered
